@@ -1,0 +1,19 @@
+# Changelog
+
+## 0.7.0
+
+- Add Transeen activation codes, secure Keychain receipts, and optional iTool account binding and restoration.
+- Require activation for capture, image import, annotation, and translation.
+- Add manual update checks using GitHub Releases.
+- Publish MIT source, bilingual documentation, and the product website.
+
+## 0.6.1
+
+- Fix a crash caused by empty or out-of-bounds OCR pixel regions.
+- Improve Retina OCR tiling, text style estimation, inline code preservation, and layout boundaries.
+- Refine the launcher spacing and preserve complete translations in the text view.
+
+## 0.6.0
+
+- Fix Apple Translation sessions outliving their SwiftUI download host.
+- Handle installed on-device language assets across macOS translation strategies.

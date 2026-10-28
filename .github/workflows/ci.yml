@@ -1,0 +1,25 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select newest available Xcode
+        run: |
+          XCODE_PATH=$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE_PATH/Contents/Developer"
+          xcodebuild -version
+      - run: brew install xcodegen
+      - name: Build
+        run: ./scripts/build.sh Release
+      - name: Verify
+        run: |
+          ./scripts/test.sh
+          ./scripts/test-license.sh
+          ./scripts/test-lifecycle.sh

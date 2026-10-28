@@ -1,0 +1,1 @@
+document.querySelectorAll('[data-demo]').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('[data-demo]').forEach(b => b.setAttribute('aria-pressed', String(b === button))); const img = document.getElementById('demo'); img.src = img.src.replace(/demo-(en|zh)\.svg/, `demo-${button.dataset.demo}.svg`); }));

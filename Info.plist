@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleExecutable</key><string>$(EXECUTABLE_NAME)</string>
+<key>CFBundleIdentifier</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+<key>CFBundleName</key><string>Transeen</string>
+<key>CFBundleDisplayName</key><string>Transeen</string>
+<key>CFBundlePackageType</key><string>APPL</string>
+<key>CFBundleShortVersionString</key><string>$(MARKETING_VERSION)</string>
+<key>CFBundleVersion</key><string>$(CURRENT_PROJECT_VERSION)</string>
+<key>CFBundleIconFile</key><string>AppIcon</string>
+<key>LSMinimumSystemVersion</key><string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+<key>LSUIElement</key><true/>
+<key>NSHighResolutionCapable</key><true/>
+<key>NSScreenCaptureUsageDescription</key><string>截取你选择的屏幕区域，用于截图、标注和翻译。</string>
+<key>NSAppTransportSecurity</key><dict><key>NSAllowsLocalNetworking</key><true/></dict>
+<key>TranseenLicenseEndpoint</key><string>https://mkbeusztkzffnzjdwmqk.supabase.co/functions/v1/transeen-license</string>
+<key>TranseenLicensePublishableKey</key><string>sb_publishable_GVf42S8a5aU4NHxMSFmTNA_LB6i6vlz</string>
+<key>CFBundleURLTypes</key><array><dict><key>CFBundleURLName</key><string>Transeen authentication</string><key>CFBundleURLSchemes</key><array><string>transeen</string></array></dict></array>
+</dict></plist>

@@ -1,0 +1,9 @@
+build/
+dist/
+*.xcodeproj/
+.DS_Store
+
+.env*
+!.env.example
+supabase/.temp/
+*.log

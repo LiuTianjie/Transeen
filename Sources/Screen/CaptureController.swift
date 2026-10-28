@@ -1,0 +1,435 @@
+import AppKit
+import OSLog
+
+@MainActor
+final class CaptureController {
+    private static let logger = Logger(subsystem: "com.transeen.app", category: "CaptureFlow")
+    private(set) var state = CaptureState()
+    private(set) var selecting = false
+    private var selectors: [ScreenSelectionPanel] = []
+    private var selectionFrames: [CGDirectDisplayID: CGImage] = [:]
+    private var panel: CapturePanel?
+    private var work: Task<Void, Never>?
+    private var generation = 0
+    private var monitor: Any?
+    private var completionTask: Task<Void, Never>?
+    private var heldPeekKey: UInt16?
+    private var original = NSImage()
+    private var translated: NSImage?
+    private var mode: CaptureMode = .translate
+    private var direction = TranslationDirection(source: .en, target: .zhHans)
+    private var detectsSource = true
+    private var sourceApplication: String?
+    private var backend: (any TranslationBackend)?
+    private var backendError: String?
+    var authorize: () -> Bool = { false }
+    var onError: ((String) -> Void)?
+    var onReselect: ((CaptureMode) -> Void)?
+    var pasteboard = NSPasteboard.general
+    var isPresenting: Bool { panel != nil }
+
+    func begin(mode: CaptureMode, settings: AppSettings) {
+        guard authorize() else { return }
+        close()
+        guard CGPreflightScreenCaptureAccess() else {
+            onError?("请在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中允许 Transeen，随后重新打开应用。")
+            return
+        }
+        self.mode = mode
+        Self.logger.notice("begin mode=\(mode.rawValue, privacy: .public)")
+        direction = TranslationDirection(source: settings.source, target: settings.target)
+        detectsSource = settings.detectsSource
+        sourceApplication = NSWorkspace.shared.frontmostApplication?.localizedName
+        if NSWorkspace.shared.frontmostApplication?.processIdentifier == ProcessInfo.processInfo.processIdentifier { sourceApplication = nil }
+        backendError = nil
+        do { backend = try settings.makeBackend() } catch {
+            backendError = error.localizedDescription
+            if mode != .screenshot { onError?(error.localizedDescription); return }
+        }
+        state = CaptureState()
+        state.shortcuts = settings.shortcuts
+        state.automaticallyTranslates = mode != .screenshot
+        state.copyCloses = settings.copyCloses
+        state.overlay = mode != .screenshot
+        updateLanguageState()
+        selecting = true
+        let token = generation
+        for screen in NSScreen.screens {
+            let selector = ScreenSelectionPanel(screen: screen, title: mode.title + " · " + direction.compactTitle)
+            selector.onCancel = { [weak self] in self?.close() }
+            selector.onDragEnded = { [weak self] rect in self?.selected(rect, screen: screen) }
+            selectors.append(selector)
+            selector.orderFrontRegardless()
+            let display = ScreenCaptureService.Display(screen)
+            Task { [weak self, weak selector] in
+                guard let image = try? await ScreenCaptureService.captureImage(rectInScreen: display.frame, display: display) else { return }
+                guard let self, token == self.generation, self.selecting else { return }
+                self.selectionFrames[display.displayID] = image
+                selector?.setBackdrop(NSImage(cgImage: image, size: display.frame.size))
+                let map = await Task.detached { ScreenRegionMap(image: image, frame: display.frame) }.value
+                guard token == self.generation, self.selecting, let map else { return }
+                selector?.setRegionMap(map)
+            }
+        }
+        NSApp.activate(ignoringOtherApps: true)
+        selectors.first?.makeKey()
+        installKeys()
+    }
+
+    /// Import an existing screenshot. Display points may shrink to the screen,
+    /// while the backing pixels and annotation export retain the file's resolution.
+    func openImage(_ input: NSImage, settings: AppSettings) {
+        guard authorize() else { return }
+        close()
+        guard input.size.width > 0, input.size.height > 0 else { return }
+        mode = .screenshot
+        direction = TranslationDirection(source: settings.source, target: settings.target)
+        detectsSource = settings.detectsSource
+        sourceApplication = nil
+        backendError = nil
+        do { backend = try settings.makeBackend() } catch { backendError = error.localizedDescription }
+        state = CaptureState()
+        state.shortcuts = settings.shortcuts
+        state.overlay = false
+        state.copyCloses = settings.copyCloses
+        updateLanguageState()
+        let image = (input.copy() as? NSImage) ?? input
+        let visible = NSScreen.main?.visibleFrame ?? CGRect(x: 0, y: 0, width: 1200, height: 800)
+        let factor = min(1, (visible.width - 80) / image.size.width, (visible.height - 180) / image.size.height)
+        image.size = CGSize(width: image.size.width * factor, height: image.size.height * factor)
+        original = image
+        let panel = CapturePanel(state: state)
+        panel.onAction = { [weak self] in self?.action($0) }
+        self.panel = panel
+        panel.present(image: image, rect: CGRect(x: visible.midX - image.size.width / 2,
+            y: visible.midY - image.size.height / 2, width: image.size.width, height: image.size.height))
+        installKeys()
+    }
+
+    func close() {
+        completionTask?.cancel(); completionTask = nil
+        heldPeekKey = nil; state.peeking = false
+        generation += 1
+        work?.cancel(); work = nil
+        backend?.cancel(); backend = nil
+        selectors.forEach { $0.orderOut(nil) }; selectors = []; selecting = false
+        panel?.orderOut(nil); panel = nil
+        if let monitor { NSEvent.removeMonitor(monitor) }; monitor = nil
+        translated = nil; original = NSImage(); selectionFrames = [:]
+    }
+
+    private func selected(_ selectedRect: CGRect, screen: NSScreen) {
+        guard selecting else { return }
+        let rect = selectedRect.intersection(screen.frame)
+        guard !rect.isNull, rect.width >= ScreenTranslate.minimumSelection, rect.height >= ScreenTranslate.minimumSelection else { close(); return }
+        selectors.forEach { $0.orderOut(nil) }; selectors = []; selecting = false
+        let display = ScreenCaptureService.Display(screen)
+        let frozen = selectionFrames[display.displayID]
+        selectionFrames = [:]
+        let token = generation
+        let requestedMode = mode
+        Self.logger.notice("selection completed mode=\(requestedMode.rawValue, privacy: .public)")
+        work = Task { [weak self] in
+            guard let self else { return }
+            do {
+                let image: NSImage
+                if let frozen, let cropped = CaptureCrop.crop(frozen, rect: rect, screenFrame: display.frame) {
+                    image = NSImage(cgImage: cropped, size: rect.size)
+                } else {
+                    image = try await ScreenCaptureService.capture(rectInScreen: rect, display: display)
+                }
+                guard valid(token) else { return }
+                original = image
+                state.automaticallyTranslates = requestedMode != .screenshot
+                // Commit the automatic state before the toolbar's first frame.
+                state.working = state.automaticallyTranslates
+                state.status = state.automaticallyTranslates ? "正在识别与翻译…" : ""
+                let panel = CapturePanel(state: state)
+                panel.onAction = { [weak self] in self?.action($0) }
+                self.panel = panel
+                panel.present(image: image, rect: rect)
+                // Translation owns its own task after capture completes. The preview
+                // is never left waiting for a toolbar click in automatic modes.
+                if state.automaticallyTranslates { restart() }
+            } catch { if valid(token) { onError?(error.localizedDescription); close() } }
+        }
+    }
+    private func valid(_ token: Int) -> Bool { token == generation && !Task.isCancelled }
+    private func updateLanguageState() {
+        state.source = direction.source
+        state.target = direction.target
+        state.detectsSource = detectsSource
+        state.direction = direction.compactTitle
+    }
+    private func displayCurrent() {
+        panel?.canvas.transition(to: state.showingTranslation ? (translated ?? original) : original)
+        state.translated = translated != nil
+        panel?.refreshUI()
+    }
+    private func translateFrame(token: Int) async {
+        let frame = original
+        var pair = direction
+        let automatic = detectsSource
+        guard let cg = frame.cgImage(forProposedRect: nil, context: nil, hints: nil), frame.size.width > 0 else {
+            state.failed = true; state.working = false; state.status = "截图读取失败，请重新框选。"; panel?.refreshUI(); return
+        }
+        state.failed = false; state.noText = false; state.warning = nil
+        state.working = true; state.status = "正在识别文字…"; panel?.refreshUI()
+        Self.logger.notice("translation started")
+        do {
+            let scale = CGFloat(cg.width) / frame.size.width
+            let requestedPair = pair
+            let analysis = try await Task.detached(priority: .userInitiated) {
+                try ScreenPipeline.analyze(cg, scale: scale, source: requestedPair.source, target: requestedPair.target, detectsSource: automatic)
+            }.value
+            guard valid(token) else { return }
+            guard let analysis, analysis.recognized > 0 else {
+                Self.logger.notice("recognition returned no text")
+                state.noText = true; state.working = false; state.status = "没有识别到文字，可重新框选或重试。"; panel?.refreshUI(); return
+            }
+            if let source = analysis.detectedSource {
+                pair = TranslationDirection(source: source, target: pair.target)
+                direction = pair
+                updateLanguageState()
+            }
+            let readingOrder = PreciseTranslation.regions(analysis.blocks.map(\.rect), fits: { _ in true }).flatMap { $0 }
+            state.textBlocks = readingOrder.map { CaptureTextBlock(id: $0, original: analysis.blocks[$0].original) }
+            let output: TranslationOutput
+            state.status = "正在翻译…"; panel?.refreshUI()
+            if pair.source == pair.target || !analysis.blocks.contains(where: { $0.translate }) { output = TranslationOutput() }
+            else {
+                if let backendError { throw ModelError.message(backendError) }
+                guard let backend else { throw ModelError.message("翻译服务尚未就绪，请重试。") }
+                output = try await backend.translate(analysis, direction: pair, app: sourceApplication)
+            }
+            guard valid(token) else { return }
+            let translations = output.translations
+            let composed = await Task.detached(priority: .userInitiated) { ScreenPipeline.compose(analysis, translations: translations) }.value
+            guard valid(token) else { return }
+            guard let picture = composed.pixels.cgImage() else { throw ModelError.message("译文画面生成失败，请重试。") }
+            translated = NSImage(cgImage: picture, size: frame.size)
+            state.hasTranslatedOnce = true
+            state.textBlocks = readingOrder.map { CaptureTextBlock(id: $0, original: analysis.blocks[$0].original, translation: translations[$0]) }
+            state.warning = output.warning
+            if composed.cut > 0 || composed.placed.count < translations.filter({ $0.value != analysis.blocks[$0.key].original }).count {
+                state.warning = [output.warning, "部分译文超出原位置，请在「文字」中查看全文。"].compactMap { $0 }.joined(separator: " ")
+            }
+            state.working = false
+            Self.logger.notice("translation completed")
+            state.status = translations.isEmpty ? "没有需要翻译的文字" : "已翻译 \(translations.count) 处 · " + state.shortcuts.help("按住看原文", .peek)
+            displayCurrent()
+        } catch {
+            guard valid(token) else { return }
+            Self.logger.error("translation failed domain=\((error as NSError).domain, privacy: .public) code=\((error as NSError).code)")
+            state.failed = true; state.working = false; state.status = error.localizedDescription; panel?.refreshUI()
+        }
+    }
+    private func restart() {
+        generation += 1; work?.cancel(); backend?.cancel()
+        let token = generation
+        state.failed = false; state.noText = false; state.working = true
+        state.warning = nil; state.textCopyCompleted = false
+        state.status = "正在识别与翻译…"; panel?.refreshUI()
+        work = Task { [weak self] in
+            guard let self else { return }
+            await translateFrame(token: token)
+        }
+    }
+    func action(_ id: String) {
+        if id == "close" { close(); return }
+        guard authorize() else { close(); return }
+        guard panel != nil, !state.finishing else { return }
+        if id == "source.auto" || id.hasPrefix("source.") || id.hasPrefix("target.") {
+            if id == "source.auto" { detectsSource = true }
+            else if id.hasPrefix("source."), let source = AppLanguage(rawValue: String(id.dropFirst(7))) {
+                detectsSource = false
+                direction = TranslationDirection(source: source, target: direction.target)
+            } else if id.hasPrefix("target."), let target = AppLanguage(rawValue: String(id.dropFirst(7))) {
+                direction = TranslationDirection(source: direction.source, target: target)
+            } else { return }
+            updateLanguageState()
+            translated = nil; state.textBlocks = []; displayCurrent(); restart()
+            return
+        }
+        switch id {
+        case "peek":
+            guard state.translated, state.overlay, !state.peeking else { return }
+            state.peeking = true; displayCurrent()
+        case "peek.end": endPeek()
+        case "tool.rectangle", "tool.ellipse", "tool.arrow", "tool.pen", "tool.move", "tool.number":
+            guard let tool = AnnotationTool(rawValue: String(id.dropFirst(5))) else { return }
+            panel?.canvas.cancelInteraction()
+            state.annotations.select(nil)
+            state.annotating = tool != .move
+            state.annotations.tool = tool
+            panel?.refreshUI(); panel?.makeKey()
+        case "layout":
+            let token = generation
+            Task { @MainActor [weak self] in
+                await Task.yield()
+                guard let self, self.generation == token else { return }
+                self.panel?.refreshUI()
+            }
+        case "annotate":
+            panel?.canvas.cancelInteraction()
+            state.annotations.select(nil)
+            state.annotating.toggle()
+            if state.annotating && state.annotations.tool == .move { state.annotations.tool = .pen }
+            if !state.annotating { state.annotations.tool = .move }
+            panel?.refreshUI()
+        case "pin": state.pinned.toggle()
+        case "reselect": onReselect?(mode)
+        case "original": state.overlay = false; displayCurrent()
+        case "translation":
+            state.overlay = true
+            if translated == nil { restart() } else { displayCurrent() }
+        case "close": close()
+        case "toggle": state.overlay.toggle(); displayCurrent()
+        case "translate":
+            guard !state.working else { return }
+            state.overlay = true; restart()
+        case "direction":
+            detectsSource = false
+            direction = direction.reversed; updateLanguageState()
+            translated = nil; state.textBlocks = []; displayCurrent(); restart()
+        case "undo": state.annotations.undo()
+        case "redo": state.annotations.redo()
+        case "delete": state.annotations.deleteSelected()
+        case "copyText":
+            guard !state.textBlocks.isEmpty else { return }
+            let text = state.textBlocks.map { $0.translation ?? $0.original }.joined(separator: "\n\n")
+            pasteboard.clearContents()
+            state.textCopyCompleted = pasteboard.setString(text, forType: .string)
+        case "copy":
+            guard !state.working else { return }
+            guard let image = export() else { return }
+            pasteboard.clearContents()
+            if pasteboard.writeObjects([image]) {
+                completionTask?.cancel()
+                state.copyCompleted = true
+                panel?.refreshUI()
+                let token = generation
+                if state.copyCloses && !state.pinned {
+                    state.finishing = true
+                    completionTask = Task { [weak self] in
+                        do { try await Task.sleep(for: .milliseconds(220)) } catch { return }
+                        guard let self, self.valid(token), let panel = self.panel else { return }
+                        await panel.finishCopy()
+                        guard self.valid(token) else { return }
+                        self.close()
+                    }
+                } else {
+                    completionTask = Task { [weak self] in
+                        do { try await Task.sleep(for: .milliseconds(1100)) } catch { return }
+                        guard let self, self.valid(token) else { return }
+                        self.state.copyCompleted = false
+                    }
+                }
+            } else { state.failed = true; state.status = "未能复制图片，请重试"; panel?.refreshUI() }
+        case "save": save()
+        default: break
+        }
+    }
+    private func export() -> NSImage? { state.annotations.export(state.showingTranslation ? (translated ?? original) : original) }
+    private func save() {
+        guard let image = export(), let cg = image.cgImage(forProposedRect: nil, context: nil, hints: nil),
+              let png = NSBitmapImageRep(cgImage: cg).representation(using: .png, properties: [:]) else { return }
+        let picker = NSSavePanel()
+        picker.allowedContentTypes = [.png]
+        picker.nameFieldStringValue = "Transeen-\(Date().formatted(.iso8601).replacingOccurrences(of: ":", with: "-" )).png"
+        NSApp.activate(ignoringOtherApps: true)
+        let token = generation
+        picker.begin { [weak self] result in
+            guard result == .OK, let url = picker.url else { return }
+            do {
+                try png.write(to: url, options: .atomic)
+                if let self, self.generation == token {
+                    self.state.failed = false; self.state.status = "已保存图片"; self.panel?.refreshUI()
+                }
+            }
+            catch { self?.onError?(error.localizedDescription) }
+        }
+    }
+    private func installKeys() {
+        monitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp, .flagsChanged]) { [weak self] event in
+            guard let self else { return event }
+            if event.type == .keyUp, self.heldPeekKey == event.keyCode { self.endPeek(); return nil }
+            if event.type == .flagsChanged, self.heldPeekKey != nil,
+               let binding = self.state.shortcuts.binding(.peek),
+               UInt64(event.modifierFlags.rawValue) & binding.flags != binding.flags { self.endPeek() }
+            guard event.type == .keyDown else { return event }
+            // Number/color editors keep their own typing, deletion and text undo.
+            if event.window?.firstResponder is NSTextView { return event }
+            if self.heldPeekKey == event.keyCode, event.isARepeat { return nil }
+            // Do not steal editing keys from settings or save panels.
+            guard self.selecting || event.window is CapturePanel || event.window?.styleMask.contains(.nonactivatingPanel) == true else { return event }
+            return self.handleShortcut(event) ? nil : event
+        }
+    }
+
+    @discardableResult func handleShortcut(_ event: NSEvent) -> Bool {
+        guard let action = state.shortcuts.action(for: event, group: "截图窗口"), !selecting || action == .close else {
+            guard !selecting, state.shortcuts.recording == nil, let selected = state.annotations.selected else { return false }
+            let flags = event.modifierFlags.intersection([.command, .option, .control, .shift])
+            if [51, 117].contains(event.keyCode), flags.isEmpty { state.annotations.deleteSelected(); return true }
+            if (123...126).contains(event.keyCode), flags.isEmpty || flags == .shift {
+                let step: CGFloat = flags == .shift ? 10 : 1
+                let dx: CGFloat = event.keyCode == 123 ? -step : event.keyCode == 124 ? step : 0
+                let dy: CGFloat = event.keyCode == 125 ? -step : event.keyCode == 126 ? step : 0
+                state.annotations.update(selected.moved(by: CGPoint(x: dx, y: dy)))
+                return true
+            }
+            return false
+        }
+        if action == .peek { heldPeekKey = event.keyCode }
+        self.action(action.command)
+        return true
+    }
+
+    func endPeek() {
+        heldPeekKey = nil
+        guard state.peeking else { return }
+        state.peeking = false
+        displayCurrent()
+    }
+
+    #if DEBUG
+    /// Exercise the same completion path as a real selection with deterministic pixels.
+    func previewSelection(_ image: NSImage, mode: CaptureMode, backend: any TranslationBackend) {
+        close()
+        guard let screen = NSScreen.main, let cg = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return }
+        self.mode = mode
+        self.backend = backend
+        backendError = nil
+        direction = TranslationDirection(source: .en, target: .zhHans)
+        detectsSource = false
+        sourceApplication = nil
+        state = CaptureState()
+        state.overlay = mode != .screenshot
+        updateLanguageState()
+        let display = ScreenCaptureService.Display(screen)
+        // Treat the fixture as the full frozen screen; choose that entire screen.
+        selectionFrames[display.displayID] = cg
+        selecting = true
+        selected(screen.frame, screen: screen)
+    }
+
+    func previewTranslation(_ image: NSImage, backend: any TranslationBackend) async {
+        preview(image)
+        self.backend = backend
+        await translateFrame(token: generation)
+    }
+    func preview(_ image: NSImage) {
+        close(); state = CaptureState(); state.status = "截图"; state.direction = "EN → 中文"
+        direction = TranslationDirection(source: .en, target: .zhHans)
+        detectsSource = false; sourceApplication = nil; updateLanguageState()
+        original = image
+        backend = AppleTranslationBackend()
+        let p = CapturePanel(state: state); panel = p
+        p.onAction = { [weak self] in self?.action($0) }
+        let visible = NSScreen.main?.visibleFrame ?? CGRect(x: 0, y: 0, width: 1200, height: 800)
+        p.present(image: image, rect: CGRect(x: visible.midX - image.size.width / 2, y: visible.midY - image.size.height / 2, width: image.size.width, height: image.size.height))
+        installKeys()
+    }
+    #endif
+}

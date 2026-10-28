@@ -1,0 +1,13 @@
+# Transeen icon
+
+The first dramatic blue/glass version was rejected. The final icon is the second generated version: warm ivory tile, muted teal, a simple viewfinder and A/文. The current AppIcon resources contain this version.
+
+Final edit prompt:
+
+Use case: precise-object-edit / logo-brand. Redesign the supplied Transeen app icon to be MUCH quieter, delicate, fresh, and minimal. Preserve only its concept: screenshot viewfinder plus language translation. Remove all neon, glow, saturated blue, glass, thick outlines, 3D volume, bevels, drop shadows, overlapping paper sheets. Replace with a single warm ivory rounded-square macOS tile, perfectly front-facing with transparent outside corners. In the center a small elegant teal monoline four-corner viewfinder; within it a refined 'A' and '文' set diagonally in thin but readable simple typography. The mark uses desaturated sage/teal only, generous whitespace with symbol occupying about 45% of the tile. Flat two-dimensional graphic, a whisper of warm paper tone only, calm editorial Japanese stationery aesthetic, beautifully precise geometry, gracefully rounded line ends. No border around tile, no dark background, no badges, no sparkle, no wordmark. Icon must remain crisp and distinctive at small sizes. Single square icon on real transparent outer background. A graceful utility icon, not a dramatic tech logo.
+
+Generated with the built-in image_gen tool on 2026-10-03. Source asset: `Sources/Resources/AppIcon.png`; macOS bundle icon: `Sources/Resources/AppIcon.icns`. Original transparent alpha is preserved; standard icon sizes are generated with sips/iconutil.
+
+Prompt:
+
+Use case: logo-brand. Create one premium macOS application icon for Transeen, a screenshot and in-place screen translation app. A single centered rounded-square app tile, front-facing, occupying 86% of a square canvas, with genuinely transparent space outside its rounded silhouette. Deep midnight navy enamel tile with carefully controlled luminous aqua accents. The main symbol is a bold four-corner screen viewfinder framing two overlapping minimal translation sheets, with one clean white A on the front sheet and a small elegant white 文 on the rear sheet. Balanced simple geometry, subtle tactile frosted-glass depth, beautifully bevelled edges, soft restrained lighting. Strong distinctive silhouette legible at 32 pixels, generous breathing room, professional macOS app icon craftsmanship. No wordmark, no brand name, no extra letters, no sparkles, no photograph, no surrounding mockup, no giant drop shadow, no background scene. Deliver a single isolated square icon image, not a grid.
