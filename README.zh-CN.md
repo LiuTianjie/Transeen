@@ -12,8 +12,8 @@
   <a href="CHANGELOG.md">更新记录</a> ·
   <a href="README.md">English</a>
 </p>
-<p align="center"><img src="docs/assets/preview.webp" alt="Transeen 原位翻译布局示意" width="820" /></p>
-<p align="center"><sub>示意图使用专门制作的示例内容。</sub></p>
+<p align="center"><img src="docs/assets/preview.webp" alt="Transeen 原位翻译真实渲染与原生工具栏" width="820" /></p>
+<p align="center"><sub>使用演示内容与固定译文，展示真实渲染和原生工具栏。</sub></p>
 
 Transeen 是一款 macOS 菜单栏应用。框选屏幕区域或打开图片，在原处查看译文、对照原文，再标注、复制、保存或钉住结果。
 

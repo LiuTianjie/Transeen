@@ -1,8 +1,496 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Transeen — Translation, right where it belongs.</title><meta name="description" content="Capture, annotate, and translate any part of your screen. A native macOS app with on-device Apple translation and support for your own model."><meta name="theme-color" content="#faf9f5"><link rel="canonical" href="https://liutianjie.github.io/Transeen/"><link rel="alternate" hreflang="en" href="https://liutianjie.github.io/Transeen/"><link rel="alternate" hreflang="zh-CN" href="https://liutianjie.github.io/Transeen/zh/"><link rel="alternate" hreflang="x-default" href="https://liutianjie.github.io/Transeen/"><meta property="og:type" content="website"><meta property="og:title" content="Transeen — Translation, right where it belongs."><meta property="og:description" content="Capture, annotate, and translate any part of your screen. A native macOS app with on-device Apple translation and support for your own model."><meta property="og:url" content="https://liutianjie.github.io/Transeen/"><meta property="og:image" content="https://liutianjie.github.io/Transeen/assets/preview.webp"><link rel="icon" href="assets/app-icon.png"><link rel="stylesheet" href="assets/site.css"></head><body>
-<nav><a class="brand" href="./"><img src="assets/app-icon.png" alt="" width="40" height="40">Transeen</a><div class="nav-links"><a class="nav-extra" href="#how">How it works</a><a href="https://github.com/LiuTianjie/Transeen">GitHub ↗</a><a href="zh/" lang="zh-CN">中文</a></div></nav>
-<main><section class="hero"><div class="eyebrow">A quieter way to read · macOS 26+</div><h1>Translation,<br><em>right where it belongs.</em></h1><p class="hero-copy">A passage, a diagram, a little detail. Select any part of your screen and read it in your language—without losing your place.</p><div class="actions"><a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">Download for Mac <span>↓</span></a><a class="button secondary" href="#activate">Activate Transeen</a></div><p class="fine">Apple Silicon & Intel · Activation required · MIT source</p></section>
-<figure class="demo"><div class="demo-head"><span>One view. Two languages.</span><div class="switch" role="group" aria-label="Demo language"><button type="button" aria-pressed="false" data-demo="en">Original</button><button type="button" aria-pressed="true" data-demo="zh">Translated</button></div></div><img id="demo" src="assets/demo-zh.svg" width="1440" height="900" alt="Illustration of text translated in its original position with an annotation toolbar."><figcaption class="caption">Layout illustration with synthetic sample text. Translation varies with content and provider.</figcaption></figure>
-<section class="section section-grid"><div><div class="eyebrow">Keep your context</div><h2>The details stay.<br>The language changes.</h2><p class="intro">Built for the things you are already reading. No copied paragraphs, no new tabs, no hunting for your place.</p></div><div><article class="feature"><h3>Read in place</h3><p>Text is recognized locally and laid back into the captured image, with its position, color, and visual hierarchy in mind.</p></article><article class="feature"><h3>Mark what matters</h3><p>Arrows, shapes, pen strokes, and numbered markers live on their own layer. Copy, save, or pin the result.</p></article><article class="feature"><h3>Choose your translation</h3><p>Use Apple translation on your Mac, or connect an OpenAI-compatible service. Model requests contain recognized text, not your screenshots.</p></article></div></section>
-<section id="how" class="section section-grid"><div><div class="eyebrow">Three small steps</div><h2>Select. Read.<br>Keep going.</h2></div><div><div class="step"><span class="step-num">01</span><article class="feature"><h3>Make it yours</h3><p>Install the app, enter your TR- activation code, and allow Screen Recording when you first capture.</p></article></div><div class="step"><span class="step-num">02</span><article class="feature"><h3>Select a region</h3><p>Press <kbd>⌃ ⌥ 2</kbd> and drag over the content. Or open an image you already have.</p></article></div><div class="step"><span class="step-num">03</span><article class="feature"><h3>Compare and keep</h3><p>Switch between original and translation with <kbd>Tab</kbd>. Annotate, then copy with <kbd>⌘ C</kbd> or save with <kbd>⌘ S</kbd>.</p></article></div></div></section>
-<section id="activate" class="section"><div class="activation"><h2>One code. Your Transeen.</h2><p>The official app requires a Transeen TR- activation code. Activate this Mac without signing in. Optionally bind your license to an iTool account to restore it later. StupidMirror SM- and iTool Pro IT- codes are separate products.</p><div class="actions"><a class="button" href="https://github.com/LiuTianjie/Transeen/discussions">Ask about activation ↗</a><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md">How licensing works ↗</a></div></div></section>
-<section class="section"><div class="eyebrow">A few useful details</div><h2>Before you begin.</h2><details><summary>Does it work offline?</summary><p>After online activation and downloading Apple’s language packs, capture, annotation, and Apple translation can work offline. A cached license remains usable during temporary network failures; the app periodically revalidates it. External models need their own connection.</p></details><details><summary>Where do my screenshots go?</summary><p>Screenshots and OCR stay on your Mac. If you choose a model provider, recognized text goes to that configured endpoint. Licensing sends a random installation ID and receipt; it does not read hardware serial numbers.</p></details><details><summary>Is the source open?</summary><p>Yes. The code is available under the MIT license, including permission for commercial use. The official binary and hosted activation service use activation codes; the MIT license does not grant access to that service.</p></details><details><summary>What should I expect from translation?</summary><p>Dense layouts, formulas, and specialist terminology may need manual checking. Compare with the original or open the text view for the complete result. macOS 26 or later is required.</p></details></section></main><footer><span>© 2026 Transeen · Made by LiuTianjie</span><div><a href="https://itool.tech">iTool</a><a href="https://github.com/LiuTianjie/Transeen">GitHub</a><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT License</a></div></footer><script src="assets/site.js" defer></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Transeen — Translation, right where it belongs.</title>
+    <meta
+      name="description"
+      content="Capture, annotate, and translate your screen in place. A native Mac app with on-device translation and your choice of models."
+    />
+    <meta name="theme-color" content="#080f0d" />
+    <link rel="canonical" href="https://liutianjie.github.io/Transeen/" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://liutianjie.github.io/Transeen/"
+    />
+    <link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://liutianjie.github.io/Transeen/zh/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://liutianjie.github.io/Transeen/"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Transeen — Translation, right where it belongs."
+    />
+    <meta
+      property="og:description"
+      content="Capture, annotate, and translate your screen in place. A native Mac app with on-device translation and your choice of models."
+    />
+    <meta property="og:url" content="https://liutianjie.github.io/Transeen/" />
+    <meta
+      property="og:image"
+      content="https://liutianjie.github.io/Transeen/assets/preview.webp"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="assets/app-icon.png" />
+    <link rel="apple-touch-icon" href="assets/app-icon.png" />
+    <link rel="stylesheet" href="assets/site.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav-shell shell" aria-label="Main navigation">
+        <a class="brand" href="./"
+          ><img
+            src="assets/app-icon.png"
+            alt=""
+            width="32"
+            height="32"
+          />Transeen</a
+        >
+        <div class="site-menu" id="site-menu">
+          <a href="#features">Features</a><a href="#how">How it works</a
+          ><a href="#privacy">Privacy</a><a href="#activate">Activation</a>
+        </div>
+        <div class="nav-actions">
+          <a class="nav-github" href="https://github.com/LiuTianjie/Transeen"
+            >GitHub ↗</a
+          ><a href="zh/" lang="zh-CN" aria-label="切换为简体中文">中文</a
+          ><a
+            class="button small nav-download"
+            href="https://github.com/LiuTianjie/Transeen/releases/latest"
+            >Download<svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4" /></svg
+          ></a>
+        </div>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-controls="site-menu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 8h16M4 16h16" />
+          </svg>
+        </button>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero">
+        <div class="shell">
+          <a
+            class="release-link"
+            href="https://github.com/LiuTianjie/Transeen/releases/latest"
+            ><span>v0.7.0</span>A small tool. A clearer view.<svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14m-6-6 6 6-6 6" /></svg
+          ></a>
+          <h1>A new language.<br /><em>The same picture.</em></h1>
+          <p class="hero-description">
+            Capture a moment on your screen. Read it in your language.<br />Translate,
+            compare, and annotate — without losing your place.
+          </p>
+          <div class="actions">
+            <a
+              class="button"
+              href="https://github.com/LiuTianjie/Transeen/releases/latest"
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4" /></svg
+              >Download for Mac</a
+            ><a class="text-link" href="#features"
+              >Take a closer look<svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" /></svg
+            ></a>
+          </div>
+          <p class="fine">
+            macOS 26+ <span aria-hidden="true"> · </span> Apple Silicon & Intel
+            <span aria-hidden="true"> · </span> Activation required
+          </p>
+          <div class="demo-wrap" id="demo">
+            <div class="demo-top">
+              <span class="demo-label"
+                ><span class="status-dot"></span>SAME LAYOUT. NEW
+                PERSPECTIVE.</span
+              >
+              <div
+                class="switch"
+                role="group"
+                aria-label="Compare original and translation"
+              >
+                <button
+                  data-demo="original"
+                  data-label="Showing original"
+                  aria-pressed="false"
+                  type="button"
+                >
+                  Original</button
+                ><button
+                  data-demo="translated"
+                  data-label="Showing translation"
+                  aria-pressed="true"
+                  type="button"
+                >
+                  Translation
+                </button>
+              </div>
+            </div>
+            <div class="stage">
+              <div class="capture" data-view="translated">
+                <img
+                  class="capture-image original"
+                  aria-hidden="true"
+                  src="assets/original.webp"
+                  width="2080"
+                  height="1060"
+                  alt="Original English reading sample with a focus diagram."
+                  fetchpriority="high"
+                />
+                <img
+                  class="capture-image translated"
+                  src="assets/translated.webp"
+                  width="2080"
+                  height="1060"
+                  alt="Transeen renders the Chinese translation in the original positions while preserving the diagram."
+                  fetchpriority="high"
+                />
+                <button class="zoom" type="button" aria-label="Enlarge sample">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" />
+                  </svg>
+                </button>
+              </div>
+              <img
+                class="native-toolbar"
+                src="assets/toolbar.webp"
+                width="1104"
+                height="186"
+                alt="Transeen native toolbar: compare, annotate, pin, and copy."
+              />
+            </div>
+            <p class="demo-caption">
+              Real Transeen rendering and toolbar, with authored sample text and
+              a fixed translation.
+            </p>
+            <span
+              class="sr-only"
+              id="demo-status"
+              role="status"
+              aria-live="polite"
+              >Showing translation</span
+            >
+          </div>
+          <div class="capabilities">
+            <span
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 3H4v4m12-4h4v4M4 16v4h4m8 0h4v-4M8 8h8v8H8z" /></svg
+              >Translate in place</span
+            ><span
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m4 16 12-12 4 4L8 20H4zm10-10 4 4" /></svg
+              >Capture & annotate</span
+            ><span
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="5" width="14" height="14" rx="3" />
+                <path
+                  d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4"
+                />
+                <rect x="9" y="9" width="6" height="6" rx="1" /></svg
+              >Apple on-device</span
+            ><span
+              ><svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m7 7-5 5 5 5m10-10 5 5-5 5M14 4l-4 16" /></svg
+              >MIT open source</span
+            >
+          </div>
+        </div>
+      </section>
+      <section class="section shell" id="features">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow">BUILT AROUND YOUR FOCUS</div>
+            <h2>Stay with the thought.<br />Skip the detour.</h2>
+          </div>
+          <p>
+            A passage, a chart, a detail you almost missed. Keep the context in
+            view and the tools within reach.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card large reveal">
+            <div class="feature-copy">
+              <h3>Keep the bigger picture.</h3>
+              <p>
+                Translation returns to the screenshot, preserving position,
+                color, and hierarchy wherever possible. Switch back to the
+                original whenever you need.
+              </p>
+              <span class="mini-tag"
+                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m5 12 4 4L19 6" /></svg
+                >Original / translation, one tap away</span
+              >
+            </div>
+            <div class="reading-art" aria-hidden="true">
+              <div class="reading-page">
+                <small>READING, UNINTERRUPTED</small>
+                <h4>Good tools stay<br />out of the way.</h4>
+                <p>
+                  Keep your attention on what matters.<br />Translate the words.
+                  Keep the picture.
+                </p>
+                <div class="translation-strip">
+                  <span>EN → 中文</span>好工具，让你专注眼前。
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-copy">
+              <h3>A shortcut to understanding.</h3>
+              <p>
+                From the menu bar to any part of your screen. One shortcut
+                brings Transeen to the thing you are reading.
+              </p>
+            </div>
+            <div class="keyboard-art" aria-label="Control Option 2">
+              <kbd>⌃</kbd><kbd>⌥</kbd><kbd>2</kbd>
+            </div>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-copy">
+              <h3>Make your point.</h3>
+              <p>
+                Arrows, shapes, and numbered notes live on their own layer. Mark
+                it up, then copy, save, or pin it.
+              </p>
+            </div>
+            <div class="annotation-art">
+              <div class="annotation-line" aria-hidden="true">
+                Keep the <span>important part.</span>
+              </div>
+              <img
+                src="assets/toolbar-annotate.webp"
+                width="1104"
+                height="262"
+                loading="lazy"
+                alt="Native annotation tools with color and line-width controls."
+              />
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="section shell flow" id="how">
+        <div class="flow-title reveal">
+          <div class="eyebrow">A NATURAL WORKFLOW</div>
+          <h2>Select. Read.<br />Carry on.</h2>
+          <p>A few simple actions.<br />Right where you already work.</p>
+        </div>
+        <div class="reveal">
+          <article class="step">
+            <span class="step-number">01</span>
+            <div>
+              <h3>Set up once.</h3>
+              <p>
+                Install the app, enter your TR- code, and allow Screen Recording
+                when prompted. Choose your translation languages.
+              </p>
+            </div>
+          </article>
+          <article class="step">
+            <span class="step-number">02</span>
+            <div>
+              <h3>Select what you want to read.</h3>
+              <p>
+                Press <kbd>⌃ ⌥ 2</kbd> and select a region. Or open an existing
+                image directly from the launcher.
+              </p>
+            </div>
+          </article>
+          <article class="step">
+            <span class="step-number">03</span>
+            <div>
+              <h3>Compare. Mark. Keep.</h3>
+              <p>
+                Use <kbd>Tab</kbd> to compare. Add a mark, then copy with
+                <kbd>⌘ C</kbd>, save with <kbd>⌘ S</kbd>, or pin it beside your
+                work.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="shell privacy" id="privacy">
+        <div class="privacy-orbit reveal" aria-hidden="true">
+          <i class="orbit-ring"></i><i class="orbit-ring"></i
+          ><i class="orbit-ring"></i>
+          <div class="local-chip">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="5" y="5" width="14" height="14" rx="3" />
+              <path d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4" />
+              <rect x="9" y="9" width="6" height="6" rx="1" />
+            </svg>
+          </div>
+          <span class="orbit-label one">On your Mac</span
+          ><span class="orbit-label two">Your choice of model</span>
+        </div>
+        <div class="privacy-copy reveal">
+          <div class="eyebrow">LOCAL FIRST. YOUR CHOICE.</div>
+          <h2>Your screen.<br />Your business.</h2>
+          <p>
+            Screenshots and text recognition stay on your Mac. Use Apple
+            on-device translation, or connect an OpenAI-compatible service.
+            Model mode sends recognized text to your chosen endpoint, never the
+            screenshot.
+          </p>
+          <ul class="privacy-list">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m5 12 4 4L19 6" /></svg
+              >No screenshot history or continuous capture
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m5 12 4 4L19 6" /></svg
+              >On-device translation after language-pack setup
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m5 12 4 4L19 6" /></svg
+              >Random installation ID, no hardware serial number
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="shell activation reveal" id="activate">
+        <div>
+          <div class="eyebrow">MAKE IT YOURS</div>
+          <h2>One code. Your Transeen.</h2>
+          <p>
+            The official app uses a dedicated TR- activation code. Activate this
+            Mac without signing in, or bind it to your iTool account for
+            recovery later. StupidMirror and iTool Pro codes are separate.
+          </p>
+        </div>
+        <div class="actions">
+          <a
+            class="button"
+            href="https://github.com/LiuTianjie/Transeen/discussions"
+            >Ask about activation<svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14m-6-6 6 6-6 6" /></svg></a
+          ><a
+            class="text-link"
+            href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md"
+            >How licensing works<svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14m-6-6 6 6-6 6" /></svg
+          ></a>
+        </div>
+      </section>
+      <section class="section shell faq" id="faq">
+        <div class="faq-heading reveal">
+          <div class="eyebrow">A FEW USEFUL DETAILS</div>
+          <h2>Before you begin.</h2>
+        </div>
+        <dl class="faq-list reveal">
+          <div class="faq-item">
+            <dt>Which Macs are supported?</dt>
+            <dd>
+              Transeen requires macOS 26 or later. One universal app supports
+              Apple Silicon and Intel. The current app interface is in
+              Simplified Chinese.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Can I use it offline?</dt>
+            <dd>
+              After online activation and downloading Apple language packs,
+              capture, annotation, and Apple translation work offline. Your
+              cached license remains usable during temporary network failures;
+              the app periodically revalidates it. External models require their
+              configured connection.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Is the source really open?</dt>
+            <dd>
+              Yes. The
+              <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE"
+                >MIT license</a
+              >
+              allows commercial use, modification, and redistribution. The
+              official app requires a TR- code; the source license does not
+              grant access to the hosted activation service.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>What should I double-check?</dt>
+            <dd>
+              Dense layouts, formulas, and specialist terminology can still need
+              correction. Compare important details with the original, or open
+              the text view for the complete translation.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>How do I get updates?</dt>
+            <dd>
+              Choose “检查更新…” in the menu bar or launcher. Transeen checks
+              the latest
+              <a href="https://github.com/LiuTianjie/Transeen/releases"
+                >GitHub release</a
+              >
+              and opens the download page when a new version is available.
+            </dd>
+          </div>
+        </dl>
+      </section>
+      <section class="closing">
+        <img
+          src="assets/app-icon.png"
+          width="76"
+          height="76"
+          alt=""
+          loading="lazy"
+        />
+        <h2>A little less friction.<br />A little more clarity.</h2>
+        <p>A small, native companion for your Mac.</p>
+        <a
+          class="button"
+          href="https://github.com/LiuTianjie/Transeen/releases/latest"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4" /></svg
+          >Get Transeen for Mac</a
+        >
+        <p class="fine">macOS 26+ · Activation required · MIT source</p>
+      </section>
+    </main>
+    <footer class="footer shell">
+      <span>© 2026 Transeen · Made by LiuTianjie</span>
+      <div>
+        <a href="https://itool.tech">iTool ↗</a
+        ><a href="https://github.com/LiuTianjie/Transeen">GitHub</a
+        ><a href="#privacy">Privacy</a
+        ><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE"
+          >MIT License</a
+        >
+      </div>
+    </footer>
+    <dialog class="lightbox" aria-label="Full-size product sample">
+      <button class="lightbox-close" type="button">Close ×</button
+      ><img src="assets/translated.webp" alt="Translation sample" />
+      <p>
+        Transeen rendering with authored sample content and a fixed translation.
+      </p>
+    </dialog>
+    <script src="assets/site.js" defer></script>
+  </body>
+</html>

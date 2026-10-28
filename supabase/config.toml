@@ -1,0 +1,4 @@
+project_id = "transeen"
+
+[functions.transeen-license]
+verify_jwt = false
