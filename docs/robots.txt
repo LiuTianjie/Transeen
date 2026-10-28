@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://liutianjie.github.io/Transeen/sitemap.xml
+
+Sitemap: https://transeen.itool.tech/sitemap.xml

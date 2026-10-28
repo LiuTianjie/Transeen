@@ -9,6 +9,7 @@
 <p align="center">
   <a href="https://github.com/LiuTianjie/Transeen/releases/latest">Download</a> ·
   <a href="https://transeen.itool.tech/">Website</a> ·
+  <a href="https://transeen.itool.tech/guide/">Setup guide</a> ·
   <a href="CHANGELOG.md">Changelog</a> ·
   <a href="README.zh-CN.md">简体中文</a>
 </p>

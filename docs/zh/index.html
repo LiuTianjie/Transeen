@@ -2,473 +2,450 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
+    <script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Transeen — 让译文，留在原处。</title>
-    <meta
-      name="description"
-      content="框选屏幕，原位翻译，随手标注。原生 Mac 应用，支持 Apple 本机翻译与自选模型，让译文留在原处。"
-    />
-    <meta name="theme-color" content="#080f0d" />
-    <link rel="canonical" href="https://liutianjie.github.io/Transeen/zh/" />
-    <link
-      rel="alternate"
-      hreflang="en"
-      href="https://liutianjie.github.io/Transeen/"
-    />
-    <link
-      rel="alternate"
-      hreflang="zh-CN"
-      href="https://liutianjie.github.io/Transeen/zh/"
-    />
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href="https://liutianjie.github.io/Transeen/"
-    />
+    <title>Transeen｜Mac 截图翻译与屏幕翻译，译文留在原处</title>
+    <meta name="description" content="按 ⌃⌥2 框选 Mac 屏幕任意区域，Transeen 把译文直接画回原图，位置、字号和颜色都不变。本机 OCR 识别，支持 Apple 本机翻译与自选模型，可标注、钉图、对照原文。" />
+    <meta name="keywords" content="Mac 截图翻译, Mac 屏幕翻译, 截图翻译软件, OCR 翻译, 图片翻译, 截图标注, 钉图, Transeen" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="LiuTianjie" />
+    <meta name="theme-color" content="#0a0d0c" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="https://transeen.itool.tech/zh/" />
+    <link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Transeen — 让译文，留在原处。" />
-    <meta
-      property="og:description"
-      content="框选屏幕，原位翻译，随手标注。原生 Mac 应用，支持 Apple 本机翻译与自选模型，让译文留在原处。"
-    />
-    <meta
-      property="og:url"
-      content="https://liutianjie.github.io/Transeen/zh/"
-    />
-    <meta
-      property="og:image"
-      content="https://liutianjie.github.io/Transeen/assets/preview.webp?v=3ba432952a9b"
-    />
+    <meta property="og:site_name" content="Transeen" />
+    <meta property="og:url" content="https://transeen.itool.tech/zh/" />
+    <meta property="og:title" content="Transeen｜框选屏幕，译文留在原处" />
+    <meta property="og:description" content="按 ⌃⌥2 框选屏幕任意区域，Transeen 把文字换成你的语言，直接画回同一张图里。" />
+    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=fcc2cbf107c4" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mac 上的一页文档，框选的部分在原处换成了中文，下方是 Transeen 工具栏" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="../assets/app-icon.svg?v=e38c2e38ac25" />
-    <link rel="apple-touch-icon" href="../assets/app-icon.png?v=417357bd4eed" />
-    <link rel="stylesheet" href="../assets/site.css?v=64a7320effd5" />
+    <meta name="twitter:title" content="Transeen｜框选屏幕，译文留在原处" />
+    <meta name="twitter:description" content="按 ⌃⌥2 框选屏幕任意区域，Transeen 把文字换成你的语言，直接画回同一张图里。" />
+    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=fcc2cbf107c4" />
+    <meta name="twitter:image:alt" content="Mac 上的一页文档，框选的部分在原处换成了中文，下方是 Transeen 工具栏" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://transeen.itool.tech/#organization",
+            "name": "Transeen",
+            "url": "https://transeen.itool.tech/",
+            "logo": { "@type": "ImageObject", "url": "https://transeen.itool.tech/assets/icon-512.png", "width": 512, "height": 512 },
+            "sameAs": ["https://github.com/LiuTianjie/Transeen"],
+            "parentOrganization": { "@type": "Organization", "name": "iTool", "url": "https://itool.tech/" }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://transeen.itool.tech/#website",
+            "url": "https://transeen.itool.tech/",
+            "name": "Transeen",
+            "inLanguage": ["en", "zh-CN"],
+            "publisher": { "@id": "https://transeen.itool.tech/#organization" }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://transeen.itool.tech/zh/#webpage",
+            "url": "https://transeen.itool.tech/zh/",
+            "name": "Transeen｜Mac 截图翻译与屏幕翻译，译文留在原处",
+            "description": "按 ⌃⌥2 框选 Mac 屏幕任意区域，Transeen 把译文直接画回原图，位置、字号和颜色都不变。本机 OCR 识别，支持 Apple 本机翻译与自选模型，可标注、钉图、对照原文。",
+            "inLanguage": "zh-CN",
+            "isPartOf": { "@id": "https://transeen.itool.tech/#website" },
+            "about": { "@id": "https://transeen.itool.tech/#software" },
+            "primaryImageOfPage": { "@type": "ImageObject", "url": "https://transeen.itool.tech/assets/og-image-zh.jpg", "width": 1200, "height": 630 },
+            "dateModified": "2026-10-28"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://transeen.itool.tech/#software",
+            "name": "Transeen",
+            "alternateName": "Transeen Mac 截图翻译",
+            "description": "macOS 菜单栏应用：框选屏幕任意区域或打开图片，在本机识别文字并把译文画回原图，保留位置、字号与颜色；支持标注、钉图、复制和导出 PNG。",
+            "url": "https://transeen.itool.tech/zh/",
+            "applicationCategory": "UtilitiesApplication",
+            "applicationSubCategory": "屏幕翻译",
+            "operatingSystem": "macOS 26 或更高版本",
+            "processorRequirements": "Apple 芯片或 Intel",
+            "softwareVersion": "0.7.0",
+            "datePublished": "2026-10-28",
+            "fileSize": "3.1 MB",
+            "downloadUrl": "https://github.com/LiuTianjie/Transeen/releases/latest",
+            "installUrl": "https://github.com/LiuTianjie/Transeen/releases/latest",
+            "releaseNotes": "https://github.com/LiuTianjie/Transeen/releases",
+            "softwareHelp": { "@type": "CreativeWork", "url": "https://transeen.itool.tech/zh/guide/" },
+            "image": "https://transeen.itool.tech/assets/og-image-zh.jpg",
+            "screenshot": [
+              "https://transeen.itool.tech/assets/capture-docs.webp",
+              "https://transeen.itool.tech/assets/capture-read.webp",
+              "https://transeen.itool.tech/assets/capture-mark.webp"
+            ],
+            "featureList": [
+              "框选屏幕任意区域，在原处替换为译文，保留位置、字号与颜色",
+              "Apple Vision 本机文字识别",
+              "Apple 本机翻译或任意兼容 OpenAI 的模型",
+              "简体中文、繁体中文、英语、日语、韩语、法语、西班牙语、德语",
+              "按 Tab 对照原文与译文",
+              "矩形、椭圆、箭头、画笔和编号标注，位于独立图层",
+              "复制、保存 PNG，或把截图钉在其他窗口上方",
+              "翻译本地图片"
+            ],
+            "license": "https://opensource.org/licenses/MIT",
+            "author": { "@type": "Person", "name": "LiuTianjie", "url": "https://github.com/LiuTianjie" },
+            "publisher": { "@id": "https://transeen.itool.tech/#organization" }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://transeen.itool.tech/zh/#faq",
+            "inLanguage": "zh-CN",
+            "isPartOf": { "@id": "https://transeen.itool.tech/#website" },
+            "mainEntity": [
+              { "@type": "Question", "name": "Transeen 支持哪些 Mac？", "acceptedAnswer": { "@type": "Answer", "text": "需要 macOS 26 或更高版本，Apple 芯片和 Intel 都支持，是同一个通用应用。应用界面目前为简体中文。" } },
+              { "@type": "Question", "name": "可以离线使用吗？", "acceptedAnswer": { "@type": "Answer", "text": "可以，激活之后即可。下载好语言包后，截图、标注和 Apple 翻译都能离线运行。断网时授权依然有效，大约每天重新校验一次。模型模式需要连接你设置的接口。" } },
+              { "@type": "Question", "name": "哪些数据会离开我的 Mac？", "acceptedAnswer": { "@type": "Answer", "text": "使用 Apple 翻译时，没有：截图、识别出的文字和译文都留在这台 Mac 上。模型模式只把识别出的文字发送到你设置的接口，不发送截图。激活时会发送激活码和一个随机安装 ID，检查更新会访问 GitHub。" } },
+              { "@type": "Question", "name": "可以用自己的模型吗？", "acceptedAnswer": { "@type": "Answer", "text": "可以。填写任意兼容 OpenAI 的 chat completions 地址和模型名，需要时再填密钥，密钥保存在钥匙串中。远端接口必须使用 HTTPS；本机 localhost 上的服务可以用 HTTP，也可以不填密钥。" } },
+              { "@type": "Question", "name": "能翻译已有的图片吗？", "acceptedAnswer": { "@type": "Answer", "text": "可以。在启动面板选择“打开图片…”或按 ⌘O，图片会在同样的窗口里打开，工具也完全一样。" } },
+              { "@type": "Question", "name": "翻译准确吗？", "acceptedAnswer": { "@type": "Answer", "text": "取决于所选的翻译服务。密集排版、公式和专业术语可能需要修正；依赖某个细节之前，请按 Tab 对照原文，或打开完整文字核对。" } },
+              { "@type": "Question", "name": "Transeen 开源吗？", "acceptedAnswer": { "@type": "Answer", "text": "开源，采用 MIT 许可证，允许商业使用。官方应用需要 TR- 激活码；源码许可证不包含托管的激活服务，独立构建需要配置自己的授权后端。" } },
+              { "@type": "Question", "name": "怎么更新？", "acceptedAnswer": { "@type": "Answer", "text": "在菜单栏或启动面板选择“检查更新…”。Transeen 会查看 GitHub Releases，有新版本时打开下载页面。" } }
+            ]
+          }
+        ]
+      }
+    </script>
+    <link rel="icon" href="../favicon.ico" sizes="48x48" />
+    <link rel="icon" href="../assets/app-icon.svg?v=e38c2e38ac25" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=f2374488919f" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <link rel="preload" href="../assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../assets/screen-en.webp?v=fbcb99113990" as="image" fetchpriority="high" />
+    <link rel="stylesheet" href="../assets/site.css?v=3cb6a127dd97" />
+    <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
-    <a class="skip" href="#main">跳至正文</a>
-    <header class="site-header">
-      <nav class="nav-shell shell" aria-label="主导航">
-        <a class="brand" href="./"
-          ><img
-            src="../assets/app-icon.png?v=417357bd4eed"
-            alt=""
-            width="32"
-            height="32"
-          />Transeen</a
-        >
-        <div class="site-menu" id="site-menu">
-          <a href="#features">功能</a><a href="#how">使用方式</a
-          ><a href="#privacy">隐私</a><a href="#activate">激活</a>
-        </div>
-        <div class="nav-actions">
-          <a class="nav-github" href="https://github.com/LiuTianjie/Transeen"
-            >GitHub ↗</a
-          ><a href="../" lang="en" aria-label="Switch to English">EN</a
-          ><a
-            class="button small nav-download"
-            href="https://github.com/LiuTianjie/Transeen/releases/latest"
-            >下载 Mac 版<svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4" /></svg
-          ></a>
-        </div>
-        <button
-          class="menu-toggle"
-          type="button"
-          aria-controls="site-menu"
-          aria-expanded="false"
-          aria-label="展开或收起导航"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 8h16M4 16h16" />
-          </svg>
-        </button>
+    <a class="skip" href="#main">跳到正文</a>
+    <header class="nav">
+      <a class="wordmark" href="./" aria-label="Transeen 首页"><img src="../assets/app-icon.png?v=417357bd4eed" width="30" height="30" alt="" />Transeen</a>
+      <nav class="nav-links" aria-label="主导航">
+        <a class="nav-optional" href="#how">使用方式</a>
+        <a class="nav-optional" href="#languages">语言</a>
+        <a href="#activate">激活</a>
+        <a href="guide/">使用指南</a>
+        <a href="../" hreflang="en" lang="en">English</a>
       </nav>
     </header>
+
     <main id="main">
-      <section class="hero">
-        <div class="shell">
-          <h1>让译文，<br /><em>留在原处。</em></h1>
-          <p class="hero-description">
-            框选屏幕里的任意区域，在熟悉的位置读懂它。<br />翻译、对照、标注，让阅读自然继续。
-          </p>
-          <div class="actions">
-            <a
-              class="button"
-              href="https://github.com/LiuTianjie/Transeen/releases/latest"
-              ><svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4" /></svg
-              >下载 Mac 版</a
-            ><a class="text-link" href="#features"
-              >看看它能做什么<svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5 12h14m-6-6 6 6-6 6" /></svg
-            ></a>
-          </div>
-          <p class="fine">
-            macOS 26+ <span aria-hidden="true"> · </span> Apple Silicon & Intel
-            <span aria-hidden="true"> · </span> 需激活使用
-          </p>
-          <div class="demo-wrap" id="demo">
-            <div class="stage">
-              <div class="capture">
-                <div class="comparison" data-position="50">
-                  <img
-                    class="capture-image original"
-                    src="../assets/original.webp?v=bfadda135cbd"
-                    width="2080"
-                    height="1060"
-                    alt="英文原文示例"
-                    draggable="false"
-                    fetchpriority="high"
-                  />
-                  <img
-                    class="capture-image translated"
-                    src="../assets/translated.webp?v=21d992582fa5"
-                    width="2080"
-                    height="1060"
-                    alt="同一示例的中文译文，使用 Transeen 排版引擎和固定译文渲染"
-                    draggable="false"
-                    fetchpriority="high"
-                  />
-                  <div class="comparison-divider" aria-hidden="true">
-                    <span
-                      ><svg viewBox="0 0 24 24">
-                        <path d="m8 8-4 4 4 4m8-8 4 4-4 4" /></svg
-                    ></span>
-                  </div>
-                  <input
-                    class="comparison-range"
-                    id="comparison-main"
-                    type="range"
-                    min="0"
-                    max="100"
-                    value="50"
-                    step="1"
-                    aria-label="左右拖动，对照原文与译文"
-                  />
-                  <button class="zoom" type="button" aria-label="放大查看示例">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" />
-                    </svg>
-                  </button>
-                </div>
+      <section class="hero" aria-labelledby="hero-title">
+        <h1 class="hero-title" id="hero-title" data-load>框选屏幕，<br />译文留在原处</h1>
+        <div class="hero-copy">
+          <p class="hero-lead" data-load style="--i: 1">按 <kbd>⌃⌥2</kbd> 框选屏幕上的任意区域。Transeen 把文字换成你的语言，直接画回同一张图里。</p>
+          <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest" data-load style="--i: 2">下载 Mac 版</a>
+          <p class="hero-note" data-load style="--i: 3">需要 macOS 26 或更高版本，以及 <a class="text-link nowrap" href="#activate">TR- 激活码</a>。</p>
+        </div>
+        <div class="stage" data-load style="--i: 2">
+          <p class="stage-label" data-stage-label>English → 简体中文</p>
+          <div class="demo" data-ui data-demo data-original-toolbar="../assets/toolbar-original.webp?v=a28d09a76dfa">
+            <div class="demo-screen" tabindex="0" role="group" aria-label="在示例页面上体验 Transeen 框选翻译" aria-describedby="demo-help">
+              <img src="../assets/screen-en.webp?v=fbcb99113990" width="720" height="500" alt="一页英文示例文档：Keep every device in sync，包含侧边栏、提示框、代码块、三个步骤和一个按钮。" draggable="false" fetchpriority="high" />
+              <div class="demo-translation">
+                <img class="is-on" src="../assets/screen-zh-hans.webp?v=a4a86d51a87c" data-toolbar="../assets/toolbar-zh-hans.webp?v=5a106c856fa3" data-direction="English → 简体中文" width="720" height="500" alt="Transeen 把同一页翻译成简体中文，排版、字号和颜色不变。" draggable="false" />
+                <img data-src="../assets/screen-ja.webp?v=a142eed6f3ca" data-toolbar="../assets/toolbar-ja.webp?v=bae1052041fe" data-direction="English → 日本語" width="720" height="500" alt="" draggable="false" />
+                <img data-src="../assets/screen-ko.webp?v=f11e304e1f79" data-toolbar="../assets/toolbar-ko.webp?v=94560dea556f" data-direction="English → 한국어" width="720" height="500" alt="" draggable="false" />
+                <img data-src="../assets/screen-fr.webp?v=b71a687edf4a" data-toolbar="../assets/toolbar-fr.webp?v=20d739265e3f" data-direction="English → Français" width="720" height="500" alt="" draggable="false" />
+                <img data-src="../assets/screen-de.webp?v=2829ea9e9026" data-toolbar="../assets/toolbar-de.webp?v=2e2e5faf8155" data-direction="English → Deutsch" width="720" height="500" alt="" draggable="false" />
+                <img data-src="../assets/screen-es.webp?v=60c21031645c" data-toolbar="../assets/toolbar-es.webp?v=aade0635c72c" data-direction="English → Español" width="720" height="500" alt="" draggable="false" />
+                <img data-src="../assets/screen-zh-hant.webp?v=552457d4ecab" data-toolbar="../assets/toolbar-zh-hant.webp?v=62fa1ccbdfdf" data-direction="English → 繁體中文" width="720" height="500" alt="" draggable="false" />
               </div>
-              <img
-                class="native-toolbar"
-                src="../assets/toolbar.webp?v=99331e4b38a2"
-                width="1104"
-                height="186"
-                alt="Transeen 原生工具栏：对照原文、标注、钉住与复制。"
-              />
-            </div>
-          </div>
-          <div class="capabilities">
-            <span
-              ><svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8 3H4v4m12-4h4v4M4 16v4h4m8 0h4v-4M8 8h8v8H8z" /></svg
-              >原位翻译</span
-            ><span
-              ><svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m4 16 12-12 4 4L8 20H4zm10-10 4 4" /></svg
-              >截图标注</span
-            ><span
-              ><svg viewBox="0 0 24 24" aria-hidden="true">
-                <rect x="5" y="5" width="14" height="14" rx="3" />
-                <path
-                  d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4"
-                />
-                <rect x="9" y="9" width="6" height="6" rx="1" /></svg
-              >Apple 本机翻译</span
-            ><span
-              ><svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m7 7-5 5 5 5m10-10 5 5-5 5M14 4l-4 16" /></svg
-              >MIT 开源</span
-            >
-          </div>
-        </div>
-      </section>
-      <section class="section shell" id="features">
-        <div class="section-heading reveal">
-          <div>
-            <h2>少一点来回，<br />多一点理解。</h2>
-          </div>
-          <p>
-            一段文字，一张图表，一个差点错过的细节。让内容留在眼前，让工具恰好在手边。
-          </p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-card large reveal">
-            <div class="feature-copy">
-              <h3>读懂文字，也看见全貌。</h3>
-              <p>
-                把译文放回截图，尽量保留原有位置、颜色与视觉层次。随时切回原文，重要细节不靠猜。
-              </p>
-              <span class="mini-tag"
-                ><svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m5 12 4 4L19 6" /></svg
-                >原文与译文，一键对照</span
-              >
-            </div>
-            <div class="reading-art" aria-hidden="true">
-              <div class="reading-page">
-                <small>READING, UNINTERRUPTED</small>
-                <h4>Good tools stay<br />out of the way.</h4>
-                <p>
-                  Keep your attention on what matters.<br />Translate the words.
-                  Keep the picture.
-                </p>
-                <div class="translation-strip">
-                  <span>EN → 中文</span>好工具，让你专注眼前。
-                </div>
+              <div class="demo-selection" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+              <div class="demo-chip" aria-hidden="true"></div>
+              <div class="demo-bar">
+                <img src="../assets/toolbar-zh-hans.webp?v=5a106c856fa3" width="552" height="93" alt="Transeen 工具栏：原文与译文切换、标注工具、文字、钉住、更多、复制、关闭，以及翻译方向 EN → 中文。" draggable="false" />
+                <button class="demo-compare" type="button" data-show="original" aria-pressed="false" aria-label="显示原文"></button>
+                <button class="demo-compare" type="button" data-show="translation" aria-pressed="true" aria-label="显示译文"></button>
               </div>
             </div>
-          </article>
-          <article class="feature-card reveal">
-            <div class="feature-copy">
-              <h3>想到，就框选。</h3>
-              <p>
-                常驻菜单栏，一个快捷键唤起。框选正在阅读的区域，也能直接打开已有图片。
-              </p>
-            </div>
-            <div class="keyboard-art" aria-label="Control Option 2">
-              <kbd>⌃</kbd><kbd>⌥</kbd><kbd>2</kbd>
-            </div>
-          </article>
-          <article class="feature-card reveal">
-            <div class="feature-copy">
-              <h3>把重点，留在画面上。</h3>
-              <p>
-                箭头、形状与编号保留在独立图层。标出重点，然后复制、保存，或钉在屏幕旁。
-              </p>
-            </div>
-            <div class="annotation-art">
-              <div class="annotation-line" aria-hidden="true">
-                留下<span>重要的那一句。</span>
-              </div>
-              <img
-                src="../assets/toolbar-annotate.webp?v=c2f67f0fd09d"
-                width="1104"
-                height="262"
-                loading="lazy"
-                alt="原生标注工具，支持选择颜色与线条粗细。"
-              />
-            </div>
-          </article>
+            <p class="sr-only" id="demo-help">在页面上拖动，或点击一段文字，选择要翻译的区域。聚焦页面后，方向键移动选区，按住 Shift 再按方向键调整大小。</p>
+          </div>
         </div>
       </section>
-      <section class="section shell flow" id="how">
-        <div class="flow-title reveal">
-          <h2>框选，读懂，<br />继续。</h2>
-          <p>几个简单动作，<br />就在你工作的地方完成。</p>
+
+      <section class="compare" id="compare" data-compare data-show="translation" aria-labelledby="compare-title">
+        <div class="compare-copy">
+          <h2 id="compare-title" data-rise>一键切回<span data-compare-word data-translation="原文" data-original="译文">原文</span></h2>
+          <p data-rise style="--i: 1">按 <kbd>Tab</kbd> 在原文和译文之间切换；按住<kbd>空格</kbd>可临时看原文；在任何应用里按 <kbd>⌃⌥空格</kbd> 也能切换。</p>
         </div>
-        <div class="reveal">
-          <article class="step">
-            <span class="step-number">01</span>
-            <div>
-              <h3>先准备好。</h3>
-              <p>
-                安装应用，输入 TR-
-                激活码，按指引开启屏幕录制权限，并选择翻译语言。
-              </p>
-            </div>
-          </article>
-          <article class="step">
-            <span class="step-number">02</span>
-            <div>
-              <h3>框选想读的内容。</h3>
-              <p>
-                按 <kbd>⌃ ⌥ 2</kbd> 拖出选区，也可以从启动面板直接打开已有图片。
-              </p>
-            </div>
-          </article>
-          <article class="step">
-            <span class="step-number">03</span>
-            <div>
-              <h3>对照，标注，留下。</h3>
-              <p>
-                用 <kbd>Tab</kbd> 对照原文。标出重点后，按
-                <kbd>⌘ C</kbd> 复制、<kbd>⌘ S</kbd> 保存，或把图片钉在屏幕旁。
-              </p>
-            </div>
-          </article>
+        <div class="segmented" data-ui role="radiogroup" aria-label="截图中显示" data-rise style="--i: 2">
+          <button type="button" role="radio" data-value="original" aria-checked="false" tabindex="-1">原文</button>
+          <button type="button" role="radio" data-value="translation" aria-checked="true" tabindex="0">译文</button>
         </div>
       </section>
-      <section class="shell privacy" id="privacy">
-        <div class="privacy-orbit reveal" aria-hidden="true">
-          <i class="orbit-ring"></i><i class="orbit-ring"></i
-          ><i class="orbit-ring"></i>
-          <div class="local-chip">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="5" y="5" width="14" height="14" rx="3" />
-              <path d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4" />
-              <rect x="9" y="9" width="6" height="6" rx="1" />
-            </svg>
+
+      <section class="how" id="how" data-how aria-labelledby="how-title">
+        <h2 class="sr-only" id="how-title">Transeen 的使用方式</h2>
+        <div class="how-copy" data-rise>
+          <div class="how-step is-on">
+            <h3>先按 <kbd>⌃⌥2</kbd>，<br />拖出范围</h3>
+            <p>框选时画面保持静止。悬停会自动吸附段落或窗口，也可以自己拖出一块区域。</p>
           </div>
-          <span class="orbit-label one">在你的 Mac 上</span
-          ><span class="orbit-label two">模型，由你选择</span>
+          <div class="how-step">
+            <h3>再在原处读译文</h3>
+            <p>文字在这台 Mac 上识别，译文写回原来的位置，字号和颜色保持一致。</p>
+          </div>
+          <div class="how-step">
+            <h3>然后标出重点</h3>
+            <p>矩形、箭头、画笔和编号都在独立图层上，切换语言也不会丢。</p>
+          </div>
+          <div class="how-step">
+            <h3>最后复制或钉住</h3>
+            <p><kbd>⌘C</kbd> 连同标注一起复制，<kbd>⌘S</kbd> 保存为 PNG，钉住的截图会浮在其他窗口上方。</p>
+          </div>
         </div>
-        <div class="privacy-copy reveal">
-          <h2>你的屏幕内容，<br />留在你的 Mac。</h2>
-          <p>
-            截图与文字识别在本机完成。可以使用 Apple 本机翻译，也可以连接兼容
-            OpenAI 的服务。模型模式仅将识别文字发送至你配置的接口，不上传截图。
-          </p>
-          <ul class="privacy-list">
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m5 12 4 4L19 6" /></svg
-              >不记录截图历史，不持续捕获屏幕
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m5 12 4 4L19 6" /></svg
-              >下载语言包后，可使用本机翻译
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m5 12 4 4L19 6" /></svg
-              >随机安装 ID，不读取硬件序列号
-            </li>
-          </ul>
+        <div class="how-picture" data-rise style="--i: 1">
+          <figure class="how-shot is-on"><img src="../assets/chart-select.webp?v=266b0326416e" width="640" height="404" alt="框选一张图表：选区外的画面变暗，蓝色四角标出选区，旁边显示 1208 × 524 px。" loading="lazy" /></figure>
+          <figure class="how-shot"><img src="../assets/capture-read.webp?v=1db377af3567" width="644" height="501" alt="截取的图表中所有标签都已换成中文，柱形和百分比不变，下方是 Transeen 工具栏。" loading="lazy" /></figure>
+          <figure class="how-shot"><img src="../assets/capture-mark.webp?v=20d6288e5842" width="644" height="539" alt="已翻译的图表上有一个红色矩形、一个绿色箭头和两个编号，工具栏显示颜色和线宽。" loading="lazy" /></figure>
+          <figure class="how-shot"><img src="../assets/capture-keep.webp?v=bc1925bad2c0" width="644" height="501" alt="标注后的图表，工具栏显示“已复制”，钉住按钮已打开。" loading="lazy" /></figure>
+        </div>
+        <div class="how-control">
+          <div class="how-track"><span class="how-fill"></span><input class="how-range" type="range" min="0" max="3" step="1" value="0" aria-label="步骤" /></div>
+          <ol class="how-names">
+            <li class="is-on"><button type="button" tabindex="-1">框选</button></li>
+            <li><button type="button" tabindex="-1">阅读</button></li>
+            <li><button type="button" tabindex="-1">标注</button></li>
+            <li><button type="button" tabindex="-1">保留</button></li>
+          </ol>
         </div>
       </section>
-      <section class="shell activation reveal" id="activate">
-        <div>
-          <h2><span>一个激活码，</span><span>开启 Transeen。</span></h2>
-          <p>
-            官方应用需要 Transeen 专用 TR- 激活码。无需登录即可激活这台
-            Mac，也可绑定 iTool 账号，方便以后恢复。StupidMirror 与 iTool Pro
-            的激活码不通用。
-          </p>
+
+      <section class="board" id="tools" aria-labelledby="tools-title">
+        <div class="tile tile-head" data-rise><h2 id="tools-title">放大看工具栏</h2></div>
+        <figure class="tile tile-6x2" data-rise style="--i: 1">
+          <img src="../assets/close-colours.webp?v=1a7900c11b81" width="2576" height="288" style="--w: 966px; --x: 20px; --y: 28px" alt="六个颜色，选中的是绿色，旁边是三种线宽和自定义样式按钮。" loading="lazy" />
+          <figcaption><strong>颜色与粗细</strong><span>六种颜色、三种线宽，也可以自选颜色。</span></figcaption>
+        </figure>
+        <figure class="tile tile-6x4 is-dark" data-rise style="--i: 2">
+          <img src="../assets/close-tools-dark.webp?v=593ebfd711ef" width="1424" height="328" style="--w: 712px; --rx: -96px; --y: 64px" alt="深色模式下的标注工具：指针、矩形、椭圆、选中的箭头、画笔和编号。" loading="lazy" />
+          <figcaption><strong>独立的标注层</strong><span>矩形、椭圆、箭头、画笔和编号，切换语言也不会移动。</span></figcaption>
+        </figure>
+        <figure class="tile tile-3x4" data-rise style="--i: 3">
+          <img src="../assets/close-copied.webp?v=f1d4fa4ef0b5" width="704" height="288" style="--w: 352px; --x: 28px; --y: 92px" alt="复制后的蓝色按钮，显示对勾和“已复制”。" loading="lazy" />
+          <figcaption><strong>连同标注复制</strong><span><kbd>⌘C</kbd> 复制的就是你看到的样子。</span></figcaption>
+        </figure>
+        <figure class="tile tile-3x4 is-dark" data-rise style="--i: 4">
+          <img src="../assets/close-direction-dark.webp?v=dcae7ddbc769" width="848" height="240" style="--w: 424px; --x: 24px; --y: 96px" alt="深色模式下的语言菜单，显示 EN → 中文。" loading="lazy" />
+          <figcaption><strong>八种语言</strong><span>自动识别原文语言，也能手动指定，一键交换方向。</span></figcaption>
+        </figure>
+        <figure class="tile tile-6x2" data-rise style="--i: 5">
+          <img src="../assets/close-history.webp?v=abbdf30967c7" width="768" height="288" style="--w: 336px; --rx: 36px; --y: 22px" alt="撤销、重做和删除按钮，均可使用。" loading="lazy" />
+          <figcaption><strong>撤销与重做</strong><span><kbd>⌘Z</kbd> 和 <kbd>⌘⇧Z</kbd> 逐步回退或恢复每一处标注。</span></figcaption>
+        </figure>
+        <figure class="tile tile-3x2 is-dark" data-rise style="--i: 6">
+          <img src="../assets/close-pin-dark.webp?v=d593aeb6262f" width="304" height="320" style="--w: 133px; --rx: 18px; --y: -18px" alt="深色模式下已打开的钉住按钮。" loading="lazy" />
+          <figcaption><strong>钉住截图</strong><span>钉住后会浮在其他窗口上方。</span></figcaption>
+        </figure>
+        <figure class="tile tile-3x2" data-rise style="--i: 7">
+          <img src="../assets/close-text.webp?v=a38907570af6" width="464" height="320" style="--w: 203px; --rx: -34px; --y: -12px" alt="“文字”按钮，用来打开完整文字。" loading="lazy" />
+          <figcaption><strong>完整文字</strong><span>查看并复制完整的译文与原文。</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="band" data-band aria-label="让译文留在原处。">
+        <p class="band-line" aria-hidden="true">
+          <span class="band-source" lang="en">Translation, right<br />where it belongs.</span>
+          <span class="band-target">让译文<br />留在原处。</span>
+        </p>
+      </section>
+
+      <section class="languages" id="languages" aria-labelledby="languages-title">
+        <h2 class="sr-only" id="languages-title">Transeen 支持的语言</h2>
+        <ul class="language-list">
+          <li data-rise><span lang="zh-Hans">简体中文</span><small>中文</small></li>
+          <li data-rise style="--i: 1"><span lang="zh-Hant">繁體中文</span><small>繁中</small></li>
+          <li data-rise style="--i: 2"><span lang="en">English</span><small>英语</small></li>
+          <li data-rise style="--i: 3"><span lang="ja">日本語</span><small>日语</small></li>
+          <li data-rise style="--i: 4"><span lang="ko">한국어</span><small>韩语</small></li>
+          <li data-rise style="--i: 5"><span lang="fr">Français</span><small>法语</small></li>
+          <li data-rise style="--i: 6"><span lang="es">Español</span><small>西班牙语</small></li>
+          <li data-rise style="--i: 7"><span lang="de">Deutsch</span><small>德语</small></li>
+        </ul>
+        <p class="languages-note" data-rise>任意两种语言之间都能互译。原文语言可以自动识别；装好语言包后，Apple 翻译在这台 Mac 上运行。</p>
+      </section>
+
+      <section class="activate" id="activate" aria-labelledby="activate-title">
+        <div class="ticket" data-rise>
+          <div class="ticket-main">
+            <h2 id="activate-title">激活码</h2>
+            <ul class="ticket-terms">
+              <li>解锁这台 Mac 上的截图、标注和翻译。</li>
+              <li>永久授权，无需登录即可激活。</li>
+              <li>可选绑定 iTool 账号，日后登录同一账号即可恢复。</li>
+              <li>StupidMirror 的 SM- 和 iTool Pro 的 IT- 激活码不能通用。</li>
+            </ul>
+          </div>
+          <div class="ticket-stub">
+            <svg class="perforation" viewBox="0 0 6 360" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="dots" width="6" height="18" patternUnits="userSpaceOnUse"><circle cx="3" cy="9" r="3" /></pattern></defs><rect width="6" height="360" fill="url(#dots)" /></svg>
+            <p class="ticket-code">TR-</p>
+            <p class="ticket-format">XXXX-XXXX-XXXX-<br />XXXX-XXXX-XXXX</p>
+            <a class="ticket-action" href="https://github.com/LiuTianjie/Transeen/discussions">咨询激活码</a>
+          </div>
         </div>
-        <div class="actions">
-          <a
-            class="button"
-            href="https://github.com/LiuTianjie/Transeen/discussions"
-            >咨询激活码<svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14m-6-6 6 6-6 6" /></svg></a
-          ><a
-            class="text-link"
-            href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md"
-            >了解授权方式<svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14m-6-6 6 6-6 6" /></svg
-          ></a>
+        <p class="activate-note" data-rise>在菜单栏打开“激活与账号…”输入激活码。源代码采用 <a class="text-link" href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 许可证</a>，你也可以<a class="text-link" href="guide/#build">自行构建</a>；托管的激活服务只用于官方应用。</p>
+      </section>
+
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <h2 class="faq-title" id="faq-title" data-rise>常见问题</h2>
+        <div class="faq-list">
+          <details class="faq-item" name="faq" data-rise>
+            <summary><h3>Transeen 支持哪些 Mac？</h3></summary>
+            <p>需要 macOS 26 或更高版本，Apple 芯片和 Intel 都支持，是同一个通用应用。应用界面目前为简体中文。</p>
+          </details>
+          <details class="faq-item" name="faq" data-rise style="--i: 1">
+            <summary><h3>可以离线使用吗？</h3></summary>
+            <p>可以，激活之后即可。下载好语言包后，截图、标注和 Apple 翻译都能离线运行。断网时授权依然有效，大约每天重新校验一次。模型模式需要连接你设置的接口。</p>
+          </details>
+          <details class="faq-item" name="faq" data-rise style="--i: 2">
+            <summary><h3>哪些数据会离开我的 Mac？</h3></summary>
+            <p>使用 Apple 翻译时，没有：截图、识别出的文字和译文都留在这台 Mac 上。模型模式只把识别出的文字发送到你设置的接口，不发送截图。激活时会发送激活码和一个随机安装 ID，检查更新会访问 GitHub。</p>
+          </details>
+          <details class="faq-item" name="faq" data-rise style="--i: 3">
+            <summary><h3>可以用自己的模型吗？</h3></summary>
+            <p>可以。填写任意兼容 OpenAI 的 chat completions 地址和模型名，需要时再填密钥，密钥保存在钥匙串中。远端接口必须使用 HTTPS；本机 localhost 上的服务可以用 HTTP，也可以不填密钥。<a href="guide/#model">使用指南</a>里有示例。</p>
+          </details>
+          <details class="faq-item" name="faq" data-rise style="--i: 4">
+            <summary><h3>能翻译已有的图片吗？</h3></summary>
+            <p>可以。在启动面板选择“打开图片…”或按 <kbd>⌘O</kbd>，图片会在同样的窗口里打开，工具也完全一样。</p>
+          </details>
+          <details class="faq-item" name="faq" data-rise style="--i: 5">
+            <summary><h3>翻译准确吗？</h3></summary>
+            <p>取决于所选的翻译服务。密集排版、公式和专业术语可能需要修正；依赖某个细节之前，请按 <kbd>Tab</kbd> 对照原文，或打开完整文字核对。</p>
+          </details>
+          <details class="faq-item" name="faq" data-rise style="--i: 6">
+            <summary><h3>Transeen 开源吗？</h3></summary>
+            <p>开源，采用 <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 许可证</a>，允许商业使用。官方应用需要 TR- 激活码；源码许可证不包含托管的激活服务，独立构建需要配置自己的授权后端。</p>
+          </details>
+          <details class="faq-item" name="faq" data-rise style="--i: 7">
+            <summary><h3>怎么更新？</h3></summary>
+            <p>在菜单栏或启动面板选择“检查更新…”。Transeen 会查看 <a href="https://github.com/LiuTianjie/Transeen/releases">GitHub Releases</a>，有新版本时打开下载页面。</p>
+          </details>
         </div>
       </section>
-      <section class="section shell faq" id="faq">
-        <div class="faq-heading reveal">
-          <h2>开始之前。</h2>
+
+      <section class="closing" aria-labelledby="closing-title">
+        <figure class="closing-object" data-rise>
+          <img src="../assets/capture-docs.webp?v=629f9c92fda2" width="724" height="597" alt="示例文档被截取并翻译成中文，下方是 Transeen 工具栏。" loading="lazy" />
+        </figure>
+        <div class="closing-copy" data-rise style="--i: 1">
+          <h2 id="closing-title">就在原处读懂</h2>
+          <p>下载 Transeen，按 <kbd>⌃⌥2</kbd>，框选第一处看不懂的地方。</p>
+          <p class="closing-fact">通用应用，3.1 MB，已通过 Apple 公证。</p>
+          <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">下载 Mac 版</a>
         </div>
-        <dl class="faq-list reveal">
-          <div class="faq-item">
-            <dt>支持哪些 Mac？</dt>
-            <dd>
-              需要 macOS 26 或更高版本，同一安装包支持 Apple Silicon 与
-              Intel。当前应用界面为简体中文。
-            </dd>
-          </div>
-          <div class="faq-item">
-            <dt>可以离线使用吗？</dt>
-            <dd>
-              联网激活并下载 Apple 语言包后，截图、标注与 Apple
-              翻译可以离线使用。暂时断网时保留已有授权，应用会定期联网校验。外部模型需要相应网络连接。
-            </dd>
-          </div>
-          <div class="faq-item">
-            <dt>开源和激活是什么关系？</dt>
-            <dd>
-              源代码采用
-              <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE"
-                >MIT 许可证</a
-              >，允许商用、修改与分发。官方安装包需要 TR-
-              激活码；源码许可证不授予托管授权服务的访问权。
-            </dd>
-          </div>
-          <div class="faq-item">
-            <dt>哪些内容需要核对？</dt>
-            <dd>
-              密集排版、公式与专业术语仍需核对。重要信息请对照原文，也可以打开文字视图阅读完整译文。
-            </dd>
-          </div>
-          <div class="faq-item">
-            <dt>如何检查更新？</dt>
-            <dd>
-              在菜单栏或启动面板中选择“检查更新…”。Transeen 会检查最新
-              <a href="https://github.com/LiuTianjie/Transeen/releases"
-                >GitHub Release</a
-              >，发现新版本后可前往下载。
-            </dd>
-          </div>
-        </dl>
-      </section>
-      <section class="closing">
-        <img
-          src="../assets/app-icon.png?v=417357bd4eed"
-          width="76"
-          height="76"
-          alt=""
-          loading="lazy"
-        />
-        <h2>看懂眼前，<br />继续向前。</h2>
-        <p>一个原生的小工具，陪你读懂更多。</p>
-        <a
-          class="button"
-          href="https://github.com/LiuTianjie/Transeen/releases/latest"
-          ><svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4" /></svg
-          >下载 Transeen</a
-        >
-        <p class="fine">macOS 26+ · 需激活使用 · MIT 开源</p>
       </section>
     </main>
-    <footer class="footer shell">
-      <span>© 2026 Transeen · 出品 LiuTianjie</span>
-      <div>
-        <a href="https://itool.tech">iTool ↗</a
-        ><a href="https://github.com/LiuTianjie/Transeen">GitHub</a
-        ><a href="#privacy">隐私</a
-        ><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE"
-          >MIT License</a
-        >
+
+    <footer class="footer">
+      <svg class="mark" viewBox="0 0 1600 320" role="img" aria-label="Transeen" data-rise>
+        <defs>
+          <mask id="mark-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="320">
+            <rect width="1600" height="320" fill="#fff" />
+            <g fill="#000" font-family="Geist, -apple-system, sans-serif" font-size="230" font-weight="600" text-anchor="middle">
+              <text x="98" y="292">T</text><text x="298.5" y="292">R</text><text x="499" y="292">A</text><text x="699.5" y="292">N</text>
+              <text x="900" y="292">S</text><text x="1100.5" y="292">E</text><text x="1301" y="292">E</text><text x="1501.5" y="292">N</text>
+            </g>
+          </mask>
+        </defs>
+        <g mask="url(#mark-cut)">
+          <rect class="mark-block" x="0" y="0" width="196.5" height="320" fill="#b5e3b8" />
+          <rect class="mark-block" x="200.5" y="90" width="196.5" height="230" fill="#eef4e2" />
+          <rect class="mark-block" x="401" y="44" width="196.5" height="276" fill="#2c6550" />
+          <rect class="mark-block" x="601.5" y="116" width="196.5" height="204" fill="#b5e3b8" />
+          <rect class="mark-block" x="802" y="20" width="196.5" height="300" fill="#eef4e2" />
+          <rect class="mark-block" x="1002.5" y="96" width="196.5" height="224" fill="#2c6550" />
+          <rect class="mark-block" x="1203" y="58" width="196.5" height="262" fill="#b5e3b8" />
+          <rect class="mark-block" x="1403.5" y="128" width="196.5" height="192" fill="#eef4e2" />
+        </g>
+      </svg>
+      <svg class="mark-stack" viewBox="0 0 800 640" role="img" aria-label="Transeen" data-rise>
+        <defs>
+          <mask id="mark-stack-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="640">
+            <rect width="800" height="640" fill="#fff" />
+            <g fill="#000" font-family="Geist, -apple-system, sans-serif" font-size="230" font-weight="600" text-anchor="middle">
+              <text x="98" y="292">T</text><text x="298.5" y="292">R</text><text x="499" y="292">A</text><text x="699.5" y="292">N</text>
+              <text x="98" y="616">S</text><text x="298.5" y="616">E</text><text x="499" y="616">E</text><text x="699.5" y="616">N</text>
+            </g>
+          </mask>
+        </defs>
+        <g mask="url(#mark-stack-cut)">
+          <rect class="mark-block" x="0" y="0" width="196.5" height="320" fill="#b5e3b8" />
+          <rect class="mark-block" x="200.5" y="90" width="196.5" height="230" fill="#eef4e2" />
+          <rect class="mark-block" x="401" y="44" width="196.5" height="276" fill="#2c6550" />
+          <rect class="mark-block" x="601.5" y="116" width="196.5" height="204" fill="#b5e3b8" />
+          <rect class="mark-block" x="0" y="340" width="196.5" height="300" fill="#eef4e2" />
+          <rect class="mark-block" x="200.5" y="416" width="196.5" height="224" fill="#2c6550" />
+          <rect class="mark-block" x="401" y="378" width="196.5" height="262" fill="#b5e3b8" />
+          <rect class="mark-block" x="601.5" y="448" width="196.5" height="192" fill="#eef4e2" />
+        </g>
+      </svg>
+      <div class="footer-grid">
+        <nav aria-label="产品">
+          <h2>产品</h2>
+          <ul>
+            <li><a href="https://github.com/LiuTianjie/Transeen/releases/latest">下载</a></li>
+            <li><a href="#how">使用方式</a></li>
+            <li><a href="#languages">语言</a></li>
+            <li><a href="#activate">激活</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="帮助">
+          <h2>帮助</h2>
+          <ul>
+            <li><a href="guide/">使用指南</a></li>
+            <li><a href="guide/#shortcuts">键盘快捷键</a></li>
+            <li><a href="#faq">常见问题</a></li>
+            <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md">授权说明</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="源代码">
+          <h2>源代码</h2>
+          <ul>
+            <li><a href="https://github.com/LiuTianjie/Transeen">GitHub</a></li>
+            <li><a href="https://github.com/LiuTianjie/Transeen/releases">版本发布</a></li>
+            <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md">更新记录</a></li>
+            <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 许可证</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="iTool 家族">
+          <h2>iTool 家族</h2>
+          <ul>
+            <li><a href="https://itool.tech/">iTool</a></li>
+            <li><a href="https://stupidmirror.itool.tech/zh/">StupidMirror</a></li>
+            <li><a href="../" hreflang="en" lang="en">Transeen English</a></li>
+          </ul>
+        </nav>
+        <div class="footer-contact">
+          <p>咨询与激活码：<a href="https://github.com/LiuTianjie/Transeen/discussions">GitHub Discussions</a>。</p>
+          <p>遇到问题？<a href="https://github.com/LiuTianjie/Transeen/issues">提交 issue</a>。</p>
+        </div>
+      </div>
+      <div class="footer-end">
+        <p>© 2026 LiuTianjie。Transeen 是一款在原处翻译屏幕内容的 Mac 原生应用。</p>
+        <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">下载</a>
       </div>
     </footer>
-    <dialog class="lightbox" aria-label="产品示例大图">
-      <button class="lightbox-close" type="button">关闭 ×</button>
-      <div class="comparison" data-position="50">
-        <img
-          class="capture-image original"
-          src="../assets/original.webp?v=bfadda135cbd"
-          width="2080"
-          height="1060"
-          alt="英文原文示例"
-          draggable="false"
-          loading="lazy"
-        />
-        <img
-          class="capture-image translated"
-          src="../assets/translated.webp?v=21d992582fa5"
-          width="2080"
-          height="1060"
-          alt="同一示例的中文译文，使用 Transeen 排版引擎和固定译文渲染"
-          draggable="false"
-          loading="lazy"
-        />
-        <div class="comparison-divider" aria-hidden="true">
-          <span
-            ><svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4m8-8 4 4-4 4" /></svg
-          ></span>
-        </div>
-        <input
-          class="comparison-range"
-          id="comparison-large"
-          type="range"
-          min="0"
-          max="100"
-          value="50"
-          step="1"
-          aria-label="左右拖动，对照原文与译文"
-        />
-      </div>
-    </dialog>
-    <script src="../assets/site.js?v=2ddc6a933425" defer></script>
+    <script src="../assets/site.js?v=2fe97d30690e" defer></script>
   </body>
 </html>

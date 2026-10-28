@@ -1,0 +1,29 @@
+# Transeen
+
+> Transeen is a native macOS menu bar app (macOS 26 or later, Apple silicon and Intel). Press Control-Option-2, select any part of the screen or open an image, and Transeen recognizes the text on the Mac and draws the translation back into the same picture, keeping its position, size and color. Captures can be compared with the original, marked up, copied, saved as PNG or pinned above other windows.
+
+- Website: https://transeen.itool.tech/ (Chinese: https://transeen.itool.tech/zh/)
+- Setup guide: https://transeen.itool.tech/guide/ (Chinese: https://transeen.itool.tech/zh/guide/)
+- Download: https://github.com/LiuTianjie/Transeen/releases/latest (version 0.7.0, signed and notarized DMG, about 3 MB)
+- Source: https://github.com/LiuTianjie/Transeen (MIT license, Swift 6)
+
+## What it does
+
+- Translates a selected screen region in place: Apple Vision text recognition on the Mac, pixel-aware text style estimation, and the translation set where the original text was.
+- Translation providers: Apple on-device translation (offline after the language pack is installed) or any OpenAI-compatible chat completions endpoint, including local servers on localhost. Model mode sends recognized text only, never the screenshot.
+- Languages: Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German, in any direction; the source language can be detected.
+- Compare original and translation with Tab (or Control-Option-Space from any app); hold Space to peek at the original.
+- Annotation on a separate layer: rectangle, ellipse, arrow, pen and numbered notes, with undo and redo.
+- Copy with Command-C, save PNG with Command-S, pin a capture above other windows, open the full text view, or translate an image opened from disk.
+- No screenshot history and no continuous capture.
+
+## Activation
+
+The official app needs a Transeen TR- activation code: a perpetual license for one Mac, activated without signing in, optionally bound to an iTool account for recovery. StupidMirror SM- and iTool Pro IT- codes do not work. Ask about codes in GitHub Discussions: https://github.com/LiuTianjie/Transeen/discussions
+
+## Docs
+
+- [Setup guide](https://transeen.itool.tech/guide/): install, activate, screen recording permission, languages, shortcuts, model setup, troubleshooting, building from source
+- [README](https://github.com/LiuTianjie/Transeen/blob/main/README.md)
+- [Licensing](https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md)
+- [Changelog](https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md)
