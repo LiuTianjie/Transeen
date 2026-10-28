@@ -28,40 +28,62 @@
     if (event.matches) closeMenu();
   });
 
-  const capture = document.querySelector(".capture");
-  const buttons = document.querySelectorAll("[data-demo]");
-  buttons.forEach((button) =>
-    button.addEventListener("click", () => {
-      capture.dataset.view = button.dataset.demo;
-      capture
-        .querySelector(".original")
-        .setAttribute(
-          "aria-hidden",
-          String(button.dataset.demo !== "original"),
-        );
-      capture
-        .querySelector(".translated")
-        .setAttribute(
-          "aria-hidden",
-          String(button.dataset.demo !== "translated"),
-        );
-      buttons.forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
+  const comparisons = [...document.querySelectorAll(".comparison")];
+  const setComparison = (position) => {
+    comparisons.forEach((comparison) => {
+      const range = comparison.querySelector(".comparison-range");
+      comparison.style.setProperty("--split", `${position}%`);
+      comparison.dataset.position = position;
+      range.value = position;
+      range.setAttribute(
+        "aria-valuetext",
+        document.documentElement.lang === "zh-CN"
+          ? `原文 ${position}%，译文 ${100 - position}%`
+          : `Original ${position}%, translation ${100 - position}%`,
       );
-      document.querySelector("#demo-status").textContent = button.dataset.label;
-    }),
-  );
-  const dialog = document.querySelector(".lightbox");
-  document.querySelector(".zoom").addEventListener("click", () => {
-    const original = capture.dataset.view === "original";
-    const source = capture.querySelector(
-      original ? ".original" : ".translated",
-    );
-    const image = dialog.querySelector("img");
-    image.src = source.src;
-    image.alt = source.alt;
-    dialog.showModal();
+    });
+  };
+  comparisons.forEach((comparison) => {
+    const range = comparison.querySelector(".comparison-range");
+    // Pointer capture keeps the divider attached even outside the picture.
+    const updateFromPointer = (event) => {
+      const bounds = comparison.getBoundingClientRect();
+      const position = Math.round(
+        Math.max(
+          0,
+          Math.min(100, ((event.clientX - bounds.left) / bounds.width) * 100),
+        ),
+      );
+      setComparison(position);
+    };
+    let dragging = false;
+    range.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      dragging = true;
+      range.focus({ preventScroll: true });
+      range.setPointerCapture(event.pointerId);
+      updateFromPointer(event);
+      event.preventDefault();
+    });
+    range.addEventListener("pointermove", (event) => {
+      if (dragging) updateFromPointer(event);
+    });
+    range.addEventListener("pointerup", () => {
+      dragging = false;
+    });
+    range.addEventListener("pointercancel", () => {
+      dragging = false;
+    });
+    range.addEventListener("lostpointercapture", () => {
+      dragging = false;
+    });
+    range.addEventListener("input", () => setComparison(Number(range.value)));
   });
+  setComparison(50);
+  const dialog = document.querySelector(".lightbox");
+  document
+    .querySelector(".zoom")
+    .addEventListener("click", () => dialog.showModal());
   dialog
     .querySelector(".lightbox-close")
     .addEventListener("click", () => dialog.close());

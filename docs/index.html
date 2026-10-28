@@ -40,7 +40,7 @@
       content="https://liutianjie.github.io/Transeen/assets/preview.webp"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="assets/app-icon.png" />
+    <link rel="icon" href="assets/app-icon.svg" />
     <link rel="apple-touch-icon" href="assets/app-icon.png" />
     <link rel="stylesheet" href="assets/site.css" />
   </head>
@@ -87,15 +87,6 @@
     <main id="main">
       <section class="hero">
         <div class="shell">
-          <a
-            class="release-link"
-            href="https://github.com/LiuTianjie/Transeen/releases/latest"
-            ><span>v0.7.0</span>A small tool. A clearer view.<svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14m-6-6 6 6-6 6" /></svg
-          ></a>
           <h1>A new language.<br /><em>The same picture.</em></h1>
           <p class="hero-description">
             Capture a moment on your screen. Read it in your language.<br />Translate,
@@ -118,57 +109,53 @@
             <span aria-hidden="true"> · </span> Activation required
           </p>
           <div class="demo-wrap" id="demo">
-            <div class="demo-top">
-              <span class="demo-label"
-                ><span class="status-dot"></span>SAME LAYOUT. NEW
-                PERSPECTIVE.</span
-              >
-              <div
-                class="switch"
-                role="group"
-                aria-label="Compare original and translation"
-              >
-                <button
-                  data-demo="original"
-                  data-label="Showing original"
-                  aria-pressed="false"
-                  type="button"
-                >
-                  Original</button
-                ><button
-                  data-demo="translated"
-                  data-label="Showing translation"
-                  aria-pressed="true"
-                  type="button"
-                >
-                  Translation
-                </button>
-              </div>
-            </div>
             <div class="stage">
-              <div class="capture" data-view="translated">
-                <img
-                  class="capture-image original"
-                  aria-hidden="true"
-                  src="assets/original.webp"
-                  width="2080"
-                  height="1060"
-                  alt="Original English reading sample with a focus diagram."
-                  fetchpriority="high"
-                />
-                <img
-                  class="capture-image translated"
-                  src="assets/translated.webp"
-                  width="2080"
-                  height="1060"
-                  alt="Transeen renders the Chinese translation in the original positions while preserving the diagram."
-                  fetchpriority="high"
-                />
-                <button class="zoom" type="button" aria-label="Enlarge sample">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" />
-                  </svg>
-                </button>
+              <div class="capture">
+                <div class="comparison" data-position="50">
+                  <img
+                    class="capture-image original"
+                    src="assets/original.webp"
+                    width="2080"
+                    height="1060"
+                    alt="Original English sample"
+                    draggable="false"
+                    fetchpriority="high"
+                  />
+                  <img
+                    class="capture-image translated"
+                    src="assets/translated.webp"
+                    width="2080"
+                    height="1060"
+                    alt="Chinese sample rendered by Transeen with a fixed translation"
+                    draggable="false"
+                    fetchpriority="high"
+                  />
+                  <div class="comparison-divider" aria-hidden="true">
+                    <span
+                      ><svg viewBox="0 0 24 24">
+                        <path d="m8 8-4 4 4 4m8-8 4 4-4 4" /></svg
+                    ></span>
+                  </div>
+                  <input
+                    class="comparison-range"
+                    id="comparison-main"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                    step="1"
+                    aria-label="Drag to compare the original and translation"
+                  />
+                  <button
+                    class="zoom"
+                    type="button"
+                    aria-label="Enlarge sample"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" />
+                    </svg>
+                  </button>
+                </div>
               </div>
               <img
                 class="native-toolbar"
@@ -178,17 +165,6 @@
                 alt="Transeen native toolbar: compare, annotate, pin, and copy."
               />
             </div>
-            <p class="demo-caption">
-              Real Transeen rendering and toolbar, with authored sample text and
-              a fixed translation.
-            </p>
-            <span
-              class="sr-only"
-              id="demo-status"
-              role="status"
-              aria-live="polite"
-              >Showing translation</span
-            >
           </div>
           <div class="capabilities">
             <span
@@ -218,7 +194,6 @@
       <section class="section shell" id="features">
         <div class="section-heading reveal">
           <div>
-            <div class="eyebrow">BUILT AROUND YOUR FOCUS</div>
             <h2>Stay with the thought.<br />Skip the detour.</h2>
           </div>
           <p>
@@ -292,7 +267,6 @@
       </section>
       <section class="section shell flow" id="how">
         <div class="flow-title reveal">
-          <div class="eyebrow">A NATURAL WORKFLOW</div>
           <h2>Select. Read.<br />Carry on.</h2>
           <p>A few simple actions.<br />Right where you already work.</p>
         </div>
@@ -345,7 +319,6 @@
           ><span class="orbit-label two">Your choice of model</span>
         </div>
         <div class="privacy-copy reveal">
-          <div class="eyebrow">LOCAL FIRST. YOUR CHOICE.</div>
           <h2>Your screen.<br />Your business.</h2>
           <p>
             Screenshots and text recognition stay on your Mac. Use Apple
@@ -374,7 +347,6 @@
       </section>
       <section class="shell activation reveal" id="activate">
         <div>
-          <div class="eyebrow">MAKE IT YOURS</div>
           <h2>One code. Your Transeen.</h2>
           <p>
             The official app uses a dedicated TR- activation code. Activate this
@@ -398,7 +370,6 @@
       </section>
       <section class="section shell faq" id="faq">
         <div class="faq-heading reveal">
-          <div class="eyebrow">A FEW USEFUL DETAILS</div>
           <h2>Before you begin.</h2>
         </div>
         <dl class="faq-list reveal">
@@ -485,11 +456,42 @@
       </div>
     </footer>
     <dialog class="lightbox" aria-label="Full-size product sample">
-      <button class="lightbox-close" type="button">Close ×</button
-      ><img src="assets/translated.webp" alt="Translation sample" />
-      <p>
-        Transeen rendering with authored sample content and a fixed translation.
-      </p>
+      <button class="lightbox-close" type="button">Close ×</button>
+      <div class="comparison" data-position="50">
+        <img
+          class="capture-image original"
+          src="assets/original.webp"
+          width="2080"
+          height="1060"
+          alt="Original English sample"
+          draggable="false"
+          loading="lazy"
+        />
+        <img
+          class="capture-image translated"
+          src="assets/translated.webp"
+          width="2080"
+          height="1060"
+          alt="Chinese sample rendered by Transeen with a fixed translation"
+          draggable="false"
+          loading="lazy"
+        />
+        <div class="comparison-divider" aria-hidden="true">
+          <span
+            ><svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4m8-8 4 4-4 4" /></svg
+          ></span>
+        </div>
+        <input
+          class="comparison-range"
+          id="comparison-large"
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          step="1"
+          aria-label="Drag to compare the original and translation"
+        />
+      </div>
     </dialog>
     <script src="assets/site.js" defer></script>
   </body>
