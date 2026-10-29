@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0
+
+- Add a first-run guide for activation, Screen Recording, translation languages, and shortcuts. It shows which Apple language packs are installed and downloads missing ones before the first capture; Settings lists them too, and model mode gains a connection test.
+- Replace the default capture mode with two shortcuts: ⌃⌥2 captures and translates, ⌃⌥3 captures for annotation. Users who had chosen screenshot as the default keep ⌃⌥2 for screenshots.
+- Drag a capture's edges or corners to adjust the area. It re-crops the frozen screen, keeps annotations in place, and translates again on release.
+- Copy is available while a translation is still running.
+- Selection corner marks follow the rounded outline instead of sticking out past it.
+
 ## 0.7.0
 
 - Add Transeen activation codes, secure Keychain receipts, and optional iTool account binding and restoration.
