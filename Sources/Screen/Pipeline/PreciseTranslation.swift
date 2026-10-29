@@ -204,7 +204,9 @@ enum PreciseTranslation {
     Answer null instead of a translation for text that must stay as it is: brand, product and \
     company names, logos, user names, code, identifiers, file names, addresses, and text that \
     is already in target_language. Inside a sentence keep such names as they are and translate \
-    the rest. Keep numbers, units and placeholders.
+    the rest. Keep numbers, units and placeholders. Text between backticks (`like this`) is \
+    code drawn in its own box: keep each such span exactly, backticks included, where it \
+    belongs in the translated sentence.
 
     Return only one JSON object with every id as a key and its translation, or null, as the value:
     {"1": "…", "2": null, "3": "…"}

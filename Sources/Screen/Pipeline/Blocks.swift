@@ -14,6 +14,19 @@ struct MeasuredLine: Sendable {
     /// rejoined across a literal, recoloured as prose, or wrapped onto another row.
     var inlineBounds: ClosedRange<CGFloat>? = nil
     var protectedLiteral = false
+    /// Which recognised line a style run came from.
+    var row: Int? = nil
+    /// A sentence put back together from its style runs, code chips among them, in reading order.
+    var parts: [MeasuredLine] = []
+}
+
+/// A code chip inside a sentence. Its own pixels move with the translation.
+struct InlineChip: Sendable {
+    var text: String
+    /// The chip and its paper, picture pixels from the top-left.
+    var rect: CGRect
+    /// From the baseline of its line to the top of `rect`.
+    var rise: CGFloat
 }
 
 /// Verified empty background around a rectangle, in pixels on each side.
@@ -39,6 +52,8 @@ struct TextBlock: Sendable {
     var translate = true
     var original = ""
     var translation = ""
+    /// The code chips in the text, which is `original` with each chip as `literal`.
+    var chips: [InlineChip] = []
 
     var firstBaseline: CGFloat { lines[0].ink.baseline }
 }
@@ -138,7 +153,18 @@ enum BlockBuilder {
 
     /// Group measured lines into blocks. `scale` is pixels per point.
     static func build(_ measured: [MeasuredLine], image: PixelImage, scale: CGFloat) -> [TextBlock] {
-        let lines = measured.sorted { $0.ink.baseline == $1.ink.baseline ? $0.ink.rect.minX < $1.ink.rect.minX : $0.ink.baseline < $1.ink.baseline }
+        var whole = measured.filter { $0.row == nil }
+        for (_, runs) in Dictionary(grouping: measured.filter { $0.row != nil }, by: { $0.row! }) {
+            // A badge or a count at either end ("+12 −0") is not part of the sentence.
+            var sentence = runs.sorted { $0.ink.rect.minX < $1.ink.rect.minX }, aside: [MeasuredLine] = []
+            func badge(_ run: MeasuredLine) -> Bool {
+                !run.text.contains(where: \.isLetter) && !run.text.allSatisfy { $0.isPunctuation || $0.isWhitespace }
+            }
+            while let first = sentence.first, badge(first) { aside.append(sentence.removeFirst()) }
+            while let last = sentence.last, badge(last) { aside.append(sentence.removeLast()) }
+            if let joined = joinRow(sentence) { whole += [joined] + aside } else { whole += runs }
+        }
+        let lines = whole.sorted { $0.ink.baseline == $1.ink.baseline ? $0.ink.rect.minX < $1.ink.rect.minX : $0.ink.baseline < $1.ink.baseline }
         var groups: [[MeasuredLine]] = []
         for line in lines {
             var joined = false
@@ -180,6 +206,9 @@ enum BlockBuilder {
             let gaps = zip(baselines.dropFirst(), baselines).map { $0 - $1 }.sorted()
             block.pitch = gaps.isEmpty ? 0 : gaps[gaps.count / 2]
             block.original = ScreenTranslate.joinParagraphLines(group.map(\.text))
+            block.chips = group.flatMap { line in
+                line.parts.filter(\.protectedLiteral).map { chip($0, baseline: line.ink.baseline, line: line.ink.background, image: image, scale: scale) }
+            }
             block.free = Space.around(rect, in: image, background: block.background, limit: style.size * scale * 40)
             if let slot = group.first?.inlineBounds {
                 block.free.left = min(block.free.left, max(0, rect.minX - slot.lowerBound))
@@ -201,6 +230,77 @@ enum BlockBuilder {
             } else { rows.append([block]) }
         }
         return rows.flatMap { $0.sorted { $0.rect.minX < $1.rect.minX } }
+    }
+
+    /// A sentence with code in it was measured in style runs, each in its own slot. Put the
+    /// sentence back together, so that it is translated whole, with each chip as `literal`.
+    static func joinRow(_ runs: [MeasuredLine]) -> MeasuredLine? {
+        let runs = runs.sorted { $0.ink.rect.minX < $1.ink.rect.minX }
+        let prose = runs.filter { !$0.protectedLiteral }
+        guard runs.contains(where: \.protectedLiteral), let main = prose.max(by: { $0.text.count < $1.text.count }),
+              main.text.contains(where: \.isLetter), case .flat(let paper) = main.ink.background,
+              !runs.contains(where: { $0.text.contains("`") }) else { return nil }
+        for run in runs {
+            guard case .flat(let own) = run.ink.background else { return nil }
+            guard !run.protectedLiteral else { continue }
+            if own.distance(to: paper) > 10 { return nil }
+            // A coloured link or a bold word would lose its look in one style. Two or three
+            // characters ("and", ".") are too few to measure a style from.
+            if run.text.count > 3, run.style.color.distance(to: main.style.color) > 40 || abs(run.style.size / main.style.size - 1) > 0.12
+                || abs(run.style.weight.rawValue - main.style.weight.rawValue) >= 200 { return nil }
+        }
+        var text = ""
+        for run in runs {
+            let piece = run.protectedLiteral ? "`" + run.text + "`" : run.text
+            if !text.isEmpty, let first = piece.first, !",.;:!?)]}%".contains(first) { text += " " }
+            text += piece
+        }
+        var line = main
+        line.text = text
+        line.box = runs.dropFirst().reduce(runs[0].box) { $0.union($1.box) }
+        line.ink.rect = runs.dropFirst().reduce(runs[0].ink.rect) { $0.union($1.ink.rect) }
+        line.ink.blobs = runs.flatMap(\.ink.blobs).sorted { $0.minX < $1.minX }
+        line.confidence = runs.map(\.confidence).min() ?? main.confidence
+        line.startsListItem = runs[0].startsListItem
+        line.inlineBounds = nil
+        line.row = nil
+        line.parts = runs
+        return line
+    }
+
+    /// Where a chip's pixels are: everything not the page that touches its text, which takes
+    /// in its fill, its border and their anti-aliased edge, and stops at the page between it
+    /// and the next word.
+    private static func chip(_ run: MeasuredLine, baseline: CGFloat, line: Background, image: PixelImage, scale: CGFloat) -> InlineChip {
+        let ink = run.ink.rect
+        var rect = ink.insetBy(dx: -scale, dy: -scale).integral
+        if case .flat(let paper) = line {
+            let size = run.style.size * scale
+            let x0 = max(0, Int(ink.minX - size)), x1 = min(image.width - 1, Int(ink.maxX + size))
+            let y0 = max(0, Int(ink.minY - size * 0.6)), y1 = min(image.height - 1, Int(ink.maxY + size * 0.6))
+            let w = x1 - x0 + 1
+            var seen = [Bool](repeating: false, count: w * (y1 - y0 + 1))
+            var stack: [(Int, Int)] = []
+            func off(_ x: Int, _ y: Int) -> Bool { image[x, y].distance(to: paper) > 4 }
+            for y in max(y0, Int(ink.minY))...min(y1, Int(ink.maxY)) {
+                for x in max(x0, Int(ink.minX))...min(x1, Int(ink.maxX)) where off(x, y) { stack.append((x, y)); seen[(y - y0) * w + x - x0] = true }
+            }
+            var minX = x1, maxX = x0, minY = y1, maxY = y0, reachedEdge = false
+            while let (x, y) = stack.popLast() {
+                minX = min(minX, x); maxX = max(maxX, x); minY = min(minY, y); maxY = max(maxY, y)
+                if x == x0 || x == x1 || y == y0 || y == y1 { reachedEdge = true }
+                for (nx, ny) in [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)] where nx >= x0 && nx <= x1 && ny >= y0 && ny <= y1 {
+                    let key = (ny - y0) * w + nx - x0
+                    if !seen[key], off(nx, ny) { seen[key] = true; stack.append((nx, ny)) }
+                }
+            }
+            // Reaching the edge of the search: a highlight across the line, not a chip.
+            if !reachedEdge, minX <= maxX {
+                rect = CGRect(x: minX, y: minY, width: maxX - minX + 1, height: maxY - minY + 1).insetBy(dx: -1, dy: -1)
+            }
+        }
+        rect = rect.intersection(CGRect(x: 0, y: 0, width: image.width, height: image.height))
+        return InlineChip(text: run.text, rect: rect, rise: rect.minY - baseline)
     }
 
     private static func canJoin(_ group: [MeasuredLine], _ next: MeasuredLine, among lines: [MeasuredLine], image: PixelImage, scale: CGFloat) -> Bool {
@@ -429,9 +529,15 @@ enum CodeText {
 
     /// Verbatim spans within prose, not a reason to discard the surrounding sentence.
     static func literalRanges(in text: String) -> [Range<String.Index>] {
-        let pattern = #"`[^`\n]+`|(?:https?://|www\.)[^\s<>]+|@[A-Za-z0-9_]+|\b[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)+\b|\b[A-Za-z0-9_-]+\.(?:swift|py|js|ts|tsx|jsx|json|ya?ml|toml|md|sql|log|sh|txt|png|jpe?g|pdf)\b|\b[A-Za-z][A-Za-z0-9]*\((?:[^()\n]|\([^()\n]*\))*\)"#
+        let pattern = #"`[^`\n]+`|(?:https?://|www\.)[^\s<>]+|@[A-Za-z0-9_]+|\b[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)+\b|\b[A-Za-z0-9_][A-Za-z0-9_.-]*\.(?:swift|py|js|ts|tsx|jsx|json|ya?ml|toml|md|sql|log|sh|txt|png|jpe?g|pdf)\b|\b[A-Za-z][A-Za-z0-9]*\((?:[^()\n]|\([^()\n]*\))*\)"#
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
         return regex.matches(in: text, range: NSRange(text.startIndex..<text.endIndex, in: text)).compactMap { Range($0.range, in: text) }
+    }
+
+    /// A whole word that names a file: `notes-0.9.0.md`, `project.yml`.
+    static func isFileName(_ word: String) -> Bool {
+        let trimmed = word.trimmingCharacters(in: CharacterSet(charactersIn: ",;:!?)"))
+        return trimmed.range(of: #"^[A-Za-z0-9_][A-Za-z0-9_.-]*\.(?:swift|py|js|ts|tsx|jsx|json|ya?ml|toml|md|sql|log|sh|txt|png|jpe?g|pdf)$"#, options: .regularExpression) != nil
     }
 
     /// Source code, identifiers and markup are shown as they are.

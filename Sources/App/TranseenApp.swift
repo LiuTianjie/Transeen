@@ -118,6 +118,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     func applicationWillTerminate(_ notification: Notification) {
         stopMonitoringLauncherClicks()
         capture.close()
+        LocalModelRuntime.shared.stop()
         shortcuts.stop()
         license.cancel()
     }

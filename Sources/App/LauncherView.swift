@@ -23,6 +23,21 @@ struct LauncherView: View {
         })
     }
 
+    private var serviceTitle: String {
+        switch settings.service {
+        case .apple: "Apple 本机翻译"
+        case .local: settings.selectedLocalModel.name
+        case .remote: settings.model.isEmpty ? "设置翻译模型" : settings.model
+        }
+    }
+    private var serviceIcon: String {
+        switch settings.service {
+        case .apple: "desktopcomputer"
+        case .local: "cpu"
+        case .remote: "network"
+        }
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
@@ -98,8 +113,7 @@ struct LauncherView: View {
 
             HStack(spacing: 8) {
                 Button(action: showSettings) {
-                    Label(settings.useModel ? (settings.model.isEmpty ? "设置翻译模型" : settings.model) : "Apple 本机翻译",
-                          systemImage: settings.useModel ? "network" : "desktopcomputer")
+                    Label(serviceTitle, systemImage: serviceIcon)
                         .font(.caption).lineLimit(1)
                 }.buttonStyle(.borderless).foregroundStyle(.secondary).help("选择翻译服务")
                 Spacer(minLength: 4)

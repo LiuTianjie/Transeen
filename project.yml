@@ -23,6 +23,25 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.transeen.app
         INFOPLIST_FILE: Info.plist
         PRODUCT_NAME: Transeen
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+    postBuildScripts:
+      - name: Embed llama-server
+        basedOnDependencyAnalysis: false
+        script: |
+          helper="$PROJECT_DIR/build/llama/llama-server"
+          if [ ! -x "$helper" ]; then
+            echo "warning: build/llama/llama-server is missing; run scripts/build-llama.sh. Local translation models will be unavailable."
+            exit 0
+          fi
+          mkdir -p "$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/Helpers"
+          cp -f "$helper" "$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/Helpers/llama-server"
+          cp -f "$PROJECT_DIR/build/llama/LICENSE" "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/llama.cpp-LICENSE.txt"
+          identity="${EXPANDED_CODE_SIGN_IDENTITY:--}"
+          if [ "$identity" = "-" ]; then
+            codesign --force --sign - "$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/Helpers/llama-server"
+          else
+            codesign --force --sign "$identity" --options runtime --timestamp "$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/Helpers/llama-server"
+          fi
 schemes:
   Transeen:
     build:

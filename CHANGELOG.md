@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Add local translation models. In Settings → Translation, choose 本地翻译模型 and download Index-Translate 2B (recommended, 1.1 GB) or Hy-MT2 1.8B (1.1 GB). The model then runs on this Mac through a bundled llama.cpp server: no account, no network, and captured text never leaves the Mac. It translates developer text and UI labels better than Apple Translation ("bumped" is no longer 碰撞, "push main" is no longer 按下主按钮). Downloads come from ModelScope in mainland China and Hugging Face elsewhere, continue after an interruption, and are checked against a SHA-256 before use. The model loads on the first capture (about 2 seconds), stays ready while you work and is unloaded after 5 idle minutes. Requires an Apple silicon Mac.
+- F1 is the default capture shortcut. Capturing for annotation and comparing from anywhere have no shortcut until you set one. Shortcuts saved by earlier versions are not carried over.
+- Press R while selecting to capture the last area again. The area is remembered across launches.
+- A sentence with code in it is translated whole. The code (`docs/`, `project.yml`, a commit hash) keeps its own pixels and moves with the translation, instead of splitting the sentence into pieces translated on their own.
+- File names are kept as they are, including ones the recogniser split after the dot ("project. yml").
+- "I'll", "CI" and similar words that the recogniser read with a lowercase l are corrected before translation.
+- A disclosure arrow at the end of a line ("Ran 2 commands ›") is no longer translated with the text.
+
 ## 0.9.0
 
 - Dragging a capture's edges follows the pointer smoothly. The frozen screen moves as one layer while dragging and is cropped once on release; each drag step used to wait about 0.2 s for the toolbar to animate.

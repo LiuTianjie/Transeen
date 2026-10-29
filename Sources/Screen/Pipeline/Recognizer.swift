@@ -126,6 +126,15 @@ enum Recognizer {
                     box = suffix.boundingBox
                 }
             }
+            // A disclosure arrow at the end ("Ran 2 commands ›") is an icon, not a word to translate.
+            if let space = raw[contentRange].lastIndex(of: " "),
+               ["›", ">", "»", "〉", "❯"].contains(raw[raw.index(after: space)..<contentRange.upperBound].trimmingCharacters(in: .whitespaces)),
+               raw[contentRange.lowerBound..<space].trimmingCharacters(in: .whitespaces).count >= 2,
+               let kept = try? candidate.boundingBox(for: contentRange.lowerBound..<space) {
+                contentRange = contentRange.lowerBound..<space
+                text = String(raw[contentRange]).trimmingCharacters(in: .whitespaces)
+                box = kept.boundingBox
+            }
             guard shouldKeep(text, confidence: candidate.confidence) else { return nil }
             let literals = CodeText.literalRanges(in: raw)
             let words = (try? NSRegularExpression(pattern: #"\S+"#))?.matches(in: raw, range: NSRange(contentRange, in: raw))
@@ -144,9 +153,50 @@ enum Recognizer {
                     previousEnd = end
                 }
             }
+            if !spans.isEmpty, joined(spans) == text {
+                spans = corrected(spans)
+                text = joined(spans)
+            } else {
+                text = text.split(separator: " ", omittingEmptySubsequences: false).map { correctedWord(String($0)) }.joined(separator: " ")
+            }
             return RecognizedLine(text: text, box: pixels(box), confidence: candidate.confidence,
                 startsListItem: bullet != nil, spans: spans)
         }
+    }
+
+    static func joined(_ spans: [RecognizedLine.Span]) -> String {
+        spans.enumerated().map { ($0.offset == 0 ? "" : $0.element.separator) + $0.element.text }.joined()
+    }
+
+    /// Words the recogniser misreads in interface type, where I and l look alike.
+    static func correctedWord(_ word: String) -> String {
+        // I'll, I'm, I've, I'd
+        if word.range(of: #"^l['’](?:ll|m|ve|d)\b"#, options: .regularExpression) != nil { return "I" + word.dropFirst() }
+        if word == "l" { return "I" }
+        // CI, UI, API, CLI, GUI, URI with their last I read as l, before any punctuation.
+        let acronyms = ["Cl": "CI", "Ul": "UI", "APl": "API", "CLl": "CLI", "GUl": "GUI", "URl": "URI"]
+        let letters = word.prefix { $0.isLetter }
+        if let fixed = acronyms[String(letters)] { return fixed + word.dropFirst(letters.count) }
+        return word
+    }
+
+    /// `corrected(_:)` on every word, and a file name split after its dot ("project. yml") joined again, as a literal.
+    static func corrected(_ spans: [RecognizedLine.Span]) -> [RecognizedLine.Span] {
+        var result: [RecognizedLine.Span] = []
+        for var span in spans {
+            span.text = correctedWord(span.text)
+            if let last = result.last, last.text.count >= 2, last.text.hasSuffix("."), span.separator == " ",
+               last.text.dropLast().last.map({ $0.isLetter || $0.isNumber }) == true,
+               CodeText.isFileName(last.text + span.text.prefix { $0.isLetter }) {
+                result[result.count - 1].text += span.text
+                result[result.count - 1].box = last.box.union(span.box)
+                result[result.count - 1].literal = true
+                continue
+            }
+            if !span.literal, CodeText.isFileName(span.text) { span.literal = true }
+            result.append(span)
+        }
+        return result
     }
 
     /// Keep short labels and numbers without turning every icon-shaped glyph

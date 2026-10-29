@@ -3,6 +3,7 @@ import Carbon
 
 enum ShortcutAction: String, CaseIterable, Identifiable {
     case captureTranslate, captureScreenshot, globalCompare
+    case lastArea
     case compare, translate, direction, rectangle, ellipse, arrow, pen, move, copy, save, undo, redo, close
     case annotate, pin, reselect
     case peek
@@ -12,6 +13,7 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
         switch self {
         case .captureTranslate, .captureScreenshot, .globalCompare: "全局"
         case .openImage, .settings, .quit: "应用"
+        case .lastArea: "框选"
         default: "截图窗口"
         }
     }
@@ -20,6 +22,7 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
         case .captureTranslate: "截图翻译"
         case .captureScreenshot: "截图标注"
         case .globalCompare: "全局对照原文"
+        case .lastArea: "选择上次的区域"
         case .compare: "原文 / 译文"
         case .translate: "翻译 / 重试"
         case .direction: "交换语言"
@@ -51,11 +54,10 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
     }
     var defaultBinding: KeyBinding? {
         let command = ScreenModifier.command
-        let global = ScreenModifier.control | ScreenModifier.option
         switch self {
-        case .captureTranslate: return KeyBinding(19, global)
-        case .captureScreenshot: return KeyBinding(20, global)
-        case .globalCompare: return KeyBinding(49, global)
+        // F1; capturing for annotation and the global comparison have no key until the user gives them one.
+        case .captureTranslate: return KeyBinding(122)
+        case .lastArea: return KeyBinding(15)
         case .compare: return KeyBinding(48)
         case .translate: return KeyBinding(17)
         case .direction: return KeyBinding(2)
@@ -77,6 +79,16 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
         }
     }
     static var globals: [Self] { allCases.filter { $0.group == "全局" } }
+    /// Where the shortcut works. Two shortcuts can share a key only where they never work at
+    /// the same time: R picks the last area while selecting and the rectangle in a capture.
+    var contexts: Set<String> {
+        switch group {
+        case "框选": ["框选"]
+        case "截图窗口": self == .close ? ["截图窗口", "框选"] : ["截图窗口"]
+        default: ["全局", "应用", "截图窗口", "框选"]
+        }
+    }
+    func conflicts(with other: Self) -> Bool { self != other && !contexts.isDisjoint(with: other.contexts) }
 }
 
 struct KeyBinding: Codable, Equatable {
@@ -120,38 +132,15 @@ final class ShortcutStore {
     var onRecordingChanged: ((Bool) -> Void)?
     var onChanged: (() -> Void)?
     private let defaults: UserDefaults
-    private static let storageKey = "keyboardShortcuts.v1"
+    private static let storageKey = "keyboardShortcuts.v2"
     static var factory: [String: KeyBinding] {
         Dictionary(uniqueKeysWithValues: ShortcutAction.allCases.compactMap { action in action.defaultBinding.map { (action.rawValue, $0) } })
     }
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         let stored = defaults.data(forKey: Self.storageKey).flatMap { try? JSONDecoder().decode([String: KeyBinding].self, from: $0) }
-        bindings = stored ?? Self.factory
-        if !defaults.bool(forKey: "keyboardShortcuts.modesIntroduced") {
-            // 0.7 had one shortcut for a "default mode" chosen in settings. It becomes the
-            // shortcut of that mode, so ⌃⌥2 keeps doing what this user set it to do.
-            let legacy = stored == nil ? ShortcutAction.captureTranslate.defaultBinding : stored?["captureDefault"]
-            let translate = ShortcutAction.captureTranslate.rawValue, screenshot = ShortcutAction.captureScreenshot.rawValue
-            if defaults.string(forKey: "defaultMode") == "screenshot" {
-                let previous = bindings[screenshot]
-                bindings[screenshot] = legacy ?? previous
-                bindings[translate] = legacy == nil ? nil : previous
-            } else {
-                bindings[translate] = legacy
-            }
-            bindings = bindings.filter { ShortcutAction(rawValue: $0.key) != nil }
-            if let data = try? JSONEncoder().encode(bindings) { defaults.set(data, forKey: Self.storageKey) }
-            defaults.removeObject(forKey: "defaultMode")
-            defaults.set(true, forKey: "keyboardShortcuts.modesIntroduced")
-        }
         // Retired actions must not reserve shortcuts or survive future saves.
-        bindings = bindings.filter { ShortcutAction(rawValue: $0.key) != nil }
-        if !defaults.bool(forKey: "keyboardShortcuts.peekIntroduced") {
-            if let key = ShortcutAction.peek.defaultBinding, !bindings.values.contains(key) { bindings[ShortcutAction.peek.rawValue] = key }
-            defaults.set(true, forKey: "keyboardShortcuts.peekIntroduced")
-            if let data = try? JSONEncoder().encode(bindings) { defaults.set(data, forKey: Self.storageKey) }
-        }
+        bindings = (stored ?? Self.factory).filter { ShortcutAction(rawValue: $0.key) != nil }
     }
     func binding(_ action: ShortcutAction) -> KeyBinding? { bindings[action.rawValue] }
     func label(_ action: ShortcutAction) -> String { binding(action)?.display ?? "未设置" }
@@ -165,7 +154,7 @@ final class ShortcutStore {
         if let key {
             guard key.menuKey != nil else { message = "这个按键暂不支持，请选择字母、数字、方向键或功能键。"; return false }
             if action.group != "截图窗口" && !key.validGlobal { message = "全局和应用快捷键需要搭配 ⌘、⌥ 或 ⌃，也可以使用 F 功能键。"; return false }
-            if let other = ShortcutAction.allCases.first(where: { $0 != action && binding($0) == key }) {
+            if let other = ShortcutAction.allCases.first(where: { $0.conflicts(with: action) && binding($0) == key }) {
                 message = "\(key.display) 已用于「\(other.title)」，请先修改或清除该项。"; return false
             }
         }

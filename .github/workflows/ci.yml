@@ -15,7 +15,7 @@ jobs:
           XCODE_PATH=$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)
           sudo xcode-select -s "$XCODE_PATH/Contents/Developer"
           xcodebuild -version
-      - run: brew install xcodegen
+      - run: brew install xcodegen cmake
       - name: Build
         run: ./scripts/build.sh Release
       - name: Verify
@@ -23,3 +23,4 @@ jobs:
           ./scripts/test.sh
           ./scripts/test-license.sh
           ./scripts/test-lifecycle.sh
+          ./scripts/test-local-models.sh

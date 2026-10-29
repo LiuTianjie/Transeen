@@ -16,6 +16,7 @@ if [[ -n "$transeen_signing_identity" ]]; then
 else
   print 'Building with ad-hoc signing. Set TRANSEEN_SIGNING_IDENTITY for stable screen-recording permissions.'
 fi
+./scripts/build-llama.sh
 xcodegen generate
 xcodebuild -project Transeen.xcodeproj -scheme Transeen -configuration "${1:-Release}" -derivedDataPath build build "${transeen_signing_args[@]}"
 mkdir -p dist

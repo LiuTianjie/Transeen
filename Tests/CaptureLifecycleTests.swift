@@ -22,6 +22,9 @@ import CoreText
         let picture = NSImage(cgImage: ctx.makeImage()!, size: NSSize(width: 600, height: 200))
         let controller = CaptureController()
         controller.authorize = { true }
+        let areaSuite = "transeen.area.tests.\(UUID().uuidString)"
+        controller.defaults = UserDefaults(suiteName: areaSuite)!
+        defer { UserDefaults.standard.removePersistentDomain(forName: areaSuite) }
         let automatic = SlowBackend()
         controller.previewSelection(picture, mode: .translate, backend: automatic)
         for _ in 0..<300 {
@@ -45,9 +48,11 @@ import CoreText
         precondition(controller.state.annotations.marks.isEmpty)
         controller.action("redo")
         let moved = CGPoint(x: markedPoint.x - dx, y: markedPoint.y - dy)
-        precondition(controller.state.annotations.marks.first?.points.first == moved, "Undo history must follow the moved origin")
+        // Pixel snapping divides by the screen's scale; compare positions, not floating-point bits.
+        func near(_ a: CGPoint?, _ b: CGPoint) -> Bool { a.map { abs($0.x - b.x) < 1e-6 && abs($0.y - b.y) < 1e-6 } ?? false }
+        precondition(near(controller.state.annotations.marks.first?.points.first, moved), "Undo history must follow the moved origin")
         controller.previewResize([.left], by: CGPoint(x: -dx, y: 0))
-        precondition(controller.state.annotations.marks.first?.points.first == CGPoint(x: markedPoint.x, y: moved.y), "Marks must stay over the same pixels when the origin moves")
+        precondition(near(controller.state.annotations.marks.first?.points.first, CGPoint(x: markedPoint.x, y: moved.y)), "Marks must stay over the same pixels when the origin moves")
         precondition(controller.state.working && !controller.state.translated, "A resized translation must be redone, not kept")
         for _ in 0..<300 {
             if controller.state.translated || controller.state.failed { break }
@@ -76,6 +81,20 @@ import CoreText
         precondition(!manual.entered && !controller.state.automaticallyTranslates && !controller.state.working, "Only explicit screenshot mode should await a manual translation")
         precondition(controller.repeatTranslateShortcut() && controller.state.working && controller.state.source == .en,
                      "The translate shortcut must translate a screenshot that was never translated, in the chosen direction")
+        controller.close()
+        let screenFrame = NSScreen.main!.frame
+        precondition(controller.lastArea == screenFrame, "A capture must remember its area")
+        let remembered = CGRect(x: screenFrame.minX + 40, y: screenFrame.minY + 30, width: 240, height: 120)
+        controller.lastArea = remembered
+        controller.previewSelecting(picture, mode: .screenshot, backend: SlowBackend())
+        let r = NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [], timestamp: 0, windowNumber: 0, context: nil,
+                                 characters: "r", charactersIgnoringModifiers: "r", isARepeat: false, keyCode: 15)!
+        precondition(controller.handleShortcut(r), "R must be handled while selecting")
+        for _ in 0..<100 where !controller.isPresenting { try await Task.sleep(for: .milliseconds(20)) }
+        precondition(controller.isPresenting && controller.previewCrop == remembered, "R must select the last area: \(controller.previewCrop)")
+        precondition(controller.state.shortcuts.binding(.lastArea) == controller.state.shortcuts.binding(.rectangle),
+                     "R picks the last area while selecting and the rectangle in a capture")
+        precondition(!controller.state.shortcuts.set(KeyBinding(53), for: .lastArea), "Esc closes a selection, so it cannot also pick the last area")
         controller.close()
         ctx.setFillColor(NSColor.white.cgColor); ctx.fill(CGRect(x: 0, y: 0, width: 600, height: 200))
         let blank = NSImage(cgImage: ctx.makeImage()!, size: NSSize(width: 600, height: 200))
@@ -205,48 +224,12 @@ import CoreText
         let suite = "transeen.shortcuts.tests.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suite)!
         defer { defaults.removePersistentDomain(forName: suite) }
-        let global = ScreenModifier.control | ScreenModifier.option
-        defaults.set("live", forKey: "defaultMode")
-        var legacyBindings = ShortcutStore.factory
-        legacyBindings.removeValue(forKey: ShortcutAction.captureTranslate.rawValue)
-        legacyBindings["captureDefault"] = KeyBinding(19, global)
-        legacyBindings["captureLive"] = KeyBinding(18, global)
-        legacyBindings["pause"] = KeyBinding(40)
-        defaults.set(try JSONEncoder().encode(legacyBindings), forKey: "keyboardShortcuts.v1")
+        // Shortcuts saved by earlier versions are not carried over: everyone starts from F1.
+        defaults.set(try JSONEncoder().encode([ShortcutAction.captureTranslate.rawValue: KeyBinding(19, ScreenModifier.control | ScreenModifier.option)]),
+                     forKey: "keyboardShortcuts.v1")
         let settings = AppSettings(defaults: defaults)
-        precondition(settings.shortcuts.binding(.captureTranslate) == KeyBinding(19, global), "A retired live default must become the translate shortcut")
-        precondition(settings.shortcuts.bindings["captureLive"] == nil && settings.shortcuts.bindings["pause"] == nil && settings.shortcuts.bindings["captureDefault"] == nil, "Retired shortcuts must be ignored")
-        precondition(defaults.object(forKey: "defaultMode") == nil, "The retired default-mode setting must be cleared")
-        for (mode, stored, expected) in [
-            ("screenshot", true, (translate: KeyBinding(20, global) as KeyBinding?, screenshot: KeyBinding(19, global) as KeyBinding?)),
-            ("screenshot", false, (KeyBinding(20, global), KeyBinding(19, global))),
-            ("translate", true, (KeyBinding(19, global), KeyBinding(20, global))),
-            ("", false, (KeyBinding(19, global), KeyBinding(20, global)))
-        ] {
-            let name = "transeen.modes.tests.\(UUID().uuidString)"
-            let modeDefaults = UserDefaults(suiteName: name)!
-            defer { modeDefaults.removePersistentDomain(forName: name) }
-            if !mode.isEmpty { modeDefaults.set(mode, forKey: "defaultMode") }
-            if stored {
-                var old = ShortcutStore.factory
-                old.removeValue(forKey: ShortcutAction.captureTranslate.rawValue)
-                old["captureDefault"] = KeyBinding(19, global)
-                modeDefaults.set(try JSONEncoder().encode(old), forKey: "keyboardShortcuts.v1")
-            }
-            let migrated = ShortcutStore(defaults: modeDefaults)
-            precondition(migrated.binding(.captureTranslate) == expected.translate && migrated.binding(.captureScreenshot) == expected.screenshot,
-                         "⌃⌥2 must keep opening the mode it opened before (\(mode), stored: \(stored))")
-            precondition(ShortcutStore(defaults: modeDefaults).bindings == migrated.bindings, "Migration must run once and persist")
-        }
-        let clearedName = "transeen.modes.cleared.\(UUID().uuidString)"
-        let cleared = UserDefaults(suiteName: clearedName)!
-        defer { cleared.removePersistentDomain(forName: clearedName) }
-        var withoutDefault = ShortcutStore.factory
-        withoutDefault.removeValue(forKey: ShortcutAction.captureTranslate.rawValue)
-        cleared.set("screenshot", forKey: "defaultMode")
-        cleared.set(try JSONEncoder().encode(withoutDefault), forKey: "keyboardShortcuts.v1")
-        let clearedStore = ShortcutStore(defaults: cleared)
-        precondition(clearedStore.binding(.captureScreenshot) == KeyBinding(20, global) && clearedStore.binding(.captureTranslate) == nil, "A disabled default shortcut must stay disabled")
+        precondition(settings.shortcuts.binding(.captureTranslate) == KeyBinding(122) && settings.shortcuts.binding(.captureScreenshot) == nil
+                     && settings.shortcuts.binding(.globalCompare) == nil, "F1 is the only default capture shortcut")
         let keys = settings.shortcuts
         let custom = KeyBinding(40, ScreenModifier.option) // Option-K
         precondition(keys.set(custom, for: .rectangle))
@@ -257,7 +240,7 @@ import CoreText
         precondition(keys.set(nil, for: .peek))
         let loaded = ShortcutStore(defaults: defaults)
         precondition(loaded.binding(.rectangle) == custom && loaded.binding(.save) == nil, "Changes and disabled bindings must survive relaunch")
-        precondition(loaded.binding(.peek) == nil, "A disabled peek key must not be restored by migration")
+        precondition(loaded.binding(.peek) == nil, "A disabled peek key stays disabled")
         keys.validateGlobals = { _ in "Simulated occupied system shortcut" }
         precondition(!keys.set(KeyBinding(38), for: .rectangle))
         precondition(keys.binding(.rectangle) == custom, "Failed registration must preserve the old setting")
@@ -306,7 +289,7 @@ import CoreText
         precondition(CaptureCrop.resized(area, edges: [.bottom], by: CGPoint(x: 0, y: 90), within: frame, minimum: 12) == CGRect(x: 100, y: 138, width: 100, height: 12))
         print("CaptureLifecycleTests: copy/close, copy during translation, pin, numbering and clipboard passed; close/reselect reject stale results; original toggle preserves annotations")
         print("ResizeTests: edge re-crop, clamping, marks and history follow the origin, re-translation on release, rounded corner marks passed")
-        print("ShortcutTests: default-mode migration, persistence, disable, conflicts, registration rollback, exact modifiers, recorder suppression and remapped capture dispatch passed")
+        print("ShortcutTests: F1 default, earlier settings not carried over, persistence, disable, conflicts, registration rollback, exact modifiers, recorder suppression and remapped capture dispatch passed")
         print("GlobalShortcuts: native Carbon register, conflict detection and unregister passed")
         print("AutoSelection: no-click translation, explicit manual screenshot mode and visible empty-OCR result passed")
     }

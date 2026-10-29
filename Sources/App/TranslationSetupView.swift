@@ -23,11 +23,15 @@ struct TranslationServiceFields: View {
             Image(systemName: "arrow.right").foregroundStyle(.secondary)
             Picker("译文", selection: $settings.target) { ForEach(AppLanguage.allCases) { Text($0.displayName).tag($0) } }
         }
-        Picker("翻译服务", selection: $settings.useModel) {
-            Text("Apple 本机翻译").tag(false)
-            Text("大模型 / 本地模型服务").tag(true)
+        Picker("翻译服务", selection: $settings.service) {
+            Text("Apple 本机翻译").tag(TranslationService.apple)
+            Text("本地翻译模型").tag(TranslationService.local)
+            Text("大模型接口").tag(TranslationService.remote)
         }
-        if !settings.useModel {
+        switch settings.service {
+        case .local:
+            LocalModelFields(settings: settings)
+        case .apple:
             ForEach(packs.sources) { language in
                 HStack {
                     Text("\(language.displayName) → \(packs.target.displayName)")
@@ -38,7 +42,7 @@ struct TranslationServiceFields: View {
             if let message = packs.message { Text(message).font(.caption).foregroundStyle(.orange) }
             Text(settings.detectsSource ? "原文为自动识别：下载你常看的语言即可。语言包由系统下载，之后离线翻译。" : "语言包由系统下载，之后离线翻译。")
                 .font(.caption).foregroundStyle(.secondary)
-        } else {
+        case .remote:
             TextField("接口地址", text: $settings.endpoint)
             TextField("模型名称", text: $settings.model)
             SecureField("API Key（本机服务可留空）", text: $apiKey)
@@ -88,6 +92,70 @@ struct TranslationServiceFields: View {
                 _ = try await ModelHTTP.chat(configuration: config, apiKey: key, system: "Reply with the single word OK.", user: "OK", timeout: 20)
                 keyStatus = "连接成功，可以翻译"
             } catch { keyStatus = error.localizedDescription }
+        }
+    }
+}
+
+/// Downloadable models that run on this Mac. Choosing one that is not downloaded yet is
+/// allowed; captures then say so until the download finishes.
+struct LocalModelFields: View {
+    @Bindable var settings: AppSettings
+    var store = LocalModelStore.shared
+
+    var body: some View {
+        if !LocalModelRuntime.isSupported {
+            Text("本地翻译模型需要 Apple 芯片的 Mac。").font(.callout).foregroundStyle(.orange)
+        }
+        ForEach(LocalModelCatalog.all) { model in
+            HStack(alignment: .center, spacing: 10) {
+                Image(systemName: settings.localModel == model.id ? "largecircle.fill.circle" : "circle")
+                    .foregroundStyle(settings.localModel == model.id ? Color.accentColor : .secondary)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(model.name + (model.id == LocalModelCatalog.defaultID ? "（推荐）" : ""))
+                    Text("\(model.summary) · \(model.sizeText)").font(.caption).foregroundStyle(.secondary)
+                    if case .failed(let message) = store.status(model) {
+                        Text(message).font(.caption).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                Spacer(minLength: 8)
+                status(model)
+            }
+            .contentShape(Rectangle())
+            .onTapGesture { settings.localModel = model.id }
+            .accessibilityElement(children: .contain)
+            .accessibilityAddTraits(settings.localModel == model.id ? .isSelected : [])
+        }
+        Text("模型下载后完全在本机运行，截图文字不会离开这台 Mac。首次翻译需要几秒加载模型，空闲 5 分钟后自动释放内存。")
+            .font(.caption).foregroundStyle(.secondary)
+    }
+
+    @ViewBuilder private func status(_ model: LocalModel) -> some View {
+        switch store.status(model) {
+        case .installed:
+            HStack(spacing: 8) {
+                Label("已下载", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green)
+                Menu {
+                    Button("在访达中显示") { NSWorkspace.shared.activateFileViewerSelecting([store.url(for: model)]) }
+                    Button("删除模型", role: .destructive) {
+                        if settings.localModel == model.id { LocalModelRuntime.shared.stop() }
+                        store.delete(model)
+                    }
+                } label: { Image(systemName: "ellipsis.circle") }
+                    .menuStyle(.borderlessButton).fixedSize().accessibilityLabel("\(model.name) 更多操作")
+            }
+        case .downloading(let fraction):
+            HStack(spacing: 6) {
+                ProgressView(value: fraction).frame(width: 80)
+                Text(fraction.formatted(.percent.precision(.fractionLength(0)))).font(.caption.monospacedDigit()).foregroundStyle(.secondary)
+                Button("停止") { store.cancel(model) }.controlSize(.small)
+            }
+        case .missing, .failed:
+            Button("下载") {
+                settings.localModel = model.id
+                store.download(model)
+            }
+            .disabled(!LocalModelRuntime.isSupported)
+            .accessibilityLabel("下载 \(model.name)，\(model.sizeText)")
         }
     }
 }

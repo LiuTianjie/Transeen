@@ -33,6 +33,20 @@ final class CaptureController {
     var onError: ((String) -> Void)?
     var onReselect: ((CaptureMode) -> Void)?
     var pasteboard = NSPasteboard.general
+    var defaults = UserDefaults.standard
+    /// The crop is an area of the screen (not an opened picture), worth selecting again.
+    private var cropIsScreenArea = false
+    /// The area of the last screen capture, in screen points, kept across launches.
+    var lastArea: CGRect? {
+        get {
+            guard let values = defaults.array(forKey: "lastCaptureArea") as? [Double], values.count == 4 else { return nil }
+            return CGRect(x: values[0], y: values[1], width: values[2], height: values[3])
+        }
+        set {
+            if let area = newValue { defaults.set([area.minX, area.minY, area.width, area.height], forKey: "lastCaptureArea") }
+            else { defaults.removeObject(forKey: "lastCaptureArea") }
+        }
+    }
     var isPresenting: Bool { panel != nil }
 
     func begin(mode: CaptureMode, settings: AppSettings) {
@@ -62,7 +76,8 @@ final class CaptureController {
         selecting = true
         let token = generation
         for screen in NSScreen.screens {
-            let selector = ScreenSelectionPanel(screen: screen, title: mode.title + " · " + direction.compactTitle)
+            let again = lastArea == nil ? "" : state.shortcuts.binding(.lastArea).map { " · \($0.display) 上次区域" } ?? ""
+            let selector = ScreenSelectionPanel(screen: screen, title: mode.title + " · " + direction.compactTitle + again)
             selector.onCancel = { [weak self] in self?.close() }
             selector.onDragEnded = { [weak self] rect in self?.selected(rect, screen: screen) }
             selectors.append(selector)
@@ -121,7 +136,7 @@ final class CaptureController {
         panel?.orderOut(nil); panel = nil
         if let monitor { NSEvent.removeMonitor(monitor) }; monitor = nil
         translated = nil; original = NSImage(); selectionFrames = [:]
-        cropSource = nil; resizeStart = nil
+        cropSource = nil; resizeStart = nil; cropIsScreenArea = false
     }
 
     private func present(_ image: NSImage, rect: CGRect, source: (image: CGImage, frame: CGRect)?) {
@@ -173,6 +188,7 @@ final class CaptureController {
         }
         original = NSImage(cgImage: pixels, size: crop.size)
         panel.endLiveCrop(image: original)
+        if cropIsScreenArea { lastArea = crop }
         if state.overlay { restart() } else { state.status = ""; panel.refreshUI() }
     }
 
@@ -180,6 +196,7 @@ final class CaptureController {
         guard selecting else { return }
         let rect = selectedRect.intersection(screen.frame)
         guard !rect.isNull, rect.width >= ScreenTranslate.minimumSelection, rect.height >= ScreenTranslate.minimumSelection else { close(); return }
+        lastArea = rect
         selectors.forEach { $0.orderOut(nil) }; selectors = []; selecting = false
         let display = ScreenCaptureService.Display(screen)
         let frozen = selectionFrames[display.displayID]
@@ -207,12 +224,24 @@ final class CaptureController {
                 state.working = state.automaticallyTranslates
                 state.status = state.automaticallyTranslates ? "正在识别与翻译…" : ""
                 present(image, rect: rect, source: source)
+                cropIsScreenArea = true
                 // Translation owns its own task after capture completes. The preview
                 // is never left waiting for a toolbar click in automatic modes.
                 if state.automaticallyTranslates { restart() }
             } catch { if valid(token) { onError?(error.localizedDescription); close() } }
         }
     }
+    /// While selecting: take the area of the last capture again, on whichever screen holds most of it now.
+    func selectLastArea() {
+        guard selecting, let area = lastArea else { NSSound.beep(); return }
+        func overlap(_ screen: NSScreen) -> CGFloat {
+            let shared = screen.frame.intersection(area)
+            return shared.isNull ? 0 : shared.width * shared.height
+        }
+        guard let screen = NSScreen.screens.max(by: { overlap($0) < overlap($1) }), overlap(screen) > 0 else { NSSound.beep(); return }
+        selected(area, screen: screen)
+    }
+
     /// The translate shortcut pressed again while a result is open: translate it if it never
     /// was, otherwise swap the languages. Returns false when there is no result to act on.
     func repeatTranslateShortcut() -> Bool {
@@ -448,6 +477,7 @@ final class CaptureController {
     }
 
     @discardableResult func handleShortcut(_ event: NSEvent) -> Bool {
+        if selecting, state.shortcuts.action(for: event, group: "框选") == .lastArea { selectLastArea(); return true }
         guard let action = state.shortcuts.action(for: event, group: "截图窗口"), !selecting || action == .close else {
             guard !selecting, state.shortcuts.recording == nil, let selected = state.annotations.selected else { return false }
             let flags = event.modifierFlags.intersection([.command, .option, .control, .shift])
@@ -476,6 +506,13 @@ final class CaptureController {
     #if DEBUG
     /// Exercise the same completion path as a real selection with deterministic pixels.
     func previewSelection(_ image: NSImage, mode: CaptureMode, backend: any TranslationBackend) {
+        previewSelecting(image, mode: mode, backend: backend)
+        guard let screen = NSScreen.main else { return }
+        selected(screen.frame, screen: screen)
+    }
+
+    /// A selection waiting for the pointer or a key, over deterministic pixels.
+    func previewSelecting(_ image: NSImage, mode: CaptureMode, backend: any TranslationBackend) {
         close()
         guard let screen = NSScreen.main, let cg = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return }
         self.mode = mode
@@ -491,7 +528,6 @@ final class CaptureController {
         // Treat the fixture as the full frozen screen; choose that entire screen.
         selectionFrames[display.displayID] = cg
         selecting = true
-        selected(screen.frame, screen: screen)
     }
 
     func previewTranslation(_ image: NSImage, backend: any TranslationBackend) async {

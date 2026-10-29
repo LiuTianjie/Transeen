@@ -14,8 +14,20 @@ enum InlineText {
     static func measure(_ line: RecognizedLine, pixels: PixelImage, scale: CGFloat,
                         verticalBounds: ClosedRange<CGFloat>,
                         measure: (String, CGRect, ClosedRange<CGFloat>) -> MeasuredLine?) -> [MeasuredLine]? {
-        let spans = line.spans
+        var spans = line.spans
         guard !spans.isEmpty else { return nil }
+        // Vision gives a word's whole box to a part it cannot place, such as the full stop
+        // after `CHANGELOG.md`. The gap in the ink says where the two meet.
+        for index in spans.indices.dropFirst()
+        where spans[index].box.minX < spans[index - 1].box.maxX - scale && spans[index].text.allSatisfy(\.isPunctuation) {
+            let previous = spans[index - 1].box, both = previous.union(spans[index].box)
+            guard let ink = InkAnalyzer.measure(pixels, box: both, verticalBounds: verticalBounds, horizontalBounds: (both.minX - scale)...(both.maxX + scale)),
+                  ink.blobs.count >= 2, let last = ink.blobs.last, last.maxX - last.minX < both.height * 0.5 else { continue }
+            let cut = (ink.blobs[ink.blobs.count - 2].maxX + last.minX) / 2
+            guard cut > previous.minX, cut < both.maxX else { continue }
+            spans[index - 1].box = CGRect(x: previous.minX, y: previous.minY, width: cut - previous.minX, height: previous.height)
+            spans[index].box = CGRect(x: cut, y: spans[index].box.minY, width: both.maxX - cut, height: spans[index].box.height)
+        }
         // A missing or overlapping Vision word box is not enough evidence to
         // cut up a sentence. Fall back to the ordinary line measurement.
         let reconstructed = spans.enumerated().map { ($0.offset == 0 ? "" : $0.element.separator) + $0.element.text }.joined()

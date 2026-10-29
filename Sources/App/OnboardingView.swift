@@ -12,11 +12,15 @@ struct OnboardingView: View {
     @State private var packs = LanguagePacks()
 
     private var translationReady: Bool {
-        if settings.useModel { return (try? ModelConfiguration(endpoint: settings.endpoint, model: settings.model)) != nil }
-        return packs.sources.isEmpty || packs.installedCount > 0
+        switch settings.service {
+        case .remote: return (try? ModelConfiguration(endpoint: settings.endpoint, model: settings.model)) != nil
+        case .local: return LocalModelStore.shared.status(settings.selectedLocalModel) == .installed
+        case .apple: return packs.sources.isEmpty || packs.installedCount > 0
+        }
     }
     private var translationDetail: String {
-        if settings.useModel { return translationReady ? "已填写模型接口，可先测试连接" : "填写 chat/completions 接口地址和模型名称" }
+        if settings.service == .remote { return translationReady ? "已填写模型接口，可先测试连接" : "填写 chat/completions 接口地址和模型名称" }
+        if settings.service == .local { return translationReady ? "\(settings.selectedLocalModel.name) 已下载，可离线翻译" : "下载一个本地模型（约 1.1 GB），之后完全离线翻译" }
         if packs.sources.isEmpty { return "这对语言不需要下载" }
         if packs.installedCount == 0 { return "先下载要翻译的语言，第一次截图就不用等" }
         return "已下载 \(packs.installedCount)/\(packs.sources.count) 个语言包，需要时再补充"

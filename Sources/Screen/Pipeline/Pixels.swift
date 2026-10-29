@@ -88,6 +88,24 @@ struct PixelImage: @unchecked Sendable {
         }
     }
 
+    mutating func fill(_ rect: CGRect, with colour: RGB) {
+        let x0 = max(0, Int(rect.minX)), x1 = min(width, Int(rect.maxX.rounded(.up)))
+        let y0 = max(0, Int(rect.minY)), y1 = min(height, Int(rect.maxY.rounded(.up)))
+        guard x0 < x1, y0 < y1 else { return }
+        for y in y0..<y1 { for x in x0..<x1 { self[x, y] = colour } }
+    }
+
+    /// `rect` of `source` placed with its top-left corner at `origin`, whole pixels.
+    mutating func copy(_ rect: CGRect, from source: PixelImage, to origin: CGPoint) {
+        let dx = Int(origin.x.rounded()) - Int(rect.minX), dy = Int(origin.y.rounded()) - Int(rect.minY)
+        let x0 = max(0, Int(rect.minX)), x1 = min(source.width, Int(rect.maxX.rounded(.up)))
+        let y0 = max(0, Int(rect.minY)), y1 = min(source.height, Int(rect.maxY.rounded(.up)))
+        guard x0 < x1, y0 < y1 else { return }
+        for y in y0..<y1 where (0..<height).contains(y + dy) {
+            for x in x0..<x1 where (0..<width).contains(x + dx) { self[x + dx, y + dy] = source[x, y] }
+        }
+    }
+
     func cgImage() -> CGImage? {
         var copy = data
         return copy.withUnsafeMutableBytes { raw -> CGImage? in

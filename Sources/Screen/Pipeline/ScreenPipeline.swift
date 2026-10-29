@@ -62,6 +62,7 @@ enum ScreenPipeline {
             nonisolated(unsafe) let results = buffer
             DispatchQueue.concurrentPerform(iterations: recognised.count) { index in
                 results[index] = measured(recognised[index], pixels: pixels, scale: scale, verticalBounds: verticalLane(for: recognised[index].box, among: recognised, height: pixels.height))
+                    .map { run in var run = run; if run.inlineBounds != nil { run.row = index }; return run }
             }
         }
         var lines = perLine.flatMap { $0 }
@@ -88,7 +89,9 @@ enum ScreenPipeline {
         StyleClusters.unify(&blocks)
         let source = detectsSource ? TextLanguage.source(in: blocks.map(\.original), target: target, fallback: source) : source
         for index in blocks.indices {
-            let text = blocks[index].original
+            // Code chips stay as they are: whether to translate is a question about the words around them.
+            let text = blocks[index].chips.isEmpty ? blocks[index].original
+                : blocks[index].original.replacingOccurrences(of: #"`[^`]+`"#, with: "X", options: .regularExpression)
             let alreadyTarget = TextLanguage.isTarget(text, source: source, target: target)
             let confident = blocks[index].lines.allSatisfy { $0.confidence >= ScreenTranslate.minimumOCRConfidence }
             blocks[index].translate = confident && !alreadyTarget && !blocks[index].lines.contains(where: \.protectedLiteral)
@@ -98,7 +101,7 @@ enum ScreenPipeline {
         // The rest of a line of code is code: a fragment beside one that is kept is kept too.
         for index in blocks.indices where blocks[index].translate {
             let own = blocks[index]
-            if own.lines.contains(where: { $0.inlineBounds != nil }) { continue }
+            if own.lines.contains(where: { $0.inlineBounds != nil || !$0.parts.isEmpty }) { continue }
             let beside = blocks.contains { other in
                 !other.translate && !other.lines.contains(where: { $0.inlineBounds != nil }) && CodeText.looksLikeCode(other.original)
                     && abs(other.firstBaseline - own.firstBaseline) <= own.style.size * scale * 0.2
@@ -145,8 +148,19 @@ enum ScreenPipeline {
             // A translation that would show next to nothing is worse than the original.
             let shown = placement.lines.map(\.text).joined().count
             if placement.truncated, shown * 3 < blocks[index].translation.count + 3 { blocks[index].translate = false; continue }
-            for line in blocks[index].lines { Eraser.erase(line.ink, in: &output, scale: scale) }
+            for line in blocks[index].lines {
+                for run in line.parts.isEmpty ? [line] : line.parts where !run.protectedLiteral { Eraser.erase(run.ink, in: &output, scale: scale) }
+            }
+            if case .flat(let paper) = blocks[index].background {
+                for chip in blocks[index].chips { output.fill(chip.rect, with: paper) }
+            }
             placed.append(.init(index: index, placement: placement))
+        }
+        // Chips move with their sentence, after every block has been erased.
+        for item in placed {
+            for chip in item.placement.chips {
+                output.copy(blocks[item.index].chips[chip.index].rect, from: analysis.pixels, to: chip.origin)
+            }
         }
         Compositor.draw(placed.map { (blocks[$0.index], $0.placement) }, on: &output, scale: scale)
         var seconds = analysis.seconds

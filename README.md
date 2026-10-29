@@ -13,7 +13,7 @@
   <a href="CHANGELOG.md">Changelog</a> ·
   <a href="README.zh-CN.md">简体中文</a>
 </p>
-<p align="center"><img src="docs/assets/preview.webp" alt="Transeen native translation rendering and toolbar" width="820" /></p>
+<p align="center"><img src="docs/assets/preview.webp" alt="Part of a Japanese shop page translated into English in place by Transeen, with its toolbar below" width="820" /></p>
 <p align="center"><sub>Production rendering and native toolbar, with authored sample content and a fixed translation.</sub></p>
 
 Transeen is a macOS menu bar app that keeps translation close to what you are reading. Select a screen region or open an image, translate the text in place, compare it with the original, then annotate, copy, save, or pin the result.
@@ -24,7 +24,7 @@ Transeen is a macOS menu bar app that keeps translation close to what you are re
 
 - **Translate in place.** Local Vision OCR, pixel-aware text layout, and original/translation comparison. A full text view keeps longer translations readable.
 - **Annotate independently.** Arrows, shapes, pen strokes, and numbered markers stay on a separate layer with undo and redo.
-- **Choose a provider.** Apple on-device translation or an OpenAI-compatible local/remote model. Model mode sends recognized text only, not screenshots.
+- **Choose a provider.** Apple on-device translation, a downloadable local translation model (Index-Translate 2B or Hy-MT2 1.8B, about 1.1 GB, Apple silicon), or an OpenAI-compatible remote model. Only the remote mode sends anything off the Mac, and then recognized text only, not screenshots.
 - **Keep a small footprint.** Menu bar access, configurable shortcuts, pinned images, PNG export, and clipboard copy. No screenshot history or continuous capture.
 - **Check for updates.** Choose “检查更新…” in the menu bar or launcher to find the latest GitHub release and its download.
 
@@ -33,15 +33,18 @@ Transeen is a macOS menu bar app that keeps translation close to what you are re
 1. Download the universal Mac app from GitHub Releases, move it to Applications, and open it. Requires macOS 26 or later.
 2. Open “激活与账号…” and enter your TR- code. SM- and IT- codes are different products.
 3. The first-run guide walks through Screen Recording, translation languages, and downloading Apple language packs ahead of time.
-4. Press Control–Option–2 to select a region. Control–Option–3 captures for annotation; Tab compares original and translation.
+4. Press F1 to select a region and translate it. On a laptop keyboard that is Fn–F1, unless the F keys are set to work as standard function keys. Every shortcut can be changed in Settings.
 
 | Action | Default shortcut |
 | --- | --- |
-| Capture and translate | `⌃⌥2` |
-| Capture for annotation | `⌃⌥3` |
-| Compare original and translation | `Tab` / `⌃⌥Space` |
+| Capture and translate | `F1` |
+| Select the last captured area again | `R`, while selecting |
+| Swap languages | `F1` again, while the result is open |
+| Compare original and translation | `Tab` |
 | Copy / save PNG | `⌘C` / `⌘S` |
 | Undo / redo | `⌘Z` / `⌘⇧Z` |
+
+Capturing for annotation and comparing from anywhere have no shortcut until you set one.
 
 The current app interface is in Simplified Chinese. Translation supports the languages listed in the app.
 
@@ -66,7 +69,7 @@ The tests cover image layout, translation protocol, activation state, version co
 
 ## Privacy and limits
 
-Screenshots and OCR stay on the Mac. External model mode sends extracted text to the endpoint you choose. Licensing uses a random installation ID and a Keychain receipt, not hardware serial numbers. Update checks contact GitHub.
+Screenshots, OCR and local-model translation stay on the Mac; the only network use of a local model is its one-time download. External model mode sends extracted text to the endpoint you choose. Licensing uses a random installation ID and a Keychain receipt, not hardware serial numbers. Update checks contact GitHub.
 
 Dense layouts, specialist terminology, and formulas can still need correction. Translation quality depends on the provider. Always compare important details with the original.
 

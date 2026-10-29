@@ -11,6 +11,8 @@ struct Placement: Sendable {
         var width: CGFloat
     }
     var lines: [Line] = []
+    /// Code chips of the block (`TextBlock.chips`) and where their top-left corner goes, picture pixels.
+    var chips: [(index: Int, origin: CGPoint)] = []
     /// Points, after any shrinking.
     var size: CGFloat
     var shrink: CGFloat = 1
@@ -121,6 +123,10 @@ enum Fitter {
 
     /// `only`: the one size step to use, when a group of equals has agreed on it.
     static func place(_ block: TextBlock, scale: CGFloat, only: CGFloat? = nil) -> Placement {
+        if !block.chips.isEmpty {
+            // Without its chips the sentence would lose its code: leave the source as it is.
+            return placeInline(block, scale: scale, only: only) ?? Placement(size: block.style.size, truncated: true)
+        }
         let text = block.translation.trimmingCharacters(in: .whitespacesAndNewlines)
         var placement = Placement(size: block.style.size)
         guard !text.isEmpty else { return placement }
@@ -192,5 +198,118 @@ enum Fitter {
             placement.lines.append(.init(text: line.text, x: x, baseline: first + CGFloat(index) * fit.pitch, width: width))
         }
         return placement
+    }
+
+    // MARK: - Sentences with code chips
+
+    private enum Token { case text(String), chip(Int) }
+
+    /// The translation split at each chip's text, with the backticks or quotes the translator
+    /// put around it. Nil unless every chip is found exactly once.
+    private static func tokens(_ block: TextBlock) -> [Token]? {
+        let text = block.translation.trimmingCharacters(in: .whitespacesAndNewlines)
+        var found: [(range: Range<String.Index>, chip: Int)] = []
+        // Longer chips first, so that one chip's text inside another's is not taken for it.
+        for chip in block.chips.indices.sorted(by: { block.chips[$0].text.count > block.chips[$1].text.count }) {
+            let free = text.ranges(of: block.chips[chip].text).filter { range in !found.contains { $0.range.overlaps(range) } }
+            let quoted = free.first { range in
+                range.lowerBound > text.startIndex && range.upperBound < text.endIndex
+                    && marks[text[text.index(before: range.lowerBound)]] == text[range.upperBound]
+            }
+            guard var range = quoted ?? free.first else { return nil }
+            if range == quoted { range = text.index(before: range.lowerBound)..<text.index(after: range.upperBound) }
+            found.append((range, chip))
+        }
+        var tokens: [Token] = [], position = text.startIndex
+        for match in found.sorted(by: { $0.range.lowerBound < $1.range.lowerBound }) {
+            if match.range.lowerBound > position { tokens.append(.text(String(text[position..<match.range.lowerBound]).replacingOccurrences(of: "`", with: ""))) }
+            tokens.append(.chip(match.chip))
+            position = match.range.upperBound
+        }
+        if position < text.endIndex { tokens.append(.text(String(text[position...]).replacingOccurrences(of: "`", with: ""))) }
+        return tokens
+    }
+
+    /// Opening marks a translator may put around code, and the mark that closes each.
+    private static let marks: [Character: Character] = ["`": "`", "“": "”", "\"": "\"", "「": "」", "‘": "’", "'": "'", "『": "』"]
+
+    private static let closing: Set<Character> = ["，", "。", "、", "；", "：", "！", "？", "）", "」", "』", ",", ".", ";", ":", "!", "?", ")", "]", "%"]
+    private static let opening: Set<Character> = ["（", "「", "『", "(", "["]
+
+    /// The translation laid out in lines with the chips' own pixels among the words.
+    static func placeInline(_ block: TextBlock, scale: CGFloat, only: CGFloat?) -> Placement? {
+        guard let tokens = tokens(block), block.align == .left else { return nil }
+        let room = Self.room(for: block, scale: scale)
+        let sourceLines = block.lines.count, sizePx = block.style.size * scale
+        struct Run { var line: Int; var x: CGFloat; var text: String?; var chip: Int?; var width: CGFloat }
+
+        /// Greedy lines no wider than `width` pixels; a chip never breaks.
+        func flow(_ font: NSFont, _ width: CGFloat, _ gap: CGFloat) -> (runs: [Run], lines: Int)? {
+            var runs: [Run] = [], line = 0, x: CGFloat = 0
+            var afterChip = false, opens = false
+            for token in tokens {
+                switch token {
+                case .chip(let index):
+                    let w = block.chips[index].rect.width
+                    if x > 0, !opens { x += gap }
+                    if x > 0, x + w > width { line += 1; x = 0 }
+                    runs.append(Run(line: line, x: x, chip: index, width: w))
+                    x += w; afterChip = true; opens = false
+                case .text(let raw):
+                    var rest = raw.trimmingCharacters(in: .whitespaces)
+                    guard !rest.isEmpty else { continue }
+                    if afterChip, let first = rest.first, !closing.contains(first) { x += gap }
+                    while !rest.isEmpty {
+                        // What may not be separated from what stands before it: the first word, or one character of Han.
+                        let unit = rest.first.map { ScreenTranslate.isCJK($0) || closing.contains($0) } == true
+                            ? String(rest.prefix(1)) : String(rest.prefix { !$0.isWhitespace })
+                        if x > 0, x + Self.width(unit, font: font) * scale > width + scale * 0.5, !(rest.first.map(closing.contains) ?? false) {
+                            line += 1; x = 0
+                        }
+                        let string = NSAttributedString(string: rest, attributes: [.font: font])
+                        let count = max(1, CTTypesetterSuggestLineBreak(CTTypesetterCreateWithAttributedString(string), 0, Double(max(1, (width - x) / scale + 0.5))))
+                        let ns = rest as NSString
+                        let piece = ns.substring(to: count).trimmingCharacters(in: .whitespaces)
+                        let pieceWidth = Self.width(piece, font: font) * scale
+                        if !piece.isEmpty { runs.append(Run(line: line, x: x, text: piece, width: pieceWidth)) }
+                        x += pieceWidth
+                        rest = ns.substring(from: count).trimmingCharacters(in: .whitespaces)
+                        if !rest.isEmpty { line += 1; x = 0 }
+                    }
+                    afterChip = false
+                    opens = raw.trimmingCharacters(in: .whitespaces).last.map(opening.contains) ?? false
+                }
+            }
+            return (runs, line + 1)
+        }
+
+        for shrink in only.map({ [$0] }) ?? shrinkSteps {
+            let font = block.style.font(size: block.style.size * shrink)
+            let gap = sizePx * shrink * 0.25
+            for (width, grow) in [(room.column, false), (room.wide, false), (room.column, true), (room.wide, true)] {
+                guard let (runs, lines) = flow(font, width, gap) else { continue }
+                let natural = sourceLines > 1 ? room.pitch : room.pitch * shrink
+                var pitch = natural
+                if lines > sourceLines {
+                    guard grow else { continue }
+                    let needed = (room.span + room.growth) / CGFloat(lines - 1)
+                    guard needed >= sizePx * shrink * 1.2 else { continue }
+                    pitch = min(natural, needed)
+                }
+                var placement = Placement(size: block.style.size * shrink, shrink: shrink)
+                placement.addedLines = max(0, lines - sourceLines)
+                placement.widened = (runs.map { $0.x + $0.width }.max() ?? 0) > room.column + 1
+                for run in runs {
+                    let baseline = block.firstBaseline + CGFloat(run.line) * pitch
+                    if let text = run.text {
+                        placement.lines.append(.init(text: text, x: block.rect.minX + run.x, baseline: baseline, width: run.width))
+                    } else if let chip = run.chip {
+                        placement.chips.append((chip, CGPoint(x: block.rect.minX + run.x, y: baseline + block.chips[chip].rise)))
+                    }
+                }
+                return placement
+            }
+        }
+        return nil
     }
 }

@@ -10,7 +10,7 @@ struct ShortcutSettingsView: View {
                 if !shortcuts.message.isEmpty { Text(shortcuts.message).font(.callout).accessibilityIdentifier("shortcutFeedback") }
                 if shortcuts.recording != nil { Button("取消录制") { shortcuts.recording = nil } }
             }
-            ForEach(["全局", "截图窗口", "应用"], id: \.self) { group in
+            ForEach(["全局", "框选", "截图窗口", "应用"], id: \.self) { group in
                 Section(group) {
                     ForEach(ShortcutAction.allCases.filter { $0.group == group }) { action in
                         ShortcutRow(shortcuts: shortcuts, action: action)

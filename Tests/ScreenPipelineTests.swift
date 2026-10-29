@@ -166,22 +166,29 @@ import CoreText
 
             let rich = inlinePicture(scale: scale)
             let mixed = try ScreenPipeline.analyze(rich.image, scale: scale, source: .en, target: .zhHans)!
-            let code = mixed.blocks.first { $0.original.contains("idle_in_transaction") }
-            check(code != nil && code?.translate == false, "\(label) an inline identifier stays verbatim: \(mixed.blocks.map(\.original))")
-            let prose = mixed.blocks.enumerated().filter { $0.element.translate }
-            check(prose.contains { $0.element.original.contains("connection") } && prose.contains { $0.element.original.contains("seconds") },
-                "\(label) protecting code must not suppress the surrounding prose")
-            let translations = Dictionary(uniqueKeysWithValues: prose.map { index, block in
-                (index, block.original.contains("seconds") ? "已空闲10秒。" : block.original.contains("Check") ? "再次检查网络连接。" : "数据库连接")
-            })
+            let name = "idle_in_transaction_session_timeout"
+            let sentence = mixed.blocks.firstIndex { $0.original.contains("`\(name)`") }
+            check(sentence.map { mixed.blocks[$0].translate && mixed.blocks[$0].chips.map(\.text) == [name] } == true,
+                  "\(label) the sentence is translated whole, with the identifier as `code`: \(mixed.blocks.map(\.original))")
+            let again = mixed.blocks.firstIndex { $0.original.contains("Check") }
+            check(sentence != nil && again != nil, "\(label) both sentences are found")
+            guard let sentence, let again else { continue }
+            let translations = [sentence: "连接`\(name)`已空闲10秒。", again: "再次检查网络连接。"]
             let translated = ScreenPipeline.compose(mixed, translations: translations)
-            check(translated.placed.count == prose.count, "\(label) all surrounding prose is placed")
+            check(translated.placed.count == 2, "\(label) both sentences are placed")
+            let moved = translated.placed.first { $0.index == sentence }?.placement.chips.first
+            check(moved != nil, "\(label) the chip moves with its sentence")
+            let chip = mixed.blocks[sentence].chips[0].rect
+            let dx = Int(moved!.origin.x.rounded()) - Int(chip.minX), dy = Int(moved!.origin.y.rounded()) - Int(chip.minY)
             let protected = PixelRect(rich.chip.insetBy(dx: 1, dy: 1), in: mixed.pixels.bounds)
             var unchanged = true
             for y in protected.minY..<protected.maxY {
-                for x in protected.minX..<protected.maxX where mixed.pixels[x, y] != translated.pixels[x, y] { unchanged = false }
+                for x in protected.minX..<protected.maxX where mixed.pixels[x, y] != translated.pixels[x + dx, y + dy] { unchanged = false }
             }
-            check(unchanged, "\(label) code chip pixels must not be erased, recoloured or overwritten by translation")
+            check(unchanged, "\(label) the chip's pixels arrive where it moved, byte for byte")
+            // A translation that lost the code would lose it from the picture: the sentence stays as it was.
+            let lost = ScreenPipeline.compose(mixed, translations: [sentence: "连接已空闲10秒。"])
+            check(!lost.placed.contains { $0.index == sentence }, "\(label) without its chip the sentence keeps its pixels")
             if let cg = translated.pixels.cgImage() {
                 try NSBitmapImageRep(cgImage: cg).representation(using: .png, properties: [:])!
                     .write(to: URL(fileURLWithPath: "build/tests/inline-\(Int(scale))x.png"))
@@ -198,6 +205,14 @@ import CoreText
         check(Recognizer.shouldKeep("OK", confidence: 0.3) && !Recognizer.shouldKeep("7", confidence: 0.4) && Recognizer.shouldKeep("12:30", confidence: 0.7), "what counts as text")
         check(Recognizer.isLikelyIconPrefix("Q") && !Recognizer.isLikelyIconPrefix("A") && Recognizer.isLikelyIconPrefix("8"), "icons read as letters")
 
+        check(Recognizer.correctedWord("l'll") == "I'll" && Recognizer.correctedWord("Cl.") == "CI." && Recognizer.correctedWord("APl") == "API"
+              && Recognizer.correctedWord("Clear") == "Clear" && Recognizer.correctedWord("all") == "all", "I read as l in interface type")
+        let split = Recognizer.corrected([
+            .init(text: "touches", box: CGRect(x: 0, y: 0, width: 50, height: 10), separator: "", literal: false),
+            .init(text: "project.", box: CGRect(x: 55, y: 0, width: 40, height: 10), separator: " ", literal: false),
+            .init(text: "yml", box: CGRect(x: 97, y: 0, width: 20, height: 10), separator: " ", literal: false)])
+        check(split.count == 2 && split[1].text == "project.yml" && split[1].literal && split[1].box.maxX == 117, "a file name split after its dot is one literal: \(split.map(\.text))")
+        check(CodeText.isFileName("notes-0.9.0.md") && !CodeText.isFileName("v0.9.0") && !CodeText.isFileName("done."), "file names")
         check(!Recognizer.isLikelyIconPrefix("2", before: "minutes ago") && Recognizer.isLikelyIconPrefix("2", before: "Inbox"), "a count before a word is text")
         for scale in [1.0, 2.0] {
             let layout = try ScreenPipeline.analyze(layoutPicture(scale: scale), scale: scale, source: .en, target: .zhHans)!
