@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.9.0
 
 - Dragging a capture's edges follows the pointer smoothly. The frozen screen moves as one layer while dragging and is cropped once on release; each drag step used to wait about 0.2 s for the toolbar to animate.
 - Pin leaves the capture on screen as a floating picture: drag it anywhere, keep taking new captures, right-click for copy, save, original/translation and close, or press Esc while it is focused.
