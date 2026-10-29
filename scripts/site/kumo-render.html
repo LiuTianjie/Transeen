@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=800" />
+    <title>Sample page for the website artwork</title>
+    <!-- Chrome renders this at 2 pixels per point for scripts/preview-website.sh; the production
+         pipeline then reads it like a screen capture. The page parts are filled in by
+         scripts/version-site-assets.py. -->
+    <link rel="stylesheet" href="kumo.css" />
+    <style>
+      html, body { margin: 0; background: #faf9f6; }
+      body { width: 800px; }
+    </style>
+  </head>
+  <body>
+    <!-- part:kumo-sprite -->
+    <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;overflow:hidden">
+      <defs>
+        <pattern id="kumo-grain" width="5" height="5" patternUnits="userSpaceOnUse">
+          <rect width="5" height="5" fill="#262626" />
+          <circle cx="1.2" cy="1.2" r="0.85" fill="#303030" />
+          <circle cx="3.7" cy="3.7" r="0.85" fill="#1d1d1d" />
+        </pattern>
+        <path id="kumo-ring" d="M125 116a35 35 0 1 1 70 0a35 35 0 1 1 -70 0" />
+      </defs>
+
+      <symbol id="kumo-camera" viewBox="0 0 320 200">
+        <ellipse cx="160" cy="190" rx="146" ry="7" fill="#dcd7cc" />
+        <rect x="44" y="15" width="38" height="15" rx="2.5" fill="#c4c4be" />
+        <rect x="44" y="15" width="38" height="5" rx="2.5" fill="#e6e6e1" />
+        <path d="M49 21v8M54 21v8M59 21v8M64 21v8M69 21v8M74 21v8M79 21v8" stroke="#aaaaa4" stroke-width="1" />
+        <rect x="138" y="21" width="44" height="9" rx="1.5" fill="#bdbdb7" />
+        <rect x="143" y="21" width="34" height="3" fill="#a2a29c" />
+        <rect x="234" y="17" width="30" height="13" rx="3" fill="#b8b8b2" />
+        <rect x="241" y="10" width="16" height="9" rx="3" fill="#ebebe6" />
+        <path d="M262 22 296 17.5 297.5 22.5 263.5 27Z" fill="#cfcfca" />
+        <path d="M28 29h264q8 0 8 8v31H20V37q0-8 8-8Z" fill="#d9d9d4" />
+        <path d="M28 29h264q8 0 8 8v1H20v-1q0-8 8-8Z" fill="#efefeb" />
+        <rect x="20" y="62" width="280" height="6" fill="#c1c1bb" />
+        <rect x="38" y="40" width="34" height="16" rx="2" fill="#27343c" />
+        <rect x="42" y="43" width="12" height="4" rx="1" fill="#62798a" />
+        <text x="124" y="52.5" font-family="Helvetica Neue, Arial, sans-serif" font-size="9.5" font-weight="700" letter-spacing="2.4" fill="#7b7b75" text-anchor="middle">SORA 35</text>
+        <rect x="178" y="40" width="20" height="16" rx="1.5" fill="#f4f3ee" />
+        <path d="M182 44.5h12M182 48h12M182 51.5h12" stroke="#e0ded7" stroke-width="1" />
+        <rect x="206" y="38" width="68" height="20" rx="3" fill="#1f2a31" />
+        <rect x="211" y="41.5" width="24" height="5" rx="1.5" fill="#557080" />
+        <rect x="20" y="68" width="280" height="98" fill="url(#kumo-grain)" />
+        <path d="M20 166h280v6q0 8-8 8H28q-8 0-8-8Z" fill="#c9c9c3" />
+        <rect x="20" y="166" width="280" height="3" fill="#e5e5e0" />
+        <rect x="11" y="78" width="11" height="16" rx="3" fill="#c3c3bd" />
+        <rect x="298" y="78" width="11" height="16" rx="3" fill="#c3c3bd" />
+        <path d="M97 149 71 161q-4.5 2-6-1.6-1-3 2.5-4.6L93.5 143Z" fill="#c9c9c3" />
+        <circle cx="160" cy="116" r="64" fill="#a7a7a1" />
+        <circle cx="160" cy="116" r="60" fill="#d4d4cf" />
+        <circle cx="160" cy="58.4" r="1.9" fill="#d63a2b" />
+        <circle cx="160" cy="116" r="55" fill="#1d1d1d" />
+        <circle cx="160" cy="116" r="51.5" fill="none" stroke="#3b3b3b" stroke-width="7" stroke-dasharray="1.6 2.6" />
+        <circle cx="160" cy="116" r="46" fill="#e2e2dd" />
+        <circle cx="160" cy="116" r="43.6" fill="none" stroke="#8e8e88" stroke-width="2.4" stroke-dasharray="0.8 5" />
+        <circle cx="160" cy="116" r="41" fill="#2c2c2c" />
+        <text font-family="Helvetica Neue, Arial, sans-serif" font-size="6.2" font-weight="600" letter-spacing="1.05" fill="#d7d7d1"><textPath href="#kumo-ring" startOffset="3%">SORA KŌGAKU 1:2.8 f=40mm No. 721094</textPath></text>
+        <circle cx="160" cy="116" r="31" fill="#121212" />
+        <circle cx="160" cy="116" r="26" fill="#0f1d26" />
+        <circle cx="160" cy="116" r="20" fill="#16303e" />
+        <path d="M141.5 109.5a20 20 0 0 1 25-12.5 25 25 0 0 0-21.5 16Z" fill="#3e6779" />
+        <circle cx="150.5" cy="105" r="3.6" fill="#d7ebf3" />
+        <ellipse cx="171" cy="127.5" rx="5.2" ry="2.3" fill="#2b5264" transform="rotate(-38 171 127.5)" />
+      </symbol>
+
+      <symbol id="kumo-camera-top" viewBox="0 0 320 200">
+        <ellipse cx="160" cy="176" rx="140" ry="6" fill="#dcd7cc" />
+        <rect x="96" y="112" width="128" height="52" rx="4" fill="#1d1d1d" />
+        <rect x="100" y="120" width="120" height="10" fill="#3b3b3b" />
+        <rect x="100" y="140" width="120" height="7" fill="#e2e2dd" />
+        <rect x="20" y="58" width="280" height="58" rx="10" fill="#d9d9d4" />
+        <rect x="20" y="58" width="280" height="10" rx="5" fill="#efefeb" />
+        <circle cx="66" cy="86" r="17" fill="#c4c4be" />
+        <circle cx="66" cy="86" r="11" fill="#e6e6e1" />
+        <rect x="138" y="76" width="44" height="22" rx="2" fill="#bdbdb7" />
+        <circle cx="249" cy="84" r="11" fill="#b8b8b2" />
+        <circle cx="249" cy="84" r="6" fill="#ebebe6" />
+        <path d="M262 98 300 92 301 98 263 104Z" fill="#cfcfca" />
+      </symbol>
+
+      <symbol id="kumo-camera-back" viewBox="0 0 320 200">
+        <ellipse cx="160" cy="190" rx="146" ry="7" fill="#dcd7cc" />
+        <path d="M28 29h264q8 0 8 8v31H20V37q0-8 8-8Z" fill="#d9d9d4" />
+        <rect x="20" y="62" width="280" height="6" fill="#c1c1bb" />
+        <rect x="238" y="38" width="30" height="20" rx="4" fill="#1b1b1b" />
+        <rect x="244" y="42" width="18" height="12" rx="2" fill="#3a4a54" />
+        <circle cx="66" cy="46" r="7" fill="#1b1b1b" />
+        <rect x="20" y="68" width="280" height="98" fill="url(#kumo-grain)" />
+        <rect x="96" y="84" width="128" height="66" rx="4" fill="none" stroke="#3a3a3a" stroke-width="2" />
+        <path d="M20 166h280v6q0 8-8 8H28q-8 0-8-8Z" fill="#c9c9c3" />
+      </symbol>
+
+      <symbol id="kumo-cloud" viewBox="0 0 30 20">
+        <path d="M8 19a7 7 0 0 1-.8-13.95A8 8 0 0 1 22 5.4 6.8 6.8 0 0 1 23.2 19Z" fill="#1c1b19" />
+        <path d="M10.5 13.5h10" stroke="#faf9f6" stroke-width="1.6" stroke-linecap="round" />
+      </symbol>
+
+      <symbol id="kumo-bag" viewBox="0 0 16 16">
+        <path d="M3 5.5h10l-.8 8.5H3.8Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+        <path d="M5.8 5.5V4.4a2.2 2.2 0 0 1 4.4 0v1.1" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
+      </symbol>
+
+      <symbol id="kumo-heart" viewBox="0 0 16 16">
+        <path d="M8 13.6S2 9.9 2 5.9A3.1 3.1 0 0 1 8 4.6a3.1 3.1 0 0 1 6 1.3c0 4-6 7.7-6 7.7Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+      </symbol>
+    </svg>
+    <!-- /part:kumo-sprite -->
+    <div data-ui>
+      <!-- part:kumo-scene -->
+      <div class="kumo" lang="ja" data-scene>
+        <div class="kumo-top">
+          <span class="kumo-logo"><svg viewBox="0 0 30 20" aria-hidden="true"><use href="#kumo-cloud" /></svg><span data-t="logo">雲カメラ</span></span>
+          <span class="kumo-nav">
+            <span data-t="nav-new">新着商品</span>
+            <span data-t="nav-cameras">カメラ</span>
+            <span data-t="nav-lenses">交換レンズ</span>
+            <span data-t="nav-sell">買取</span>
+            <span class="kumo-cart"><span class="kumo-bag"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#kumo-bag" /></svg><i>1</i></span><span data-t="nav-cart">買い物かご</span></span>
+          </span>
+        </div>
+        <p class="kumo-crumb" data-t="crumb">トップ ＞ フィルムカメラ ＞ 距離計連動カメラ</p>
+        <div class="kumo-main">
+          <div class="kumo-media">
+            <div class="kumo-photo"><svg viewBox="0 0 320 200" aria-hidden="true"><use href="#kumo-camera" /></svg></div>
+            <div class="kumo-thumbs">
+              <span><svg viewBox="0 0 320 200" aria-hidden="true"><use href="#kumo-camera" /></svg></span>
+              <span><svg viewBox="0 0 320 200" aria-hidden="true"><use href="#kumo-camera-top" /></svg></span>
+              <span><svg viewBox="0 0 320 200" aria-hidden="true"><use href="#kumo-camera-back" /></svg></span>
+              <span><svg viewBox="96 52 128 128" aria-hidden="true"><use href="#kumo-camera" width="320" height="200" /></svg></span>
+            </div>
+            <p class="kumo-desc-title" data-t="desc-title">商品説明</p>
+            <p class="kumo-desc" data-t="desc">レンズにくもり・カビはありません。モルトは交換済みで、届いたその日から撮影できます。</p>
+          </div>
+          <div class="kumo-info">
+            <span class="kumo-badge" data-t="badge">新入荷</span>
+            <p class="kumo-title" data-t="title">ソラ 35 距離計連動カメラ</p>
+            <p class="kumo-sub" data-t="sub">40mm F2.8・1972年製</p>
+            <p class="kumo-price">¥48,000</p>
+            <p class="kumo-tax" data-t="tax">税込・送料無料</p>
+            <p class="kumo-grade"><span class="kumo-chip" data-t="grade-label">状態</span><b data-t="grade">美品</b></p>
+            <p class="kumo-checked" data-t="checked">シャッター・露出計 動作確認済み</p>
+            <p class="kumo-stock" data-t="stock">残り1点</p>
+            <span class="kumo-buy"><span data-t="cart">カートに入れる</span></span>
+            <span class="kumo-save"><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#kumo-heart" /></svg><span data-t="save">お気に入り</span></span>
+            <p class="kumo-ship" data-t="ship">平日14時までのご注文は当日発送します。</p>
+            <dl class="kumo-specs">
+              <div><dt data-t="spec-lens">撮影レンズ</dt><dd>40mm F2.8</dd></div>
+              <div><dt data-t="spec-exposure">露出制御</dt><dd data-t="spec-exposure-v">絞り優先AE</dd></div>
+              <div><dt data-t="spec-box">付属品</dt><dd data-t="spec-box-v">ストラップ・レンズキャップ</dd></div>
+              <div><dt data-t="spec-battery">電池</dt><dd data-t="spec-battery-v">LR44 1個（付属）</dd></div>
+            </dl>
+            <div class="kumo-notice">
+              <p data-t="notice-title">海外発送について</p>
+              <p data-t="notice">海外への直接発送は行っておりません。転送サービスをご利用ください。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /part:kumo-scene -->
+    </div>
+  </body>
+</html>

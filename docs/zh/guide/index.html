@@ -23,7 +23,7 @@
     <meta property="og:url" content="https://transeen.itool.tech/zh/guide/" />
     <meta property="og:title" content="五步装好 Transeen" />
     <meta property="og:description" content="从下载到第一次在 Mac 上截图翻译，附完整快捷键与模型配置。" />
-    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=fcc2cbf107c4" />
+    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=b3e5d2df6db1" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -34,7 +34,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="五步装好 Transeen" />
     <meta name="twitter:description" content="从下载到第一次在 Mac 上截图翻译，附完整快捷键与模型配置。" />
-    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=fcc2cbf107c4" />
+    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=b3e5d2df6db1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -67,7 +67,7 @@
               { "@type": "HowToStep", "position": 2, "name": "激活", "url": "https://transeen.itool.tech/zh/guide/#activate", "text": "在菜单栏菜单选择“激活与账号…”，输入 TR- 激活码，点“激活这台 Mac”。" },
               { "@type": "HowToStep", "position": 3, "name": "开启屏幕录制", "url": "https://transeen.itool.tech/zh/guide/#permission", "text": "在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中开启 Transeen。" },
               { "@type": "HowToStep", "position": 4, "name": "选择语言", "url": "https://transeen.itool.tech/zh/guide/#languages", "text": "在新手引导或启动面板选择原文和译文语言，并提前下载需要的 Apple 语言包。" },
-              { "@type": "HowToStep", "position": 5, "name": "框选翻译", "url": "https://transeen.itool.tech/zh/guide/#translate", "text": "按 Control-Option-2 框选屏幕区域，在原处阅读译文，按 Tab 对照原文。" }
+              { "@type": "HowToStep", "position": 5, "name": "框选翻译", "url": "https://transeen.itool.tech/zh/guide/#translate", "text": "按 F1 框选屏幕区域，在原处阅读译文，按 Tab 对照原文。" }
             ]
           },
           {
@@ -93,7 +93,7 @@
     <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=f2374488919f" />
     <link rel="manifest" href="../../site.webmanifest" />
     <link rel="preload" href="../../assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="../../assets/site.css?v=3cb6a127dd97" />
+    <link rel="stylesheet" href="../../assets/site.css?v=9305b8b71568" />
     <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
@@ -115,7 +115,7 @@
         <h1 id="guide-title" data-load>五步装好<br />Transeen</h1>
         <p class="hero-lead" data-load style="--i: 1">从下载到第一次截图翻译。你需要一台 macOS 26 或更高版本的 Mac，以及一个 TR- 激活码。</p>
         <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest" data-load style="--i: 2">下载 Mac 版</a>
-        <figure data-load style="--i: 2"><img src="../../assets/chart-select.webp?v=266b0326416e" width="640" height="404" alt="按 ⌃⌥2 框选一张图表：选区外的画面变暗，蓝色四角标出选区，旁边显示 1208 × 524 px。" fetchpriority="high" /></figure>
+        <figure data-load style="--i: 2"><img src="../../assets/select-zh.webp?v=edf97a692b4c" width="800" height="729" alt="在一个日文网店页面上按 F1 框选：选区外的画面变暗，蓝色四角标出选区，提示写着“截屏翻译 · JA → 中文”和 696 × 588 px。" fetchpriority="high" /></figure>
         <nav class="guide-toc" aria-label="本页目录" data-load style="--i: 3">
           <ol>
             <li><a href="#install">安装</a></li>
@@ -124,7 +124,7 @@
             <li><a href="#languages">选择语言</a></li>
             <li><a href="#translate">框选翻译</a></li>
             <li><a href="#mark">标注</a></li>
-            <li><a href="#keep">复制、保存或钉住</a></li>
+            <li><a href="#keep">复制、保存或钉图</a></li>
             <li><a href="#model">使用自己的模型</a></li>
             <li><a href="#shortcuts">键盘快捷键</a></li>
             <li><a href="#troubleshooting">常见问题排查</a></li>
@@ -135,7 +135,7 @@
 
       <section class="guide-row" id="install" aria-labelledby="install-title">
         <h2 id="install-title" data-rise>安装</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <div class="guide-body">
           <ol class="steps">
             <li>从 <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a> 下载最新的 DMG。大约 3 MB，是同时支持 Apple 芯片和 Intel 的通用应用。</li>
             <li>打开 DMG，把 Transeen 拖进“应用程序”。</li>
@@ -147,7 +147,7 @@
 
       <section class="guide-row" id="activate" aria-labelledby="activate-title">
         <h2 id="activate-title" data-rise>激活</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <div class="guide-body">
           <ol class="steps">
             <li>在菜单栏菜单选择“激活与账号…”，或在启动面板点“激活 Transeen”。</li>
             <li>输入激活码，格式是 TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX，然后点“激活这台 Mac”。</li>
@@ -159,7 +159,7 @@
 
       <section class="guide-row" id="permission" aria-labelledby="permission-title">
         <h2 id="permission-title" data-rise>开启屏幕录制</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <div class="guide-body">
           <p>第一次截图时，Transeen 会请求“屏幕录制”权限。它只使用屏幕图像，不采集音频；只在你按下截图快捷键时读取屏幕，不保存历史，也不会持续录制。</p>
           <ol class="steps">
             <li>点“打开系统设置…”，或前往系统设置 → 隐私与安全性 → 屏幕与系统音频录制。</li>
@@ -167,58 +167,60 @@
             <li>回到 Transeen，它会自动重新检查；点“开始框选”继续。</li>
           </ol>
           <p>如果已经开启但仍未生效，在同一个窗口里点“重新检查”或“重新打开”。</p>
-          <figure><img src="../../assets/permission.webp?v=4d6b7486db52" width="440" height="438" alt="权限已开启时的 Transeen 授权窗口：显示“已准备好”、可在原文与译文间切换的预览，以及“开始框选”按钮。" loading="lazy" /><figcaption>开启权限后，窗口会显示“已准备好”。</figcaption></figure>
+          <figure><img src="../../assets/permission.webp?v=257f40d15d4c" width="440" height="438" alt="权限已开启时的 Transeen 授权窗口：显示“已准备好”、可在原文与译文间切换的预览，以及“开始框选”按钮。" loading="lazy" /><figcaption>开启权限后，窗口会显示“已准备好”。</figcaption></figure>
         </div>
       </section>
 
       <section class="guide-row" id="languages" aria-labelledby="languages-title">
         <h2 id="languages-title" data-rise>选择语言</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <div class="guide-body">
           <p>启动面板里有“原文”和“译文”两个菜单。原文可以保持“自动识别”，也可以从八种语言中选一种：简体中文、繁体中文、英语、日语、韩语、法语、西班牙语和德语。任意两种之间都能互译。</p>
-          <figure><img src="../../assets/toolbar-zh-hans.webp?v=5a106c856fa3" width="552" height="93" alt="Transeen 工具栏，第二行显示翻译方向 EN → 中文。" loading="lazy" /><figcaption>在截图上，工具下方的方向（这里是 EN → 中文）可以修改任一语言或交换方向。</figcaption></figure>
+          <figure><img src="../../assets/toolbar-zh.webp?v=460f60c4a137" width="552" height="93" alt="翻译完成后的 Transeen 工具栏，第二行显示翻译方向 JA → 中文和状态“已翻译 9 处”。" loading="lazy" /><figcaption>在截图上，工具下方的方向（这里是 JA → 中文）可以修改任一语言；再按一次 F1 就交换两种语言。</figcaption></figure>
           <p>Apple 翻译的每个语言组合都需要语言包。首次打开时的新手引导，以及之后的设置 → 通用 → 翻译，会按译文语言列出所需语言包和下载状态；点“下载”即可在第一次截图前准备好。之后就在这台 Mac 上离线翻译。已下载的语言包也可以在系统设置 → 通用 → 语言与地区 → 翻译语言中查看。</p>
         </div>
       </section>
 
       <section class="guide-row" id="translate" aria-labelledby="translate-title">
         <h2 id="translate-title" data-rise>框选翻译</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <div class="guide-body">
           <ol class="steps">
-            <li>按 <kbd>⌃⌥2</kbd>，画面会保持静止并变暗。</li>
+            <li>按 <kbd>F1</kbd>，画面会保持静止并变暗。笔记本键盘上要按 <kbd>fn</kbd> <kbd>F1</kbd>，除非已把 F 键设为标准功能键。</li>
             <li>悬停时会自动吸附段落、输入框或窗口，点击即可选中；也可以自己拖出一块区域。按 <kbd>Esc</kbd> 或右键取消。</li>
+            <li>还是上次那块地方？框选时按 <kbd>R</kbd>，直接选中上一次截图的区域，重启后也记得。</li>
             <li>在原来的位置阅读译文。按 <kbd>Tab</kbd> 在原文和译文之间切换，按住<kbd>空格</kbd>可临时看原文。</li>
-            <li>框得不准？拖动截图的边或角即可调整。它从同一张冻结画面重新裁剪，标注留在原处，松手后自动重新翻译。</li>
+            <li>框得不准？拖动截图的边或角即可调整，边框会跟着鼠标走。它从同一张冻结画面重新裁剪，标注留在原处，松手后自动重新翻译。</li>
+            <li>方向反了？截图打开时再按一次 <kbd>F1</kbd>，原文和译文的语言就会互换。</li>
           </ol>
-          <figure><img src="../../assets/capture-read.webp?v=1db377af3567" width="644" height="501" alt="截取的图表中所有标签都已换成中文，下方是 Transeen 工具栏。" loading="lazy" /><figcaption>截图停在你框选的位置，工具栏在它下方。</figcaption></figure>
-          <p><kbd>⌃⌥2</kbd> 框选并翻译，<kbd>⌃⌥3</kbd> 只截图标注、不翻译，两者都可以在设置 → 通用或快捷键中单独修改；在那个窗口里按 <kbd>T</kbd> 可以再翻译。要翻译已有的图片，选择“打开图片…”或按 <kbd>⌘O</kbd>。</p>
+          <figure><img src="../../assets/capture-read-zh.webp?v=22a77db659d7" width="552" height="403" alt="日文网店页面的一部分被截取，并在原处翻译成中文，下方是 Transeen 工具栏。" loading="lazy" /><figcaption>截图停在你框选的位置，工具栏在它下方。</figcaption></figure>
+          <p>默认只有 <kbd>F1</kbd> 在任何应用里都能用。只截图标注、不翻译，可以在菜单栏菜单里选“截图标注”，或在设置 → 快捷键里给它设一个按键；在那个窗口里按 <kbd>T</kbd> 可以再翻译。要翻译已有的图片，选择“打开图片…”或按 <kbd>⌘O</kbd>。</p>
         </div>
       </section>
 
       <section class="guide-row" id="mark" aria-labelledby="mark-title">
         <h2 id="mark-title" data-rise>标注</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <div class="guide-body">
           <p>在工具栏选择工具，或直接按键：<kbd>R</kbd> 矩形、<kbd>O</kbd> 椭圆、<kbd>A</kbd> 箭头、<kbd>P</kbd> 画笔、<kbd>V</kbd> 选择和移动。编号从 1 开始递增，撤销和重做都会保留编号。</p>
-          <figure><img src="../../assets/capture-mark.webp?v=20d6288e5842" width="644" height="539" alt="已翻译的图表上有一个红色矩形、一个绿色箭头和两个编号，工具栏显示颜色和线宽。" loading="lazy" /><figcaption>标注在独立图层上，切换原文和译文不会移动它们。</figcaption></figure>
+          <figure><img src="../../assets/capture-mark-zh.webp?v=9d0294253306" width="552" height="441" alt="已翻译的截图上，价格被红框圈住，旁边有两个编号和一个橙色箭头，工具栏显示颜色和线宽。" loading="lazy" /><figcaption>标注在独立图层上，切换原文和译文不会移动它们。</figcaption></figure>
           <p>可以选六种颜色和三种线宽，也可以打开调节面板自选颜色、设置 1 到 10 的线宽。<kbd>⌘Z</kbd> 和 <kbd>⌘⇧Z</kbd> 撤销与重做，<kbd>Delete</kbd> 删除选中的标注。</p>
         </div>
       </section>
 
       <section class="guide-row" id="keep" aria-labelledby="keep-title">
-        <h2 id="keep-title" data-rise>复制、保存或钉住</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <h2 id="keep-title" data-rise>复制、保存或钉图</h2>
+        <div class="guide-body">
           <ul class="points">
             <li><kbd>⌘C</kbd> 按你看到的样子复制图片，标注也在其中；翻译还没完成时也能复制。默认复制后会关闭截图；在设置中关掉“复制后关闭截图”即可保留。</li>
             <li><kbd>⌘S</kbd> 保存为 PNG。</li>
-            <li>钉住后，截图会浮在其他窗口上方，方便对照着工作。</li>
+            <li>点工具栏上的图钉（钉到屏幕上），当前画面连同标注会变成一张独立的浮动图片，这次截图随即结束，可以马上截下一张。钉图可以拖到任意位置，也可以同时钉多张；右键可以复制、保存、切换原文和译文或关闭，钉图选中时按 <kbd>Esc</kbd> 也能关闭。</li>
             <li>“文字”会并排显示完整译文和原文，可以直接复制。</li>
           </ul>
-          <figure><img src="../../assets/capture-keep.webp?v=bc1925bad2c0" width="644" height="501" alt="标注后的图表，工具栏显示“已复制”，钉住按钮已打开。" loading="lazy" /></figure>
+          <figure><img src="../../assets/capture-keep-zh.webp?v=ecea777b7771" width="552" height="403" alt="标注后的截图，复制按钮显示“已复制”。" loading="lazy" /></figure>
         </div>
       </section>
 
       <section class="guide-row" id="model" aria-labelledby="model-title">
         <h2 id="model-title" data-rise>使用自己的模型</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <div class="guide-body">
           <p>默认使用 Apple 翻译。要改用模型，打开设置（<kbd>⌘,</kbd>），把“翻译服务”设为“大模型 / 本地模型服务”，然后填写：</p>
           <ul class="points">
             <li>接口地址：完整的 chat completions 地址，例如 <code>https://api.openai.com/v1/chat/completions</code>；</li>
@@ -232,13 +234,13 @@
 
       <section class="guide-row" id="shortcuts" aria-labelledby="shortcuts-title">
         <h2 id="shortcuts-title" data-rise>键盘快捷键</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <div class="guide-body">
           <table class="keys">
             <thead><tr><th scope="col">默认按键</th><th scope="col">操作</th></tr></thead>
             <tbody>
-              <tr><td><kbd>⌃⌥2</kbd></td><td>截图翻译</td></tr>
-              <tr><td><kbd>⌃⌥3</kbd></td><td>截图标注</td></tr>
-              <tr><td><kbd>⌃⌥空格</kbd></td><td>在任何应用里切换原文和译文</td></tr>
+              <tr><td><kbd>F1</kbd></td><td>截图翻译</td></tr>
+              <tr><td>框选时按 <kbd>R</kbd></td><td>选中上次截图的区域</td></tr>
+              <tr><td>截图打开时按 <kbd>F1</kbd></td><td>交换语言；“截图标注”截的图则开始翻译</td></tr>
               <tr><td><kbd>Tab</kbd></td><td>切换原文和译文</td></tr>
               <tr><td>按住<kbd>空格</kbd></td><td>临时看原文</td></tr>
               <tr><td><kbd>T</kbd></td><td>翻译或重试</td></tr>
@@ -253,15 +255,15 @@
               <tr><td><kbd>⌘,</kbd></td><td>打开设置</td></tr>
             </tbody>
           </table>
-          <p>所有快捷键都可以在设置 → 快捷键中修改；“恢复全部默认快捷键”会还原默认值。</p>
+          <p>所有快捷键都可以在设置 → 快捷键中修改；“恢复全部默认快捷键”会还原默认值。“截图标注”和“全局对照原文”默认没有按键，需要时在这里添加。旧版本保存的快捷键不会保留，升级后统一从 <kbd>F1</kbd> 开始。</p>
         </div>
       </section>
 
       <section class="guide-row" id="troubleshooting" aria-labelledby="troubleshooting-title">
         <h2 id="troubleshooting-title" data-rise>常见问题排查</h2>
-        <div class="guide-body" data-rise style="--i: 1">
-          <h3>按 <kbd>⌃⌥2</kbd> 没有反应</h3>
-          <p>可能有其他应用占用了同一个快捷键；无法注册时 Transeen 会提示。在设置 → 快捷键中换一个按键，或从菜单栏菜单选择“截图翻译”。</p>
+        <div class="guide-body">
+          <h3>按 <kbd>F1</kbd> 没有反应</h3>
+          <p>笔记本键盘上的 F1 默认调节亮度，要同时按住 <kbd>fn</kbd>，或在系统设置 → 键盘 → 键盘快捷键 → 功能键里打开“将 F1、F2 等键用作标准功能键”。也可能有其他应用占用了 F1；无法注册时 Transeen 会提示。在设置 → 快捷键中换一个按键，或从菜单栏菜单选择“截图翻译”。</p>
           <h3>截图是空的，或一直提示授权</h3>
           <p>打开菜单栏菜单里的“屏幕权限…”。如果系统设置中 Transeen 已经开启，先关闭再重新开启，然后点“重新打开”。</p>
           <h3>Apple 翻译没有开始</h3>
@@ -273,7 +275,7 @@
 
       <section class="guide-row" id="build" aria-labelledby="build-title">
         <h2 id="build-title" data-rise>从源码构建</h2>
-        <div class="guide-body" data-rise style="--i: 1">
+        <div class="guide-body">
           <p>Transeen 采用 <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 许可证</a>。需要 Xcode 26.4 或更高版本、Swift 6 和 XcodeGen。</p>
           <pre><code>brew install xcodegen
 git clone https://github.com/LiuTianjie/Transeen.git
@@ -337,6 +339,6 @@ cd Transeen
         <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">下载</a>
       </div>
     </footer>
-    <script src="../../assets/site.js?v=2fe97d30690e" defer></script>
+    <script src="../../assets/site.js?v=1ec42738fe14" defer></script>
   </body>
 </html>

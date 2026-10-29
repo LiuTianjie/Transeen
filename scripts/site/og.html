@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- The 1200 × 630 share card, rendered by scripts/render-og.sh: ?lang=zh for the Chinese one. -->
+    <style>
+      @font-face { font-family: "Geist"; src: url("../../docs/assets/fonts/geist-1.8.2.woff2") format("woff2"); font-weight: 100 900; }
+      html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #0a0d0c; }
+      body { position: relative; color: #edf3ee; font-family: "Geist", -apple-system, "PingFang SC", sans-serif; -webkit-font-smoothing: antialiased; }
+      .mark { position: absolute; left: 64px; top: 56px; display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 600; letter-spacing: -0.01em; }
+      .mark img { width: 44px; height: 44px; }
+      h1 { position: absolute; left: 64px; top: 178px; width: 560px; margin: 0; font-size: 64px; font-weight: 560; line-height: 0.98; letter-spacing: -0.045em; }
+      :lang(zh) h1 { font-size: 72px; line-height: 1.12; letter-spacing: -0.01em; }
+      .keys { position: absolute; left: 64px; bottom: 64px; display: flex; gap: 8px; }
+      .keys kbd { display: grid; place-items: center; min-width: 52px; height: 52px; padding: 0 12px; background: #b5e3b8; color: #0c2417; font: 600 26px "Geist", -apple-system, sans-serif; }
+      .stage { position: absolute; left: 640px; top: 72px; right: 0; bottom: 0; background: #b5e3b8; }
+      .stage img { position: absolute; left: 30px; top: 46px; width: 500px; }
+    </style>
+  </head>
+  <body>
+    <div class="mark"><img src="../../docs/assets/app-icon.png" alt="" />Transeen</div>
+    <h1 id="title">Translate your Mac<br />screen, in place</h1>
+    <div class="keys"><kbd>F1</kbd></div>
+    <div class="stage"><img id="shot" src="../../docs/assets/capture-read-en.webp" alt="" /></div>
+    <script>
+      if (location.search.includes("lang=zh")) {
+        document.documentElement.lang = "zh-CN";
+        document.getElementById("title").innerHTML = "框选屏幕，<br />译文留在原处";
+        document.getElementById("shot").src = "../../docs/assets/capture-read-zh.webp";
+      }
+    </script>
+  </body>
+</html>

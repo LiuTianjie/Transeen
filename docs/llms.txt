@@ -1,6 +1,6 @@
 # Transeen
 
-> Transeen is a native macOS menu bar app (macOS 26 or later, Apple silicon and Intel). Press Control-Option-2, select any part of the screen or open an image, and Transeen recognizes the text on the Mac and draws the translation back into the same picture, keeping its position, size and color. Captures can be compared with the original, marked up, copied, saved as PNG or pinned above other windows.
+> Transeen is a native macOS menu bar app (macOS 26 or later, Apple silicon and Intel). Press F1 (fn-F1 on most laptop keyboards), select any part of the screen or open an image, and Transeen recognizes the text on the Mac and draws the translation back into the same picture, keeping its position, size and color. Captures can be compared with the original, marked up, re-cropped by dragging an edge, copied, saved as PNG or pinned to the screen as floating pictures while new captures continue. Pressing F1 again on an open capture swaps the languages, and pressing R while selecting takes the last captured area again.
 
 - Website: https://transeen.itool.tech/ (Chinese: https://transeen.itool.tech/zh/)
 - Setup guide: https://transeen.itool.tech/guide/ (Chinese: https://transeen.itool.tech/zh/guide/)
@@ -12,9 +12,11 @@
 - Translates a selected screen region in place: Apple Vision text recognition on the Mac, pixel-aware text style estimation, and the translation set where the original text was.
 - Translation providers: Apple on-device translation (offline after the language pack is installed) or any OpenAI-compatible chat completions endpoint, including local servers on localhost. Model mode sends recognized text only, never the screenshot.
 - Languages: Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German, in any direction; the source language can be detected.
-- Compare original and translation with Tab (or Control-Option-Space from any app); hold Space to peek at the original.
+- Compare original and translation with Tab; hold Space to peek at the original.
+- Sentences that contain code or file names are translated whole; the code and file names keep their own pixels and move with the translation.
+- F1 is the only default global shortcut. Capturing for annotation and comparing from any app have no shortcut until one is set in Settings; every shortcut can be changed there.
 - Annotation on a separate layer: rectangle, ellipse, arrow, pen and numbered notes, with undo and redo.
-- Copy with Command-C, save PNG with Command-S, pin a capture above other windows, open the full text view, or translate an image opened from disk.
+- Copy with Command-C, save PNG with Command-S, pin a capture to the screen as a floating picture (drag it anywhere, right-click to copy, save, switch original and translation or close), open the full text view, or translate an image opened from disk.
 - No screenshot history and no continuous capture.
 
 ## Activation

@@ -1,0 +1,43 @@
+{
+  "languages": {
+    "ja": {"name": "日本語", "short": "JA"},
+    "en": {"name": "English", "short": "EN"},
+    "zh-Hans": {"name": "简体中文", "short": "中文"},
+    "zh-Hant": {"name": "繁體中文", "short": "繁中"},
+    "ko": {"name": "한국어", "short": "KO"},
+    "fr": {"name": "Français", "short": "FR"},
+    "es": {"name": "Español", "short": "ES"},
+    "de": {"name": "Deutsch", "short": "DE"}
+  },
+  "strings": {
+    "logo": {"ja": "雲カメラ", "en": "Kumo Camera", "zh-Hans": "云相机", "zh-Hant": "雲相機", "ko": "쿠모 카메라", "fr": "Kumo Caméra", "es": "Kumo Cámara", "de": "Kumo Kamera"},
+    "nav-new": {"ja": "新着商品", "en": "New", "zh-Hans": "新品", "zh-Hant": "新品", "ko": "신상품", "fr": "Nouveautés", "es": "Novedades", "de": "Neu"},
+    "nav-cameras": {"ja": "カメラ", "en": "Cameras", "zh-Hans": "相机", "zh-Hant": "相機", "ko": "카메라", "fr": "Appareils", "es": "Cámaras", "de": "Kameras"},
+    "nav-lenses": {"ja": "交換レンズ", "en": "Lenses", "zh-Hans": "镜头", "zh-Hant": "鏡頭", "ko": "렌즈", "fr": "Objectifs", "es": "Objetivos", "de": "Objektive"},
+    "nav-sell": {"ja": "買取", "en": "Sell", "zh-Hans": "回收", "zh-Hant": "收購", "ko": "매입", "fr": "Rachat", "es": "Vender", "de": "Ankauf"},
+    "nav-cart": {"ja": "買い物かご", "en": "Cart", "zh-Hans": "购物车", "zh-Hant": "購物車", "ko": "장바구니", "fr": "Panier", "es": "Carrito", "de": "Warenkorb"},
+    "crumb": {"ja": "トップ ＞ フィルムカメラ ＞ 距離計連動カメラ", "en": "Home > Film cameras > Rangefinders", "zh-Hans": "首页 > 胶片相机 > 旁轴相机", "zh-Hant": "首頁 > 底片相機 > 旁軸相機", "ko": "홈 > 필름 카메라 > 레인지파인더", "fr": "Accueil > Argentiques > Télémétriques", "es": "Inicio > Analógicas > Telemétricas", "de": "Start > Analogkameras > Messsucher"},
+    "desc-title": {"ja": "商品説明", "en": "Description", "zh-Hans": "商品说明", "zh-Hant": "商品說明", "ko": "상품 설명", "fr": "Description", "es": "Descripción", "de": "Beschreibung"},
+    "desc": {"ja": "レンズにくもり・カビはありません。モルトは交換済みで、届いたその日から撮影できます。", "en": "No haze or fungus in the lens. The light seals are new, so it is ready to shoot the day it arrives.", "zh-Hans": "镜头无雾、无霉。遮光棉已更换，到手当天就能拍。", "zh-Hant": "鏡頭無霧、無黴。遮光棉已更換，到手當天就能拍。", "ko": "렌즈에 흐림이나 곰팡이가 없습니다. 차광재를 교체해 받은 날 바로 촬영할 수 있습니다.", "fr": "Ni voile ni champignons dans l’objectif. Les joints sont neufs : prêt à photographier dès réception.", "es": "La lente no tiene velo ni hongos. Los burletes son nuevos: lista para disparar el día que llega.", "de": "Kein Schleier, kein Pilz im Objektiv. Neue Lichtdichtungen, ab dem ersten Tag einsatzbereit."},
+    "badge": {"ja": "新入荷", "en": "New", "zh-Hans": "新到货", "zh-Hant": "新到貨", "ko": "신상", "fr": "Nouveau", "es": "Nuevo", "de": "Neu"},
+    "title": {"ja": "ソラ 35 距離計連動カメラ", "en": "Sora 35 rangefinder", "zh-Hans": "Sora 35 旁轴相机", "zh-Hant": "Sora 35 旁軸相機", "ko": "소라 35 레인지파인더", "fr": "Télémétrique Sora 35", "es": "Telemétrica Sora 35", "de": "Sora 35 Messsucher"},
+    "sub": {"ja": "40mm F2.8・1972年製", "en": "40mm f/2.8, made in 1972", "zh-Hans": "40mm F2.8，1972 年产", "zh-Hant": "40mm F2.8，1972 年製", "ko": "40mm F2.8 · 1972년 제조", "fr": "40 mm f/2,8, fabriqué en 1972", "es": "40 mm f/2,8, fabricada en 1972", "de": "40 mm f/2,8, Baujahr 1972"},
+    "tax": {"ja": "税込・送料無料", "en": "Tax included, free shipping", "zh-Hans": "含税，包邮", "zh-Hant": "含稅，免運費", "ko": "세금 포함 · 무료 배송", "fr": "TTC, livraison offerte", "es": "IVA incluido, envío gratis", "de": "Inkl. MwSt., versandkostenfrei"},
+    "grade-label": {"ja": "状態", "en": "Grade", "zh-Hans": "成色", "zh-Hant": "成色", "ko": "상태", "fr": "État", "es": "Estado", "de": "Zustand"},
+    "grade": {"ja": "美品", "en": "Excellent", "zh-Hans": "美品", "zh-Hant": "美品", "ko": "최상급", "fr": "Excellent", "es": "Excelente", "de": "Sehr gut"},
+    "checked": {"ja": "シャッター・露出計 動作確認済み", "en": "Shutter and light meter tested", "zh-Hans": "快门、测光表已测试正常", "zh-Hant": "快門、測光表已測試正常", "ko": "셔터·노출계 작동 확인 완료", "fr": "Obturateur et posemètre testés", "es": "Obturador y fotómetro probados", "de": "Verschluss und Belichtungsmesser geprüft"},
+    "stock": {"ja": "残り1点", "en": "Only 1 left", "zh-Hans": "仅剩 1 件", "zh-Hant": "僅剩 1 件", "ko": "1개 남음", "fr": "Plus qu’un exemplaire", "es": "Solo queda 1", "de": "Nur noch 1 Stück"},
+    "cart": {"ja": "カートに入れる", "en": "Add to cart", "zh-Hans": "加入购物车", "zh-Hant": "加入購物車", "ko": "장바구니에 담기", "fr": "Ajouter au panier", "es": "Añadir al carrito", "de": "In den Warenkorb"},
+    "save": {"ja": "お気に入り", "en": "Save", "zh-Hans": "收藏", "zh-Hant": "收藏", "ko": "찜하기", "fr": "Favori", "es": "Guardar", "de": "Merken"},
+    "ship": {"ja": "平日14時までのご注文は当日発送します。", "en": "Weekday orders placed by 2 pm ship the same day.", "zh-Hans": "工作日 14 点前下单，当天发货。", "zh-Hant": "平日 14 點前下單，當天出貨。", "ko": "평일 오후 2시까지 주문하면 당일 발송합니다.", "fr": "Avant 14 h en semaine : expédié le jour même.", "es": "Envío el mismo día si pides antes de las 14:00.", "de": "Werktags bis 14 Uhr bestellt, am selben Tag verschickt."},
+    "spec-lens": {"ja": "撮影レンズ", "en": "Lens", "zh-Hans": "镜头", "zh-Hant": "鏡頭", "ko": "렌즈", "fr": "Objectif", "es": "Objetivo", "de": "Objektiv"},
+    "spec-exposure": {"ja": "露出制御", "en": "Exposure", "zh-Hans": "曝光", "zh-Hant": "曝光", "ko": "노출", "fr": "Exposition", "es": "Exposición", "de": "Belichtung"},
+    "spec-exposure-v": {"ja": "絞り優先AE", "en": "Aperture-priority auto", "zh-Hans": "光圈优先自动曝光", "zh-Hant": "光圈優先自動曝光", "ko": "조리개 우선 AE", "fr": "Priorité à l’ouverture", "es": "Prioridad a la abertura", "de": "Zeitautomatik"},
+    "spec-box": {"ja": "付属品", "en": "In the box", "zh-Hans": "附件", "zh-Hant": "配件", "ko": "구성품", "fr": "Fournis", "es": "Incluye", "de": "Zubehör"},
+    "spec-box-v": {"ja": "ストラップ・レンズキャップ", "en": "Strap and lens cap", "zh-Hans": "背带、镜头盖", "zh-Hant": "背帶、鏡頭蓋", "ko": "스트랩·렌즈 캡", "fr": "Courroie et bouchon", "es": "Correa y tapa", "de": "Riemen und Deckel"},
+    "spec-battery": {"ja": "電池", "en": "Battery", "zh-Hans": "电池", "zh-Hant": "電池", "ko": "배터리", "fr": "Pile", "es": "Pila", "de": "Batterie"},
+    "spec-battery-v": {"ja": "LR44 1個（付属）", "en": "One LR44, included", "zh-Hans": "LR44 一颗（附送）", "zh-Hant": "LR44 一顆（附贈）", "ko": "LR44 1개 (포함)", "fr": "1 pile LR44 fournie", "es": "1 pila LR44 incluida", "de": "1× LR44, beiliegend"},
+    "notice-title": {"ja": "海外発送について", "en": "Shipping abroad", "zh-Hans": "关于海外发货", "zh-Hant": "關於海外寄送", "ko": "해외 배송 안내", "fr": "Expédition à l’étranger", "es": "Envíos al extranjero", "de": "Versand ins Ausland"},
+    "notice": {"ja": "海外への直接発送は行っておりません。転送サービスをご利用ください。", "en": "We don’t ship abroad directly. Please use a forwarding service.", "zh-Hans": "我们不直接发往海外，请使用转运服务。", "zh-Hant": "我們不直接寄往海外，請使用轉運服務。", "ko": "해외로 직접 배송하지 않습니다. 배송대행 서비스를 이용해 주세요.", "fr": "Nous n’expédions pas directement à l’étranger. Passez par un service de réexpédition.", "es": "No enviamos directamente al extranjero. Usa un servicio de reenvío.", "de": "Wir versenden nicht direkt ins Ausland. Bitte nutze einen Weiterleitungsdienst."}
+  }
+}
