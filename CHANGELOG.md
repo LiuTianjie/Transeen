@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.10.0
 
 - Add local translation models. In Settings → Translation, choose 本地翻译模型 and download Index-Translate 2B (recommended, 1.1 GB) or Hy-MT2 1.8B (1.1 GB). The model then runs on this Mac through a bundled llama.cpp server: no account, no network, and captured text never leaves the Mac. It translates developer text and UI labels better than Apple Translation ("bumped" is no longer 碰撞, "push main" is no longer 按下主按钮). Downloads come from ModelScope in mainland China and Hugging Face elsewhere, continue after an interruption, and are checked against a SHA-256 before use. The model loads on the first capture (about 2 seconds), stays ready while you work and is unloaded after 5 idle minutes. Requires an Apple silicon Mac.
 - F1 is the default capture shortcut. Capturing for annotation and comparing from anywhere have no shortcut until you set one. Shortcuts saved by earlier versions are not carried over.
