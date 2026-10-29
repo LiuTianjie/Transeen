@@ -23,7 +23,6 @@ final class CaptureState {
     var warning: String?
     var annotating = false
     var requestsNumberEdit = false
-    var pinned = false
     var copyCloses = true
     var failed = false
     var automaticallyTranslates = false
@@ -32,6 +31,8 @@ final class CaptureState {
     var hasTranslatedOnce = false
     var copyCompleted = false
     var finishing = false
+    /// The crop's pixel size while an edge is dragged. Not `status`, which re-measures the toolbar.
+    var cropReadout: String?
     var compactProgress: Bool { working && !hasTranslatedOnce && !annotating && annotations.selectedID == nil }
     var showingTranslation: Bool { overlay && !peeking }
     let annotations = AnnotationStore()
@@ -44,6 +45,11 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
     let state: CaptureState
     private let border = ScreenPinBorderView()
     private let handles = CaptureResizeHandles()
+    /// The whole frozen frame as one layer while an edge is dragged; the crop is
+    /// only where it is clipped, so the pointer never waits for pixels to be copied.
+    private let liveView = NSView()
+    private let liveImage = CALayer()
+    private var liveFrame: CGRect?
     private let chromePanel: NSPanel
     private let hosting: NSHostingView<CaptureToolbar>
     var onAction: ((String) -> Void)?
@@ -56,7 +62,7 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
         set { handles.isEnabled = newValue }
     }
     /// The picture's frame on screen.
-    var contentRect: CGRect { frame.insetBy(dx: Self.margin, dy: Self.margin) }
+    private(set) var contentRect = CGRect.zero
 
     init(state: CaptureState) {
         self.state = state
@@ -83,6 +89,13 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
         root.wantsLayer = true
         root.layer?.backgroundColor = NSColor.clear.cgColor
         contentView = root
+        liveView.wantsLayer = true
+        liveView.clipsToBounds = true
+        liveView.layer?.addSublayer(liveImage)
+        liveImage.contentsGravity = .resize
+        liveImage.magnificationFilter = .nearest
+        liveView.isHidden = true
+        root.addSubview(liveView)
         root.addSubview(canvas)
         root.addSubview(border)
         handles.margin = Self.margin
@@ -110,40 +123,83 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
         }
         makeKey()
     }
-    /// A new crop while the edges are dragged.
-    func update(image: NSImage, rect: CGRect) {
+    /// Start dragging an edge: the window grows to the whole frozen frame (`frame`,
+    /// in screen points) and stays put, so only layers move until `endLiveCrop`.
+    func beginLiveCrop(source: CGImage, frame sourceFrame: CGRect) {
+        let content = contentRect
+        liveFrame = sourceFrame
+        CATransaction.begin(); CATransaction.setDisableActions(true)
+        liveImage.contents = source
+        CATransaction.commit()
+        liveView.isHidden = false
+        canvas.showsImage = false
+        setFrame(sourceFrame.union(content).insetBy(dx: -Self.margin, dy: -Self.margin), display: false)
+        place(content)
+        positionChrome()
+    }
+    /// A new crop while the edge is dragged.
+    func updateLiveCrop(_ rect: CGRect) {
         place(rect)
-        canvas.replace(image)
+        positionChrome()
+    }
+    /// The drag is over: show `image`, the pixels of the final crop, in a window its own size again.
+    func endLiveCrop(image: NSImage?) {
+        guard liveFrame != nil else { return }
+        liveFrame = nil
+        if let image { canvas.replace(image) }
+        canvas.showsImage = true
+        liveView.isHidden = true
+        place(contentRect)
+        liveImage.contents = nil
         refreshUI()
     }
     private func place(_ rect: CGRect) {
-        setFrame(rect.insetBy(dx: -Self.margin, dy: -Self.margin), display: false)
-        canvas.frame = CGRect(origin: CGPoint(x: Self.margin, y: Self.margin), size: rect.size)
-        border.frame = canvas.frame
+        contentRect = rect
+        CATransaction.begin(); CATransaction.setDisableActions(true)
+        if liveFrame == nil { setFrame(rect.insetBy(dx: -Self.margin, dy: -Self.margin), display: false) }
+        let local = rect.offsetBy(dx: -frame.minX, dy: -frame.minY)
+        canvas.frame = local
+        border.frame = local
         border.needsLayout = true
-        handles.frame = contentView?.bounds ?? .zero
+        liveView.frame = local
+        if let liveFrame {
+            liveImage.frame = CGRect(origin: CGPoint(x: liveFrame.minX - rect.minX, y: liveFrame.minY - rect.minY), size: liveFrame.size)
+        }
+        handles.frame = local.insetBy(dx: -Self.margin, dy: -Self.margin)
         handles.needsDisplay = true
         displayIfNeeded()
+        CATransaction.commit()
     }
     func refreshUI() {
         border.setWorking(state.working)
         hosting.invalidateIntrinsicContentSize()
         hosting.layoutSubtreeIfNeeded()
         let size = hosting.fittingSize
-        let screen = NSScreen.screens.first { $0.frame.contains(CGPoint(x: frame.midX, y: frame.midY)) } ?? NSScreen.main
-        let visible = screen?.visibleFrame ?? frame
-        let x = max(visible.minX + 8, min(frame.midX - size.width / 2, visible.maxX - size.width - 8))
-        let content = contentRect
-        var y = content.minY - size.height - 12
-        if y < visible.minY + 4 { y = min(content.maxY + 12, visible.maxY - size.height - 4) }
-        let nextFrame = CGRect(x: x, y: y, width: size.width, height: size.height)
-        let animate = chromePanel.isVisible && chromePanel.frame.size != size && !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
-        chromePanel.setFrame(nextFrame, display: true, animate: animate)
+        // An animated frame change blocks until it finishes; never while the pointer drags.
+        let animate = liveFrame == nil && chromePanel.isVisible && chromePanel.frame.size != size && !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
+        chromePanel.setFrame(chromeFrame(size: size), display: true, animate: animate)
         hosting.frame = CGRect(origin: .zero, size: size)
         chromePanel.orderFrontRegardless()
     }
+    /// Follow the picture without measuring the toolbar again.
+    private func positionChrome() {
+        guard chromePanel.isVisible else { return }
+        chromePanel.setFrameOrigin(chromeFrame(size: chromePanel.frame.size).origin)
+    }
+    private func chromeFrame(size: CGSize) -> CGRect {
+        let content = contentRect
+        let screen = NSScreen.screens.first { $0.frame.contains(CGPoint(x: content.midX, y: content.midY)) } ?? NSScreen.main
+        let visible = screen?.visibleFrame ?? content
+        let x = max(visible.minX + 8, min(content.midX - size.width / 2, visible.maxX - size.width - 8))
+        var y = content.minY - size.height - 12
+        if y < visible.minY + 4 { y = min(content.maxY + 12, visible.maxY - size.height - 4) }
+        return CGRect(x: x, y: y, width: size.width, height: size.height)
+    }
     func windowDidMove(_ notification: Notification) {
-        if let window = notification.object as? NSWindow, window === self { refreshUI() }
+        guard let window = notification.object as? NSWindow, window === self else { return }
+        // Dragged by the picture; while an edge is dragged the window spans the frozen frame instead.
+        if liveFrame == nil { contentRect = frame.insetBy(dx: Self.margin, dy: Self.margin) }
+        refreshUI()
     }
     func windowDidResignKey(_ notification: Notification) { onAction?("peek.end") }
     func finishCopy() async {

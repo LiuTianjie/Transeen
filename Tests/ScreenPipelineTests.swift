@@ -62,6 +62,33 @@ import CoreText
             width: chip.width * scale, height: chip.height * scale))
     }
 
+    /// A navigation bar read as one line, a table whose short cells stack in columns,
+    /// and a count at the start of a cell.
+    static func layoutPicture(scale: CGFloat) -> CGImage {
+        let width = 520.0, height = 200.0
+        let context = CGContext(data: nil, width: Int(width * scale), height: Int(height * scale), bitsPerComponent: 8, bytesPerRow: 0,
+            space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
+        context.scaleBy(x: scale, y: scale)
+        context.setFillColor(NSColor.white.cgColor)
+        context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+        let font = NSFont.systemFont(ofSize: 14)
+        func draw(_ text: String, _ x: CGFloat, _ y: CGFloat) {
+            let line = CTLineCreateWithAttributedString(NSAttributedString(string: text, attributes: [.font: font, .foregroundColor: NSColor(white: 0.15, alpha: 1)]))
+            context.textPosition = CGPoint(x: x, y: y)
+            CTLineDraw(line, context)
+        }
+        var x: CGFloat = 40
+        for item in ["Products", "Pricing", "Docs", "Support"] {
+            draw(item, x, 165)
+            x += Fitter.width(item, font: font) + 26
+        }
+        for (row, cells) in [["Status", "Owner"], ["Running", "2 minutes ago"], ["Failed", "Yesterday"]].enumerated() {
+            draw(cells[0], 40, 110 - CGFloat(row) * 21)
+            draw(cells[1], 40 + Fitter.width("Running", font: font) + 28, 110 - CGFloat(row) * 21)
+        }
+        return context.makeImage()!
+    }
+
     static func main() throws {
         var passed = 0
         func check(_ condition: Bool, _ what: String) { precondition(condition, what); passed += 1 }
@@ -170,6 +197,14 @@ import CoreText
         check(Recognizer.columns(width: 2560, initial: []).count == 1, "nothing found: the whole width is read again")
         check(Recognizer.shouldKeep("OK", confidence: 0.3) && !Recognizer.shouldKeep("7", confidence: 0.4) && Recognizer.shouldKeep("12:30", confidence: 0.7), "what counts as text")
         check(Recognizer.isLikelyIconPrefix("Q") && !Recognizer.isLikelyIconPrefix("A") && Recognizer.isLikelyIconPrefix("8"), "icons read as letters")
+
+        check(!Recognizer.isLikelyIconPrefix("2", before: "minutes ago") && Recognizer.isLikelyIconPrefix("2", before: "Inbox"), "a count before a word is text")
+        for scale in [1.0, 2.0] {
+            let layout = try ScreenPipeline.analyze(layoutPicture(scale: scale), scale: scale, source: .en, target: .zhHans)!
+            let texts = layout.blocks.map(\.original)
+            check(["Products", "Pricing", "Docs", "Support"].allSatisfy(texts.contains), "\(Int(scale))x navigation items stay apart: \(texts)")
+            check(["Running", "Failed", "2 minutes ago", "Yesterday"].allSatisfy(texts.contains), "\(Int(scale))x stacked table cells stay apart, with their counts: \(texts)")
+        }
 
         print("ScreenPipelineTests: \(passed) checks passed")
     }

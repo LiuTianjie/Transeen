@@ -34,7 +34,7 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
         case .redo: "重做标注"
         case .close: "关闭截图 / 取消框选"
         case .annotate: "展开 / 收起标注"
-        case .pin: "钉住 / 取消钉住"
+        case .pin: "钉到屏幕"
         case .reselect: "重新框选"
         case .peek: "按住对照原文"
         case .openImage: "打开图片"

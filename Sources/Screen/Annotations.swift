@@ -235,6 +235,8 @@ final class AnnotationStore {
 final class AnnotationCanvas: NSView {
     let annotations: AnnotationStore
     var image = NSImage() { didSet { needsDisplay = true } }
+    /// Off while a layer behind the canvas shows the picture; the marks are still drawn.
+    var showsImage = true { didSet { needsDisplay = true } }
     var draft: Annotation?
     var onEditNumber: (() -> Void)?
     private struct EditGesture {
@@ -256,10 +258,10 @@ final class AnnotationCanvas: NSView {
     override var acceptsFirstResponder: Bool { true }
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
     override func draw(_ dirtyRect: NSRect) {
-        if let previousImage {
+        if showsImage, let previousImage {
             previousImage.draw(in: bounds, from: .zero, operation: .copy, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.none.rawValue])
             image.draw(in: bounds, from: .zero, operation: .sourceOver, fraction: transitionFraction, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.none.rawValue])
-        } else {
+        } else if showsImage {
             image.draw(in: bounds, from: .zero, operation: .copy, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.none.rawValue])
         }
         for mark in annotations.marks { mark.draw() }

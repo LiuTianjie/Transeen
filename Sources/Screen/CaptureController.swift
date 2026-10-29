@@ -9,6 +9,8 @@ final class CaptureController {
     private var selectors: [ScreenSelectionPanel] = []
     private var selectionFrames: [CGDirectDisplayID: CGImage] = [:]
     private var panel: CapturePanel?
+    /// Pictures pinned from earlier captures; `close()` leaves them alone.
+    private(set) var pins: [PinnedImagePanel] = []
     private var work: Task<Void, Never>?
     private var generation = 0
     private var monitor: Any?
@@ -139,32 +141,38 @@ final class CaptureController {
         guard let source = cropSource, let panel, !state.finishing else { return }
         if phase == .began {
             resizeStart = (crop, panel.contentRect, false)
+            let shift = CGPoint(x: panel.contentRect.minX - crop.minX, y: panel.contentRect.minY - crop.minY)
+            panel.beginLiveCrop(source: source.image, frame: source.frame.offsetBy(dx: shift.x, dy: shift.y))
             return
         }
         guard var start = resizeStart else { return }
         let scale = CGFloat(source.image.width) / max(1, source.frame.width)
         let snapped = CGPoint(x: (delta.x * scale).rounded() / scale, y: (delta.y * scale).rounded() / scale)
         let next = CaptureCrop.resized(start.crop, edges: edges, by: snapped, within: source.frame, minimum: ScreenTranslate.minimumSelection)
-        if next != crop, let pixels = CaptureCrop.crop(source.image, rect: next, screenFrame: source.frame) {
+        if next != crop {
             if !start.changed {
                 generation += 1; work?.cancel(); backend?.cancel()
                 completionTask?.cancel(); completionTask = nil
                 state.working = false; state.copyCompleted = false
+                translated = nil
+                state.translated = false; state.textBlocks = []; state.warning = nil
+                state.failed = false; state.noText = false; state.peeking = false
                 start.changed = true
                 resizeStart = start
             }
             state.annotations.offset(by: CGPoint(x: crop.minX - next.minX, y: crop.minY - next.minY))
             crop = next
-            original = NSImage(cgImage: pixels, size: next.size)
-            translated = nil
-            state.translated = false; state.textBlocks = []; state.warning = nil
-            state.failed = false; state.noText = false; state.peeking = false
-            state.status = "\(Int((next.width * scale).rounded())) × \(Int((next.height * scale).rounded())) px"
-            panel.update(image: original, rect: next.offsetBy(dx: start.content.minX - start.crop.minX, dy: start.content.minY - start.crop.minY))
+            state.cropReadout = "\(Int((next.width * scale).rounded())) × \(Int((next.height * scale).rounded())) px"
+            panel.updateLiveCrop(next.offsetBy(dx: start.content.minX - start.crop.minX, dy: start.content.minY - start.crop.minY))
         }
         guard phase == .ended else { return }
         resizeStart = nil
-        guard start.changed else { return }
+        state.cropReadout = nil
+        guard start.changed, let pixels = CaptureCrop.crop(source.image, rect: crop, screenFrame: source.frame) else {
+            panel.endLiveCrop(image: nil); return
+        }
+        original = NSImage(cgImage: pixels, size: crop.size)
+        panel.endLiveCrop(image: original)
         if state.overlay { restart() } else { state.status = ""; panel.refreshUI() }
     }
 
@@ -204,6 +212,13 @@ final class CaptureController {
                 if state.automaticallyTranslates { restart() }
             } catch { if valid(token) { onError?(error.localizedDescription); close() } }
         }
+    }
+    /// The translate shortcut pressed again while a result is open: translate it if it never
+    /// was, otherwise swap the languages. Returns false when there is no result to act on.
+    func repeatTranslateShortcut() -> Bool {
+        guard panel != nil, !selecting, !state.finishing, resizeStart == nil else { return false }
+        action(state.hasTranslatedOnce || state.working ? "direction" : "translate")
+        return true
     }
     private func valid(_ token: Int) -> Bool { token == generation && !Task.isCancelled }
     private func updateLanguageState() {
@@ -267,7 +282,8 @@ final class CaptureController {
             }
             state.working = false
             Self.logger.notice("translation completed")
-            state.status = translations.isEmpty ? "没有需要翻译的文字" : "已翻译 \(translations.count) 处 · " + state.shortcuts.help("按住看原文", .peek)
+            let swap = state.shortcuts.binding(.captureTranslate).map { " · 再按 \($0.display) 交换语言" } ?? ""
+            state.status = translations.isEmpty ? "没有需要翻译的文字" + swap : "已翻译 \(translations.count) 处 · " + state.shortcuts.help("按住看原文", .peek) + swap
             displayCurrent()
         } catch {
             guard valid(token) else { return }
@@ -328,7 +344,7 @@ final class CaptureController {
             if state.annotating && state.annotations.tool == .move { state.annotations.tool = .pen }
             if !state.annotating { state.annotations.tool = .move }
             panel?.refreshUI()
-        case "pin": state.pinned.toggle()
+        case "pin": pin()
         case "reselect": onReselect?(mode)
         case "original": state.overlay = false; displayCurrent()
         case "translation":
@@ -360,7 +376,7 @@ final class CaptureController {
                 state.copyCompleted = true
                 panel?.refreshUI()
                 let token = generation
-                if state.copyCloses && !state.pinned {
+                if state.copyCloses {
                     state.finishing = true
                     completionTask = Task { [weak self] in
                         do { try await Task.sleep(for: .milliseconds(220)) } catch { return }
@@ -382,6 +398,17 @@ final class CaptureController {
         }
     }
     private func export() -> NSImage? { state.annotations.export(state.showingTranslation ? (translated ?? original) : original) }
+    /// Leave what is on screen as a pinned picture and end this capture, so the next one can start.
+    private func pin() {
+        guard let panel, resizeStart == nil, let shown = export() else { return }
+        let translation = state.showingTranslation && translated != nil
+        let other = translated.flatMap { state.annotations.export(translation ? original : $0) }
+        let pinned = PinnedImagePanel(image: shown, alternate: other, showsTranslation: translation, rect: panel.contentRect)
+        pinned.onClose = { [weak self] closed in self?.pins.removeAll { $0 === closed } }
+        pins.append(pinned)
+        pinned.show()
+        close()
+    }
     private func save() {
         guard let image = export(), let cg = image.cgImage(forProposedRect: nil, context: nil, hints: nil),
               let png = NSBitmapImageRep(cgImage: cg).representation(using: .png, properties: [:]) else { return }
@@ -411,6 +438,8 @@ final class CaptureController {
             guard event.type == .keyDown else { return event }
             // Number/color editors keep their own typing, deletion and text undo.
             if event.window?.firstResponder is NSTextView { return event }
+            // A focused pin takes its own Esc and ⌘C.
+            if event.window is PinnedImagePanel { return event }
             if self.heldPeekKey == event.keyCode, event.isARepeat { return nil }
             // Do not steal editing keys from settings or save panels.
             guard self.selecting || event.window is CapturePanel || event.window?.styleMask.contains(.nonactivatingPanel) == true else { return event }

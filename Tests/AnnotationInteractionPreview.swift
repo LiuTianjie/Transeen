@@ -13,7 +13,7 @@ import AppKit
         }
         controller.pasteboard = NSPasteboard(name: NSPasteboard.Name("transeen.annotation-preview"))
         controller.preview(picture)
-        controller.state.pinned = true
+        controller.state.copyCloses = false
         let store = controller.state.annotations
         store.append(Annotation(tool: .rectangle, points: [CGPoint(x: 50, y: 150), CGPoint(x: 220, y: 230)], color: .systemRed, width: 4))
         store.append(Annotation(tool: .ellipse, points: [CGPoint(x: 280, y: 150), CGPoint(x: 440, y: 230)], color: .systemRed, width: 4))

@@ -119,7 +119,7 @@ enum Recognizer {
             if let space = raw.firstIndex(of: " ") {
                 let prefix = String(raw[..<space])
                 let rest = raw.index(after: space)..<raw.endIndex
-                if isLikelyIconPrefix(prefix) || bullet != nil, raw[rest].count >= 2,
+                if isLikelyIconPrefix(prefix, before: raw[rest]) || bullet != nil, raw[rest].count >= 2,
                    let suffix = try? candidate.boundingBox(for: rest) {
                     text = String(raw[rest]).trimmingCharacters(in: .whitespaces)
                     contentRange = rest
@@ -167,9 +167,11 @@ enum Recognizer {
         return false
     }
 
-    static func isLikelyIconPrefix(_ prefix: String) -> Bool {
+    /// `next` is the word after the prefix: a number before a lowercase word is a count ("2 minutes ago").
+    static func isLikelyIconPrefix(_ prefix: String, before next: Substring = "") -> Bool {
         let scalars = prefix.unicodeScalars
         guard !scalars.isEmpty else { return false }
+        if prefix.allSatisfy(\.isNumber), next.first?.isLowercase == true { return false }
         if scalars.count == 1 {
             let scalar = scalars[scalars.startIndex]
             // A/I are real words; a lone digit, symbol or other ASCII letter is

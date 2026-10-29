@@ -91,8 +91,13 @@ final class ModelTranslationBackend: TranslationBackend {
 
 enum TranslationText {
     static func normalize(_ text: String, locale: Locale) -> String {
-        guard locale.language.languageCode?.identifier == "zh" else { return text }
+        let language = locale.language.languageCode?.identifier
+        guard language == "zh" || language == "ja" else { return text }
+        // Full-width punctuation carries its own spacing; Apple Translation still puts a
+        // space between sentences ("数据。 如果").
+        let spaced = text.replacingOccurrences(of: #"([。！？；：，、」』）])[ \t]+(?=\S)"#, with: "$1", options: .regularExpression)
+        guard language == "zh" else { return spaced }
         let transform: StringTransform = locale.language.script?.identifier == "Hant" ? StringTransform("Simplified-Traditional") : StringTransform("Traditional-Simplified")
-        return text.applyingTransform(transform, reverse: false) ?? text
+        return spaced.applyingTransform(transform, reverse: false) ?? spaced
     }
 }

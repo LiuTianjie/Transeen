@@ -216,6 +216,19 @@ enum ScreenPipeline {
                 start = index
             }
         }
+        // Items set apart on one paper ("Products   Pricing   Docs" in a navigation bar).
+        // No space between words is this wide; Fragments.join keeps such gaps apart too.
+        if pieces.count < 2, onOneColour, runs.count >= 2, runs.count == words.count {
+            pieces = []
+            let wide = line.style.size * scale * 1.5
+            let separator = StyleEstimator.hanShare(line.text) >= 0.9 ? "" : " "
+            var start = 0
+            for index in 1...runs.count where index == runs.count || runs[index].minX - runs[index - 1].maxX > wide {
+                let box = CGRect(x: runs[start].minX, y: line.box.minY, width: runs[index - 1].maxX - runs[start].minX, height: line.box.height)
+                pieces.append((words[start..<index].joined(separator: separator), box))
+                start = index
+            }
+        }
         if pieces.count >= 2 {
             return pieces.compactMap { measure($0.text, $0.box, confidence: found.confidence, list: false, pixels: pixels, scale: scale, verticalBounds: verticalBounds) }
         }

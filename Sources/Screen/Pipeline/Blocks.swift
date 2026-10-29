@@ -144,7 +144,7 @@ enum BlockBuilder {
             var joined = false
             // The nearest block above that this line continues.
             for index in groups.indices.reversed() {
-                if canJoin(groups[index], line, image: image, scale: scale) {
+                if canJoin(groups[index], line, among: lines, image: image, scale: scale) {
                     groups[index].append(line)
                     joined = true
                     break
@@ -203,7 +203,7 @@ enum BlockBuilder {
         return rows.flatMap { $0.sorted { $0.rect.minX < $1.rect.minX } }
     }
 
-    private static func canJoin(_ group: [MeasuredLine], _ next: MeasuredLine, image: PixelImage, scale: CGFloat) -> Bool {
+    private static func canJoin(_ group: [MeasuredLine], _ next: MeasuredLine, among lines: [MeasuredLine], image: PixelImage, scale: CGFloat) -> Bool {
         let previous = group[group.count - 1]
         guard previous.inlineBounds == nil, next.inlineBounds == nil,
               !previous.protectedLiteral, !next.protectedLiteral else { return false }
@@ -261,8 +261,18 @@ enum BlockBuilder {
            abs((a.maxX + free.right) - (b.maxX + below.right)) > size * 0.5 { return false }
         let padding = min(free.left, size * 1.5)
         let room = max(free.right, groupRight - a.maxX)
-        let forced = room < firstWord + padding * 0.5
         let trimmed = previous.text.trimmingCharacters(in: .whitespaces)
+        // A short line stopped by text beside it (a table cell, a column of labels) was not
+        // broken by its column; the next line, starting afresh, is the next item. Inside a
+        // narrow card the edge stops it instead, and a title can wrap there.
+        let startsAfresh = next.text.first.map { $0.isUppercase || $0.isNumber } ?? false
+        let besideText = lines.contains { other in
+            other.box != previous.box && other.ink.rect.minX > a.maxX && other.ink.rect.minX - a.maxX <= room + size
+                && abs(other.ink.baseline - previous.ink.baseline) < size * 0.5
+        }
+        let item = besideText && a.width < size * 8 && (StyleEstimator.hanShare(trimmed) >= 0.3
+            ? trimmed.count <= 6 : trimmed.split(separator: " ").count <= 3 && startsAfresh)
+        let forced = room < firstWord + padding * 0.5 && !item
         let runsOn: Bool = {
             guard let last = trimmed.last, !terminal.contains(last) else { return false }
             if han { return trimmed.count >= 8 }

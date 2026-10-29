@@ -65,11 +65,17 @@ import CoreText
         precondition(controller.state.peeking && controller.state.overlay && !controller.state.showingTranslation, "Holding peek must temporarily display the original without changing the chosen layer")
         controller.endPeek()
         precondition(controller.state.showingTranslation && !controller.state.peeking, "Releasing peek must restore the translation")
+        precondition(controller.repeatTranslateShortcut(), "The translate shortcut must act on an open result")
+        precondition(controller.state.source == .zhHans && controller.state.target == .en && controller.state.working,
+                     "Pressing the translate shortcut on a translated result must swap the languages and translate again")
         controller.close()
+        precondition(!controller.repeatTranslateShortcut(), "Without a result the translate shortcut starts a new capture")
         let manual = SlowBackend()
         controller.previewSelection(picture, mode: .screenshot, backend: manual)
         try await Task.sleep(for: .milliseconds(250))
         precondition(!manual.entered && !controller.state.automaticallyTranslates && !controller.state.working, "Only explicit screenshot mode should await a manual translation")
+        precondition(controller.repeatTranslateShortcut() && controller.state.working && controller.state.source == .en,
+                     "The translate shortcut must translate a screenshot that was never translated, in the chosen direction")
         controller.close()
         ctx.setFillColor(NSColor.white.cgColor); ctx.fill(CGRect(x: 0, y: 0, width: 600, height: 200))
         let blank = NSImage(cgImage: ctx.makeImage()!, size: NSSize(width: 600, height: 200))
@@ -173,16 +179,29 @@ import CoreText
         precondition(controller.isPresenting, "An old copy dismissal must not close a new screenshot")
         controller.close()
         controller.preview(picture)
+        let pinnedFrame = controller.previewCrop
         controller.action("pin")
-        controller.action("copy")
-        precondition(controller.isPresenting, "Pinned capture must stay open after copy")
+        precondition(!controller.isPresenting && controller.pins.count == 1, "Pinning must end the capture and leave a pinned picture")
+        let pinFrame = controller.pins[0].frame
+        // Window frames land on the display's pixel grid.
+        precondition(abs(pinFrame.minX - pinnedFrame.minX) <= 1 && abs(pinFrame.minY - pinnedFrame.minY) <= 1
+                     && abs(pinFrame.width - pinnedFrame.width) <= 1 && abs(pinFrame.height - pinnedFrame.height) <= 1
+                     && controller.pins[0].isVisible, "The pin must stay where the capture was")
+        controller.preview(picture)
+        precondition(controller.isPresenting && controller.pins.count == 1, "A new capture must not close a pin")
         controller.close()
+        precondition(controller.pins.count == 1 && controller.pins[0].isVisible, "Closing a capture must not close a pin")
+        controller.pins[0].dismiss()
+        precondition(controller.pins.isEmpty, "A dismissed pin must be released")
         controller.preview(picture)
         controller.state.copyCloses = false
         controller.action("copy")
         precondition(controller.isPresenting, "User preference must preserve capture")
         controller.close()
         board.releaseGlobally()
+        let chinese = Locale(identifier: "zh-Hans-CN")
+        precondition(TranslationText.normalize("同步数据。 如果失败， 请重试", locale: chinese) == "同步数据。如果失败，请重试", "No space follows full-width punctuation")
+        precondition(TranslationText.normalize("版本 2.0 已发布", locale: chinese) == "版本 2.0 已发布", "Other spaces stay")
         let suite = "transeen.shortcuts.tests.\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suite)!
         defer { defaults.removePersistentDomain(forName: suite) }

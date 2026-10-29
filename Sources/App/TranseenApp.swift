@@ -76,7 +76,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             guard let self, settings.shortcuts.recording == nil else { return }
             switch action {
             case .globalCompare: capture.action("toggle")
-            case .captureTranslate: start(.translate)
+            case .captureTranslate: if !capture.repeatTranslateShortcut() { start(.translate) }
             case .captureScreenshot: start(.screenshot)
             default: break
             }

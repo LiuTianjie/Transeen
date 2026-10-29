@@ -39,7 +39,7 @@ struct CaptureToolbar: View {
                             .popover(isPresented: $showsText, arrowEdge: .bottom) {
                                 CaptureTranscript(state: state) { action("copyText") }
                             }
-                        iconButton(state.pinned ? "pin.fill" : "pin", state.pinned ? "取消钉住" : "钉住图片", "pin", selected: state.pinned)
+                        iconButton("pin", state.shortcuts.help("钉到屏幕上，可继续截图", .pin), "pin")
                         moreMenu
                         Button { action("copy") } label: {
                             Label(state.copyCompleted ? "已复制" : "复制", systemImage: state.copyCompleted ? "checkmark" : "doc.on.doc")
@@ -58,7 +58,7 @@ struct CaptureToolbar: View {
                         if state.failed || state.noText || state.warning != nil {
                             Image(systemName: state.failed ? "exclamationmark.circle" : "info.circle")
                         }
-                        Text(state.warning ?? (state.status.isEmpty ? "拖动图片移动 · 拖动边缘调整范围 · 选择工具标注" : state.status))
+                        Text(state.cropReadout ?? state.warning ?? (state.status.isEmpty ? "拖动图片移动 · 拖动边缘调整范围 · 选择工具标注" : state.status))
                             .lineLimit(3).fixedSize(horizontal: false, vertical: true)
                     }.font(.system(size: 11))
                         .foregroundStyle(state.failed ? Color.red : state.warning != nil ? Color.orange : CaptureAppearance.secondary)
