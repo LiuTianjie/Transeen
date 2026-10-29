@@ -49,7 +49,7 @@
             "mainEntityOfPage": "https://transeen.itool.tech/zh/guide/",
             "image": "https://transeen.itool.tech/assets/og-image-zh.jpg",
             "datePublished": "2026-10-28",
-            "dateModified": "2026-10-28",
+            "dateModified": "2026-10-29",
             "author": { "@type": "Person", "name": "LiuTianjie", "url": "https://github.com/LiuTianjie" },
             "publisher": { "@id": "https://transeen.itool.tech/#organization" },
             "about": { "@id": "https://transeen.itool.tech/#software" },
@@ -66,7 +66,7 @@
               { "@type": "HowToStep", "position": 1, "name": "安装", "url": "https://transeen.itool.tech/zh/guide/#install", "text": "从 GitHub Releases 下载 DMG，把 Transeen 拖进“应用程序”并打开。它在菜单栏运行。" },
               { "@type": "HowToStep", "position": 2, "name": "激活", "url": "https://transeen.itool.tech/zh/guide/#activate", "text": "在菜单栏菜单选择“激活与账号…”，输入 TR- 激活码，点“激活这台 Mac”。" },
               { "@type": "HowToStep", "position": 3, "name": "开启屏幕录制", "url": "https://transeen.itool.tech/zh/guide/#permission", "text": "在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中开启 Transeen。" },
-              { "@type": "HowToStep", "position": 4, "name": "选择语言", "url": "https://transeen.itool.tech/zh/guide/#languages", "text": "在启动面板选择原文和译文语言；首次使用 Apple 翻译可能需要下载语言包。" },
+              { "@type": "HowToStep", "position": 4, "name": "选择语言", "url": "https://transeen.itool.tech/zh/guide/#languages", "text": "在新手引导或启动面板选择原文和译文语言，并提前下载需要的 Apple 语言包。" },
               { "@type": "HowToStep", "position": 5, "name": "框选翻译", "url": "https://transeen.itool.tech/zh/guide/#translate", "text": "按 Control-Option-2 框选屏幕区域，在原处阅读译文，按 Tab 对照原文。" }
             ]
           },
@@ -176,7 +176,7 @@
         <div class="guide-body" data-rise style="--i: 1">
           <p>启动面板里有“原文”和“译文”两个菜单。原文可以保持“自动识别”，也可以从八种语言中选一种：简体中文、繁体中文、英语、日语、韩语、法语、西班牙语和德语。任意两种之间都能互译。</p>
           <figure><img src="../../assets/toolbar-zh-hans.webp?v=5a106c856fa3" width="552" height="93" alt="Transeen 工具栏，第二行显示翻译方向 EN → 中文。" loading="lazy" /><figcaption>在截图上，工具下方的方向（这里是 EN → 中文）可以修改任一语言或交换方向。</figcaption></figure>
-          <p>第一次用 Apple 翻译某个语言组合时，macOS 可能需要下载语言包，之后就在这台 Mac 上离线翻译。已下载的语言包可以在系统设置 → 通用 → 语言与地区 → 翻译语言中查看。</p>
+          <p>Apple 翻译的每个语言组合都需要语言包。首次打开时的新手引导，以及之后的设置 → 通用 → 翻译，会按译文语言列出所需语言包和下载状态；点“下载”即可在第一次截图前准备好。之后就在这台 Mac 上离线翻译。已下载的语言包也可以在系统设置 → 通用 → 语言与地区 → 翻译语言中查看。</p>
         </div>
       </section>
 
@@ -187,9 +187,10 @@
             <li>按 <kbd>⌃⌥2</kbd>，画面会保持静止并变暗。</li>
             <li>悬停时会自动吸附段落、输入框或窗口，点击即可选中；也可以自己拖出一块区域。按 <kbd>Esc</kbd> 或右键取消。</li>
             <li>在原来的位置阅读译文。按 <kbd>Tab</kbd> 在原文和译文之间切换，按住<kbd>空格</kbd>可临时看原文。</li>
+            <li>框得不准？拖动截图的边或角即可调整。它从同一张冻结画面重新裁剪，标注留在原处，松手后自动重新翻译。</li>
           </ol>
           <figure><img src="../../assets/capture-read.webp?v=1db377af3567" width="644" height="501" alt="截取的图表中所有标签都已换成中文，下方是 Transeen 工具栏。" loading="lazy" /><figcaption>截图停在你框选的位置，工具栏在它下方。</figcaption></figure>
-          <p><kbd>⌃⌥2</kbd> 使用默认模式，也就是翻译；可以在设置 → 通用 → 默认框选行为中修改。<kbd>⌃⌥3</kbd> 只截图标注、不翻译；在那个窗口里按 <kbd>T</kbd> 可以再翻译。要翻译已有的图片，选择“打开图片…”或按 <kbd>⌘O</kbd>。</p>
+          <p><kbd>⌃⌥2</kbd> 框选并翻译，<kbd>⌃⌥3</kbd> 只截图标注、不翻译，两者都可以在设置 → 通用或快捷键中单独修改；在那个窗口里按 <kbd>T</kbd> 可以再翻译。要翻译已有的图片，选择“打开图片…”或按 <kbd>⌘O</kbd>。</p>
         </div>
       </section>
 
@@ -206,7 +207,7 @@
         <h2 id="keep-title" data-rise>复制、保存或钉住</h2>
         <div class="guide-body" data-rise style="--i: 1">
           <ul class="points">
-            <li><kbd>⌘C</kbd> 按你看到的样子复制图片，标注也在其中。默认复制后会关闭截图；在设置中关掉“复制后关闭截图”即可保留。</li>
+            <li><kbd>⌘C</kbd> 按你看到的样子复制图片，标注也在其中；翻译还没完成时也能复制。默认复制后会关闭截图；在设置中关掉“复制后关闭截图”即可保留。</li>
             <li><kbd>⌘S</kbd> 保存为 PNG。</li>
             <li>钉住后，截图会浮在其他窗口上方，方便对照着工作。</li>
             <li>“文字”会并排显示完整译文和原文，可以直接复制。</li>
@@ -235,7 +236,7 @@
           <table class="keys">
             <thead><tr><th scope="col">默认按键</th><th scope="col">操作</th></tr></thead>
             <tbody>
-              <tr><td><kbd>⌃⌥2</kbd></td><td>按默认模式框选，默认是翻译</td></tr>
+              <tr><td><kbd>⌃⌥2</kbd></td><td>截图翻译</td></tr>
               <tr><td><kbd>⌃⌥3</kbd></td><td>截图标注</td></tr>
               <tr><td><kbd>⌃⌥空格</kbd></td><td>在任何应用里切换原文和译文</td></tr>
               <tr><td><kbd>Tab</kbd></td><td>切换原文和译文</td></tr>
@@ -260,11 +261,11 @@
         <h2 id="troubleshooting-title" data-rise>常见问题排查</h2>
         <div class="guide-body" data-rise style="--i: 1">
           <h3>按 <kbd>⌃⌥2</kbd> 没有反应</h3>
-          <p>可能有其他应用占用了同一个快捷键；无法注册时 Transeen 会提示。在设置 → 快捷键中换一个按键，或从菜单栏菜单选择“框选（默认模式）”。</p>
+          <p>可能有其他应用占用了同一个快捷键；无法注册时 Transeen 会提示。在设置 → 快捷键中换一个按键，或从菜单栏菜单选择“截图翻译”。</p>
           <h3>截图是空的，或一直提示授权</h3>
           <p>打开菜单栏菜单里的“屏幕权限…”。如果系统设置中 Transeen 已经开启，先关闭再重新开启，然后点“重新打开”。</p>
           <h3>Apple 翻译没有开始</h3>
-          <p>这个语言组合的语言包可能还在下载。到系统设置 → 通用 → 语言与地区 → 翻译语言中查看，稍后再试。</p>
+          <p>这个语言组合的语言包可能还没下载或仍在下载。在设置 → 通用 → 翻译中下载，或到系统设置 → 通用 → 语言与地区 → 翻译语言中查看，稍后再试。</p>
           <h3>部分文字翻译不对</h3>
           <p>密集排版、公式和专业术语可能影响识别或翻译。按 <kbd>Tab</kbd> 对照原文，打开“文字”查看完整内容，或者框选更小的区域。</p>
         </div>
@@ -283,7 +284,7 @@ cd Transeen
       </section>
 
       <section class="guide-next" aria-labelledby="next-title">
-        <h2 id="next-title">下载 Transeen 0.7.0</h2>
+        <h2 id="next-title">下载 Transeen 0.8.0</h2>
         <p>适用于 macOS 26 或更高版本的通用应用，已签名并通过公证。</p>
         <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">下载 Mac 版</a>
       </section>

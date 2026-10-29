@@ -36,6 +36,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     private var status: NSStatusItem?
     private var settingsWindow: NSWindow?
     private var homeWindow: NSWindow?
+    private var onboardingWindow: NSWindow?
     private var launcherPopover: NSPopover?
     private var launcherClickMonitor: Any?
     private var statusMenu: NSMenu?
@@ -48,10 +49,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         let menu = NSMenu()
         menu.addItem(menuItem("Transeen", action: nil))
         menu.addItem(.separator())
-        menu.addItem(menuItem(settings.shortcuts.help("框选（默认模式）", .captureDefault), action: #selector(defaultCapture)))
+        menu.addItem(menuItem(settings.shortcuts.help("截图翻译", .captureTranslate), action: #selector(translateCapture)))
         menu.addItem(menuItem(settings.shortcuts.help("截图标注", .captureScreenshot), action: #selector(screenshot)))
         menu.addItem(menuItem("关闭当前截图", action: #selector(closeCapture)))
         menu.addItem(.separator())
+        menu.addItem(menuItem("新手引导…", action: #selector(showOnboarding)))
         menu.addItem(menuItem("屏幕权限…", action: #selector(showPermissionGuide)))
         menu.addItem(menuItem("设置…", action: #selector(showSettings)))
         menu.addItem(menuItem("激活与账号…", action: #selector(showLicense)))
@@ -74,7 +76,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             guard let self, settings.shortcuts.recording == nil else { return }
             switch action {
             case .globalCompare: capture.action("toggle")
-            case .captureDefault: start(settings.defaultMode)
+            case .captureTranslate: start(.translate)
             case .captureScreenshot: start(.screenshot)
             default: break
             }
@@ -101,9 +103,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             return
         }
         #endif
+        // "introduced" marks installs from before the guide existed.
+        let onboarded = UserDefaults.standard.bool(forKey: "onboarded") || UserDefaults.standard.bool(forKey: "introduced")
         if permission.pendingMode != nil { showPermissionGuide() }
+        else if !onboarded { showOnboarding() }
         else { showHome() }
-        UserDefaults.standard.set(true, forKey: "introduced")
     }
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         if !flag { showHome() }
@@ -136,7 +140,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         let item = NSMenuItem(title: title, action: action, keyEquivalent: ""); item.target = self; return item
     }
     private func refreshShortcutLabels() {
-        for (index, action, title) in [(2, ShortcutAction.captureDefault, "框选（默认模式）"), (3, .captureScreenshot, "截图标注")] {
+        for (index, action, title) in [(2, ShortcutAction.captureTranslate, "截图翻译"), (3, .captureScreenshot, "截图标注")] {
             statusMenu?.item(at: index)?.title = settings.shortcuts.help(title, action)
         }
     }
@@ -144,6 +148,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         guard authorize() else { return }
         launcherPopover?.performClose(nil)
         homeWindow?.orderOut(nil)
+        onboardingWindow?.orderOut(nil)
         permission.refresh()
         guard permission.granted else {
             permission.pendingMode = mode
@@ -164,7 +169,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             window.isReleasedWhenClosed = false
             window.delegate = self
             let view = PermissionGuide(permission: permission, continueCapture: { [weak self] in
-                guard let self else { return }; start(permission.pendingMode ?? settings.defaultMode)
+                guard let self else { return }; start(permission.pendingMode ?? .translate)
             }, later: { [weak self] in
                 self?.permission.pendingMode = nil
                 self?.permissionWindow?.orderOut(nil)
@@ -185,11 +190,42 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         permissionWindow?.makeKeyAndOrderFront(nil)
     }
     func windowWillClose(_ notification: Notification) {
-        guard let window = notification.object as? NSWindow, window === permissionWindow else { return }
+        guard let window = notification.object as? NSWindow else { return }
+        if window === onboardingWindow {
+            UserDefaults.standard.set(true, forKey: "onboarded")
+            settings.shortcuts.recording = nil
+            window.contentView = nil
+            onboardingWindow = nil
+            return
+        }
+        guard window === permissionWindow else { return }
         window.contentView = nil
         permissionWindow = nil
     }
-    @objc private func defaultCapture() { start(settings.defaultMode) }
+    @objc private func showOnboarding() {
+        launcherPopover?.performClose(nil)
+        homeWindow?.orderOut(nil)
+        if onboardingWindow == nil {
+            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 540, height: 660), styleMask: [.titled, .closable], backing: .buffered, defer: false)
+            window.title = "开始使用 Transeen"
+            window.isReleasedWhenClosed = false
+            window.delegate = self
+            let host = NSHostingView(rootView: OnboardingView(settings: settings, permission: permission, license: license,
+                showLicense: { [weak self] in self?.showLicense() },
+                finish: { [weak self] startCapture in
+                    guard let self else { return }
+                    onboardingWindow?.close()
+                    if startCapture { start(.translate) } else { showHome() }
+                }))
+            host.sizingOptions = [.preferredContentSize]
+            window.contentView = host
+            onboardingWindow = window
+            window.center()
+        }
+        NSApp.activate(ignoringOtherApps: true)
+        onboardingWindow?.makeKeyAndOrderFront(nil)
+    }
+    @objc private func translateCapture() { start(.translate) }
     @objc private func screenshot() { start(.screenshot) }
     @objc private func closeCapture() { capture.close() }
     @objc private func quit() { NSApp.terminate(nil) }
@@ -198,6 +234,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             start: { [weak self] in self?.start($0) },
             showSettings: { [weak self] in self?.showSettings() },
             showPermission: { [weak self] in self?.showPermissionGuide() },
+            showOnboarding: { [weak self] in self?.showOnboarding() },
             openImage: { [weak self] in self?.openImage() },
             closeCapture: { [weak self] in self?.capture.close() },
             quit: { NSApp.terminate(nil) }, showLicense: { [weak self] in self?.showLicense() }, checkForUpdates: { [weak self] in self?.checkForUpdates() }, license: license, compact: compact)
@@ -287,7 +324,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 380), styleMask: [.titled, .closable], backing: .buffered, defer: false)
             window.title = "Transeen · 激活与账号"
             window.isReleasedWhenClosed = false
-            let host = NSHostingView(rootView: LicenseView(manager: license, done: { [weak self] in self?.licenseWindow?.orderOut(nil); self?.showHome() }))
+            let host = NSHostingView(rootView: LicenseView(manager: license, done: { [weak self] in
+                guard let self else { return }
+                licenseWindow?.orderOut(nil)
+                // Activation opened from the guide returns to its next step.
+                if let onboardingWindow { onboardingWindow.makeKeyAndOrderFront(nil) } else { showHome() }
+            }))
             host.sizingOptions = [.preferredContentSize]
             window.contentView = host
             window.setContentSize(host.fittingSize)
@@ -309,8 +351,7 @@ private struct SettingsView: View {
     var showPermission: () -> Void
     var capture: (CaptureMode) -> Void
     @State private var tab = 0
-    @State private var apiKey = ""
-    @State private var keyStatus = ""
+    @State private var packs = LanguagePacks()
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 11) {
@@ -329,42 +370,13 @@ private struct SettingsView: View {
             } else {
             Form {
                 Section("捕获") {
-                    Picker("默认框选行为", selection: $settings.defaultMode) {
-                        Text("框选后自动翻译").tag(CaptureMode.translate)
-                        Text("框选后截图标注").tag(CaptureMode.screenshot)
-                    }
+                    ShortcutRow(shortcuts: settings.shortcuts, action: .captureTranslate)
+                    ShortcutRow(shortcuts: settings.shortcuts, action: .captureScreenshot)
+                    if !settings.shortcuts.message.isEmpty { Text(settings.shortcuts.message).font(.caption).foregroundStyle(.secondary) }
                     Toggle("复制后关闭截图", isOn: $settings.copyCloses)
                     Text("钉住的图片会继续保留。").font(.caption).foregroundStyle(.secondary)
                 }
-                Section("翻译") {
-                    HStack {
-                        Picker("原文", selection: Binding(get: { settings.detectsSource ? "auto" : settings.source.rawValue }, set: { value in
-                            settings.detectsSource = value == "auto"
-                            if let language = AppLanguage(rawValue: value) { settings.source = language }
-                        })) {
-                            Text("自动识别").tag("auto")
-                            ForEach(AppLanguage.allCases) { Text($0.displayName).tag($0.rawValue) }
-                        }
-                        Image(systemName: "arrow.right").foregroundStyle(.secondary)
-                        Picker("译文", selection: $settings.target) { ForEach(AppLanguage.allCases) { Text($0.displayName).tag($0) } }
-                    }
-                    Picker("翻译服务", selection: $settings.useModel) {
-                        Text("Apple 本机翻译").tag(false)
-                        Text("大模型 / 本地模型服务").tag(true)
-                    }
-                    if !settings.useModel {
-                        Text("首次使用可能需要下载系统语言包，之后可离线翻译。").font(.caption).foregroundStyle(.secondary)
-                    } else {
-                        TextField("接口地址", text: $settings.endpoint)
-                        TextField("模型名称", text: $settings.model)
-                        SecureField("API Key（本机服务可留空）", text: $apiKey)
-                        HStack {
-                            Button("保存密钥") { saveKey() }
-                            Text(keyStatus).font(.caption).foregroundStyle(.secondary)
-                        }
-                        Text("兼容 chat/completions；只发送识别后的文本。远程接口使用 HTTPS，本机服务可用 HTTP。").font(.caption).foregroundStyle(.secondary)
-                    }
-                }
+                Section("翻译") { TranslationServiceFields(settings: settings, packs: packs) }
                 Section("屏幕权限") {
                     HStack {
                         Label(permission.granted ? "屏幕权限已开启" : "屏幕权限尚未开启", systemImage: permission.granted ? "checkmark.circle.fill" : "circle.dashed")
@@ -374,15 +386,9 @@ private struct SettingsView: View {
                     }
                 }
             }.formStyle(.grouped)
+                .onDisappear { settings.shortcuts.recording = nil }
             }
         }.frame(width: 540, height: 570)
-    }
-    private func saveKey() {
-        do {
-            let config = try ModelConfiguration(endpoint: settings.endpoint, model: settings.model)
-            try ModelKeychain.save(apiKey, endpoint: config.endpoint)
-            keyStatus = apiKey.isEmpty ? "已清除该接口密钥" : "已保存到钥匙串"
-            apiKey = ""
-        } catch { keyStatus = error.localizedDescription }
+            .languagePacks(packs, for: settings)
     }
 }

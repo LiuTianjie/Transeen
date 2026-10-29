@@ -16,6 +16,11 @@ final class CaptureController {
     private var heldPeekKey: UInt16?
     private var original = NSImage()
     private var translated: NSImage?
+    /// Pixels the result can be re-cropped from (the frozen display, or an opened
+    /// image), with the rect in points they cover, and the current crop within it.
+    private var cropSource: (image: CGImage, frame: CGRect)?
+    private var crop = CGRect.zero
+    private var resizeStart: (crop: CGRect, content: CGRect, changed: Bool)?
     private var mode: CaptureMode = .translate
     private var direction = TranslationDirection(source: .en, target: .zhHans)
     private var detectsSource = true
@@ -98,11 +103,9 @@ final class CaptureController {
         let factor = min(1, (visible.width - 80) / image.size.width, (visible.height - 180) / image.size.height)
         image.size = CGSize(width: image.size.width * factor, height: image.size.height * factor)
         original = image
-        let panel = CapturePanel(state: state)
-        panel.onAction = { [weak self] in self?.action($0) }
-        self.panel = panel
-        panel.present(image: image, rect: CGRect(x: visible.midX - image.size.width / 2,
-            y: visible.midY - image.size.height / 2, width: image.size.width, height: image.size.height))
+        let rect = CGRect(x: visible.midX - image.size.width / 2, y: visible.midY - image.size.height / 2,
+                          width: image.size.width, height: image.size.height)
+        present(image, rect: rect, source: image.cgImage(forProposedRect: nil, context: nil, hints: nil).map { ($0, rect) })
         installKeys()
     }
 
@@ -116,6 +119,53 @@ final class CaptureController {
         panel?.orderOut(nil); panel = nil
         if let monitor { NSEvent.removeMonitor(monitor) }; monitor = nil
         translated = nil; original = NSImage(); selectionFrames = [:]
+        cropSource = nil; resizeStart = nil
+    }
+
+    private func present(_ image: NSImage, rect: CGRect, source: (image: CGImage, frame: CGRect)?) {
+        cropSource = source
+        crop = rect
+        let panel = CapturePanel(state: state)
+        panel.onAction = { [weak self] in self?.action($0) }
+        panel.onResize = { [weak self] phase, edges, delta in self?.resize(phase, edges: edges, by: delta) }
+        panel.allowsCropResize = source != nil
+        self.panel = panel
+        panel.present(image: image, rect: rect)
+    }
+
+    /// Dragging the result's edges re-crops the same frozen frame. Marks stay over the
+    /// same pixels; a translation of the old area is discarded and redone on release.
+    private func resize(_ phase: CaptureResizeHandles.Phase, edges: ResizeEdges, by delta: CGPoint) {
+        guard let source = cropSource, let panel, !state.finishing else { return }
+        if phase == .began {
+            resizeStart = (crop, panel.contentRect, false)
+            return
+        }
+        guard var start = resizeStart else { return }
+        let scale = CGFloat(source.image.width) / max(1, source.frame.width)
+        let snapped = CGPoint(x: (delta.x * scale).rounded() / scale, y: (delta.y * scale).rounded() / scale)
+        let next = CaptureCrop.resized(start.crop, edges: edges, by: snapped, within: source.frame, minimum: ScreenTranslate.minimumSelection)
+        if next != crop, let pixels = CaptureCrop.crop(source.image, rect: next, screenFrame: source.frame) {
+            if !start.changed {
+                generation += 1; work?.cancel(); backend?.cancel()
+                completionTask?.cancel(); completionTask = nil
+                state.working = false; state.copyCompleted = false
+                start.changed = true
+                resizeStart = start
+            }
+            state.annotations.offset(by: CGPoint(x: crop.minX - next.minX, y: crop.minY - next.minY))
+            crop = next
+            original = NSImage(cgImage: pixels, size: next.size)
+            translated = nil
+            state.translated = false; state.textBlocks = []; state.warning = nil
+            state.failed = false; state.noText = false; state.peeking = false
+            state.status = "\(Int((next.width * scale).rounded())) × \(Int((next.height * scale).rounded())) px"
+            panel.update(image: original, rect: next.offsetBy(dx: start.content.minX - start.crop.minX, dy: start.content.minY - start.crop.minY))
+        }
+        guard phase == .ended else { return }
+        resizeStart = nil
+        guard start.changed else { return }
+        if state.overlay { restart() } else { state.status = ""; panel.refreshUI() }
     }
 
     private func selected(_ selectedRect: CGRect, screen: NSScreen) {
@@ -126,6 +176,7 @@ final class CaptureController {
         let display = ScreenCaptureService.Display(screen)
         let frozen = selectionFrames[display.displayID]
         selectionFrames = [:]
+        let frame = display.frame
         let token = generation
         let requestedMode = mode
         Self.logger.notice("selection completed mode=\(requestedMode.rawValue, privacy: .public)")
@@ -133,10 +184,13 @@ final class CaptureController {
             guard let self else { return }
             do {
                 let image: NSImage
-                if let frozen, let cropped = CaptureCrop.crop(frozen, rect: rect, screenFrame: display.frame) {
+                let source: (image: CGImage, frame: CGRect)?
+                if let frozen, let cropped = CaptureCrop.crop(frozen, rect: rect, screenFrame: frame) {
                     image = NSImage(cgImage: cropped, size: rect.size)
+                    source = (frozen, frame)
                 } else {
                     image = try await ScreenCaptureService.capture(rectInScreen: rect, display: display)
+                    source = image.cgImage(forProposedRect: nil, context: nil, hints: nil).map { ($0, rect) }
                 }
                 guard valid(token) else { return }
                 original = image
@@ -144,10 +198,7 @@ final class CaptureController {
                 // Commit the automatic state before the toolbar's first frame.
                 state.working = state.automaticallyTranslates
                 state.status = state.automaticallyTranslates ? "正在识别与翻译…" : ""
-                let panel = CapturePanel(state: state)
-                panel.onAction = { [weak self] in self?.action($0) }
-                self.panel = panel
-                panel.present(image: image, rect: rect)
+                present(image, rect: rect, source: source)
                 // Translation owns its own task after capture completes. The preview
                 // is never left waiting for a toolbar click in automatic modes.
                 if state.automaticallyTranslates { restart() }
@@ -301,8 +352,8 @@ final class CaptureController {
             pasteboard.clearContents()
             state.textCopyCompleted = pasteboard.setString(text, forType: .string)
         case "copy":
-            guard !state.working else { return }
-            guard let image = export() else { return }
+            // Whatever is on screen right now; a running translation never blocks copying.
+            guard resizeStart == nil, let image = export() else { return }
             pasteboard.clearContents()
             if pasteboard.writeObjects([image]) {
                 completionTask?.cancel()
@@ -425,11 +476,19 @@ final class CaptureController {
         detectsSource = false; sourceApplication = nil; updateLanguageState()
         original = image
         backend = AppleTranslationBackend()
-        let p = CapturePanel(state: state); panel = p
-        p.onAction = { [weak self] in self?.action($0) }
         let visible = NSScreen.main?.visibleFrame ?? CGRect(x: 0, y: 0, width: 1200, height: 800)
-        p.present(image: image, rect: CGRect(x: visible.midX - image.size.width / 2, y: visible.midY - image.size.height / 2, width: image.size.width, height: image.size.height))
+        let rect = CGRect(x: visible.midX - image.size.width / 2, y: visible.midY - image.size.height / 2, width: image.size.width, height: image.size.height)
+        present(image, rect: rect, source: image.cgImage(forProposedRect: nil, context: nil, hints: nil).map { ($0, rect) })
         installKeys()
     }
+
+    /// The edge drag a pointer would perform, for tests.
+    func previewResize(_ edges: ResizeEdges, by delta: CGPoint) {
+        resize(.began, edges: edges, by: .zero)
+        resize(.changed, edges: edges, by: CGPoint(x: delta.x / 2, y: delta.y / 2))
+        resize(.ended, edges: edges, by: delta)
+    }
+    var previewCrop: CGRect { crop }
+    var previewImageSize: CGSize { original.size }
     #endif
 }

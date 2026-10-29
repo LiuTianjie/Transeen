@@ -8,7 +8,7 @@ enum TranslationEngineError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .notReady: return String(localized: "翻译模型还没准备好。")
+        case .notReady: return String(localized: "翻译语言包还没下载。可在设置 → 通用 → 翻译中提前下载。")
         case .unsupported: return String(localized: "系统不支持这对语言。")
         case .incomplete: return String(localized: "系统翻译没有返回完整结果，请重试。")
         }
@@ -46,27 +46,24 @@ final class TranslationEngine {
         needsDownload = false
     }
 
+    /// SDK 26.4 changed the default strategy. Check each strategy's own assets:
+    /// ordinary language packs must not wait for unavailable AI models, and a
+    /// ready high-fidelity model should be used when present.
+    static func availability(source: Locale.Language, target: Locale.Language) async -> (status: LanguageAvailability.Status, highFidelity: Bool) {
+        if #available(macOS 26.4, *) {
+            let high = await LanguageAvailability(preferredStrategy: .highFidelity).status(from: source, to: target)
+            if high == .installed { return (high, true) }
+            return (await LanguageAvailability(preferredStrategy: .lowLatency).status(from: source, to: target), false)
+        }
+        return (await LanguageAvailability().status(from: source, to: target), false)
+    }
+
     func prepareInstalled(source: Locale.Language, target: Locale.Language) async throws {
         let token = generation
         outputLocale = Locale(identifier: target.maximalIdentifier)
-        let status: LanguageAvailability.Status
-        if #available(macOS 26.4, *) {
-            // SDK 26.4 changed the default strategy. Check each strategy's own
-            // assets: ordinary language packs must not wait for unavailable AI
-            // models, and a ready high-fidelity model should be used when present.
-            let high = await LanguageAvailability(preferredStrategy: .highFidelity).status(from: source, to: target)
-            guard token == generation, !Task.isCancelled else { throw CancellationError() }
-            if high == .installed {
-                usesHighFidelity = true
-                status = high
-            } else {
-                usesHighFidelity = false
-                status = await LanguageAvailability(preferredStrategy: .lowLatency).status(from: source, to: target)
-            }
-        } else {
-            status = await LanguageAvailability().status(from: source, to: target)
-        }
+        let (status, highFidelity) = await Self.availability(source: source, target: target)
         guard token == generation, !Task.isCancelled else { throw CancellationError() }
+        usesHighFidelity = highFidelity
         switch status {
         case .installed:
             languages = (source, target)

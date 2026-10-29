@@ -9,7 +9,6 @@ enum CaptureMode: String, CaseIterable, Identifiable {
 @MainActor @Observable
 final class AppSettings {
     let shortcuts: ShortcutStore
-    var defaultMode: CaptureMode { didSet { defaults.set(defaultMode.rawValue, forKey: "defaultMode") } }
     var source: AppLanguage { didSet { defaults.set(source.rawValue, forKey: "source") } }
     var detectsSource: Bool { didSet { defaults.set(detectsSource, forKey: "detectsSource") } }
     var target: AppLanguage { didSet { defaults.set(target.rawValue, forKey: "target") } }
@@ -21,7 +20,6 @@ final class AppSettings {
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         shortcuts = ShortcutStore(defaults: defaults)
-        defaultMode = CaptureMode(rawValue: defaults.string(forKey: "defaultMode") ?? "") ?? .translate
         source = AppLanguage(rawValue: defaults.string(forKey: "source") ?? "") ?? .en
         detectsSource = defaults.object(forKey: "detectsSource") == nil ? true : defaults.bool(forKey: "detectsSource")
         target = AppLanguage(rawValue: defaults.string(forKey: "target") ?? "") ?? .zhHans

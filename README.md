@@ -32,12 +32,12 @@ Transeen is a macOS menu bar app that keeps translation close to what you are re
 
 1. Download the universal Mac app from GitHub Releases, move it to Applications, and open it. Requires macOS 26 or later.
 2. Open “激活与账号…” and enter your TR- code. SM- and IT- codes are different products.
-3. Allow Screen Recording when prompted, then select your translation languages. Apple may need to download language packs first.
+3. The first-run guide walks through Screen Recording, translation languages, and downloading Apple language packs ahead of time.
 4. Press Control–Option–2 to select a region. Control–Option–3 captures for annotation; Tab compares original and translation.
 
 | Action | Default shortcut |
 | --- | --- |
-| Capture with the default mode | `⌃⌥2` |
+| Capture and translate | `⌃⌥2` |
 | Capture for annotation | `⌃⌥3` |
 | Compare original and translation | `Tab` / `⌃⌥Space` |
 | Copy / save PNG | `⌘C` / `⌘S` |

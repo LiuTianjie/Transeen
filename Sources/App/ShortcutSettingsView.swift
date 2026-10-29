@@ -13,21 +13,30 @@ struct ShortcutSettingsView: View {
             ForEach(["全局", "截图窗口", "应用"], id: \.self) { group in
                 Section(group) {
                     ForEach(ShortcutAction.allCases.filter { $0.group == group }) { action in
-                        HStack {
-                            Text(action.title)
-                            Spacer()
-                            ShortcutRecorder(shortcuts: shortcuts, action: action).frame(width: 136, height: 28)
-                            Button { shortcuts.recording = nil; shortcuts.set(nil, for: action) } label: {
-                                Image(systemName: "xmark.circle.fill").foregroundStyle(.tertiary)
-                            }.buttonStyle(.plain).help("清除\(action.title)快捷键")
-                                .accessibilityLabel("清除\(action.title)快捷键")
-                        }
+                        ShortcutRow(shortcuts: shortcuts, action: action)
                     }
                 }
             }
             Section { Button("恢复全部默认快捷键") { shortcuts.restoreDefaults() } }
         }.formStyle(.grouped)
             .onDisappear { shortcuts.recording = nil }
+    }
+}
+
+/// One action with its recorder and a button that disables it.
+struct ShortcutRow: View {
+    @Bindable var shortcuts: ShortcutStore
+    let action: ShortcutAction
+    var body: some View {
+        HStack {
+            Text(action.title)
+            Spacer()
+            ShortcutRecorder(shortcuts: shortcuts, action: action).frame(width: 136, height: 28)
+            Button { shortcuts.recording = nil; shortcuts.set(nil, for: action) } label: {
+                Image(systemName: "xmark.circle.fill").foregroundStyle(.tertiary)
+            }.buttonStyle(.plain).help("清除\(action.title)快捷键")
+                .accessibilityLabel("清除\(action.title)快捷键")
+        }
     }
 }
 

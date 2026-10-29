@@ -45,7 +45,7 @@ struct CaptureToolbar: View {
                             Label(state.copyCompleted ? "已复制" : "复制", systemImage: state.copyCompleted ? "checkmark" : "doc.on.doc")
                                 .font(.system(size: 11, weight: .semibold)).frame(minWidth: 44)
                         }.buttonStyle(.borderedProminent).controlSize(.regular)
-                            .help(state.shortcuts.help("复制图片", .copy)).disabled(state.working)
+                            .help(state.shortcuts.help("复制图片", .copy))
                         iconButton("xmark", state.shortcuts.help("关闭", .close), "close")
                     }
                 }.padding(.horizontal, 10).padding(.vertical, 7).frame(width: toolbarWidth)
@@ -58,7 +58,7 @@ struct CaptureToolbar: View {
                         if state.failed || state.noText || state.warning != nil {
                             Image(systemName: state.failed ? "exclamationmark.circle" : "info.circle")
                         }
-                        Text(state.warning ?? (state.status.isEmpty ? "拖动图片移动 · 选择工具标注" : state.status))
+                        Text(state.warning ?? (state.status.isEmpty ? "拖动图片移动 · 拖动边缘调整范围 · 选择工具标注" : state.status))
                             .lineLimit(3).fixedSize(horizontal: false, vertical: true)
                     }.font(.system(size: 11))
                         .foregroundStyle(state.failed ? Color.red : state.warning != nil ? Color.orange : CaptureAppearance.secondary)

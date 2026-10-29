@@ -202,6 +202,18 @@ final class AnnotationStore {
     func clear() {
         transaction = nil; marks = []; selectedID = nil; history = []; undone = []; onChange?()
     }
+    /// The picture's origin moved under the marks. Keep them over the same pixels,
+    /// in undo history too; this is not itself an undoable change.
+    func offset(by delta: CGPoint) {
+        guard delta != .zero else { return }
+        func shifted(_ snapshot: Snapshot) -> Snapshot {
+            Snapshot(marks: snapshot.marks.map { $0.moved(by: delta) }, selectedID: snapshot.selectedID)
+        }
+        marks = marks.map { $0.moved(by: delta) }
+        history = history.map(shifted); undone = undone.map(shifted)
+        transaction = transaction.map(shifted)
+        onChange?()
+    }
 
     func export(_ image: NSImage) -> NSImage? {
         guard let cg = image.cgImage(forProposedRect: nil, context: nil, hints: nil), image.size.width > 0,
@@ -269,6 +281,11 @@ final class AnnotationCanvas: NSView {
             context.fill(rect); context.stroke(rect)
         }
         context.restoreGState()
+    }
+    /// A different crop: no crossfade, which would stretch the old picture to the new frame.
+    func replace(_ next: NSImage) {
+        transitionTask?.cancel(); transitionTask = nil
+        previousImage = nil; image = next
     }
     /// Only crossfade image pixels. The frame and annotation geometry stay fixed.
     func transition(to next: NSImage) {

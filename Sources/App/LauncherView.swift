@@ -7,6 +7,7 @@ struct LauncherView: View {
     var start: (CaptureMode) -> Void
     var showSettings: () -> Void
     var showPermission: () -> Void
+    var showOnboarding: () -> Void
     var openImage: () -> Void
     var closeCapture: () -> Void
     var quit: () -> Void
@@ -15,7 +16,6 @@ struct LauncherView: View {
     @ObservedObject var license: LicenseManager
     var compact = false
 
-    private var alternateMode: CaptureMode { settings.defaultMode == .translate ? .screenshot : .translate }
     private var sourceLanguage: Binding<String> {
         Binding(get: { settings.detectsSource ? "auto" : settings.source.rawValue }, set: { value in
             settings.detectsSource = value == "auto"
@@ -35,26 +35,27 @@ struct LauncherView: View {
             }
 
             VStack(alignment: .leading, spacing: 10) {
-                Button { start(settings.defaultMode) } label: {
+                Button { start(.translate) } label: {
                     HStack(spacing: 8) {
-                        Label(settings.defaultMode == .translate ? "截图翻译" : "开始截图",
-                              systemImage: settings.defaultMode == .translate ? "translate" : "viewfinder")
+                        Label("截图翻译", systemImage: "translate")
                         Spacer(minLength: 0)
-                        if let shortcut = settings.shortcuts.binding(.captureDefault)?.display {
+                        if let shortcut = settings.shortcuts.binding(.captureTranslate)?.display {
                             Text(shortcut).font(.callout.monospaced()).foregroundStyle(.secondary)
                         }
                     }.frame(maxWidth: .infinity)
                 }.buttonStyle(.bordered).controlSize(.large)
 
-                Text(settings.defaultMode == .translate ? "框选一块区域，译文留在原处" : "框选一块区域，标注或复制")
-                    .font(.caption).foregroundStyle(.secondary)
+                Text("框选一块区域，译文留在原处").font(.caption).foregroundStyle(.secondary)
 
                 HStack(spacing: 8) {
-                    Button { start(alternateMode) } label: {
-                        Label(alternateMode == .screenshot ? "截图标注" : "截图翻译",
-                              systemImage: alternateMode == .screenshot ? "pencil.and.outline" : "translate")
-                            .frame(maxWidth: .infinity)
-                    }
+                    Button { start(.screenshot) } label: {
+                        HStack(spacing: 6) {
+                            Label("截图标注", systemImage: "pencil.and.outline")
+                            if let shortcut = settings.shortcuts.binding(.captureScreenshot)?.display {
+                                Text(shortcut).font(.caption.monospaced()).foregroundStyle(.secondary)
+                            }
+                        }.frame(maxWidth: .infinity)
+                    }.help(settings.shortcuts.help("框选后标注，不翻译", .captureScreenshot))
                     Button(action: openImage) {
                         Label("打开图片…", systemImage: "photo.on.rectangle").frame(maxWidth: .infinity)
                     }.help(settings.shortcuts.help("打开本地图片", .openImage))
@@ -105,6 +106,7 @@ struct LauncherView: View {
                 Menu {
                     Button("关闭当前截图", action: closeCapture)
                     Button("屏幕权限…", action: showPermission)
+                    Button("新手引导…", action: showOnboarding)
                     Divider()
                     Button("激活与账号…", action: showLicense)
                     Button("检查更新…", action: checkForUpdates)

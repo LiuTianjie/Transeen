@@ -2,7 +2,7 @@ import AppKit
 import Carbon
 
 enum ShortcutAction: String, CaseIterable, Identifiable {
-    case captureDefault, captureScreenshot, globalCompare
+    case captureTranslate, captureScreenshot, globalCompare
     case compare, translate, direction, rectangle, ellipse, arrow, pen, move, copy, save, undo, redo, close
     case annotate, pin, reselect
     case peek
@@ -10,14 +10,14 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
     var id: String { rawValue }
     var group: String {
         switch self {
-        case .captureDefault, .captureScreenshot, .globalCompare: "全局"
+        case .captureTranslate, .captureScreenshot, .globalCompare: "全局"
         case .openImage, .settings, .quit: "应用"
         default: "截图窗口"
         }
     }
     var title: String {
         switch self {
-        case .captureDefault: "按默认模式框选"
+        case .captureTranslate: "截图翻译"
         case .captureScreenshot: "截图标注"
         case .globalCompare: "全局对照原文"
         case .compare: "原文 / 译文"
@@ -53,7 +53,7 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
         let command = ScreenModifier.command
         let global = ScreenModifier.control | ScreenModifier.option
         switch self {
-        case .captureDefault: return KeyBinding(19, global)
+        case .captureTranslate: return KeyBinding(19, global)
         case .captureScreenshot: return KeyBinding(20, global)
         case .globalCompare: return KeyBinding(49, global)
         case .compare: return KeyBinding(48)
@@ -126,7 +126,25 @@ final class ShortcutStore {
     }
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
-        bindings = defaults.data(forKey: Self.storageKey).flatMap { try? JSONDecoder().decode([String: KeyBinding].self, from: $0) } ?? Self.factory
+        let stored = defaults.data(forKey: Self.storageKey).flatMap { try? JSONDecoder().decode([String: KeyBinding].self, from: $0) }
+        bindings = stored ?? Self.factory
+        if !defaults.bool(forKey: "keyboardShortcuts.modesIntroduced") {
+            // 0.7 had one shortcut for a "default mode" chosen in settings. It becomes the
+            // shortcut of that mode, so ⌃⌥2 keeps doing what this user set it to do.
+            let legacy = stored == nil ? ShortcutAction.captureTranslate.defaultBinding : stored?["captureDefault"]
+            let translate = ShortcutAction.captureTranslate.rawValue, screenshot = ShortcutAction.captureScreenshot.rawValue
+            if defaults.string(forKey: "defaultMode") == "screenshot" {
+                let previous = bindings[screenshot]
+                bindings[screenshot] = legacy ?? previous
+                bindings[translate] = legacy == nil ? nil : previous
+            } else {
+                bindings[translate] = legacy
+            }
+            bindings = bindings.filter { ShortcutAction(rawValue: $0.key) != nil }
+            if let data = try? JSONEncoder().encode(bindings) { defaults.set(data, forKey: Self.storageKey) }
+            defaults.removeObject(forKey: "defaultMode")
+            defaults.set(true, forKey: "keyboardShortcuts.modesIntroduced")
+        }
         // Retired actions must not reserve shortcuts or survive future saves.
         bindings = bindings.filter { ShortcutAction(rawValue: $0.key) != nil }
         if !defaults.bool(forKey: "keyboardShortcuts.peekIntroduced") {

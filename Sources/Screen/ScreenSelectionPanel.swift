@@ -167,13 +167,7 @@ final class ScreenSelectionView: NSView {
             NSColor.white.withAlphaComponent(0.92).setStroke()
             inner.stroke()
             if dragging, highlight.width > 32, highlight.height > 32 {
-                let corners = NSBezierPath()
-                let r = highlight.insetBy(dx: 2, dy: 2)
-                for (x, y, dx, dy) in [(r.minX, r.minY, 1.0, 1.0), (r.maxX, r.minY, -1.0, 1.0), (r.minX, r.maxY, 1.0, -1.0), (r.maxX, r.maxY, -1.0, -1.0)] {
-                    corners.move(to: CGPoint(x: x, y: y + 12 * dy))
-                    corners.line(to: CGPoint(x: x, y: y))
-                    corners.line(to: CGPoint(x: x + 12 * dx, y: y))
-                }
+                let corners = Self.cornerMarks(in: highlight.insetBy(dx: 1.5, dy: 1.5), radius: max(0, radius - 1), length: 12)
                 corners.lineWidth = 2.5; corners.lineJoinStyle = .round; corners.lineCapStyle = .round
                 NSColor.controlAccentColor.setStroke(); corners.stroke()
             }
@@ -203,6 +197,32 @@ final class ScreenSelectionView: NSView {
         NSColor.separatorColor.setStroke(); chipPath.lineWidth = 0.75; chipPath.stroke()
         chip.draw(at: NSPoint(x: chipRect.minX + 12, y: chipRect.minY + 9))
         if !title.isEmpty { heading.draw(at: NSPoint(x: chipRect.minX + 12, y: chipRect.maxY - 21)) }
+    }
+
+    /// Accent brackets that run along the rounded outline through each corner's arc,
+    /// `length` points past the arc on either side, so no square tip sticks out.
+    static func cornerMarks(in rect: CGRect, radius: CGFloat, length: CGFloat) -> NSBezierPath {
+        let r = min(radius, rect.width / 2, rect.height / 2)
+        let arm = max(0, min(length, rect.width / 2 - r - 2, rect.height / 2 - r - 2))
+        let path = NSBezierPath()
+        // Each corner: arc centre, start angle (counter-clockwise through 90°), and the
+        // unit directions of the edge before and after the arc.
+        let corners: [(CGPoint, CGFloat, CGPoint, CGPoint)] = [
+            (CGPoint(x: rect.minX + r, y: rect.minY + r), 180, CGPoint(x: 0, y: -1), CGPoint(x: 1, y: 0)),
+            (CGPoint(x: rect.maxX - r, y: rect.minY + r), 270, CGPoint(x: 1, y: 0), CGPoint(x: 0, y: 1)),
+            (CGPoint(x: rect.maxX - r, y: rect.maxY - r), 0, CGPoint(x: 0, y: 1), CGPoint(x: -1, y: 0)),
+            (CGPoint(x: rect.minX + r, y: rect.maxY - r), 90, CGPoint(x: -1, y: 0), CGPoint(x: 0, y: -1))
+        ]
+        for (center, angle, incoming, outgoing) in corners {
+            let radians = angle * .pi / 180
+            let arcStart = CGPoint(x: center.x + cos(radians) * r, y: center.y + sin(radians) * r)
+            let arcEnd = CGPoint(x: center.x + cos(radians + .pi / 2) * r, y: center.y + sin(radians + .pi / 2) * r)
+            path.move(to: CGPoint(x: arcStart.x - incoming.x * arm, y: arcStart.y - incoming.y * arm))
+            path.line(to: arcStart)
+            if r > 0.5 { path.appendArc(withCenter: center, radius: r, startAngle: angle, endAngle: angle + 90) }
+            path.line(to: CGPoint(x: arcEnd.x + outgoing.x * arm, y: arcEnd.y + outgoing.y * arm))
+        }
+        return path
     }
 
     static func hintRect(at point: CGPoint, size: CGSize, within bounds: CGRect) -> CGRect {

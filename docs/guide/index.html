@@ -46,7 +46,7 @@
             "mainEntityOfPage": "https://transeen.itool.tech/guide/",
             "image": "https://transeen.itool.tech/assets/og-image.jpg",
             "datePublished": "2026-10-28",
-            "dateModified": "2026-10-28",
+            "dateModified": "2026-10-29",
             "author": { "@type": "Person", "name": "LiuTianjie", "url": "https://github.com/LiuTianjie" },
             "publisher": { "@id": "https://transeen.itool.tech/#organization" },
             "about": { "@id": "https://transeen.itool.tech/#software" },
@@ -63,7 +63,7 @@
               { "@type": "HowToStep", "position": 1, "name": "Install", "url": "https://transeen.itool.tech/guide/#install", "text": "Download the DMG from GitHub Releases, drag Transeen to Applications and open it. It runs in the menu bar." },
               { "@type": "HowToStep", "position": 2, "name": "Activate", "url": "https://transeen.itool.tech/guide/#activate", "text": "Choose 激活与账号… in the menu bar menu, enter your TR- code and choose 激活这台 Mac." },
               { "@type": "HowToStep", "position": 3, "name": "Allow screen recording", "url": "https://transeen.itool.tech/guide/#permission", "text": "Turn on Transeen in System Settings, Privacy & Security, Screen & System Audio Recording." },
-              { "@type": "HowToStep", "position": 4, "name": "Choose languages", "url": "https://transeen.itool.tech/guide/#languages", "text": "Pick the source and target language in the launcher; Apple may download a language pack the first time." },
+              { "@type": "HowToStep", "position": 4, "name": "Choose languages", "url": "https://transeen.itool.tech/guide/#languages", "text": "Pick the source and target language in the first-run guide or the launcher, and download the Apple language packs you need ahead of time." },
               { "@type": "HowToStep", "position": 5, "name": "Translate a region", "url": "https://transeen.itool.tech/guide/#translate", "text": "Press Control-Option-2, select part of the screen and read the translation in place. Press Tab to compare with the original." }
             ]
           },
@@ -173,7 +173,7 @@
         <div class="guide-body" data-rise style="--i: 1">
           <p>The launcher has two menus, 原文 (source) and 译文 (target). Leave the source on 自动识别 (Detect) or choose one of the eight languages: Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German. Any of them translates into any other.</p>
           <figure><img src="../assets/toolbar-zh-hans.webp?v=5a106c856fa3" width="552" height="93" alt="The Transeen toolbar; its second row shows the direction EN → 中文." loading="lazy" /><figcaption>On a capture, the direction under the tools (here EN → 中文) changes either language or swaps them.</figcaption></figure>
-          <p>The first time you use a pair with Apple translation, macOS may download its language pack. After that the translation runs on your Mac, offline. Packs are listed in System Settings → General → Language &amp; Region → Translation Languages.</p>
+          <p>Apple translation needs a language pack for each pair. The guide that opens on first launch, and Settings → 通用 → 翻译 later, list the packs for your target language with their status; 下载 (Download) fetches one before your first capture needs it. After that the translation runs on your Mac, offline. Packs are also listed in System Settings → General → Language &amp; Region → Translation Languages.</p>
         </div>
       </section>
 
@@ -184,9 +184,10 @@
             <li>Press <kbd>⌃⌥2</kbd>. The screen holds still and dims.</li>
             <li>Hover to snap to a paragraph, a field or a window and click, or drag a frame of your own. <kbd>Esc</kbd> or a right click cancels.</li>
             <li>Read the translation where the text was. Press <kbd>Tab</kbd> to switch to the original and back, or hold <kbd>Space</kbd> to peek at it.</li>
+            <li>Missed a bit? Drag an edge or corner of the capture. It re-crops from the same frozen screen, keeps your marks in place and translates again when you let go.</li>
           </ol>
           <figure><img src="../assets/capture-read.webp?v=1db377af3567" width="644" height="501" alt="A captured chart with every label in Chinese and the Transeen toolbar below it." loading="lazy" /><figcaption>The capture stays where you selected it, with the toolbar underneath.</figcaption></figure>
-          <p><kbd>⌃⌥2</kbd> uses the default mode, which is translation; Settings → 通用 → 默认框选行为 changes it. <kbd>⌃⌥3</kbd> captures for marking up without translating; press <kbd>T</kbd> in that window if you want the translation after all. To translate a picture you already have, choose 打开图片… (Open image) or press <kbd>⌘O</kbd>.</p>
+          <p><kbd>⌃⌥2</kbd> selects and translates. <kbd>⌃⌥3</kbd> captures for marking up without translating; each has its own shortcut in Settings → 通用 or 快捷键 (Shortcuts); press <kbd>T</kbd> in that window if you want the translation after all. To translate a picture you already have, choose 打开图片… (Open image) or press <kbd>⌘O</kbd>.</p>
         </div>
       </section>
 
@@ -203,7 +204,7 @@
         <h2 id="keep-title" data-rise>Copy, save or pin</h2>
         <div class="guide-body" data-rise style="--i: 1">
           <ul class="points">
-            <li><kbd>⌘C</kbd> copies the picture as you see it, marks included. By default this also closes the capture; turn off 复制后关闭截图 in Settings to keep it open.</li>
+            <li><kbd>⌘C</kbd> copies the picture as you see it, marks included, even while a translation is still running. By default this also closes the capture; turn off 复制后关闭截图 in Settings to keep it open.</li>
             <li><kbd>⌘S</kbd> saves it as a PNG.</li>
             <li>The pin keeps the capture floating above your other windows while you work beside it.</li>
             <li>文字 (Text) opens the full translation next to the original, ready to copy.</li>
@@ -232,7 +233,7 @@
           <table class="keys">
             <thead><tr><th scope="col">Default</th><th scope="col">Action</th></tr></thead>
             <tbody>
-              <tr><td><kbd>⌃⌥2</kbd></td><td>Select a region in the default mode, translation</td></tr>
+              <tr><td><kbd>⌃⌥2</kbd></td><td>Select a region and translate it</td></tr>
               <tr><td><kbd>⌃⌥3</kbd></td><td>Capture a region to mark it up</td></tr>
               <tr><td><kbd>⌃⌥Space</kbd></td><td>Switch original and translation from any app</td></tr>
               <tr><td><kbd>Tab</kbd></td><td>Switch original and translation</td></tr>
@@ -257,11 +258,11 @@
         <h2 id="troubleshooting-title" data-rise>Troubleshooting</h2>
         <div class="guide-body" data-rise style="--i: 1">
           <h3>Nothing happens when I press <kbd>⌃⌥2</kbd></h3>
-          <p>Another app may hold the same shortcut; Transeen tells you when it cannot register one. Choose a different key in Settings → 快捷键, or start from 框选（默认模式） in the menu bar menu.</p>
+          <p>Another app may hold the same shortcut; Transeen tells you when it cannot register one. Choose a different key in Settings → 快捷键, or start from 截图翻译 in the menu bar menu.</p>
           <h3>The capture is empty or the permission keeps asking</h3>
           <p>Open 屏幕权限… in the menu bar menu. If System Settings already shows Transeen turned on, turn it off and on again, then choose 重新打开 (Reopen).</p>
           <h3>Apple translation does not start</h3>
-          <p>The language pack for that pair may still be downloading. Check System Settings → General → Language &amp; Region → Translation Languages and try again.</p>
+          <p>The language pack for that pair may be missing or still downloading. Download it in Settings → 通用 → 翻译, or check System Settings → General → Language &amp; Region → Translation Languages, and try again.</p>
           <h3>Some text comes out wrong</h3>
           <p>Dense layouts, formulas and specialist terms can trip up recognition or translation. Compare with the original (<kbd>Tab</kbd>), open 文字 for the full text, or select a smaller region.</p>
         </div>
@@ -280,7 +281,7 @@ cd Transeen
       </section>
 
       <section class="guide-next" aria-labelledby="next-title">
-        <h2 id="next-title">Download Transeen 0.7.0</h2>
+        <h2 id="next-title">Download Transeen 0.8.0</h2>
         <p>One universal app for macOS 26 or later, signed and notarized.</p>
         <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">Download for Mac</a>
       </section>
