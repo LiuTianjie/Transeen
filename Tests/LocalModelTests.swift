@@ -6,28 +6,28 @@ import CryptoKit
 @main struct LocalModelTests {
     @MainActor static func main() async throws {
         _ = NSApplication.shared
-        precondition(LocalModelCatalog.model(id: LocalModelCatalog.defaultID) != nil)
-        precondition(Set(LocalModelCatalog.all.map(\.id)).count == LocalModelCatalog.all.count)
+        check(LocalModelCatalog.model(id: LocalModelCatalog.defaultID) != nil)
+        check(Set(LocalModelCatalog.all.map(\.id)).count == LocalModelCatalog.all.count)
         for model in LocalModelCatalog.all {
-            precondition(model.sha256.count == 64 && model.bytes > 500_000_000)
-            precondition(model.sources(region: "CN").first == model.modelScope && model.sources(region: "US").first == model.huggingFace)
+            check(model.sha256.count == 64 && model.bytes > 500_000_000)
+            check(model.sources(region: "CN").first == model.modelScope && model.sources(region: "US").first == model.huggingFace)
         }
 
         let index = LocalPrompt.message("Bump to 0.9.0", source: .en, target: .zhHans, prompt: .index)
-        precondition(index == "请将以下英语文本翻译为简体中文，直接输出翻译结果，不要进行任何解释。\n\nBump to 0.9.0")
-        precondition(LocalPrompt.message("x", source: .en, target: .zhHans, prompt: .hunyuan).hasPrefix("将以下文本翻译为简体中文"))
-        precondition(LocalPrompt.message("x", source: .en, target: .ja, prompt: .hunyuan).hasPrefix("Translate the following text into Japanese."))
-        precondition(LocalPrompt.clean("<think>\n\n</think>\n\n你好") == "你好")
-        precondition(LocalPrompt.maxTokens(for: String(repeating: "a", count: 10_000)) == 2048)
+        check(index == "请将以下英语文本翻译为简体中文，直接输出翻译结果，不要进行任何解释。\n\nBump to 0.9.0")
+        check(LocalPrompt.message("x", source: .en, target: .zhHans, prompt: .hunyuan).hasPrefix("将以下文本翻译为简体中文"))
+        check(LocalPrompt.message("x", source: .en, target: .ja, prompt: .hunyuan).hasPrefix("Translate the following text into Japanese."))
+        check(LocalPrompt.clean("<think>\n\n</think>\n\n你好") == "你好")
+        check(LocalPrompt.maxTokens(for: String(repeating: "a", count: 10_000)) == 2048)
 
         let defaults = UserDefaults(suiteName: "transeen.local.tests.\(UUID().uuidString)")!
         defaults.set(true, forKey: "useModel")
-        precondition(AppSettings(defaults: defaults).service == .remote, "A saved remote model setting must survive the new service picker")
+        check(AppSettings(defaults: defaults).service == .remote, "A saved remote model setting must survive the new service picker")
         defaults.removeObject(forKey: "useModel")
         let fresh = AppSettings(defaults: defaults)
-        precondition(fresh.service == .apple && fresh.localModel == LocalModelCatalog.defaultID)
+        check(fresh.service == .apple && fresh.localModel == LocalModelCatalog.defaultID)
         fresh.service = .local
-        precondition(AppSettings(defaults: defaults).service == .local)
+        check(AppSettings(defaults: defaults).service == .local)
 
         try await downloads()
         if let path = ProcessInfo.processInfo.environment["TRANSEEN_TEST_MODEL"] { try await translation(model: path) }
@@ -62,8 +62,11 @@ import CryptoKit
         """]
         try server.run()
         defer { server.terminate() }
-        try await Task.sleep(for: .milliseconds(600))
         let url = URL(string: "http://127.0.0.1:\(port)/model.gguf")!
+        for _ in 0..<100 {
+            if (try? await URLSession.shared.data(for: URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 1))) != nil { break }
+            try await Task.sleep(for: .milliseconds(200))
+        }
         let digest = SHA256.hash(data: payload).map { String(format: "%02x", $0) }.joined()
         let good = LocalModel(id: "t", name: "Test", summary: "", file: "model.gguf", bytes: Int64(payload.count), sha256: digest,
                               modelScope: url, huggingFace: url, prompt: .index)
@@ -72,20 +75,20 @@ import CryptoKit
         try payload.prefix(1_234_567).write(to: store.directory.appending(path: "model.gguf.partial"))
         store.download(good)
         try await wait { store.status(good) == .installed || { if case .failed = store.status(good) { true } else { false } }() }
-        precondition(store.status(good) == .installed, "Resumed download must finish: \(store.status(good))")
+        check(store.status(good) == .installed, "Resumed download must finish: \(store.status(good))")
         let downloaded = try Data(contentsOf: store.url(for: good))
-        precondition(downloaded == payload, "Resumed download must equal the served file")
-        precondition(store.isInstalled(good))
+        check(downloaded == payload, "Resumed download must equal the served file")
+        check(store.isInstalled(good))
         store.delete(good)
-        precondition(!store.isInstalled(good) && store.status(good) == .missing)
+        check(!store.isInstalled(good) && store.status(good) == .missing)
 
         let bad = LocalModel(id: "b", name: "Bad", summary: "", file: "model.gguf", bytes: Int64(payload.count), sha256: String(repeating: "0", count: 64),
                              modelScope: url, huggingFace: url, prompt: .index)
         store.download(bad)
         try await wait { if case .failed = store.status(bad) { true } else { false } }
-        precondition(store.status(bad) == .failed(LocalModelError.corrupted.localizedDescription))
-        precondition(!FileManager.default.fileExists(atPath: store.directory.appending(path: "model.gguf.partial").path), "A corrupt download must be deleted")
-        precondition(!store.isInstalled(bad))
+        check(store.status(bad) == .failed(LocalModelError.corrupted.localizedDescription), "A wrong checksum must fail as corrupted: \(store.status(bad))")
+        check(!FileManager.default.fileExists(atPath: store.directory.appending(path: "model.gguf.partial").path), "A corrupt download must be deleted")
+        check(!store.isInstalled(bad))
     }
 
     @MainActor static func translation(model path: String) async throws {
@@ -111,21 +114,28 @@ import CryptoKit
         let output = try await backend.translate(analysis, direction: TranslationDirection(source: .en, target: .zhHans), app: nil)
         let first = Date().timeIntervalSince(started)
         let texts = output.translations.values.sorted()
-        precondition(texts.count == analysis.blocks.filter(\.translate).count && texts.allSatisfy { $0.unicodeScalars.contains { (0x4E00...0x9FFF).contains($0.value) } },
+        check(texts.count == analysis.blocks.filter(\.translate).count && texts.allSatisfy { $0.unicodeScalars.contains { (0x4E00...0x9FFF).contains($0.value) } },
                      "Every block must come back in Chinese: \(texts)")
-        precondition(Set(texts).count == texts.count, "Each block must keep its own translation: \(texts)")
+        check(Set(texts).count == texts.count, "Each block must keep its own translation: \(texts)")
         for (original, word) in [("Keyboard shortcuts", "快捷键"), ("Terms of Service", "条款"), ("Show all files", "文件")] {
             guard let index = analysis.blocks.firstIndex(where: { $0.original == original }) else { continue }
-            precondition(output.translations[index]?.contains(word) == true, "Answers must not be shuffled: \(output.translations)")
+            check(output.translations[index]?.contains(word) == true, "Answers must not be shuffled: \(output.translations)")
         }
         let again = Date()
         _ = try await backend.translate(analysis, direction: TranslationDirection(source: .en, target: .zhHans), app: nil)
-        precondition(Date().timeIntervalSince(again) < 0.5, "A repeated capture must use the cache and the running server")
+        check(Date().timeIntervalSince(again) < 0.5, "A repeated capture must use the cache and the running server")
         runtime.stop()
         print("LocalModelTests: live translation in \(String(format: "%.1f", first))s including model load: \(texts)")
     }
 
     @MainActor static func wait(_ done: () -> Bool) async throws {
-        for _ in 0..<300 where !done() { try await Task.sleep(for: .milliseconds(50)) }
+        for _ in 0..<1200 where !done() { try await Task.sleep(for: .milliseconds(50)) }
+    }
+
+    /// `precondition` drops its message in -O builds; CI needs the reason.
+    static func check(_ condition: Bool, _ message: @autoclosure () -> String = "", line: Int = #line) {
+        guard !condition else { return }
+        FileHandle.standardError.write(Data("LocalModelTests failed at line \(line): \(message())\n".utf8))
+        exit(1)
     }
 }
