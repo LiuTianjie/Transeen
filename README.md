@@ -13,7 +13,7 @@
   <a href="CHANGELOG.md">Changelog</a> ·
   <a href="README.zh-CN.md">简体中文</a>
 </p>
-<p align="center"><img src="docs/assets/preview.webp" alt="Part of a Japanese shop page translated into English in place by Transeen, with its toolbar below" width="820" /></p>
+<p align="center"><img src="docs/assets/preview.webp" alt="A Japanese train booking page with its selected-train card translated into English in place by Transeen, with the toolbar below" width="820" /></p>
 <p align="center"><sub>Production rendering and native toolbar, with authored sample content and a fixed translation.</sub></p>
 
 Transeen is a macOS menu bar app that keeps translation close to what you are reading. Select a screen region or open an image, translate the text in place, compare it with the original, then annotate, copy, save, or pin the result.

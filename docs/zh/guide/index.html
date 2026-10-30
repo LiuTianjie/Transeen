@@ -5,11 +5,11 @@
     <script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mac 怎么截图翻译？Transeen 使用指南：安装、激活与快捷键</title>
-    <meta name="description" content="五步装好 Transeen：下载、激活、开启屏幕录制、选择语言、框选翻译。附完整快捷键表、兼容 OpenAI 与本地模型的配置方法，以及常见问题的解决办法。" />
-    <meta name="keywords" content="Mac 截图翻译教程, Transeen 使用指南, 屏幕录制权限, Mac 翻译快捷键, 本地模型翻译, Ollama 翻译" />
+    <meta name="description" content="五步装好 Transeen：下载、激活、开启屏幕录制、选择语言、框选翻译。附完整快捷键表、内置本地翻译模型与兼容 OpenAI 接口的配置方法，以及常见问题的解决办法。" />
+    <meta name="keywords" content="Mac 截图翻译教程, Transeen 使用指南, 屏幕录制权限, Mac 翻译快捷键, 本地翻译模型, 离线翻译" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="LiuTianjie" />
-    <meta name="theme-color" content="#0a0d0c" />
+    <meta name="theme-color" content="#08090a" />
     <meta name="color-scheme" content="dark" />
     <meta name="applicable-device" content="pc,mobile" />
     <meta http-equiv="Cache-Control" content="no-transform" />
@@ -23,18 +23,18 @@
     <meta property="og:url" content="https://transeen.itool.tech/zh/guide/" />
     <meta property="og:title" content="五步装好 Transeen" />
     <meta property="og:description" content="从下载到第一次在 Mac 上截图翻译，附完整快捷键与模型配置。" />
-    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=b3e5d2df6db1" />
+    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=a81f4a9cdcae" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Mac 上的一页文档，框选的部分在原处换成了中文，下方是 Transeen 工具栏" />
+    <meta property="og:image:alt" content="Mac 上的一页日文订票网站，框选的车票卡片在原处换成了中文，下方是 Transeen 工具栏" />
     <meta property="og:locale" content="zh_CN" />
     <meta property="og:locale:alternate" content="en_US" />
-    <meta property="article:modified_time" content="2026-10-28" />
+    <meta property="article:modified_time" content="2026-10-30" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="五步装好 Transeen" />
     <meta name="twitter:description" content="从下载到第一次在 Mac 上截图翻译，附完整快捷键与模型配置。" />
-    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=b3e5d2df6db1" />
+    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-zh.jpg?v=a81f4a9cdcae" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -43,7 +43,7 @@
             "@type": "TechArticle",
             "@id": "https://transeen.itool.tech/zh/guide/#article",
             "headline": "五步装好 Transeen",
-            "description": "五步装好 Transeen：下载、激活、开启屏幕录制、选择语言、框选翻译。附完整快捷键表、兼容 OpenAI 与本地模型的配置方法，以及常见问题的解决办法。",
+            "description": "五步装好 Transeen：下载、激活、开启屏幕录制、选择语言、框选翻译。附完整快捷键表、内置本地翻译模型与兼容 OpenAI 接口的配置方法，以及常见问题的解决办法。",
             "inLanguage": "zh-CN",
             "url": "https://transeen.itool.tech/zh/guide/",
             "mainEntityOfPage": "https://transeen.itool.tech/zh/guide/",
@@ -60,14 +60,14 @@
             "@id": "https://transeen.itool.tech/zh/guide/#howto",
             "name": "如何用 Transeen 在 Mac 上截图翻译",
             "inLanguage": "zh-CN",
-            "supply": [{ "@type": "HowToSupply", "name": "TR- 激活码" }],
-            "tool": [{ "@type": "HowToTool", "name": "macOS 26 或更高版本的 Mac" }, { "@type": "HowToTool", "name": "Transeen" }],
+            "supply": [{ "@type": "HowToSupply", "name": "一个 TR- 激活码" }],
+            "tool": [{ "@type": "HowToTool", "name": "一台 macOS 26 或更高版本的 Mac" }, { "@type": "HowToTool", "name": "Transeen" }],
             "step": [
-              { "@type": "HowToStep", "position": 1, "name": "安装", "url": "https://transeen.itool.tech/zh/guide/#install", "text": "从 GitHub Releases 下载 DMG，把 Transeen 拖进“应用程序”并打开。它在菜单栏运行。" },
-              { "@type": "HowToStep", "position": 2, "name": "激活", "url": "https://transeen.itool.tech/zh/guide/#activate", "text": "在菜单栏菜单选择“激活与账号…”，输入 TR- 激活码，点“激活这台 Mac”。" },
-              { "@type": "HowToStep", "position": 3, "name": "开启屏幕录制", "url": "https://transeen.itool.tech/zh/guide/#permission", "text": "在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中开启 Transeen。" },
-              { "@type": "HowToStep", "position": 4, "name": "选择语言", "url": "https://transeen.itool.tech/zh/guide/#languages", "text": "在新手引导或启动面板选择原文和译文语言，并提前下载需要的 Apple 语言包。" },
-              { "@type": "HowToStep", "position": 5, "name": "框选翻译", "url": "https://transeen.itool.tech/zh/guide/#translate", "text": "按 F1 框选屏幕区域，在原处阅读译文，按 Tab 对照原文。" }
+              { "@type": "HowToStep", "position": 1, "name": "安装", "url": "https://transeen.itool.tech/zh/guide/#install", "text": "从 GitHub Releases 下载 DMG，把 Transeen 拖进“应用程序”并打开。它常驻在菜单栏。" },
+              { "@type": "HowToStep", "position": 2, "name": "激活", "url": "https://transeen.itool.tech/zh/guide/#activate", "text": "在菜单栏菜单中选择“激活与账号…”，输入 TR- 激活码，选择“激活这台 Mac”。" },
+              { "@type": "HowToStep", "position": 3, "name": "开启屏幕录制", "url": "https://transeen.itool.tech/zh/guide/#permission", "text": "在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中打开 Transeen。" },
+              { "@type": "HowToStep", "position": 4, "name": "选择语言", "url": "https://transeen.itool.tech/zh/guide/#languages", "text": "选好原文语言和译文语言，并在设置 → 通用 → 翻译中提前下载需要的 Apple 语言包。" },
+              { "@type": "HowToStep", "position": 5, "name": "框选翻译", "url": "https://transeen.itool.tech/zh/guide/#translate", "text": "按 F1 框选屏幕的一部分，在原处读译文。按 Tab 对照原文。" }
             ]
           },
           {
@@ -89,34 +89,119 @@
       }
     </script>
     <link rel="icon" href="../../favicon.ico" sizes="48x48" />
-    <link rel="icon" href="../../assets/app-icon.svg?v=e38c2e38ac25" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=f2374488919f" />
+    <link rel="icon" href="../../assets/app-icon.svg?v=8d9ae33a2b93" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=a9e04b962aeb" />
     <link rel="manifest" href="../../site.webmanifest" />
     <link rel="preload" href="../../assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="../../assets/site.css?v=9305b8b71568" />
+    <link rel="stylesheet" href="../../assets/site.css?v=0ba230f96315" />
     <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
+    <!-- part:sprite -->
+    <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;overflow:hidden">
+      <symbol id="ui-cursorarrow" viewBox="0 0 20 20">
+        <path d="M5.6 2.9v12.8l3.2-3 2.2 4.6 2.1-.9-2.2-4.5 4.5-.3Z" fill="currentColor" stroke="currentColor" stroke-width="0.7" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-rectangle" viewBox="0 0 20 20">
+        <rect x="2.6" y="5" width="14.8" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.45" />
+      </symbol>
+      <symbol id="ui-circle" viewBox="0 0 20 20">
+        <circle cx="10" cy="10" r="7.1" fill="none" stroke="currentColor" stroke-width="1.45" />
+      </symbol>
+      <symbol id="ui-arrow" viewBox="0 0 20 20">
+        <path d="M4.8 15.2 15 5M7.6 5H15v7.4" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-pencil" viewBox="0 0 20 20">
+        <path d="M4 16l.9-3.4 8.4-8.4a1.6 1.6 0 0 1 2.3 0l.2.2a1.6 1.6 0 0 1 0 2.3L7.4 15.1Z" fill="currentColor" />
+      </symbol>
+      <symbol id="ui-number" viewBox="0 0 20 20">
+        <circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.35" />
+        <path d="M8.5 7.7 10.6 6.4v7.4" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-text" viewBox="0 0 20 20">
+        <path d="M3.4 5.4h13.2M3.4 8.8h9.2M3.4 12.2h13.2M3.4 15.6h7.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </symbol>
+      <symbol id="ui-pin" viewBox="0 0 20 20">
+        <path d="M7 3.4h6M8.2 3.4v5.3l-2.6 2.9h8.8l-2.6-2.9V3.4M10 11.6v5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-ellipsis" viewBox="0 0 20 20">
+        <circle cx="4.4" cy="10" r="1.35" fill="currentColor" /><circle cx="10" cy="10" r="1.35" fill="currentColor" /><circle cx="15.6" cy="10" r="1.35" fill="currentColor" />
+      </symbol>
+      <symbol id="ui-copy" viewBox="0 0 20 20">
+        <path d="M7.4 5.2V4.3c0-.8.6-1.4 1.4-1.4h4.4l3 3v7.3c0 .8-.6 1.4-1.4 1.4h-.9" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round" />
+        <path d="M5.2 5.4h4.4l3 3v7.4c0 .8-.6 1.4-1.4 1.4H5.2c-.8 0-1.4-.6-1.4-1.4V6.8c0-.8.6-1.4 1.4-1.4Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-check" viewBox="0 0 20 20">
+        <path d="M4.8 10.6 8.3 14l7-7.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-xmark" viewBox="0 0 20 20">
+        <path d="M5.4 5.4l9.2 9.2M14.6 5.4l-9.2 9.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </symbol>
+      <symbol id="ui-globe" viewBox="0 0 20 20">
+        <g fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="10" cy="10" r="7.3" /><ellipse cx="10" cy="10" rx="3.1" ry="7.3" />
+          <path d="M2.7 10h14.6M3.9 6.2h12.2M3.9 13.8h12.2" />
+        </g>
+      </symbol>
+      <symbol id="ui-swap" viewBox="0 0 20 20">
+        <path d="M6.6 4 3.4 7.2l3.2 3.2M3.4 7.2h12.2M13.4 9.6l3.2 3.2-3.2 3.2M16.6 12.8H4.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-viewfinder" viewBox="0 0 20 20">
+        <path d="M3.4 7V5.2c0-1 .8-1.8 1.8-1.8H7M13 3.4h1.8c1 0 1.8.8 1.8 1.8V7M16.6 13v1.8c0 1-.8 1.8-1.8 1.8H13M7 16.6H5.2c-1 0-1.8-.8-1.8-1.8V13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </symbol>
+      <symbol id="cur-arrow" viewBox="0 0 24 24">
+        <path d="M4.5 2.5v16.4l4.2-4 2.9 6.6 3-1.3-2.8-6.4h5.9Z" fill="#000" stroke="#fff" stroke-width="1.3" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-download" viewBox="0 0 20 20">
+        <path d="M10 3.5v9.2M6.4 9.3 10 12.9l3.6-3.6M4.2 16.2h11.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-lock" viewBox="0 0 20 20">
+        <rect x="4.2" y="8.6" width="11.6" height="8.4" rx="2" fill="none" stroke="currentColor" stroke-width="1.4" />
+        <path d="M6.8 8.6V6.4a3.2 3.2 0 0 1 6.4 0v2.2" fill="none" stroke="currentColor" stroke-width="1.4" />
+      </symbol>
+      <symbol id="ui-replay" viewBox="0 0 20 20">
+        <path d="M4.6 10a5.4 5.4 0 1 0 1.6-3.8M4.4 3.6v3h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-crop" viewBox="0 0 20 20">
+        <path d="M6 2.8V14h11.2M2.8 6H14v11.2" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+    </svg>
+    <!-- /part:sprite -->
     <a class="skip" href="#main">跳到正文</a>
     <header class="nav">
-      <a class="wordmark" href="../" aria-label="Transeen 首页"><img src="../../assets/app-icon.png?v=417357bd4eed" width="30" height="30" alt="" />Transeen</a>
-      <nav class="nav-links" aria-label="主导航">
-        <a class="nav-optional" href="../#how">使用方式</a>
-        <a class="nav-optional" href="../#languages">语言</a>
-        <a href="../#activate">激活</a>
-        <a href="./" aria-current="page">使用指南</a>
-        <a href="../../guide/" hreflang="en" lang="en">English</a>
-      </nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="../" aria-label="Transeen 首页"><img src="../../assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
+        <nav class="nav-links" aria-label="主导航">
+          <a href="../#how">工作原理</a>
+          <a href="../#tools">工具</a>
+          <a href="../#languages">语言</a>
+          <a href="../#activation">激活</a>
+          <a href="./" aria-current="page">使用指南</a>
+        </nav>
+        <div class="nav-end">
+          <a class="nav-lang" href="../../guide/" hreflang="en" lang="en">English</a>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/latest">下载</a>
+        </div>
+      </div>
     </header>
 
     <main id="main">
       <section class="guide-hero" aria-labelledby="guide-title">
-        <nav class="breadcrumb" aria-label="面包屑导航"><a href="../">Transeen</a><span aria-hidden="true">/</span><span aria-current="page">使用指南</span></nav>
-        <h1 id="guide-title" data-load>五步装好<br />Transeen</h1>
-        <p class="hero-lead" data-load style="--i: 1">从下载到第一次截图翻译。你需要一台 macOS 26 或更高版本的 Mac，以及一个 TR- 激活码。</p>
-        <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest" data-load style="--i: 2">下载 Mac 版</a>
-        <figure data-load style="--i: 2"><img src="../../assets/select-zh.webp?v=edf97a692b4c" width="800" height="729" alt="在一个日文网店页面上按 F1 框选：选区外的画面变暗，蓝色四角标出选区，提示写着“截屏翻译 · JA → 中文”和 696 × 588 px。" fetchpriority="high" /></figure>
-        <nav class="guide-toc" aria-label="本页目录" data-load style="--i: 3">
+        <span data-top></span>
+        <div class="wrap">
+          <nav class="crumbs load" aria-label="面包屑"><a href="../">Transeen</a><span aria-hidden="true">/</span><span aria-current="page">使用指南</span></nav>
+          <h1 class="load" id="guide-title" style="--d: 60">五步装好 Transeen，<span>然后按 F1。</span></h1>
+          <p class="hero-lead load" style="--d: 140">从下载到第一次截图翻译。你需要一台 macOS 26 或更高版本的 Mac，和一个 TR- 激活码。</p>
+          <div class="hero-actions load" style="--d: 220">
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>下载 Mac 版</a>
+            <a class="link-arrow" href="#shortcuts">全部快捷键</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap guide">
+        <nav class="toc" aria-labelledby="toc-title">
+          <p id="toc-title">本页内容</p>
           <ol>
             <li><a href="#install">安装</a></li>
             <li><a href="#activate">激活</a></li>
@@ -125,220 +210,212 @@
             <li><a href="#translate">框选翻译</a></li>
             <li><a href="#mark">标注</a></li>
             <li><a href="#keep">复制、保存或钉图</a></li>
-            <li><a href="#model">使用自己的模型</a></li>
+            <li><a href="#model">选择翻译服务</a></li>
             <li><a href="#shortcuts">键盘快捷键</a></li>
             <li><a href="#troubleshooting">常见问题排查</a></li>
             <li><a href="#build">从源码构建</a></li>
           </ol>
         </nav>
-      </section>
 
-      <section class="guide-row" id="install" aria-labelledby="install-title">
-        <h2 id="install-title" data-rise>安装</h2>
-        <div class="guide-body">
-          <ol class="steps">
-            <li>从 <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a> 下载最新的 DMG。大约 10 MB，是同时支持 Apple 芯片和 Intel 的通用应用。</li>
-            <li>打开 DMG，把 Transeen 拖进“应用程序”。</li>
-            <li>从“应用程序”打开 Transeen。它在菜单栏运行，请在菜单栏找它的图标，而不是在程序坞里。</li>
-          </ol>
-          <p>应用和 DMG 都使用 Developer ID 签名，并通过了 Apple 公证，macOS 打开时不会弹出警告。同一个发布页面还提供 ZIP 和 SHA-256 校验值。</p>
-        </div>
-      </section>
+        <article class="doc">
+          <section id="install" aria-labelledby="install-title">
+            <h2 id="install-title"><small>01</small>安装</h2>
+            <ol>
+              <li>从 <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a> 下载最新的 DMG。大约 10 MB，一个通用版本同时支持 Apple 芯片和 Intel。</li>
+              <li>打开 DMG，把 Transeen 拖进“应用程序”。</li>
+              <li>从“应用程序”打开 Transeen。它常驻在菜单栏，不在程序坞里，请在菜单栏找它的图标。</li>
+            </ol>
+            <p>应用和 DMG 都用 Developer ID 签名并经过 Apple 公证，macOS 打开时不会弹出警告。同一个发布页还有 ZIP 和 SHA-256 校验值。界面语言跟随系统：简体中文、繁體中文、English、日本語、한국어、Français、Español、Deutsch。</p>
+          </section>
 
-      <section class="guide-row" id="activate" aria-labelledby="activate-title">
-        <h2 id="activate-title" data-rise>激活</h2>
-        <div class="guide-body">
-          <ol class="steps">
-            <li>在菜单栏菜单选择“激活与账号…”，或在启动面板点“激活 Transeen”。</li>
-            <li>输入激活码，格式是 TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX，然后点“激活这台 Mac”。</li>
-            <li>需要的话，展开“iTool 账号”，用 Google、GitHub 或邮箱登录并绑定授权。之后登录同一个账号即可恢复。</li>
-          </ol>
-          <p>激活只在钥匙串里保存一个随机安装 ID 和授权回执，不读取 Mac 的序列号。一个激活码对应一台 Mac，绑定账号不会多出一份授权。StupidMirror 的 SM- 和 iTool Pro 的 IT- 激活码是其他产品，不能通用。获取激活码，请到 <a href="https://github.com/LiuTianjie/Transeen/discussions">GitHub Discussions</a> 咨询。</p>
-        </div>
-      </section>
+          <section id="activate" aria-labelledby="activate-title">
+            <h2 id="activate-title"><small>02</small>激活</h2>
+            <ol>
+              <li>在菜单栏菜单中选择 <strong>激活与账号…</strong>，或在主窗口中选择 <strong>激活 Transeen</strong>。</li>
+              <li>输入激活码，格式是 <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>，然后选择 <strong>激活这台 Mac</strong>。无需登录。</li>
+              <li>如果愿意，可以用 Google、GitHub 或邮箱登录 iTool 账号并绑定授权。以后登录同一账号即可恢复。</li>
+            </ol>
+            <p>激活只在钥匙串里保存一个随机安装 ID 和一份凭证，不读取 Mac 的序列号。一个激活码对应一台 Mac，绑定账号不会多出一份授权。StupidMirror 的 SM- 和 iTool Pro 的 IT- 激活码属于其他产品，在这里不能用。想要激活码，请<a href="https://github.com/LiuTianjie/Transeen/discussions">在 GitHub Discussions 留言</a>。</p>
+          </section>
 
-      <section class="guide-row" id="permission" aria-labelledby="permission-title">
-        <h2 id="permission-title" data-rise>开启屏幕录制</h2>
-        <div class="guide-body">
-          <p>第一次截图时，Transeen 会请求“屏幕录制”权限。它只使用屏幕图像，不采集音频；只在你按下截图快捷键时读取屏幕，不保存历史，也不会持续录制。</p>
-          <ol class="steps">
-            <li>点“打开系统设置…”，或前往系统设置 → 隐私与安全性 → 屏幕与系统音频录制。</li>
-            <li>找到 Transeen，打开开关。</li>
-            <li>回到 Transeen，它会自动重新检查；点“开始框选”继续。</li>
-          </ol>
-          <p>如果已经开启但仍未生效，在同一个窗口里点“重新检查”或“重新打开”。</p>
-          <figure><img src="../../assets/permission.webp?v=257f40d15d4c" width="440" height="438" alt="权限已开启时的 Transeen 授权窗口：显示“已准备好”、可在原文与译文间切换的预览，以及“开始框选”按钮。" loading="lazy" /><figcaption>开启权限后，窗口会显示“已准备好”。</figcaption></figure>
-        </div>
-      </section>
+          <section id="permission" aria-labelledby="permission-title">
+            <h2 id="permission-title"><small>03</small>开启屏幕录制</h2>
+            <p>第一次截图时，Transeen 会请求屏幕录制权限。它只用屏幕画面，不录音，而且只在你按下截图快捷键时才截取。它不保存历史，也从不持续录屏。</p>
+            <ol>
+              <li>选择 <strong>打开系统设置…</strong>，或前往系统设置 → 隐私与安全性 → 屏幕与系统音频录制。</li>
+              <li>找到 Transeen 并打开开关。</li>
+              <li>回到 Transeen。它会自动重新检查并显示 <strong>已准备好</strong>，选择 <strong>开始框选</strong> 继续。</li>
+            </ol>
+            <p>如果开关已打开但仍不生效，在同一个窗口里点 <strong>重新检查</strong> 或 <strong>重新打开</strong>。</p>
+          </section>
 
-      <section class="guide-row" id="languages" aria-labelledby="languages-title">
-        <h2 id="languages-title" data-rise>选择语言</h2>
-        <div class="guide-body">
-          <p>启动面板里有“原文”和“译文”两个菜单。原文可以保持“自动识别”，也可以从八种语言中选一种：简体中文、繁体中文、英语、日语、韩语、法语、西班牙语和德语。任意两种之间都能互译。</p>
-          <figure><img src="../../assets/toolbar-zh.webp?v=460f60c4a137" width="552" height="93" alt="翻译完成后的 Transeen 工具栏，第二行显示翻译方向 JA → 中文和状态“已翻译 9 处”。" loading="lazy" /><figcaption>在截图上，工具下方的方向（这里是 JA → 中文）可以修改任一语言；再按一次 F1 就交换两种语言。</figcaption></figure>
-          <p>Apple 翻译的每个语言组合都需要语言包。首次打开时的新手引导，以及之后的设置 → 通用 → 翻译，会按译文语言列出所需语言包和下载状态；点“下载”即可在第一次截图前准备好。之后就在这台 Mac 上离线翻译。已下载的语言包也可以在系统设置 → 通用 → 语言与地区 → 翻译语言中查看。</p>
-        </div>
-      </section>
+          <section id="languages" aria-labelledby="languages-title">
+            <h2 id="languages-title"><small>04</small>选择语言</h2>
+            <p>主窗口有两个菜单：<strong>原文语言</strong> 和 <strong>译文语言</strong>。原文可以保持 <strong>自动识别</strong>，也可以从八种语言中选一种：简体中文、繁体中文、英语、日语、韩语、法语、西班牙语、德语。任意两种之间都能互译。</p>
+            <p>截图打开时，工具下方的方向（例如 JA → ZH）可以改任一边的语言；再按一次 <kbd>F1</kbd> 就交换两边。</p>
+            <p>Apple 翻译每一对语言都需要语言包。首次启动的引导，以及之后的设置 → 通用 → 翻译，会列出目标语言需要的语言包和状态。点 <strong>下载</strong> 提前装好，第一次截图就不用等；之后翻译完全在本机离线完成。语言包也可以在系统设置 → 通用 → 语言与地区 → 翻译语言中查看。</p>
+          </section>
 
-      <section class="guide-row" id="translate" aria-labelledby="translate-title">
-        <h2 id="translate-title" data-rise>框选翻译</h2>
-        <div class="guide-body">
-          <ol class="steps">
-            <li>按 <kbd>F1</kbd>，画面会保持静止并变暗。笔记本键盘上要按 <kbd>fn</kbd> <kbd>F1</kbd>，除非已把 F 键设为标准功能键。</li>
-            <li>悬停时会自动吸附段落、输入框或窗口，点击即可选中；也可以自己拖出一块区域。按 <kbd>Esc</kbd> 或右键取消。</li>
-            <li>还是上次那块地方？框选时按 <kbd>R</kbd>，直接选中上一次截图的区域，重启后也记得。</li>
-            <li>在原来的位置阅读译文。按 <kbd>Tab</kbd> 在原文和译文之间切换，按住<kbd>空格</kbd>可临时看原文。</li>
-            <li>框得不准？拖动截图的边或角即可调整，边框会跟着鼠标走。它从同一张冻结画面重新裁剪，标注留在原处，松手后自动重新翻译。</li>
-            <li>方向反了？截图打开时再按一次 <kbd>F1</kbd>，原文和译文的语言就会互换。</li>
-          </ol>
-          <figure><img src="../../assets/capture-read-zh.webp?v=22a77db659d7" width="552" height="403" alt="日文网店页面的一部分被截取，并在原处翻译成中文，下方是 Transeen 工具栏。" loading="lazy" /><figcaption>截图停在你框选的位置，工具栏在它下方。</figcaption></figure>
-          <p>默认只有 <kbd>F1</kbd> 在任何应用里都能用。只截图标注、不翻译，可以在菜单栏菜单里选“截图标注”，或在设置 → 快捷键里给它设一个按键；在那个窗口里按 <kbd>T</kbd> 可以再翻译。要翻译已有的图片，选择“打开图片…”或按 <kbd>⌘O</kbd>。</p>
-        </div>
-      </section>
+          <section id="translate" aria-labelledby="translate-title">
+            <h2 id="translate-title"><small>05</small>框选翻译</h2>
+            <ol>
+              <li>按 <kbd>F1</kbd>。屏幕会定格并变暗。在笔记本键盘上是 <kbd>fn</kbd> <kbd>F1</kbd>，除非你把 F 键设成了标准功能键。</li>
+              <li>移动指针会自动吸附到段落、输入框或窗口，点一下即可；也可以自己拖一个框。<kbd>Esc</kbd> 或右键取消。</li>
+              <li>和上次同一个位置？框选时按 <kbd>R</kbd>，直接沿用上一次截图的区域，重启后也有效。</li>
+              <li>译文出现在原文所在的位置，逐行翻好逐行显示。按 <kbd>Tab</kbd> 在原文和译文之间切换，按住 <kbd>空格</kbd> 临时看原文。</li>
+              <li>少框了一点？拖动截图的边或角。它会从同一张定格画面重新裁切，标注留在原处，松手后重新翻译。</li>
+              <li>方向反了？截图打开时再按一次 <kbd>F1</kbd>，两种语言会对调。</li>
+            </ol>
+            <p><kbd>F1</kbd> 是默认唯一在任何应用里都能用的快捷键。只想截图标注、不翻译，可以在菜单栏菜单中选择 <strong>截图标注</strong>，或在设置 → 快捷键中给它分配一个键；在那个窗口里按 <kbd>T</kbd> 仍可翻译。要翻译已有的图片，选择 <strong>打开图片…</strong> 或按 <kbd>⌘O</kbd>。</p>
+          </section>
 
-      <section class="guide-row" id="mark" aria-labelledby="mark-title">
-        <h2 id="mark-title" data-rise>标注</h2>
-        <div class="guide-body">
-          <p>在工具栏选择工具，或直接按键：<kbd>R</kbd> 矩形、<kbd>O</kbd> 椭圆、<kbd>A</kbd> 箭头、<kbd>P</kbd> 画笔、<kbd>V</kbd> 选择和移动。编号从 1 开始递增，撤销和重做都会保留编号。</p>
-          <figure><img src="../../assets/capture-mark-zh.webp?v=9d0294253306" width="552" height="441" alt="已翻译的截图上，价格被红框圈住，旁边有两个编号和一个橙色箭头，工具栏显示颜色和线宽。" loading="lazy" /><figcaption>标注在独立图层上，切换原文和译文不会移动它们。</figcaption></figure>
-          <p>可以选六种颜色和三种线宽，也可以打开调节面板自选颜色、设置 1 到 10 的线宽。<kbd>⌘Z</kbd> 和 <kbd>⌘⇧Z</kbd> 撤销与重做，<kbd>Delete</kbd> 删除选中的标注。</p>
-        </div>
-      </section>
+          <section id="mark" aria-labelledby="mark-title">
+            <h2 id="mark-title"><small>06</small>标注</h2>
+            <p>在工具栏选工具，或直接按键：<kbd>R</kbd> 矩形、<kbd>O</kbd> 椭圆、<kbd>A</kbd> 箭头、<kbd>P</kbd> 画笔、<kbd>V</kbd> 选择和移动。序号标注从 1 开始递增，撤销和重做后编号不变。</p>
+            <p>有六种颜色和三种粗细可选，也可以打开滑块选任意颜色和 1 到 10 的线宽。<kbd>⌘Z</kbd> 和 <kbd>⌘⇧Z</kbd> 撤销、重做，<kbd>Delete</kbd> 删除选中的标注。标注在单独的图层上，切换原文和译文时不会移动。</p>
+          </section>
 
-      <section class="guide-row" id="keep" aria-labelledby="keep-title">
-        <h2 id="keep-title" data-rise>复制、保存或钉图</h2>
-        <div class="guide-body">
-          <ul class="points">
-            <li><kbd>⌘C</kbd> 按你看到的样子复制图片，标注也在其中；翻译还没完成时也能复制。默认复制后会关闭截图；在设置中关掉“复制后关闭截图”即可保留。</li>
-            <li><kbd>⌘S</kbd> 保存为 PNG。</li>
-            <li>点工具栏上的图钉（钉到屏幕上），当前画面连同标注会变成一张独立的浮动图片，这次截图随即结束，可以马上截下一张。钉图可以拖到任意位置，也可以同时钉多张；右键可以复制、保存、切换原文和译文或关闭，钉图选中时按 <kbd>Esc</kbd> 也能关闭。</li>
-            <li>“文字”会并排显示完整译文和原文，可以直接复制。</li>
-          </ul>
-          <figure><img src="../../assets/capture-keep-zh.webp?v=ecea777b7771" width="552" height="403" alt="标注后的截图，复制按钮显示“已复制”。" loading="lazy" /></figure>
-        </div>
-      </section>
+          <section id="keep" aria-labelledby="keep-title">
+            <h2 id="keep-title"><small>07</small>复制、保存或钉图</h2>
+            <ul>
+              <li><kbd>⌘C</kbd> 按你看到的样子复制图片，包括标注，即使译文还在生成也可以。默认复制后会关闭截图；在设置中关掉 <strong>复制后关闭截图</strong> 即可保留。</li>
+              <li><kbd>⌘S</kbd> 存成 PNG。</li>
+              <li><strong>钉到屏幕</strong> 把图片留在屏幕上，成为一个独立的浮动窗口，同时结束本次截图，马上可以截下一张。钉图可以拖到任何地方，想留几张都行；右键可复制、保存、切换原文和译文或关闭。</li>
+              <li><strong>文字</strong> 打开完整译文，与原文并排，方便复制。</li>
+            </ul>
+          </section>
 
-      <section class="guide-row" id="model" aria-labelledby="model-title">
-        <h2 id="model-title" data-rise>使用自己的模型</h2>
-        <div class="guide-body">
-          <p>默认使用 Apple 翻译。要改用模型，打开设置（<kbd>⌘,</kbd>），把“翻译服务”设为“大模型 / 本地模型服务”，然后填写：</p>
-          <ul class="points">
-            <li>接口地址：完整的 chat completions 地址，例如 <code>https://api.openai.com/v1/chat/completions</code>；</li>
-            <li>模型名称；</li>
-            <li>API Key：服务需要时填写，再点“保存密钥”，密钥会存进钥匙串。</li>
-          </ul>
-          <p>本机运行的服务也可以用。本地地址可以用 HTTP，并且不用填密钥，例如 Ollama 的 <code>http://localhost:11434/v1/chat/completions</code>，或 LM Studio 的 <code>http://localhost:1234/v1/chat/completions</code>。远程地址必须使用 HTTPS。</p>
-          <p>模型模式只发送识别出的文字，不发送截图。请求失败时，Transeen 会显示错误并保留原图。</p>
-        </div>
-      </section>
+          <section id="model" aria-labelledby="model-title">
+            <h2 id="model-title"><small>08</small>选择翻译服务</h2>
+            <p>打开设置（<kbd>⌘,</kbd>）→ 通用 → 翻译，选择 <strong>翻译服务</strong>。文字识别始终在本机完成。</p>
+            <h3>Apple 本机翻译</h3>
+            <p>默认选项。使用第 4 步的语言包，离线运行，不向任何地方发送内容。文字每 8 行一组翻译，长截图会边看边填满。</p>
+            <h3>本地翻译模型</h3>
+            <p>下载 Index-Translate 2B 或 Hy-MT2 1.8B，每个约 1.1 GB。模型在 Transeen 内部运行，不需要账号、不需要另装应用，也不联网。需要 Apple 芯片的 Mac。首次翻译要几秒钟加载模型，空闲 5 分钟后自动释放内存。<strong>删除模型</strong> 可以再移除它。</p>
+            <h3>大模型接口</h3>
+            <p>任何兼容 OpenAI 的 chat/completions 接口。依次填写：</p>
+            <ul>
+              <li><strong>接口地址</strong>，完整 URL，例如 <code>https://api.openai.com/v1/chat/completions</code>；</li>
+              <li><strong>模型名称</strong>；</li>
+              <li>服务需要时填写 API Key，然后点 <strong>保存密钥</strong>，它会存进钥匙串。<strong>测试连接</strong> 可以检查是否可用。</li>
+            </ul>
+            <p>本机上的服务也可以：本地地址可以用 HTTP，也不需要密钥，例如 Ollama 的 <code>http://localhost:11434/v1/chat/completions</code>。远程地址必须用 HTTPS。这种方式只发送识别出的文字，从不发送截图。请求失败时，Transeen 会显示错误并保留原图。</p>
+          </section>
 
-      <section class="guide-row" id="shortcuts" aria-labelledby="shortcuts-title">
-        <h2 id="shortcuts-title" data-rise>键盘快捷键</h2>
-        <div class="guide-body">
-          <table class="keys">
-            <thead><tr><th scope="col">默认按键</th><th scope="col">操作</th></tr></thead>
-            <tbody>
-              <tr><td><kbd>F1</kbd></td><td>截图翻译</td></tr>
-              <tr><td>框选时按 <kbd>R</kbd></td><td>选中上次截图的区域</td></tr>
-              <tr><td>截图打开时按 <kbd>F1</kbd></td><td>交换语言；“截图标注”截的图则开始翻译</td></tr>
-              <tr><td><kbd>Tab</kbd></td><td>切换原文和译文</td></tr>
-              <tr><td>按住<kbd>空格</kbd></td><td>临时看原文</td></tr>
-              <tr><td><kbd>T</kbd></td><td>翻译或重试</td></tr>
-              <tr><td><kbd>D</kbd></td><td>交换语言</td></tr>
-              <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>矩形、椭圆、箭头、画笔</td></tr>
-              <tr><td><kbd>V</kbd></td><td>选择和移动标注</td></tr>
-              <tr><td><kbd>⌘C</kbd></td><td>复制图片</td></tr>
-              <tr><td><kbd>⌘S</kbd></td><td>保存为 PNG</td></tr>
-              <tr><td><kbd>⌘Z</kbd> <kbd>⌘⇧Z</kbd></td><td>撤销、重做</td></tr>
-              <tr><td><kbd>Esc</kbd></td><td>关闭截图，或取消框选</td></tr>
-              <tr><td><kbd>⌘O</kbd></td><td>打开图片</td></tr>
-              <tr><td><kbd>⌘,</kbd></td><td>打开设置</td></tr>
-            </tbody>
-          </table>
-          <p>所有快捷键都可以在设置 → 快捷键中修改；“恢复全部默认快捷键”会还原默认值。“截图标注”和“全局对照原文”默认没有按键，需要时在这里添加。旧版本保存的快捷键不会保留，升级后统一从 <kbd>F1</kbd> 开始。</p>
-        </div>
-      </section>
+          <section id="shortcuts" aria-labelledby="shortcuts-title">
+            <h2 id="shortcuts-title"><small>09</small>键盘快捷键</h2>
+            <div class="table-wrap">
+              <table class="keys-table">
+                <thead><tr><th scope="col">默认按键</th><th scope="col">作用</th></tr></thead>
+                <tbody>
+                  <tr><td><kbd>F1</kbd></td><td>框选区域并翻译</td></tr>
+                  <tr><td>框选时按 <kbd>R</kbd></td><td>沿用上一次截图的区域</td></tr>
+                  <tr><td>截图打开时按 <kbd>F1</kbd></td><td>交换语言，或翻译“截图标注”的截图</td></tr>
+                  <tr><td><kbd>Tab</kbd></td><td>切换原文和译文</td></tr>
+                  <tr><td>按住 <kbd>空格</kbd></td><td>临时查看原文</td></tr>
+                  <tr><td><kbd>T</kbd></td><td>翻译或重试</td></tr>
+                  <tr><td><kbd>D</kbd></td><td>交换语言</td></tr>
+                  <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>矩形、椭圆、箭头、画笔</td></tr>
+                  <tr><td><kbd>V</kbd></td><td>选择和移动标注</td></tr>
+                  <tr><td><kbd>⌘C</kbd></td><td>复制图片</td></tr>
+                  <tr><td><kbd>⌘S</kbd></td><td>存为 PNG</td></tr>
+                  <tr><td><kbd>⌘Z</kbd> <kbd>⌘⇧Z</kbd></td><td>撤销、重做</td></tr>
+                  <tr><td><kbd>Esc</kbd></td><td>关闭截图，或取消框选</td></tr>
+                  <tr><td><kbd>⌘O</kbd></td><td>打开图片</td></tr>
+                  <tr><td><kbd>⌘,</kbd></td><td>打开设置</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>每一项都可以在设置 → 快捷键中修改，<strong>恢复全部默认快捷键</strong> 可以还原。<strong>截图标注</strong> 和 <strong>全局对照原文</strong> 默认没有按键，需要在那里设置。全局快捷键需要搭配 <kbd>⌘</kbd>、<kbd>⌥</kbd> 或 <kbd>⌃</kbd>，也可以用 F 功能键。</p>
+          </section>
 
-      <section class="guide-row" id="troubleshooting" aria-labelledby="troubleshooting-title">
-        <h2 id="troubleshooting-title" data-rise>常见问题排查</h2>
-        <div class="guide-body">
-          <h3>按 <kbd>F1</kbd> 没有反应</h3>
-          <p>笔记本键盘上的 F1 默认调节亮度，要同时按住 <kbd>fn</kbd>，或在系统设置 → 键盘 → 键盘快捷键 → 功能键里打开“将 F1、F2 等键用作标准功能键”。也可能有其他应用占用了 F1；无法注册时 Transeen 会提示。在设置 → 快捷键中换一个按键，或从菜单栏菜单选择“截图翻译”。</p>
-          <h3>截图是空的，或一直提示授权</h3>
-          <p>打开菜单栏菜单里的“屏幕权限…”。如果系统设置中 Transeen 已经开启，先关闭再重新开启，然后点“重新打开”。</p>
-          <h3>Apple 翻译没有开始</h3>
-          <p>这个语言组合的语言包可能还没下载或仍在下载。在设置 → 通用 → 翻译中下载，或到系统设置 → 通用 → 语言与地区 → 翻译语言中查看，稍后再试。</p>
-          <h3>部分文字翻译不对</h3>
-          <p>密集排版、公式和专业术语可能影响识别或翻译。按 <kbd>Tab</kbd> 对照原文，打开“文字”查看完整内容，或者框选更小的区域。</p>
-        </div>
-      </section>
+          <section id="troubleshooting" aria-labelledby="troubleshooting-title">
+            <h2 id="troubleshooting-title"><small>10</small>常见问题排查</h2>
+            <h3>按 F1 没有反应</h3>
+            <p>在笔记本键盘上，F1 默认调节亮度，需要按住 <kbd>fn</kbd>，或在系统设置 → 键盘 → 键盘快捷键 → 功能键中打开“将 F1、F2 等键用作标准功能键”。也可能是其他应用占用了 F1，Transeen 无法注册快捷键时会提示你。可以在设置 → 快捷键中换一个键，或从菜单栏菜单的 <strong>截图翻译</strong> 开始。</p>
+            <h3>截图是空的，或一直提示授权</h3>
+            <p>打开菜单栏菜单中的 <strong>屏幕权限…</strong>。如果系统设置里 Transeen 已经是打开的，先关掉再打开，然后选择 <strong>重新打开</strong>。</p>
+            <h3>Apple 翻译没有开始</h3>
+            <p>这对语言的语言包可能没有下载或还在下载。在设置 → 通用 → 翻译中下载，或到系统设置 → 通用 → 语言与地区 → 翻译语言中查看，然后再试一次。</p>
+            <h3>本地模型启动不了</h3>
+            <p>先重试一次。仍不行的话，在设置 → 通用 → 翻译中删除模型后重新下载；校验失败的下载会被自动删除。</p>
+            <h3>部分文字翻译不对</h3>
+            <p>密集排版、公式和专业术语可能让识别或翻译出错。按 <kbd>Tab</kbd> 对照原文，打开 <strong>文字</strong> 查看完整译文，或框选更小的区域。</p>
+          </section>
 
-      <section class="guide-row" id="build" aria-labelledby="build-title">
-        <h2 id="build-title" data-rise>从源码构建</h2>
-        <div class="guide-body">
-          <p>Transeen 采用 <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 许可证</a>。需要 Xcode 26.4 或更高版本、Swift 6 和 XcodeGen。</p>
-          <pre><code>brew install xcodegen
+          <section id="build" aria-labelledby="build-title">
+            <h2 id="build-title"><small>11</small>从源码构建</h2>
+            <p>Transeen 以 <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 许可证</a>开源。需要 Xcode 26.4 或更高版本、Swift 6 和 XcodeGen。</p>
+            <pre><code>brew install xcodegen
 git clone https://github.com/LiuTianjie/Transeen.git
 cd Transeen
 ./scripts/build.sh</code></pre>
-          <p>应用生成在 <code>dist/Transeen.app</code>。没有 Developer ID 身份时会使用临时签名；设置 <code>TRANSEEN_SIGNING_IDENTITY</code> 可得到签名构建。测试脚本是 <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code> 和 <code>./scripts/test-lifecycle.sh</code>。托管的激活服务只用于官方应用，独立分发需要配置自己的授权后端。</p>
-        </div>
-      </section>
+            <p>应用会生成在 <code>dist/Transeen.app</code>。没有 Developer ID 证书时使用临时签名；设置 <code>TRANSEEN_SIGNING_IDENTITY</code> 可生成正式签名的版本。测试脚本是 <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code> 和 <code>./scripts/test-lifecycle.sh</code>。托管的激活服务只属于官方版本，独立分发需要自己的授权后端。</p>
+          </section>
+        </article>
+      </div>
 
       <section class="guide-next" aria-labelledby="next-title">
-        <h2 id="next-title">下载 Transeen 0.11.0</h2>
-        <p>适用于 macOS 26 或更高版本的通用应用，已签名并通过公证。</p>
-        <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">下载 Mac 版</a>
+        <div class="wrap">
+          <h2 id="next-title">下载 Transeen 0.11.1</h2>
+          <p>一个通用版本，支持 macOS 26 或更高版本，已签名并经 Apple 公证。</p>
+          <div class="hero-actions">
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>下载 Mac 版</a>
+            <a class="link-arrow" href="../">返回首页</a>
+          </div>
+        </div>
       </section>
     </main>
 
     <footer class="footer">
-      <div class="footer-grid">
-        <nav aria-label="产品">
-          <h2>产品</h2>
-          <ul>
-            <li><a href="https://github.com/LiuTianjie/Transeen/releases/latest">下载</a></li>
-            <li><a href="../#how">使用方式</a></li>
-            <li><a href="../#languages">语言</a></li>
-            <li><a href="../#activate">激活</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="帮助">
-          <h2>帮助</h2>
-          <ul>
-            <li><a href="./">使用指南</a></li>
-            <li><a href="#shortcuts">键盘快捷键</a></li>
-            <li><a href="../#faq">常见问题</a></li>
-            <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md">授权说明</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="源代码">
-          <h2>源代码</h2>
-          <ul>
-            <li><a href="https://github.com/LiuTianjie/Transeen">GitHub</a></li>
-            <li><a href="https://github.com/LiuTianjie/Transeen/releases">版本发布</a></li>
-            <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md">更新记录</a></li>
-            <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 许可证</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="iTool 家族">
-          <h2>iTool 家族</h2>
-          <ul>
-            <li><a href="https://itool.tech/">iTool</a></li>
-            <li><a href="https://stupidmirror.itool.tech/zh/">StupidMirror</a></li>
-            <li><a href="../../guide/" hreflang="en" lang="en">Setup guide in English</a></li>
-          </ul>
-        </nav>
-        <div class="footer-contact">
-          <p>咨询与激活码：<a href="https://github.com/LiuTianjie/Transeen/discussions">GitHub Discussions</a>。</p>
-          <p>遇到问题？<a href="https://github.com/LiuTianjie/Transeen/issues">提交 issue</a>。</p>
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="../"><img src="../../assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
+            <p>原生 Mac 应用，把屏幕上的文字在原处翻译。来自 iTool。</p>
+          </div>
+          <nav aria-labelledby="footer-product">
+            <h2 id="footer-product">产品</h2>
+            <ul>
+              <li><a href="../#how">工作原理</a></li>
+              <li><a href="../#tools">工具</a></li>
+              <li><a href="../#languages">语言</a></li>
+              <li><a href="../#activation">激活</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-help">
+            <h2 id="footer-help">帮助</h2>
+            <ul>
+              <li><a href="./">使用指南</a></li>
+              <li><a href="#shortcuts">键盘快捷键</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/discussions">提问</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/issues">报告问题</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-source">
+            <h2 id="footer-source">源码</h2>
+            <ul>
+              <li><a href="https://github.com/LiuTianjie/Transeen">GitHub</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/releases">版本发布</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md">更新日志</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md">授权说明</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-more">
+            <h2 id="footer-more">iTool 的其他产品</h2>
+            <ul>
+              <li><a href="https://itool.tech/">iTool</a></li>
+              <li><a href="https://stupidmirror.itool.tech/">StupidMirror</a></li>
+              <li><a href="../../guide/" hreflang="en" lang="en">English guide</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="footer-end">
+          <p>© 2026 LiuTianjie。以 MIT 许可证发布。</p>
+          <p>Mac、macOS 和 Apple 芯片是 Apple Inc. 的商标。</p>
         </div>
       </div>
-      <div class="footer-end">
-        <p>© 2026 LiuTianjie。Transeen 是一款在原处翻译屏幕内容的 Mac 原生应用。</p>
-        <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">下载</a>
-      </div>
     </footer>
-    <script src="../../assets/site.js?v=1ec42738fe14" defer></script>
+    <script src="../../assets/site.js?v=58b37f6c2bf3" defer></script>
   </body>
 </html>

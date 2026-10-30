@@ -5,11 +5,11 @@
     <script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Transeen: Translate Text on Your Mac Screen, in Place</title>
-    <meta name="description" content="Press F1, select any part of your Mac screen and read it in your language, inside the same picture. On-device OCR, Apple Translation or your own model. macOS 26+." />
-    <meta name="keywords" content="screenshot translator for Mac, translate screen on Mac, screen translation app, OCR translation, translate text in images, in-place translation, Transeen" />
+    <meta name="description" content="Press F1, select any part of your Mac screen and read it in your language, inside the same picture. On-device OCR, Apple Translation, a built-in local model or your own. macOS 26+." />
+    <meta name="keywords" content="screenshot translator for Mac, translate screen on Mac, screen translation app, OCR translation, translate text in images, in-place translation, offline translation, Transeen" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="LiuTianjie" />
-    <meta name="theme-color" content="#0a0d0c" />
+    <meta name="theme-color" content="#08090a" />
     <meta name="color-scheme" content="dark" />
     <meta name="applicable-device" content="pc,mobile" />
     <meta name="format-detection" content="telephone=no" />
@@ -22,18 +22,18 @@
     <meta property="og:url" content="https://transeen.itool.tech/" />
     <meta property="og:title" content="Transeen: translate your Mac screen, in place" />
     <meta property="og:description" content="Press F1, select any part of the screen and Transeen redraws the text in your language, inside the same picture." />
-    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image.jpg?v=a123323a9cde" />
+    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image.jpg?v=ae1b9d808442" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="A documentation page on a Mac, its selected part translated into Chinese in place, with the Transeen toolbar below it" />
+    <meta property="og:image:alt" content="A Japanese train booking page on a Mac, its selected card translated into English in place, with the Transeen toolbar below it" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="zh_CN" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Transeen: translate your Mac screen, in place" />
     <meta name="twitter:description" content="Press F1, select any part of the screen and Transeen redraws the text in your language, inside the same picture." />
-    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image.jpg?v=a123323a9cde" />
-    <meta name="twitter:image:alt" content="A documentation page on a Mac, its selected part translated into Chinese in place, with the Transeen toolbar below it" />
+    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image.jpg?v=ae1b9d808442" />
+    <meta name="twitter:image:alt" content="A Japanese train booking page on a Mac, its selected card translated into English in place, with the Transeen toolbar below it" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -60,7 +60,7 @@
             "@id": "https://transeen.itool.tech/#webpage",
             "url": "https://transeen.itool.tech/",
             "name": "Transeen: Translate Text on Your Mac Screen, in Place",
-            "description": "Press F1, select any part of your Mac screen and read it in your language, inside the same picture. On-device OCR, Apple Translation or your own model. macOS 26+.",
+            "description": "Press F1, select any part of your Mac screen and read it in your language, inside the same picture. On-device OCR, Apple Translation, a built-in local model or your own. macOS 26+.",
             "inLanguage": "en",
             "isPartOf": { "@id": "https://transeen.itool.tech/#website" },
             "about": { "@id": "https://transeen.itool.tech/#software" },
@@ -77,24 +77,23 @@
             "applicationSubCategory": "Screen translation",
             "operatingSystem": "macOS 26 or later",
             "processorRequirements": "Apple silicon or Intel",
-            "softwareVersion": "0.11.0",
+            "softwareVersion": "0.11.1",
             "datePublished": "2026-10-28",
+            "dateModified": "2026-10-30",
             "fileSize": "9.6 MB",
             "downloadUrl": "https://github.com/LiuTianjie/Transeen/releases/latest",
             "installUrl": "https://github.com/LiuTianjie/Transeen/releases/latest",
-            "releaseNotes": "https://github.com/LiuTianjie/Transeen/releases",
+            "releaseNotes": "https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md",
             "softwareHelp": { "@type": "CreativeWork", "url": "https://transeen.itool.tech/guide/" },
             "image": "https://transeen.itool.tech/assets/og-image.jpg",
-            "screenshot": [
-              "https://transeen.itool.tech/assets/capture-read-en.webp",
-              "https://transeen.itool.tech/assets/capture-mark-en.webp",
-              "https://transeen.itool.tech/assets/select-en.webp"
-            ],
+            "screenshot": ["https://transeen.itool.tech/assets/preview.webp"],
             "featureList": [
               "Translate any selected screen region in place, keeping position, size and color",
               "On-device text recognition with Apple Vision",
-              "Apple on-device translation or any OpenAI-compatible model",
-              "Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German",
+              "Apple on-device translation, a built-in local translation model, or any OpenAI-compatible endpoint",
+              "Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German, in any direction",
+              "An interface in the same eight languages",
+              "Translations appear as they arrive, with a count in the toolbar",
               "Compare original and translation with Tab, or hold Space to peek",
               "Pull an edge of a capture to re-crop and translate it again",
               "Boxes, ellipses, arrows, pen strokes and numbered notes on a separate layer",
@@ -123,33 +122,30 @@
             "inLanguage": "en",
             "isPartOf": { "@id": "https://transeen.itool.tech/#website" },
             "mainEntity": [
-              { "@type": "Question", "name": "Which Macs does Transeen run on?", "acceptedAnswer": { "@type": "Answer", "text": "macOS 26 or later, on Apple silicon or Intel: it is one universal app. The app's own interface is in Simplified Chinese for now." } },
-              { "@type": "Question", "name": "Does it work offline?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, once it is activated. Capture, annotation and Apple translation work offline after the language packs are downloaded. An activation stays valid through network outages and is checked again about once a day. Model mode needs a connection to your endpoint." } },
-              { "@type": "Question", "name": "What leaves my Mac?", "acceptedAnswer": { "@type": "Answer", "text": "With Apple translation, nothing: the screenshot, the recognized text and the translation stay on this Mac. In model mode only the recognized text goes to the endpoint you set, never the screenshot. Activation sends your code and a random installation ID, and update checks contact GitHub." } },
-              { "@type": "Question", "name": "Can I use my own model?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Enter any OpenAI-compatible chat completions URL, a model name and, if it needs one, a key, which is kept in your Keychain. Remote endpoints must use HTTPS; a server on localhost can use HTTP without a key." } },
-              { "@type": "Question", "name": "Can it translate an image I already have?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Choose 打开图片… (Open image) in the launcher or press ⌘O; the picture opens in the same window, with the same tools." } },
-              { "@type": "Question", "name": "How accurate is it?", "acceptedAnswer": { "@type": "Answer", "text": "That depends on the translation provider. Dense layouts, formulas and specialist terms can need correcting, so compare with the original using Tab, or open the full text, before you rely on a detail." } },
+              { "@type": "Question", "name": "Which Macs does Transeen run on?", "acceptedAnswer": { "@type": "Answer", "text": "macOS 26 or later, on Apple silicon or Intel: it is one universal app. The local translation models need Apple silicon. The interface follows your language: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español or Deutsch." } },
+              { "@type": "Question", "name": "Does it work offline?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, once it is activated. Capture, annotation, Apple Translation and the local models work offline after their language packs or model are downloaded. An activation stays valid through network outages and is checked again about once a day. An LLM API needs a connection to your endpoint." } },
+              { "@type": "Question", "name": "What leaves my Mac?", "acceptedAnswer": { "@type": "Answer", "text": "With Apple Translation or a local model, nothing: the screenshot, the recognized text and the translation stay on this Mac. With an LLM API only the recognized text goes to the endpoint you set, never the screenshot. Activation sends your code and a random installation ID, and update checks contact GitHub." } },
+              { "@type": "Question", "name": "Can I use a different model?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. In Settings → General → Translation, download Index-Translate 2B or Hy-MT2 1.8B (about 1.1 GB each), which run inside Transeen, or enter any OpenAI-compatible chat/completions endpoint, a model name and, if it needs one, a key kept in your Keychain. Remote endpoints must use HTTPS; a server on localhost can use HTTP without a key." } },
+              { "@type": "Question", "name": "Can it translate an image I already have?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Choose Open Image… in the launcher or press ⌘O; the picture opens in the same window, with the same tools." } },
+              { "@type": "Question", "name": "How accurate is it?", "acceptedAnswer": { "@type": "Answer", "text": "That depends on the translation service. Dense layouts, formulas and specialist terms can need correcting, so compare with the original using Tab, or open the full text, before you rely on a detail." } },
               { "@type": "Question", "name": "Is Transeen open source?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, under the MIT license, commercial use included. The official app needs a TR- code; the source license does not include the hosted activation service, so independent builds bring their own." } },
-              { "@type": "Question", "name": "How do I update?", "acceptedAnswer": { "@type": "Answer", "text": "Choose 检查更新… (Check for updates) in the menu bar or the launcher. Transeen checks GitHub Releases and opens the download when a newer version exists." } }
+              { "@type": "Question", "name": "How do I update?", "acceptedAnswer": { "@type": "Answer", "text": "Choose Check for Updates… in the menu bar or the launcher. Transeen checks GitHub Releases and opens the download when a newer version exists." } }
             ]
           }
         ]
       }
     </script>
     <link rel="icon" href="favicon.ico" sizes="48x48" />
-    <link rel="icon" href="assets/app-icon.svg?v=e38c2e38ac25" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=f2374488919f" />
+    <link rel="icon" href="assets/app-icon.svg?v=8d9ae33a2b93" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=a9e04b962aeb" />
     <link rel="manifest" href="site.webmanifest" />
     <link rel="preload" href="assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="assets/page-ja.webp?v=d83ea075cf93" as="image" fetchpriority="high" />
-    <link rel="stylesheet" href="assets/site.css?v=9305b8b71568" />
-    <link rel="stylesheet" href="assets/ui.css?v=9c3958829800" />
+    <link rel="stylesheet" href="assets/site.css?v=0ba230f96315" />
     <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
     <!-- part:sprite -->
     <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;overflow:hidden">
-      <!-- Toolbar glyphs, drawn on a 20-point grid to sit where the app's SF Symbols sit. -->
       <symbol id="ui-cursorarrow" viewBox="0 0 20 20">
         <path d="M5.6 2.9v12.8l3.2-3 2.2 4.6 2.1-.9-2.2-4.5 4.5-.3Z" fill="currentColor" stroke="currentColor" stroke-width="0.7" stroke-linejoin="round" />
       </symbol>
@@ -175,10 +171,6 @@
       <symbol id="ui-pin" viewBox="0 0 20 20">
         <path d="M7 3.4h6M8.2 3.4v5.3l-2.6 2.9h8.8l-2.6-2.9V3.4M10 11.6v5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
       </symbol>
-      <symbol id="ui-pin-fill" viewBox="0 0 20 20">
-        <path d="M7.5 2.7h5a.7.7 0 0 1 0 1.4h-.6v4.4l2.5 2.7c.4.5.1 1.2-.5 1.2H6.1c-.6 0-.9-.7-.5-1.2l2.5-2.7V4.1h-.6a.7.7 0 0 1 0-1.4Z" fill="currentColor" />
-        <path d="M10 12v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-      </symbol>
       <symbol id="ui-ellipsis" viewBox="0 0 20 20">
         <circle cx="4.4" cy="10" r="1.35" fill="currentColor" /><circle cx="10" cy="10" r="1.35" fill="currentColor" /><circle cx="15.6" cy="10" r="1.35" fill="currentColor" />
       </symbol>
@@ -198,433 +190,610 @@
           <path d="M2.7 10h14.6M3.9 6.2h12.2M3.9 13.8h12.2" />
         </g>
       </symbol>
-      <symbol id="ui-chevron" viewBox="0 0 20 20">
-        <path d="M6.6 8.4 10 11.8l3.4-3.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-      </symbol>
-      <symbol id="ui-sliders" viewBox="0 0 20 20">
-        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
-          <path d="M3 5.8h7.6M14.2 5.8H17M3 10h2.8M9.4 10H17M3 14.2h8.6M15.2 14.2H17" />
-          <circle cx="12.4" cy="5.8" r="1.8" /><circle cx="7.6" cy="10" r="1.8" /><circle cx="13.4" cy="14.2" r="1.8" />
-        </g>
-      </symbol>
-      <symbol id="ui-undo" viewBox="0 0 20 20">
-        <path d="M7.6 4.6 4 8.2l3.6 3.6M4 8.2h8.2a3.9 3.9 0 0 1 0 7.8H9.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      </symbol>
-      <symbol id="ui-redo" viewBox="0 0 20 20">
-        <path d="M12.4 4.6 16 8.2l-3.6 3.6M16 8.2H7.8a3.9 3.9 0 0 0 0 7.8h2.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-      </symbol>
-      <symbol id="ui-trash" viewBox="0 0 20 20">
-        <path d="M3.8 5.4h12.4M8 5.4V4h4v1.4M5.4 5.4l.8 10.3c.1.8.7 1.3 1.4 1.3h4.8c.7 0 1.3-.5 1.4-1.3l.8-10.3M8.4 8.4V14M11.6 8.4V14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-      </symbol>
-      <symbol id="ui-save" viewBox="0 0 20 20">
-        <path d="M10 3.2v9.2M6.6 9.2 10 12.6l3.4-3.4M6.4 6.6H5.2c-.8 0-1.4.6-1.4 1.4v7.6c0 .8.6 1.4 1.4 1.4h9.6c.8 0 1.4-.6 1.4-1.4V8c0-.8-.6-1.4-1.4-1.4h-1.2" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" />
+      <symbol id="ui-swap" viewBox="0 0 20 20">
+        <path d="M6.6 4 3.4 7.2l3.2 3.2M3.4 7.2h12.2M13.4 9.6l3.2 3.2-3.2 3.2M16.6 12.8H4.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
       </symbol>
       <symbol id="ui-viewfinder" viewBox="0 0 20 20">
         <path d="M3.4 7V5.2c0-1 .8-1.8 1.8-1.8H7M13 3.4h1.8c1 0 1.8.8 1.8 1.8V7M16.6 13v1.8c0 1-.8 1.8-1.8 1.8H13M7 16.6H5.2c-1 0-1.8-.8-1.8-1.8V13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
       </symbol>
-      <symbol id="ui-swap" viewBox="0 0 20 20">
-        <path d="M6.6 4 3.4 7.2l3.2 3.2M3.4 7.2h12.2M13.4 9.6l3.2 3.2-3.2 3.2M16.6 12.8H4.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-      </symbol>
-      <symbol id="ui-retry" viewBox="0 0 20 20">
-        <path d="M15.8 9.6a5.9 5.9 0 1 1-1.8-4.3M14.8 2.8v3.4h-3.4" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
-      </symbol>
-      <symbol id="ui-translate" viewBox="0 0 20 20">
-        <path d="M2.8 5.2h8.4M7 3.4v1.8M9.6 5.2c-.6 2.9-2.5 5.3-5.6 6.8M5.4 7.6c1 1.8 2.6 3.2 4.6 4M10.4 16.6l3.2-7.6 3.2 7.6M11.6 14h4" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" />
-      </symbol>
-      <symbol id="ui-spinner" viewBox="0 0 20 20">
-        <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-          <path d="M10 3.4v3" opacity="1" /><path d="M14.7 5.3l-2.1 2.1" opacity=".86" /><path d="M16.6 10h-3" opacity=".72" /><path d="M14.7 14.7l-2.1-2.1" opacity=".58" />
-          <path d="M10 16.6v-3" opacity=".46" /><path d="M5.3 14.7l2.1-2.1" opacity=".36" /><path d="M3.4 10h3" opacity=".28" /><path d="M5.3 5.3l2.1 2.1" opacity=".22" />
-        </g>
-      </symbol>
-
-      <!-- Pointers for the demonstrations, after the macOS arrow, crosshair and resize cursors. -->
       <symbol id="cur-arrow" viewBox="0 0 24 24">
         <path d="M4.5 2.5v16.4l4.2-4 2.9 6.6 3-1.3-2.8-6.4h5.9Z" fill="#000" stroke="#fff" stroke-width="1.3" stroke-linejoin="round" />
       </symbol>
-      <symbol id="cur-cross" viewBox="0 0 24 24">
-        <path d="M12 2.5v19M2.5 12h19" stroke="#fff" stroke-width="3" stroke-linecap="square" />
-        <path d="M12 3v18M3 12h18" stroke="#000" stroke-width="1" />
+      <symbol id="ui-download" viewBox="0 0 20 20">
+        <path d="M10 3.5v9.2M6.4 9.3 10 12.9l3.6-3.6M4.2 16.2h11.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
       </symbol>
-      <symbol id="cur-resize" viewBox="0 0 24 24">
-        <path d="M12 2.5 7 7.6h3.4v8.8H7l5 5.1 5-5.1h-3.4V7.6H17Z" fill="#000" stroke="#fff" stroke-width="1.3" stroke-linejoin="round" />
+      <symbol id="ui-lock" viewBox="0 0 20 20">
+        <rect x="4.2" y="8.6" width="11.6" height="8.4" rx="2" fill="none" stroke="currentColor" stroke-width="1.4" />
+        <path d="M6.8 8.6V6.4a3.2 3.2 0 0 1 6.4 0v2.2" fill="none" stroke="currentColor" stroke-width="1.4" />
       </symbol>
-      <symbol id="cur-resize-x" viewBox="0 0 24 24">
-        <path d="M2.5 12 7.6 7v3.4h8.8V7l5.1 5-5.1 5v-3.4H7.6V17Z" fill="#000" stroke="#fff" stroke-width="1.3" stroke-linejoin="round" />
+      <symbol id="ui-replay" viewBox="0 0 20 20">
+        <path d="M4.6 10a5.4 5.4 0 1 0 1.6-3.8M4.4 3.6v3h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-crop" viewBox="0 0 20 20">
+        <path d="M6 2.8V14h11.2M2.8 6H14v11.2" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
       </symbol>
     </svg>
     <!-- /part:sprite -->
     <a class="skip" href="#main">Skip to content</a>
     <header class="nav">
-      <a class="wordmark" href="./" aria-label="Transeen home"><img src="assets/app-icon.png?v=417357bd4eed" width="30" height="30" alt="" />Transeen</a>
-      <nav class="nav-links" aria-label="Main">
-        <a class="nav-optional" href="#how">How it works</a>
-        <a class="nav-optional" href="#work">Tools</a>
-        <a class="nav-optional" href="#languages">Languages</a>
-        <a href="#activate">Activation</a>
-        <a href="guide/">Guide</a>
-        <a href="zh/" hreflang="zh-CN" lang="zh-CN">中文</a>
-      </nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Transeen home"><img src="assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
+        <nav class="nav-links" aria-label="Main">
+          <a href="#how">How it works</a>
+          <a href="#tools">Tools</a>
+          <a href="#languages">Languages</a>
+          <a href="#activation">Activation</a>
+          <a href="guide/">Guide</a>
+        </nav>
+        <div class="nav-end">
+          <a class="nav-lang" href="zh/" hreflang="zh-CN" lang="zh-CN">中文</a>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/latest">Download</a>
+        </div>
+      </div>
     </header>
 
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
-        <h1 class="hero-title" id="hero-title" data-load>Translate your Mac<br /> screen, in place</h1>
-        <div class="hero-copy">
-          <p class="hero-lead" data-load style="--i: 1">Press <kbd>F1</kbd> and drag across anything you can’t read. Transeen redraws it in your language, inside the same picture.</p>
-          <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest" data-load style="--i: 2">Download for Mac</a>
-          <p class="hero-note" data-load style="--i: 3">For macOS 26 or later, with a <a class="text-link nowrap" href="#activate">TR- activation code</a>.</p>
-        </div>
-        <div class="stage hero-stage" data-load style="--i: 2">
-          <button class="keycaps" type="button" data-shortcut aria-label="F1: start a selection, or swap the languages of an open capture"><kbd>F1</kbd></button>
-          <div class="screen" data-ui data-screen="hero" data-target="en" tabindex="0" role="group" aria-label="Transeen working on a Japanese camera shop page" aria-describedby="hero-help">
-            <div class="screen-world">
-              <img class="screen-page" src="assets/page-ja.webp?v=d83ea075cf93" width="800" height="729" alt="A Japanese web shop listing a Sora 35 rangefinder camera for ¥48,000, with its condition, stock and an Add to cart button." draggable="false" fetchpriority="high" />
+        <span data-top></span>
+        <div class="wrap">
+          <h1 class="hero-title load" id="hero-title">Translate your screen, <span>in place.</span></h1>
+          <p class="hero-lead load" style="--d: 120">Press F1 and select anything you can’t read. Transeen redraws it in your language, inside the same picture, at the same size and in the same color.</p>
+          <div class="hero-actions load" style="--d: 220">
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Download for Mac</a>
+            <a class="link-arrow" href="guide/">Setup guide</a>
+          </div>
+          <p class="hero-meta load" style="--d: 300"><span>v0.11.1</span><span>macOS 26+</span><span>Apple silicon &amp; Intel</span><span>Notarized by Apple</span></p>
+
+          <div class="hero-stage load" style="--d: 380">
+            <div class="demo" tabindex="0" role="group" aria-roledescription="demonstration" aria-labelledby="demo-label">
+              <p class="sr-only" id="demo-label">Demonstration: on a Japanese train booking page, F1 is pressed and the booking card is selected. Its lines are recognized and redrawn in English in the same places. Hold Space while it has focus to see the original.</p>
+              <div class="demo-viewport">
+                <!-- part:demo -->
+                <div class="window" aria-hidden="true" lang="ja">
+                  <div class="chrome">
+                    <span class="lights"><i></i><i></i><i></i></span>
+                    <span class="address">soramichi.example.jp/reserve</span>
+                  </div>
+                  <div class="site-bar">
+                    <span class="site-logo"><svg viewBox="0 0 26 26" fill="none" stroke="#b6262c" stroke-width="2.2" stroke-linecap="round"><path d="M4 18c4-9 14-9 18 0" /><path d="M8 18c2.5-4.5 7.5-4.5 10 0" /></svg>そらみち</span>
+                    <span>予約</span>
+                    <span>運行情報</span>
+                    <span>時刻表</span>
+                    <span class="site-login">ログイン</span>
+                  </div>
+                  <div class="page">
+                    <div class="page-list">
+                      <p class="steps-bar"><b>1 列車を選ぶ</b><span>2 座席</span><span>3 お支払い</span></p>
+                      <p class="route">東京 → 京都</p>
+                      <p class="route-date">11月14日（金）・大人1名</p>
+                      <div class="trains">
+                        <div class="train"><span class="train-time">8:30<small>→ 10:45</small></span><span class="train-name"><b>しらかぜ 21号</b><span>2時間15分</span></span><span class="mark ok"><i>○</i>空席あり</span></div>
+                        <div class="train is-picked"><span class="train-time">9:00<small>→ 11:15</small></span><span class="train-name"><b>しらかぜ 23号</b><span>2時間15分</span></span><span class="mark low"><i>△</i>残りわずか</span></div>
+                        <div class="train"><span class="train-time">9:30<small>→ 11:45</small></span><span class="train-name"><b>しらかぜ 25号</b><span>2時間15分</span></span><span class="mark ok"><i>○</i>空席あり</span></div>
+                        <div class="train"><span class="train-time">10:00<small>→ 12:15</small></span><span class="train-name"><b>しらかぜ 27号</b><span>2時間15分</span></span><span class="mark out"><i>×</i>満席</span></div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-head"><span class="card-label" data-k="label">選択中の列車</span><span class="badge" data-k="badge">残りわずか</span></div>
+                      <p class="card-train" data-k="train">しらかぜ 23号</p>
+                      <div class="legs">
+                        <div class="leg"><b>9:00</b><span data-k="from">東京</span></div>
+                        <div class="legs-line"><span data-k="dur">2時間15分</span></div>
+                        <div class="leg"><b>11:15</b><span data-k="to">京都</span></div>
+                      </div>
+                      <p class="card-seat" data-k="seat">指定席・7号車 12番E席（窓側）</p>
+                      <div class="card-price"><b>¥14,170</b><span data-k="fare">大人1名・税込</span></div>
+                      <span class="card-buy"><span data-k="buy">予約へ進む</span></span>
+                      <p class="card-note" data-k="note">発車6分前まで、何度でも変更できます。</p>
+                    </div>
+                  </div>
+                  <div class="press"><kbd>F1</kbd></div>
+                  <div class="frame"><div class="frame-ui"><i></i><i></i><i></i><i></i><span class="frame-size"></span></div><div class="scan"></div></div>
+                  <div class="hits"></div>
+                  <div class="cursor"><svg viewBox="0 0 24 24"><use href="#cur-arrow" /></svg></div>
+                  <div class="toolbar">
+                    <div class="tb-row">
+                      <span class="tb-seg"><button type="button" tabindex="-1" data-view="original" aria-pressed="false" data-ui="original">原文</button><button type="button" tabindex="-1" data-view="translation" aria-pressed="true" data-ui="translation">译文</button></span>
+                      <span class="tb-icon is-on"><svg><use href="#ui-cursorarrow" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-rectangle" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-circle" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-arrow" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-pencil" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-number" /></svg></span>
+                      <span class="tb-sep"></span>
+                      <span class="tb-icon"><svg><use href="#ui-text" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-pin" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-ellipsis" /></svg></span>
+                      <span class="tb-copy" data-ui="copy">复制</span>
+                      <span class="tb-icon"><svg><use href="#ui-xmark" /></svg></span>
+                    </div>
+                    <p class="tb-foot"><b data-ui="dir">JA → 中文</b><span data-ui="status"></span></p>
+                  </div>
+                </div>
+                <!-- /part:demo -->
+              </div>
+            </div>
+            <div class="demo-controls">
+              <div class="langs" role="group" aria-label="Translate the demonstration into">
+                <span class="langs-label">JA →</span>
+                <button class="chip" type="button" data-lang="en" aria-pressed="true">English</button>
+                <button class="chip" type="button" data-lang="zh-Hans" lang="zh-Hans" aria-pressed="false">简体中文</button>
+                <button class="chip" type="button" data-lang="zh-Hant" lang="zh-Hant" aria-pressed="false">繁體中文</button>
+                <button class="chip" type="button" data-lang="ko" lang="ko" aria-pressed="false">한국어</button>
+                <button class="chip" type="button" data-lang="fr" lang="fr" aria-pressed="false">Français</button>
+                <button class="chip" type="button" data-lang="es" lang="es" aria-pressed="false">Español</button>
+                <button class="chip" type="button" data-lang="de" lang="de" aria-pressed="false">Deutsch</button>
+              </div>
+              <p class="demo-hint"><span>Press and hold the capture to see the original</span><button class="replay" type="button"><svg aria-hidden="true"><use href="#ui-replay" /></svg>Replay</button></p>
             </div>
           </div>
-          <p class="sr-only" id="hero-help">Press F1, or the key button above the page, to start a selection, then drag across the page or click a block. Press R while selecting to take the last area again. In a capture, hold Space to see the original, and press Escape to close it.</p>
         </div>
       </section>
 
-      <section class="compare" id="compare" data-compare data-show="translation" aria-labelledby="compare-title">
-        <div class="compare-copy">
-          <h2 id="compare-title" data-rise><span data-compare-word data-translation="The original" data-original="The translation">The original</span>, one key away</h2>
-          <p data-rise style="--i: 1">Press <button class="key" type="button" data-key="toggle" aria-label="Tab: switch between original and translation"><kbd>Tab</kbd></button> to switch. Hold <button class="key" type="button" data-key="peek" aria-label="Space: hold to see the original"><kbd>Space</kbd></button> to peek.</p>
-        </div>
-        <figure class="compare-shot" data-rise style="--i: 1">
-          <img class="compare-original" src="assets/stage-original.webp?v=1ed2fd34c99a" width="696" height="588" alt="The captured part of the Japanese page: the camera’s name, price, condition, stock and the cart button." loading="lazy" />
-          <img class="compare-translation" src="assets/stage-redrawn-en.webp?v=bc2bebf636b4" width="696" height="588" alt="The same capture after Transeen: every line in English, at the same place, size and color." loading="lazy" />
-          <svg class="shot-border" data-ui viewBox="0 0 348 294" aria-hidden="true"><path class="shot-outer" d="M11.2 1.2H336.8A10 10 0 0 1 346.8 11.2V282.8A10 10 0 0 1 336.8 292.8H11.2A10 10 0 0 1 1.2 282.8V11.2A10 10 0 0 1 11.2 1.2Z" /><path class="shot-inner" d="M11.2 1.2H336.8A10 10 0 0 1 346.8 11.2V282.8A10 10 0 0 1 336.8 292.8H11.2A10 10 0 0 1 1.2 282.8V11.2A10 10 0 0 1 11.2 1.2Z" /></svg>
-        </figure>
-        <div class="segmented" data-ui role="radiogroup" aria-label="Show in the capture">
-          <button type="button" role="radio" data-value="original" aria-checked="false" tabindex="-1" lang="zh-CN" aria-label="原文, original">原文</button>
-          <button type="button" role="radio" data-value="translation" aria-checked="true" tabindex="0" lang="zh-CN" aria-label="译文, translation">译文</button>
-        </div>
-      </section>
-
-      <section class="how" id="how" data-how data-lines="en" aria-labelledby="how-title">
-        <h2 class="sr-only" id="how-title">How Transeen translates a capture</h2>
-        <div class="how-copy" data-rise>
-          <div class="how-step is-on">
-            <h3>First, select what you can’t read</h3>
-            <p>The screen holds still while you choose. Hover to snap to a block, or drag a frame of your own.</p>
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 1.0 &nbsp;How it works</p>
+            <h2 class="lede" id="how-title"><b>One key, four steps.</b> Transeen reads the pixels you select and sets your language back into them, without leaving the Mac.</h2>
           </div>
-          <div class="how-step">
-            <h3>Then each line is recognized</h3>
-            <p>Apple’s Vision framework finds and reads every line, on your Mac.</p>
-          </div>
-          <div class="how-step">
-            <h3>Next, its letters are lifted off</h3>
-            <p>Only the ink comes out. The background underneath is rebuilt.</p>
-          </div>
-          <div class="how-step">
-            <h3>Finally, yours are set in place</h3>
-            <p>At the same position, size and color. A line is narrowed or wrapped only when it must be.</p>
-          </div>
-        </div>
-        <div class="how-picture" data-rise style="--i: 1">
-          <div class="how-frame">
-            <figure class="how-shot is-on how-select"><img src="assets/select-en.webp?v=eee759106bc4" width="1600" height="1458" alt="Selecting on the Japanese page: outside the frame the screen is dimmed, blue corners mark it, and a label reads 截屏翻译 · JA → EN, 696 × 588 px." loading="lazy" /></figure>
-            <figure class="how-shot how-place"><img class="how-page" src="assets/page-ja.webp?v=d83ea075cf93" width="1600" height="1458" alt="" loading="lazy" /><img class="how-capture" src="assets/stage-original.webp?v=1ed2fd34c99a" width="696" height="588" alt="The capture with a box drawn round every line Vision recognized." loading="lazy" /><svg class="how-boxes" data-ui data-lines aria-hidden="true"></svg></figure>
-            <figure class="how-shot how-place"><img class="how-page" src="assets/page-ja.webp?v=d83ea075cf93" width="1600" height="1458" alt="" loading="lazy" /><img class="how-capture" src="assets/stage-lifted-en.webp?v=ef029275e456" width="696" height="588" alt="The capture with the Japanese letters removed and the backgrounds rebuilt: the red badge, the gray chip and the black button are empty." loading="lazy" /></figure>
-            <figure class="how-shot how-place"><img class="how-page" src="assets/page-ja.webp?v=d83ea075cf93" width="1600" height="1458" alt="" loading="lazy" /><img class="how-capture" src="assets/stage-redrawn-en.webp?v=bc2bebf636b4" width="696" height="588" alt="The capture with the English set where the Japanese was." loading="lazy" /></figure>
-            <svg class="how-border" data-ui viewBox="0 0 408 414" aria-hidden="true"><path class="how-border-outer" d="M51.2 41.2H376.8A10 10 0 0 1 386.8 51.2V322.8A10 10 0 0 1 376.8 332.8H51.2A10 10 0 0 1 41.2 322.8V51.2A10 10 0 0 1 51.2 41.2Z" /><path class="how-border-inner" d="M51.2 41.2H376.8A10 10 0 0 1 386.8 51.2V322.8A10 10 0 0 1 376.8 332.8H51.2A10 10 0 0 1 41.2 322.8V51.2A10 10 0 0 1 51.2 41.2Z" /></svg>
-          </div>
-        </div>
-        <div class="how-control">
-          <div class="how-track"><span class="how-fill"></span><input class="how-range" type="range" min="0" max="3" step="1" value="0" aria-label="Stage" /></div>
-          <ol class="how-names">
-            <li class="is-on"><button type="button" tabindex="-1">Select</button></li>
-            <li><button type="button" tabindex="-1">Recognize</button></li>
-            <li><button type="button" tabindex="-1">Erase</button></li>
-            <li><button type="button" tabindex="-1">Redraw</button></li>
+          <ol class="grid grid-4 reveal" role="list">
+            <li class="cell">
+              <!-- part:fig-select -->
+              <svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
+                <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
+                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" style="--d:60" />
+                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" style="--d:120" />
+                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" style="--d:180" />
+                <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
+                <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
+                <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="blue" />
+                <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="blue" />
+                <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="blue" />
+                <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="blue" />
+                <path d="M94.3 59.9 L197.0 119.3 L154.0 144.1 L51.2 84.8 Z" class="blue" stroke-dasharray="2 3" opacity="0.6" />
+              </svg>
+              <!-- /part:fig-select -->
+              <p class="fig">1.1 &nbsp;Select</p>
+              <h3>Frame what you can’t read</h3>
+              <p>The screen holds still. Hover to snap to a paragraph, a field or a window, or drag a frame of your own.</p>
+            </li>
+            <li class="cell" style="--d: 120">
+              <!-- part:fig-recognize -->
+              <svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
+                <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
+                <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
+                <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
+                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="hi" style="--d:60" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" class="blue" style="--d:290" />
+                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="hi" style="--d:120" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" class="blue" style="--d:380" />
+                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="hi" style="--d:180" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" class="blue" style="--d:470" />
+              </svg>
+              <!-- /part:fig-recognize -->
+              <p class="fig">1.2 &nbsp;Recognize</p>
+              <h3>Each line is read on your Mac</h3>
+              <p>Apple’s Vision framework finds every line and its style. Nothing is uploaded to do it.</p>
+            </li>
+            <li class="cell" style="--d: 240">
+              <!-- part:fig-lift -->
+              <svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" stroke-dasharray="2 3" opacity="0.7" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" stroke-dasharray="2 3" opacity="0.7" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" stroke-dasharray="2 3" opacity="0.7" />
+                <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
+                <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
+                <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
+                <path d="M94.3 18.5 L156.4 54.4" pathLength="1" class="hi" style="--d:360" />
+                <path d="M94.3 62.7 L94.3 24.1" stroke-dasharray="1.5 3" opacity="0.7" />
+                <path d="M79.9 26.8 L173.1 80.6" pathLength="1" class="hi" style="--d:420" />
+                <path d="M79.9 71.0 L79.9 32.3" stroke-dasharray="1.5 3" opacity="0.7" />
+                <path d="M65.6 35.1 L113.4 62.7" pathLength="1" class="hi" style="--d:480" />
+                <path d="M65.6 79.3 L65.6 40.6" stroke-dasharray="1.5 3" opacity="0.7" />
+              </svg>
+              <!-- /part:fig-lift -->
+              <p class="fig">1.3 &nbsp;Lift</p>
+              <h3>Only the ink comes off</h3>
+              <p>The letters are lifted out and the background underneath them is rebuilt, gradient or texture included.</p>
+            </li>
+            <li class="cell" style="--d: 360">
+              <!-- part:fig-set -->
+              <svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
+                <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
+                <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
+                <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" opacity="0.35" />
+                <path d="M94.3 68.2 L170.8 112.4" pathLength="1" class="blue" stroke-width="1.6" style="--d:90" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" opacity="0.35" />
+                <path d="M79.9 76.5 L134.9 108.2" pathLength="1" class="blue" stroke-width="1.6" style="--d:180" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" opacity="0.35" />
+                <path d="M65.6 84.8 L134.9 124.8" pathLength="1" class="blue" stroke-width="1.6" style="--d:270" />
+                <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="hi" />
+                <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="hi" />
+                <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="hi" />
+                <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="hi" />
+              </svg>
+              <!-- /part:fig-set -->
+              <p class="fig">1.4 &nbsp;Set</p>
+              <h3>Yours go where they were</h3>
+              <p>Same position, size and color. A line is narrowed or wrapped only when the translation would not fit.</p>
+            </li>
           </ol>
         </div>
       </section>
 
-      <section class="work" id="work" data-work aria-labelledby="work-title">
-        <div class="work-stage">
-          <div class="screen" data-ui data-screen="work" data-target="en" tabindex="0" role="group" aria-label="A Transeen capture to try the tools on">
-            <div class="screen-world">
-              <img class="screen-page" src="assets/page-ja.webp?v=d83ea075cf93" width="800" height="729" alt="" draggable="false" loading="lazy" />
-            </div>
+      <section class="section" aria-labelledby="keys-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 2.0 &nbsp;Keyboard</p>
+            <h2 class="lede" id="keys-title"><b>Made for the keyboard.</b> The original is always one key away, and so is the last place you looked.</h2>
           </div>
-          <div class="win chat" data-ui data-chat aria-hidden="true">
-            <div class="win-bar"><span class="win-lights"><i></i><i></i><i></i></span>Aiko</div>
-            <div class="chat-thread" data-thread><div class="chat-row"><p class="chat-bubble">Did you find the camera?</p></div></div>
+          <div class="keys-panel reveal">
+            <div class="key-cell"><span class="caps"><kbd>F1</kbd></span><p><b>Select and translate</b>From any app. On a laptop keyboard, fn F1.</p></div>
+            <div class="key-cell"><span class="caps"><kbd>R</kbd></span><p><b>Same area again</b>While selecting, take the last capture’s area, even after a restart.</p></div>
+            <div class="key-cell"><span class="caps"><kbd>Tab</kbd></span><p><b>Original or translation</b>Switch the whole capture back and forth.</p></div>
+            <div class="key-cell"><span class="caps"><kbd>Space</kbd></span><p><b>Peek</b>Hold to see the original, let go to read yours.</p></div>
+            <div class="key-cell"><span class="caps"><kbd>F1</kbd><kbd>F1</kbd></span><p><b>Swap languages</b>Press it again on an open capture to translate the other way.</p></div>
           </div>
-          <p class="work-count"><span data-count>1</span> of 6</p>
-        </div>
-        <h2 class="work-title" id="work-title" data-rise>A capture you can work with</h2>
-        <div class="work-tabs" role="tablist" aria-label="Tools to try">
-          <button type="button" role="tab" data-tab="mark" aria-selected="true"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-rectangle" /></svg>Mark</button>
-          <button type="button" role="tab" data-tab="language" aria-selected="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-globe" /></svg>Languages</button>
-          <button type="button" role="tab" data-tab="edge" aria-selected="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-viewfinder" /></svg>Edges</button>
-          <button type="button" role="tab" data-tab="pin" aria-selected="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-pin" /></svg>Pin</button>
-          <button type="button" role="tab" data-tab="copy" aria-selected="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-copy" /></svg>Copy</button>
-          <button type="button" role="tab" data-tab="text" aria-selected="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-text" /></svg>Text</button>
-        </div>
-        <div class="work-list">
-          <article class="work-item" data-step="mark">
-            <h3>Mark what matters</h3>
-            <p>Boxes, ellipses, arrows, pen strokes and numbered notes, in six colors. Draw on the capture.</p>
-            <div class="work-control control-tools" data-ui role="toolbar" aria-label="Marking tools">
-              <span class="control-row">
-              <button class="tb-btn" type="button" data-work-tool="rectangle" aria-label="Rectangle (R)" aria-pressed="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-rectangle" /></svg></button>
-              <button class="tb-btn" type="button" data-work-tool="ellipse" aria-label="Ellipse (O)" aria-pressed="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-circle" /></svg></button>
-              <button class="tb-btn" type="button" data-work-tool="arrow" aria-label="Arrow (A)" aria-pressed="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-arrow" /></svg></button>
-              <button class="tb-btn" type="button" data-work-tool="pen" aria-label="Pen (P)" aria-pressed="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-pencil" /></svg></button>
-              <button class="tb-btn" type="button" data-work-tool="number" aria-label="Numbered note" aria-pressed="false"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-number" /></svg></button>
-              </span>
-              <span class="tb-divider"></span>
-              <span class="control-swatches" role="radiogroup" aria-label="Color">
-                <button class="tb-swatch" type="button" role="radio" data-work-color="red" style="--c: #ff383c" aria-label="Red"><i></i></button>
-                <button class="tb-swatch" type="button" role="radio" data-work-color="orange" style="--c: #ff8d28" aria-label="Orange"><i></i></button>
-                <button class="tb-swatch" type="button" role="radio" data-work-color="yellow" style="--c: #ffcc00" aria-label="Yellow"><i></i></button>
-                <button class="tb-swatch" type="button" role="radio" data-work-color="green" style="--c: #34c759" aria-label="Green"><i></i></button>
-                <button class="tb-swatch" type="button" role="radio" data-work-color="blue" style="--c: #0088ff" aria-label="Blue"><i></i></button>
-                <button class="tb-swatch" type="button" role="radio" data-work-color="white" data-color="white" style="--c: #ffffff" aria-label="White"><i></i></button>
-              </span>
-            </div>
-          </article>
-          <article class="work-item" data-step="language">
-            <h3>Switch languages, keep the marks</h3>
-            <p>The marks sit on their own layer, so a new translation slides in under them.</p>
-            <div class="work-control control-langs" data-ui role="radiogroup" aria-label="Translate into">
-              <button type="button" role="radio" data-work-lang="en" lang="en">EN</button>
-              <button type="button" role="radio" data-work-lang="zh-Hans" lang="zh-Hans">中文</button>
-              <button type="button" role="radio" data-work-lang="zh-Hant" lang="zh-Hant">繁中</button>
-              <button type="button" role="radio" data-work-lang="ko" lang="ko">KO</button>
-              <button type="button" role="radio" data-work-lang="fr" lang="fr">FR</button>
-              <button type="button" role="radio" data-work-lang="es" lang="es">ES</button>
-              <button type="button" role="radio" data-work-lang="de" lang="de">DE</button>
-            </div>
-          </article>
-          <article class="work-item" data-step="edge">
-            <h3>Missed a line? Pull an edge</h3>
-            <p>The capture re-crops from the frozen screen and translates again.</p>
-            <div class="work-control control-edge" data-ui><input class="edge-range" type="range" data-work-edge aria-label="Bottom edge of the capture" /></div>
-          </article>
-          <article class="work-item" data-step="pin">
-            <h3>Pin it, keep capturing</h3>
-            <p>A pin leaves the picture floating on the screen and ends the capture, so the next one can start. Drag pins anywhere; right-click for more.</p>
-            <div class="work-control control-pin" data-ui>
-              <button class="tb-btn control-big" type="button" data-work-pin aria-label="Pin to the screen"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-pin" /></svg></button>
-              <button class="keycaps" type="button" data-work-again aria-label="F1: start the next capture"><kbd>F1</kbd></button>
-              <button class="keycaps" type="button" data-work-last hidden aria-label="R: select the last area again"><kbd>R</kbd></button>
-            </div>
-          </article>
-          <article class="work-item" data-step="copy">
-            <h3>Copy what you see</h3>
-            <p>⌘C copies the picture with your marks and closes the capture, ready to paste.</p>
-            <div class="work-control control-copy" data-ui><button class="tb-copy control-big" type="button" data-work-copy><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-copy" /></svg><span lang="zh-CN">复制</span></button></div>
-          </article>
-          <article class="work-item" data-step="text">
-            <h3>Read it as text</h3>
-            <p>Every line in a list you can select and copy, beside the original if you like.</p>
-            <div class="work-control control-text" data-ui><button class="tb-btn tb-wide control-big" type="button" data-work-text><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-text" /></svg><span lang="zh-CN">文字</span></button></div>
-          </article>
         </div>
       </section>
 
-      <section class="languages" id="languages" data-languages data-start="en" aria-labelledby="languages-title">
-        <h2 class="languages-title" id="languages-title" data-rise>Eight languages, either way</h2>
-        <div class="language-body">
-          <ul class="language-list" role="radiogroup" aria-label="Translate the capture into" data-rise>
-            <li><button type="button" role="radio" data-lang-choice="en" lang="en" aria-checked="true">English</button></li>
-            <li><button type="button" role="radio" data-lang-choice="zh-Hans" lang="zh-Hans" aria-checked="false" tabindex="-1">简体中文</button></li>
-            <li><button type="button" role="radio" data-lang-choice="zh-Hant" lang="zh-Hant" aria-checked="false" tabindex="-1">繁體中文</button></li>
-            <li><button type="button" role="radio" data-lang-choice="ja" lang="ja" aria-checked="false" tabindex="-1">日本語</button></li>
-            <li><button type="button" role="radio" data-lang-choice="ko" lang="ko" aria-checked="false" tabindex="-1">한국어</button></li>
-            <li><button type="button" role="radio" data-lang-choice="fr" lang="fr" aria-checked="false" tabindex="-1">Français</button></li>
-            <li><button type="button" role="radio" data-lang-choice="es" lang="es" aria-checked="false" tabindex="-1">Español</button></li>
-            <li><button type="button" role="radio" data-lang-choice="de" lang="de" aria-checked="false" tabindex="-1">Deutsch</button></li>
+      <section class="section" id="tools" aria-labelledby="tools-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 3.0 &nbsp;The capture</p>
+            <h2 class="lede" id="tools-title"><b>A capture you can work with.</b> It stays where you selected it, with the tools underneath.</h2>
+          </div>
+          <ul class="grid grid-3 reveal" role="list">
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-rectangle" /></svg>
+              <h3>Mark it up</h3>
+              <p>Boxes, ellipses, arrows, the pen and numbered notes, in six colors. Marks sit on their own layer, so switching languages never moves them.</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-crop" /></svg>
+              <h3>Missed a line? Pull an edge</h3>
+              <p>Drag an edge or a corner. Transeen re-crops from the same frozen screen and translates again when you let go.</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-pin" /></svg>
+              <h3>Pin it, keep capturing</h3>
+              <p>A pin floats on the screen as a picture of its own. Keep as many as you need; right-click one to copy, save or switch it.</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-copy" /></svg>
+              <h3>Copy what you see</h3>
+              <p><kbd>⌘C</kbd> copies the picture with your marks, even while the translation is still arriving. <kbd>⌘S</kbd> saves a PNG.</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-text" /></svg>
+              <h3>Read it as text</h3>
+              <p>Open the full translation beside the original as a list you can select and copy.</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-viewfinder" /></svg>
+              <h3>Open an image</h3>
+              <p>A screenshot someone sent you works too. Press <kbd>⌘O</kbd> and it opens with the same tools.</p>
+            </li>
           </ul>
-          <figure class="language-shot" data-rise style="--i: 1">
-            <div class="language-pictures">
-              <div class="language-picture is-on" data-lang="en"><img src="assets/page-en.webp?v=d2617d066400" width="800" height="729" alt="The capture in English." loading="lazy" /></div>
-            </div>
-            <svg class="shot-border" data-ui viewBox="0 0 348 294" aria-hidden="true"><path class="shot-outer" d="M11.2 1.2H336.8A10 10 0 0 1 346.8 11.2V282.8A10 10 0 0 1 336.8 292.8H11.2A10 10 0 0 1 1.2 282.8V11.2A10 10 0 0 1 11.2 1.2Z" /><path class="shot-inner" d="M11.2 1.2H336.8A10 10 0 0 1 346.8 11.2V282.8A10 10 0 0 1 336.8 292.8H11.2A10 10 0 0 1 1.2 282.8V11.2A10 10 0 0 1 11.2 1.2Z" /></svg>
-            <figcaption class="language-direction" data-ui><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><use href="#ui-globe" /></svg><span data-direction>JA → EN</span></figcaption>
-          </figure>
         </div>
-        <p class="languages-note" data-rise>From any of them into any other. Transeen can detect the source, and Apple translation runs on your Mac once its language pack is installed.</p>
       </section>
 
-      <section class="activate" id="activate" aria-labelledby="activate-title">
-        <div class="ticket" data-rise>
-          <div class="ticket-main">
-            <h2 id="activate-title">Activation code</h2>
-            <ul class="ticket-terms">
-              <li>Unlocks capture, annotation and translation on one Mac.</li>
-              <li>Perpetual. Activate without signing in.</li>
-              <li>Bind it to an iTool account to restore it later, if you like.</li>
-              <li>StupidMirror SM- and iTool Pro IT- codes don’t work here.</li>
+      <section class="section" id="services" aria-labelledby="services-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 4.0 &nbsp;Translation</p>
+            <h2 class="lede" id="services-title"><b>Three ways to translate.</b> Pick one in Settings, change it any time. Recognition always happens on your Mac.</h2>
+          </div>
+          <ul class="grid grid-3 providers reveal" role="list">
+            <li class="cell">
+              <h3>Apple Translation <span class="tag">Default</span></h3>
+              <p>The translation built into macOS. Download a language pack once and it works offline.</p>
+              <ul class="facts">
+                <li><span>Runs</span><span>On this Mac</span></li>
+                <li><span>Download</span><span>Per language pack</span></li>
+                <li><span>Speed</span><span>In groups of 8 lines</span></li>
+              </ul>
+            </li>
+            <li class="cell">
+              <h3>Local Translation Model <span class="tag">Apple silicon</span></h3>
+              <p>Index-Translate 2B or Hy-MT2 1.8B, run by Transeen itself. Better with developer text and interface labels.</p>
+              <ul class="facts">
+                <li><span>Runs</span><span>On this Mac</span></li>
+                <li><span>Download</span><span>About 1.1 GB, checked</span></li>
+                <li><span>Memory</span><span>Freed after 5 idle minutes</span></li>
+              </ul>
+            </li>
+            <li class="cell">
+              <h3>LLM API <span class="tag">Your endpoint</span></h3>
+              <p>Any OpenAI-compatible chat/completions endpoint, remote over HTTPS or a server on localhost.</p>
+              <ul class="facts">
+                <li><span>Sends</span><span>Recognized text only</span></li>
+                <li><span>Key</span><span>Kept in your Keychain</span></li>
+                <li><span>Answers</span><span>Shown as they arrive</span></li>
+              </ul>
+            </li>
+          </ul>
+          <p class="privacy reveal"><svg aria-hidden="true"><use href="#ui-lock" /></svg><span><b>The screenshot never leaves your Mac.</b> Transeen keeps no capture history and never records continuously. With Apple Translation or a local model, the text stays on the Mac too.</span></p>
+        </div>
+      </section>
+
+      <section class="section" id="languages" aria-labelledby="languages-title">
+        <div class="wrap lang-layout">
+          <div class="reveal">
+            <div class="section-head">
+              <p class="fig">Fig 5.0 &nbsp;Languages</p>
+              <h2 class="lede" id="languages-title"><b>Eight languages, either way.</b> From any of them into any other, with the source detected for you.</h2>
+              <p class="body-copy">The app speaks your language too: every window, menu and message follows the one you choose. A page already in your language is translated into your other one.</p>
+            </div>
+            <ul class="lang-list" role="list">
+              <li lang="en">English <small>EN</small></li>
+              <li lang="zh-Hans">简体中文 <small>ZH-HANS</small></li>
+              <li lang="zh-Hant">繁體中文 <small>ZH-HANT</small></li>
+              <li lang="ja">日本語 <small>JA</small></li>
+              <li lang="ko">한국어 <small>KO</small></li>
+              <li lang="fr">Français <small>FR</small></li>
+              <li lang="es">Español <small>ES</small></li>
+              <li lang="de">Deutsch <small>DE</small></li>
             </ul>
           </div>
-          <div class="ticket-stub">
-            <svg class="perforation" viewBox="0 0 6 360" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="dots" width="6" height="18" patternUnits="userSpaceOnUse"><circle cx="3" cy="9" r="3" /></pattern></defs><rect width="6" height="360" fill="url(#dots)" /></svg>
-            <p class="ticket-code">TR-</p>
-            <p class="ticket-format">XXXX-XXXX-XXXX-<br />XXXX-XXXX-XXXX</p>
-            <a class="ticket-action" href="https://github.com/LiuTianjie/Transeen/discussions">Ask about a code</a>
-          </div>
+          <figure class="reveal" style="--d: 150">
+            <!-- part:matrix -->
+            <svg class="matrix" viewBox="0 0 340 330" aria-hidden="true" focusable="false">
+              <text x="58" y="22" text-anchor="middle">EN</text>
+              <text x="32" y="43.5" text-anchor="middle">EN</text>
+              <text x="92" y="22" text-anchor="middle">简</text>
+              <text x="32" y="77.5" text-anchor="middle">简</text>
+              <text x="126" y="22" text-anchor="middle">繁</text>
+              <text x="32" y="111.5" text-anchor="middle">繁</text>
+              <text x="160" y="22" text-anchor="middle">日</text>
+              <text x="32" y="145.5" text-anchor="middle">日</text>
+              <text x="194" y="22" text-anchor="middle">한</text>
+              <text x="32" y="179.5" text-anchor="middle">한</text>
+              <text x="228" y="22" text-anchor="middle">FR</text>
+              <text x="32" y="213.5" text-anchor="middle">FR</text>
+              <text x="262" y="22" text-anchor="middle">ES</text>
+              <text x="32" y="247.5" text-anchor="middle">ES</text>
+              <text x="296" y="22" text-anchor="middle">DE</text>
+              <text x="32" y="281.5" text-anchor="middle">DE</text>
+              <circle class="self" cx="58" cy="40" r="3.5" />
+              <circle class="dot" cx="92" cy="40" r="3.5" style="--d:1" />
+              <circle class="dot" cx="126" cy="40" r="3.5" style="--d:2" />
+              <circle class="dot" cx="160" cy="40" r="3.5" style="--d:3" />
+              <circle class="dot" cx="194" cy="40" r="3.5" style="--d:4" />
+              <circle class="dot" cx="228" cy="40" r="3.5" style="--d:5" />
+              <circle class="dot" cx="262" cy="40" r="3.5" style="--d:6" />
+              <circle class="dot" cx="296" cy="40" r="3.5" style="--d:7" />
+              <circle class="dot" cx="58" cy="74" r="3.5" style="--d:1" />
+              <circle class="self" cx="92" cy="74" r="3.5" />
+              <circle class="dot" cx="126" cy="74" r="3.5" style="--d:3" />
+              <circle class="dot" cx="160" cy="74" r="3.5" style="--d:4" />
+              <circle class="dot" cx="194" cy="74" r="3.5" style="--d:5" />
+              <circle class="dot" cx="228" cy="74" r="3.5" style="--d:6" />
+              <circle class="dot" cx="262" cy="74" r="3.5" style="--d:7" />
+              <circle class="dot" cx="296" cy="74" r="3.5" style="--d:8" />
+              <circle class="dot" cx="58" cy="108" r="3.5" style="--d:2" />
+              <circle class="dot" cx="92" cy="108" r="3.5" style="--d:3" />
+              <circle class="self" cx="126" cy="108" r="3.5" />
+              <circle class="dot" cx="160" cy="108" r="3.5" style="--d:5" />
+              <circle class="dot" cx="194" cy="108" r="3.5" style="--d:6" />
+              <circle class="dot" cx="228" cy="108" r="3.5" style="--d:7" />
+              <circle class="dot" cx="262" cy="108" r="3.5" style="--d:8" />
+              <circle class="dot" cx="296" cy="108" r="3.5" style="--d:9" />
+              <circle class="dot" cx="58" cy="142" r="3.5" style="--d:3" />
+              <circle class="dot" cx="92" cy="142" r="3.5" style="--d:4" />
+              <circle class="dot" cx="126" cy="142" r="3.5" style="--d:5" />
+              <circle class="self" cx="160" cy="142" r="3.5" />
+              <circle class="dot" cx="194" cy="142" r="3.5" style="--d:7" />
+              <circle class="dot" cx="228" cy="142" r="3.5" style="--d:8" />
+              <circle class="dot" cx="262" cy="142" r="3.5" style="--d:9" />
+              <circle class="dot" cx="296" cy="142" r="3.5" style="--d:10" />
+              <circle class="dot" cx="58" cy="176" r="3.5" style="--d:4" />
+              <circle class="dot" cx="92" cy="176" r="3.5" style="--d:5" />
+              <circle class="dot" cx="126" cy="176" r="3.5" style="--d:6" />
+              <circle class="dot" cx="160" cy="176" r="3.5" style="--d:7" />
+              <circle class="self" cx="194" cy="176" r="3.5" />
+              <circle class="dot" cx="228" cy="176" r="3.5" style="--d:9" />
+              <circle class="dot" cx="262" cy="176" r="3.5" style="--d:10" />
+              <circle class="dot" cx="296" cy="176" r="3.5" style="--d:11" />
+              <circle class="dot" cx="58" cy="210" r="3.5" style="--d:5" />
+              <circle class="dot" cx="92" cy="210" r="3.5" style="--d:6" />
+              <circle class="dot" cx="126" cy="210" r="3.5" style="--d:7" />
+              <circle class="dot" cx="160" cy="210" r="3.5" style="--d:8" />
+              <circle class="dot" cx="194" cy="210" r="3.5" style="--d:9" />
+              <circle class="self" cx="228" cy="210" r="3.5" />
+              <circle class="dot" cx="262" cy="210" r="3.5" style="--d:11" />
+              <circle class="dot" cx="296" cy="210" r="3.5" style="--d:12" />
+              <circle class="dot" cx="58" cy="244" r="3.5" style="--d:6" />
+              <circle class="dot" cx="92" cy="244" r="3.5" style="--d:7" />
+              <circle class="dot" cx="126" cy="244" r="3.5" style="--d:8" />
+              <circle class="dot" cx="160" cy="244" r="3.5" style="--d:9" />
+              <circle class="dot" cx="194" cy="244" r="3.5" style="--d:10" />
+              <circle class="dot" cx="228" cy="244" r="3.5" style="--d:11" />
+              <circle class="self" cx="262" cy="244" r="3.5" />
+              <circle class="dot" cx="296" cy="244" r="3.5" style="--d:13" />
+              <circle class="dot" cx="58" cy="278" r="3.5" style="--d:7" />
+              <circle class="dot" cx="92" cy="278" r="3.5" style="--d:8" />
+              <circle class="dot" cx="126" cy="278" r="3.5" style="--d:9" />
+              <circle class="dot" cx="160" cy="278" r="3.5" style="--d:10" />
+              <circle class="dot" cx="194" cy="278" r="3.5" style="--d:11" />
+              <circle class="dot" cx="228" cy="278" r="3.5" style="--d:12" />
+              <circle class="dot" cx="262" cy="278" r="3.5" style="--d:13" />
+              <circle class="self" cx="296" cy="278" r="3.5" />
+            </svg>
+            <!-- /part:matrix -->
+            <figcaption class="matrix-caption">8 languages × 7 targets = 56 directions</figcaption>
+          </figure>
         </div>
-        <p class="activate-note" data-rise>Enter the code in 激活与账号… (Activation and account) in the menu bar. The source is <a class="text-link" href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT licensed</a>, and you can <a class="text-link" href="guide/#build">build it yourself</a>; the hosted activation service is only for the official app.</p>
       </section>
 
-      <section class="faq" id="faq" aria-labelledby="faq-title">
-        <h2 class="faq-title" id="faq-title" data-rise>Questions</h2>
-        <div class="faq-list">
-          <details class="faq-item" name="faq" data-rise>
-            <summary><h3>Which Macs does Transeen run on?</h3></summary>
-            <p>macOS 26 or later, on Apple silicon or Intel: it is one universal app. The app’s own interface is in Simplified Chinese for now.</p>
-          </details>
-          <details class="faq-item" name="faq" data-rise style="--i: 1">
-            <summary><h3>Does it work offline?</h3></summary>
-            <p>Yes, once it is activated. Capture, annotation and Apple translation work offline after the language packs are downloaded. An activation stays valid through network outages and is checked again about once a day. Model mode needs a connection to your endpoint.</p>
-          </details>
-          <details class="faq-item" name="faq" data-rise style="--i: 2">
-            <summary><h3>What leaves my Mac?</h3></summary>
-            <p>With Apple translation, nothing: the screenshot, the recognized text and the translation stay on this Mac. In model mode only the recognized text goes to the endpoint you set, never the screenshot. Activation sends your code and a random installation ID, and update checks contact GitHub.</p>
-          </details>
-          <details class="faq-item" name="faq" data-rise style="--i: 3">
-            <summary><h3>Can I use my own model?</h3></summary>
-            <p>Yes. Enter any OpenAI-compatible chat completions URL, a model name and, if it needs one, a key, which is kept in your Keychain. Remote endpoints must use HTTPS; a server on localhost can use HTTP without a key. The <a href="guide/#model">setup guide</a> has examples.</p>
-          </details>
-          <details class="faq-item" name="faq" data-rise style="--i: 4">
-            <summary><h3>Can it translate an image I already have?</h3></summary>
-            <p>Yes. Choose 打开图片… (Open image) in the launcher or press <kbd>⌘O</kbd>; the picture opens in the same window, with the same tools.</p>
-          </details>
-          <details class="faq-item" name="faq" data-rise style="--i: 5">
-            <summary><h3>How accurate is it?</h3></summary>
-            <p>That depends on the translation provider. Dense layouts, formulas and specialist terms can need correcting, so compare with the original using <kbd>Tab</kbd>, or open the full text, before you rely on a detail.</p>
-          </details>
-          <details class="faq-item" name="faq" data-rise style="--i: 6">
-            <summary><h3>Is Transeen open source?</h3></summary>
-            <p>Yes, under the <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT license</a>, commercial use included. The official app needs a TR- code; the source license does not include the hosted activation service, so independent builds bring their own.</p>
-          </details>
-          <details class="faq-item" name="faq" data-rise style="--i: 7">
-            <summary><h3>How do I update?</h3></summary>
-            <p>Choose 检查更新… (Check for updates) in the menu bar or the launcher. Transeen checks <a href="https://github.com/LiuTianjie/Transeen/releases">GitHub Releases</a> and opens the download when a newer version exists.</p>
-          </details>
+      <section class="section" id="changes" aria-labelledby="changes-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 6.0 &nbsp;Changelog</p>
+            <h2 class="lede" id="changes-title"><b>Recently shipped.</b> Small releases, often. The full list is on GitHub.</h2>
+          </div>
+          <div class="notes reveal">
+            <article class="note">
+              <p class="note-meta"><b>0.11.1</b><time datetime="2026-10-30">Oct 30, 2026</time></p>
+              <ul>
+                <li><b>Every sentence is translated.</b> A long paragraph a local model was slow on is sent again on its own, instead of keeping its original.</li>
+                <li><b>The screen freezes first.</b> F1 keeps another app’s open menu, popover or tooltip in the picture, and that app keeps focus.</li>
+                <li><b>Cleaner erasing.</b> Letters like g and y no longer leave marks, and a floating arrow no longer turns into stray characters.</li>
+              </ul>
+            </article>
+            <article class="note">
+              <p class="note-meta"><b>0.11.0</b><time datetime="2026-10-30">Oct 30, 2026</time></p>
+              <ul>
+                <li><b>The interface follows your language.</b> Every window, menu and message, in any of the eight languages.</li>
+                <li><b>Translations appear as they arrive.</b> The first paragraphs show before the last are done, with a count in the toolbar.</li>
+                <li><b>A native macOS look</b> for the home window, the menu bar panel, the first-run guide and Settings.</li>
+              </ul>
+            </article>
+          </div>
+          <p class="reveal" style="margin-top: 28px"><a class="link-arrow" href="https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md">Full changelog</a></p>
+        </div>
+      </section>
+
+      <section class="section" id="activation" aria-labelledby="activation-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 7.0 &nbsp;Activation</p>
+            <h2 class="lede" id="activation-title"><b>One code, one Mac, for good.</b> No subscription and no account required.</h2>
+          </div>
+          <div class="license reveal">
+            <div class="license-code">
+              <p class="code-line" aria-label="Activation code format: TR followed by six groups of four characters">TR<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX</p>
+              <div class="license-price">
+                <b>Perpetual license</b>
+                <span>Enter it in Activation &amp; Account… in the menu bar.</span>
+              </div>
+              <div class="license-actions">
+                <a class="button" href="https://github.com/LiuTianjie/Transeen/discussions">Ask about a code</a>
+                <a class="link-arrow" href="guide/#activate">How to activate</a>
+              </div>
+            </div>
+            <ul class="license-list" role="list">
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Unlocks capture, markup and translation</b> on one Mac.</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Activate without signing in.</b> A random installation ID is kept in your Keychain; your serial number is never read.</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Optionally bind it to an iTool account</b> to restore it on a reinstall.</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Open source under MIT.</b> Build it yourself; independent builds bring their own activation service.</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-xmark" /></svg><span>StupidMirror SM- and iTool Pro IT- codes are separate products and don’t work here.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq" aria-labelledby="faq-title">
+        <div class="wrap faq-layout">
+          <div class="section-head reveal">
+            <p class="fig">Fig 8.0 &nbsp;Questions</p>
+            <h2 class="lede" id="faq-title"><b>Questions.</b> Anything else, ask in GitHub Discussions.</h2>
+          </div>
+          <div class="faq reveal">
+            <details>
+              <summary>Which Macs does Transeen run on?</summary>
+              <p>macOS 26 or later, on Apple silicon or Intel: it is one universal app. The local translation models need Apple silicon. The interface follows your language: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español or Deutsch.</p>
+            </details>
+            <details>
+              <summary>Does it work offline?</summary>
+              <p>Yes, once it is activated. Capture, annotation, Apple Translation and the local models work offline after their language packs or model are downloaded. An activation stays valid through network outages and is checked again about once a day. An LLM API needs a connection to your endpoint.</p>
+            </details>
+            <details>
+              <summary>What leaves my Mac?</summary>
+              <p>With Apple Translation or a local model, nothing: the screenshot, the recognized text and the translation stay on this Mac. With an LLM API only the recognized text goes to the endpoint you set, never the screenshot. Activation sends your code and a random installation ID, and update checks contact GitHub.</p>
+            </details>
+            <details>
+              <summary>Can I use a different model?</summary>
+              <p>Yes. In Settings → General → Translation, download Index-Translate 2B or Hy-MT2 1.8B (about 1.1 GB each), which run inside Transeen, or enter any OpenAI-compatible chat/completions endpoint, a model name and, if it needs one, a key kept in your Keychain. Remote endpoints must use HTTPS; a server on localhost can use HTTP without a key.</p>
+            </details>
+            <details>
+              <summary>Can it translate an image I already have?</summary>
+              <p>Yes. Choose Open Image… in the launcher or press <kbd>⌘O</kbd>; the picture opens in the same window, with the same tools.</p>
+            </details>
+            <details>
+              <summary>How accurate is it?</summary>
+              <p>That depends on the translation service. Dense layouts, formulas and specialist terms can need correcting, so compare with the original using <kbd>Tab</kbd>, or open the full text, before you rely on a detail.</p>
+            </details>
+            <details>
+              <summary>Is Transeen open source?</summary>
+              <p>Yes, under the <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT license</a>, commercial use included. The official app needs a TR- code; the source license does not include the hosted activation service, so independent builds bring their own.</p>
+            </details>
+            <details>
+              <summary>How do I update?</summary>
+              <p>Choose Check for Updates… in the menu bar or the launcher. Transeen checks GitHub Releases and opens the download when a newer version exists.</p>
+            </details>
+          </div>
         </div>
       </section>
 
       <section class="closing" aria-labelledby="closing-title">
-        <figure class="closing-object" data-rise>
-          <img src="assets/capture-read-en.webp?v=be8ba838b4a7" width="1104" height="806" alt="A capture of the Japanese shop page translated into English, with the Transeen toolbar below it reading 已翻译 9 处 (9 places translated)." loading="lazy" />
-        </figure>
-        <div class="closing-copy" data-rise style="--i: 1">
-          <h2 id="closing-title">Read it where it is</h2>
-          <p>Download Transeen, press <kbd>F1</kbd> and select the first thing you couldn’t read.</p>
-          <p class="closing-fact">Universal app, 9.6 MB, notarized by Apple.</p>
-          <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">Download for Mac</a>
+        <div class="wrap reveal">
+          <span class="f1" aria-hidden="true">F1</span>
+          <h2 class="hero-title" id="closing-title">Read it <span>where it is.</span></h2>
+          <p class="hero-lead">Download Transeen, press F1 and select the first thing you couldn’t read.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Download for Mac</a>
+            <a class="link-arrow" href="https://github.com/LiuTianjie/Transeen">View the source</a>
+          </div>
+          <p class="hero-meta"><span>Universal app</span><span>9.6 MB</span><span>Signed and notarized</span></p>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <svg class="mark" viewBox="0 0 1600 320" role="img" aria-label="Transeen" data-rise>
-        <defs>
-          <mask id="mark-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="320">
-            <rect width="1600" height="320" fill="#fff" />
-            <g fill="#000" font-family="Geist, -apple-system, sans-serif" font-size="230" font-weight="600" text-anchor="middle">
-              <text x="98" y="292">T</text><text x="298.5" y="292">R</text><text x="499" y="292">A</text><text x="699.5" y="292">N</text>
-              <text x="900" y="292">S</text><text x="1100.5" y="292">E</text><text x="1301" y="292">E</text><text x="1501.5" y="292">N</text>
-            </g>
-          </mask>
-        </defs>
-        <g mask="url(#mark-cut)">
-          <rect class="mark-block" x="0" y="0" width="196.5" height="320" fill="#b5e3b8" />
-          <rect class="mark-block" x="200.5" y="90" width="196.5" height="230" fill="#eef4e2" />
-          <rect class="mark-block" x="401" y="44" width="196.5" height="276" fill="#2c6550" />
-          <rect class="mark-block" x="601.5" y="116" width="196.5" height="204" fill="#b5e3b8" />
-          <rect class="mark-block" x="802" y="20" width="196.5" height="300" fill="#eef4e2" />
-          <rect class="mark-block" x="1002.5" y="96" width="196.5" height="224" fill="#2c6550" />
-          <rect class="mark-block" x="1203" y="58" width="196.5" height="262" fill="#b5e3b8" />
-          <rect class="mark-block" x="1403.5" y="128" width="196.5" height="192" fill="#eef4e2" />
-        </g>
-      </svg>
-      <svg class="mark-stack" viewBox="0 0 800 640" role="img" aria-label="Transeen" data-rise>
-        <defs>
-          <mask id="mark-stack-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="640">
-            <rect width="800" height="640" fill="#fff" />
-            <g fill="#000" font-family="Geist, -apple-system, sans-serif" font-size="230" font-weight="600" text-anchor="middle">
-              <text x="98" y="292">T</text><text x="298.5" y="292">R</text><text x="499" y="292">A</text><text x="699.5" y="292">N</text>
-              <text x="98" y="616">S</text><text x="298.5" y="616">E</text><text x="499" y="616">E</text><text x="699.5" y="616">N</text>
-            </g>
-          </mask>
-        </defs>
-        <g mask="url(#mark-stack-cut)">
-          <rect class="mark-block" x="0" y="0" width="196.5" height="320" fill="#b5e3b8" />
-          <rect class="mark-block" x="200.5" y="90" width="196.5" height="230" fill="#eef4e2" />
-          <rect class="mark-block" x="401" y="44" width="196.5" height="276" fill="#2c6550" />
-          <rect class="mark-block" x="601.5" y="116" width="196.5" height="204" fill="#b5e3b8" />
-          <rect class="mark-block" x="0" y="340" width="196.5" height="300" fill="#eef4e2" />
-          <rect class="mark-block" x="200.5" y="416" width="196.5" height="224" fill="#2c6550" />
-          <rect class="mark-block" x="401" y="378" width="196.5" height="262" fill="#b5e3b8" />
-          <rect class="mark-block" x="601.5" y="448" width="196.5" height="192" fill="#eef4e2" />
-        </g>
-      </svg>
-      <div class="footer-grid">
-        <nav aria-label="Product">
-          <h2>Product</h2>
-          <ul>
-            <li><a href="https://github.com/LiuTianjie/Transeen/releases/latest">Download</a></li>
-            <li><a href="#how">How it works</a></li>
-            <li><a href="#languages">Languages</a></li>
-            <li><a href="#activate">Activation</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="Help">
-          <h2>Help</h2>
-          <ul>
-            <li><a href="guide/">Setup guide</a></li>
-            <li><a href="guide/#shortcuts">Keyboard shortcuts</a></li>
-            <li><a href="#faq">Questions</a></li>
-            <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md">Licensing</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="Source">
-          <h2>Source</h2>
-          <ul>
-            <li><a href="https://github.com/LiuTianjie/Transeen">GitHub</a></li>
-            <li><a href="https://github.com/LiuTianjie/Transeen/releases">Releases</a></li>
-            <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md">Changelog</a></li>
-            <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT License</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="Family">
-          <h2>Also from iTool</h2>
-          <ul>
-            <li><a href="https://itool.tech/">iTool</a></li>
-            <li><a href="https://stupidmirror.itool.tech/">StupidMirror</a></li>
-            <li><a href="zh/" hreflang="zh-CN" lang="zh-CN">Transeen 中文</a></li>
-          </ul>
-        </nav>
-        <div class="footer-contact">
-          <p>Questions and activation codes: <a href="https://github.com/LiuTianjie/Transeen/discussions">GitHub Discussions</a>.</p>
-          <p>Something broken? <a href="https://github.com/LiuTianjie/Transeen/issues">Open an issue</a>.</p>
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./"><img src="assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
+            <p>A native Mac app that translates what’s on your screen, in place. Made by iTool.</p>
+          </div>
+          <nav aria-labelledby="footer-product">
+            <h2 id="footer-product">Product</h2>
+            <ul>
+              <li><a href="#how">How it works</a></li>
+              <li><a href="#tools">Tools</a></li>
+              <li><a href="#languages">Languages</a></li>
+              <li><a href="#activation">Activation</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-help">
+            <h2 id="footer-help">Help</h2>
+            <ul>
+              <li><a href="guide/">Setup guide</a></li>
+              <li><a href="guide/#shortcuts">Keyboard shortcuts</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/discussions">Questions</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/issues">Report a problem</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-source">
+            <h2 id="footer-source">Source</h2>
+            <ul>
+              <li><a href="https://github.com/LiuTianjie/Transeen">GitHub</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/releases">Releases</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md">Changelog</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md">Licensing</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-more">
+            <h2 id="footer-more">Also from iTool</h2>
+            <ul>
+              <li><a href="https://itool.tech/">iTool</a></li>
+              <li><a href="https://stupidmirror.itool.tech/">StupidMirror</a></li>
+              <li><a href="zh/" hreflang="zh-CN" lang="zh-CN">Transeen 中文</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="footer-end">
+          <p>© 2026 LiuTianjie. Released under the MIT license.</p>
+          <p>Mac, macOS and Apple silicon are trademarks of Apple Inc.</p>
         </div>
       </div>
-      <div class="footer-end">
-        <p>© 2026 LiuTianjie. Transeen is a native Mac app for translating what’s on your screen.</p>
-        <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest">Download</a>
-      </div>
     </footer>
-    <template id="kumo-pages">
-      <img data-lang="ja" src="assets/page-ja.webp?v=d83ea075cf93" alt="" />
-      <img data-lang="en" src="assets/page-en.webp?v=d2617d066400" alt="" />
-      <img data-lang="zh-Hans" src="assets/page-zh-hans.webp?v=7c2a67a1bffc" alt="" />
-      <img data-lang="zh-Hant" src="assets/page-zh-hant.webp?v=2c5253396730" alt="" />
-      <img data-lang="ko" src="assets/page-ko.webp?v=fa855b56e3b4" alt="" />
-      <img data-lang="fr" src="assets/page-fr.webp?v=1efe8b022f5d" alt="" />
-      <img data-lang="es" src="assets/page-es.webp?v=fceb76667394" alt="" />
-      <img data-lang="de" src="assets/page-de.webp?v=039e51051205" alt="" />
-    </template>
-    <!-- part:scene-data -->
-    <script type="application/json" id="scene-data">{"page":[800,729],"capture":[432,93,348,294],"languages":{"ja":{"name":"日本語","short":"JA"},"en":{"name":"English","short":"EN"},"zh-Hans":{"name":"简体中文","short":"中文"},"zh-Hant":{"name":"繁體中文","short":"繁中"},"ko":{"name":"한국어","short":"KO"},"fr":{"name":"Français","short":"FR"},"es":{"name":"Español","short":"ES"},"de":{"name":"Deutsch","short":"DE"}},"regions":{"cell":8,"columns":100,"grid":"00000001010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000202020202020000000000000000000000000001010101010101010101010101010101010000000000000000000000000000000000000303030303030303030300000004040404040404040000050505050505050505050500000606060606060600000202020202020202020202020202020200000000010101010101010101010101010101010100000000000000000000000000000000000003030303030303030303000000040404040404040400000505050505050505050505000006060606060606000002020202020202020202020202020202000000000101010101010101010101010101010101000000000000000000000000000000000000030303030303030303030000000404040404040404000005050505050505050505050000060606060606060000020202020202020202020202020202020000000001010101010101010101010101010101010000000000000000000000000000000000000303030303030303030300000004040404040404040000050505050505050505050500000606060606060600000202020202020202020202020202020200000000010101010101010101010101010101010100000000000000000000000000000000000000030303030303030303000000040404040404040000000505050505050505050505000006060606060606000002020202020202020202020202020200000007070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707080808080808080808080808080808080808080808080808080808080808080808080707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070808080808080808080808080808080808080808080808080808080808080808080807070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070708080808080808080808080808080808080808080808080808080808080808080808070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707080808080808080808080808080808080808080808080808080808080808080808080707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707090909090909090909090909090909090909090909090909090909090909090909090909090909090909090909090909090909070a0a0a0a0a0a0a0a0a0a0707070707070707070707070707070707070707070707070707070707070707070707070707090909090909090909090909090909090909090909090909090909090909090909090909090909090909090909090909090909070a0a0a0a0a0a0a0a0a0a070707070707070707070707070707070707070707070707070707070707070707070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070a0c0c0c0c0c0c0c0c0a0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070a0c0c0c0c0c0c0c0c0a0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070a0a0a0a0a0a0a0a0a0a0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070f0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070g0g0g0g0e0e0g0h0g0g0g0g0g0g0g0g0g0g0g0g0g0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0e0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070i0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0h0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0i0h0h0h0h0h0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0k0k0k0k0k0k0k0k0l0l0l0l0b0b0b0b0b0909070j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0k0k0k0k0k0k0k0k0l0l0l0l0b0b0b0b0b0909070j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0k0k0k0k0k0k0k0k0l0l0l0l0b0b0b0b0b0909070j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0j0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0m0b0b0b0b0b0b0b0b0b0b0b0n0n0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070j0j0j0j0j0j0j0j0j0j0j0j0j0j0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0m0b0b0o0o0o0o0o0o0o0o0b0n0n0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070j0j0j0j0j0j0j0j0j0j0j0j0j0j0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0m0b0o0o0o0o0o0o0o0o0o0o0b0n0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070p0p0p0p0p0p0p0p0p0q0q0q0q0q0q0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0b0o0o0o0o0o0o0o0o0o0o0o0b0n0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070p0p0r0r0r0r0r0r0q0q0q0q0q0q0q0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0b0o0o0o0o0o0o0o0o0o0o0o0b0b0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070p0p0r0r0r0r0r0r0q0q0q0q0q0q0q0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0b0b0o0o0o0o0o0o0o0o0o0o0o0b0b0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070p0p0p0p0p0p0p0p0q0q0q0q0q0q0s0s0s0s0s0s0s0s0s0s0s0s0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0b0b0o0o0o0o0o0o0o0o0o0o0o0b0b0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0b0b0o0o0o0o0o0o0o0o0o0o0o0b0b0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0b0o0o0o0o0o0o0o0o0o0o0o0b0b0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070t0s0s0s0s0s0s0s0t0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0b0o0o0o0o0o0o0o0o0o0o0o0b0n0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070u0u0u0u0u0u0u0u0t0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0s0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0m0b0o0o0o0o0o0o0o0o0o0b0b0n0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070u0u0u0u0u0u0u0u0u0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d07070707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0m0b0b0b0b0b0b0b0b0b0b0b0n0n0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070u0u0u0u0u0u0u0u0v0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0707070709090b0b0b0b0b0b0m0m0m0m0m0m0m0m0m0m0m0m0b0b0b0b0b0b0b0b0b0b0b0n0n0n0n0n0n0n0n0n0n0n0n0n0b0b0b0b0b0909070w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0x0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0x0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0x0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0x0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0x0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0x0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0y0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0w0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0z0A0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0w0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0w0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0w0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0w0w0707070709090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0909070w0w0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0B0w0w0707070707090b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0907070w0w0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0w0w07070707070D0D0D0D0D0D0D0D0D0D0D0D070D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D07070E0F0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0w0w07070707070D0G0H0H0H0H0H0H0H0H0G0G0D0I0I0I0I0I0I0I0I0I0I0I0D0J0J0K0K0K0K0K0K0K0K0J0D0D0L0L0L0L0L0L0L0L0L0L0D07070F0F0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0707070707070D0D0G0H0H0H0H0H0H0H0H0G0G0D0I0I0I0I0I0I0I0I0I0I0I0D0J0J0K0K0K0K0K0K0K0K0J0D0D0M0M0M0M0M0M0N0M0M0M0D0D070F0F0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0707070707070D0D0G0O0P0O0O0O0Q0P0O0G0G0D0I0I0I0I0I0I0I0I0I0I0I0D0J0J0R0R0R0R0R0R0R0R0J0D0D0M0M0M0M0M0M0N0M0M0M0D0D07070d0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0707070707070D0D0G0S0S0S0T0T0U0V0V0G0G0D0I0I0I0I0I0I0I0I0I0I0I0D0J0J0W0W0W0W0W0W0X0X0J0D0D0M0M0M0M0M0M0N0M0M0M0D0D07070Y0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0707070707070D0D0G10101011110U0V0V120G0D0I0I0I0I0I0I0I0I0I0I0I0D0J0J0W0W1313131313130J0D0D0M0M0M0M0M0M0N0M0M0M0D0D07140Y0Y0Y0Y0Y0Y0Y0Y0Y0Y151616161616161616161616161615151515151515151515151515151515150707070707070D0D0G0S0S0S0T0T0U0V0V120G0D0I0I0I0I0I0I0I0I0I0I0I0D0J0J17171717171717170J0D0D0M0M0M0M0M0M0N0M0M0M0D0D07180Y0Y0Y0Y0Y0Y0Y0Y0Y0Y151616161616161616161616161615151515151515151515151515151515150707070707070D0D0G19191919191a19190G0G0D0I0I0I0I0I0I0I0I0I0I0I0D0J0J1b1b1b1b1b1b1b1b0J0D0D0M0M0M0M0M0M0N0M0M0M0D0D07180Y0Y0Y0Y0Y0Y0Y0Y0Y0Y151616161616161616161616161615151515151515151515151515151515150707070707070D0D0G19191919191a19190G0G0D0I0I0I0I0I0I0I0I0I0I0I0D0J0J1b1b1b1b1b1b1b1b0J0D0D1c1c1c1c1c1c1d1c1c1c0D0D07070Y0Y0Y0Y0Y0Y0Y0Y0Y15151616161616161616161616161615151515151515151515151515151515150707070707070D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D071e1f1f1f1f1f1f1f1f1g1g1g1h1h1h1h1h1h1h1h1h1h1h1h1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g0707070707071i1i1i1i1i1i1i1i1i1i1i0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D0D071j1f1f1f1f1f1f1f1f1g1g1g1h1h1h1h1h1h1h1h1h1h1h1h1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g0707070707071k1k1k1k1k1k1k1k1k1k1k07070707070707070707070707070707070707070707070707070707070707070707070707070707071j1f1f1f1f1f1f1f1f1g1g1g1h1h1h1h1h1h1h1h1h1h1h1h1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g0707070707071k1k1k1k1k1k1k1k1k1k1k0707070707070707070707070707070707070707070707070707070707070707070707070707070707071f1f1f1f1f1f1f1f1g1g1g1h1h1h1h1h1h1h1h1h1h1h1h1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g1g0707070707071k1k1k1k1k1k1k1k1k1k1k0707070707070707070707070707070707070707070707070707070707070707070707070707070707071l1l1l1l1l1l1l1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m0707070707071n1k1k1k1k1k1k1k1k1k1n1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o07071p1l1l1l1l1l1l1l1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m0707070707071o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o07071p1l1l1l1l1l1l1l1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m0707070707071o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o0707071l1l1l1l1l1l1l1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m1m0707070707071q1q1o1o1o1o1o1o1q1o1o1o1o1q1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o0707071r1r1r1r1r1r1r1r1r1r1r1s1s1s1s1s1s1s1s1s1s1s1s1s1s1s1s1r1r1r1r1r1r1r1r1r1r1r1r1r1r0707070707071q1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1q1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o1o0707071r1r1r1r1r1r1r1r1r1r1r1s1s1s1s1s1s1s1s1s1s1s1s1s1s1s1s1r1r1r1r1r1r1r1r1r1r1r1r1r1r0707070707071t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t07070707070707070707070707070707070707070707070707070707071r1r1r1r1r1r1r1r1r1r1r1s1s1s1s1s1s1s1s1s1s1s1s1s1s1s1s1r1r1r1r1r1r1r1r1r1r1r1r1r1r0707070707071t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t07070707070707070707070707070707070707070707070707070707071r1r1r1r1r1r1r1r1r1r1r1s1s1s1s1s1s1s1s1s1s1s1s1s1s1s1s1r1r1r1r1r1r1r1r1r1r1r1r1r1r0707070707071t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t1t0707070707070707070707070707070707070707070707070707070707071u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071v071u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u1u07071v07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1w070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x07070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w1w1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1x1w070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707071w070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707070707","rects":[[0,0,800,51],[26.5,9,119,31.5],[667,4,106.5,35],[308,12.5,63.5,25.5],[405,13.5,49,23.5],[487.5,12.5,75.5,25],[595,13.5,38,24.5],[0,52,800,677],[29,64.5,261.5,24],[25.5,94,392.5,342.5],[437.5,96,69.5,34],[32,100.5,380,330],[444,102.5,57,21.5],[32,52,768,450.5],[439.5,130,281,33.5],[437.5,96,283,67.5],[437.5,130,283,59],[437.5,164,161.5,25],[437.5,164,161.5,83],[437.5,194,123.5,53],[269.5,202,69.5,20],[269.5,201.5,96.5,25],[78,233,101.5,100],[264.5,233,101.5,100],[180,240,84,84],[437.5,251,106,31.5],[490,251.5,53.5,30.5],[444,257.5,54,19],[437.5,251,196,52],[437.5,251,196,76.5],[437.5,302.5,60.5,25],[437.5,302.5,336.5,130.5],[437.5,330.5,336.5,102.5],[444,337,324,44],[447.5,337,317,44],[447.5,337,317,52],[446,337,320,53],[446,390,320,36],[444,426,324,42],[25.5,434,392.5,74.5],[437.5,330.5,336.5,127],[438,433.5,235.5,24],[34,442.5,83.5,58],[34,440.5,83.5,16.5],[129.5,440.5,87.5,62],[227,440.5,87.5,62],[227,440.5,87.5,23.5],[324.5,440.5,87.5,54],[331.5,448.5,74,46],[331.5,440.5,74,54],[44,457.5,64,30],[44,458,64,29.5],[44,457,64,30.5],[239,455,64,31.5],[44,464.5,39.5,23],[44,465,39.5,22.5],[44,465,40.5,22.5],[44,464.5,64,23],[239,464.5,46.5,22],[256,464.5,47,22],[444,472.5,65,24],[444,426,324,43],[44,464.5,40,23],[44,465,40,22.5],[44,464.5,64.5,28.5],[256.5,464.5,46.5,22],[437.5,461.5,336.5,35],[444,469,324,32.5],[539.5,473.5,81.5,22.5],[239,464.5,64,22],[438,472.5,71,24],[34,457.5,83.5,43],[34,457,83.5,43.5],[227,486.5,87.5,16],[324.5,448.5,87.5,54],[324.5,440.5,87.5,62],[437.5,495,336.5,35],[444,506.5,53.5,23.5],[444,502.5,324,32.5],[540,506,76.5,24],[25.5,434,392.5,114],[438,506.5,59.5,23.5],[26,522,67.5,26],[444,540,41.5,23.5],[444,536,324,32.5],[26,522,385.5,54],[28,550.5,383.5,25.5],[438,540,47.5,23.5],[26.5,550.5,385,48],[444,569.5,324,32.5],[540,573,108.5,24],[26.5,573.5,171,25],[447.5,427,316.5,192],[437.5,595.5,336.5,112],[437.5,612.5,336.5,95],[448.5,619,315,82.5]],"rows":92,"width":2},"blocks":[{"o":"雲カメラ","r":[70,17,69,17],"t":{"de":"Kumo Kamera","en":"Kumo Camera","es":"Kumo Cámara","fr":"Kumo Caméra","ko":"쿠모 카메라","zh-Hans":"云相机","zh-Hant":"雲相機"}},{"o":"新着商品","r":[314,19,52,13],"t":{"de":"Neu","en":"New","es":"Novedades","fr":"Nouveautés","ko":"신상품","zh-Hans":"新品","zh-Hant":"新品"}},{"o":"交換レンズ","r":[494,19,63,13],"t":{"de":"Objektive","en":"Lenses","es":"Objetivos","fr":"Objectifs","ko":"렌즈","zh-Hans":"镜头","zh-Hant":"鏡頭"}},{"o":"買い物かご","r":[703,19,64,13],"t":{"de":"Warenkorb","en":"Cart","es":"Carrito","fr":"Panier","ko":"장바구니","zh-Hans":"购物车","zh-Hant":"購物車"}},{"o":"カメラ","r":[411,20,37,11],"t":{"de":"Kameras","en":"Cameras","es":"Cámaras","fr":"Appareils","ko":"카메라","zh-Hans":"相机","zh-Hant":"相機"}},{"o":"買取","r":[601,20,26,12],"t":{"de":"Ankauf","en":"Sell","es":"Vender","fr":"Rachat","ko":"매입","zh-Hans":"回收","zh-Hant":"收購"}},{"o":"トップ＞ フィルムカメラ ＞ 距離計連動カメラ","r":[35,71,250,12],"t":{"de":"Start > Analogkameras > Messsucher","en":"Home > Film cameras > Rangefinders","es":"Inicio > Analógicas > Telemétricas","fr":"Accueil > Argentiques > Télémétriques","ko":"홈 > 필름 카메라 > 레인지파인더","zh-Hans":"首页 > 胶片相机 > 旁轴相机","zh-Hant":"首頁 > 底片相機 > 旁軸相機"}},{"o":"新入荷","r":[456,107,33,11],"t":{"de":"Neu","en":"New","es":"Nuevo","fr":"Nouveau","ko":"신상","zh-Hans":"新到货","zh-Hant":"新到貨"}},{"o":"ソラ 35距離計連動カメラ","r":[446,136,268,22],"t":{"de":"Sora 35 Messsucher","en":"Sora 35 rangefinder","es":"Telemétrica Sora 35","fr":"Télémétrique Sora 35","ko":"소라 35 레인지파인더","zh-Hans":"Sora 35 旁轴相机","zh-Hant":"Sora 35 旁軸相機"}},{"o":"40mm F2.8・1972年製","r":[444,170,149,13],"t":{"de":"40 mm f/2,8, Baujahr 1972","en":"40mm f/2.8, made in 1972","es":"40 mm f/2,8, fabricada en 1972","fr":"40 mm f/2,8, fabriqué en 1972","ko":"40mm F2.8 · 1972년 제조","zh-Hans":"40mm F2.8，1972 年产","zh-Hant":"40mm F2.8，1972 年製"}},{"o":"SORA 35","r":[156,209,56,8],"t":{}},{"o":"税込・送料無料","r":[444,229,84,12],"t":{"de":"Inkl. MwSt., versandkostenfrei","en":"Tax included, free shipping","es":"IVA incluido, envío gratis","fr":"TTC, livraison offerte","ko":"세금 포함 · 무료 배송","zh-Hans":"含税，包邮","zh-Hant":"含稅，免運費"}},{"o":"1:2.8 ▶6Olでし","r":[210,235,57,98],"t":{}},{"o":"KOGAKU","r":[188,239,52,20],"t":{}},{"o":"SORA","r":[164,243,49,42],"t":{}},{"o":"美品","r":[508,259,29,15],"t":{"de":"Sehr gut","en":"Excellent","es":"Excelente","fr":"Excellent","ko":"최상급","zh-Hans":"美品","zh-Hant":"美品"}},{"o":"状態","r":[460,261,22,11],"t":{"de":"Zustand","en":"Grade","es":"Estado","fr":"État","ko":"상태","zh-Hans":"成色","zh-Hant":"成色"}},{"o":"シャッター・露出計 動作確認済み","r":[445,285,183,12],"t":{"de":"Verschluss und Belichtungsmesser geprüft","en":"Shutter and light meter tested","es":"Obturador y fotómetro probados","fr":"Obturateur et posemètre testés","ko":"셔터·노출계 작동 확인 완료","zh-Hans":"快门、测光表已测试正常","zh-Hant":"快門、測光表已測試正常"}},{"o":"残り1点","r":[444,309,48,12],"t":{"de":"Nur noch 1 Stück","en":"Only 1 left","es":"Solo queda 1","fr":"Plus qu’un exemplaire","ko":"1개 남음","zh-Hans":"仅剩 1 件","zh-Hant":"僅剩 1 件"}},{"o":"カートに入れる","r":[552,352,107,14],"t":{"de":"In den Warenkorb","en":"Add to cart","es":"Añadir al carrito","fr":"Ajouter au panier","ko":"장바구니에 담기","zh-Hans":"加入购物车","zh-Hant":"加入購物車"}},{"o":"お気に入り","r":[585,402,62,12],"t":{"de":"Merken","en":"Save","es":"Guardar","fr":"Favori","ko":"찜하기","zh-Hans":"收藏","zh-Hant":"收藏"}},{"o":"平日14時までのご注文は当日発送します。","r":[444,440,224,12],"t":{"de":"Werktags bis 14 Uhr bestellt, am selben Tag verschickt.","en":"Weekday orders placed by 2 pm ship the same day.","es":"Envío el mismo día si pides antes de las 14:00.","fr":"Avant 14 h en semaine : expédié le jour même.","ko":"평일 오후 2시까지 주문하면 당일 발송합니다.","zh-Hans":"工作日 14 点前下单，当天发货。","zh-Hant":"平日 14 點前下單，當天出貨。"}},{"o":"撮影レンズ","r":[444,479,59,12],"t":{"de":"Objektiv","en":"Lens","es":"Objetivo","fr":"Objectif","ko":"렌즈","zh-Hans":"镜头","zh-Hant":"鏡頭"}},{"o":"40mm F2.8","r":[546,480,69,10],"t":{}},{"o":"絞り優先AE","r":[546,512,65,12],"t":{"de":"Zeitautomatik","en":"Aperture-priority auto","es":"Prioridad a la abertura","fr":"Priorité à l’ouverture","ko":"조리개 우선 AE","zh-Hans":"光圈优先自动曝光","zh-Hant":"光圈優先自動曝光"}},{"o":"露出制御","r":[444,513,48,11],"t":{"de":"Belichtung","en":"Exposure","es":"Exposición","fr":"Exposition","ko":"노출","zh-Hans":"曝光","zh-Hant":"曝光"}},{"o":"商品説明","r":[32,528,55,14],"t":{"de":"Beschreibung","en":"Description","es":"Descripción","fr":"Description","ko":"상품 설명","zh-Hans":"商品说明","zh-Hant":"商品說明"}},{"o":"付属品","r":[444,546,35,12],"t":{"de":"Zubehör","en":"In the box","es":"Incluye","fr":"Fournis","ko":"구성품","zh-Hans":"附件","zh-Hant":"配件"}},{"o":"ストラップ・レンズキャップ","r":[547,546,152,12],"t":{"de":"Riemen und Deckel","en":"Strap and lens cap","es":"Correa y tapa","fr":"Courroie et bouchon","ko":"스트랩·렌즈 캡","zh-Hans":"背带、镜头盖","zh-Hant":"背帶、鏡頭蓋"}},{"o":"レンズにくもり・カビはありません。モルトは交換済みで、届い たその日から撮影できます。","r":[33,557,372,35],"t":{"de":"Kein Schleier, kein Pilz im Objektiv. Neue Lichtdichtungen, ab dem ersten Tag einsatzbereit.","en":"No haze or fungus in the lens. The light seals are new, so it is ready to shoot the day it arrives.","es":"La lente no tiene velo ni hongos. Los burletes son nuevos: lista para disparar el día que llega.","fr":"Ni voile ni champignons dans l’objectif. Les joints sont neufs : prêt à photographier dès réception.","ko":"렌즈에 흐림이나 곰팡이가 없습니다. 차광재를 교체해 받은 날 바로 촬영할 수 있습니다.","zh-Hans":"镜头无雾、无霉。遮光棉已更换，到手当天就能拍。","zh-Hant":"鏡頭無霧、無黴。遮光棉已更換，到手當天就能拍。"}},{"o":"LR44 1個（付属）","r":[547,579,96,12],"t":{"de":"1× LR44, beiliegend","en":"One LR44, included","es":"1 pila LR44 incluida","fr":"1 pile LR44 fournie","ko":"LR44 1개 (포함)","zh-Hans":"LR44 一颗（附送）","zh-Hant":"LR44 一顆（附贈）"}},{"o":"電池","r":[444,580,24,11],"t":{"de":"Batterie","en":"Battery","es":"Pila","fr":"Pile","ko":"배터리","zh-Hans":"电池","zh-Hant":"電池"}},{"o":"海外発送について","r":[458,633,103,13],"t":{"de":"Versand ins Ausland","en":"Shipping abroad","es":"Envíos al extranjero","fr":"Expédition à l’étranger","ko":"해외 배송 안내","zh-Hans":"关于海外发货","zh-Hant":"關於海外寄送"}},{"o":"海外への直接発送は行っておりません。転送サービス をご利用ください。","r":[458,655,286,31],"t":{"de":"Wir versenden nicht direkt ins Ausland. Bitte nutze einen Weiterleitungsdienst.","en":"We don’t ship abroad directly. Please use a forwarding service.","es":"No enviamos directamente al extranjero. Usa un servicio de reenvío.","fr":"Nous n’expédions pas directement à l’étranger. Passez par un service de réexpédition.","ko":"해외로 직접 배송하지 않습니다. 배송대행 서비스를 이용해 주세요.","zh-Hans":"我们不直接发往海外，请使用转运服务。","zh-Hant":"我們不直接寄往海外，請使用轉運服務。"}}],"lines":{"en":[{"h":10.3,"text":"新入荷","w":32.2,"x":24.3,"y":14.7},{"h":20.7,"text":"ソラ 35距離計連動カメラ","w":267.4,"x":14.6,"y":43.8},{"h":11.9,"text":"40mm F2.8・1972年製","w":148.2,"x":12.5,"y":77.6},{"h":11.2,"text":"税込・送料無料","w":82.9,"x":12.6,"y":136.8},{"h":14,"text":"美品","w":28.3,"x":76.7,"y":166.3},{"h":10.2,"text":"状態","w":20.9,"x":28.5,"y":168.7},{"h":11,"text":"シャッター・露出計 動作確認済み","w":181.6,"x":13.8,"y":193},{"h":12,"text":"残り1点","w":47.6,"x":12.3,"y":216},{"h":13.3,"text":"カートに入れる","w":105.8,"x":120.6,"y":259.2}],"zh-Hans":[{"h":10.3,"text":"新入荷","w":32.2,"x":24.3,"y":14.7},{"h":20.7,"text":"ソラ 35距離計連動カメラ","w":267.4,"x":14.6,"y":43.8},{"h":11.9,"text":"40mm F2.8・1972年製","w":148.2,"x":12.5,"y":77.6},{"h":11.2,"text":"税込・送料無料","w":82.9,"x":12.6,"y":136.8},{"h":14,"text":"美品","w":28.3,"x":76.7,"y":166.3},{"h":10.2,"text":"状態","w":20.9,"x":28.5,"y":168.7},{"h":11,"text":"シャッター・露出計 動作確認済み","w":181.6,"x":13.8,"y":193},{"h":12,"text":"残り1点","w":47.6,"x":12.3,"y":216},{"h":13.3,"text":"カートに入れる","w":105.8,"x":120.6,"y":259.2}]}}</script>
-    <!-- /part:scene-data -->
-    <script src="assets/site.js?v=1ec42738fe14" defer></script>
+    <script src="assets/site.js?v=58b37f6c2bf3" defer></script>
   </body>
 </html>

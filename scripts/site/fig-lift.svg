@@ -1,0 +1,15 @@
+<svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
+  <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" stroke-dasharray="2 3" opacity="0.7" />
+  <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" stroke-dasharray="2 3" opacity="0.7" />
+  <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" stroke-dasharray="2 3" opacity="0.7" />
+  <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
+  <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
+  <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
+  <path d="M94.3 18.5 L156.4 54.4" pathLength="1" class="hi" style="--d:360" />
+  <path d="M94.3 62.7 L94.3 24.1" stroke-dasharray="1.5 3" opacity="0.7" />
+  <path d="M79.9 26.8 L173.1 80.6" pathLength="1" class="hi" style="--d:420" />
+  <path d="M79.9 71.0 L79.9 32.3" stroke-dasharray="1.5 3" opacity="0.7" />
+  <path d="M65.6 35.1 L113.4 62.7" pathLength="1" class="hi" style="--d:480" />
+  <path d="M65.6 79.3 L65.6 40.6" stroke-dasharray="1.5 3" opacity="0.7" />
+</svg>

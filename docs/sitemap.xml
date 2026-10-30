@@ -4,10 +4,7 @@
     <loc>https://transeen.itool.tech/</loc>
     <lastmod>2026-10-30</lastmod>
     <image:image><image:loc>https://transeen.itool.tech/assets/og-image.jpg</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/capture-read-en.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/capture-mark-en.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/select-en.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/page-en.webp</image:loc></image:image>
+    <image:image><image:loc>https://transeen.itool.tech/assets/preview.webp</image:loc></image:image>
     <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
@@ -16,10 +13,7 @@
     <loc>https://transeen.itool.tech/zh/</loc>
     <lastmod>2026-10-30</lastmod>
     <image:image><image:loc>https://transeen.itool.tech/assets/og-image-zh.jpg</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/capture-read-zh.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/capture-mark-zh.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/select-zh.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/page-zh-hans.webp</image:loc></image:image>
+    <image:image><image:loc>https://transeen.itool.tech/assets/preview-zh.webp</image:loc></image:image>
     <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
@@ -27,9 +21,6 @@
   <url>
     <loc>https://transeen.itool.tech/guide/</loc>
     <lastmod>2026-10-30</lastmod>
-    <image:image><image:loc>https://transeen.itool.tech/assets/select-en.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/capture-keep-en.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/permission.webp</image:loc></image:image>
     <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
@@ -37,9 +28,6 @@
   <url>
     <loc>https://transeen.itool.tech/zh/guide/</loc>
     <lastmod>2026-10-30</lastmod>
-    <image:image><image:loc>https://transeen.itool.tech/assets/select-zh.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/capture-keep-zh.webp</image:loc></image:image>
-    <image:image><image:loc>https://transeen.itool.tech/assets/permission.webp</image:loc></image:image>
     <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />

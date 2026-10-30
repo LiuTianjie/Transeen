@@ -2,43 +2,16 @@
 """Refresh the shared page parts and the static asset versions after changing the website."""
 from hashlib import sha256
 from pathlib import Path
-import json
 import re
 
 root = Path(__file__).resolve().parent.parent
 docs = root / "docs"
 parts_dir = root / "scripts" / "site"
 
-# Shared parts live once in scripts/site and are copied between <!-- part:name --> and
-# <!-- /part:name --> markers, indented like the opening marker.
-def json_script(element_id, value):
-    data = json.dumps(value, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-    return f'<script type="application/json" id="{element_id}">{data}</script>'
-
-
-def load(name):
-    # The render page is built before these exist; it does not use them.
-    path = parts_dir / name
-    return json.loads(path.read_text()) if path.is_file() else None
-
-
-# What the website's demonstrations know about the sample page: its size, the default capture, where
-# the selection snaps (the production region finder), every text block with its translations, and
-# the lines recognised in the default capture. All of it comes from scripts/preview-website.sh.
-scene = {
-    "page": [800, 729],
-    "capture": [432, 93, 348, 294],
-    "languages": load("kumo-strings.json")["languages"],
-    "regions": load("regions-ja.json"),
-    "blocks": load("blocks-ja.json"),
-    "lines": {"en": load("stage-lines-en.json"), "zh-Hans": load("stage-lines-zh.json")},
-}
-parts = {
-    "sprite": (parts_dir / "sprite.svg").read_text().strip(),
-    "kumo-sprite": (parts_dir / "kumo-sprite.svg").read_text().strip(),
-    "kumo-scene": (parts_dir / "kumo-scene.html").read_text().strip(),
-    "scene-data": json_script("scene-data", scene),
-}
+# Shared parts live once in scripts/site as <name>.svg or <name>.html and are copied between
+# <!-- part:name --> and <!-- /part:name --> markers, indented like the opening marker.
+parts = {path.stem: path.read_text().strip() for path in parts_dir.glob("*.svg")}
+parts |= {path.stem: path.read_text().strip() for path in parts_dir.glob("*.html") if path.stem != "og"}
 part_block = re.compile(r"^([ \t]*)<!-- part:([\w-]+) -->\n.*?^[ \t]*<!-- /part:\2 -->$", re.M | re.S)
 
 
@@ -62,8 +35,12 @@ def version(match):
     return f"{match[1]}{match[2]}?v={digest}{match[4]}"
 
 
-for page in sorted(docs.rglob("*.html")) + [parts_dir / "kumo-render.html"]:
+# The share card page reuses the demo but points at docs/assets by relative path, so it only
+# needs its parts.
+share = parts_dir / "og.html"
+share.write_text(part_block.sub(fill, share.read_text()))
+
+# docs/design/lab holds local scratch pages that are not published.
+for page in sorted(path for path in docs.rglob("*.html") if "lab" not in path.relative_to(docs).parts):
     text = part_block.sub(fill, page.read_text())
-    if page.is_relative_to(docs):
-        text = asset_reference.sub(version, text)
-    page.write_text(text)
+    page.write_text(asset_reference.sub(version, text))

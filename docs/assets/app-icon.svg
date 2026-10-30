@@ -1,18 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" fill="none">
   <defs>
-    <linearGradient id="base" x1="196" y1="118" x2="862" y2="930" gradientUnits="userSpaceOnUse"><stop stop-color="#326652"/><stop offset=".48" stop-color="#183E30"/><stop offset="1" stop-color="#0B2119"/></linearGradient>
-    <linearGradient id="paper" x1="238" y1="245" x2="580" y2="596" gradientUnits="userSpaceOnUse"><stop stop-color="#F0F9DE"/><stop offset="1" stop-color="#D4EBC5"/></linearGradient>
-    <linearGradient id="mint" x1="440" y1="404" x2="773" y2="778" gradientUnits="userSpaceOnUse"><stop stop-color="#B3E0B3"/><stop offset="1" stop-color="#71AD91"/></linearGradient>
-    <linearGradient id="edge" x1="256" y1="100" x2="730" y2="911" gradientUnits="userSpaceOnUse"><stop stop-color="#D6F4CF" stop-opacity=".32"/><stop offset=".55" stop-color="#D6F4CF" stop-opacity="0"/><stop offset="1" stop-color="#D6F4CF" stop-opacity=".07"/></linearGradient>
-    <filter id="shadow" x="0" y="0" width="1024" height="1024" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#06170E" flood-opacity=".2"/></filter>
-    <filter id="page-shadow" x="150" y="170" width="720" height="690" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#051C10" flood-opacity=".24"/></filter>
+    <linearGradient id="base" x1="512" y1="80" x2="512" y2="944" gradientUnits="userSpaceOnUse"><stop stop-color="#26282c"/><stop offset=".55" stop-color="#121315"/><stop offset="1" stop-color="#08090a"/></linearGradient>
+    <linearGradient id="rim" x1="512" y1="80" x2="512" y2="944" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".34"/><stop offset=".4" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity=".1"/></linearGradient>
+    <linearGradient id="ink" x1="300" y1="420" x2="724" y2="600" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#d9dce1"/></linearGradient>
+    <radialGradient id="glow" cx="512" cy="560" r="330" gradientUnits="userSpaceOnUse"><stop stop-color="#0a84ff" stop-opacity=".34"/><stop offset="1" stop-color="#0a84ff" stop-opacity="0"/></radialGradient>
+    <filter id="shadow" x="0" y="0" width="1024" height="1024" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity=".3"/></filter>
   </defs>
-  <g filter="url(#shadow)"><rect x="80" y="80" width="864" height="864" rx="196" fill="url(#base)"/><rect x="82" y="82" width="860" height="860" rx="194" stroke="url(#edge)" stroke-width="4"/></g>
-  <g filter="url(#page-shadow)">
-    <rect x="228" y="232" width="350" height="368" rx="68" fill="url(#paper)"/>
-    <path d="M310 495 388 320Q397 300 406 320L482 495M339 434H454" stroke="#23503D" stroke-width="25" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="436" y="424" width="360" height="368" rx="68" fill="url(#mint)"/>
-    <rect x="438" y="426" width="356" height="364" rx="66" stroke="#E2F5D0" stroke-opacity=".24" stroke-width="4"/>
-    <path d="m610 499 13 23M530 553H706M570 555c14 66 55 119 131 155M666 555c-14 66-56 119-132 155" stroke="#173E2D" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <g filter="url(#shadow)">
+    <rect x="80" y="80" width="864" height="864" rx="196" fill="url(#base)"/>
+    <rect x="82" y="82" width="860" height="860" rx="194" stroke="url(#rim)" stroke-width="4"/>
   </g>
+  <rect x="80" y="80" width="864" height="864" rx="196" fill="url(#glow)"/>
+  <g stroke="#0a84ff" stroke-width="44" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M250 372V318a68 68 0 0 1 68-68h54"/>
+    <path d="M652 250h54a68 68 0 0 1 68 68v54"/>
+    <path d="M774 652v54a68 68 0 0 1-68 68h-54"/>
+    <path d="M372 774h-54a68 68 0 0 1-68-68v-54"/>
+  </g>
+  <path d="M362 450h300" stroke="url(#ink)" stroke-width="56" stroke-linecap="round"/>
+  <path d="M362 574h196" stroke="#fff" stroke-opacity=".38" stroke-width="56" stroke-linecap="round"/>
 </svg>
