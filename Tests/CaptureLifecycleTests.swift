@@ -4,7 +4,8 @@ import CoreText
 @MainActor private final class SlowBackend: TranslationBackend {
     var entered = false
     func cancel() {}
-    func translate(_ analysis: ScreenPipeline.Analysis, direction: TranslationDirection, app: String?) async throws -> TranslationOutput {
+    func translate(_ analysis: ScreenPipeline.Analysis, direction: TranslationDirection, app: String?,
+                   progress: @escaping TranslationProgress) async throws -> TranslationOutput {
         entered = true
         // Deliberately ignore cancellation: the controller still must reject the stale response.
         try? await Task.sleep(for: .milliseconds(300))
