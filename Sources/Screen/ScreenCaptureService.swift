@@ -40,8 +40,9 @@ enum ScreenCaptureService {
         return NSImage(cgImage: image, size: source.size)
     }
 
-    /// The pixels of `rectInScreen` without our own windows, at the display's backing scale.
-    static func captureImage(rectInScreen: CGRect, display screen: Display) async throws -> CGImage {
+    /// The pixels of `rectInScreen` at the display's backing scale: without our own windows,
+    /// or with them except `excluding` when that is given.
+    static func captureImage(rectInScreen: CGRect, display screen: Display, excluding windows: Set<CGWindowID>? = nil) async throws -> CGImage {
         guard CGPreflightScreenCaptureAccess() else { throw ScreenCaptureError.notAuthorized }
         let source = ScreenTranslate.captureSourceRect(appKitRect: rectInScreen, screenFrame: screen.frame)
         guard source.width >= ScreenTranslate.minimumSelection, source.height >= ScreenTranslate.minimumSelection else {
@@ -53,7 +54,11 @@ enum ScreenCaptureService {
             throw ScreenCaptureError.noDisplay
         }
         let pid = ProcessInfo.processInfo.processIdentifier
-        let excluded = content.windows.filter { $0.owningApplication?.processID == pid }
+        let excluded = content.windows.filter { window in
+            guard window.owningApplication?.processID == pid else { return false }
+            // A selection overlay still on its way out is never part of the picture.
+            return windows.map { $0.contains(window.windowID) || window.windowLayer >= Int(CGWindowLevelForKey(.screenSaverWindow)) } ?? true
+        }
         let filter = SCContentFilter(display: display, excludingWindows: excluded)
         let config = SCStreamConfiguration()
         config.sourceRect = source

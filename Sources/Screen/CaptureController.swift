@@ -56,7 +56,8 @@ final class CaptureController {
     }
     var isPresenting: Bool { panel != nil }
 
-    func begin(mode: CaptureMode, settings: AppSettings) {
+    /// `leaving` are windows of ours on their way out (the menu-bar panel that started this) to keep out of the picture.
+    func begin(mode: CaptureMode, settings: AppSettings, leaving: [NSWindow] = []) {
         guard authorize() else { return }
         close()
         guard CGPreflightScreenCaptureAccess() else {
@@ -82,27 +83,47 @@ final class CaptureController {
         updateLanguageState()
         selecting = true
         let token = generation
-        for screen in NSScreen.screens {
+        // The screen is frozen first, as it was when the shortcut was pressed: another app's open
+        // menu or popover closes as soon as anything takes focus from it. Nothing here activates
+        // Transeen; the overlay is a non-activating panel, so that app stays frontmost throughout.
+        // Our own windows on screen (Home, Settings, a pin) are part of it too, as in any screenshot.
+        let ours = Set(NSApp.windows.filter { window in !window.isVisible || window is CapturePanel || leaving.contains { $0 === window } }.map { CGWindowID($0.windowNumber) })
+        let screens = NSScreen.screens.map { (screen: $0, display: ScreenCaptureService.Display($0)) }
+        work = Task { [weak self] in
+            let frames = await withTaskGroup(of: (CGDirectDisplayID, CGImage?).self) { group in
+                for (_, display) in screens {
+                    group.addTask { (display.displayID, try? await ScreenCaptureService.captureImage(rectInScreen: display.frame, display: display, excluding: ours)) }
+                }
+                var frames: [CGDirectDisplayID: CGImage] = [:]
+                for await (id, image) in group { frames[id] = image }
+                return frames
+            }
+            guard let self, token == self.generation, self.selecting else { return }
+            self.selectionFrames = frames
+            self.showSelectors(screens, mode: mode, token: token)
+        }
+        installKeys()
+    }
+
+    private func showSelectors(_ screens: [(screen: NSScreen, display: ScreenCaptureService.Display)], mode: CaptureMode, token: Int) {
+        let pointer = NSEvent.mouseLocation
+        for (screen, display) in screens {
             let again = lastArea == nil ? "" : state.shortcuts.binding(.lastArea).map { " · " + L("%@ 上次区域", $0.display) } ?? ""
             let selector = ScreenSelectionPanel(screen: screen, title: mode.title + " · " + direction.compactTitle + again)
             selector.onCancel = { [weak self] in self?.close() }
             selector.onDragEnded = { [weak self] rect in self?.selected(rect, screen: screen) }
+            let image = selectionFrames[display.displayID]
+            if let image { selector.setBackdrop(NSImage(cgImage: image, size: display.frame.size)) }
             selectors.append(selector)
             selector.orderFrontRegardless()
-            let display = ScreenCaptureService.Display(screen)
+            guard let image else { continue }
             Task { [weak self, weak selector] in
-                guard let image = try? await ScreenCaptureService.captureImage(rectInScreen: display.frame, display: display) else { return }
-                guard let self, token == self.generation, self.selecting else { return }
-                self.selectionFrames[display.displayID] = image
-                selector?.setBackdrop(NSImage(cgImage: image, size: display.frame.size))
                 let map = await Task.detached { ScreenRegionMap(image: image, frame: display.frame) }.value
-                guard token == self.generation, self.selecting, let map else { return }
+                guard let self, token == self.generation, self.selecting, let map else { return }
                 selector?.setRegionMap(map)
             }
         }
-        NSApp.activate(ignoringOtherApps: true)
-        selectors.first?.makeKey()
-        installKeys()
+        (selectors.first { $0.frame.contains(pointer) } ?? selectors.first)?.makeKey()
     }
 
     /// Import an existing screenshot. Display points may shrink to the screen,

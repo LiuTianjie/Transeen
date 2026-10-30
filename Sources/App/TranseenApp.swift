@@ -40,7 +40,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     private var launcherPopover: NSPopover?
     private var launcherClickMonitor: Any?
     private var statusMenu: NSMenu?
-    private var windowsHiddenForCapture: [NSWindow] = []
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
@@ -60,9 +59,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         Task { await license.bootstrap() }
         capture.onReselect = { [weak self] mode in self?.start(mode) }
         capture.onError = { [weak self] message in self?.notice(message) }
-        capture.onFinished = { [weak self] in
-            DispatchQueue.main.async { self?.restoreWindowsAfterCapture() }
-        }
         shortcuts.onPressed = { [weak self] action in
             guard let self, settings.shortcuts.recording == nil else { return }
             switch action {
@@ -169,8 +165,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     }
     private func start(_ mode: CaptureMode) {
         guard authorize() else { return }
-        launcherPopover?.performClose(nil)
-        hideForCapture([homeWindow, onboardingWindow])
         permission.refresh()
         guard permission.granted else {
             permission.pendingMode = mode
@@ -181,24 +175,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         permissionWindow?.orderOut(nil)
         permissionWindow?.contentView = nil
         permissionWindow = nil
-        hideForCapture([settingsWindow])
-        capture.begin(mode: mode, settings: settings)
-        if !capture.isActive { restoreWindowsAfterCapture() }
-    }
-    /// Our own windows step aside so they are not captured, and return when the capture ends.
-    private func hideForCapture(_ windows: [NSWindow?]) {
-        for case let window? in windows where window.isVisible {
-            if !windowsHiddenForCapture.contains(window) { windowsHiddenForCapture.append(window) }
-            window.orderOut(nil)
-        }
-    }
-    private func restoreWindowsAfterCapture() {
-        guard !capture.isActive, !windowsHiddenForCapture.isEmpty else { return }
-        let windows = windowsHiddenForCapture
-        windowsHiddenForCapture = []
-        NSApp.activate(ignoringOtherApps: true)
-        windows.forEach { $0.orderFront(nil) }
-        windows.last?.makeKey()
+        let launcher = launcherPopover?.contentViewController?.view.window
+        launcherPopover?.performClose(nil)
+        capture.begin(mode: mode, settings: settings, leaving: launcher.map { [$0] } ?? [])
     }
     @objc private func showPermissionGuide() {
         if permissionWindow == nil {

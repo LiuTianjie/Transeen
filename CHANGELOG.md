@@ -6,6 +6,7 @@
 - Code in a bordered pill (`check`) is recognised as code and moves with its sentence. When a translator rewrites the code, the sentence is still translated and the pill is cleared with the rest of the original.
 - Letters that reach below the line (g, y, p) are erased with their own line and no longer leave marks in the translation.
 - A floating button over the text, such as a scroll-down arrow, no longer turns into stray characters ("r • +") in the translation.
+- The capture shortcut freezes the screen as it is, before anything changes: another app's open menu, popover or tooltip stays in the picture, Transeen no longer takes focus from the app you are capturing, and Transeen's own windows stay where they are instead of hiding.
 - More misreadings of "I'll" are corrected, and a label without a full stop gets a translation without one.
 
 ## 0.11.0
