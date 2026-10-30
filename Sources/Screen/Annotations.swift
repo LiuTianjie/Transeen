@@ -316,22 +316,33 @@ final class AnnotationCanvas: NSView {
     override func mouseDown(with event: NSEvent) {
         window?.makeKey(); window?.makeFirstResponder(self)
         let location = point(event)
+        // The handles of the selected mark, the one just drawn too, reshape it with any tool.
         if let selected = annotations.selected, let handle = selected.handle(at: location) {
             beginEditing(selected, at: location, handle: handle)
             return
         }
-        if let mark = annotations.hit(at: location, interior: annotations.tool == .move) {
-            annotations.tool = .move
+        if let mark = pickable(at: location) {
             annotations.select(mark.id)
             if event.clickCount == 2, mark.tool == .number { onEditNumber?(); return }
             beginEditing(mark, at: location)
             return
         }
         annotations.select(nil)
-        if annotations.tool == .move { window?.performDrag(with: event); return }
+        // The capture window stays where it is; only a pin moves with the mouse.
+        guard annotations.tool != .move else { return }
         draft = Annotation(tool: annotations.tool, points: [location], color: annotations.color, width: annotations.width,
                            number: annotations.tool == .number ? annotations.nextNumber : nil)
         needsDisplay = true
+    }
+    /// The mark a press takes hold of. The pointer takes any mark and the number tool its
+    /// own badges, since a badge stamped on a badge is never wanted. The other tools always
+    /// draw, even over a mark: an arrow often starts on a number or a box.
+    private func pickable(at location: CGPoint) -> Annotation? {
+        switch annotations.tool {
+        case .move: annotations.hit(at: location, interior: true)
+        case .number: annotations.marks.last { $0.tool == .number && $0.contains(location) }
+        default: nil
+        }
     }
     private func beginEditing(_ mark: Annotation, at point: CGPoint, handle: Int? = nil) {
         annotations.beginEdit()
@@ -371,7 +382,7 @@ final class AnnotationCanvas: NSView {
     }
     override func menu(for event: NSEvent) -> NSMenu? {
         guard let mark = annotations.hit(at: point(event), interior: true) else { return nil }
-        annotations.tool = .move; annotations.select(mark.id)
+        annotations.select(mark.id)
         let menu = NSMenu()
         if mark.tool == .number {
             let edit = NSMenuItem(title: L("修改编号…"), action: #selector(editNumber), keyEquivalent: "")

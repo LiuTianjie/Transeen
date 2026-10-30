@@ -100,6 +100,7 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
         root.addSubview(border)
         handles.margin = Self.margin
         handles.isBusy = { [weak state] in state?.finishing ?? true }
+        handles.isDrawing = { [weak state] in state.map { $0.annotations.tool != .move } ?? false }
         root.addSubview(handles)
         chromePanel.contentView = hosting
         hosting.rootView = CaptureToolbar(state: state) { [weak self] in self?.onAction?($0) }
@@ -197,7 +198,7 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
     }
     func windowDidMove(_ notification: Notification) {
         guard let window = notification.object as? NSWindow, window === self else { return }
-        // Dragged by the picture; while an edge is dragged the window spans the frozen frame instead.
+        // Moved by the system (another display, Mission Control); while an edge is dragged the window spans the frozen frame instead.
         if liveFrame == nil { contentRect = frame.insetBy(dx: Self.margin, dy: Self.margin) }
         refreshUI()
     }
@@ -224,13 +225,15 @@ final class CaptureResizeHandles: NSView {
     enum Phase { case began, changed, ended }
     var onResize: ((Phase, ResizeEdges, CGPoint) -> Void)?
     var isBusy: () -> Bool = { false }
+    /// A drawing tool is chosen: every pixel of the picture draws, only the margin outside it resizes.
+    var isDrawing: () -> Bool = { false }
     var isEnabled = false { didSet { needsDisplay = true } }
     var margin: CGFloat = 8
     private var hovering = false
     private var cursorEdges: ResizeEdges = []
     private var drag: (edges: ResizeEdges, start: CGPoint)?
     /// How far inside the picture an edge can be grabbed, and how far along it a corner reaches.
-    private static let inside: CGFloat = 4
+    private var inside: CGFloat { isDrawing() ? 0 : 4 }
     private static let corner: CGFloat = 16
 
     private var content: CGRect { bounds.insetBy(dx: margin, dy: margin) }
@@ -244,9 +247,10 @@ final class CaptureResizeHandles: NSView {
 
     func edges(at p: CGPoint) -> ResizeEdges {
         let c = content
-        guard bounds.contains(p), !c.insetBy(dx: Self.inside, dy: Self.inside).contains(p) else { return [] }
-        let nearLeft = p.x <= c.minX + Self.inside, nearRight = p.x >= c.maxX - Self.inside
-        let nearBottom = p.y <= c.minY + Self.inside, nearTop = p.y >= c.maxY - Self.inside
+        let inside = inside
+        guard bounds.contains(p), !c.insetBy(dx: inside, dy: inside).contains(p) else { return [] }
+        let nearLeft = p.x <= c.minX + inside, nearRight = p.x >= c.maxX - inside
+        let nearBottom = p.y <= c.minY + inside, nearTop = p.y >= c.maxY - inside
         var edges: ResizeEdges = []
         if nearLeft || ((nearBottom || nearTop) && p.x <= c.minX + Self.corner && p.x < c.midX) { edges.insert(.left) }
         else if nearRight || ((nearBottom || nearTop) && p.x >= c.maxX - Self.corner) { edges.insert(.right) }

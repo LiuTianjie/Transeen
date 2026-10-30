@@ -83,6 +83,31 @@ import AppKit
         precondition(pen.contains(CGPoint(x: 70, y: 230)) && !pen.contains(CGPoint(x: 75, y: 201)), "Pen hit testing must follow its stroke")
         let resizedPen = pen.resized(handle: 2, by: CGPoint(x: 50, y: 30))
         precondition(resizedPen.points == [CGPoint(x: 50, y: 200), CGPoint(x: 90, y: 260), CGPoint(x: 150, y: 200)], "Freehand strokes must scale as one object")
+        // A drawing tool always draws, even when the press lands on a mark, and never
+        // falls back to the pointer, whose press on the background used to drag the window.
+        let marked = store.marks
+        store.tool = .arrow
+        drag(CGPoint(x: 95, y: 75), CGPoint(x: 200, y: 260))
+        precondition(store.marks.count == marked.count + 1 && store.marks.last?.tool == .arrow
+                     && store.marks.last?.points == [CGPoint(x: 95, y: 75), CGPoint(x: 200, y: 260)]
+                     && Array(store.marks.dropLast()) == marked && store.tool == .arrow,
+                     "An arrow started on a number or a box must be drawn, not pick the mark up")
+        drag(CGPoint(x: 42, y: 75), CGPoint(x: 10, y: 10))
+        precondition(store.marks.count == marked.count + 2 && store.tool == .arrow, "A press on a mark's edge with a drawing tool must draw")
+        store.undo(); store.undo()
+        precondition(store.marks == marked)
+        store.tool = .number
+        drag(CGPoint(x: 95, y: 75), CGPoint(x: 120, y: 90))
+        precondition(store.marks.count == marked.count && store.marks.first { $0.id == number.id }?.points == [CGPoint(x: 120, y: 90)],
+                     "The number tool moves its own badges instead of stamping one on another")
+        store.undo()
+        let window = NSWindow(contentRect: CGRect(x: 200, y: 200, width: 500, height: 300), styleMask: [.borderless], backing: .buffered, defer: false)
+        window.contentView = canvas
+        store.tool = .move
+        drag(CGPoint(x: 480, y: 280), CGPoint(x: 400, y: 200))
+        precondition(window.frame.origin == CGPoint(x: 200, y: 200) && store.marks == marked && store.selectedID == nil,
+                     "A press on the picture's background selects nothing and leaves the capture where it is")
+        window.contentView = nil
         for shape in [ellipse, arrow, pen] {
             store.append(shape); store.tool = .move; store.select(nil)
             let anchor = shape.tool == .ellipse ? CGPoint(x: 250, y: 70) : shape.points.first!

@@ -58,7 +58,7 @@ struct CaptureToolbar: View {
                         if state.failed || state.noText || state.warning != nil {
                             Image(systemName: state.failed ? "exclamationmark.circle" : "info.circle")
                         }
-                        Text(state.cropReadout ?? state.warning ?? (state.status.isEmpty ? L("拖动图片移动 · 拖动边缘调整范围 · 选择工具标注") : state.status))
+                        Text(state.cropReadout ?? state.warning ?? (state.status.isEmpty ? L("拖动边缘调整范围 · 选择工具标注") : state.status))
                             .lineLimit(3).fixedSize(horizontal: false, vertical: true)
                     }.font(.system(size: 11))
                         .foregroundStyle(state.failed ? Color.red : state.warning != nil ? Color.orange : CaptureAppearance.secondary)

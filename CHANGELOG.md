@@ -4,6 +4,7 @@
 
 - A picture next to the text, such as a row of screenshot thumbnails, is no longer read as words, erased and covered with a translation ("望开！"). A line the recogniser is unsure of is read again, magnified, and kept only if it reads the same.
 - Chinese words inside an English sentence ("defaulting to 简体中文", "the hero counts 已翻译 8 处") are read as Chinese and kept, instead of turning into Latin garbage that was then translated.
+- A drawing tool always draws. An arrow started on a number or a box used to pick that mark up and switch to the pointer, so the next stroke dragged the whole capture away instead. The capture now stays where it was taken; only a pin moves with the mouse. With a drawing tool chosen, the picture's edge draws too, and the capture is resized from just outside it.
 
 ## 0.11.1
 
