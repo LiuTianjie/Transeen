@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://transeen.itool.tech/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <image:image><image:loc>https://transeen.itool.tech/assets/og-image.jpg</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/capture-read-en.webp</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/capture-mark-en.webp</image:loc></image:image>
@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://transeen.itool.tech/zh/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <image:image><image:loc>https://transeen.itool.tech/assets/og-image-zh.jpg</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/capture-read-zh.webp</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/capture-mark-zh.webp</image:loc></image:image>
@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://transeen.itool.tech/guide/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <image:image><image:loc>https://transeen.itool.tech/assets/select-en.webp</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/capture-keep-en.webp</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/permission.webp</image:loc></image:image>
@@ -36,7 +36,7 @@
   </url>
   <url>
     <loc>https://transeen.itool.tech/zh/guide/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <image:image><image:loc>https://transeen.itool.tech/assets/select-zh.webp</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/capture-keep-zh.webp</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/permission.webp</image:loc></image:image>

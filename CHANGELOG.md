@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.11.0
+
+- The interface follows your native language. Choose it in the first-run guide or Settings, and every window, menu and message switches to it: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Deutsch or Español. On first launch it is taken from the Mac's preferred languages.
+- A page already in your native language is translated into your other one: English for most readers, Chinese for English readers.
+- Translations appear as they arrive. Apple Translation works through the text in groups of 8 and local or remote models report each answer, so the first paragraphs show before the last are done, with a count in the toolbar.
+- Windows that Transeen hides while you select an area come back when the capture closes.
+- The home window, menu-bar panel, first-run guide and Settings use a native macOS look: coloured symbol tiles, shortcuts drawn as key caps, grouped cards and a translucent background.
+- A paragraph in grey quoted text is translated whole again, instead of breaking where a word measured slightly bolder or lighter.
+- A flag or coloured icon before a word stays as it is and no longer turns into a bullet ("•France").
+
 ## 0.10.0
 
 - Add local translation models. In Settings → Translation, choose 本地翻译模型 and download Index-Translate 2B (recommended, 1.1 GB) or Hy-MT2 1.8B (1.1 GB). The model then runs on this Mac through a bundled llama.cpp server: no account, no network, and captured text never leaves the Mac. It translates developer text and UI labels better than Apple Translation ("bumped" is no longer 碰撞, "push main" is no longer 按下主按钮). Downloads come from ModelScope in mainland China and Hugging Face elsewhere, continue after an interruption, and are checked against a SHA-256 before use. The model loads on the first capture (about 2 seconds), stays ready while you work and is unloaded after 5 idle minutes. Requires an Apple silicon Mac.
