@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.11.2
+
+- A picture next to the text, such as a row of screenshot thumbnails, is no longer read as words, erased and covered with a translation ("望开！"). A line the recogniser is unsure of is read again, magnified, and kept only if it reads the same.
+- Chinese words inside an English sentence ("defaulting to 简体中文", "the hero counts 已翻译 8 处") are read as Chinese and kept, instead of turning into Latin garbage that was then translated.
+
 ## 0.11.1
 
 - Every sentence on the screen is translated in place. A long paragraph that a local model did not answer in time is sent again on its own, with more time, instead of keeping its original.
