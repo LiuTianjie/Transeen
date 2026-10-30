@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.1
+
+- Every sentence on the screen is translated in place. A long paragraph that a local model did not answer in time is sent again on its own, with more time, instead of keeping its original.
+- Code in a bordered pill (`check`) is recognised as code and moves with its sentence. When a translator rewrites the code, the sentence is still translated and the pill is cleared with the rest of the original.
+- Letters that reach below the line (g, y, p) are erased with their own line and no longer leave marks in the translation.
+- A floating button over the text, such as a scroll-down arrow, no longer turns into stray characters ("r • +") in the translation.
+- More misreadings of "I'll" are corrected, and a label without a full stop gets a translation without one.
+
 ## 0.11.0
 
 - The interface follows your native language. Choose it in the first-run guide or Settings, and every window, menu and message switches to it: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Deutsch or Español. On first launch it is taken from the Mac's preferred languages.
