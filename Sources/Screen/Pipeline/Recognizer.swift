@@ -28,6 +28,183 @@ enum Recognizer {
     /// `scale` is picture pixels per point: on a Retina capture the type is
     /// twice as many pixels tall and survives the recogniser's scaling down.
     static func recognize(_ image: CGImage, scale: CGFloat, languages: [String]) throws -> [RecognizedLine] {
+        let lines = try confirmed(tiled(image, languages: languages), in: image, languages: languages)
+        return try withHanRestored(lines, in: image, languages: languages)
+    }
+
+    private static let hanLanguages = ["zh-Hans", "zh-Hant", "ja-JP", "ja", "ko-KR", "ko"]
+
+    /// Read with Latin first, a few Han words inside an English sentence come back as
+    /// Latin garbage ("defaulting to 简体中文." as "defaulting to iǻ1##X."). Those
+    /// stretches are read again with Han first.
+    static func withHanRestored(_ lines: [RecognizedLine], in image: CGImage, languages: [String]) throws -> [RecognizedLine] {
+        let han = languages.filter { hanLanguages.contains($0) }
+        guard !han.isEmpty else { return lines }
+        let hanFirst = han + languages.filter { !han.contains($0) }
+        let suspects = lines.indices.filter { index in
+            lines[index].spans.contains { isGarbledHan($0.text) } && StyleEstimator.hanShare(lines[index].text) < 0.5
+        }
+        guard !suspects.isEmpty else { return lines }
+        var restored = [RecognizedLine?](repeating: nil, count: suspects.count)
+        let failure = Mutex<(any Error)?>(nil)
+        restored.withUnsafeMutableBufferPointer { buffer in
+            nonisolated(unsafe) let results = buffer
+            DispatchQueue.concurrentPerform(iterations: suspects.count) { index in
+                do { results[index] = try restoringHan(lines[suspects[index]], in: image, languages: hanFirst) } catch { failure.withLock { $0 = error } }
+            }
+        }
+        if let error = failure.withLock({ $0 }) { throw error }
+        var result = lines
+        for (index, line) in zip(suspects, restored) { if let line { result[index] = line } }
+        return result
+    }
+
+    /// A word no reading of English looks like: a letter from another script, or a symbol
+    /// in it ("E*li7", "(#1)"). Only a suspect: a Han reading of the place decides.
+    static func isGarbledHan(_ word: String) -> Bool {
+        let scalars = word.unicodeScalars
+        let letters = scalars.filter { CharacterSet.letters.contains($0) }
+        if letters.contains(where: { $0.value > 0x24F && !(0x1E00...0x1EFF).contains($0.value) && !StyleEstimator.isHan($0) }) { return true }
+        return word.count >= 2 && scalars.contains { "#*+=~^|{}<>¦".unicodeScalars.contains($0) }
+    }
+
+    private static func restoringHan(_ line: RecognizedLine, in image: CGImage, languages: [String]) throws -> RecognizedLine? {
+        var spans = line.spans
+        var changed = false
+        var index = 0
+        while index < spans.count {
+            defer { index += 1 }
+            guard isGarbledHan(spans[index].text) else { continue }
+            // A misread stretch is often several "words" long ("E*li7 8 2L" for 已翻译 8 处), and the
+            // recogniser reads a Han word whole only with enough around it: the fullest of a few readings.
+            var best: (text: String, box: CGRect, han: Int)?
+            for reach in [(1, 2), (2, 3)] {
+                let first = max(0, index - reach.0), last = min(spans.count - 1, index + reach.1)
+                let window = spans[first...last].reduce(CGRect.null) { $0.union($1.box) }
+                let margin = line.box.height * 0.4
+                let area = window.insetBy(dx: -margin * 0.5, dy: -margin)
+                    .intersection(CGRect(x: 0, y: 0, width: image.width, height: image.height)).integral
+                guard area.width >= 2, area.height >= 2, let piece = image.cropping(to: area) else { continue }
+                for factor in [CGFloat(2), 1] {
+                    for run in try hanRuns(in: piece, magnified: factor, languages: languages) {
+                        let box = run.box.offsetBy(dx: area.minX, dy: area.minY)
+                        guard box.intersects(spans[index].box.insetBy(dx: 0, dy: -line.box.height)) else { continue }
+                        let han = run.text.unicodeScalars.filter { StyleEstimator.isHan($0) }.count
+                        if han > best?.han ?? 0 { best = (run.text, box, han) }
+                    }
+                }
+            }
+            guard let run = best else { continue }
+            let covered = spans.indices.filter { spans[$0].box.midX >= run.box.minX - 2 && spans[$0].box.midX <= run.box.maxX + 2 }
+            guard let start = covered.first, let end = covered.last, covered.contains(index) else { continue }
+            // Punctuation of the sentence that the misread word carried along.
+            let tail = String(spans[end].text.reversed().prefix { ".,;:!?".contains($0) }.reversed())
+            let text = run.text.hasSuffix(tail) ? run.text : run.text + tail
+            let merged = spans[start...end].reduce(CGRect.null) { $0.union($1.box) }
+            spans.replaceSubrange(start...end, with: [Span(text: text, box: merged, separator: spans[start].separator, literal: false)])
+            index = start
+            changed = true
+        }
+        guard changed else { return nil }
+        var line = line
+        line.spans = spans
+        line.text = joined(spans)
+        return line
+    }
+
+    /// Stretches of Han in `piece`, read Han first at `factor` times its size, with their boxes in its pixels.
+    private static func hanRuns(in piece: CGImage, magnified factor: CGFloat, languages: [String]) throws -> [(text: String, box: CGRect)] {
+        let width = Int(CGFloat(piece.width) * factor), height = Int(CGFloat(piece.height) * factor)
+        guard let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0,
+                                      space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+        else { return [] }
+        context.interpolationQuality = .high
+        context.draw(piece, in: CGRect(x: 0, y: 0, width: width, height: height))
+        guard let magnified = context.makeImage() else { return [] }
+        let request = VNRecognizeTextRequest()
+        request.recognitionLevel = .accurate
+        request.usesLanguageCorrection = true
+        request.recognitionLanguages = languages
+        try VNImageRequestHandler(cgImage: magnified, options: [:]).perform([request])
+        let pattern = #"[(（「《]?\p{Han}(?:[\p{Han}\d ]*\p{Han})?[)）」》]?"#
+        var runs: [(text: String, box: CGRect)] = []
+        for observation in request.results ?? [] {
+            guard let candidate = observation.topCandidates(1).first else { continue }
+            let string = candidate.string
+            var searchStart = string.startIndex
+            while let range = string.range(of: pattern, options: .regularExpression, range: searchStart..<string.endIndex) {
+                searchStart = range.upperBound
+                let text = String(string[range])
+                guard text.unicodeScalars.filter({ StyleEstimator.isHan($0) }).count >= 2,
+                      let bounds = try candidate.boundingBox(for: range)?.boundingBox else { continue }
+                let box = CGRect(x: bounds.minX * CGFloat(piece.width), y: (1 - bounds.maxY) * CGFloat(piece.height),
+                                 width: bounds.width * CGFloat(piece.width), height: bounds.height * CGFloat(piece.height))
+                runs.append((text.replacingOccurrences(of: " ", with: ""), box))
+            }
+        }
+        return runs
+    }
+    typealias Span = RecognizedLine.Span
+
+    /// A line the recogniser was unsure of is read again, magnified. Type reads the same
+    /// twice; a picture read as text (a row of thumbnails as "望开！") reads differently or not at all.
+    static func confirmed(_ lines: [RecognizedLine], in image: CGImage, languages: [String]) throws -> [RecognizedLine] {
+        let doubtful = lines.indices.filter { lines[$0].confidence < 1 }
+        guard !doubtful.isEmpty else { return lines }
+        var verdicts = [RecognizedLine?](repeating: nil, count: doubtful.count)
+        let failure = Mutex<(any Error)?>(nil)
+        verdicts.withUnsafeMutableBufferPointer { buffer in
+            nonisolated(unsafe) let results = buffer
+            DispatchQueue.concurrentPerform(iterations: doubtful.count) { index in
+                do { results[index] = try reread(lines[doubtful[index]], in: image, languages: languages) } catch { failure.withLock { $0 = error } }
+            }
+        }
+        if let error = failure.withLock({ $0 }) { throw error }
+        var result = lines
+        for (index, line) in zip(doubtful, verdicts).reversed() {
+            if let line { result[index] = line } else { result.remove(at: index) }
+        }
+        return result
+    }
+
+    static let rereadMagnification: CGFloat = 2
+
+    /// The line as a magnified second reading confirms it, a clearer reading of it, or nil when it is not text.
+    private static func reread(_ line: RecognizedLine, in image: CGImage, languages: [String]) throws -> RecognizedLine? {
+        let margin = line.box.height * 0.6
+        let area = line.box.insetBy(dx: -margin, dy: -margin)
+            .intersection(CGRect(x: 0, y: 0, width: image.width, height: image.height)).integral
+        guard area.width >= 2, area.height >= 2, let piece = image.cropping(to: area) else { return line }
+        let factor = rereadMagnification
+        let width = Int(CGFloat(piece.width) * factor), height = Int(CGFloat(piece.height) * factor)
+        guard let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0,
+                                      space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+        else { return line }
+        context.interpolationQuality = .high
+        context.draw(piece, in: CGRect(x: 0, y: 0, width: width, height: height))
+        guard let magnified = context.makeImage() else { return line }
+        func back(_ box: CGRect) -> CGRect {
+            CGRect(x: area.minX + box.minX / factor, y: area.minY + box.minY / factor, width: box.width / factor, height: box.height / factor)
+        }
+        let readings = try scan(magnified, languages: languages).map { reading in
+            var reading = reading
+            reading.box = back(reading.box)
+            reading.spans = reading.spans.map { span in var span = span; span.box = back(span.box); return span }
+            return reading
+        }.filter { reading in
+            let both = reading.box.intersection(line.box)
+            return !both.isNull && both.width > min(reading.box.width, line.box.width) * 0.5
+                && both.height > min(reading.box.height, line.box.height) * 0.5
+        }
+        func letters(_ text: String) -> String { text.filter { !$0.isWhitespace } }
+        if readings.contains(where: { letters($0.text) == letters(line.text) }) { return line }
+        // Small type the first reading garbled is read cleanly once magnified.
+        if readings.count == 1, let clear = readings.first, clear.confidence >= 1,
+           clear.box.width >= line.box.width * 0.8 { return clear }
+        return nil
+    }
+
+    private static func tiled(_ image: CGImage, languages: [String]) throws -> [RecognizedLine] {
         let initial = try scan(image, languages: languages)
         guard CGFloat(max(image.width, image.height)) > largePicture else { return initial }
         // Vision scales a large picture down and loses small type. Read every

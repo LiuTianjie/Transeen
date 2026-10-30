@@ -281,6 +281,17 @@ import CoreText
         check(Recognizer.shouldKeep("OK", confidence: 0.3) && !Recognizer.shouldKeep("7", confidence: 0.4) && Recognizer.shouldKeep("12:30", confidence: 0.7), "what counts as text")
         check(Recognizer.isLikelyIconPrefix("Q") && !Recognizer.isLikelyIconPrefix("A") && Recognizer.isLikelyIconPrefix("8"), "icons read as letters")
 
+        let thumbnails = NSImage(contentsOfFile: "Tests/Fixtures/thumbnails-1x.png")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+        let thumbnailRow = try ScreenPipeline.analyze(thumbnails, scale: 1, source: .en, target: .zhHans, detectsSource: true)!
+        check(thumbnailRow.blocks.count == 1 && thumbnailRow.blocks[0].original.hasPrefix("Ran 11 commands"),
+              "a row of screenshot thumbnails is a picture, not text: \(thumbnailRow.blocks.map(\.original))")
+        let hanInEnglish = NSImage(contentsOfFile: "Tests/Fixtures/han-in-english.png")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+        let hanText = try ScreenPipeline.analyze(hanInEnglish, scale: 2, source: .en, target: .zhHans, detectsSource: true)!.blocks.map(\.original).joined(separator: " ")
+        check(hanText.contains("counts 已翻译8处 in Chinese") && hanText.contains("（美品）"), "Han words inside an English sentence are read as Han: \(hanText)")
+        check(Recognizer.isGarbledHan("E*li7") && Recognizer.isGarbledHan("iǻ1##X.") && Recognizer.isGarbledHan("(*nl).") && Recognizer.isGarbledHan("(#1).")
+              && !Recognizer.isGarbledHan("index.html") && !Recognizer.isGarbledHan("commands,") && !Recognizer.isGarbledHan("Mbappé!")
+              && !Recognizer.isGarbledHan("v2") && !Recognizer.isGarbledHan("0.11.1"), "what a Han word read as Latin looks like")
+
         check(Recognizer.correctedWord("l'll") == "I'll" && Recognizer.correctedWord("Cl.") == "CI." && Recognizer.correctedWord("APl") == "API"
               && Recognizer.correctedWord("Clear") == "Clear" && Recognizer.correctedWord("all") == "all", "I read as l in interface type")
         check(Recognizer.correctedWord("l'il") == "I'll" && Recognizer.correctedWord("I'Il") == "I'll" && Recognizer.correctedWord("I'm") == "I'm"
