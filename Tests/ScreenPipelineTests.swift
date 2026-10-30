@@ -62,6 +62,35 @@ import CoreText
             width: chip.width * scale, height: chip.height * scale))
     }
 
+    /// Red code on a pale pill with a border, on a page that is not white: the pill's edge
+    /// falls in the rim around the word, so its paper is read from inside the box.
+    static func pillPicture(scale: CGFloat) -> CGImage {
+        let width: CGFloat = 760, height: CGFloat = 80
+        let context = CGContext(data: nil, width: Int(width * scale), height: Int(height * scale), bitsPerComponent: 8, bytesPerRow: 0,
+            space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
+        context.scaleBy(x: scale, y: scale)
+        context.setFillColor(NSColor(srgbRed: 0.988, green: 0.986, blue: 0.98, alpha: 1).cgColor)
+        context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+        let font = NSFont.systemFont(ofSize: 16), code = NSFont.monospacedSystemFont(ofSize: 14, weight: .regular)
+        func draw(_ text: String, _ x: CGFloat, _ font: NSFont, _ color: NSColor) -> CGFloat {
+            let line = CTLineCreateWithAttributedString(NSAttributedString(string: text, attributes: [.font: font, .foregroundColor: color]))
+            context.textPosition = CGPoint(x: x, y: 32)
+            CTLineDraw(line, context)
+            return CGFloat(CTLineGetTypographicBounds(line, nil, nil, nil))
+        }
+        let ink = NSColor(white: 0.12, alpha: 1)
+        let before = draw("Extend the wait to 60s, and add a", 20, font, ink)
+        let start = 20 + before + 9, chipWidth = Fitter.width("check", font: code)
+        let pill = CGPath(roundedRect: CGRect(x: start - 5, y: 26, width: chipWidth + 10, height: 22), cornerWidth: 5, cornerHeight: 5, transform: nil)
+        context.setFillColor(NSColor(srgbRed: 0.94, green: 0.94, blue: 0.93, alpha: 1).cgColor)
+        context.addPath(pill); context.fillPath()
+        context.setStrokeColor(NSColor(srgbRed: 0.86, green: 0.86, blue: 0.85, alpha: 1).cgColor)
+        context.setLineWidth(1); context.addPath(pill); context.strokePath()
+        _ = draw("check", start, code, NSColor(srgbRed: 0.7, green: 0.2, blue: 0.18, alpha: 1))
+        _ = draw("helper that prints failure details.", start + chipWidth + 9, font, ink)
+        return context.makeImage()!
+    }
+
     /// A navigation bar read as one line, a table whose short cells stack in columns,
     /// and a count at the start of a cell.
     static func layoutPicture(scale: CGFloat) -> CGImage {
@@ -91,7 +120,7 @@ import CoreText
 
     static func main() throws {
         var passed = 0
-        func check(_ condition: Bool, _ what: String) { precondition(condition, what); passed += 1 }
+        func check(_ condition: Bool, _ what: String) { if !condition { print("FAIL: \(what)"); exit(1) }; passed += 1 }
 
         // The reader's language comes from the system's preferred languages.
         check(AppLanguage.preferred(["zh-Hans-CN", "en-US"]) == .zhHans, "simplified Chinese system")
@@ -215,14 +244,32 @@ import CoreText
                 for x in protected.minX..<protected.maxX where mixed.pixels[x, y] != translated.pixels[x + dx, y + dy] { unchanged = false }
             }
             check(unchanged, "\(label) the chip's pixels arrive where it moved, byte for byte")
-            // A translation that lost the code would lose it from the picture: the sentence stays as it was.
+            // A translator that dropped the code: the sentence is still translated, and the chip
+            // is cleared with the rest of the source instead of floating over the new text.
             let lost = ScreenPipeline.compose(mixed, translations: [sentence: "连接已空闲10秒。"])
-            check(!lost.placed.contains { $0.index == sentence }, "\(label) without its chip the sentence keeps its pixels")
+            check(lost.placed.contains { $0.index == sentence }, "\(label) without its chip the sentence is still placed")
+            var red = false
+            for y in protected.minY..<protected.maxY {
+                for x in protected.minX..<protected.maxX where lost.pixels[x, y].r > 120 && lost.pixels[x, y].g < 90 { red = true }
+            }
+            check(!red, "\(label) and the chip's red letters are gone")
+            check(ScreenPipeline.compose(mixed, translations: [:]).blocks[sentence].kept == .untranslated, "\(label) a block with no answer says why")
+            let pill = pillPicture(scale: scale)
+            let pilled = try ScreenPipeline.analyze(pill, scale: scale, source: .en, target: .zhHans)!
+            check(pilled.blocks.contains { $0.translate && $0.chips.map(\.text) == ["check"] },
+                  "\(label) red code in a bordered pill is a chip: \(pilled.blocks.map(\.original))")
             if let cg = translated.pixels.cgImage() {
                 try NSBitmapImageRep(cgImage: cg).representation(using: .png, properties: [:])!
                     .write(to: URL(fileURLWithPath: "build/tests/inline-\(Int(scale))x.png"))
             }
         }
+
+        check(Prose.droppingStrayMarks("extend the download timeout, and r • + failure reasons.") == "extend the download timeout, and failure reasons.",
+              "a button's glyphs read into a sentence are dropped")
+        check(Prose.droppingStrayMarks("Press A • B to go") == "Press A • B to go" && Prose.droppingStrayMarks("Items: • one • two") == "Items: • one • two"
+              && Prose.droppingStrayMarks("so a + b is c") == "so a + b is c", "keys, lists and sums stay")
+        check(ScreenPipeline.matchingEnd("读取 `a.swift`。", of: "read `a.swift`") == "读取 `a.swift`"
+              && ScreenPipeline.matchingEnd("完成。", of: "Done.") == "完成。", "a label gets no full stop its source does not have")
 
         // Tiles for a large picture follow the columns of text.
         let lines = [RecognizedLine(text: "a", box: CGRect(x: 100, y: 0, width: 400, height: 20), confidence: 1, startsListItem: false),
@@ -236,6 +283,8 @@ import CoreText
 
         check(Recognizer.correctedWord("l'll") == "I'll" && Recognizer.correctedWord("Cl.") == "CI." && Recognizer.correctedWord("APl") == "API"
               && Recognizer.correctedWord("Clear") == "Clear" && Recognizer.correctedWord("all") == "all", "I read as l in interface type")
+        check(Recognizer.correctedWord("l'il") == "I'll" && Recognizer.correctedWord("I'Il") == "I'll" && Recognizer.correctedWord("I'm") == "I'm"
+              && Recognizer.correctedWord("text.l") == "text. I" && Recognizer.correctedWord("ill") == "ill", "the other ways I'll is misread")
         let split = Recognizer.corrected([
             .init(text: "touches", box: CGRect(x: 0, y: 0, width: 50, height: 10), separator: "", literal: false),
             .init(text: "project.", box: CGRect(x: 55, y: 0, width: 40, height: 10), separator: " ", literal: false),

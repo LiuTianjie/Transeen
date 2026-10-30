@@ -123,11 +123,11 @@ enum Fitter {
 
     /// `only`: the one size step to use, when a group of equals has agreed on it.
     static func place(_ block: TextBlock, scale: CGFloat, only: CGFloat? = nil) -> Placement {
-        if !block.chips.isEmpty {
-            // Without its chips the sentence would lose its code: leave the source as it is.
-            return placeInline(block, scale: scale, only: only) ?? Placement(size: block.style.size, truncated: true)
-        }
-        let text = block.translation.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !block.chips.isEmpty, let inline = placeInline(block, scale: scale, only: only) { return inline }
+        // A translator that rewrote a chip, or a sentence that only fits as plain lines: the code
+        // is set as text with the rest, and the chips' boxes are cleared with the source.
+        var text = block.translation.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !block.chips.isEmpty { text = text.replacingOccurrences(of: "`", with: "") }
         var placement = Placement(size: block.style.size)
         guard !text.isEmpty else { return placement }
         let sizePx = block.style.size * scale

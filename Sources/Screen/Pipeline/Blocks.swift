@@ -39,6 +39,12 @@ struct FreeSpace: Sendable {
     var upSolid = false, downSolid = false
 }
 
+enum KeepReason: String, Sendable {
+    case lowConfidence, alreadyTarget, protectedLiteral, notProse, code, besideCode
+    /// No translation came back, or it says the same, or only a sliver of it fits.
+    case untranslated, unchanged, truncated
+}
+
 /// Lines that are set as one piece of text.
 struct TextBlock: Sendable {
     var lines: [MeasuredLine]
@@ -50,6 +56,8 @@ struct TextBlock: Sendable {
     var free = FreeSpace()
     var background: Background
     var translate = true
+    /// Why the block shows its original, once that has been decided.
+    var kept: KeepReason?
     var original = ""
     var translation = ""
     /// The code chips in the text, which is `original` with each chip as `literal`.
@@ -144,6 +152,48 @@ enum Fragments {
             }
             result.append(current)
         }
+        return chipSentences(result, image: image, scale: scale)
+    }
+
+    /// OCR can return a code word in a pill apart from the sentence it sits in, and then
+    /// nothing on its own line tells it from a word. Its neighbours do: their paper is
+    /// the page, its box is filled with the pill.
+    private static func chipSentences(_ lines: [MeasuredLine], image: PixelImage, scale: CGFloat) -> [MeasuredLine] {
+        var lines = lines.sorted { $0.ink.rect.minX < $1.ink.rect.minX }
+        func free(_ line: MeasuredLine) -> Bool { line.inlineBounds == nil && line.parts.isEmpty && line.row == nil }
+        func beside(_ a: MeasuredLine, _ b: MeasuredLine) -> Bool {
+            let size = max(a.style.size, b.style.size) * scale
+            let gap = b.ink.rect.minX - a.ink.rect.maxX
+            return gap > -1 && gap <= size * 1.5 && abs(a.ink.baseline - b.ink.baseline) <= size * 0.2
+                && abs(a.style.size / b.style.size - 1) < 0.25
+        }
+        func paper(_ line: MeasuredLine) -> RGB? { if case .flat(let colour) = line.ink.background { colour } else { nil } }
+        for index in lines.indices where free(lines[index]) && !lines[index].protectedLiteral {
+            let word = lines[index]
+            guard !word.text.contains(" "), word.text.count >= 2, InlineText.codeInk(word.style),
+                  let own = InlineText.interiorPaper(word.box, in: image) else { continue }
+            let neighbours = lines.indices.filter { $0 != index && free(lines[$0]) && !lines[$0].protectedLiteral
+                && (beside(lines[$0], word) || beside(word, lines[$0])) }
+            guard !neighbours.isEmpty, neighbours.allSatisfy({ paper(lines[$0]).map { own.distance(to: $0) > 14 } ?? false }),
+                  neighbours.contains(where: { lines[$0].text.contains(where: \.isLetter) && lines[$0].text.count > 3 }) else { continue }
+            lines[index].protectedLiteral = true
+            lines[index].ink.background = .flat(own)
+        }
+        guard lines.contains(where: { $0.protectedLiteral && free($0) }) else { return lines }
+        var result: [MeasuredLine] = [], used = Set<Int>()
+        for start in lines.indices where !used.contains(start) {
+            var run = [start]
+            while let last = run.last, let next = lines.indices.first(where: { !used.contains($0) && !run.contains($0)
+                && free(lines[$0]) && free(lines[last]) && beside(lines[last], lines[$0]) }) { run.append(next) }
+            let members = run.map { lines[$0] }
+            if members.count >= 2, members.contains(where: \.protectedLiteral), let joined = BlockBuilder.joinRow(members) {
+                used.formUnion(run)
+                result.append(joined)
+            } else {
+                used.insert(start)
+                result.append(lines[start])
+            }
+        }
         return result
     }
 }
@@ -205,7 +255,7 @@ enum BlockBuilder {
             let baselines = group.map(\.ink.baseline)
             let gaps = zip(baselines.dropFirst(), baselines).map { $0 - $1 }.sorted()
             block.pitch = gaps.isEmpty ? 0 : gaps[gaps.count / 2]
-            block.original = ScreenTranslate.joinParagraphLines(group.map(\.text))
+            block.original = Prose.droppingStrayMarks(ScreenTranslate.joinParagraphLines(group.map(\.text)))
             block.chips = group.flatMap { line in
                 line.parts.filter(\.protectedLiteral).map { chip($0, baseline: line.ink.baseline, line: line.ink.background, image: image, scale: scale) }
             }
@@ -517,6 +567,32 @@ enum StyleClusters {
 }
 
 enum Prose {
+    private static let marks = CharacterSet(charactersIn: "•·∙◦▪▫■□●○↓↑←→↗↘⌄⌃▾▴▸◂")
+
+    /// A button floating over a sentence reads as a few one-character tokens between its
+    /// words, like `r • +`, which a translator then carries into the translation.
+    static func droppingStrayMarks(_ text: String) -> String {
+        let tokens = text.split(separator: " ", omittingEmptySubsequences: false).map(String.init)
+        guard tokens.count >= 4 else { return text }
+        func word(_ token: String) -> Bool { token.unicodeScalars.filter { CharacterSet.letters.contains($0) }.count >= 2 }
+        var kept: [String] = [], index = 0
+        while index < tokens.count {
+            var end = index
+            while end < tokens.count, tokens[end].count == 1 { end += 1 }
+            let run = tokens[index..<end]
+            if run.count >= 2, index > 0, end < tokens.count, word(tokens[index - 1]), word(tokens[end]),
+               run.contains(where: { $0.unicodeScalars.allSatisfy(marks.contains) }),
+               // `A • B` is a list of keys; a lone small letter beside a bullet is a glyph of the button.
+               run.allSatisfy({ $0.first!.isLetter ? $0.first!.isLowercase && $0 != "a" : true }) {
+                index = end
+                continue
+            }
+            kept.append(contentsOf: run.isEmpty ? [tokens[index]] : Array(run))
+            index = max(end, index + 1)
+        }
+        return kept.joined(separator: " ")
+    }
+
     /// Whether a block is language to translate. A sentence stays a sentence
     /// even with a symbol or an identifier in it; short strings fall back to the
     /// shipping heuristics for code, numbers and paths.

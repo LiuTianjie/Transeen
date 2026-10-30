@@ -1,5 +1,6 @@
 import Darwin
 import Foundation
+import os
 
 /// The bundled llama-server running one downloaded model, bound to 127.0.0.1 with a key
 /// made per launch. It starts with the first capture that needs it and exits after a few
@@ -209,12 +210,13 @@ enum LocalChat {
         return URLSession(configuration: options)
     }()
 
-    static func translate(_ text: String, source: AppLanguage, target: AppLanguage, prompt: LocalModel.Prompt, endpoint: LocalModelRuntime.Endpoint) async throws -> String {
+    static func translate(_ text: String, source: AppLanguage, target: AppLanguage, prompt: LocalModel.Prompt, endpoint: LocalModelRuntime.Endpoint,
+                          timeout: TimeInterval = 30) async throws -> String {
         var body = LocalPrompt.sampling(prompt)
         body["messages"] = [["role": "user", "content": LocalPrompt.message(text, source: source, target: target, prompt: prompt)]]
         body["max_tokens"] = LocalPrompt.maxTokens(for: text)
         body["stream"] = false
-        var request = URLRequest(url: endpoint.url.appending(path: "v1/chat/completions"), timeoutInterval: 30)
+        var request = URLRequest(url: endpoint.url.appending(path: "v1/chat/completions"), timeoutInterval: timeout)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(endpoint.key)", forHTTPHeaderField: "Authorization")
@@ -228,6 +230,7 @@ enum LocalChat {
 
 @MainActor
 final class LocalModelTranslationBackend: TranslationBackend {
+    nonisolated private static let logger = Logger(subsystem: "com.transeen.app", category: "LocalTranslation")
     /// A named type: Swift 6.4 at -O drops the index of an `(Int, Result<String, Error>)` child-task result.
     private struct Answer: Sendable {
         let index: Int
@@ -279,6 +282,7 @@ final class LocalModelTranslationBackend: TranslationBackend {
             var result = TranslationOutput()
             var failures = 0
             var lastError: Error?
+            var failed: [Int] = []
             try await withThrowingTaskGroup(of: Answer.self) { group in
                 var next = 0, inFlight = 0
                 while next < jobs.count || inFlight > 0 {
@@ -298,7 +302,27 @@ final class LocalModelTranslationBackend: TranslationBackend {
                         var sofar = early
                         sofar.translations.merge(result.translations) { _, new in new }
                         progress(sofar)
-                    } else { failures += 1; lastError = answer.error }
+                    } else {
+                        failed.append(answer.index)
+                        Self.logger.notice("block \(answer.index, privacy: .public) failed: \(String(describing: answer.error), privacy: .public)")
+                    }
+                }
+            }
+            // Four requests at once can starve one long block past its timeout. Alone, with
+            // more time, the server gets through it.
+            for index in failed.sorted() {
+                try Task.checkCancellation()
+                let source = jobs.first { $0.index == index }?.source ?? direction.source
+                do {
+                    let text = try await LocalChat.translate(texts[index], source: source, target: target, prompt: prompt,
+                                                             endpoint: endpoint, timeout: 90)
+                    result.translations[index] = TranslationText.normalize(text, locale: target.speechLocale)
+                    var sofar = early
+                    sofar.translations.merge(result.translations) { _, new in new }
+                    progress(sofar)
+                } catch {
+                    failures += 1; lastError = error
+                    Self.logger.error("block \(index, privacy: .public) kept after retry: \(String(describing: error), privacy: .public)")
                 }
             }
             if failures > 0, result.translations.isEmpty, let lastError { throw lastError }

@@ -180,8 +180,15 @@ enum Recognizer {
     /// Words the recogniser misreads in interface type, where I and l look alike.
     static func correctedWord(_ word: String) -> String {
         // I'll, I'm, I've, I'd
-        if word.range(of: #"^l['’](?:ll|m|ve|d)\b"#, options: .regularExpression) != nil { return "I" + word.dropFirst() }
+        // The l and I of interface type look alike in any of the three places: l'il, I'Il, l'll.
+        if let match = word.range(of: #"^[lI]['’](?:[lIi][lI]|m|ve|d)\b"#, options: .regularExpression) {
+            let apostrophe = word[word.index(after: word.startIndex)]
+            let tail = word[word.index(word.startIndex, offsetBy: 2)..<match.upperBound]
+            return "I" + String(apostrophe) + (tail.count == 2 ? "ll" : String(tail)) + word[match.upperBound...]
+        }
         if word == "l" { return "I" }
+        // A sentence run into the next one's I: "text.l should".
+        if let dot = word.range(of: #"[a-z]{2}\.l$"#, options: .regularExpression) { return word[..<dot.upperBound].dropLast() + " I" }
         // CI, UI, API, CLI, GUI, URI with their last I read as l, before any punctuation.
         let acronyms = ["Cl": "CI", "Ul": "UI", "APl": "API", "CLl": "CLI", "GUl": "GUI", "URl": "URI"]
         let letters = word.prefix { $0.isLetter }

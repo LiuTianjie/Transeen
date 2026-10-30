@@ -325,7 +325,10 @@ final class CaptureController {
                 state.warning = [output.warning, L("部分译文超出原位置，请在「文字」中查看全文。")].compactMap { $0 }.joined(separator: " ")
             }
             state.working = false
-            Self.logger.notice("translation completed")
+            Self.logger.notice("translation completed blocks=\(composed.blocks.count, privacy: .public) placed=\(composed.placed.count, privacy: .public) cut=\(composed.cut, privacy: .public)")
+            for (reason, indices) in Dictionary(grouping: composed.blocks.indices.filter { composed.blocks[$0].kept != nil }, by: { composed.blocks[$0].kept! }) {
+                Self.logger.notice("kept \(reason.rawValue, privacy: .public) blocks=\(indices.map(String.init).joined(separator: ","), privacy: .public)")
+            }
             let swap = state.shortcuts.binding(.captureTranslate).map { " · " + L("再按 %@ 交换语言", $0.display) } ?? ""
             state.status = translations.isEmpty ? L("没有需要翻译的文字") + swap : L("已翻译 %ld 处", translations.count) + " · " + state.shortcuts.help(L("按住看原文"), .peek) + swap
             displayCurrent()
