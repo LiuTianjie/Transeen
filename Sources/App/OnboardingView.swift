@@ -19,65 +19,70 @@ struct OnboardingView: View {
         }
     }
     private var translationDetail: String {
-        if settings.service == .remote { return translationReady ? "已填写模型接口，可先测试连接" : "填写 chat/completions 接口地址和模型名称" }
-        if settings.service == .local { return translationReady ? "\(settings.selectedLocalModel.name) 已下载，可离线翻译" : "下载一个本地模型（约 1.1 GB），之后完全离线翻译" }
-        if packs.sources.isEmpty { return "这对语言不需要下载" }
-        if packs.installedCount == 0 { return "先下载要翻译的语言，第一次截图就不用等" }
-        return "已下载 \(packs.installedCount)/\(packs.sources.count) 个语言包，需要时再补充"
+        if settings.service == .remote { return translationReady ? L("已填写模型接口，可先测试连接") : L("填写 chat/completions 接口地址和模型名称") }
+        if settings.service == .local { return translationReady ? L("%@ 已下载，可离线翻译", settings.selectedLocalModel.name) : L("下载一个本地模型（约 1.1 GB），之后完全离线翻译") }
+        if packs.sources.isEmpty { return L("这对语言不需要下载") }
+        if packs.installedCount == 0 { return L("先下载要翻译的语言，第一次截图就不用等") }
+        return L("已下载 %ld/%ld 个语言包，需要时再补充", packs.installedCount, packs.sources.count)
     }
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 12) {
-                Image(nsImage: NSImage(named: "AppIcon") ?? NSImage())
-                    .resizable().interpolation(.high).frame(width: 44, height: 44)
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("欢迎使用 Transeen").font(.system(size: 20, weight: .medium, design: .rounded)).tracking(-0.3)
-                    Text("先把这几项准备好，用的时候就不用等。").font(.system(size: 12)).foregroundStyle(.secondary)
-                }
-                Spacer()
-            }.padding(.horizontal, 26).padding(.top, 24).padding(.bottom, 6)
+            VStack(spacing: 6) {
+                Image(nsImage: NSApp.applicationIconImage)
+                    .resizable().interpolation(.high).frame(width: 64, height: 64).accessibilityHidden(true)
+                Text(L("欢迎使用 Transeen")).font(.system(size: 22, weight: .bold))
+                Text(L("先把这几项准备好，用的时候就不用等。")).font(.system(size: 13)).foregroundStyle(.secondary)
+            }.frame(maxWidth: .infinity).padding(.top, 34).padding(.bottom, 2)
 
             Form {
                 Section {
-                    SetupStep(number: 1, title: "激活 Transeen", detail: license.state.isActivated ? "截图、标注与翻译已解锁" : "需要 TR- 激活码，无需登录", done: license.state.isActivated) {
-                        if license.state == .checking { ProgressView().controlSize(.small) }
-                        else if !license.state.isActivated { Button("输入激活码…", action: showLicense) }
+                    SetupStep(number: 1, symbol: "globe", colors: TilePalette.blue, title: L("你的母语"), detail: L("识别出的文字默认翻译成它；本来就是它的，翻译成%@", settings.target.alternate.displayName), done: true) {
+                        Picker(L("母语"), selection: $settings.target) {
+                            ForEach(AppLanguage.allCases) { language in Text(language.displayName).tag(language) }
+                        }.labelsHidden().pickerStyle(.menu).fixedSize()
                     }
                 }
                 Section {
-                    SetupStep(number: 2, title: "允许录制屏幕", detail: permission.granted ? "已开启" : permission.requested ? "已开启但仍未生效时，重新打开 Transeen" : "只读取屏幕图像，不采集音频", done: permission.granted) {
+                    SetupStep(number: 2, symbol: "key.fill", colors: TilePalette.yellow, title: L("激活 Transeen"), detail: license.state.isActivated ? L("截图、标注与翻译已解锁") : L("需要 TR- 激活码，无需登录"), done: license.state.isActivated) {
+                        if license.state == .checking { ProgressView().controlSize(.small) }
+                        else if !license.state.isActivated { Button(L("输入激活码…"), action: showLicense) }
+                    }
+                }
+                Section {
+                    SetupStep(number: 3, symbol: "record.circle", colors: TilePalette.red, title: L("允许录制屏幕"), detail: permission.granted ? L("已开启") : permission.requested ? L("已开启但仍未生效时，重新打开 Transeen") : L("只读取屏幕图像，不采集音频"), done: permission.granted) {
                         if !permission.granted {
                             HStack {
-                                if permission.requested { Button("重新打开") { permission.relaunch() } }
-                                Button("打开系统设置…") { permission.openSettings() }
+                                if permission.requested { Button(L("重新打开")) { permission.relaunch() } }
+                                Button(L("打开系统设置…")) { permission.openSettings() }
                             }
                         }
                     }
                 }
                 Section {
-                    SetupStep(number: 3, title: "准备翻译", detail: translationDetail, done: translationReady) { EmptyView() }
+                    SetupStep(number: 4, symbol: "character.bubble.fill", colors: TilePalette.indigo, title: L("准备翻译"), detail: translationDetail, done: translationReady) { EmptyView() }
                     TranslationServiceFields(settings: settings, packs: packs)
                 }
                 Section {
-                    SetupStep(number: 4, title: "确认快捷键", detail: "按下即框选；松开后拖动结果边缘可调整范围", done: settings.shortcuts.binding(.captureTranslate) != nil || settings.shortcuts.binding(.captureScreenshot) != nil) { EmptyView() }
+                    SetupStep(number: 5, symbol: "command", colors: TilePalette.graphite, title: L("确认快捷键"), detail: L("按下即框选；松开后拖动结果边缘可调整范围"), done: settings.shortcuts.binding(.captureTranslate) != nil || settings.shortcuts.binding(.captureScreenshot) != nil) { EmptyView() }
                     ShortcutRow(shortcuts: settings.shortcuts, action: .captureTranslate)
                     ShortcutRow(shortcuts: settings.shortcuts, action: .captureScreenshot)
                     if !settings.shortcuts.message.isEmpty { Text(settings.shortcuts.message).font(.caption).foregroundStyle(.secondary) }
                 }
-            }.formStyle(.grouped)
+            }.formStyle(.grouped).scrollContentBackground(.hidden)
 
             Divider()
             HStack {
-                Button("稍后") { finish(false) }.keyboardShortcut(.cancelAction)
-                Text("可随时从菜单栏打开「新手引导…」").font(.caption).foregroundStyle(.tertiary)
+                Button(L("稍后")) { finish(false) }.keyboardShortcut(.cancelAction)
+                Text(L("可随时从菜单栏打开「新手引导…」")).font(.caption).foregroundStyle(.tertiary)
                 Spacer()
-                Button("开始截图翻译") { finish(true) }
-                    .keyboardShortcut(.defaultAction).buttonStyle(.glassProminent)
-            }.padding(.horizontal, 22).padding(.vertical, 14)
+                Button(L("开始截图翻译")) { finish(true) }
+                    .keyboardShortcut(.defaultAction).buttonStyle(.borderedProminent)
+            }.controlSize(.large).padding(.horizontal, 20).padding(.vertical, 14)
         }
-        .frame(width: 540, height: 660)
+        .frame(minWidth: 540, maxWidth: .infinity, minHeight: 680, maxHeight: .infinity)
         .background(Color(nsColor: .windowBackgroundColor))
+        .ignoresSafeArea()
         .languagePacks(packs, for: settings)
         .task {
             while !Task.isCancelled {
@@ -91,6 +96,8 @@ struct OnboardingView: View {
 
 private struct SetupStep<Trailing: View>: View {
     let number: Int
+    let symbol: String
+    let colors: [Color]
     let title: String
     let detail: String
     let done: Bool
@@ -99,23 +106,20 @@ private struct SetupStep<Trailing: View>: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            ZStack {
-                Circle().fill(done ? Color.green : Color.secondary.opacity(0.14))
-                if done {
-                    Image(systemName: "checkmark").font(.system(size: 10, weight: .bold)).foregroundStyle(.white)
-                } else {
-                    Text("\(number)").font(.system(size: 11, weight: .semibold).monospacedDigit()).foregroundStyle(.secondary)
-                }
-            }.frame(width: 22, height: 22)
-                .animation(reduceMotion ? nil : .spring(response: 0.3, dampingFraction: 0.8), value: done)
+            IconTile(symbol: symbol, colors: colors, size: 28)
             VStack(alignment: .leading, spacing: 2) {
                 Text(title).font(.system(size: 13, weight: .medium))
                 Text(detail).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: 8)
             trailing
+            if done {
+                Image(systemName: "checkmark.circle.fill").font(.system(size: 16)).foregroundStyle(.green)
+                    .transition(.scale.combined(with: .opacity)).accessibilityHidden(true)
+            }
         }
+        .animation(reduceMotion ? nil : .spring(response: 0.3, dampingFraction: 0.8), value: done)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("第 \(number) 步：\(title)，\(done ? "已完成" : detail)")
+        .accessibilityLabel(L("第 %ld 步：%@，%@", number, title, done ? L("已完成") : detail))
     }
 }

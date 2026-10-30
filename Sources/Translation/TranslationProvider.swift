@@ -200,7 +200,7 @@ final class TranslationDownloadWindow: NSPanel {
         self.provider = provider
         super.init(contentRect: NSRect(x: 0, y: 0, width: 360, height: 120),
                    styleMask: [.titled, .closable, .nonactivatingPanel], backing: .buffered, defer: false)
-        title = String(localized: "下载翻译模型")
+        title = L("下载翻译模型")
         isFloatingPanel = true
         level = .floating
         hidesOnDeactivate = false
@@ -218,9 +218,9 @@ private struct TranslationDownloadView: View {
     @Bindable var provider: TranslationProvider
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Label(String(localized: "正在准备翻译模型"), systemImage: "arrow.down.circle")
+            Label(L("正在准备翻译模型"), systemImage: "arrow.down.circle")
                 .font(.system(size: 13, weight: .semibold))
-            Text(String(localized: "系统会询问是否下载这对语言的离线翻译模型。下载完成后这个窗口会自动关闭。"))
+            Text(L("系统会询问是否下载这对语言的离线翻译模型。下载完成后这个窗口会自动关闭。"))
                 .font(.system(size: 12)).foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             ProgressView().controlSize(.small)

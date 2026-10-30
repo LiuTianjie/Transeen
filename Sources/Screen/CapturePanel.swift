@@ -80,8 +80,8 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
             panel.hidesOnDeactivate = false
             panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         }
-        title = "截图预览"
-        chromePanel.title = "截图工具栏"
+        title = L("截图预览")
+        chromePanel.title = L("截图工具栏")
         // A transparent, resizing panel gets a stale WindowServer shadow contour.
         // The opaque surface supplies its own boundary; don't shadow the window.
         chromePanel.hasShadow = false

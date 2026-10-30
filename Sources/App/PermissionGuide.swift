@@ -46,7 +46,7 @@ struct PermissionGuide: View {
                     .resizable().interpolation(.high).frame(width: 52, height: 52)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Transeen").font(.system(size: 23, weight: .medium, design: .rounded)).tracking(-0.4)
-                    Text("截图与原位翻译").font(.system(size: 11)).foregroundStyle(.secondary)
+                    Text(L("截图与原位翻译")).font(.system(size: 11)).foregroundStyle(.secondary)
                 }
                 Spacer()
             }.padding(.bottom, 24)
@@ -55,7 +55,7 @@ struct PermissionGuide: View {
             HStack {
                 HStack(spacing: 5) {
                     Circle().fill(peeking ? Color.secondary.opacity(0.5) : Color.accentColor).frame(width: 4, height: 4)
-                    Text(peeking ? "原文" : "译文").foregroundStyle(.secondary)
+                    Text(peeking ? L("原文") : L("译文")).foregroundStyle(.secondary)
                 }.font(.system(size: 10))
                 Spacer()
                 HoldToCompare(peeking: $peeking).frame(width: 91, height: 20)
@@ -68,9 +68,9 @@ struct PermissionGuide: View {
                     .foregroundStyle(permission.granted ? Color.green : Color.secondary)
                     .frame(width: 27).padding(.top, 1)
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(permission.granted ? "已准备好" : "还差一步：允许截屏")
+                    Text(permission.granted ? L("已准备好") : L("还差一步：允许截屏"))
                         .font(.system(size: 13, weight: .medium))
-                    Text(permission.granted ? "选一块屏幕，就能开始。" : "在系统设置中开启 Transeen 的屏幕录制权限。")
+                    Text(permission.granted ? L("选一块屏幕，就能开始。") : L("在系统设置中开启 Transeen 的屏幕录制权限。"))
                         .font(.system(size: 11)).foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -78,20 +78,20 @@ struct PermissionGuide: View {
                 if !permission.granted {
                     Button { helpVisible.toggle() } label: {
                         Image(systemName: "questionmark.circle").foregroundStyle(.tertiary)
-                    }.buttonStyle(.borderless).help("查看授权步骤")
+                    }.buttonStyle(.borderless).help(L("查看授权步骤"))
                         .popover(isPresented: $helpVisible, arrowEdge: .trailing) {
                             VStack(alignment: .leading, spacing: 12) {
-                                Text("开启屏幕录制").font(.system(size: 13, weight: .semibold))
-                                Text("系统设置 → 隐私与安全性\n→ 屏幕与系统音频录制")
-                                Text("找到 Transeen，开启开关。\n返回这里后会自动检查。")
-                                Text("仅使用屏幕图像，不采集音频。")
+                                Text(L("开启屏幕录制")).font(.system(size: 13, weight: .semibold))
+                                Text(L("系统设置 → 隐私与安全性\n→ 屏幕与系统音频录制"))
+                                Text(L("找到 Transeen，开启开关。\n返回这里后会自动检查。"))
+                                Text(L("仅使用屏幕图像，不采集音频。"))
                                     .font(.system(size: 11)).foregroundStyle(.secondary)
                                 if permission.requested {
                                     Divider()
-                                    Text("已经开启，但仍未生效？").foregroundStyle(.secondary)
+                                    Text(L("已经开启，但仍未生效？")).foregroundStyle(.secondary)
                                     HStack {
-                                        Button("重新检查") { permission.refresh() }
-                                        Button("重新打开") { permission.relaunch() }
+                                        Button(L("重新检查")) { permission.refresh() }
+                                        Button(L("重新打开")) { permission.relaunch() }
                                     }.controlSize(.small)
                                 }
                             }.font(.system(size: 12)).lineSpacing(3).padding(18).frame(width: 285, alignment: .leading)
@@ -99,9 +99,9 @@ struct PermissionGuide: View {
                 }
             }.padding(.vertical, 20)
             HStack {
-                Button("稍后", action: later).keyboardShortcut(.cancelAction)
+                Button(L("稍后"), action: later).keyboardShortcut(.cancelAction)
                 Spacer()
-                Button(permission.granted ? "开始框选" : "打开系统设置…", action: permission.granted ? continueCapture : permission.openSettings)
+                Button(permission.granted ? L("开始框选") : L("打开系统设置…"), action: permission.granted ? continueCapture : permission.openSettings)
                     .keyboardShortcut(.defaultAction).buttonStyle(.glassProminent)
             }.controlSize(.regular)
         }
@@ -122,13 +122,13 @@ struct PermissionGuide: View {
             HStack(spacing: 4) {
                 ForEach(0..<3) { _ in Circle().fill(Color.primary.opacity(0.10)).frame(width: 5, height: 5) }
                 Spacer()
-                Text("翻译预览").font(.system(size: 9)).foregroundStyle(.tertiary)
+                Text(L("翻译预览")).font(.system(size: 9)).foregroundStyle(.tertiary)
             }.padding(.horizontal, 17).padding(.top, 13).padding(.bottom, 6)
-            previewRow("sun.max", peeking ? "Appearance" : "外观", peeking ? "Light" : "浅色")
+            previewRow("sun.max", peeking ? "Appearance" : L("外观"), peeking ? "Light" : L("浅色"))
             Divider().padding(.leading, 44).padding(.trailing, 16)
-            previewRow("bell", peeking ? "Notifications" : "通知", peeking ? "On" : "开启")
+            previewRow("bell", peeking ? "Notifications" : L("通知"), peeking ? "On" : L("开启"))
             Divider().padding(.leading, 44).padding(.trailing, 16)
-            previewRow("command", peeking ? "Keyboard shortcuts" : "键盘快捷键", "⌘ K")
+            previewRow("command", peeking ? "Keyboard shortcuts" : L("键盘快捷键"), "⌘ K")
                 .padding(.bottom, 7)
         }
         .background(Color(nsColor: .textBackgroundColor).opacity(0.55), in: RoundedRectangle(cornerRadius: 8))
@@ -175,14 +175,14 @@ private struct ViewfinderCorners: Shape {
 private struct HoldToCompare: NSViewRepresentable {
     @Binding var peeking: Bool
     func makeNSView(context: Context) -> CompareButton {
-        let button = CompareButton(title: "按住看原文", target: nil, action: nil)
+        let button = CompareButton(title: L("按住看原文"), target: nil, action: nil)
         button.bezelStyle = .inline
         button.controlSize = .small
         button.font = .systemFont(ofSize: 11)
         button.image = NSImage(systemSymbolName: "eye", accessibilityDescription: nil)
         button.imagePosition = .imageLeading
-        button.setAccessibilityLabel("对照示例原文")
-        button.setAccessibilityHelp("按住显示英文，松开显示中文")
+        button.setAccessibilityLabel(L("对照示例原文"))
+        button.setAccessibilityHelp(L("按住显示英文，松开显示中文"))
         return button
     }
     func updateNSView(_ view: CompareButton, context: Context) { view.onPeek = { peeking = $0 } }

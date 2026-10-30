@@ -126,6 +126,15 @@ enum Recognizer {
                     box = suffix.boundingBox
                 }
             }
+            // An emoji or flag before a word comes back as a bullet glued to it ("•France").
+            if bullet == nil, contentRange.lowerBound == raw.startIndex,
+               let glued = raw.range(of: #"^[•●◦▪‣](?=\p{L})"#, options: .regularExpression),
+               raw[glued.upperBound...].count >= 2,
+               let suffix = try? candidate.boundingBox(for: glued.upperBound..<raw.endIndex) {
+                contentRange = glued.upperBound..<raw.endIndex
+                text = String(raw[contentRange]).trimmingCharacters(in: .whitespaces)
+                box = suffix.boundingBox
+            }
             // A disclosure arrow at the end ("Ran 2 commands ›") is an icon, not a word to translate.
             if let space = raw[contentRange].lastIndex(of: " "),
                ["›", ">", "»", "〉", "❯"].contains(raw[raw.index(after: space)..<contentRange.upperBound].trimmingCharacters(in: .whitespaces)),

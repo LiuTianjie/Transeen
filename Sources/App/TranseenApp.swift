@@ -10,13 +10,13 @@ struct TranseenApp: App {
         Settings { EmptyView() }
             .commands {
                 CommandGroup(replacing: .newItem) {
-                    Button("打开图片…") { delegate.openImage() }.configuredShortcut(.openImage, in: delegate.settings.shortcuts)
+                    Button(L("打开图片…")) { delegate.openImage() }.configuredShortcut(.openImage, in: delegate.settings.shortcuts)
                 }
                 CommandGroup(replacing: .appTermination) {
-                    Button("退出 Transeen") { NSApp.terminate(nil) }.configuredShortcut(.quit, in: delegate.settings.shortcuts)
+                    Button(L("退出 Transeen")) { NSApp.terminate(nil) }.configuredShortcut(.quit, in: delegate.settings.shortcuts)
                 }
                 CommandGroup(replacing: .appSettings) {
-                    Button("设置…") { delegate.showSettings() }.configuredShortcut(.settings, in: delegate.settings.shortcuts)
+                    Button(L("设置…")) { delegate.showSettings() }.configuredShortcut(.settings, in: delegate.settings.shortcuts)
                 }
             }
     }
@@ -40,30 +40,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     private var launcherPopover: NSPopover?
     private var launcherClickMonitor: Any?
     private var statusMenu: NSMenu?
+    private var windowsHiddenForCapture: [NSWindow] = []
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         item.button?.image = NSImage(systemSymbolName: "viewfinder", accessibilityDescription: "Transeen")
-        item.button?.toolTip = "Transeen · 截图与翻译"
-        let menu = NSMenu()
-        menu.addItem(menuItem("Transeen", action: nil))
-        menu.addItem(.separator())
-        menu.addItem(menuItem(settings.shortcuts.help("截图翻译", .captureTranslate), action: #selector(translateCapture)))
-        menu.addItem(menuItem(settings.shortcuts.help("截图标注", .captureScreenshot), action: #selector(screenshot)))
-        menu.addItem(menuItem("关闭当前截图", action: #selector(closeCapture)))
-        menu.addItem(.separator())
-        menu.addItem(menuItem("新手引导…", action: #selector(showOnboarding)))
-        menu.addItem(menuItem("屏幕权限…", action: #selector(showPermissionGuide)))
-        menu.addItem(menuItem("设置…", action: #selector(showSettings)))
-        menu.addItem(menuItem("激活与账号…", action: #selector(showLicense)))
-        menu.addItem(menuItem("检查更新…", action: #selector(checkForUpdates)))
-        menu.addItem(menuItem("退出 Transeen", action: #selector(quit)))
-        statusMenu = menu
         item.button?.target = self
         item.button?.action = #selector(toggleLauncher)
         item.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
         status = item
+        buildStatusMenu()
+        observeInterfaceLanguage()
         capture.authorize = { [weak self] in self?.authorize() ?? false }
         licenseObservation = license.$state.dropFirst().sink { [weak self] state in
             guard !state.isActivated else { return }
@@ -72,6 +60,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         Task { await license.bootstrap() }
         capture.onReselect = { [weak self] mode in self?.start(mode) }
         capture.onError = { [weak self] message in self?.notice(message) }
+        capture.onFinished = { [weak self] in
+            DispatchQueue.main.async { self?.restoreWindowsAfterCapture() }
+        }
         shortcuts.onPressed = { [weak self] action in
             guard let self, settings.shortcuts.recording == nil else { return }
             switch action {
@@ -87,7 +78,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             guard !failures.isEmpty else { return nil }
             if settings.shortcuts.recording == nil { _ = shortcuts.register(settings.shortcuts.bindings) }
             else { shortcuts.stop() }
-            return "快捷键注册失败，可能被系统或其他应用占用：" + failures.map(\.title).joined(separator: "、") + "。原配置已保留。"
+            return L("快捷键注册失败，可能被系统或其他应用占用：") + failures.map(\.title).joined(separator: L("、")) + L("。原配置已保留。")
         }
         settings.shortcuts.onRecordingChanged = { [weak self] recording in
             guard let self else { return }
@@ -96,7 +87,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         }
         settings.shortcuts.onChanged = { [weak self] in self?.refreshShortcutLabels() }
         let failures = shortcuts.register(settings.shortcuts.bindings)
-        if !failures.isEmpty { settings.shortcuts.message = "这些全局快捷键无法注册，请重新设置：" + failures.map(\.title).joined(separator: "、") }
+        if !failures.isEmpty { settings.shortcuts.message = L("这些全局快捷键无法注册，请重新设置：") + failures.map(\.title).joined(separator: L("、")) }
         #if DEBUG
         if let path = ProcessInfo.processInfo.environment["TRANSEEN_PREVIEW"], let image = NSImage(contentsOfFile: path) {
             capture.preview(image)
@@ -140,16 +131,46 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     private func menuItem(_ title: String, action: Selector?) -> NSMenuItem {
         let item = NSMenuItem(title: title, action: action, keyEquivalent: ""); item.target = self; return item
     }
+    private func buildStatusMenu() {
+        status?.button?.toolTip = L("Transeen · 截图与翻译")
+        let menu = NSMenu()
+        menu.addItem(menuItem("Transeen", action: nil))
+        menu.addItem(.separator())
+        menu.addItem(menuItem(settings.shortcuts.help(L("截图翻译"), .captureTranslate), action: #selector(translateCapture)))
+        menu.addItem(menuItem(settings.shortcuts.help(L("截图标注"), .captureScreenshot), action: #selector(screenshot)))
+        menu.addItem(menuItem(L("关闭当前截图"), action: #selector(closeCapture)))
+        menu.addItem(.separator())
+        menu.addItem(menuItem(L("新手引导…"), action: #selector(showOnboarding)))
+        menu.addItem(menuItem(L("屏幕权限…"), action: #selector(showPermissionGuide)))
+        menu.addItem(menuItem(L("设置…"), action: #selector(showSettings)))
+        menu.addItem(menuItem(L("激活与账号…"), action: #selector(showLicense)))
+        menu.addItem(menuItem(L("检查更新…"), action: #selector(checkForUpdates)))
+        menu.addItem(menuItem(L("退出 Transeen"), action: #selector(quit)))
+        statusMenu = menu
+    }
+    private func observeInterfaceLanguage() {
+        withObservationTracking { _ = InterfaceLanguage.shared.language } onChange: { [weak self] in
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                self.buildStatusMenu()
+                self.settings.shortcuts.message = ""
+                self.onboardingWindow?.title = L("开始使用 Transeen")
+                self.settingsWindow?.title = L("设置")
+                self.licenseWindow?.title = L("Transeen · 激活与账号")
+                self.capture.refreshLanguage()
+                self.observeInterfaceLanguage()
+            }
+        }
+    }
     private func refreshShortcutLabels() {
-        for (index, action, title) in [(2, ShortcutAction.captureTranslate, "截图翻译"), (3, .captureScreenshot, "截图标注")] {
+        for (index, action, title) in [(2, ShortcutAction.captureTranslate, L("截图翻译")), (3, .captureScreenshot, L("截图标注"))] {
             statusMenu?.item(at: index)?.title = settings.shortcuts.help(title, action)
         }
     }
     private func start(_ mode: CaptureMode) {
         guard authorize() else { return }
         launcherPopover?.performClose(nil)
-        homeWindow?.orderOut(nil)
-        onboardingWindow?.orderOut(nil)
+        hideForCapture([homeWindow, onboardingWindow])
         permission.refresh()
         guard permission.granted else {
             permission.pendingMode = mode
@@ -160,8 +181,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         permissionWindow?.orderOut(nil)
         permissionWindow?.contentView = nil
         permissionWindow = nil
-        settingsWindow?.orderOut(nil)
+        hideForCapture([settingsWindow])
         capture.begin(mode: mode, settings: settings)
+        if !capture.isActive { restoreWindowsAfterCapture() }
+    }
+    /// Our own windows step aside so they are not captured, and return when the capture ends.
+    private func hideForCapture(_ windows: [NSWindow?]) {
+        for case let window? in windows where window.isVisible {
+            if !windowsHiddenForCapture.contains(window) { windowsHiddenForCapture.append(window) }
+            window.orderOut(nil)
+        }
+    }
+    private func restoreWindowsAfterCapture() {
+        guard !capture.isActive, !windowsHiddenForCapture.isEmpty else { return }
+        let windows = windowsHiddenForCapture
+        windowsHiddenForCapture = []
+        NSApp.activate(ignoringOtherApps: true)
+        windows.forEach { $0.orderFront(nil) }
+        windows.last?.makeKey()
     }
     @objc private func showPermissionGuide() {
         if permissionWindow == nil {
@@ -207,8 +244,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         launcherPopover?.performClose(nil)
         homeWindow?.orderOut(nil)
         if onboardingWindow == nil {
-            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 540, height: 660), styleMask: [.titled, .closable], backing: .buffered, defer: false)
-            window.title = "开始使用 Transeen"
+            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 540, height: 680), styleMask: [.titled, .closable, .fullSizeContentView], backing: .buffered, defer: false)
+            window.title = L("开始使用 Transeen")
+            window.titleVisibility = .hidden
+            window.titlebarAppearsTransparent = true
+            window.isMovableByWindowBackground = true
             window.isReleasedWhenClosed = false
             window.delegate = self
             let host = NSHostingView(rootView: OnboardingView(settings: settings, permission: permission, license: license,
@@ -218,7 +258,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
                     onboardingWindow?.close()
                     if startCapture { start(.translate) } else { showHome() }
                 }))
-            host.sizingOptions = [.preferredContentSize]
             window.contentView = host
             onboardingWindow = window
             window.center()
@@ -268,7 +307,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         settingsWindow?.orderOut(nil)
         permissionWindow?.orderOut(nil)
         if homeWindow == nil {
-            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 360, height: 300), styleMask: [.titled, .closable], backing: .buffered, defer: false)
+            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 340, height: 300), styleMask: [.titled, .closable, .fullSizeContentView], backing: .buffered, defer: false)
             window.title = "Transeen"
             window.titleVisibility = .hidden
             window.titlebarAppearsTransparent = true
@@ -292,7 +331,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         picker.allowedContentTypes = [.image]
         picker.canChooseDirectories = false
         picker.allowsMultipleSelection = false
-        picker.prompt = "打开"
+        picker.prompt = L("打开")
         NSApp.activate(ignoringOtherApps: true)
         picker.begin { [weak self] response in
             guard let self, response == .OK, let url = picker.url,
@@ -306,8 +345,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         launcherPopover?.performClose(nil)
         homeWindow?.orderOut(nil)
         if settingsWindow == nil {
-            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 540, height: 570), styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
-            window.title = "设置"; window.isReleasedWhenClosed = false
+            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 720, height: 580), styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView], backing: .buffered, defer: false)
+            window.title = L("设置"); window.isReleasedWhenClosed = false
+            window.titleVisibility = .hidden; window.titlebarAppearsTransparent = true
             window.contentView = NSHostingView(rootView: SettingsView(settings: settings, permission: permission, showHome: { [weak self] in self?.showHome() }, showPermission: { [weak self] in self?.showPermissionGuide() }, capture: { [weak self] in self?.start($0) }))
             settingsWindow = window; window.center()
         }
@@ -323,7 +363,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         launcherPopover?.performClose(nil)
         if licenseWindow == nil {
             let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 380), styleMask: [.titled, .closable], backing: .buffered, defer: false)
-            window.title = "Transeen · 激活与账号"
+            window.title = L("Transeen · 激活与账号")
             window.isReleasedWhenClosed = false
             let host = NSHostingView(rootView: LicenseView(manager: license, done: { [weak self] in
                 guard let self else { return }
@@ -340,8 +380,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         NSApp.activate(ignoringOtherApps: true); licenseWindow?.makeKeyAndOrderFront(nil)
     }
     private func notice(_ text: String) {
-        let alert = NSAlert(); alert.messageText = "Transeen"; alert.informativeText = text; alert.addButton(withTitle: "知道了")
+        let alert = NSAlert(); alert.messageText = "Transeen"; alert.informativeText = text; alert.addButton(withTitle: L("知道了"))
         NSApp.activate(ignoringOtherApps: true); alert.runModal()
+    }
+}
+
+private enum SettingsPane: Int, CaseIterable, Identifiable {
+    case general, translation, shortcuts
+    var id: Int { rawValue }
+    var title: String {
+        switch self { case .general: L("通用"); case .translation: L("翻译"); case .shortcuts: L("快捷键") }
+    }
+    var subtitle: String {
+        switch self {
+        case .general: L("截图行为与屏幕权限")
+        case .translation: L("语言、翻译服务与模型")
+        case .shortcuts: L("自定义每个操作的按键")
+        }
+    }
+    var icon: String {
+        switch self { case .general: "gearshape.fill"; case .translation: "globe"; case .shortcuts: "command" }
+    }
+    var iconColors: [Color] {
+        switch self { case .general: TilePalette.gray; case .translation: TilePalette.blue; case .shortcuts: TilePalette.graphite }
     }
 }
 
@@ -351,45 +412,103 @@ private struct SettingsView: View {
     var showHome: () -> Void
     var showPermission: () -> Void
     var capture: (CaptureMode) -> Void
-    @State private var tab = 0
+    @State private var pane = SettingsPane.general
     @State private var packs = LanguagePacks()
+    private var version: String { Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "" }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: 11) {
-                Button(action: showHome) { Image(systemName: "chevron.left").frame(width: 24, height: 24) }.buttonStyle(.glass).help("返回")
-                Text("设置").font(.system(size: 21, weight: .semibold))
-                Spacer()
-                Text("Transeen " + (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""))
-                    .font(.system(size: 11)).foregroundStyle(.secondary)
-            }.padding(22)
-            Picker("设置分类", selection: $tab) {
-                Text("通用").tag(0)
-                Text("快捷键").tag(1)
-            }.pickerStyle(.segmented).padding(.horizontal, 22).padding(.bottom, 10)
-            if tab == 1 {
-                ShortcutSettingsView(shortcuts: settings.shortcuts)
-            } else {
+        HStack(spacing: 0) {
+            sidebar
+            Divider().ignoresSafeArea()
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(spacing: 12) {
+                    IconTile(symbol: pane.icon, colors: pane.iconColors, size: 32)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(pane.title).font(.system(size: 20, weight: .bold))
+                        Text(pane.subtitle).font(.system(size: 12)).foregroundStyle(.secondary)
+                    }
+                }.padding(.horizontal, 28).padding(.top, 34).padding(.bottom, 4)
+                content.formStyle(.grouped).scrollContentBackground(.hidden)
+            }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .background(Color(nsColor: .windowBackgroundColor))
+        }
+        .frame(minWidth: 720, maxWidth: .infinity, minHeight: 580, maxHeight: .infinity)
+        .ignoresSafeArea()
+        .languagePacks(packs, for: settings)
+        .onChange(of: pane) { settings.shortcuts.recording = nil }
+        .onDisappear { settings.shortcuts.recording = nil }
+    }
+
+    private var sidebar: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            HStack(spacing: 10) {
+                Image(nsImage: NSApp.applicationIconImage).resizable().frame(width: 34, height: 34)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Transeen").font(.system(size: 13, weight: .semibold))
+                    Text(version).font(.system(size: 11).monospacedDigit()).foregroundStyle(.secondary)
+                }
+            }.padding(.horizontal, 6).padding(.top, 48).padding(.bottom, 18)
+            ForEach(SettingsPane.allCases) { item in
+                let selected = item == pane
+                Button { pane = item } label: {
+                    HStack(spacing: 9) {
+                        IconTile(symbol: item.icon, colors: item.iconColors)
+                        Text(item.title).font(.system(size: 13, weight: selected ? .medium : .regular))
+                        Spacer(minLength: 0)
+                    }
+                    .padding(.horizontal, 6).frame(height: 30)
+                    .background(selected ? Color.primary.opacity(0.09) : .clear, in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+                    .contentShape(Rectangle())
+                }.buttonStyle(.plain).accessibilityAddTraits(selected ? .isSelected : [])
+            }
+            Spacer()
+            Button(action: showPermission) {
+                HStack(spacing: 7) {
+                    Circle().fill(permission.granted ? Color.green : Color.orange).frame(width: 6, height: 6)
+                    Text(permission.granted ? L("屏幕权限已开启") : L("屏幕权限尚未开启")).lineLimit(1)
+                }.font(.system(size: 11)).foregroundStyle(.secondary).padding(.horizontal, 8).padding(.bottom, 6)
+            }.buttonStyle(.plain).help(L("查看权限"))
+            Button(action: showHome) {
+                Label(L("返回"), systemImage: "chevron.left").font(.system(size: 12))
+                    .frame(maxWidth: .infinity)
+            }.controlSize(.large)
+        }
+        .padding(12)
+        .frame(width: 210)
+        .frame(maxHeight: .infinity)
+        .background(VisualEffectBackground(material: .sidebar).ignoresSafeArea())
+    }
+
+    @ViewBuilder private var content: some View {
+        switch pane {
+        case .general:
             Form {
-                Section("捕获") {
+                Section(L("捕获")) {
                     ShortcutRow(shortcuts: settings.shortcuts, action: .captureTranslate)
                     ShortcutRow(shortcuts: settings.shortcuts, action: .captureScreenshot)
                     if !settings.shortcuts.message.isEmpty { Text(settings.shortcuts.message).font(.caption).foregroundStyle(.secondary) }
-                    Toggle("复制后关闭截图", isOn: $settings.copyCloses)
-                    Text("钉住的图片会继续保留。").font(.caption).foregroundStyle(.secondary)
-                }
-                Section("翻译") { TranslationServiceFields(settings: settings, packs: packs) }
-                Section("屏幕权限") {
-                    HStack {
-                        Label(permission.granted ? "屏幕权限已开启" : "屏幕权限尚未开启", systemImage: permission.granted ? "checkmark.circle.fill" : "circle.dashed")
-                            .foregroundStyle(permission.granted ? Color.green : Color.secondary)
-                        Spacer()
-                        Button("查看权限", action: showPermission)
+                    VStack(alignment: .leading, spacing: 3) {
+                        Toggle(L("复制后关闭截图"), isOn: $settings.copyCloses)
+                        Text(L("钉住的图片会继续保留。")).font(.caption).foregroundStyle(.secondary)
                     }
                 }
-            }.formStyle(.grouped)
-                .onDisappear { settings.shortcuts.recording = nil }
+                Section(L("屏幕权限")) {
+                    HStack {
+                        Label {
+                            Text(permission.granted ? L("屏幕权限已开启") : L("屏幕权限尚未开启"))
+                        } icon: {
+                            Image(systemName: permission.granted ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                                .foregroundStyle(permission.granted ? Color.green : Color.orange)
+                        }
+                        Spacer()
+                        Button(L("查看权限"), action: showPermission)
+                    }
+                }
             }
-        }.frame(width: 540, height: 570)
-            .languagePacks(packs, for: settings)
+        case .translation:
+            Form { Section { TranslationServiceFields(settings: settings, packs: packs) } }
+        case .shortcuts:
+            ShortcutSettingsView(shortcuts: settings.shortcuts)
+        }
     }
 }

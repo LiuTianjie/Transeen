@@ -59,6 +59,24 @@ enum AppLanguage: String, CaseIterable, Identifiable, Hashable {
     var translationLanguage: Locale.Language {
         Locale(identifier: rawValue).language
     }
+
+    /// The first of the user's preferred languages that Transeen translates into, English otherwise.
+    static func preferred(_ identifiers: [String] = Locale.preferredLanguages) -> AppLanguage {
+        for identifier in identifiers {
+            let language = Locale.Language(identifier: identifier)
+            guard let code = language.languageCode?.identifier else { continue }
+            if code == "zh" {
+                if let script = language.script?.identifier { return script == "Hant" ? .zhHant : .zhHans }
+                let region = language.region?.identifier
+                return ["TW", "HK", "MO"].contains(region ?? "") ? .zhHant : .zhHans
+            }
+            if let match = AppLanguage(rawValue: code) { return match }
+        }
+        return .en
+    }
+
+    /// Where text already in `self` goes instead: English, or Chinese for those who read English.
+    var alternate: AppLanguage { self == .en ? .zhHans : .en }
 }
 
 /// Script checks prevent short Japanese and Korean labels being mistaken for
@@ -118,12 +136,12 @@ struct TranslationDirection: Equatable, Hashable, Identifiable {
     var reversed: Self { Self(source: target, target: source) }
 
     var title: String {
-        if source == target { return "\(source.displayName)原文" }
+        if source == target { return L("%@原文", source.displayName) }
         return "\(source.shortName) → \(target.shortName)"
     }
 
     var compactTitle: String {
-        if source == target { return "\(source.shortName) 原文" }
+        if source == target { return source.shortName + " " + L("原文") }
         return "\(source.shortName) → \(target.shortName)"
     }
 

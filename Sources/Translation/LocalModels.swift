@@ -6,7 +6,8 @@ struct LocalModel: Identifiable, Sendable, Equatable {
     enum Prompt: Sendable { case index, hunyuan }
     let id: String
     let name: String
-    let summary: String
+    let summaryKey: String
+    var summary: String { L(summaryKey) }
     let file: String
     let bytes: Int64
     let sha256: String
@@ -26,14 +27,14 @@ enum LocalModelCatalog {
     static let defaultID = "index-translate-2b"
     static let all: [LocalModel] = [
         LocalModel(id: "index-translate-2b", name: "Index-Translate 2B",
-                   summary: "哔哩哔哩开源，150 种语言，代码和术语保留得好",
+                   summaryKey: "哔哩哔哩开源，150 种语言，代码和术语保留得好",
                    file: "Index-Translate-2B.Q3_K_M.gguf", bytes: 1_127_802_368,
                    sha256: "230306b90b65af599dd86a003b170824f694952ae1e8e7addacdababfc750de5",
                    modelScope: URL(string: "https://modelscope.cn/models/IndexTeam/Index-Translate-2B-GGUF/resolve/master/Index-Translate-2B.Q3_K_M.gguf")!,
                    huggingFace: URL(string: "https://huggingface.co/IndexTeam/Index-Translate-2B-GGUF/resolve/main/Index-Translate-2B.Q3_K_M.gguf")!,
                    prompt: .index),
         LocalModel(id: "hy-mt2-1.8b", name: "Hy-MT2 1.8B",
-                   summary: "腾讯混元开源，33 种语言，速度最快",
+                   summaryKey: "腾讯混元开源，33 种语言，速度最快",
                    file: "Hy-MT2-1.8B-Q4_K_M.gguf", bytes: 1_133_080_448,
                    sha256: "dc5f44fcf1fa496ee7ad725982c0c8c553a4de00259b53af84c4b89fb0c06699",
                    modelScope: URL(string: "https://modelscope.cn/models/Tencent-Hunyuan/Hy-MT2-1.8B-GGUF/resolve/master/Hy-MT2-1.8B-Q4_K_M.gguf")!,
@@ -47,15 +48,15 @@ enum LocalModelError: LocalizedError {
     case unsupportedMac, missingHelper, notDownloaded(String), diskSpace(String), corrupted, unexpectedSize, http(Int), startFailed, noTranslation
     var errorDescription: String? {
         switch self {
-        case .unsupportedMac: return String(localized: "本地翻译模型需要 Apple 芯片的 Mac。")
-        case .missingHelper: return String(localized: "这个版本没有附带本地模型运行组件，请重新安装 Transeen。")
-        case .notDownloaded(let name): return String(localized: "本地模型 \(name) 还没下载。可在设置 → 通用 → 翻译中下载。")
-        case .diskSpace(let size): return String(localized: "磁盘空间不足，下载需要约 \(size)。")
-        case .corrupted: return String(localized: "下载的模型文件校验失败，已删除，请重新下载。")
-        case .unexpectedSize: return String(localized: "下载的模型文件大小不对，请重新下载。")
-        case .http(let code): return String(localized: "下载服务器返回 HTTP \(code)。")
-        case .startFailed: return String(localized: "本地翻译模型没能启动，请重试；仍不行可在设置中删除后重新下载。")
-        case .noTranslation: return String(localized: "本地模型没有返回可用的翻译，请重试。")
+        case .unsupportedMac: return L("本地翻译模型需要 Apple 芯片的 Mac。")
+        case .missingHelper: return L("这个版本没有附带本地模型运行组件，请重新安装 Transeen。")
+        case .notDownloaded(let name): return L("本地模型 %@ 还没下载。可在设置 → 通用 → 翻译中下载。", name)
+        case .diskSpace(let size): return L("磁盘空间不足，下载需要约 %@。", size)
+        case .corrupted: return L("下载的模型文件校验失败，已删除，请重新下载。")
+        case .unexpectedSize: return L("下载的模型文件大小不对，请重新下载。")
+        case .http(let code): return L("下载服务器返回 HTTP %ld。", code)
+        case .startFailed: return L("本地翻译模型没能启动，请重试；仍不行可在设置中删除后重新下载。")
+        case .noTranslation: return L("本地模型没有返回可用的翻译，请重试。")
         }
     }
 }
@@ -149,7 +150,7 @@ final class LocalModelStore {
             } else if let error = error as? LocalModelError {
                 statuses[model.id] = .failed(error.localizedDescription)
             } else {
-                statuses[model.id] = .failed(String(localized: "下载中断：\(error.localizedDescription)"))
+                statuses[model.id] = .failed(L("下载中断：%@", error.localizedDescription))
             }
         }
         tasks[model.id] = nil

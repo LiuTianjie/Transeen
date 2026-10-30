@@ -8,6 +8,11 @@ import CoreText
     typealias Answer = PreciseTranslation.Answer
 
     /// Counts how many requests are under way at once.
+    actor Reports {
+        var counts: [Int] = []
+        func add(_ count: Int) { counts.append(count) }
+    }
+
     actor Gauge {
         var now = 0, most = 0, total = 0
         func enter() { now += 1; most = max(most, now); total += 1 }
@@ -186,6 +191,11 @@ import CoreText
         })
         outcome = await slow.translate(parts, source: .en, target: .zhHans)
         let most = await gauge.most, total = await gauge.total
+        // What is accepted is reported after each answer, so the screen can show it before the rest.
+        let reports = Reports()
+        outcome = await slow.translate(parts, source: .en, target: .zhHans) { await reports.add($0.translations.count) }
+        let counts = await reports.counts
+        check(counts == Array(1...7) && outcome.accepted.translations.count == 7, "each answer is reported as it lands: \(counts)")
         check(outcome.failure == nil && outcome.accepted.translations.count == 7 && total == 7, "every part is asked and answered: \(outcome)")
         check(most == 3, "never more than three at once: \(most)")
 

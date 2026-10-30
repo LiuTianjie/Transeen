@@ -3,7 +3,7 @@ import AppKit
 enum AnnotationTool: String, CaseIterable, Identifiable {
     case move, rectangle, ellipse, arrow, pen, number
     var id: String { rawValue }
-    var title: String { switch self { case .move: "选择 / 移动"; case .rectangle: "矩形"; case .ellipse: "椭圆"; case .arrow: "箭头"; case .pen: "画笔"; case .number: "编号" } }
+    var title: String { switch self { case .move: L("选择 / 移动"); case .rectangle: L("矩形"); case .ellipse: L("椭圆"); case .arrow: L("箭头"); case .pen: L("画笔"); case .number: L("编号") } }
     var symbol: String { switch self { case .move: "cursorarrow"; case .rectangle: "rectangle"; case .ellipse: "circle"; case .arrow: "arrow.up.right"; case .pen: "pencil"; case .number: "1.circle" } }
 }
 
@@ -374,10 +374,10 @@ final class AnnotationCanvas: NSView {
         annotations.tool = .move; annotations.select(mark.id)
         let menu = NSMenu()
         if mark.tool == .number {
-            let edit = NSMenuItem(title: "修改编号…", action: #selector(editNumber), keyEquivalent: "")
+            let edit = NSMenuItem(title: L("修改编号…"), action: #selector(editNumber), keyEquivalent: "")
             edit.target = self; menu.addItem(edit)
         }
-        let delete = NSMenuItem(title: "删除标注", action: #selector(deleteMark), keyEquivalent: "")
+        let delete = NSMenuItem(title: L("删除标注"), action: #selector(deleteMark), keyEquivalent: "")
         delete.target = self; menu.addItem(delete)
         return menu
     }

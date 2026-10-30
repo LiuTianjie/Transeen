@@ -39,8 +39,9 @@ struct ScreenPreciseTranslator: Sendable {
     /// Requests in flight at once, when a capture needs more than one.
     var concurrent = 3
 
+    /// `progress` hears what has been accepted so far, after each answer that adds to it.
     func translate(_ requests: [[PreciseTranslation.Item]], source: AppLanguage, target: AppLanguage,
-                   app: String? = nil) async -> Outcome {
+                   app: String? = nil, progress: (@Sendable (PreciseTranslation.Accepted) async -> Void)? = nil) async -> Outcome {
         guard !requests.isEmpty else { return Outcome() }
         enum Event: Sendable {
             case answered(Int, Result<String, any Error>)
@@ -80,6 +81,7 @@ struct ScreenPreciseTranslator: Sendable {
                     outcome.accepted.kept.formUnion(accepted.kept.subtracting(decided))
                     outcome.accepted.rejected += accepted.rejected
                     outcome.accepted.long += accepted.long
+                    if !accepted.translations.isEmpty || !accepted.kept.isEmpty, let progress { await progress(outcome.accepted) }
                     let missing = requests[index].contains {
                         outcome.accepted.translations[$0.block] == nil && !outcome.accepted.kept.contains($0.block)
                     }

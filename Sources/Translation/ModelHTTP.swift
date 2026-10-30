@@ -24,11 +24,11 @@ enum ModelError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .message(let text): return text
-        case .configuration: return String(localized: "请填写完整的 HTTPS chat/completions 接口地址和模型名；仅本机服务允许 HTTP。")
-        case .missingKey: return String(localized: "尚未保存此接口的 API Key。")
-        case .http(let code): return String(localized: "翻译服务返回 HTTP \(code)。")
-        case .invalidResponse: return String(localized: "翻译服务没有返回完整、有效的文字。")
-        case .tooLarge: return String(localized: "翻译请求或响应超过长度限制。")
+        case .configuration: return L("请填写完整的 HTTPS chat/completions 接口地址和模型名；仅本机服务允许 HTTP。")
+        case .missingKey: return L("尚未保存此接口的 API Key。")
+        case .http(let code): return L("翻译服务返回 HTTP %ld。", code)
+        case .invalidResponse: return L("翻译服务没有返回完整、有效的文字。")
+        case .tooLarge: return L("翻译请求或响应超过长度限制。")
         }
     }
 }

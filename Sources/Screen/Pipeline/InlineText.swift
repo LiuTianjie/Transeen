@@ -77,6 +77,9 @@ enum InlineText {
             run.startsListItem = index == 0 && line.startsListItem
             measured.append(run)
         }
+        // Without a chip the runs are one sentence whose words merely measure a little differently:
+        // anti-aliasing makes short words read lighter. Split, they would be translated word by word.
+        guard measured.contains(where: \.protectedLiteral) else { return nil }
         return measured
     }
 

@@ -249,7 +249,8 @@ final class LocalModelTranslationBackend: TranslationBackend {
     func prepare() { runtime.prewarm(model, store: store) }
     func cancel() { work?.cancel(); work = nil }
 
-    func translate(_ analysis: ScreenPipeline.Analysis, direction: TranslationDirection, app: String?) async throws -> TranslationOutput {
+    func translate(_ analysis: ScreenPipeline.Analysis, direction: TranslationDirection, app: String?,
+                   progress: @escaping TranslationProgress) async throws -> TranslationOutput {
         runtime.begin()
         defer { runtime.end() }
         let endpoint = try await runtime.endpoint(for: model, store: store)
@@ -272,6 +273,8 @@ final class LocalModelTranslationBackend: TranslationBackend {
         }
         let texts = analysis.blocks.map(\.original)
         let target = direction.target, prompt = model.prompt
+        let early = output
+        if !jobs.isEmpty { progress(early) }
         let task = Task { () throws -> TranslationOutput in
             var result = TranslationOutput()
             var failures = 0
@@ -290,12 +293,16 @@ final class LocalModelTranslationBackend: TranslationBackend {
                     guard let answer = try await group.next() else { break }
                     inFlight -= 1
                     try Task.checkCancellation()
-                    if let text = answer.text { result.translations[answer.index] = TranslationText.normalize(text, locale: target.speechLocale) }
-                    else { failures += 1; lastError = answer.error }
+                    if let text = answer.text {
+                        result.translations[answer.index] = TranslationText.normalize(text, locale: target.speechLocale)
+                        var sofar = early
+                        sofar.translations.merge(result.translations) { _, new in new }
+                        progress(sofar)
+                    } else { failures += 1; lastError = answer.error }
                 }
             }
             if failures > 0, result.translations.isEmpty, let lastError { throw lastError }
-            if failures > 0 { result.warning = String(localized: "有 \(failures) 处未能翻译，已保留原文，可重新翻译。") }
+            if failures > 0 { result.warning = L("有 %ld 处未能翻译，已保留原文，可重新翻译。", failures) }
             return result
         }
         work = task

@@ -17,7 +17,7 @@ final class PinnedImagePanel: NSPanel {
         self.showsTranslation = showsTranslation
         picture = PinnedImageView(frame: CGRect(origin: .zero, size: rect.size))
         super.init(contentRect: rect, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
-        title = "钉住的截图"
+        title = L("钉住的截图")
         level = .floating
         isFloatingPanel = true
         isOpaque = false
@@ -58,11 +58,11 @@ final class PinnedImagePanel: NSPanel {
             entry.target = self
             menu.addItem(entry)
         }
-        item("复制图片", #selector(copyImage), "c")
-        item("保存图片…", #selector(saveImage), "s")
-        if alternate != nil { item(showsTranslation ? "显示原文" : "显示译文", #selector(swapLayer)) }
+        item(L("复制图片"), #selector(copyImage), "c")
+        item(L("保存图片…"), #selector(saveImage), "s")
+        if alternate != nil { item(showsTranslation ? L("显示原文") : L("显示译文"), #selector(swapLayer)) }
         menu.addItem(.separator())
-        item("关闭", #selector(dismiss), "\u{1b}")
+        item(L("关闭"), #selector(dismiss), "\u{1b}")
         menu.items.last?.keyEquivalentModifierMask = []
         return menu
     }

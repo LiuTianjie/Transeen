@@ -93,6 +93,14 @@ import CoreText
         var passed = 0
         func check(_ condition: Bool, _ what: String) { precondition(condition, what); passed += 1 }
 
+        // The reader's language comes from the system's preferred languages.
+        check(AppLanguage.preferred(["zh-Hans-CN", "en-US"]) == .zhHans, "simplified Chinese system")
+        check(AppLanguage.preferred(["zh-Hant-TW"]) == .zhHant && AppLanguage.preferred(["zh-HK"]) == .zhHant, "traditional Chinese, by script or region")
+        check(AppLanguage.preferred(["ja-JP", "en"]) == .ja && AppLanguage.preferred(["de-AT"]) == .de, "a language with its region")
+        check(AppLanguage.preferred(["pt-BR", "fr-CA"]) == .fr, "the first language Transeen has")
+        check(AppLanguage.preferred(["ru"]) == .en && AppLanguage.preferred([]) == .en, "English when none matches")
+        check(AppLanguage.zhHans.alternate == .en && AppLanguage.en.alternate == .zhHans, "the other language a page in one's own goes to")
+
         // Narrow glyphs can leave an empty sampling ring. Rectangle conversion
         // must survive both that inset and out-of-image OCR coordinates.
         let bounds = PixelRect(minX: 0, minY: 0, maxX: 100, maxY: 100)
@@ -120,6 +128,27 @@ import CoreText
         for (a, b) in zip(ordered, ordered.dropFirst()) {
             check(a.ink.rect.maxY <= b.ink.rect.minY, "adjacent source ink must remain separated")
         }
+        // A quoted statement in grey prose: words measure a little apart in colour and weight,
+        // and the paragraphs run to the edge of the capture. Each paragraph is one block, translated whole.
+        let quoted = NSImage(contentsOfFile: "Tests/Fixtures/quoted-paragraphs.png")!.cgImage(forProposedRect: nil, context: nil, hints: nil)!
+        let quotedAnalysis = try ScreenPipeline.analyze(quoted, scale: 2, source: .en, target: .zhHans)!
+        check(quotedAnalysis.blocks.count == 6, "five paragraphs and the sign-off: \(quotedAnalysis.blocks.map(\.original))")
+        check(quotedAnalysis.blocks.prefix(5).allSatisfy { $0.lines.count == 4 && $0.translate }, "every paragraph keeps its four lines")
+        check(quotedAnalysis.blocks[0].original.hasSuffix("Are we serious right now?"), "the first paragraph reads to its end")
+        // Read by someone whose own language it is: it goes to their other language instead.
+        let own = try ScreenPipeline.analyze(quoted, scale: 2, source: .zhHans, target: .en, detectsSource: true)!
+        check(own.detectedSource == .en && own.redirectedTarget == .zhHans && own.blocks.prefix(5).allSatisfy(\.translate),
+              "an English page for an English reader is translated into Chinese: \(own.detectedSource as Any) \(own.redirectedTarget as Any)")
+        let foreign = try ScreenPipeline.analyze(quoted, scale: 2, source: .en, target: .zhHans, detectsSource: true)!
+        check(foreign.redirectedTarget == nil, "a foreign page keeps the reader's language")
+        let signOff = quotedAnalysis.blocks[5]
+        check(signOff.original == "France stands with Mbappé!", "the flag before the sign-off is not read as a bullet: \(signOff.original)")
+        check(signOff.align == .left && signOff.lines[0].ink.trimmedLeading, "the sign-off starts after its flag, which stays")
+        for line in quotedAnalysis.blocks.flatMap(\.lines) {
+            guard case .flat(let paper) = line.ink.background else { continue }
+            check(line.ink.blobs.allSatisfy { $0.paper.distance(to: paper) <= 8 }, "word paper is sampled clear of anti-aliasing")
+        }
+
         for scale in [1.0, 2.0] as [CGFloat] {
             let image = picture(scale: scale)
             guard let analysis = try ScreenPipeline.analyze(image, scale: scale, source: .en, target: .zhHans) else { fatalError("no analysis") }

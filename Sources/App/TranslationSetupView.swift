@@ -13,20 +13,20 @@ struct TranslationServiceFields: View {
 
     var body: some View {
         HStack {
-            Picker("原文", selection: Binding(get: { settings.detectsSource ? "auto" : settings.source.rawValue }, set: { value in
+            Picker(L("原文"), selection: Binding(get: { settings.detectsSource ? "auto" : settings.source.rawValue }, set: { value in
                 settings.detectsSource = value == "auto"
                 if let language = AppLanguage(rawValue: value) { settings.source = language }
             })) {
-                Text("自动识别").tag("auto")
+                Text(L("自动识别")).tag("auto")
                 ForEach(AppLanguage.allCases) { Text($0.displayName).tag($0.rawValue) }
             }
             Image(systemName: "arrow.right").foregroundStyle(.secondary)
-            Picker("译文", selection: $settings.target) { ForEach(AppLanguage.allCases) { Text($0.displayName).tag($0) } }
+            Picker(L("译文"), selection: $settings.target) { ForEach(AppLanguage.allCases) { Text($0.displayName).tag($0) } }
         }
-        Picker("翻译服务", selection: $settings.service) {
-            Text("Apple 本机翻译").tag(TranslationService.apple)
-            Text("本地翻译模型").tag(TranslationService.local)
-            Text("大模型接口").tag(TranslationService.remote)
+        Picker(L("翻译服务"), selection: $settings.service) {
+            Text(L("Apple 本机翻译")).tag(TranslationService.apple)
+            Text(L("本地翻译模型")).tag(TranslationService.local)
+            Text(L("大模型接口")).tag(TranslationService.remote)
         }
         switch settings.service {
         case .local:
@@ -40,18 +40,18 @@ struct TranslationServiceFields: View {
                 }
             }
             if let message = packs.message { Text(message).font(.caption).foregroundStyle(.orange) }
-            Text(settings.detectsSource ? "原文为自动识别：下载你常看的语言即可。语言包由系统下载，之后离线翻译。" : "语言包由系统下载，之后离线翻译。")
+            Text(settings.detectsSource ? L("原文为自动识别：下载你常看的语言即可。语言包由系统下载，之后离线翻译。") : L("语言包由系统下载，之后离线翻译。"))
                 .font(.caption).foregroundStyle(.secondary)
         case .remote:
-            TextField("接口地址", text: $settings.endpoint)
-            TextField("模型名称", text: $settings.model)
-            SecureField("API Key（本机服务可留空）", text: $apiKey)
+            TextField(L("接口地址"), text: $settings.endpoint)
+            TextField(L("模型名称"), text: $settings.model)
+            SecureField(L("API Key（本机服务可留空）"), text: $apiKey)
             HStack {
-                Button("保存密钥") { saveKey() }
-                Button(testing ? "正在连接…" : "测试连接") { test() }.disabled(testing)
+                Button(L("保存密钥")) { saveKey() }
+                Button(testing ? L("正在连接…") : L("测试连接")) { test() }.disabled(testing)
                 Text(keyStatus).font(.caption).foregroundStyle(.secondary).lineLimit(2)
             }
-            Text("兼容 chat/completions；只发送识别后的文本。远程接口使用 HTTPS，本机服务可用 HTTP。").font(.caption).foregroundStyle(.secondary)
+            Text(L("兼容 chat/completions；只发送识别后的文本。远程接口使用 HTTPS，本机服务可用 HTTP。")).font(.caption).foregroundStyle(.secondary)
         }
     }
 
@@ -59,14 +59,14 @@ struct TranslationServiceFields: View {
         switch packs.statuses[language] ?? .checking {
         case .checking: ProgressView().controlSize(.small)
         case .installed:
-            Label("已下载", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green)
+            Label(L("已下载"), systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green)
         case .missing:
-            Button("下载") { packs.download(language) }.disabled(packs.isDownloading)
-                .accessibilityLabel("下载 \(language.displayName) 到 \(packs.target.displayName) 语言包")
+            Button(L("下载")) { packs.download(language) }.disabled(packs.isDownloading)
+                .accessibilityLabel(L("下载 %@ 到 %@ 语言包", language.displayName, packs.target.displayName))
         case .downloading:
-            HStack(spacing: 6) { ProgressView().controlSize(.small); Text("下载中…").font(.callout).foregroundStyle(.secondary) }
+            HStack(spacing: 6) { ProgressView().controlSize(.small); Text(L("下载中…")).font(.callout).foregroundStyle(.secondary) }
         case .unsupported:
-            Text("系统暂不支持").font(.callout).foregroundStyle(.secondary)
+            Text(L("系统暂不支持")).font(.callout).foregroundStyle(.secondary)
         }
     }
 
@@ -74,14 +74,14 @@ struct TranslationServiceFields: View {
         do {
             let config = try ModelConfiguration(endpoint: settings.endpoint, model: settings.model)
             try ModelKeychain.save(apiKey, endpoint: config.endpoint)
-            keyStatus = apiKey.isEmpty ? "已清除该接口密钥" : "已保存到钥匙串"
+            keyStatus = apiKey.isEmpty ? L("已清除该接口密钥") : L("已保存到钥匙串")
             apiKey = ""
         } catch { keyStatus = error.localizedDescription }
     }
 
     /// The same request path a capture takes, with the saved key.
     private func test() {
-        guard apiKey.isEmpty else { keyStatus = "请先保存密钥，再测试连接。"; return }
+        guard apiKey.isEmpty else { keyStatus = L("请先保存密钥，再测试连接。"); return }
         testing = true
         keyStatus = ""
         Task { @MainActor in
@@ -90,7 +90,7 @@ struct TranslationServiceFields: View {
                 let config = try ModelConfiguration(endpoint: settings.endpoint, model: settings.model)
                 let key = try ModelKeychain.read(endpoint: config.endpoint)
                 _ = try await ModelHTTP.chat(configuration: config, apiKey: key, system: "Reply with the single word OK.", user: "OK", timeout: 20)
-                keyStatus = "连接成功，可以翻译"
+                keyStatus = L("连接成功，可以翻译")
             } catch { keyStatus = error.localizedDescription }
         }
     }
@@ -104,14 +104,14 @@ struct LocalModelFields: View {
 
     var body: some View {
         if !LocalModelRuntime.isSupported {
-            Text("本地翻译模型需要 Apple 芯片的 Mac。").font(.callout).foregroundStyle(.orange)
+            Text(L("本地翻译模型需要 Apple 芯片的 Mac。")).font(.callout).foregroundStyle(.orange)
         }
         ForEach(LocalModelCatalog.all) { model in
             HStack(alignment: .center, spacing: 10) {
                 Image(systemName: settings.localModel == model.id ? "largecircle.fill.circle" : "circle")
                     .foregroundStyle(settings.localModel == model.id ? Color.accentColor : .secondary)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(model.name + (model.id == LocalModelCatalog.defaultID ? "（推荐）" : ""))
+                    Text(model.name + (model.id == LocalModelCatalog.defaultID ? L("（推荐）") : ""))
                     Text("\(model.summary) · \(model.sizeText)").font(.caption).foregroundStyle(.secondary)
                     if case .failed(let message) = store.status(model) {
                         Text(message).font(.caption).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true)
@@ -125,7 +125,7 @@ struct LocalModelFields: View {
             .accessibilityElement(children: .contain)
             .accessibilityAddTraits(settings.localModel == model.id ? .isSelected : [])
         }
-        Text("模型下载后完全在本机运行，截图文字不会离开这台 Mac。首次翻译需要几秒加载模型，空闲 5 分钟后自动释放内存。")
+        Text(L("模型下载后完全在本机运行，截图文字不会离开这台 Mac。首次翻译需要几秒加载模型，空闲 5 分钟后自动释放内存。"))
             .font(.caption).foregroundStyle(.secondary)
     }
 
@@ -133,29 +133,29 @@ struct LocalModelFields: View {
         switch store.status(model) {
         case .installed:
             HStack(spacing: 8) {
-                Label("已下载", systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green)
+                Label(L("已下载"), systemImage: "checkmark.circle.fill").font(.callout).foregroundStyle(.green)
                 Menu {
-                    Button("在访达中显示") { NSWorkspace.shared.activateFileViewerSelecting([store.url(for: model)]) }
-                    Button("删除模型", role: .destructive) {
+                    Button(L("在访达中显示")) { NSWorkspace.shared.activateFileViewerSelecting([store.url(for: model)]) }
+                    Button(L("删除模型"), role: .destructive) {
                         if settings.localModel == model.id { LocalModelRuntime.shared.stop() }
                         store.delete(model)
                     }
                 } label: { Image(systemName: "ellipsis.circle") }
-                    .menuStyle(.borderlessButton).fixedSize().accessibilityLabel("\(model.name) 更多操作")
+                    .menuStyle(.borderlessButton).fixedSize().accessibilityLabel(L("%@ 更多操作", model.name))
             }
         case .downloading(let fraction):
             HStack(spacing: 6) {
                 ProgressView(value: fraction).frame(width: 80)
                 Text(fraction.formatted(.percent.precision(.fractionLength(0)))).font(.caption.monospacedDigit()).foregroundStyle(.secondary)
-                Button("停止") { store.cancel(model) }.controlSize(.small)
+                Button(L("停止")) { store.cancel(model) }.controlSize(.small)
             }
         case .missing, .failed:
-            Button("下载") {
+            Button(L("下载")) {
                 settings.localModel = model.id
                 store.download(model)
             }
             .disabled(!LocalModelRuntime.isSupported)
-            .accessibilityLabel("下载 \(model.name)，\(model.sizeText)")
+            .accessibilityLabel(L("下载 %@，%@", model.name, model.sizeText))
         }
     }
 }

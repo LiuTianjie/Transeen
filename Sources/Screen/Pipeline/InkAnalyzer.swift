@@ -322,6 +322,8 @@ enum InkAnalyzer {
             let colours = others.map(\.color)
             let usual = RGB(r: median(colours.map(\.r))!, g: median(colours.map(\.g))!, b: median(colours.map(\.b))!)
             if blob.solidity >= 0.7, width >= typical * 0.5, blob.color.distance(to: usual) > 40 || height > typical * 1.2 { return true }
+            // A coloured icon split off the first letter keeps a sliver of that letter, so it is less filled.
+            if blob.solidity >= 0.4, width >= typical * 0.3, blob.color.distance(to: usual) > 90 { return true }
             // Taller than the words: needs several words to compare with, one neighbour is no measure.
             if others.count >= 2, height > typical * 1.45, width < typical * 2.2 { return true }
             return false
@@ -452,13 +454,13 @@ enum InkAnalyzer {
                     if a >= 0.3 { run += 1 } else {
                         if run > 0 { runs.append(run) }
                         run = 0
-                        if a <= 0.2 { papers.append(image[x, y]) }
+                        if a <= 0.02 { papers.append(image[x, y]) }
                     }
                 }
                 if run > 0 { runs.append(run) }
             }
             for y in [firstRow - 2, lastRow + 2] where y >= 0 && y < image.height {
-                for x in from...to where ink.alpha(x, y) <= 0.2 { papers.append(image[x, y]) }
+                for x in from...to where ink.alpha(x, y) <= 0.02 { papers.append(image[x, y]) }
             }
             let paper = papers.isEmpty ? ink.background.color(x: from, y: firstRow)
                 : RGB(r: median(papers.map(\.r))!, g: median(papers.map(\.g))!, b: median(papers.map(\.b))!)
@@ -476,10 +478,27 @@ enum InkAnalyzer {
             result.append(.init(minX: CGFloat(from), maxX: CGFloat(to + 1), top: topEdge, bottom: bottomEdge,
                 color: colour, solidity: min(across, down), paper: paper))
         }
+        // A coloured icon touching the first letter ("🇫🇷France") is a run of its own.
+        func columnColour(_ x: Int) -> RGB? {
+            var sum = RGB(r: 0, g: 0, b: 0), n: Float = 0
+            for y in top...bottom {
+                let a = ink.alpha(x, y)
+                guard a >= 0.75 else { continue }
+                let paper = ink.background.color(x: x, y: y)
+                sum = sum + paper + (image[x, y] - paper) * (1 / a); n += 1
+            }
+            return n >= 2 ? sum * (1 / n) : nil
+        }
+        var runColour: RGB?
         for x in left...right {
             var inked = false
             for y in top...bottom where ink.alpha(x, y) >= 0.3 { inked = true; break }
             if inked {
+                let colour = columnColour(x)
+                if let from = start, let colour, let runColour, colour.distance(to: runColour) > 90, x - from >= 3 {
+                    close(from, lastInk); start = nil
+                }
+                if let colour { runColour = colour }
                 if start == nil { start = x }
                 lastInk = x; empty = 0
             } else if let from = start {

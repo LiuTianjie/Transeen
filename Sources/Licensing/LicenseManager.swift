@@ -130,7 +130,7 @@ enum LicenseServiceError: LocalizedError, Equatable, Sendable {
         case .loginRequired:
             "Sign in to restore or bind an account license. Code activation does not require sign-in."
         case .iToolCodeNotAccepted:
-            "请输入 Transeen 专用的 TR- 激活码；SM- 和 IT- 激活码不能在此使用。"
+            L("请输入 Transeen 专用的 TR- 激活码；SM- 和 IT- 激活码不能在此使用。")
         case let .rejected(_, message):
             message
         case let .storage(message):

@@ -174,11 +174,11 @@ final class ScreenSelectionView: NSView {
         }
         let prompt: String
         if dragging {
-            prompt = "\(Int((highlight.width * pixelScale).rounded())) × \(Int((highlight.height * pixelScale).rounded())) px  ·  松开完成"
+            prompt = "\(Int((highlight.width * pixelScale).rounded())) × \(Int((highlight.height * pixelScale).rounded())) px  ·  " + L("松开完成")
         } else if hoverBounds != nil {
-            prompt = "点击选中 · 拖动自选"
+            prompt = L("点击选中 · 拖动自选")
         } else {
-            prompt = "移动鼠标选择 · 拖动框选"
+            prompt = L("移动鼠标选择 · 拖动框选")
         }
         let chip = NSAttributedString(
             string: prompt,

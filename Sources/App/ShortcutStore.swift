@@ -19,30 +19,30 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
     }
     var title: String {
         switch self {
-        case .captureTranslate: "截图翻译"
-        case .captureScreenshot: "截图标注"
-        case .globalCompare: "全局对照原文"
-        case .lastArea: "选择上次的区域"
-        case .compare: "原文 / 译文"
-        case .translate: "翻译 / 重试"
-        case .direction: "交换语言"
-        case .rectangle: "矩形"
-        case .ellipse: "椭圆"
-        case .arrow: "箭头"
-        case .pen: "画笔"
-        case .move: "移动"
-        case .copy: "复制图片"
-        case .save: "保存图片"
-        case .undo: "撤销标注"
-        case .redo: "重做标注"
-        case .close: "关闭截图 / 取消框选"
-        case .annotate: "展开 / 收起标注"
-        case .pin: "钉到屏幕"
-        case .reselect: "重新框选"
-        case .peek: "按住对照原文"
-        case .openImage: "打开图片"
-        case .settings: "打开设置"
-        case .quit: "退出 Transeen"
+        case .captureTranslate: L("截图翻译")
+        case .captureScreenshot: L("截图标注")
+        case .globalCompare: L("全局对照原文")
+        case .lastArea: L("选择上次的区域")
+        case .compare: L("原文 / 译文")
+        case .translate: L("翻译 / 重试")
+        case .direction: L("交换语言")
+        case .rectangle: L("矩形")
+        case .ellipse: L("椭圆")
+        case .arrow: L("箭头")
+        case .pen: L("画笔")
+        case .move: L("移动")
+        case .copy: L("复制图片")
+        case .save: L("保存图片")
+        case .undo: L("撤销标注")
+        case .redo: L("重做标注")
+        case .close: L("关闭截图 / 取消框选")
+        case .annotate: L("展开 / 收起标注")
+        case .pin: L("钉到屏幕")
+        case .reselect: L("重新框选")
+        case .peek: L("按住对照原文")
+        case .openImage: L("打开图片")
+        case .settings: L("打开设置")
+        case .quit: L("退出 Transeen")
         }
     }
     var command: String {
@@ -143,7 +143,7 @@ final class ShortcutStore {
         bindings = (stored ?? Self.factory).filter { ShortcutAction(rawValue: $0.key) != nil }
     }
     func binding(_ action: ShortcutAction) -> KeyBinding? { bindings[action.rawValue] }
-    func label(_ action: ShortcutAction) -> String { binding(action)?.display ?? "未设置" }
+    func label(_ action: ShortcutAction) -> String { binding(action)?.display ?? L("未设置") }
     func help(_ text: String, _ action: ShortcutAction) -> String { binding(action).map { "\(text)（\($0.display)）" } ?? text }
     func action(for event: NSEvent, group: String) -> ShortcutAction? {
         guard recording == nil, !event.isARepeat else { return nil }
@@ -152,10 +152,10 @@ final class ShortcutStore {
     }
     @discardableResult func set(_ key: KeyBinding?, for action: ShortcutAction) -> Bool {
         if let key {
-            guard key.menuKey != nil else { message = "这个按键暂不支持，请选择字母、数字、方向键或功能键。"; return false }
-            if action.group != "截图窗口" && !key.validGlobal { message = "全局和应用快捷键需要搭配 ⌘、⌥ 或 ⌃，也可以使用 F 功能键。"; return false }
+            guard key.menuKey != nil else { message = L("这个按键暂不支持，请选择字母、数字、方向键或功能键。"); return false }
+            if action.group != "截图窗口" && !key.validGlobal { message = L("全局和应用快捷键需要搭配 ⌘、⌥ 或 ⌃，也可以使用 F 功能键。"); return false }
             if let other = ShortcutAction.allCases.first(where: { $0.conflicts(with: action) && binding($0) == key }) {
-                message = "\(key.display) 已用于「\(other.title)」，请先修改或清除该项。"; return false
+                message = L("%@ 已用于「%@」，请先修改或清除该项。", key.display, other.title); return false
             }
         }
         var next = bindings
@@ -163,7 +163,7 @@ final class ShortcutStore {
         if let error = validateGlobals?(next) { message = error; return false }
         bindings = next
         persist()
-        message = key == nil ? "已清除「\(action.title)」快捷键" : "已更新「\(action.title)」"
+        message = key == nil ? L("已清除「%@」快捷键", action.title) : L("已更新「%@」", action.title)
         return true
     }
     func restoreDefaults() {
@@ -171,7 +171,7 @@ final class ShortcutStore {
         if let error = validateGlobals?(Self.factory) { message = error; return }
         bindings = Self.factory
         persist()
-        message = "已恢复默认快捷键"
+        message = L("已恢复默认快捷键")
     }
     private func persist() {
         if let data = try? JSONEncoder().encode(bindings) { defaults.set(data, forKey: Self.storageKey) }

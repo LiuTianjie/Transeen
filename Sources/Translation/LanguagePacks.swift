@@ -68,7 +68,7 @@ final class LanguagePacks {
         guard pair.target == target else { return }
         statuses[pair.source] = Self.status(status)
         if status != .installed {
-            message = "\(pair.source.displayName) 语言包没有下载完成" + (failure.map { "：\($0)" } ?? "。")
+            message = L("%@ 语言包没有下载完成", pair.source.displayName) + (failure.map { "：\($0)" } ?? "。")
         }
     }
 

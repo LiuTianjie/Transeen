@@ -20,6 +20,8 @@ enum ScreenPipeline {
         var blocks: [TextBlock]
         var recognized: Int
         var detectedSource: AppLanguage? = nil
+        /// Set when everything on screen was already in the requested target, so it goes to `target.alternate`.
+        var redirectedTarget: AppLanguage? = nil
         var seconds = Seconds()
     }
 
@@ -88,6 +90,9 @@ enum ScreenPipeline {
         var blocks = BlockBuilder.build(found.lines, image: pixels, scale: scale)
         StyleClusters.unify(&blocks)
         let source = detectsSource ? TextLanguage.source(in: blocks.map(\.original), target: target, fallback: source) : source
+        // A page already in the reader's own language is read in their other one.
+        let redirected = detectsSource && source == target && blocks.contains { Prose.shouldTranslate($0.original) } ? target.alternate : nil
+        let target = redirected ?? target
         for index in blocks.indices {
             // Code chips stay as they are: whether to translate is a question about the words around them.
             let text = blocks[index].chips.isEmpty ? blocks[index].original
@@ -112,7 +117,7 @@ enum ScreenPipeline {
         var seconds = found.seconds
         seconds.structure = CFAbsoluteTimeGetCurrent() - start
         return Analysis(scale: scale, pixels: pixels, lines: found.lines, blocks: blocks, recognized: found.recognized,
-                        detectedSource: detectsSource ? source : nil, seconds: seconds)
+                        detectedSource: detectsSource ? source : nil, redirectedTarget: redirected, seconds: seconds)
     }
 
     // MARK: - Compose

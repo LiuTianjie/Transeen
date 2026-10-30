@@ -11,11 +11,11 @@ struct CaptureTranscript: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(state.hasTranslatedOnce ? "完整译文" : "识别文字").font(.system(size: 15, weight: .semibold))
+                    Text(state.hasTranslatedOnce ? L("完整译文") : L("识别文字")).font(.system(size: 15, weight: .semibold))
                     Text(state.direction).font(.system(size: 11)).foregroundStyle(.secondary)
                 }
                 Spacer()
-                Toggle("对照原文", isOn: $showsOriginal).toggleStyle(.checkbox).controlSize(.small)
+                Toggle(L("对照原文"), isOn: $showsOriginal).toggleStyle(.checkbox).controlSize(.small)
             }.padding(16)
             Divider()
             ScrollView {
@@ -34,10 +34,10 @@ struct CaptureTranscript: View {
             }.frame(maxHeight: 380)
             Divider()
             HStack {
-                Text("文字可选择、复制").font(.system(size: 11)).foregroundStyle(.secondary)
+                Text(L("文字可选择、复制")).font(.system(size: 11)).foregroundStyle(.secondary)
                 Spacer()
                 Button(action: copy) {
-                    Label(state.textCopyCompleted ? "已复制" : "复制文字", systemImage: state.textCopyCompleted ? "checkmark" : "doc.on.doc")
+                    Label(state.textCopyCompleted ? L("已复制") : L("复制文字"), systemImage: state.textCopyCompleted ? "checkmark" : "doc.on.doc")
                 }.controlSize(.small)
             }.padding(12)
         }.frame(width: 420)

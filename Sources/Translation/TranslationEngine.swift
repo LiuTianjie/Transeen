@@ -8,9 +8,9 @@ enum TranslationEngineError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .notReady: return String(localized: "翻译语言包还没下载。可在设置 → 通用 → 翻译中提前下载。")
-        case .unsupported: return String(localized: "系统不支持这对语言。")
-        case .incomplete: return String(localized: "系统翻译没有返回完整结果，请重试。")
+        case .notReady: return L("翻译语言包还没下载。可在设置 → 通用 → 翻译中提前下载。")
+        case .unsupported: return L("系统不支持这对语言。")
+        case .incomplete: return L("系统翻译没有返回完整结果，请重试。")
         }
     }
 }

@@ -313,7 +313,11 @@ enum BlockBuilder {
         let brief = next.text.count <= 3
         let ratio = next.style.size / previous.style.size
         guard brief || (ratio > 0.87 && ratio < 1.15) else { return false }
-        guard brief || (previous.style.weight.rawValue >= 600) == (next.style.weight.rawValue >= 600) else { return false }
+        // Weight measured from the pixels of one line wanders by a step or two in running text
+        // (regular lines read 400, 500 or 600). Below a full line only a clear difference is a boundary.
+        let running = previous.text.count >= 24
+        let weights = abs(previous.style.weight.rawValue - next.style.weight.rawValue)
+        guard brief || (running ? weights < 300 : (previous.style.weight.rawValue >= 600) == (next.style.weight.rawValue >= 600)) else { return false }
         var overPicture = false
         if case .complex = previous.ink.background { overPicture = true }
         guard (brief && overPicture) || previous.style.color.distance(to: next.style.color) < 60 else { return false }
@@ -352,12 +356,15 @@ enum BlockBuilder {
         let firstWord: CGFloat = han ? size : (next.ink.blobs.first.map { $0.maxX - $0.minX } ?? size) + size * 0.3
         let free = Space.around(a, in: image, background: previous.ink.background, limit: size * 30)
         // A boundary between the two lines: they sit in different containers.
-        if !overPicture, free.downSolid, free.down < b.minY - a.maxY - 2 { return false }
+        // A container leaves padding: what touches the ink is the ink's own rim or compression noise.
+        let padded = size * 0.1
+        if !overPicture, free.downSolid, free.down >= padded, free.down < b.minY - a.maxY - 2 { return false }
         // Each hugged by its own container (two pills, two tags): their right edges differ.
         // Over a picture there is no container to see: the picture itself stops the search at once,
         // and a subtitle's short last line ("…走到这一 / 步。") was taken for a second item.
         let below = Space.around(b, in: image, background: next.ink.background, limit: size * 30)
         if !overPicture, free.rightEdge, below.rightEdge, free.right < size * 1.5, below.right < size * 1.5,
+           max(free.right, below.right) >= padded,
            abs((a.maxX + free.right) - (b.maxX + below.right)) > size * 0.5 { return false }
         let padding = min(free.left, size * 1.5)
         let room = max(free.right, groupRight - a.maxX)
@@ -418,7 +425,8 @@ enum BlockBuilder {
             if left > 0 { blocks[index].align = .left; continue }
             // No neighbours: where does it sit in its container?
             let free = block.free
-            if free.leftEdge, free.rightEdge, abs(free.left - free.right) <= max(2 * scale, min(free.left, free.right) * 0.18) {
+            // Two empty margins are no evidence: an icon hard against the text leaves none.
+            if free.leftEdge, free.rightEdge, min(free.left, free.right) >= size, abs(free.left - free.right) <= max(2 * scale, min(free.left, free.right) * 0.18) {
                 blocks[index].align = .center
             } else if free.right <= size * 2.5, free.right < free.left * 0.35 {
                 // Close to the right side of its container (or of the capture) and far from the left.

@@ -25,9 +25,9 @@ struct LauncherView: View {
 
     private var serviceTitle: String {
         switch settings.service {
-        case .apple: "Apple 本机翻译"
+        case .apple: L("Apple 本机翻译")
         case .local: settings.selectedLocalModel.name
-        case .remote: settings.model.isEmpty ? "设置翻译模型" : settings.model
+        case .remote: settings.model.isEmpty ? L("设置翻译模型") : settings.model
         }
     }
     private var serviceIcon: String {
@@ -39,101 +39,115 @@ struct LauncherView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text("Transeen").font(.headline)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                Image(nsImage: NSApp.applicationIconImage).resizable().interpolation(.high).frame(width: 30, height: 30)
+                    .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("Transeen").font(.system(size: 13, weight: .semibold))
+                    Button(action: showLicense) {
+                        Text(license.state.isActivated ? L("已激活 · 授权与账号") : L("激活 Transeen"))
+                            .font(.system(size: 11)).foregroundStyle(license.state.isActivated ? AnyShapeStyle(.secondary) : AnyShapeStyle(.tint))
+                    }.buttonStyle(.plain)
+                }
                 Spacer()
-                Button("设置", systemImage: "gearshape", action: showSettings)
-                    .labelStyle(.iconOnly)
-                    .buttonStyle(.borderless)
-                    .help(settings.shortcuts.help("设置", .settings)).accessibilityLabel("设置")
+                Button(L("设置"), systemImage: "gearshape", action: showSettings)
+                    .labelStyle(.iconOnly).buttonStyle(.borderless).controlSize(.large)
+                    .help(settings.shortcuts.help(L("设置"), .settings)).accessibilityLabel(L("设置"))
+            }.padding(.horizontal, 6)
+
+            VStack(spacing: 2) {
+                LauncherRow(symbol: "character.bubble.fill", colors: TilePalette.blue, title: L("截图翻译"), detail: L("框选一块区域，译文留在原处"),
+                            shortcut: settings.shortcuts.binding(.captureTranslate)?.display) { start(.translate) }
+                LauncherRow(symbol: "pencil.tip.crop.circle.fill", colors: TilePalette.orange, title: L("截图标注"), detail: L("框选后标注，不翻译"),
+                            shortcut: settings.shortcuts.binding(.captureScreenshot)?.display) { start(.screenshot) }
+                LauncherRow(symbol: "photo.fill", colors: TilePalette.purple, title: L("打开图片…"), detail: L("打开本地图片"),
+                            shortcut: settings.shortcuts.binding(.openImage)?.display, action: openImage)
+                if !permission.granted {
+                    LauncherRow(symbol: "exclamationmark.triangle.fill", colors: TilePalette.yellow, title: L("开启屏幕录制权限…"), detail: L("屏幕权限尚未开启"),
+                                shortcut: nil, action: showPermission)
+                }
             }
 
-            VStack(alignment: .leading, spacing: 10) {
-                Button { start(.translate) } label: {
-                    HStack(spacing: 8) {
-                        Label("截图翻译", systemImage: "translate")
-                        Spacer(minLength: 0)
-                        if let shortcut = settings.shortcuts.binding(.captureTranslate)?.display {
-                            Text(shortcut).font(.callout.monospaced()).foregroundStyle(.secondary)
-                        }
-                    }.frame(maxWidth: .infinity)
-                }.buttonStyle(.bordered).controlSize(.large)
-
-                Text("框选一块区域，译文留在原处").font(.caption).foregroundStyle(.secondary)
-
+            CardGroup {
                 HStack(spacing: 8) {
-                    Button { start(.screenshot) } label: {
-                        HStack(spacing: 6) {
-                            Label("截图标注", systemImage: "pencil.and.outline")
-                            if let shortcut = settings.shortcuts.binding(.captureScreenshot)?.display {
-                                Text(shortcut).font(.caption.monospaced()).foregroundStyle(.secondary)
-                            }
-                        }.frame(maxWidth: .infinity)
-                    }.help(settings.shortcuts.help("框选后标注，不翻译", .captureScreenshot))
-                    Button(action: openImage) {
-                        Label("打开图片…", systemImage: "photo.on.rectangle").frame(maxWidth: .infinity)
-                    }.help(settings.shortcuts.help("打开本地图片", .openImage))
-                }.buttonStyle(.bordered)
-            }
-
-            Button(license.state.isActivated ? "已激活 · 授权与账号" : "激活 Transeen", systemImage: license.state.isActivated ? "checkmark.seal" : "key", action: showLicense)
-                .buttonStyle(.borderless).font(.caption).foregroundStyle(.secondary)
-            Divider()
-
-            HStack(alignment: .bottom, spacing: 10) {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("原文").font(.caption).foregroundStyle(.secondary)
-                    Picker("原文语言", selection: sourceLanguage) {
-                        Text("自动识别").tag("auto")
+                    Picker(L("原文语言"), selection: sourceLanguage) {
+                        Text(L("自动识别")).tag("auto")
                         Divider()
                         ForEach(AppLanguage.allCases) { language in
                             Text(language.displayName).tag(language.rawValue)
                         }
-                    }.labelsHidden().pickerStyle(.menu)
-                }.frame(maxWidth: .infinity, alignment: .leading)
-                Image(systemName: "arrow.right").foregroundStyle(.secondary).padding(.bottom, 5)
-                    .accessibilityHidden(true)
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("译文").font(.caption).foregroundStyle(.secondary)
-                    Picker("译文语言", selection: $settings.target) {
+                    }.labelsHidden().pickerStyle(.menu).buttonStyle(.borderless).frame(maxWidth: .infinity, alignment: .leading)
+                    Image(systemName: "arrow.right").font(.system(size: 11, weight: .semibold)).foregroundStyle(.tertiary)
+                        .accessibilityHidden(true)
+                    Picker(L("译文语言"), selection: $settings.target) {
                         ForEach(AppLanguage.allCases) { language in
                             Text(language.displayName).tag(language)
                         }
-                    }.labelsHidden().pickerStyle(.menu)
-                }.frame(maxWidth: .infinity, alignment: .leading)
-            }
-
-            if !permission.granted {
-                Button("开启屏幕录制权限…", systemImage: "rectangle.dashed.badge.record", action: showPermission)
-                    .buttonStyle(.bordered)
-            }
-
-            Divider()
-
-            HStack(spacing: 8) {
+                    }.labelsHidden().pickerStyle(.menu).buttonStyle(.borderless).frame(maxWidth: .infinity, alignment: .trailing)
+                }.padding(.horizontal, 8).padding(.vertical, 6)
+                Divider().padding(.horizontal, 8)
                 Button(action: showSettings) {
-                    Label(serviceTitle, systemImage: serviceIcon)
-                        .font(.caption).lineLimit(1)
-                }.buttonStyle(.borderless).foregroundStyle(.secondary).help("选择翻译服务")
-                Spacer(minLength: 4)
-                Menu {
-                    Button("关闭当前截图", action: closeCapture)
-                    Button("屏幕权限…", action: showPermission)
-                    Button("新手引导…", action: showOnboarding)
-                    Divider()
-                    Button("激活与账号…", action: showLicense)
-                    Button("检查更新…", action: checkForUpdates)
-                    Divider()
-                    Button("退出 Transeen", action: quit)
-                } label: { Image(systemName: "ellipsis") }
-                    .menuIndicator(.hidden).menuStyle(.borderlessButton).fixedSize()
-                    .accessibilityLabel("更多操作")
+                    HStack(spacing: 8) {
+                        Image(systemName: serviceIcon).font(.system(size: 11)).foregroundStyle(.secondary).frame(width: 16)
+                        Text(serviceTitle).font(.system(size: 12)).lineLimit(1)
+                        Spacer(minLength: 4)
+                        Image(systemName: "chevron.right").font(.system(size: 10, weight: .semibold)).foregroundStyle(.tertiary)
+                    }.padding(.horizontal, 8).padding(.vertical, 7).contentShape(Rectangle())
+                }.buttonStyle(.plain).help(L("选择翻译服务"))
             }
+
+            HStack {
+                Spacer()
+                Menu {
+                    Button(L("关闭当前截图"), action: closeCapture)
+                    Button(L("屏幕权限…"), action: showPermission)
+                    Button(L("新手引导…"), action: showOnboarding)
+                    Divider()
+                    Button(L("激活与账号…"), action: showLicense)
+                    Button(L("检查更新…"), action: checkForUpdates)
+                    Divider()
+                    Button(L("退出 Transeen"), action: quit)
+                } label: { Image(systemName: "ellipsis.circle") }
+                    .menuIndicator(.hidden).menuStyle(.borderlessButton).fixedSize()
+                    .foregroundStyle(.secondary)
+                    .accessibilityLabel(L("更多操作"))
+            }.padding(.horizontal, 6)
         }
-        .padding(compact ? 16 : 20)
-        .frame(width: compact ? 320 : 360)
+        .padding(compact ? 10 : 14)
+        .padding(.top, compact ? 0 : 6)
+        .frame(width: compact ? 320 : 340)
+        .background { if !compact { VisualEffectBackground(material: .popover).ignoresSafeArea() } }
         .fixedSize(horizontal: false, vertical: true)
         .onAppear { permission.refresh() }
+    }
+}
+
+private struct LauncherRow: View {
+    let symbol: String
+    let colors: [Color]
+    let title: String
+    let detail: String
+    let shortcut: String?
+    let action: () -> Void
+    @State private var hovering = false
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 10) {
+                IconTile(symbol: symbol, colors: colors, size: 28)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(title).font(.system(size: 13, weight: .medium))
+                    Text(detail).font(.system(size: 11)).foregroundStyle(.secondary).lineLimit(1)
+                }
+                Spacer(minLength: 6)
+                if let shortcut { KeyCaps(shortcut) }
+            }
+            .padding(.horizontal, 6).padding(.vertical, 5)
+            .background(hovering ? Color.primary.opacity(0.07) : .clear, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .onHover { hovering = $0 }
     }
 }

@@ -68,7 +68,7 @@ import CryptoKit
             try await Task.sleep(for: .milliseconds(200))
         }
         let digest = SHA256.hash(data: payload).map { String(format: "%02x", $0) }.joined()
-        let good = LocalModel(id: "t", name: "Test", summary: "", file: "model.gguf", bytes: Int64(payload.count), sha256: digest,
+        let good = LocalModel(id: "t", name: "Test", summaryKey: "", file: "model.gguf", bytes: Int64(payload.count), sha256: digest,
                               modelScope: url, huggingFace: url, prompt: .index)
         let store = LocalModelStore(directory: root.appending(path: "models"))
         try FileManager.default.createDirectory(at: store.directory, withIntermediateDirectories: true)
@@ -82,7 +82,7 @@ import CryptoKit
         store.delete(good)
         check(!store.isInstalled(good) && store.status(good) == .missing)
 
-        let bad = LocalModel(id: "b", name: "Bad", summary: "", file: "model.gguf", bytes: Int64(payload.count), sha256: String(repeating: "0", count: 64),
+        let bad = LocalModel(id: "b", name: "Bad", summaryKey: "", file: "model.gguf", bytes: Int64(payload.count), sha256: String(repeating: "0", count: 64),
                              modelScope: url, huggingFace: url, prompt: .index)
         store.download(bad)
         try await wait { if case .failed = store.status(bad) { true } else { false } }
@@ -94,7 +94,7 @@ import CryptoKit
     @MainActor static func translation(model path: String) async throws {
         let file = URL(filePath: path)
         let bytes = (try FileManager.default.attributesOfItem(atPath: path)[.size] as! NSNumber).int64Value
-        let model = LocalModel(id: "live", name: "Live", summary: "", file: file.lastPathComponent, bytes: bytes, sha256: "",
+        let model = LocalModel(id: "live", name: "Live", summaryKey: "", file: file.lastPathComponent, bytes: bytes, sha256: "",
                                modelScope: file, huggingFace: file, prompt: path.contains("Hy-MT") ? .hunyuan : .index)
         let store = LocalModelStore(directory: file.deletingLastPathComponent())
         let runtime = LocalModelRuntime()
@@ -111,7 +111,9 @@ import CryptoKit
         let analysis = try ScreenPipeline.analyze(ctx.makeImage()!, scale: 1, source: .en, target: .zhHans, detectsSource: true)!
         let backend = try LocalModelTranslationBackend(model: model, store: store, runtime: runtime)
         let started = Date()
-        let output = try await backend.translate(analysis, direction: TranslationDirection(source: .en, target: .zhHans), app: nil)
+        var reports: [Int] = []
+        let output = try await backend.translate(analysis, direction: TranslationDirection(source: .en, target: .zhHans), app: nil) { reports.append($0.translations.count) }
+        check(reports.count > 2 && reports == reports.sorted(), "Answers must be reported as they arrive, growing: \(reports)")
         let first = Date().timeIntervalSince(started)
         let texts = output.translations.values.sorted()
         check(texts.count == analysis.blocks.filter(\.translate).count && texts.allSatisfy { $0.unicodeScalars.contains { (0x4E00...0x9FFF).contains($0.value) } },
@@ -122,7 +124,7 @@ import CryptoKit
             check(output.translations[index]?.contains(word) == true, "Answers must not be shuffled: \(output.translations)")
         }
         let again = Date()
-        _ = try await backend.translate(analysis, direction: TranslationDirection(source: .en, target: .zhHans), app: nil)
+        _ = try await backend.translate(analysis, direction: TranslationDirection(source: .en, target: .zhHans), app: nil) { _ in }
         check(Date().timeIntervalSince(again) < 0.5, "A repeated capture must use the cache and the running server")
         runtime.stop()
         print("LocalModelTests: live translation in \(String(format: "%.1f", first))s including model load: \(texts)")

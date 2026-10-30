@@ -37,23 +37,23 @@ final class UpdateChecker {
                       url.path.hasPrefix("/LiuTianjie/Transeen/releases/") else { throw UpdateError.unavailable }
                 let alert = NSAlert()
                 if latest > installed {
-                    alert.messageText = "发现 Transeen \(release.tag_name)"
-                    alert.informativeText = "当前版本：\(current)\n\n" + String((release.body ?? "新版本已发布。").prefix(1200))
-                    alert.addButton(withTitle: "查看并下载更新")
-                    alert.addButton(withTitle: "稍后")
+                    alert.messageText = L("发现 Transeen %@", release.tag_name)
+                    alert.informativeText = L("当前版本：%@", current) + "\n\n" + String((release.body ?? L("新版本已发布。")).prefix(1200))
+                    alert.addButton(withTitle: L("查看并下载更新"))
+                    alert.addButton(withTitle: L("稍后"))
                     NSApp.activate(ignoringOtherApps: true)
                     if alert.runModal() == .alertFirstButtonReturn { NSWorkspace.shared.open(url) }
                 } else {
-                    alert.messageText = "Transeen 已是最新版本"
-                    alert.informativeText = "当前版本：\(current)"
-                    alert.addButton(withTitle: "好")
+                    alert.messageText = L("Transeen 已是最新版本")
+                    alert.informativeText = L("当前版本：%@", current)
+                    alert.addButton(withTitle: L("好"))
                     NSApp.activate(ignoringOtherApps: true); alert.runModal()
                 }
             } catch {
                 let alert = NSAlert()
-                alert.messageText = "暂时无法检查更新"
-                alert.informativeText = "请稍后重试，或打开 GitHub 查看最新版本。"
-                alert.addButton(withTitle: "打开下载页面"); alert.addButton(withTitle: "关闭")
+                alert.messageText = L("暂时无法检查更新")
+                alert.informativeText = L("请稍后重试，或打开 GitHub 查看最新版本。")
+                alert.addButton(withTitle: L("打开下载页面")); alert.addButton(withTitle: L("关闭"))
                 NSApp.activate(ignoringOtherApps: true)
                 if alert.runModal() == .alertFirstButtonReturn { NSWorkspace.shared.open(Self.releasesURL) }
             }

@@ -1,0 +1,308 @@
+zh-Hans	zh-Hant	en	ja	ko	fr	es	de
+截屏翻译	截圖翻譯	Translate Screen	画面を翻訳	화면 번역	Traduire l’écran	Traducir pantalla	Bildschirm übersetzen
+截图标注	截圖標註	Markup	注釈	주석	Annoter	Anotar	Markieren
+Apple 本机翻译	Apple 本機翻譯	Apple Translation (on device)	Apple 翻訳（本機）	Apple 번역(기기 내)	Traduction Apple (sur l’appareil)	Traducción de Apple (en el dispositivo)	Apple-Übersetzung (auf dem Gerät)
+设置翻译模型	設定翻譯模型	Set Up Translation Model	翻訳モデルを設定	번역 모델 설정	Configurer le modèle de traduction	Configurar modelo de traducción	Übersetzungsmodell einrichten
+设置	設定	Settings	設定	설정	Réglages	Ajustes	Einstellungen
+截图翻译	截圖翻譯	Capture & Translate	キャプチャして翻訳	캡처 후 번역	Capturer et traduire	Capturar y traducir	Aufnehmen & übersetzen
+框选一块区域，译文留在原处	框選一塊區域，譯文留在原處	Select an area; the translation stays in place	範囲を選ぶと、訳文がその場に表示されます	영역을 선택하면 번역이 제자리에 표시됩니다	Sélectionnez une zone, la traduction reste en place	Selecciona un área; la traducción queda en su sitio	Bereich wählen – die Übersetzung bleibt an Ort und Stelle
+框选后标注，不翻译	框選後標註，不翻譯	Select an area to mark up, without translating	範囲を選んで注釈（翻訳なし）	영역 선택 후 주석(번역 안 함)	Sélectionner pour annoter, sans traduire	Selecciona para anotar, sin traducir	Bereich wählen und markieren, ohne Übersetzung
+打开图片…	打開圖片…	Open Image…	画像を開く…	이미지 열기…	Ouvrir une image…	Abrir imagen…	Bild öffnen…
+打开本地图片	打開本機圖片	Open an image file	画像ファイルを開く	이미지 파일 열기	Ouvrir un fichier image	Abrir un archivo de imagen	Bilddatei öffnen
+已激活 · 授权与账号	已啟用 · 授權與帳號	Activated · License & Account	アクティベート済み · ライセンスとアカウント	활성화됨 · 라이선스 및 계정	Activé · Licence et compte	Activado · Licencia y cuenta	Aktiviert · Lizenz & Konto
+激活 Transeen	啟用 Transeen	Activate Transeen	Transeen をアクティベート	Transeen 활성화	Activer Transeen	Activar Transeen	Transeen aktivieren
+原文	原文	Original	原文	원문	Original	Original	Original
+原文语言	原文語言	Source Language	原文の言語	원문 언어	Langue source	Idioma de origen	Ausgangssprache
+自动识别	自動識別	Auto Detect	自動検出	자동 감지	Détection auto	Detección auto	Automatisch
+译文	譯文	Translation	訳文	번역	Traduction	Traducción	Übersetzung
+译文语言	譯文語言	Target Language	翻訳先の言語	번역 언어	Langue cible	Idioma de destino	Zielsprache
+开启屏幕录制权限…	開啟螢幕錄製權限…	Allow Screen Recording…	画面収録を許可…	화면 기록 허용…	Autoriser l’enregistrement de l’écran…	Permitir grabación de pantalla…	Bildschirmaufnahme erlauben…
+选择翻译服务	選擇翻譯服務	Choose translation service	翻訳サービスを選択	번역 서비스 선택	Choisir le service de traduction	Elegir servicio de traducción	Übersetzungsdienst wählen
+关闭当前截图	關閉目前截圖	Close Current Capture	現在のキャプチャを閉じる	현재 캡처 닫기	Fermer la capture	Cerrar captura actual	Aktuelle Aufnahme schließen
+屏幕权限…	螢幕權限…	Screen Permission…	画面収録の許可…	화면 권한…	Autorisation d’écran…	Permiso de pantalla…	Bildschirmberechtigung…
+新手引导…	新手導覽…	Getting Started…	はじめに…	시작하기…	Prise en main…	Primeros pasos…	Erste Schritte…
+激活与账号…	啟用與帳號…	Activation & Account…	アクティベーションとアカウント…	활성화 및 계정…	Activation et compte…	Activación y cuenta…	Aktivierung & Konto…
+检查更新…	檢查更新…	Check for Updates…	アップデートを確認…	업데이트 확인…	Rechercher des mises à jour…	Buscar actualizaciones…	Nach Updates suchen…
+退出 Transeen	結束 Transeen	Quit Transeen	Transeen を終了	Transeen 종료	Quitter Transeen	Salir de Transeen	Transeen beenden
+更多操作	更多操作	More	その他	더 보기	Plus	Más	Mehr
+已填写模型接口，可先测试连接	已填寫模型介面，可先測試連線	Model endpoint is set; test the connection first	モデルの接続先を設定済み。まず接続をテストできます	모델 엔드포인트가 설정됨. 먼저 연결을 테스트하세요	Point d’accès configuré ; testez d’abord la connexion	Endpoint configurado; prueba primero la conexión	Endpunkt eingerichtet – zuerst Verbindung testen
+填写 chat/completions 接口地址和模型名称	填寫 chat/completions 介面位址和模型名稱	Enter a chat/completions endpoint and model name	chat/completions の URL とモデル名を入力	chat/completions 주소와 모델 이름을 입력하세요	Saisissez un point d’accès chat/completions et un nom de modèle	Introduce un endpoint chat/completions y un nombre de modelo	chat/completions-Endpunkt und Modellname eingeben
+%@ 已下载，可离线翻译	%@ 已下載，可離線翻譯	%@ is downloaded and translates offline	%@ をダウンロード済み。オフラインで翻訳できます	%@ 다운로드됨. 오프라인 번역 가능	%@ est téléchargé et traduit hors ligne	%@ está descargado y traduce sin conexión	%@ ist geladen und übersetzt offline
+下载一个本地模型（约 1.1 GB），之后完全离线翻译	下載一個本機模型（約 1.1 GB），之後完全離線翻譯	Download a local model (about 1.1 GB) to translate fully offline	ローカルモデル（約 1.1 GB）をダウンロードすると完全にオフラインで翻訳できます	로컬 모델(약 1.1GB)을 내려받으면 완전히 오프라인으로 번역합니다	Téléchargez un modèle local (environ 1,1 Go) pour traduire entièrement hors ligne	Descarga un modelo local (unos 1,1 GB) para traducir sin conexión	Lokales Modell laden (ca. 1,1 GB), danach komplett offline übersetzen
+这对语言不需要下载	這對語言不需要下載	No download needed for these languages	この言語の組み合わせはダウンロード不要です	이 언어 조합은 다운로드가 필요 없습니다	Aucun téléchargement nécessaire pour ces langues	Estos idiomas no requieren descarga	Für diese Sprachen ist kein Download nötig
+先下载要翻译的语言，第一次截图就不用等	先下載要翻譯的語言，第一次截圖就不用等	Download the languages you read now so the first capture doesn’t wait	よく読む言語を先にダウンロードしておくと、最初のキャプチャで待ちません	자주 보는 언어를 미리 내려받으면 첫 캡처에서 기다리지 않습니다	Téléchargez maintenant vos langues pour ne pas attendre à la première capture	Descarga ahora tus idiomas para no esperar en la primera captura	Lade deine Sprachen jetzt, damit die erste Aufnahme nicht wartet
+已下载 %ld/%ld 个语言包，需要时再补充	已下載 %ld/%ld 個語言包，需要時再補充	%ld of %ld language packs downloaded; add more when needed	%ld/%ld 個の言語パックをダウンロード済み。必要に応じて追加できます	언어 팩 %ld/%ld개 다운로드됨. 필요할 때 추가하세요	%ld sur %ld packs de langue téléchargés ; ajoutez-en au besoin	%ld de %ld paquetes de idioma descargados; añade más cuando los necesites	%ld von %ld Sprachpaketen geladen; weitere bei Bedarf
+欢迎使用 Transeen	歡迎使用 Transeen	Welcome to Transeen	Transeen へようこそ	Transeen에 오신 것을 환영합니다	Bienvenue dans Transeen	Te damos la bienvenida a Transeen	Willkommen bei Transeen
+先把这几项准备好，用的时候就不用等。	先把這幾項準備好，用的時候就不用等。	Set these up now so nothing waits later.	ここで準備しておけば、使うときに待ちません。	지금 준비해 두면 사용할 때 기다리지 않습니다.	Préparez ceci maintenant pour ne rien attendre ensuite.	Prepáralo ahora y luego no tendrás que esperar.	Richte das jetzt ein, dann wartet später nichts.
+你的母语	你的母語	Your Language	あなたの母語	모국어	Votre langue	Tu idioma	Deine Sprache
+识别出的文字默认翻译成它；本来就是它的，翻译成%@	識別出的文字預設翻譯成它；本來就是它的，翻譯成%@	Text is translated into it, and the app shows this language. Text already in it is translated into %@	認識した文字はこの言語に翻訳され、画面表示もこの言語になります。もともとこの言語の文字は%@に翻訳します	인식한 텍스트는 이 언어로 번역되고 앱도 이 언어로 표시됩니다. 이미 이 언어인 텍스트는 %@(으)로 번역합니다	Le texte est traduit dans cette langue, qui sert aussi pour l’interface. Le texte déjà dans cette langue est traduit en %@	El texto se traduce a este idioma, que también usa la app. El texto que ya está en él se traduce a %@	Text wird in diese Sprache übersetzt, die auch die App verwendet. Text, der schon in ihr ist, wird ins %@ übersetzt
+母语	母語	Language	母語	모국어	Langue	Idioma	Sprache
+截图、标注与翻译已解锁	截圖、標註與翻譯已解鎖	Capture, markup and translation are unlocked	キャプチャ、注釈、翻訳が使えます	캡처, 주석, 번역이 잠금 해제되었습니다	Capture, annotation et traduction déverrouillées	Captura, anotación y traducción desbloqueadas	Aufnahme, Markierung und Übersetzung sind freigeschaltet
+需要 TR- 激活码，无需登录	需要 TR- 啟用碼，無需登入	Needs a TR- activation code; no sign-in required	TR- アクティベーションコードが必要です（ログイン不要）	TR- 활성화 코드가 필요합니다(로그인 불필요)	Code d’activation TR- requis, sans connexion	Requiere un código de activación TR-, sin iniciar sesión	TR-Aktivierungscode nötig, keine Anmeldung
+输入激活码…	輸入啟用碼…	Enter Code…	コードを入力…	코드 입력…	Saisir le code…	Introducir código…	Code eingeben…
+允许录制屏幕	允許錄製螢幕	Allow Screen Recording	画面収録を許可	화면 기록 허용	Autoriser l’enregistrement de l’écran	Permitir grabación de pantalla	Bildschirmaufnahme erlauben
+已开启	已開啟	Allowed	許可済み	허용됨	Autorisé	Permitido	Erlaubt
+已开启但仍未生效时，重新打开 Transeen	已開啟但仍未生效時，重新打開 Transeen	If it’s on but not working yet, reopen Transeen	許可しても反映されない場合は、Transeen を開き直してください	허용했는데도 적용되지 않으면 Transeen을 다시 여세요	Si c’est activé mais sans effet, rouvrez Transeen	Si está activado pero no funciona, vuelve a abrir Transeen	Wenn es aktiviert ist, aber nicht greift, Transeen neu öffnen
+只读取屏幕图像，不采集音频	只讀取螢幕影像，不擷取音訊	Reads screen images only, never audio	画面の画像のみを読み取り、音声は取得しません	화면 이미지만 읽고 오디오는 수집하지 않습니다	Lit uniquement l’image de l’écran, jamais l’audio	Solo lee la imagen de la pantalla, nunca el audio	Liest nur Bildschirminhalte, nie Ton
+重新打开	重新打開	Reopen	開き直す	다시 열기	Rouvrir	Volver a abrir	Neu öffnen
+打开系统设置…	打開系統設定…	Open System Settings…	システム設定を開く…	시스템 설정 열기…	Ouvrir Réglages Système…	Abrir Ajustes del Sistema…	Systemeinstellungen öffnen…
+准备翻译	準備翻譯	Prepare Translation	翻訳の準備	번역 준비	Préparer la traduction	Preparar la traducción	Übersetzung vorbereiten
+确认快捷键	確認快速鍵	Check Shortcuts	ショートカットを確認	단축키 확인	Vérifier les raccourcis	Revisar atajos	Kurzbefehle prüfen
+按下即框选；松开后拖动结果边缘可调整范围	按下即框選；放開後拖動結果邊緣可調整範圍	Press to start selecting; afterwards drag the result’s edges to adjust	押すと範囲選択を開始。あとで結果の端をドラッグして調整できます	누르면 영역 선택을 시작하고, 이후 결과 가장자리를 끌어 조정합니다	Appuyez pour sélectionner, puis faites glisser les bords du résultat pour ajuster	Pulsa para seleccionar; después arrastra los bordes del resultado para ajustar	Drücken, um auszuwählen; danach die Ränder des Ergebnisses ziehen
+稍后	稍後	Later	後で	나중에	Plus tard	Más tarde	Später
+可随时从菜单栏打开「新手引导…」	可隨時從選單列打開「新手導覽…」	Open “Getting Started…” from the menu bar any time	メニューバーの「はじめに…」からいつでも開けます	메뉴 막대의 ‘시작하기…’에서 언제든 열 수 있습니다	Rouvrez « Prise en main… » depuis la barre des menus	Abre «Primeros pasos…» desde la barra de menús cuando quieras	„Erste Schritte…“ jederzeit über die Menüleiste öffnen
+开始截图翻译	開始截圖翻譯	Start Capturing	キャプチャを開始	캡처 시작	Commencer la capture	Empezar a capturar	Aufnahme starten
+第 %ld 步：%@，%@	第 %ld 步：%@，%@	Step %ld: %@, %@	ステップ %ld：%@、%@	%ld단계: %@, %@	Étape %ld : %@, %@	Paso %ld: %@, %@	Schritt %ld: %@, %@
+已完成	已完成	done	完了	완료	terminé	completado	erledigt
+截图与原位翻译	截圖與原位翻譯	Capture and in-place translation	キャプチャとその場翻訳	캡처와 제자리 번역	Capture et traduction sur place	Captura y traducción en su sitio	Aufnahme und Übersetzung an Ort und Stelle
+已准备好	已準備好	All Set	準備完了	준비 완료	Tout est prêt	Todo listo	Alles bereit
+还差一步：允许截屏	還差一步：允許截圖	One More Step: Allow Screen Capture	あと一歩：画面収録を許可	한 단계 남음: 화면 캡처 허용	Encore une étape : autoriser la capture d’écran	Un paso más: permite la captura de pantalla	Noch ein Schritt: Bildschirmaufnahme erlauben
+选一块屏幕，就能开始。	選一塊螢幕，就能開始。	Pick an area of the screen to begin.	画面の範囲を選べば始められます。	화면 영역을 선택하면 시작됩니다.	Choisissez une zone de l’écran pour commencer.	Elige un área de la pantalla para empezar.	Wähle einen Bildschirmbereich, um zu beginnen.
+在系统设置中开启 Transeen 的屏幕录制权限。	在系統設定中開啟 Transeen 的螢幕錄製權限。	Turn on Screen Recording for Transeen in System Settings.	システム設定で Transeen の画面収録を許可してください。	시스템 설정에서 Transeen의 화면 기록을 허용하세요.	Activez l’enregistrement de l’écran pour Transeen dans Réglages Système.	Activa la grabación de pantalla para Transeen en Ajustes del Sistema.	Aktiviere die Bildschirmaufnahme für Transeen in den Systemeinstellungen.
+查看授权步骤	查看授權步驟	Show the steps	手順を表示	단계 보기	Voir les étapes	Ver los pasos	Schritte anzeigen
+开启屏幕录制	開啟螢幕錄製	Turn On Screen Recording	画面収録をオンにする	화면 기록 켜기	Activer l’enregistrement de l’écran	Activar la grabación de pantalla	Bildschirmaufnahme aktivieren
+系统设置 → 隐私与安全性\n→ 屏幕与系统音频录制	系統設定 → 隱私權與安全性\n→ 螢幕與系統音訊錄製	System Settings → Privacy & Security\n→ Screen & System Audio Recording	システム設定 → プライバシーとセキュリティ\n→ 画面収録とシステムオーディオ録音	시스템 설정 → 개인정보 보호 및 보안\n→ 화면 및 시스템 오디오 기록	Réglages Système → Confidentialité et sécurité\n→ Enregistrement de l’écran et de l’audio du système	Ajustes del Sistema → Privacidad y seguridad\n→ Grabación de pantalla y audio del sistema	Systemeinstellungen → Datenschutz & Sicherheit\n→ Bildschirm- & Systemaudioaufnahme
+找到 Transeen，开启开关。\n返回这里后会自动检查。	找到 Transeen，開啟開關。\n返回這裡後會自動檢查。	Find Transeen and turn it on.\nThis window checks again when you return.	Transeen を見つけてオンにします。\n戻ると自動で確認します。	Transeen을 찾아 켜세요.\n돌아오면 자동으로 다시 확인합니다.	Trouvez Transeen et activez-le.\nCette fenêtre vérifie à votre retour.	Busca Transeen y actívalo.\nAl volver se comprobará automáticamente.	Transeen suchen und einschalten.\nBeim Zurückkehren wird automatisch geprüft.
+仅使用屏幕图像，不采集音频。	僅使用螢幕影像，不擷取音訊。	Only screen images are used, never audio.	画面の画像のみを使い、音声は取得しません。	화면 이미지만 사용하며 오디오는 수집하지 않습니다.	Seule l’image de l’écran est utilisée, jamais l’audio.	Solo se usa la imagen de la pantalla, nunca el audio.	Es werden nur Bildschirminhalte genutzt, nie Ton.
+已经开启，但仍未生效？	已經開啟，但仍未生效？	Turned on but still not working?	オンにしても反映されませんか？	켰는데도 적용되지 않나요?	Activé mais toujours sans effet ?	¿Activado pero sigue sin funcionar?	Aktiviert, aber wirkt noch nicht?
+重新检查	重新檢查	Check Again	再確認	다시 확인	Vérifier à nouveau	Comprobar de nuevo	Erneut prüfen
+开始框选	開始框選	Select an Area	範囲を選択	영역 선택	Sélectionner une zone	Seleccionar un área	Bereich auswählen
+翻译预览	翻譯預覽	Translation preview	翻訳プレビュー	번역 미리보기	Aperçu de la traduction	Vista previa de la traducción	Übersetzungsvorschau
+外观	外觀	Appearance	外観	모양	Apparence	Apariencia	Erscheinungsbild
+浅色	淺色	Light	ライト	라이트	Clair	Claro	Hell
+通知	通知	Notifications	通知	알림	Notifications	Notificaciones	Mitteilungen
+开启	開啟	On	オン	켬	Activé	Activado	Ein
+键盘快捷键	鍵盤快速鍵	Keyboard shortcuts	キーボードショートカット	키보드 단축키	Raccourcis clavier	Atajos de teclado	Tastaturkurzbefehle
+按住看原文	按住看原文	Hold to See Original	押し続けて原文を表示	누르고 있으면 원문 보기	Maintenir pour voir l’original	Mantén pulsado para ver el original	Gedrückt halten für Original
+对照示例原文	對照示例原文	Compare with the sample original	サンプルの原文と比較	예시 원문과 비교	Comparer avec l’original	Comparar con el original de ejemplo	Mit dem Beispieloriginal vergleichen
+按住显示英文，松开显示中文	按住顯示英文，放開顯示中文	Hold to show the original, release to show the translation	押している間は原文、離すと訳文を表示	누르고 있으면 원문, 떼면 번역을 표시	Maintenez pour l’original, relâchez pour la traduction	Mantén pulsado para el original y suelta para la traducción	Halten zeigt das Original, Loslassen die Übersetzung
+点击右侧按键，再直接按下新的组合键。更改立即生效；× 可停用该项。	點擊右側按鍵，再直接按下新的組合鍵。更改立即生效；× 可停用該項。	Click a shortcut on the right, then press the new keys. Changes apply immediately; × turns a shortcut off.	右のキーをクリックしてから新しい組み合わせを押します。変更はすぐ反映され、× で無効にできます。	오른쪽 단축키를 클릭한 뒤 새 키 조합을 누르세요. 변경은 즉시 적용되며 ×로 끌 수 있습니다.	Cliquez sur un raccourci à droite, puis appuyez sur les nouvelles touches. Effet immédiat ; × désactive le raccourci.	Haz clic en un atajo a la derecha y pulsa las nuevas teclas. Se aplica al instante; × lo desactiva.	Rechts auf einen Kurzbefehl klicken und die neuen Tasten drücken. Sofort wirksam; × schaltet ihn aus.
+取消录制	取消錄製	Cancel Recording	記録をキャンセル	기록 취소	Annuler l’enregistrement	Cancelar grabación	Aufnahme abbrechen
+恢复全部默认快捷键	恢復全部預設快速鍵	Restore All Default Shortcuts	すべてのショートカットを初期設定に戻す	모든 단축키를 기본값으로 복원	Rétablir tous les raccourcis par défaut	Restaurar todos los atajos predeterminados	Alle Standardkurzbefehle wiederherstellen
+清除%@快捷键	清除%@快速鍵	Clear %@ shortcut	%@ のショートカットを消去	%@ 단축키 지우기	Effacer le raccourci « %@ »	Borrar el atajo de %@	Kurzbefehl „%@“ löschen
+请按快捷键…	請按快速鍵…	Press keys…	キーを押してください…	키를 누르세요…	Appuyez sur les touches…	Pulsa las teclas…	Tasten drücken…
+录制时 Esc 也可设为快捷键；如需退出，请点击「取消录制」。	錄製時 Esc 也可設為快速鍵；如需退出，請點擊「取消錄製」。	While recording, Esc can be a shortcut too; click “Cancel Recording” to stop.	記録中は Esc もショートカットにできます。終了するには「記録をキャンセル」をクリックしてください。	기록 중에는 Esc도 단축키로 쓸 수 있습니다. 끝내려면 ‘기록 취소’를 클릭하세요.	Pendant l’enregistrement, Échap peut aussi servir de raccourci ; cliquez sur « Annuler l’enregistrement » pour arrêter.	Durante la grabación, Esc también puede ser un atajo; haz clic en «Cancelar grabación» para salir.	Während der Aufnahme kann auch Esc ein Kurzbefehl sein; zum Beenden „Aufnahme abbrechen“ klicken.
+全局对照原文	全域對照原文	Show Original Anywhere	どこでも原文を表示	어디서나 원문 보기	Afficher l’original partout	Ver el original en cualquier lugar	Original überall zeigen
+选择上次的区域	選擇上次的區域	Use Last Area	前回の範囲を使う	지난 영역 사용	Reprendre la dernière zone	Usar la última área	Letzten Bereich verwenden
+原文 / 译文	原文 / 譯文	Original / Translation	原文 / 訳文	원문 / 번역	Original / Traduction	Original / Traducción	Original / Übersetzung
+翻译 / 重试	翻譯 / 重試	Translate / Retry	翻訳 / 再試行	번역 / 다시 시도	Traduire / Réessayer	Traducir / Reintentar	Übersetzen / Wiederholen
+交换语言	交換語言	Swap Languages	言語を入れ替え	언어 바꾸기	Inverser les langues	Intercambiar idiomas	Sprachen tauschen
+矩形	矩形	Rectangle	四角形	사각형	Rectangle	Rectángulo	Rechteck
+椭圆	橢圓	Ellipse	楕円	타원	Ellipse	Elipse	Ellipse
+箭头	箭頭	Arrow	矢印	화살표	Flèche	Flecha	Pfeil
+画笔	畫筆	Pen	ペン	펜	Crayon	Lápiz	Stift
+移动	移動	Move	移動	이동	Déplacer	Mover	Bewegen
+复制图片	拷貝圖片	Copy Image	画像をコピー	이미지 복사	Copier l’image	Copiar imagen	Bild kopieren
+保存图片	儲存圖片	Save Image	画像を保存	이미지 저장	Enregistrer l’image	Guardar imagen	Bild sichern
+撤销标注	還原標註	Undo Markup	注釈を取り消す	주석 실행 취소	Annuler l’annotation	Deshacer anotación	Markierung widerrufen
+重做标注	重做標註	Redo Markup	注釈をやり直す	주석 다시 실행	Rétablir l’annotation	Rehacer anotación	Markierung wiederholen
+关闭截图 / 取消框选	關閉截圖 / 取消框選	Close Capture / Cancel Selection	キャプチャを閉じる / 選択をキャンセル	캡처 닫기 / 선택 취소	Fermer la capture / Annuler la sélection	Cerrar captura / Cancelar selección	Aufnahme schließen / Auswahl abbrechen
+展开 / 收起标注	展開 / 收合標註	Show / Hide Markup Tools	注釈ツールを表示 / 隠す	주석 도구 보기 / 숨기기	Afficher / masquer les outils d’annotation	Mostrar / ocultar herramientas	Markierungswerkzeuge ein/aus
+钉到屏幕	釘到螢幕	Pin to Screen	画面にピン留め	화면에 고정	Épingler à l’écran	Fijar en pantalla	Am Bildschirm anheften
+重新框选	重新框選	Select Again	範囲を選び直す	다시 선택	Resélectionner	Volver a seleccionar	Neu auswählen
+按住对照原文	按住對照原文	Hold to Compare	押し続けて原文と比較	누르고 있으면 원문 비교	Maintenir pour comparer	Mantén pulsado para comparar	Gedrückt halten zum Vergleichen
+打开图片	打開圖片	Open Image	画像を開く	이미지 열기	Ouvrir une image	Abrir imagen	Bild öffnen
+打开设置	打開設定	Open Settings	設定を開く	설정 열기	Ouvrir les réglages	Abrir ajustes	Einstellungen öffnen
+未设置	未設定	Not Set	未設定	설정 안 됨	Non défini	Sin definir	Nicht festgelegt
+这个按键暂不支持，请选择字母、数字、方向键或功能键。	這個按鍵暫不支援，請選擇字母、數字、方向鍵或功能鍵。	This key isn’t supported. Choose a letter, number, arrow or function key.	このキーは使えません。文字、数字、矢印キー、ファンクションキーを選んでください。	이 키는 지원되지 않습니다. 문자, 숫자, 화살표 또는 기능 키를 선택하세요.	Cette touche n’est pas prise en charge. Choisissez une lettre, un chiffre, une flèche ou une touche de fonction.	Esta tecla no es compatible. Elige una letra, un número, una flecha o una tecla de función.	Diese Taste wird nicht unterstützt. Wähle einen Buchstaben, eine Ziffer, eine Pfeil- oder Funktionstaste.
+截图窗口	截圖視窗	Capture Window	キャプチャウインドウ	캡처 창	Fenêtre de capture	Ventana de captura	Aufnahmefenster
+全局和应用快捷键需要搭配 ⌘、⌥ 或 ⌃，也可以使用 F 功能键。	全域和應用程式快速鍵需要搭配 ⌘、⌥ 或 ⌃，也可以使用 F 功能鍵。	Global and app shortcuts need ⌘, ⌥ or ⌃, or use an F key.	グローバルとアプリのショートカットには ⌘、⌥、⌃ のいずれか、または F キーが必要です。	전역 및 앱 단축키에는 ⌘, ⌥, ⌃ 중 하나 또는 F 키가 필요합니다.	Les raccourcis globaux et de l’app nécessitent ⌘, ⌥ ou ⌃, ou une touche F.	Los atajos globales y de la app necesitan ⌘, ⌥ o ⌃, o una tecla F.	Globale und App-Kurzbefehle brauchen ⌘, ⌥ oder ⌃ oder eine F-Taste.
+%@ 已用于「%@」，请先修改或清除该项。	%@ 已用於「%@」，請先修改或清除該項。	%@ is already used for “%@”. Change or clear that shortcut first.	%@ は「%@」で使用中です。先にそちらを変更または消去してください。	%@ 키는 이미 ‘%@’에 사용 중입니다. 먼저 그 단축키를 바꾸거나 지우세요.	%@ est déjà utilisé pour « %@ ». Modifiez ou effacez d’abord ce raccourci.	%@ ya se usa para «%@». Cambia o borra primero ese atajo.	%@ wird bereits für „%@“ verwendet. Ändere oder lösche zuerst diesen Kurzbefehl.
+已清除「%@」快捷键	已清除「%@」快速鍵	Cleared the “%@” shortcut	「%@」のショートカットを消去しました	‘%@’ 단축키를 지웠습니다	Raccourci « %@ » effacé	Atajo «%@» borrado	Kurzbefehl „%@“ gelöscht
+已更新「%@」	已更新「%@」	Updated “%@”	「%@」を更新しました	‘%@’ 업데이트됨	« %@ » mis à jour	«%@» actualizado	„%@“ aktualisiert
+已恢复默认快捷键	已恢復預設快速鍵	Default shortcuts restored	ショートカットを初期設定に戻しました	기본 단축키로 복원했습니다	Raccourcis par défaut rétablis	Atajos predeterminados restaurados	Standardkurzbefehle wiederhergestellt
+设置…	設定…	Settings…	設定…	설정…	Réglages…	Ajustes…	Einstellungen…
+快捷键注册失败，可能被系统或其他应用占用：	快速鍵註冊失敗，可能被系統或其他應用程式佔用：	Couldn’t register shortcuts; the system or another app may be using them: 	ショートカットを登録できません。システムか他のアプリが使用中の可能性があります：	단축키를 등록하지 못했습니다. 시스템이나 다른 앱이 사용 중일 수 있습니다: 	Impossible d’enregistrer les raccourcis ; le système ou une autre app les utilise peut-être : 	No se pudieron registrar los atajos; puede que los use el sistema u otra app: 	Kurzbefehle konnten nicht registriert werden; System oder eine andere App nutzt sie evtl.:
+、	、	, 	、	, 	, 	, 	,
+。原配置已保留。	。原設定已保留。	. Your previous settings were kept.	。元の設定はそのままです。	. 이전 설정은 그대로 유지됩니다.	. Les réglages précédents sont conservés.	. Se conservó la configuración anterior.	. Die bisherigen Einstellungen bleiben erhalten.
+这些全局快捷键无法注册，请重新设置：	這些全域快速鍵無法註冊，請重新設定：	These global shortcuts couldn’t be registered; set them again: 	次のグローバルショートカットを登録できません。設定し直してください：	다음 전역 단축키를 등록할 수 없습니다. 다시 설정하세요: 	Ces raccourcis globaux n’ont pas pu être enregistrés ; redéfinissez-les : 	No se pudieron registrar estos atajos globales; vuelve a configurarlos: 	Diese globalen Kurzbefehle konnten nicht registriert werden; bitte neu festlegen:
+Transeen · 截图与翻译	Transeen · 截圖與翻譯	Transeen · Capture & Translate	Transeen · キャプチャと翻訳	Transeen · 캡처 및 번역	Transeen · Capture et traduction	Transeen · Captura y traducción	Transeen · Aufnehmen & übersetzen
+开始使用 Transeen	開始使用 Transeen	Get Started with Transeen	Transeen をはじめる	Transeen 시작하기	Bien démarrer avec Transeen	Empezar con Transeen	Los geht’s mit Transeen
+Transeen · 激活与账号	Transeen · 啟用與帳號	Transeen · Activation & Account	Transeen · アクティベーションとアカウント	Transeen · 활성화 및 계정	Transeen · Activation et compte	Transeen · Activación y cuenta	Transeen · Aktivierung & Konto
+打开	打開	Open	開く	열기	Ouvrir	Abrir	Öffnen
+知道了	知道了	OK	OK	확인	OK	Aceptar	OK
+返回	返回	Back	戻る	뒤로	Retour	Atrás	Zurück
+通用	一般	General	一般	일반	Général	General	Allgemein
+快捷键	快速鍵	Shortcuts	ショートカット	단축키	Raccourcis	Atajos	Kurzbefehle
+捕获	擷取	Capture	キャプチャ	캡처	Capture	Captura	Aufnahme
+复制后关闭截图	拷貝後關閉截圖	Close capture after copying	コピー後にキャプチャを閉じる	복사 후 캡처 닫기	Fermer la capture après la copie	Cerrar la captura después de copiar	Aufnahme nach dem Kopieren schließen
+钉住的图片会继续保留。	釘住的圖片會繼續保留。	Pinned images stay open.	ピン留めした画像は残ります。	고정한 이미지는 그대로 남습니다.	Les images épinglées restent affichées.	Las imágenes fijadas se mantienen.	Angeheftete Bilder bleiben erhalten.
+翻译	翻譯	Translation	翻訳	번역	Traduction	Traducción	Übersetzung
+屏幕权限	螢幕權限	Screen Permission	画面収録の許可	화면 권한	Autorisation d’écran	Permiso de pantalla	Bildschirmberechtigung
+屏幕权限已开启	螢幕權限已開啟	Screen recording is allowed	画面収録は許可されています	화면 기록이 허용되었습니다	L’enregistrement de l’écran est autorisé	La grabación de pantalla está permitida	Bildschirmaufnahme ist erlaubt
+屏幕权限尚未开启	螢幕權限尚未開啟	Screen recording isn’t allowed yet	画面収録はまだ許可されていません	화면 기록이 아직 허용되지 않았습니다	L’enregistrement de l’écran n’est pas encore autorisé	La grabación de pantalla aún no está permitida	Bildschirmaufnahme ist noch nicht erlaubt
+查看权限	查看權限	View Permission	許可を確認	권한 보기	Voir l’autorisation	Ver permiso	Berechtigung anzeigen
+翻译服务	翻譯服務	Translation Service	翻訳サービス	번역 서비스	Service de traduction	Servicio de traducción	Übersetzungsdienst
+本地翻译模型	本機翻譯模型	Local Translation Model	ローカル翻訳モデル	로컬 번역 모델	Modèle de traduction local	Modelo de traducción local	Lokales Übersetzungsmodell
+大模型接口	大模型介面	LLM API	LLM API	LLM API	API de LLM	API de LLM	LLM-API
+原文为自动识别：下载你常看的语言即可。语言包由系统下载，之后离线翻译。	原文為自動識別：下載你常看的語言即可。語言包由系統下載，之後離線翻譯。	The source language is detected automatically, so download the languages you read most. macOS downloads the packs, then translates offline.	原文は自動検出されるため、よく読む言語をダウンロードすれば十分です。言語パックはシステムがダウンロードし、その後はオフラインで翻訳します。	원문은 자동 감지되므로 자주 보는 언어만 내려받으면 됩니다. 언어 팩은 시스템이 내려받고 이후 오프라인으로 번역합니다.	La langue source est détectée automatiquement : téléchargez les langues que vous lisez le plus. macOS télécharge les packs, puis traduit hors ligne.	El idioma de origen se detecta automáticamente: descarga los idiomas que más lees. macOS descarga los paquetes y después traduce sin conexión.	Die Ausgangssprache wird automatisch erkannt – lade die Sprachen, die du am meisten liest. macOS lädt die Pakete und übersetzt dann offline.
+语言包由系统下载，之后离线翻译。	語言包由系統下載，之後離線翻譯。	macOS downloads the language packs, then translates offline.	言語パックはシステムがダウンロードし、その後はオフラインで翻訳します。	언어 팩은 시스템이 내려받고 이후 오프라인으로 번역합니다.	macOS télécharge les packs de langue, puis traduit hors ligne.	macOS descarga los paquetes de idioma y después traduce sin conexión.	macOS lädt die Sprachpakete und übersetzt dann offline.
+接口地址	介面位址	Endpoint	エンドポイント	엔드포인트	Point d’accès	Endpoint	Endpunkt
+模型名称	模型名稱	Model Name	モデル名	모델 이름	Nom du modèle	Nombre del modelo	Modellname
+API Key（本机服务可留空）	API Key（本機服務可留空）	API Key (optional for local servers)	API キー（ローカルサーバでは省略可）	API 키(로컬 서버는 생략 가능)	Clé API (facultative pour un serveur local)	Clave de API (opcional en servidores locales)	API-Schlüssel (optional für lokale Server)
+保存密钥	儲存金鑰	Save Key	キーを保存	키 저장	Enregistrer la clé	Guardar clave	Schlüssel sichern
+正在连接…	正在連線…	Connecting…	接続中…	연결 중…	Connexion…	Conectando…	Verbinde…
+测试连接	測試連線	Test Connection	接続をテスト	연결 테스트	Tester la connexion	Probar conexión	Verbindung testen
+兼容 chat/completions；只发送识别后的文本。远程接口使用 HTTPS，本机服务可用 HTTP。	相容 chat/completions；只傳送識別後的文字。遠端介面使用 HTTPS，本機服務可用 HTTP。	Works with chat/completions and sends only recognized text. Remote endpoints use HTTPS; local servers may use HTTP.	chat/completions 互換。送信するのは認識したテキストだけです。リモートは HTTPS、ローカルサーバは HTTP も使えます。	chat/completions와 호환되며 인식한 텍스트만 보냅니다. 원격은 HTTPS, 로컬 서버는 HTTP도 가능합니다.	Compatible chat/completions, n’envoie que le texte reconnu. HTTPS pour les serveurs distants, HTTP possible en local.	Compatible con chat/completions; solo envía el texto reconocido. Los remotos usan HTTPS; los locales pueden usar HTTP.	Kompatibel mit chat/completions, sendet nur erkannten Text. Entfernte Endpunkte nutzen HTTPS, lokale dürfen HTTP nutzen.
+已下载	已下載	Downloaded	ダウンロード済み	다운로드됨	Téléchargé	Descargado	Geladen
+下载	下載	Download	ダウンロード	다운로드	Télécharger	Descargar	Laden
+下载 %@ 到 %@ 语言包	下載 %@ 到 %@ 語言包	Download %@ to %@ language pack	%@→%@ の言語パックをダウンロード	%@→%@ 언어 팩 다운로드	Télécharger le pack %@ vers %@	Descargar el paquete de %@ a %@	Sprachpaket %@ → %@ laden
+下载中…	下載中…	Downloading…	ダウンロード中…	다운로드 중…	Téléchargement…	Descargando…	Wird geladen…
+系统暂不支持	系統暫不支援	Not supported by macOS	システム未対応	시스템 미지원	Non pris en charge par macOS	No compatible con macOS	Von macOS nicht unterstützt
+已清除该接口密钥	已清除該介面金鑰	Key for this endpoint cleared	この接続先のキーを消去しました	이 엔드포인트의 키를 지웠습니다	Clé de ce point d’accès effacée	Clave de este endpoint borrada	Schlüssel für diesen Endpunkt gelöscht
+已保存到钥匙串	已儲存到鑰匙圈	Saved to Keychain	キーチェーンに保存しました	키체인에 저장됨	Enregistrée dans le trousseau	Guardada en el llavero	Im Schlüsselbund gesichert
+请先保存密钥，再测试连接。	請先儲存金鑰，再測試連線。	Save the key before testing the connection.	接続をテストする前にキーを保存してください。	연결을 테스트하기 전에 키를 저장하세요.	Enregistrez la clé avant de tester la connexion.	Guarda la clave antes de probar la conexión.	Sichere den Schlüssel, bevor du die Verbindung testest.
+连接成功，可以翻译	連線成功，可以翻譯	Connected, ready to translate	接続しました。翻訳できます	연결됨, 번역 준비 완료	Connecté, prêt à traduire	Conectado, listo para traducir	Verbunden, bereit zum Übersetzen
+本地翻译模型需要 Apple 芯片的 Mac。	本機翻譯模型需要 Apple 晶片的 Mac。	Local translation models need a Mac with Apple silicon.	ローカル翻訳モデルには Apple シリコン搭載の Mac が必要です。	로컬 번역 모델에는 Apple 실리콘 Mac이 필요합니다.	Les modèles locaux nécessitent un Mac avec puce Apple.	Los modelos locales necesitan un Mac con chip de Apple.	Lokale Modelle brauchen einen Mac mit Apple-Chip.
+（推荐）	（推薦）	 (Recommended)	（おすすめ）	 (추천)	 (recommandé)	 (recomendado)	 (empfohlen)
+模型下载后完全在本机运行，截图文字不会离开这台 Mac。首次翻译需要几秒加载模型，空闲 5 分钟后自动释放内存。	模型下載後完全在本機執行，截圖文字不會離開這台 Mac。首次翻譯需要幾秒載入模型，閒置 5 分鐘後自動釋放記憶體。	Once downloaded, the model runs entirely on this Mac, so captured text never leaves it. The first translation takes a few seconds to load the model; memory is freed after 5 idle minutes.	ダウンロード後はこの Mac 上だけで動作し、キャプチャした文字が外に出ることはありません。初回はモデルの読み込みに数秒かかり、5 分間使わないとメモリを解放します。	내려받은 모델은 이 Mac에서만 실행되어 캡처한 텍스트가 밖으로 나가지 않습니다. 첫 번역은 모델을 불러오느라 몇 초 걸리며, 5분 동안 쓰지 않으면 메모리를 해제합니다.	Une fois téléchargé, le modèle fonctionne entièrement sur ce Mac : le texte capturé n’en sort jamais. La première traduction charge le modèle en quelques secondes ; la mémoire est libérée après 5 minutes d’inactivité.	Una vez descargado, el modelo funciona solo en este Mac y el texto capturado nunca sale de él. La primera traducción tarda unos segundos en cargar el modelo; la memoria se libera tras 5 minutos de inactividad.	Nach dem Laden läuft das Modell komplett auf diesem Mac, erfasster Text verlässt ihn nie. Die erste Übersetzung lädt das Modell in wenigen Sekunden; nach 5 Minuten Leerlauf wird der Speicher freigegeben.
+在访达中显示	在 Finder 中顯示	Show in Finder	Finder に表示	Finder에서 보기	Afficher dans le Finder	Mostrar en el Finder	Im Finder zeigen
+删除模型	刪除模型	Delete Model	モデルを削除	모델 삭제	Supprimer le modèle	Eliminar modelo	Modell löschen
+%@ 更多操作	%@ 更多操作	More for %@	%@ のその他の操作	%@ 더 보기	Plus pour %@	Más para %@	Mehr für %@
+停止	停止	Stop	停止	중지	Arrêter	Detener	Stoppen
+下载 %@，%@	下載 %@，%@	Download %@, %@	%@ をダウンロード（%@）	%@ 다운로드, %@	Télécharger %@, %@	Descargar %@, %@	%@ laden, %@
+发现 Transeen %@	發現 Transeen %@	Transeen %@ is available	Transeen %@ が利用可能です	Transeen %@ 사용 가능	Transeen %@ est disponible	Transeen %@ está disponible	Transeen %@ ist verfügbar
+当前版本：%@	目前版本：%@	Current version: %@	現在のバージョン：%@	현재 버전: %@	Version actuelle : %@	Versión actual: %@	Aktuelle Version: %@
+新版本已发布。	新版本已發布。	A new version is available.	新しいバージョンが公開されました。	새 버전이 출시되었습니다.	Une nouvelle version est disponible.	Hay una nueva versión disponible.	Eine neue Version ist verfügbar.
+查看并下载更新	查看並下載更新	View & Download	確認してダウンロード	확인 및 다운로드	Voir et télécharger	Ver y descargar	Ansehen & laden
+Transeen 已是最新版本	Transeen 已是最新版本	Transeen is up to date	Transeen は最新です	Transeen이 최신 버전입니다	Transeen est à jour	Transeen está actualizado	Transeen ist auf dem neuesten Stand
+好	好	OK	OK	확인	OK	Aceptar	OK
+暂时无法检查更新	暫時無法檢查更新	Couldn’t check for updates	アップデートを確認できませんでした	업데이트를 확인할 수 없습니다	Impossible de rechercher les mises à jour	No se pudo buscar actualizaciones	Suche nach Updates nicht möglich
+请稍后重试，或打开 GitHub 查看最新版本。	請稍後重試，或打開 GitHub 查看最新版本。	Try again later, or check GitHub for the latest version.	後でもう一度試すか、GitHub で最新版を確認してください。	나중에 다시 시도하거나 GitHub에서 최신 버전을 확인하세요.	Réessayez plus tard ou consultez GitHub pour la dernière version.	Inténtalo más tarde o consulta la última versión en GitHub.	Versuche es später erneut oder sieh auf GitHub nach der neuesten Version.
+打开下载页面	打開下載頁面	Open Download Page	ダウンロードページを開く	다운로드 페이지 열기	Ouvrir la page de téléchargement	Abrir página de descarga	Downloadseite öffnen
+关闭	關閉	Close	閉じる	닫기	Fermer	Cerrar	Schließen
+请输入 Transeen 专用的 TR- 激活码；SM- 和 IT- 激活码不能在此使用。	請輸入 Transeen 專用的 TR- 啟用碼；SM- 和 IT- 啟用碼不能在此使用。	Enter a Transeen TR- activation code. SM- and IT- codes don’t work here.	Transeen 専用の TR- コードを入力してください。SM- と IT- のコードは使えません。	Transeen 전용 TR- 활성화 코드를 입력하세요. SM-과 IT- 코드는 사용할 수 없습니다.	Saisissez un code d’activation Transeen TR-. Les codes SM- et IT- ne fonctionnent pas ici.	Introduce un código de activación TR- de Transeen. Los códigos SM- e IT- no sirven aquí.	Gib einen Transeen-Aktivierungscode (TR-) ein. SM- und IT-Codes funktionieren hier nicht.
+Transeen 已激活	Transeen 已啟用	Transeen Is Activated	Transeen はアクティベート済みです	Transeen이 활성화되었습니다	Transeen est activé	Transeen está activado	Transeen ist aktiviert
+让译文留在原处	讓譯文留在原處	Translations that stay in place	訳文をその場に	번역을 제자리에	Des traductions qui restent en place	Traducciones que se quedan en su sitio	Übersetzungen, die an Ort und Stelle bleiben
+永久授权 · 截图、标注与翻译已解锁	永久授權 · 截圖、標註與翻譯已解鎖	Lifetime license · Capture, markup and translation unlocked	永久ライセンス · キャプチャ、注釈、翻訳が使えます	영구 라이선스 · 캡처, 주석, 번역 잠금 해제	Licence à vie · Capture, annotation et traduction déverrouillées	Licencia permanente · Captura, anotación y traducción desbloqueadas	Dauerlizenz · Aufnahme, Markierung und Übersetzung freigeschaltet
+输入 Transeen 专用激活码，解锁截图、标注和翻译。无需登录即可激活这台 Mac。	輸入 Transeen 專用啟用碼，解鎖截圖、標註和翻譯。無需登入即可啟用這台 Mac。	Enter your Transeen activation code to unlock capture, markup and translation. No sign-in is needed to activate this Mac.	Transeen 専用のコードを入力すると、キャプチャ、注釈、翻訳が使えるようになります。この Mac のアクティベートにログインは不要です。	Transeen 활성화 코드를 입력하면 캡처, 주석, 번역이 잠금 해제됩니다. 이 Mac을 활성화하는 데 로그인은 필요 없습니다.	Saisissez votre code Transeen pour déverrouiller capture, annotation et traduction. Aucune connexion n’est nécessaire pour activer ce Mac.	Introduce tu código de Transeen para desbloquear captura, anotación y traducción. No hace falta iniciar sesión para activar este Mac.	Gib deinen Transeen-Code ein, um Aufnahme, Markierung und Übersetzung freizuschalten. Für diesen Mac ist keine Anmeldung nötig.
+获取激活码	取得啟用碼	Get a Code	コードを入手	코드 받기	Obtenir un code	Conseguir un código	Code kaufen
+正在激活…	正在啟用…	Activating…	アクティベート中…	활성화 중…	Activation…	Activando…	Wird aktiviert…
+激活这台 Mac	啟用這台 Mac	Activate This Mac	この Mac をアクティベート	이 Mac 활성화	Activer ce Mac	Activar este Mac	Diesen Mac aktivieren
+iTool 账号 · 可选的绑定与恢复	iTool 帳號 · 可選的綁定與恢復	iTool Account · Optional linking and restore	iTool アカウント · 任意の連携と復元	iTool 계정 · 선택적 연결 및 복원	Compte iTool · Association et restauration facultatives	Cuenta de iTool · Vinculación y restauración opcionales	iTool-Konto · Optional verknüpfen und wiederherstellen
+TR- 授权独立于 iTool Pro 和 StupidMirror。绑定账号后，可登录同一账号恢复授权。	TR- 授權獨立於 iTool Pro 和 StupidMirror。綁定帳號後，可登入同一帳號恢復授權。	TR- licenses are separate from iTool Pro and StupidMirror. Link an account to restore the license by signing in to it later.	TR- ライセンスは iTool Pro や StupidMirror とは別です。アカウントに連携すると、同じアカウントでログインして復元できます。	TR- 라이선스는 iTool Pro, StupidMirror와 별개입니다. 계정에 연결하면 같은 계정으로 로그인해 복원할 수 있습니다.	Les licences TR- sont distinctes d’iTool Pro et de StupidMirror. Associez un compte pour restaurer la licence en vous y connectant.	Las licencias TR- son independientes de iTool Pro y StupidMirror. Vincula una cuenta para restaurar la licencia iniciando sesión en ella.	TR-Lizenzen sind unabhängig von iTool Pro und StupidMirror. Verknüpfe ein Konto, um die Lizenz später per Anmeldung wiederherzustellen.
+已登录 iTool 账号	已登入 iTool 帳號	Signed in to iTool	iTool にログイン済み	iTool에 로그인됨	Connecté à iTool	Sesión iniciada en iTool	Bei iTool angemeldet
+将本机授权绑定到账号	將本機授權綁定到帳號	Link This Mac’s License to the Account	この Mac のライセンスをアカウントに連携	이 Mac의 라이선스를 계정에 연결	Associer la licence de ce Mac au compte	Vincular la licencia de este Mac a la cuenta	Lizenz dieses Macs mit dem Konto verknüpfen
+恢复授权	恢復授權	Restore License	ライセンスを復元	라이선스 복원	Restaurer la licence	Restaurar licencia	Lizenz wiederherstellen
+授权已恢复。	授權已恢復。	License restored.	ライセンスを復元しました。	라이선스를 복원했습니다.	Licence restaurée.	Licencia restaurada.	Lizenz wiederhergestellt.
+此账号尚未绑定 Transeen 授权。	此帳號尚未綁定 Transeen 授權。	This account has no Transeen license linked yet.	このアカウントには Transeen のライセンスが連携されていません。	이 계정에는 아직 Transeen 라이선스가 연결되지 않았습니다.	Aucune licence Transeen n’est encore associée à ce compte.	Esta cuenta aún no tiene una licencia de Transeen vinculada.	Mit diesem Konto ist noch keine Transeen-Lizenz verknüpft.
+退出账号	登出帳號	Sign Out	ログアウト	로그아웃	Se déconnecter	Cerrar sesión	Abmelden
+使用 Google 登录	使用 Google 登入	Sign in with Google	Google でログイン	Google로 로그인	Se connecter avec Google	Iniciar sesión con Google	Mit Google anmelden
+使用 GitHub 登录	使用 GitHub 登入	Sign in with GitHub	GitHub でログイン	GitHub로 로그인	Se connecter avec GitHub	Iniciar sesión con GitHub	Mit GitHub anmelden
+邮箱	電子郵件	Email	メールアドレス	이메일	E-mail	Correo electrónico	E-Mail
+密码	密碼	Password	パスワード	암호	Mot de passe	Contraseña	Passwort
+使用邮箱登录	使用電子郵件登入	Sign in with Email	メールでログイン	이메일로 로그인	Se connecter par e-mail	Iniciar sesión con correo	Mit E-Mail anmelden
+授权信息安全保存在 macOS 钥匙串中	授權資訊安全儲存在 macOS 鑰匙圈中	License details are stored securely in the macOS Keychain	ライセンス情報は macOS のキーチェーンに安全に保存されます	라이선스 정보는 macOS 키체인에 안전하게 저장됩니다	Les informations de licence sont stockées en toute sécurité dans le trousseau macOS	Los datos de la licencia se guardan de forma segura en el llavero de macOS	Lizenzdaten werden sicher im macOS-Schlüsselbund gespeichert
+开始使用	開始使用	Get Started	はじめる	시작하기	Commencer	Empezar	Loslegen
+激活成功。	啟用成功。	Activated.	アクティベートしました。	활성화되었습니다.	Activé.	Activado.	Aktiviert.
+选择 / 移动	選擇 / 移動	Select / Move	選択 / 移動	선택 / 이동	Sélectionner / Déplacer	Seleccionar / Mover	Auswählen / Bewegen
+编号	編號	Number	番号	번호	Numéro	Número	Nummer
+修改编号…	修改編號…	Change Number…	番号を変更…	번호 변경…	Modifier le numéro…	Cambiar número…	Nummer ändern…
+删除标注	刪除標註	Delete Markup	注釈を削除	주석 삭제	Supprimer l’annotation	Eliminar anotación	Markierung löschen
+请在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中允许 Transeen，随后重新打开应用。	請在系統設定 → 隱私權與安全性 → 螢幕與系統音訊錄製中允許 Transeen，隨後重新打開應用程式。	Allow Transeen in System Settings → Privacy & Security → Screen & System Audio Recording, then reopen the app.	システム設定 → プライバシーとセキュリティ → 画面収録とシステムオーディオ録音 で Transeen を許可し、アプリを開き直してください。	시스템 설정 → 개인정보 보호 및 보안 → 화면 및 시스템 오디오 기록에서 Transeen을 허용한 뒤 앱을 다시 여세요.	Autorisez Transeen dans Réglages Système → Confidentialité et sécurité → Enregistrement de l’écran et de l’audio du système, puis rouvrez l’app.	Permite Transeen en Ajustes del Sistema → Privacidad y seguridad → Grabación de pantalla y audio del sistema y vuelve a abrir la app.	Erlaube Transeen unter Systemeinstellungen → Datenschutz & Sicherheit → Bildschirm- & Systemaudioaufnahme und öffne die App dann neu.
+%@ 上次区域	%@ 上次區域	%@ last area	%@ 前回の範囲	%@ 지난 영역	%@ dernière zone	%@ última área	%@ letzter Bereich
+正在识别与翻译…	正在識別與翻譯…	Recognizing and translating…	認識して翻訳中…	인식 및 번역 중…	Reconnaissance et traduction…	Reconociendo y traduciendo…	Erkenne und übersetze…
+截图读取失败，请重新框选。	截圖讀取失敗，請重新框選。	Couldn’t read the capture. Select the area again.	キャプチャを読み込めませんでした。範囲を選び直してください。	캡처를 읽지 못했습니다. 영역을 다시 선택하세요.	Impossible de lire la capture. Resélectionnez la zone.	No se pudo leer la captura. Vuelve a seleccionar el área.	Aufnahme konnte nicht gelesen werden. Bereich neu auswählen.
+正在识别文字…	正在識別文字…	Recognizing text…	文字を認識中…	텍스트 인식 중…	Reconnaissance du texte…	Reconociendo texto…	Erkenne Text…
+没有识别到文字，可重新框选或重试。	沒有識別到文字，可重新框選或重試。	No text found. Select again or retry.	文字が見つかりません。範囲を選び直すか再試行してください。	텍스트를 찾지 못했습니다. 다시 선택하거나 다시 시도하세요.	Aucun texte trouvé. Resélectionnez ou réessayez.	No se encontró texto. Vuelve a seleccionar o reintenta.	Kein Text gefunden. Neu auswählen oder wiederholen.
+正在翻译…	正在翻譯…	Translating…	翻訳中…	번역 중…	Traduction…	Traduciendo…	Übersetze…
+翻译服务尚未就绪，请重试。	翻譯服務尚未就緒，請重試。	The translation service isn’t ready. Try again.	翻訳サービスの準備ができていません。もう一度試してください。	번역 서비스가 준비되지 않았습니다. 다시 시도하세요.	Le service de traduction n’est pas prêt. Réessayez.	El servicio de traducción no está listo. Inténtalo de nuevo.	Der Übersetzungsdienst ist nicht bereit. Bitte erneut versuchen.
+译文画面生成失败，请重试。	譯文畫面產生失敗，請重試。	Couldn’t draw the translation. Try again.	訳文の画像を作成できませんでした。もう一度試してください。	번역 화면을 만들지 못했습니다. 다시 시도하세요.	Impossible d’afficher la traduction. Réessayez.	No se pudo dibujar la traducción. Inténtalo de nuevo.	Übersetzung konnte nicht gezeichnet werden. Bitte erneut versuchen.
+部分译文超出原位置，请在「文字」中查看全文。	部分譯文超出原位置，請在「文字」中查看全文。	Some translations don’t fit in place; see the full text under “Text”.	一部の訳文が元の位置に収まりません。全文は「テキスト」で確認できます。	일부 번역이 제자리에 맞지 않습니다. 전체 내용은 ‘텍스트’에서 보세요.	Certaines traductions ne tiennent pas en place ; le texte complet est dans « Texte ».	Algunas traducciones no caben en su sitio; consulta el texto completo en «Texto».	Einige Übersetzungen passen nicht an ihren Platz; den ganzen Text gibt es unter „Text“.
+再按 %@ 交换语言	再按 %@ 交換語言	Press %@ again to swap languages	もう一度 %@ で言語を入れ替え	%@ 키를 다시 누르면 언어를 바꿉니다	Réappuyez sur %@ pour inverser les langues	Pulsa %@ otra vez para intercambiar idiomas	%@ erneut drücken, um Sprachen zu tauschen
+没有需要翻译的文字	沒有需要翻譯的文字	Nothing to translate	翻訳する文字はありません	번역할 텍스트가 없습니다	Rien à traduire	Nada que traducir	Nichts zu übersetzen
+已翻译 %ld 处	已翻譯 %ld 處	Translated %ld items	%ld 件を翻訳しました	%ld개 번역됨	%ld éléments traduits	%ld elementos traducidos	%ld Stellen übersetzt
+未能复制图片，请重试	未能拷貝圖片，請重試	Couldn’t copy the image. Try again	画像をコピーできませんでした。もう一度試してください	이미지를 복사하지 못했습니다. 다시 시도하세요	Impossible de copier l’image. Réessayez	No se pudo copiar la imagen. Inténtalo de nuevo	Bild konnte nicht kopiert werden. Bitte erneut versuchen
+已保存图片	已儲存圖片	Image saved	画像を保存しました	이미지를 저장했습니다	Image enregistrée	Imagen guardada	Bild gesichert
+截图	截圖	Capture	キャプチャ	캡처	Capture	Captura	Aufnahme
+截图预览	截圖預覽	Capture Preview	キャプチャのプレビュー	캡처 미리보기	Aperçu de la capture	Vista previa de la captura	Aufnahmevorschau
+截图工具栏	截圖工具列	Capture Toolbar	キャプチャのツールバー	캡처 도구 막대	Barre d’outils de capture	Barra de herramientas de captura	Aufnahme-Symbolleiste
+编号 · 下一个：%ld	編號 · 下一個：%ld	Number · Next: %ld	番号 · 次：%ld	번호 · 다음: %ld	Numéro · Suivant : %ld	Número · Siguiente: %ld	Nummer · Nächste: %ld
+文字	文字	Text	テキスト	텍스트	Texte	Texto	Text
+查看完整译文和原文，复制文字	查看完整譯文和原文，拷貝文字	View the full translation and original, and copy text	訳文と原文の全文を表示してコピー	전체 번역과 원문을 보고 텍스트 복사	Voir la traduction et l’original complets, copier le texte	Ver la traducción y el original completos y copiar el texto	Ganze Übersetzung und Original ansehen, Text kopieren
+钉到屏幕上，可继续截图	釘到螢幕上，可繼續截圖	Pin to the screen and keep capturing	画面にピン留めしてキャプチャを続ける	화면에 고정하고 계속 캡처	Épingler à l’écran et continuer à capturer	Fijar en pantalla y seguir capturando	Am Bildschirm anheften und weiter aufnehmen
+已复制	已拷貝	Copied	コピーしました	복사됨	Copié	Copiado	Kopiert
+复制	拷貝	Copy	コピー	복사	Copier	Copiar	Kopieren
+拖动图片移动 · 拖动边缘调整范围 · 选择工具标注	拖動圖片移動 · 拖動邊緣調整範圍 · 選擇工具標註	Drag the image to move · Drag edges to resize · Pick a tool to mark up	画像をドラッグで移動 · 端をドラッグで範囲調整 · ツールを選んで注釈	이미지를 끌어 이동 · 가장자리를 끌어 크기 조정 · 도구를 골라 주석	Glissez l’image pour la déplacer · Glissez les bords pour redimensionner · Choisissez un outil pour annoter	Arrastra la imagen para moverla · Arrastra los bordes para ajustar · Elige una herramienta para anotar	Bild ziehen zum Bewegen · Ränder ziehen zum Anpassen · Werkzeug wählen zum Markieren
+自动	自動	Auto	自動	자동	Auto	Auto	Auto
+更改原文或译文语言	更改原文或譯文語言	Change source or target language	原文または翻訳先の言語を変更	원문 또는 번역 언어 변경	Changer la langue source ou cible	Cambiar idioma de origen o destino	Ausgangs- oder Zielsprache ändern
+重试	重試	Retry	再試行	다시 시도	Réessayer	Reintentar	Wiederholen
+翻译中	翻譯中	Translating	翻訳中	번역 중	Traduction	Traduciendo	Übersetze
+切换原文 / 译文	切換原文 / 譯文	Switch original / translation	原文 / 訳文を切り替え	원문 / 번역 전환	Basculer original / traduction	Alternar original / traducción	Original / Übersetzung umschalten
+翻译选中区域	翻譯選取區域	Translate the selected area	選択範囲を翻訳	선택 영역 번역	Traduire la zone sélectionnée	Traducir el área seleccionada	Ausgewählten Bereich übersetzen
+红色	紅色	Red	赤	빨간색	Rouge	Rojo	Rot
+橙色	橙色	Orange	オレンジ	주황색	Orange	Naranja	Orange
+黄色	黃色	Yellow	黄	노란색	Jaune	Amarillo	Gelb
+绿色	綠色	Green	緑	초록색	Vert	Verde	Grün
+蓝色	藍色	Blue	青	파란색	Bleu	Azul	Blau
+白色	白色	White	白	흰색	Blanc	Blanco	Weiß
+编号 %ld	編號 %ld	Number %ld	番号 %ld	번호 %ld	Numéro %ld	Número %ld	Nummer %ld
+修改编号数字	修改編號數字	Change the number	番号を変更	번호 변경	Modifier le numéro	Cambiar el número	Nummer ändern
+编号大小：%ld	編號大小：%ld	Number size: %ld	番号のサイズ：%ld	번호 크기: %ld	Taille du numéro : %ld	Tamaño del número: %ld	Nummerngröße: %ld
+线宽：%ld	線寬：%ld	Line width: %ld	線の太さ：%ld	선 굵기: %ld	Épaisseur : %ld	Grosor: %ld	Linienstärke: %ld
+自定义颜色与粗细	自訂顏色與粗細	Custom color and width	色と太さをカスタマイズ	색상 및 굵기 사용자화	Couleur et épaisseur personnalisées	Color y grosor personalizados	Farbe und Stärke anpassen
+撤销	還原	Undo	取り消す	실행 취소	Annuler	Deshacer	Widerrufen
+重做	重做	Redo	やり直す	다시 실행	Rétablir	Rehacer	Wiederholen
+删除选中标注（Delete）	刪除選取標註（Delete）	Delete selected markup (Delete)	選択した注釈を削除（Delete）	선택한 주석 삭제(Delete)	Supprimer l’annotation sélectionnée (Suppr)	Eliminar la anotación seleccionada (Supr)	Ausgewählte Markierung löschen (Entf)
+编号范围：1–9999	編號範圍：1–9999	Range: 1–9999	範囲：1–9999	범위: 1–9999	Plage : 1–9999	Rango: 1–9999	Bereich: 1–9999
+颜色	顏色	Color	色	색상	Couleur	Color	Farbe
+大小	大小	Size	サイズ	크기	Taille	Tamaño	Größe
+粗细	粗細	Width	太さ	굵기	Épaisseur	Grosor	Stärke
+编号大小	編號大小	Number size	番号のサイズ	번호 크기	Taille du numéro	Tamaño del número	Nummerngröße
+线宽	線寬	Line width	線の太さ	선 굵기	Épaisseur du trait	Grosor de línea	Linienstärke
+保存图片…	儲存圖片…	Save Image…	画像を保存…	이미지 저장…	Enregistrer l’image…	Guardar imagen…	Bild sichern…
+删除选中标注	刪除選取標註	Delete Selected Markup	選択した注釈を削除	선택한 주석 삭제	Supprimer l’annotation sélectionnée	Eliminar anotación seleccionada	Ausgewählte Markierung löschen
+重新翻译	重新翻譯	Translate Again	もう一度翻訳	다시 번역	Retraduire	Volver a traducir	Neu übersetzen
+保存与更多操作	儲存與更多操作	Save and more	保存とその他	저장 및 더 보기	Enregistrer et plus	Guardar y más	Sichern und mehr
+完整译文	完整譯文	Full Translation	訳文全体	전체 번역	Traduction complète	Traducción completa	Vollständige Übersetzung
+识别文字	識別文字	Recognized Text	認識したテキスト	인식한 텍스트	Texte reconnu	Texto reconocido	Erkannter Text
+对照原文	對照原文	Show Original	原文と比較	원문 함께 보기	Afficher l’original	Mostrar original	Original zeigen
+文字可选择、复制	文字可選擇、拷貝	Text can be selected and copied	テキストは選択してコピーできます	텍스트를 선택하고 복사할 수 있습니다	Le texte peut être sélectionné et copié	El texto se puede seleccionar y copiar	Text lässt sich auswählen und kopieren
+复制文字	拷貝文字	Copy Text	テキストをコピー	텍스트 복사	Copier le texte	Copiar texto	Text kopieren
+钉住的截图	釘住的截圖	Pinned Capture	ピン留めしたキャプチャ	고정된 캡처	Capture épinglée	Captura fijada	Angeheftete Aufnahme
+显示原文	顯示原文	Show Original	原文を表示	원문 보기	Afficher l’original	Mostrar original	Original zeigen
+显示译文	顯示譯文	Show Translation	訳文を表示	번역 보기	Afficher la traduction	Mostrar traducción	Übersetzung zeigen
+所见即译需要屏幕录制权限。	所見即譯需要螢幕錄製權限。	Transeen needs Screen Recording permission.	Transeen には画面収録の許可が必要です。	Transeen에는 화면 기록 권한이 필요합니다.	Transeen a besoin de l’autorisation d’enregistrement de l’écran.	Transeen necesita permiso de grabación de pantalla.	Transeen braucht die Berechtigung zur Bildschirmaufnahme.
+找不到这块屏幕。	找不到這塊螢幕。	Couldn’t find this display.	このディスプレイが見つかりません。	이 디스플레이를 찾을 수 없습니다.	Impossible de trouver cet écran.	No se encuentra esta pantalla.	Dieser Bildschirm wurde nicht gefunden.
+截取屏幕失败，请重试。	擷取螢幕失敗，請重試。	Screen capture failed. Try again.	画面をキャプチャできませんでした。もう一度試してください。	화면 캡처에 실패했습니다. 다시 시도하세요.	La capture d’écran a échoué. Réessayez.	Falló la captura de pantalla. Inténtalo de nuevo.	Bildschirmaufnahme fehlgeschlagen. Bitte erneut versuchen.
+空格	空白鍵	Space	スペース	스페이스	Espace	Espacio	Leertaste
+键%ld	鍵%ld	Key %ld	キー %ld	키 %ld	Touche %ld	Tecla %ld	Taste %ld
+松开完成	放開完成	Release to finish	離すと完了	떼면 완료	Relâchez pour terminer	Suelta para terminar	Loslassen zum Abschließen
+点击选中 · 拖动自选	點擊選取 · 拖動自選	Click to select · Drag to draw your own	クリックで選択 · ドラッグで自由に選択	클릭해 선택 · 끌어서 직접 선택	Cliquez pour sélectionner · Glissez pour tracer	Haz clic para seleccionar · Arrastra para dibujar	Klicken zum Auswählen · Ziehen für eigene Auswahl
+移动鼠标选择 · 拖动框选	移動滑鼠選擇 · 拖動框選	Move the pointer to choose · Drag to select an area	ポインタを動かして選択 · ドラッグで範囲選択	포인터를 움직여 선택 · 끌어서 영역 선택	Déplacez le pointeur pour choisir · Glissez pour sélectionner une zone	Mueve el puntero para elegir · Arrastra para seleccionar un área	Zeiger bewegen zum Wählen · Ziehen zum Auswählen
+%@原文	%@原文	%@ original	%@の原文	%@ 원문	%@ (original)	%@ (original)	%@ (Original)
+%@ 语言包没有下载完成	%@ 語言包沒有下載完成	The %@ language pack didn’t finish downloading	%@ の言語パックのダウンロードが完了していません	%@ 언어 팩 다운로드가 끝나지 않았습니다	Le pack de langue %@ n’a pas fini de se télécharger	El paquete de idioma %@ no terminó de descargarse	Das Sprachpaket %@ wurde nicht vollständig geladen
+这个版本没有附带本地模型运行组件，请重新安装 Transeen。	這個版本沒有附帶本機模型執行元件，請重新安裝 Transeen。	This build doesn’t include the local model runtime. Reinstall Transeen.	このビルドにはローカルモデルの実行コンポーネントが含まれていません。Transeen を再インストールしてください。	이 빌드에는 로컬 모델 실행 구성 요소가 없습니다. Transeen을 다시 설치하세요.	Cette version ne contient pas le moteur des modèles locaux. Réinstallez Transeen.	Esta versión no incluye el motor de modelos locales. Reinstala Transeen.	Diese Version enthält die Laufzeit für lokale Modelle nicht. Installiere Transeen neu.
+本地模型 %@ 还没下载。可在设置 → 通用 → 翻译中下载。	本機模型 %@ 還沒下載。可在設定 → 一般 → 翻譯中下載。	The local model %@ isn’t downloaded. Download it in Settings → General → Translation.	ローカルモデル %@ はまだダウンロードされていません。設定 → 一般 → 翻訳 でダウンロードできます。	로컬 모델 %@을(를) 아직 내려받지 않았습니다. 설정 → 일반 → 번역에서 내려받으세요.	Le modèle local %@ n’est pas téléchargé. Téléchargez-le dans Réglages → Général → Traduction.	El modelo local %@ no está descargado. Descárgalo en Ajustes → General → Traducción.	Das lokale Modell %@ ist nicht geladen. Lade es unter Einstellungen → Allgemein → Übersetzung.
+磁盘空间不足，下载需要约 %@。	磁碟空間不足，下載需要約 %@。	Not enough disk space; the download needs about %@.	ディスクの空きが足りません。約 %@ 必要です。	디스크 공간이 부족합니다. 약 %@이(가) 필요합니다.	Espace disque insuffisant ; le téléchargement nécessite environ %@.	No hay espacio suficiente; la descarga necesita unos %@.	Nicht genug Speicherplatz; der Download braucht etwa %@.
+下载的模型文件校验失败，已删除，请重新下载。	下載的模型檔案驗證失敗，已刪除，請重新下載。	The downloaded model failed verification and was deleted. Download it again.	ダウンロードしたモデルの検証に失敗したため削除しました。もう一度ダウンロードしてください。	내려받은 모델이 검증에 실패해 삭제했습니다. 다시 내려받으세요.	Le modèle téléchargé n’a pas passé la vérification et a été supprimé. Retéléchargez-le.	El modelo descargado no superó la verificación y se eliminó. Descárgalo de nuevo.	Das geladene Modell hat die Prüfung nicht bestanden und wurde gelöscht. Bitte erneut laden.
+下载的模型文件大小不对，请重新下载。	下載的模型檔案大小不對，請重新下載。	The downloaded model has the wrong size. Download it again.	ダウンロードしたモデルのサイズが正しくありません。もう一度ダウンロードしてください。	내려받은 모델의 크기가 올바르지 않습니다. 다시 내려받으세요.	Le modèle téléchargé n’a pas la bonne taille. Retéléchargez-le.	El modelo descargado tiene un tamaño incorrecto. Descárgalo de nuevo.	Das geladene Modell hat die falsche Größe. Bitte erneut laden.
+下载服务器返回 HTTP %ld。	下載伺服器回傳 HTTP %ld。	The download server returned HTTP %ld.	ダウンロードサーバが HTTP %ld を返しました。	다운로드 서버가 HTTP %ld을(를) 반환했습니다.	Le serveur de téléchargement a renvoyé HTTP %ld.	El servidor de descarga devolvió HTTP %ld.	Der Downloadserver meldete HTTP %ld.
+本地翻译模型没能启动，请重试；仍不行可在设置中删除后重新下载。	本機翻譯模型沒能啟動，請重試；仍不行可在設定中刪除後重新下載。	The local model didn’t start. Try again; if it still fails, delete it in Settings and download it again.	ローカルモデルを起動できませんでした。もう一度試し、だめなら設定で削除して再ダウンロードしてください。	로컬 모델을 시작하지 못했습니다. 다시 시도하고, 그래도 안 되면 설정에서 삭제 후 다시 내려받으세요.	Le modèle local n’a pas démarré. Réessayez ; en cas d’échec, supprimez-le dans Réglages et retéléchargez-le.	El modelo local no se inició. Inténtalo de nuevo; si sigue fallando, elimínalo en Ajustes y descárgalo otra vez.	Das lokale Modell ist nicht gestartet. Erneut versuchen; klappt es nicht, in den Einstellungen löschen und neu laden.
+本地模型没有返回可用的翻译，请重试。	本機模型沒有回傳可用的翻譯，請重試。	The local model returned no usable translation. Try again.	ローカルモデルから使える翻訳が返りませんでした。もう一度試してください。	로컬 모델이 쓸 수 있는 번역을 반환하지 않았습니다. 다시 시도하세요.	Le modèle local n’a renvoyé aucune traduction utilisable. Réessayez.	El modelo local no devolvió una traducción útil. Inténtalo de nuevo.	Das lokale Modell lieferte keine brauchbare Übersetzung. Bitte erneut versuchen.
+下载中断：%@	下載中斷：%@	Download interrupted: %@	ダウンロードが中断されました：%@	다운로드 중단됨: %@	Téléchargement interrompu : %@	Descarga interrumpida: %@	Download unterbrochen: %@
+有 %ld 处未能翻译，已保留原文，可重新翻译。	有 %ld 處未能翻譯，已保留原文，可重新翻譯。	%ld items couldn’t be translated and keep their original text. You can translate again.	%ld 件を翻訳できず、原文のままにしました。もう一度翻訳できます。	%ld개를 번역하지 못해 원문을 그대로 두었습니다. 다시 번역할 수 있습니다.	%ld éléments n’ont pas pu être traduits et gardent leur texte d’origine. Vous pouvez retraduire.	%ld elementos no se pudieron traducir y conservan el original. Puedes volver a traducir.	%ld Stellen konnten nicht übersetzt werden und behalten den Originaltext. Du kannst neu übersetzen.
+请填写完整的 HTTPS chat/completions 接口地址和模型名；仅本机服务允许 HTTP。	請填寫完整的 HTTPS chat/completions 介面位址和模型名；僅本機服務允許 HTTP。	Enter a full HTTPS chat/completions endpoint and a model name. HTTP is only allowed for local servers.	完全な HTTPS の chat/completions URL とモデル名を入力してください。HTTP はローカルサーバのみ使えます。	전체 HTTPS chat/completions 주소와 모델 이름을 입력하세요. HTTP는 로컬 서버에서만 허용됩니다.	Saisissez un point d’accès HTTPS chat/completions complet et un nom de modèle. HTTP n’est permis que pour un serveur local.	Introduce un endpoint HTTPS chat/completions completo y un nombre de modelo. HTTP solo se permite en servidores locales.	Gib einen vollständigen HTTPS-Endpunkt für chat/completions und einen Modellnamen ein. HTTP ist nur für lokale Server erlaubt.
+尚未保存此接口的 API Key。	尚未儲存此介面的 API Key。	No API key is saved for this endpoint.	この接続先の API キーは保存されていません。	이 엔드포인트의 API 키가 저장되지 않았습니다.	Aucune clé API n’est enregistrée pour ce point d’accès.	No hay una clave de API guardada para este endpoint.	Für diesen Endpunkt ist kein API-Schlüssel gesichert.
+翻译服务返回 HTTP %ld。	翻譯服務回傳 HTTP %ld。	The translation service returned HTTP %ld.	翻訳サービスが HTTP %ld を返しました。	번역 서비스가 HTTP %ld을(를) 반환했습니다.	Le service de traduction a renvoyé HTTP %ld.	El servicio de traducción devolvió HTTP %ld.	Der Übersetzungsdienst meldete HTTP %ld.
+翻译服务没有返回完整、有效的文字。	翻譯服務沒有回傳完整、有效的文字。	The translation service didn’t return complete, valid text.	翻訳サービスから完全で有効なテキストが返りませんでした。	번역 서비스가 완전하고 올바른 텍스트를 반환하지 않았습니다.	Le service de traduction n’a pas renvoyé de texte complet et valide.	El servicio de traducción no devolvió un texto completo y válido.	Der Übersetzungsdienst lieferte keinen vollständigen, gültigen Text.
+翻译请求或响应超过长度限制。	翻譯請求或回應超過長度限制。	The translation request or response is too long.	翻訳のリクエストまたはレスポンスが長すぎます。	번역 요청 또는 응답이 너무 깁니다.	La requête ou la réponse de traduction est trop longue.	La solicitud o respuesta de traducción es demasiado larga.	Übersetzungsanfrage oder -antwort ist zu lang.
+无法读取模型密钥，请在设置中重新保存。	無法讀取模型金鑰，請在設定中重新儲存。	Couldn’t read the model key. Save it again in Settings.	モデルのキーを読み込めません。設定で保存し直してください。	모델 키를 읽을 수 없습니다. 설정에서 다시 저장하세요.	Impossible de lire la clé du modèle. Réenregistrez-la dans Réglages.	No se pudo leer la clave del modelo. Guárdala de nuevo en Ajustes.	Modellschlüssel konnte nicht gelesen werden. In den Einstellungen neu sichern.
+无法删除模型密钥。	無法刪除模型金鑰。	Couldn’t delete the model key.	モデルのキーを削除できません。	모델 키를 삭제할 수 없습니다.	Impossible de supprimer la clé du modèle.	No se pudo eliminar la clave del modelo.	Modellschlüssel konnte nicht gelöscht werden.
+无法保存模型密钥。	無法儲存模型金鑰。	Couldn’t save the model key.	モデルのキーを保存できません。	모델 키를 저장할 수 없습니다.	Impossible d’enregistrer la clé du modèle.	No se pudo guardar la clave del modelo.	Modellschlüssel konnte nicht gesichert werden.
+模型翻译超时，请重试或切换本机翻译。	模型翻譯逾時，請重試或切換本機翻譯。	The model timed out. Try again or switch to on-device translation.	モデルの翻訳がタイムアウトしました。もう一度試すか、本機の翻訳に切り替えてください。	모델 번역 시간이 초과되었습니다. 다시 시도하거나 기기 내 번역으로 바꾸세요.	Le modèle a expiré. Réessayez ou passez à la traduction sur l’appareil.	El modelo agotó el tiempo. Inténtalo de nuevo o cambia a la traducción en el dispositivo.	Zeitüberschreitung beim Modell. Erneut versuchen oder zur Übersetzung auf dem Gerät wechseln.
+模型未返回可用的翻译。	模型未回傳可用的翻譯。	The model returned no usable translation.	モデルから使える翻訳が返りませんでした。	모델이 쓸 수 있는 번역을 반환하지 않았습니다.	Le modèle n’a renvoyé aucune traduction utilisable.	El modelo no devolvió una traducción útil.	Das Modell lieferte keine brauchbare Übersetzung.
+翻译语言包还没下载。可在设置 → 通用 → 翻译中提前下载。	翻譯語言包還沒下載。可在設定 → 一般 → 翻譯中提前下載。	The language pack isn’t downloaded yet. Download it in Settings → General → Translation.	言語パックがまだダウンロードされていません。設定 → 一般 → 翻訳 で先にダウンロードできます。	언어 팩을 아직 내려받지 않았습니다. 설정 → 일반 → 번역에서 미리 내려받으세요.	Le pack de langue n’est pas encore téléchargé. Téléchargez-le dans Réglages → Général → Traduction.	El paquete de idioma aún no está descargado. Descárgalo en Ajustes → General → Traducción.	Das Sprachpaket ist noch nicht geladen. Lade es unter Einstellungen → Allgemein → Übersetzung.
+系统不支持这对语言。	系統不支援這對語言。	macOS doesn’t support this language pair.	システムはこの言語の組み合わせに対応していません。	시스템이 이 언어 조합을 지원하지 않습니다.	macOS ne prend pas en charge cette paire de langues.	macOS no admite este par de idiomas.	macOS unterstützt dieses Sprachpaar nicht.
+系统翻译没有返回完整结果，请重试。	系統翻譯沒有回傳完整結果，請重試。	System translation returned an incomplete result. Try again.	システム翻訳の結果が不完全でした。もう一度試してください。	시스템 번역 결과가 완전하지 않습니다. 다시 시도하세요.	La traduction système a renvoyé un résultat incomplet. Réessayez.	La traducción del sistema devolvió un resultado incompleto. Inténtalo de nuevo.	Die Systemübersetzung war unvollständig. Bitte erneut versuchen.
+下载翻译模型	下載翻譯模型	Download Translation Model	翻訳モデルをダウンロード	번역 모델 다운로드	Télécharger le modèle de traduction	Descargar modelo de traducción	Übersetzungsmodell laden
+正在准备翻译模型	正在準備翻譯模型	Preparing the translation model	翻訳モデルを準備中	번역 모델 준비 중	Préparation du modèle de traduction	Preparando el modelo de traducción	Übersetzungsmodell wird vorbereitet
+系统会询问是否下载这对语言的离线翻译模型。下载完成后这个窗口会自动关闭。	系統會詢問是否下載這對語言的離線翻譯模型。下載完成後這個視窗會自動關閉。	macOS will ask to download the offline model for this language pair. This window closes when the download finishes.	この言語の組み合わせのオフラインモデルをダウンロードするか、システムが確認します。完了するとこのウインドウは自動で閉じます。	시스템이 이 언어 조합의 오프라인 모델을 내려받을지 묻습니다. 다운로드가 끝나면 이 창은 자동으로 닫힙니다.	macOS va proposer de télécharger le modèle hors ligne pour ces langues. Cette fenêtre se ferme à la fin du téléchargement.	macOS te preguntará si quieres descargar el modelo sin conexión de estos idiomas. Esta ventana se cierra al terminar.	macOS fragt, ob das Offline-Modell für dieses Sprachpaar geladen werden soll. Das Fenster schließt sich nach dem Download.
+全局	全域	Global	グローバル	전역	Global	Global	Global
+应用	應用程式	App	アプリ	앱	App	App	App
+框选	框選	Selecting	範囲選択中	영역 선택	Sélection	Selección	Auswahl
+哔哩哔哩开源，150 种语言，代码和术语保留得好	嗶哩嗶哩開源，150 種語言，程式碼和術語保留得好	Open source from Bilibili, 150 languages, keeps code and terms intact	bilibili のオープンソース。150 言語、コードや用語をよく保持	Bilibili 오픈 소스, 150개 언어, 코드와 용어를 잘 보존	Open source par Bilibili, 150 langues, préserve le code et les termes	Código abierto de Bilibili, 150 idiomas, respeta código y términos	Open Source von Bilibili, 150 Sprachen, erhält Code und Fachbegriffe
+腾讯混元开源，33 种语言，速度最快	騰訊混元開源，33 種語言，速度最快	Open source from Tencent Hunyuan, 33 languages, the fastest	Tencent Hunyuan のオープンソース。33 言語、最速	Tencent Hunyuan 오픈 소스, 33개 언어, 가장 빠름	Open source par Tencent Hunyuan, 33 langues, le plus rapide	Código abierto de Tencent Hunyuan, 33 idiomas, el más rápido	Open Source von Tencent Hunyuan, 33 Sprachen, am schnellsten
+截图行为与屏幕权限	截圖行為與螢幕權限	Capture behavior and screen access	撮影の動作と画面収録の権限	캡처 동작과 화면 권한	Capture et accès à l’écran	Captura y acceso a la pantalla	Aufnahme und Bildschirmzugriff
+语言、翻译服务与模型	語言、翻譯服務與模型	Languages, service, and models	言語・翻訳サービス・モデル	언어, 번역 서비스, 모델	Langues, service et modèles	Idiomas, servicio y modelos	Sprachen, Dienst und Modelle
+自定义每个操作的按键	自訂每個操作的按鍵	Choose a key for every action	操作ごとにキーを設定	작업마다 단축키 지정	Une touche pour chaque action	Una tecla para cada acción	Eine Taste für jede Aktion

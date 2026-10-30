@@ -9,9 +9,9 @@ enum ScreenCaptureError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .notAuthorized: return String(localized: "所见即译需要屏幕录制权限。")
-        case .noDisplay: return String(localized: "找不到这块屏幕。")
-        case .failed: return String(localized: "截取屏幕失败，请重试。")
+        case .notAuthorized: return L("所见即译需要屏幕录制权限。")
+        case .noDisplay: return L("找不到这块屏幕。")
+        case .failed: return L("截取屏幕失败，请重试。")
         }
     }
 }

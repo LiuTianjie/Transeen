@@ -29,9 +29,16 @@ final class CaptureController {
     private var sourceApplication: String?
     private var backend: (any TranslationBackend)?
     private var backendError: String?
+    /// What has been translated of the frame being worked on, and how much of it is on screen.
+    private var partialTranslations: [Int: String] = [:]
+    private var partialDrawn = 0
+    private var partialTask: Task<Void, Never>?
     var authorize: () -> Bool = { false }
     var onError: ((String) -> Void)?
     var onReselect: ((CaptureMode) -> Void)?
+    /// Called once the selection and result windows are gone.
+    var onFinished: (() -> Void)?
+    var isActive: Bool { selecting || panel != nil || !selectors.isEmpty }
     var pasteboard = NSPasteboard.general
     var defaults = UserDefaults.standard
     /// The crop is an area of the screen (not an opened picture), worth selecting again.
@@ -53,7 +60,7 @@ final class CaptureController {
         guard authorize() else { return }
         close()
         guard CGPreflightScreenCaptureAccess() else {
-            onError?("请在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中允许 Transeen，随后重新打开应用。")
+            onError?(L("请在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中允许 Transeen，随后重新打开应用。"))
             return
         }
         self.mode = mode
@@ -76,7 +83,7 @@ final class CaptureController {
         selecting = true
         let token = generation
         for screen in NSScreen.screens {
-            let again = lastArea == nil ? "" : state.shortcuts.binding(.lastArea).map { " · \($0.display) 上次区域" } ?? ""
+            let again = lastArea == nil ? "" : state.shortcuts.binding(.lastArea).map { " · " + L("%@ 上次区域", $0.display) } ?? ""
             let selector = ScreenSelectionPanel(screen: screen, title: mode.title + " · " + direction.compactTitle + again)
             selector.onCancel = { [weak self] in self?.close() }
             selector.onDragEnded = { [weak self] rect in self?.selected(rect, screen: screen) }
@@ -127,10 +134,12 @@ final class CaptureController {
     }
 
     func close() {
+        let wasActive = isActive
+        defer { if wasActive { onFinished?() } }
         completionTask?.cancel(); completionTask = nil
         heldPeekKey = nil; state.peeking = false
         generation += 1
-        work?.cancel(); work = nil
+        work?.cancel(); work = nil; partialTask?.cancel(); partialTask = nil
         backend?.cancel(); backend = nil
         selectors.forEach { $0.orderOut(nil) }; selectors = []; selecting = false
         panel?.orderOut(nil); panel = nil
@@ -166,7 +175,7 @@ final class CaptureController {
         let next = CaptureCrop.resized(start.crop, edges: edges, by: snapped, within: source.frame, minimum: ScreenTranslate.minimumSelection)
         if next != crop {
             if !start.changed {
-                generation += 1; work?.cancel(); backend?.cancel()
+                generation += 1; work?.cancel(); backend?.cancel(); partialTask?.cancel(); partialTask = nil
                 completionTask?.cancel(); completionTask = nil
                 state.working = false; state.copyCompleted = false
                 translated = nil
@@ -222,7 +231,7 @@ final class CaptureController {
                 state.automaticallyTranslates = requestedMode != .screenshot
                 // Commit the automatic state before the toolbar's first frame.
                 state.working = state.automaticallyTranslates
-                state.status = state.automaticallyTranslates ? "正在识别与翻译…" : ""
+                state.status = state.automaticallyTranslates ? L("正在识别与翻译…") : ""
                 present(image, rect: rect, source: source)
                 cropIsScreenArea = true
                 // Translation owns its own task after capture completes. The preview
@@ -250,6 +259,7 @@ final class CaptureController {
         return true
     }
     private func valid(_ token: Int) -> Bool { token == generation && !Task.isCancelled }
+    func refreshLanguage() { updateLanguageState(); panel?.refreshUI() }
     private func updateLanguageState() {
         state.source = direction.source
         state.target = direction.target
@@ -266,10 +276,10 @@ final class CaptureController {
         var pair = direction
         let automatic = detectsSource
         guard let cg = frame.cgImage(forProposedRect: nil, context: nil, hints: nil), frame.size.width > 0 else {
-            state.failed = true; state.working = false; state.status = "截图读取失败，请重新框选。"; panel?.refreshUI(); return
+            state.failed = true; state.working = false; state.status = L("截图读取失败，请重新框选。"); panel?.refreshUI(); return
         }
         state.failed = false; state.noText = false; state.warning = nil
-        state.working = true; state.status = "正在识别文字…"; panel?.refreshUI()
+        state.working = true; state.status = L("正在识别文字…"); panel?.refreshUI()
         Self.logger.notice("translation started")
         do {
             let scale = CGFloat(cg.width) / frame.size.width
@@ -280,39 +290,44 @@ final class CaptureController {
             guard valid(token) else { return }
             guard let analysis, analysis.recognized > 0 else {
                 Self.logger.notice("recognition returned no text")
-                state.noText = true; state.working = false; state.status = "没有识别到文字，可重新框选或重试。"; panel?.refreshUI(); return
+                state.noText = true; state.working = false; state.status = L("没有识别到文字，可重新框选或重试。"); panel?.refreshUI(); return
             }
             if let source = analysis.detectedSource {
-                pair = TranslationDirection(source: source, target: pair.target)
+                pair = TranslationDirection(source: source, target: analysis.redirectedTarget ?? pair.target)
                 direction = pair
                 updateLanguageState()
             }
             let readingOrder = PreciseTranslation.regions(analysis.blocks.map(\.rect), fits: { _ in true }).flatMap { $0 }
             state.textBlocks = readingOrder.map { CaptureTextBlock(id: $0, original: analysis.blocks[$0].original) }
             let output: TranslationOutput
-            state.status = "正在翻译…"; panel?.refreshUI()
+            state.status = L("正在翻译…"); panel?.refreshUI()
             if pair.source == pair.target || !analysis.blocks.contains(where: { $0.translate }) { output = TranslationOutput() }
             else {
                 if let backendError { throw ModelError.message(backendError) }
-                guard let backend else { throw ModelError.message("翻译服务尚未就绪，请重试。") }
-                output = try await backend.translate(analysis, direction: pair, app: sourceApplication)
+                guard let backend else { throw ModelError.message(L("翻译服务尚未就绪，请重试。")) }
+                let wanted = analysis.blocks.filter(\.translate).count
+                partialTranslations = [:]; partialDrawn = 0
+                output = try await backend.translate(analysis, direction: pair, app: sourceApplication) { [weak self] sofar in
+                    self?.showPartial(sofar, of: analysis, wanted: wanted, token: token)
+                }
             }
+            partialTask?.cancel(); partialTask = nil
             guard valid(token) else { return }
             let translations = output.translations
             let composed = await Task.detached(priority: .userInitiated) { ScreenPipeline.compose(analysis, translations: translations) }.value
             guard valid(token) else { return }
-            guard let picture = composed.pixels.cgImage() else { throw ModelError.message("译文画面生成失败，请重试。") }
+            guard let picture = composed.pixels.cgImage() else { throw ModelError.message(L("译文画面生成失败，请重试。")) }
             translated = NSImage(cgImage: picture, size: frame.size)
             state.hasTranslatedOnce = true
             state.textBlocks = readingOrder.map { CaptureTextBlock(id: $0, original: analysis.blocks[$0].original, translation: translations[$0]) }
             state.warning = output.warning
             if composed.cut > 0 || composed.placed.count < translations.filter({ $0.value != analysis.blocks[$0.key].original }).count {
-                state.warning = [output.warning, "部分译文超出原位置，请在「文字」中查看全文。"].compactMap { $0 }.joined(separator: " ")
+                state.warning = [output.warning, L("部分译文超出原位置，请在「文字」中查看全文。")].compactMap { $0 }.joined(separator: " ")
             }
             state.working = false
             Self.logger.notice("translation completed")
-            let swap = state.shortcuts.binding(.captureTranslate).map { " · 再按 \($0.display) 交换语言" } ?? ""
-            state.status = translations.isEmpty ? "没有需要翻译的文字" + swap : "已翻译 \(translations.count) 处 · " + state.shortcuts.help("按住看原文", .peek) + swap
+            let swap = state.shortcuts.binding(.captureTranslate).map { " · " + L("再按 %@ 交换语言", $0.display) } ?? ""
+            state.status = translations.isEmpty ? L("没有需要翻译的文字") + swap : L("已翻译 %ld 处", translations.count) + " · " + state.shortcuts.help(L("按住看原文"), .peek) + swap
             displayCurrent()
         } catch {
             guard valid(token) else { return }
@@ -320,12 +335,32 @@ final class CaptureController {
             state.failed = true; state.working = false; state.status = error.localizedDescription; panel?.refreshUI()
         }
     }
+    /// Draws what is translated so far, at most every 150 ms, while the rest is on its way.
+    private func showPartial(_ sofar: TranslationOutput, of analysis: ScreenPipeline.Analysis, wanted: Int, token: Int) {
+        guard valid(token) else { return }
+        partialTranslations = sofar.translations
+        state.status = L("正在翻译…") + " \(min(wanted, sofar.translations.count + sofar.kept.count))/\(wanted)"; panel?.refreshUI()
+        guard partialTask == nil else { return }
+        let size = original.size
+        partialTask = Task { [weak self] in
+            while let self, self.valid(token), self.partialTranslations.count > self.partialDrawn {
+                let translations = self.partialTranslations
+                self.partialDrawn = translations.count
+                let composed = await Task.detached(priority: .userInitiated) { ScreenPipeline.compose(analysis, translations: translations) }.value
+                guard self.valid(token), let picture = composed.pixels.cgImage() else { return }
+                self.translated = NSImage(cgImage: picture, size: size)
+                self.displayCurrent()
+                do { try await Task.sleep(for: .milliseconds(150)) } catch { return }
+            }
+            self?.partialTask = nil
+        }
+    }
     private func restart() {
-        generation += 1; work?.cancel(); backend?.cancel()
+        generation += 1; work?.cancel(); backend?.cancel(); partialTask?.cancel(); partialTask = nil
         let token = generation
         state.failed = false; state.noText = false; state.working = true
         state.warning = nil; state.textCopyCompleted = false
-        state.status = "正在识别与翻译…"; panel?.refreshUI()
+        state.status = L("正在识别与翻译…"); panel?.refreshUI()
         work = Task { [weak self] in
             guard let self else { return }
             await translateFrame(token: token)
@@ -421,7 +456,7 @@ final class CaptureController {
                         self.state.copyCompleted = false
                     }
                 }
-            } else { state.failed = true; state.status = "未能复制图片，请重试"; panel?.refreshUI() }
+            } else { state.failed = true; state.status = L("未能复制图片，请重试"); panel?.refreshUI() }
         case "save": save()
         default: break
         }
@@ -451,7 +486,7 @@ final class CaptureController {
             do {
                 try png.write(to: url, options: .atomic)
                 if let self, self.generation == token {
-                    self.state.failed = false; self.state.status = "已保存图片"; self.panel?.refreshUI()
+                    self.state.failed = false; self.state.status = L("已保存图片"); self.panel?.refreshUI()
                 }
             }
             catch { self?.onError?(error.localizedDescription) }
@@ -536,7 +571,7 @@ final class CaptureController {
         await translateFrame(token: generation)
     }
     func preview(_ image: NSImage) {
-        close(); state = CaptureState(); state.status = "截图"; state.direction = "EN → 中文"
+        close(); state = CaptureState(); state.status = L("截图"); state.direction = "EN → 中文"
         direction = TranslationDirection(source: .en, target: .zhHans)
         detectsSource = false; sourceApplication = nil; updateLanguageState()
         original = image

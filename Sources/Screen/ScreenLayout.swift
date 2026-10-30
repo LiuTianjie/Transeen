@@ -90,7 +90,7 @@ struct ScreenCaptureShortcut: Equatable, Hashable {
         case kVK_ANSI_7: return "7"
         case kVK_ANSI_8: return "8"
         case kVK_ANSI_9: return "9"
-        case kVK_Space: return String(localized: "空格")
+        case kVK_Space: return L("空格")
         case kVK_Return: return "↩"
         case kVK_Escape: return "Esc"
         case kVK_Tab: return "Tab"
@@ -131,7 +131,7 @@ struct ScreenCaptureShortcut: Equatable, Hashable {
         case kVK_F18: return "F18"
         case kVK_F19: return "F19"
         case kVK_F20: return "F20"
-        default: return String(localized: "键\(keyCode)")
+        default: return L("键%ld", Int(keyCode))
         }
     }
 }
