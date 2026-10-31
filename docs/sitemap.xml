@@ -2,34 +2,298 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://transeen.itool.tech/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <image:image><image:loc>https://transeen.itool.tech/assets/og-image.jpg</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/preview.webp</image:loc></image:image>
     <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
   </url>
   <url>
     <loc>https://transeen.itool.tech/zh/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
     <image:image><image:loc>https://transeen.itool.tech/assets/og-image-zh.jpg</image:loc></image:image>
     <image:image><image:loc>https://transeen.itool.tech/assets/preview-zh.webp</image:loc></image:image>
     <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/zh-hant/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-zh-hant.jpg</image:loc></image:image>
+    <image:image><image:loc>https://transeen.itool.tech/assets/preview-zh-hant.webp</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/ja/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-ja.jpg</image:loc></image:image>
+    <image:image><image:loc>https://transeen.itool.tech/assets/preview-ja.webp</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/ko/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-ko.jpg</image:loc></image:image>
+    <image:image><image:loc>https://transeen.itool.tech/assets/preview-ko.webp</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/fr/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-fr.jpg</image:loc></image:image>
+    <image:image><image:loc>https://transeen.itool.tech/assets/preview-fr.webp</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/es/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-es.jpg</image:loc></image:image>
+    <image:image><image:loc>https://transeen.itool.tech/assets/preview-es.webp</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/de/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-de.jpg</image:loc></image:image>
+    <image:image><image:loc>https://transeen.itool.tech/assets/preview-de.webp</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
   </url>
   <url>
     <loc>https://transeen.itool.tech/guide/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image.jpg</image:loc></image:image>
     <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/guide/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/guide/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/guide/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
   </url>
   <url>
     <loc>https://transeen.itool.tech/zh/guide/</loc>
-    <lastmod>2026-10-30</lastmod>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-zh.jpg</image:loc></image:image>
     <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/guide/" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/guide/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/guide/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/zh-hant/guide/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-zh-hant.jpg</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/guide/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/guide/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/ja/guide/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-ja.jpg</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/guide/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/guide/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/ko/guide/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-ko.jpg</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/guide/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/guide/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/fr/guide/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-fr.jpg</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/guide/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/guide/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/es/guide/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-es.jpg</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/guide/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/guide/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
+  </url>
+  <url>
+    <loc>https://transeen.itool.tech/de/guide/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <image:image><image:loc>https://transeen.itool.tech/assets/og-image-de.jpg</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/guide/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/guide/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/guide/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
   </url>
 </urlset>

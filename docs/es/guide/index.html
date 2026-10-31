@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cómo traducir una captura de pantalla en Mac: guía de Transeen</title>
+    <meta name="description" content="Instala Transeen, actívalo, permite la grabación de pantalla y traduce tu primera zona. Todos los atajos de teclado, los modelos locales integrados, las API compatibles con OpenAI y soluciones a los problemas habituales." />
+    <meta name="keywords" content="traducir captura de pantalla Mac, guía Transeen, permiso de grabación de pantalla, atajo de traducción Mac, modelo de traducción local, traducción sin conexión" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="LiuTianjie" />
+    <meta name="theme-color" content="#08090a" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="https://transeen.itool.tech/es/guide/" />
+    <link rel="alternate" hreflang="en" href="https://transeen.itool.tech/guide/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/guide/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/guide/" />
+    <link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/guide/" />
+    <link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/guide/" />
+    <link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/guide/" />
+    <link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/guide/" />
+    <link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/guide/" />
+    <link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/guide/" />
+    <link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/guide/" />
+    <link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/guide/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Transeen" />
+    <meta property="og:url" content="https://transeen.itool.tech/es/guide/" />
+    <meta property="og:title" content="Configura Transeen en cinco pasos" />
+    <meta property="og:description" content="De la descarga a tu primera captura traducida en un Mac, con todos los atajos y la configuración de modelos." />
+    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-es.jpg?v=ecbfa45057e1" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Una página japonesa de reserva de trenes en un Mac, con la tarjeta seleccionada traducida al español en su sitio y la barra de herramientas de Transeen debajo" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:locale:alternate" content="zh_TW" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="ko_KR" />
+    <meta property="og:locale:alternate" content="fr_FR" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta property="article:published_time" content="2026-10-28" />
+    <meta property="article:modified_time" content="2026-10-31" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Configura Transeen en cinco pasos" />
+    <meta name="twitter:description" content="De la descarga a tu primera captura traducida en un Mac, con todos los atajos y la configuración de modelos." />
+    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-es.jpg?v=ecbfa45057e1" />
+    <meta name="twitter:image:alt" content="Una página japonesa de reserva de trenes en un Mac, con la tarjeta seleccionada traducida al español en su sitio y la barra de herramientas de Transeen debajo" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://transeen.itool.tech/#organization",
+            "name": "Transeen",
+            "url": "https://transeen.itool.tech/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://transeen.itool.tech/assets/icon-512.png",
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://github.com/LiuTianjie/Transeen"
+            ],
+            "parentOrganization": {
+              "@type": "Organization",
+              "name": "iTool",
+              "url": "https://itool.tech/"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://transeen.itool.tech/#website",
+            "url": "https://transeen.itool.tech/",
+            "name": "Transeen",
+            "inLanguage": [
+              "en",
+              "zh-Hans",
+              "zh-Hant",
+              "ja",
+              "ko",
+              "fr",
+              "es",
+              "de"
+            ],
+            "publisher": {
+              "@id": "https://transeen.itool.tech/#organization"
+            }
+          },
+          {
+            "@type": "TechArticle",
+            "@id": "https://transeen.itool.tech/es/guide/#article",
+            "headline": "Configura Transeen en cinco pasos.",
+            "description": "Instala Transeen, actívalo, permite la grabación de pantalla y traduce tu primera zona. Todos los atajos de teclado, los modelos locales integrados, las API compatibles con OpenAI y soluciones a los problemas habituales.",
+            "inLanguage": "es",
+            "url": "https://transeen.itool.tech/es/guide/",
+            "mainEntityOfPage": "https://transeen.itool.tech/es/guide/",
+            "image": "https://transeen.itool.tech/assets/og-image-es.jpg",
+            "datePublished": "2026-10-28",
+            "dateModified": "2026-10-31",
+            "author": {
+              "@type": "Person",
+              "name": "LiuTianjie",
+              "url": "https://github.com/LiuTianjie"
+            },
+            "publisher": {
+              "@id": "https://transeen.itool.tech/#organization"
+            },
+            "about": {
+              "@id": "https://transeen.itool.tech/#software"
+            },
+            "isPartOf": {
+              "@id": "https://transeen.itool.tech/#website"
+            },
+            "proficiencyLevel": "Beginner"
+          },
+          {
+            "@type": "HowTo",
+            "@id": "https://transeen.itool.tech/es/guide/#howto",
+            "name": "Cómo traducir una captura de pantalla en un Mac con Transeen",
+            "inLanguage": "es",
+            "image": "https://transeen.itool.tech/assets/og-image-es.jpg",
+            "supply": [
+              {
+                "@type": "HowToSupply",
+                "name": "Un código de activación TR-"
+              }
+            ],
+            "tool": [
+              {
+                "@type": "HowToTool",
+                "name": "Un Mac con macOS 26 o posterior"
+              },
+              {
+                "@type": "HowToTool",
+                "name": "Transeen"
+              }
+            ],
+            "step": [
+              {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Instalar",
+                "url": "https://transeen.itool.tech/es/guide/#install",
+                "text": "Descarga el DMG de GitHub Releases, arrastra Transeen a Aplicaciones y ábrelo. Se ejecuta en la barra de menús."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Activar",
+                "url": "https://transeen.itool.tech/es/guide/#activate",
+                "text": "Elige Activación y cuenta… en el menú de la barra de menús, introduce tu código TR- y elige Activar este Mac."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Permitir la grabación de pantalla",
+                "url": "https://transeen.itool.tech/es/guide/#permission",
+                "text": "Activa Transeen en Ajustes del Sistema, Privacidad y seguridad, Grabación de pantalla y audio del sistema."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Elegir idiomas",
+                "url": "https://transeen.itool.tech/es/guide/#languages",
+                "text": "Elige el idioma de origen y el de destino, y descarga con antelación los paquetes de idioma de Apple que necesites en Ajustes, General, Traducción."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Traducir una zona",
+                "url": "https://transeen.itool.tech/es/guide/#translate",
+                "text": "En cualquier app, pulsa F1, selecciona parte de la pantalla y lee la traducción en su sitio. Pulsa Tab para compararla con el original."
+              }
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://transeen.itool.tech/es/guide/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Transeen",
+                "item": "https://transeen.itool.tech/es/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Guía de configuración",
+                "item": "https://transeen.itool.tech/es/guide/"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <link rel="icon" href="../../favicon.ico" sizes="48x48" />
+    <link rel="icon" href="../../assets/app-icon.svg?v=8d9ae33a2b93" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=a9e04b962aeb" />
+    <link rel="manifest" href="../../site.webmanifest" />
+    <link rel="preload" href="../../assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../../assets/site.css?v=1c3da10917de" />
+    <script>document.documentElement.classList.add("js")</script>
+  </head>
+  <body>
+    <!-- part:sprite -->
+    <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;overflow:hidden">
+      <symbol id="ui-cursorarrow" viewBox="0 0 20 20">
+        <path d="M5.6 2.9v12.8l3.2-3 2.2 4.6 2.1-.9-2.2-4.5 4.5-.3Z" fill="currentColor" stroke="currentColor" stroke-width="0.7" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-rectangle" viewBox="0 0 20 20">
+        <rect x="2.6" y="5" width="14.8" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.45" />
+      </symbol>
+      <symbol id="ui-circle" viewBox="0 0 20 20">
+        <circle cx="10" cy="10" r="7.1" fill="none" stroke="currentColor" stroke-width="1.45" />
+      </symbol>
+      <symbol id="ui-arrow" viewBox="0 0 20 20">
+        <path d="M4.8 15.2 15 5M7.6 5H15v7.4" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-pencil" viewBox="0 0 20 20">
+        <path d="M4 16l.9-3.4 8.4-8.4a1.6 1.6 0 0 1 2.3 0l.2.2a1.6 1.6 0 0 1 0 2.3L7.4 15.1Z" fill="currentColor" />
+      </symbol>
+      <symbol id="ui-number" viewBox="0 0 20 20">
+        <circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.35" />
+        <path d="M8.5 7.7 10.6 6.4v7.4" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-text" viewBox="0 0 20 20">
+        <path d="M3.4 5.4h13.2M3.4 8.8h9.2M3.4 12.2h13.2M3.4 15.6h7.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </symbol>
+      <symbol id="ui-pin" viewBox="0 0 20 20">
+        <path d="M7 3.4h6M8.2 3.4v5.3l-2.6 2.9h8.8l-2.6-2.9V3.4M10 11.6v5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-ellipsis" viewBox="0 0 20 20">
+        <circle cx="4.4" cy="10" r="1.35" fill="currentColor" /><circle cx="10" cy="10" r="1.35" fill="currentColor" /><circle cx="15.6" cy="10" r="1.35" fill="currentColor" />
+      </symbol>
+      <symbol id="ui-copy" viewBox="0 0 20 20">
+        <path d="M7.4 5.2V4.3c0-.8.6-1.4 1.4-1.4h4.4l3 3v7.3c0 .8-.6 1.4-1.4 1.4h-.9" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round" />
+        <path d="M5.2 5.4h4.4l3 3v7.4c0 .8-.6 1.4-1.4 1.4H5.2c-.8 0-1.4-.6-1.4-1.4V6.8c0-.8.6-1.4 1.4-1.4Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-check" viewBox="0 0 20 20">
+        <path d="M4.8 10.6 8.3 14l7-7.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-xmark" viewBox="0 0 20 20">
+        <path d="M5.4 5.4l9.2 9.2M14.6 5.4l-9.2 9.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </symbol>
+      <symbol id="ui-globe" viewBox="0 0 20 20">
+        <g fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="10" cy="10" r="7.3" /><ellipse cx="10" cy="10" rx="3.1" ry="7.3" />
+          <path d="M2.7 10h14.6M3.9 6.2h12.2M3.9 13.8h12.2" />
+        </g>
+      </symbol>
+      <symbol id="ui-swap" viewBox="0 0 20 20">
+        <path d="M6.6 4 3.4 7.2l3.2 3.2M3.4 7.2h12.2M13.4 9.6l3.2 3.2-3.2 3.2M16.6 12.8H4.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-viewfinder" viewBox="0 0 20 20">
+        <path d="M3.4 7V5.2c0-1 .8-1.8 1.8-1.8H7M13 3.4h1.8c1 0 1.8.8 1.8 1.8V7M16.6 13v1.8c0 1-.8 1.8-1.8 1.8H13M7 16.6H5.2c-1 0-1.8-.8-1.8-1.8V13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </symbol>
+      <symbol id="cur-arrow" viewBox="0 0 24 24">
+        <path d="M4.5 2.5v16.4l4.2-4 2.9 6.6 3-1.3-2.8-6.4h5.9Z" fill="#000" stroke="#fff" stroke-width="1.3" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-download" viewBox="0 0 20 20">
+        <path d="M10 3.5v9.2M6.4 9.3 10 12.9l3.6-3.6M4.2 16.2h11.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-lock" viewBox="0 0 20 20">
+        <rect x="4.2" y="8.6" width="11.6" height="8.4" rx="2" fill="none" stroke="currentColor" stroke-width="1.4" />
+        <path d="M6.8 8.6V6.4a3.2 3.2 0 0 1 6.4 0v2.2" fill="none" stroke="currentColor" stroke-width="1.4" />
+      </symbol>
+      <symbol id="ui-replay" viewBox="0 0 20 20">
+        <path d="M4.6 10a5.4 5.4 0 1 0 1.6-3.8M4.4 3.6v3h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-crop" viewBox="0 0 20 20">
+        <path d="M6 2.8V14h11.2M2.8 6H14v11.2" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+    </svg>
+    <!-- /part:sprite -->
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="../" aria-label="Inicio de Transeen"><img src="../../assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
+        <nav class="nav-links" aria-label="Navegación principal">
+          <a href="../#how">Cómo funciona</a>
+          <a href="../#apps">Cualquier app</a>
+          <a href="../#tools">Herramientas</a>
+          <a href="../#languages">Idiomas</a>
+          <a href="./" aria-current="page">Guía</a>
+        </nav>
+        <div class="nav-end">
+          <details class="langmenu">
+            <summary aria-label="Idioma: Español"><svg aria-hidden="true"><use href="#ui-globe" /></svg><span>Español</span></summary>
+            <ul role="list">
+              <li><a href="../../guide/" hreflang="en" lang="en">English</a></li>
+              <li><a href="../../zh/guide/" hreflang="zh-Hans" lang="zh-CN">简体中文</a></li>
+              <li><a href="../../zh-hant/guide/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li>
+              <li><a href="../../ja/guide/" hreflang="ja" lang="ja">日本語</a></li>
+              <li><a href="../../ko/guide/" hreflang="ko" lang="ko">한국어</a></li>
+              <li><a href="../../fr/guide/" hreflang="fr" lang="fr">Français</a></li>
+              <li><a href="./" aria-current="page">Español</a></li>
+              <li><a href="../../de/guide/" hreflang="de" lang="de">Deutsch</a></li>
+            </ul>
+          </details>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/latest">Descargar</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="guide-hero" aria-labelledby="guide-title">
+        <span data-top></span>
+        <div class="wrap">
+          <nav class="crumbs load" aria-label="Ruta de navegación"><a href="../">Transeen</a><span aria-hidden="true">/</span><span aria-current="page">Guía de configuración</span></nav>
+          <h1 class="load" id="guide-title" style="--d: 60">Configura Transeen <span>en cinco pasos.</span></h1>
+          <p class="hero-lead load" style="--d: 140">De la descarga a tu primera captura traducida. Necesitas un Mac con macOS 26 o posterior y un código de activación TR-.</p>
+          <div class="hero-actions load" style="--d: 220">
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Descargar para Mac</a>
+            <a class="link-arrow" href="#shortcuts">Todos los atajos</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap guide">
+        <nav class="toc" aria-labelledby="toc-title">
+          <p id="toc-title">En esta página</p>
+          <ol>
+            <li><a href="#install">Instalar</a></li>
+            <li><a href="#activate">Activar</a></li>
+            <li><a href="#permission">Permitir la grabación de pantalla</a></li>
+            <li><a href="#languages">Elegir idiomas</a></li>
+            <li><a href="#translate">Traducir una zona</a></li>
+            <li><a href="#mark">Anotar</a></li>
+            <li><a href="#keep">Copiar, guardar o fijar</a></li>
+            <li><a href="#model">Elegir un servicio de traducción</a></li>
+            <li><a href="#shortcuts">Atajos de teclado</a></li>
+            <li><a href="#troubleshooting">Solución de problemas</a></li>
+            <li><a href="#build">Compilar desde el código fuente</a></li>
+          </ol>
+        </nav>
+
+        <article class="doc">
+          <section id="install" aria-labelledby="install-title">
+            <h2 id="install-title"><small>01</small>Instalar</h2>
+            <ol>
+              <li>Descarga el DMG más reciente de <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a>. Ocupa unos 10 MB y es una sola app universal para chip de Apple e Intel.</li>
+              <li>Abre el DMG y arrastra Transeen a Aplicaciones.</li>
+              <li>Abre Transeen desde Aplicaciones. Vive en la barra de menús, así que busca su icono allí y no en el Dock.</li>
+            </ol>
+            <p>La app y el DMG están firmados con un Developer ID y notarizados por Apple, así que macOS los abre sin avisos. En la misma página hay un ZIP y sumas de verificación SHA-256. La interfaz sigue el idioma de tu Mac: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español o Deutsch.</p>
+          </section>
+
+          <section id="activate" aria-labelledby="activate-title">
+            <h2 id="activate-title"><small>02</small>Activar</h2>
+            <ol>
+              <li>Elige <strong>Activación y cuenta…</strong> en el menú de la barra de menús, o <strong>Activar Transeen</strong> en la ventana de inicio.</li>
+              <li>Introduce tu código, que tiene la forma <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>, y elige <strong>Activar este Mac</strong>. No hace falta iniciar sesión.</li>
+              <li>Si quieres, inicia sesión en una cuenta de iTool con Google, GitHub o tu correo y vincula la licencia. Al iniciar sesión en la misma cuenta más adelante, se restaura.</li>
+            </ol>
+            <p>La activación guarda un ID de instalación aleatorio y un recibo en tu llavero; nunca lee el número de serie del Mac. Un código cubre un Mac, y vincular una cuenta no crea una segunda licencia. Los códigos SM- de StupidMirror e IT- de iTool Pro son de otros productos y no funcionan aquí. Para conseguir un código, <a href="https://github.com/LiuTianjie/Transeen/discussions">pregunta en GitHub Discussions</a>.</p>
+          </section>
+
+          <section id="permission" aria-labelledby="permission-title">
+            <h2 id="permission-title"><small>03</small>Permitir la grabación de pantalla</h2>
+            <p>La primera vez que capturas, Transeen pide el permiso de grabación de pantalla. Solo usa la imagen de la pantalla, nunca el audio, y solo cuando pulsas un atajo de captura. No guarda historial ni graba nunca de forma continua.</p>
+            <ol>
+              <li>Elige <strong>Abrir Ajustes del Sistema…</strong>, o ve a Ajustes del Sistema → Privacidad y seguridad → Grabación de pantalla y audio del sistema.</li>
+              <li>Busca Transeen y actívalo.</li>
+              <li>Vuelve a Transeen. Lo comprueba de nuevo por sí solo y muestra <strong>Todo listo</strong>; elige <strong>Seleccionar un área</strong> para continuar.</li>
+            </ol>
+            <p>Si está activado pero sigue sin funcionar, usa <strong>Comprobar de nuevo</strong> o <strong>Volver a abrir</strong> en la misma ventana.</p>
+          </section>
+
+          <section id="languages" aria-labelledby="languages-title">
+            <h2 id="languages-title"><small>04</small>Elegir idiomas</h2>
+            <p>La ventana de inicio tiene dos menús, <strong>Idioma de origen</strong> e <strong>Idioma de destino</strong>. Deja el origen en <strong>Detección auto</strong> o elige uno de los ocho idiomas: chino simplificado, chino tradicional, inglés, japonés, coreano, francés, español y alemán. Cualquiera se traduce a cualquier otro.</p>
+            <p>Con una captura abierta, la dirección que aparece bajo las herramientas (por ejemplo JA → ES) cambia cualquiera de los dos idiomas, y al volver a pulsar <kbd>F1</kbd> se intercambian.</p>
+            <p>La Traducción de Apple necesita un paquete de idioma para cada par. La guía que se abre la primera vez, y después Ajustes → General → Traducción, muestran los paquetes de tu idioma de destino con su estado. <strong>Descargar</strong> obtiene uno antes de que tu primera captura lo necesite; a partir de ahí la traducción se hace en tu Mac, sin conexión. Los paquetes también aparecen en Ajustes del Sistema → General → Idioma y región → Idiomas de traducción.</p>
+          </section>
+
+          <section id="translate" aria-labelledby="translate-title">
+            <h2 id="translate-title"><small>05</small>Traducir una zona</h2>
+            <ol>
+              <li>En cualquier app, pulsa <kbd>F1</kbd>. La pantalla se congela y se oscurece. En el teclado de un portátil es <kbd>fn</kbd> <kbd>F1</kbd>, salvo que las teclas F funcionen como teclas de función estándar.</li>
+              <li>Pasa el puntero para ajustarte a un párrafo, un campo o una ventana y haz clic, o dibuja tu propio marco. Un marco puede abarcar ventanas de varias apps. <kbd>Esc</kbd> o un clic derecho cancela.</li>
+              <li>¿El mismo sitio que la última vez? Pulsa <kbd>R</kbd> mientras seleccionas y se toma de nuevo la zona de la última captura, incluso tras reiniciar.</li>
+              <li>Lee la traducción donde estaba el texto. Las líneas aparecen a medida que se traducen. Pulsa <kbd>Tab</kbd> para cambiar al original y volver, o mantén pulsada la <kbd>barra espaciadora</kbd> para echarle un vistazo.</li>
+              <li>¿Te faltó un trozo? Arrastra un borde o una esquina de la captura. Se recorta de nuevo a partir de la misma pantalla congelada, tus anotaciones se quedan en su sitio y se vuelve a traducir al soltar.</li>
+              <li>¿Al revés? Pulsa <kbd>F1</kbd> otra vez con la captura abierta y los dos idiomas se intercambian.</li>
+            </ol>
+            <p>Transeen lee los píxeles de la pantalla, así que funciona igual en todas las apps, incluidas las de pantalla completa y en todos los Spaces, y un menú o una ayuda abiertos se quedan en la imagen. <kbd>F1</kbd> es el único atajo que funciona en cualquier app desde el primer momento. Para capturar y anotar sin traducir, elige <strong>Anotar</strong> en el menú de la barra de menús o asígnale una tecla en Ajustes → Atajos; pulsa <kbd>T</kbd> en esa ventana si al final quieres la traducción. Para traducir una imagen que ya tienes, elige <strong>Abrir imagen…</strong> o pulsa <kbd>⌘O</kbd>.</p>
+          </section>
+
+          <section id="mark" aria-labelledby="mark-title">
+            <h2 id="mark-title"><small>06</small>Anotar</h2>
+            <p>Elige una herramienta en la barra de herramientas o pulsa su tecla: <kbd>R</kbd> para un rectángulo, <kbd>O</kbd> para una elipse, <kbd>A</kbd> para una flecha, <kbd>P</kbd> para el lápiz y <kbd>V</kbd> para seleccionar y mover. Una herramienta de dibujo siempre dibuja, aunque empieces sobre una anotación; usa <kbd>V</kbd> para coger una. Los números cuentan desde 1 y conservan su valor al deshacer y rehacer.</p>
+            <p>Elige uno de los seis colores y de los tres grosores, o abre los controles deslizantes para cualquier color y un grosor de 1 a 10. <kbd>⌘Z</kbd> y <kbd>⌘⇧Z</kbd> deshacen y rehacen; <kbd>Supr</kbd> elimina la anotación seleccionada. Las anotaciones tienen su propia capa, así que alternar entre original y traducción nunca las mueve.</p>
+          </section>
+
+          <section id="keep" aria-labelledby="keep-title">
+            <h2 id="keep-title"><small>07</small>Copiar, guardar o fijar</h2>
+            <ul>
+              <li><kbd>⌘C</kbd> copia la imagen tal como la ves, anotaciones incluidas, incluso mientras se está traduciendo. De forma predeterminada también cierra la captura; desactiva <strong>Cerrar la captura después de copiar</strong> en Ajustes para mantenerla abierta.</li>
+              <li><kbd>⌘S</kbd> la guarda en PNG.</li>
+              <li><strong>Fijar en pantalla</strong> deja la imagen en la pantalla como una ventana flotante propia y termina la captura, para que la siguiente empiece enseguida. Una captura fijada se queda encima de la app a la que cambies. Arrástrala adonde quieras y guarda tantas como necesites; haz clic derecho en una para copiarla, guardarla, alternar entre original y traducción o cerrarla.</li>
+              <li><strong>Texto</strong> abre la traducción completa junto al original, lista para copiar.</li>
+            </ul>
+          </section>
+
+          <section id="model" aria-labelledby="model-title">
+            <h2 id="model-title"><small>08</small>Elegir un servicio de traducción</h2>
+            <p>Abre Ajustes (<kbd>⌘,</kbd>) → General → Traducción y elige un <strong>Servicio de traducción</strong>. El reconocimiento de texto siempre ocurre en tu Mac.</p>
+            <h3>Traducción de Apple (en el dispositivo)</h3>
+            <p>La opción predeterminada. Usa los paquetes de idioma del paso 4, funciona sin conexión y no envía nada a ningún sitio. Las líneas se traducen en grupos de ocho, así que una captura larga se va completando mientras lees.</p>
+            <h3>Modelo de traducción local</h3>
+            <p>Descarga Index-Translate 2B o Hy-MT2 1.8B, de unos 1,1 GB cada uno. El modelo se ejecuta dentro de Transeen, sin cuenta, sin otra app y sin red. Necesita un Mac con chip de Apple. La primera traducción tarda unos segundos en cargar el modelo, y su memoria se libera tras cinco minutos sin uso. <strong>Eliminar modelo</strong> lo quita de nuevo.</p>
+            <h3>API de LLM</h3>
+            <p>Cualquier endpoint chat/completions compatible con OpenAI. Rellena:</p>
+            <ul>
+              <li><strong>Endpoint</strong>, la URL completa, por ejemplo <code>https://api.openai.com/v1/chat/completions</code>;</li>
+              <li><strong>Nombre del modelo</strong>;</li>
+              <li>la clave de API, si el servicio la necesita, y después <strong>Guardar clave</strong>. Se guarda en tu llavero. <strong>Probar conexión</strong> la comprueba.</li>
+            </ul>
+            <p>También sirve un servidor en tu propio Mac: las direcciones locales pueden usar HTTP sin clave, por ejemplo <code>http://localhost:11434/v1/chat/completions</code> para Ollama. Las direcciones remotas deben usar HTTPS. Este modo solo envía el texto reconocido, nunca la captura. Si una solicitud falla, Transeen muestra el error y conserva la imagen original.</p>
+          </section>
+
+          <section id="shortcuts" aria-labelledby="shortcuts-title">
+            <h2 id="shortcuts-title"><small>09</small>Atajos de teclado</h2>
+            <div class="table-wrap">
+              <table class="keys-table">
+                <thead><tr><th scope="col">Predeterminado</th><th scope="col">Acción</th></tr></thead>
+                <tbody>
+                  <tr><td><kbd>F1</kbd></td><td>Seleccionar una zona y traducirla, desde cualquier app</td></tr>
+                  <tr><td><kbd>R</kbd> al seleccionar</td><td>Tomar de nuevo la zona de la última captura</td></tr>
+                  <tr><td><kbd>F1</kbd> con una captura abierta</td><td>Intercambiar los idiomas, o traducir una captura de «Anotar»</td></tr>
+                  <tr><td><kbd>Tab</kbd></td><td>Alternar entre original y traducción</td></tr>
+                  <tr><td>Mantener <kbd>Espacio</kbd></td><td>Echar un vistazo al original</td></tr>
+                  <tr><td><kbd>T</kbd></td><td>Traducir, o reintentar</td></tr>
+                  <tr><td><kbd>D</kbd></td><td>Intercambiar los idiomas</td></tr>
+                  <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>Rectángulo, elipse, flecha, lápiz</td></tr>
+                  <tr><td><kbd>V</kbd></td><td>Seleccionar y mover anotaciones</td></tr>
+                  <tr><td><kbd>⌘C</kbd></td><td>Copiar la imagen</td></tr>
+                  <tr><td><kbd>⌘S</kbd></td><td>Guardar en PNG</td></tr>
+                  <tr><td><kbd>⌘Z</kbd> <kbd>⌘⇧Z</kbd></td><td>Deshacer, rehacer</td></tr>
+                  <tr><td><kbd>Esc</kbd></td><td>Cerrar la captura, o cancelar la selección</td></tr>
+                  <tr><td><kbd>⌘O</kbd></td><td>Abrir una imagen</td></tr>
+                  <tr><td><kbd>⌘,</kbd></td><td>Abrir Ajustes</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Cámbialos en Ajustes → Atajos; <strong>Restaurar todos los atajos predeterminados</strong> los devuelve a su estado inicial. <strong>Anotar</strong> y <strong>Ver el original en cualquier lugar</strong> no tienen tecla hasta que les asignes una. Los atajos globales necesitan <kbd>⌘</kbd>, <kbd>⌥</kbd> o <kbd>⌃</kbd>, o una tecla F.</p>
+          </section>
+
+          <section id="troubleshooting" aria-labelledby="troubleshooting-title">
+            <h2 id="troubleshooting-title"><small>10</small>Solución de problemas</h2>
+            <h3>No pasa nada al pulsar F1</h3>
+            <p>En el teclado de un portátil, F1 cambia el brillo a menos que mantengas pulsada <kbd>fn</kbd> o actives «Usar las teclas F1, F2, etc. como teclas de función estándar» en Ajustes del Sistema → Teclado → Atajos de teclado → Teclas de función. También puede que otra app ocupe F1; Transeen te avisa cuando no puede registrar un atajo. Elige otra tecla en Ajustes → Atajos, o empieza desde <strong>Capturar y traducir</strong> en el menú de la barra de menús.</p>
+            <h3>La captura sale vacía o el permiso se pide una y otra vez</h3>
+            <p>Abre <strong>Permiso de pantalla…</strong> en el menú de la barra de menús. Si Ajustes del Sistema ya muestra Transeen activado, desactívalo y vuelve a activarlo, y luego elige <strong>Volver a abrir</strong>.</p>
+            <h3>Una parte de la ventana sale en negro</h3>
+            <p>Algunas apps protegen el vídeo y otros contenidos de la grabación de pantalla, y salen en negro en cualquier captura. Transeen no puede leer ni traducir esa parte; el resto del marco funciona con normalidad.</p>
+            <h3>La Traducción de Apple no empieza</h3>
+            <p>Puede que falte el paquete de idioma de ese par o que aún se esté descargando. Descárgalo en Ajustes → General → Traducción, o revisa Ajustes del Sistema → General → Idioma y región → Idiomas de traducción, y vuelve a intentarlo.</p>
+            <h3>El modelo local no se inicia</h3>
+            <p>Inténtalo otra vez. Si sigue fallando, elimina el modelo en Ajustes → General → Traducción y descárgalo de nuevo; una descarga que no supera la verificación se elimina sola.</p>
+            <h3>Parte del texto sale mal traducido</h3>
+            <p>Las maquetaciones densas, las fórmulas y los términos especializados pueden confundir al reconocimiento o a la traducción. Compara con el original (<kbd>Tab</kbd>), abre <strong>Texto</strong> para ver la traducción completa o selecciona una zona más pequeña.</p>
+          </section>
+
+          <section id="build" aria-labelledby="build-title">
+            <h2 id="build-title"><small>11</small>Compilar desde el código fuente</h2>
+            <p>Transeen tiene <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">licencia MIT</a>. Necesitas Xcode 26.4 o posterior, Swift 6 y XcodeGen.</p>
+            <pre><code>brew install xcodegen
+git clone https://github.com/LiuTianjie/Transeen.git
+cd Transeen
+./scripts/build.sh</code></pre>
+            <p>La app se genera en <code>dist/Transeen.app</code>. Sin una identidad Developer ID, la compilación se firma ad hoc; define <code>TRANSEEN_SIGNING_IDENTITY</code> para obtener una compilación firmada. Las pruebas son <code>./scripts/test.sh</code>, <code>./scripts/test-license.sh</code> y <code>./scripts/test-lifecycle.sh</code>. El servicio de activación alojado pertenece a la app oficial, así que una distribución independiente necesita su propio servidor de licencias.</p>
+          </section>
+        </article>
+      </div>
+
+      <section class="guide-next" aria-labelledby="next-title">
+        <div class="wrap">
+          <h2 id="next-title">Descarga Transeen 0.11.2</h2>
+          <p>Una sola app universal para macOS 26 o posterior, firmada y notarizada.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Descargar para Mac</a>
+            <a class="link-arrow" href="../">Volver a Transeen</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="../"><img src="../../assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
+            <p>Una app nativa para Mac que traduce lo que hay en tu pantalla, en su sitio, en cualquier app. Hecha por iTool.</p>
+          </div>
+          <nav aria-labelledby="footer-product">
+            <h2 id="footer-product">Producto</h2>
+            <ul>
+              <li><a href="../#how">Cómo funciona</a></li>
+              <li><a href="../#apps">Cualquier app</a></li>
+              <li><a href="../#tools">Herramientas</a></li>
+              <li><a href="../#activation">Activación</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-help">
+            <h2 id="footer-help">Ayuda</h2>
+            <ul>
+              <li><a href="./">Guía de configuración</a></li>
+              <li><a href="#shortcuts">Atajos de teclado</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/discussions">Preguntas</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/issues">Informar de un problema</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-source">
+            <h2 id="footer-source">Código fuente</h2>
+            <ul>
+              <li><a href="https://github.com/LiuTianjie/Transeen">GitHub</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/releases">Versiones</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md">Historial de cambios</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md">Licencias</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-more">
+            <h2 id="footer-more">También de iTool</h2>
+            <ul>
+              <li><a href="https://itool.tech/">iTool</a></li>
+              <li><a href="https://stupidmirror.itool.tech/">StupidMirror</a></li>
+            </ul>
+          </nav>
+        </div>
+        <nav class="footer-langs" aria-label="Idioma">
+          <svg aria-hidden="true"><use href="#ui-globe" /></svg>
+          <a href="../../guide/" hreflang="en" lang="en">English</a>
+          <a href="../../zh/guide/" hreflang="zh-Hans" lang="zh-CN">简体中文</a>
+          <a href="../../zh-hant/guide/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="../../ja/guide/" hreflang="ja" lang="ja">日本語</a>
+          <a href="../../ko/guide/" hreflang="ko" lang="ko">한국어</a>
+          <a href="../../fr/guide/" hreflang="fr" lang="fr">Français</a>
+          <a href="./" aria-current="page">Español</a>
+          <a href="../../de/guide/" hreflang="de" lang="de">Deutsch</a>
+        </nav>
+        <div class="footer-end">
+          <p>© 2026 LiuTianjie. Publicado con licencia MIT.</p>
+          <p>Mac, macOS y chip de Apple son marcas comerciales de Apple Inc.</p>
+        </div>
+      </div>
+    </footer>
+    <script src="../../assets/site.js?v=3d79e1bf1e0f" defer></script>
+  </body>
+</html>

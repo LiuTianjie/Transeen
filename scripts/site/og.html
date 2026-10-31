@@ -2,7 +2,8 @@
 <html lang="en" data-still>
   <head>
     <meta charset="utf-8" />
-    <!-- Rendered by scripts/render-og.sh. ?lang=zh for Chinese; ?shot draws the bare demo window for
+    <!-- Written by scripts/site/build.py from templates/og.html and rendered by
+         scripts/render-og.sh. ?lang=<code> for each language; ?shot draws the bare demo window for
          the README screenshot instead of the 1200 × 630 share card. -->
     <link rel="stylesheet" href="../../docs/assets/site.css" />
     <style>
@@ -15,8 +16,11 @@
       .share h1 { position: relative; z-index: 1; width: 440px; margin-top: 110px; font-size: 66px; font-weight: 560; line-height: 1; letter-spacing: -0.045em; }
       .share h1 span { display: block; color: var(--fg-2); }
       .share h1 b { font-weight: inherit; }
-      :lang(zh) .share h1 b, :lang(zh) .share h1 span { display: inline-block; }
-      :lang(zh) .share h1 { font-size: 64px; line-height: 1.14; letter-spacing: -0.02em; }
+      :is(:lang(zh), :lang(ja), :lang(ko)) .share h1 b, :is(:lang(zh), :lang(ja), :lang(ko)) .share h1 span { display: inline-block; }
+      :is(:lang(zh), :lang(ja), :lang(ko)) .share h1 { font-size: 60px; line-height: 1.16; letter-spacing: -0.02em; }
+      :is(:lang(fr), :lang(es)) .share h1 { font-size: 58px; }
+      :lang(de) .share h1 { font-size: 50px; }
+      .share h1 .nb { white-space: nowrap; }
       .share .meta { position: absolute; left: 72px; bottom: 64px; display: flex; gap: 22px; align-items: center; color: var(--fg-3); font: 15px/1 var(--mono); letter-spacing: 0.02em; }
       .share .meta kbd { padding: 8px 12px; font-size: 16px; }
       .share .stage { position: absolute; left: 500px; top: 120px; width: 680px; }
@@ -170,10 +174,13 @@
       </div>
     </div>
     <script>
+      // Each language's share card: ?lang=<code> sets the page language and the title.
+      const titles = {"en": ["en", "Translate your screen, <span>in place.</span>"], "zh-Hans": ["zh-CN", "<b class=\"nb\">框选屏幕，</b><span>译文留在原处。</span>"], "zh-Hant": ["zh-Hant", "<b class=\"nb\">框選螢幕，</b><span>譯文留在原處。</span>"], "ja": ["ja", "<b class=\"nb\">画面の文字を、</b><span>その場で翻訳。</span>"], "ko": ["ko", "<b class=\"nb\">화면의 글자를</b> <span>제자리에서 번역.</span>"], "fr": ["fr", "Traduisez votre écran, <span>sur place.</span>"], "es": ["es", "Traduce tu pantalla, <span>en su sitio.</span>"], "de": ["de", "Übersetze deinen Bildschirm, <span class=\"nb\">an Ort und Stelle.</span>"]};
       const query = new URLSearchParams(location.search);
-      if (query.get("lang") === "zh") {
-        document.documentElement.lang = "zh-CN";
-        document.getElementById("title").innerHTML = "<b>框选屏幕，</b><span>译文留在原处。</span>";
+      const chosen = titles[query.get("lang")];
+      if (chosen) {
+        document.documentElement.lang = chosen[0];
+        document.getElementById("title").innerHTML = chosen[1];
       }
       if (query.has("shot")) {
         const card = document.getElementById("card");

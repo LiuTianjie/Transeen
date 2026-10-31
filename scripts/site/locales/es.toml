@@ -1,0 +1,477 @@
+# Español (tuteo; nombres de la interfaz tomados de la localización es de la app)
+
+[meta]
+title = "Transeen: traduce la pantalla de tu Mac en su sitio, en cualquier app"
+description = "Pulsa F1 en cualquier app, selecciona una parte de la pantalla del Mac y léela en tu idioma, dentro de la misma imagen, con el mismo tamaño y color. También en varias apps a la vez. OCR en el dispositivo, Traducción de Apple, un modelo local integrado o tu propia API. macOS 26 o posterior."
+keywords = "traducir pantalla Mac, traductor de capturas de pantalla Mac, traductor de pantalla, traducción OCR, traducir texto de imágenes, traducción en su sitio, traducción sin conexión, app de traducción para Mac, Transeen"
+og_title = "Transeen: traduce la pantalla de tu Mac, en su sitio"
+og_description = "Pulsa F1 en cualquier app, selecciona una parte de la pantalla y Transeen redibuja el texto en tu idioma, dentro de la misma imagen."
+image_alt = "Una página japonesa de reserva de trenes en un Mac, con la tarjeta seleccionada traducida al español en su sitio y la barra de herramientas de Transeen debajo"
+guide_title = "Cómo traducir una captura de pantalla en Mac: guía de Transeen"
+guide_description = "Instala Transeen, actívalo, permite la grabación de pantalla y traduce tu primera zona. Todos los atajos de teclado, los modelos locales integrados, las API compatibles con OpenAI y soluciones a los problemas habituales."
+guide_keywords = "traducir captura de pantalla Mac, guía Transeen, permiso de grabación de pantalla, atajo de traducción Mac, modelo de traducción local, traducción sin conexión"
+guide_og_title = "Configura Transeen en cinco pasos"
+guide_og_description = "De la descarga a tu primera captura traducida en un Mac, con todos los atajos y la configuración de modelos."
+
+[ui]
+skip = "Saltar al contenido"
+home = "Inicio de Transeen"
+main_nav = "Navegación principal"
+how = "Cómo funciona"
+apps = "Cualquier app"
+tools = "Herramientas"
+languages = "Idiomas"
+activation = "Activación"
+guide = "Guía"
+download = "Descargar"
+download_mac = "Descargar para Mac"
+setup_guide = "Guía de configuración"
+language = "Idioma"
+tagline = "Una app nativa para Mac que traduce lo que hay en tu pantalla, en su sitio, en cualquier app. Hecha por iTool."
+product = "Producto"
+help = "Ayuda"
+shortcuts = "Atajos de teclado"
+questions = "Preguntas"
+report = "Informar de un problema"
+source = "Código fuente"
+releases = "Versiones"
+changelog = "Historial de cambios"
+licensing = "Licencias"
+more = "También de iTool"
+copyright = "© 2026 LiuTianjie. Publicado con licencia MIT."
+trademarks = "Mac, macOS y chip de Apple son marcas comerciales de Apple Inc."
+breadcrumb = "Ruta de navegación"
+date = "{d} de {mon} de {y}"
+months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+
+[hero]
+title = "Traduce tu pantalla, <span>en su sitio.</span>"
+lead = "Pulsa F1 en cualquier app y selecciona lo que no puedes leer. Transeen lo redibuja en tu idioma, dentro de la misma imagen, con el mismo tamaño y el mismo color."
+meta = ["v{version}", "macOS 26+", "Chip de Apple e Intel", "Notarizada por Apple"]
+
+[demo]
+role = "demostración"
+label = "Demostración: en una página japonesa de reserva de trenes se pulsa F1 y se selecciona la tarjeta de la reserva. Sus líneas se reconocen y se redibujan en español en los mismos lugares. Mantén pulsada la barra espaciadora cuando tenga el foco para ver el original."
+chips = "Traducir la demostración al"
+hint = "Mantén pulsada la captura para ver el original"
+replay = "Repetir"
+
+[how]
+fig = "Cómo funciona"
+lede = "<b>Una tecla, cuatro pasos.</b> Transeen lee los píxeles que seleccionas y vuelve a poner tu idioma en ellos, sin salir del Mac."
+
+[[how.cells]]
+label = "Seleccionar"
+title = "Enmarca lo que no puedes leer"
+text = "La pantalla se congela. Pasa el puntero por un párrafo, un campo o una ventana para ajustarte a ellos, o dibuja tu propio marco."
+
+[[how.cells]]
+label = "Reconocer"
+title = "Cada línea se lee en tu Mac"
+text = "El framework Vision de Apple encuentra cada línea y su estilo. No se sube nada para hacerlo."
+
+[[how.cells]]
+label = "Levantar"
+title = "Solo se va la tinta"
+text = "Las letras se retiran y se reconstruye el fondo que hay debajo, con su degradado o textura."
+
+[[how.cells]]
+label = "Colocar"
+title = "Lo tuyo va donde estaba"
+text = "Misma posición, tamaño y color. Una línea solo se estrecha o se parte cuando la traducción no cabe."
+
+[apps]
+fig = "Cualquier app"
+lede = "<b>En cualquier app, y entre apps.</b> Transeen lee los píxeles de tu pantalla, así que funciona dondequiera que aparezca texto, sin instalar nada en la app."
+caption = "Un solo marco sobre las ventanas de dos apps, traducido como una sola imagen"
+
+[[apps.items]]
+title = "Sin extensiones ni integraciones"
+text = "Navegadores, chats, PDF, juegos, herramientas de diseño, escritorios remotos: si está en la pantalla, se puede traducir. Incluso el texto que no puedes seleccionar."
+
+[[apps.items]]
+title = "Un marco sobre varias apps"
+text = "Un marco puede abarcar a la vez ventanas de apps distintas. Cada línea dentro de él se traduce en la misma captura."
+
+[[apps.items]]
+title = "En pantalla completa y en todos los Spaces"
+text = "F1 funciona en una app a pantalla completa y en cualquier escritorio. Un menú, una ventana emergente o una ayuda abiertos se quedan en la imagen, y la app conserva el foco."
+
+[[apps.items]]
+title = "Se ajusta a lo que hay"
+text = "Detén el puntero y el marco encuentra el párrafo, el campo o la ventana que hay debajo, sea de la app que sea."
+
+[[apps.items]]
+title = "Las fijadas flotan sobre todas las apps"
+text = "Una traducción fijada se queda encima de la app a la que cambies, para que la leas junto a la que estás usando."
+
+[keys]
+fig = "Teclado"
+lede = "<b>Pensado para el teclado.</b> El original siempre está a una tecla, igual que el último sitio que miraste."
+space = "Espacio"
+
+[[keys.items]]
+keys = ["F1"]
+title = "Seleccionar y traducir"
+text = "Desde cualquier app. En el teclado de un portátil, fn F1."
+
+[[keys.items]]
+keys = ["R"]
+title = "La misma zona"
+text = "Mientras seleccionas, toma de nuevo la zona de la última captura, incluso tras reiniciar."
+
+[[keys.items]]
+keys = ["Tab"]
+title = "Original o traducción"
+text = "Alterna toda la captura de un lado a otro."
+
+[[keys.items]]
+keys = ["{space}"]
+title = "Echar un vistazo"
+text = "Mantén pulsado para ver el original y suelta para leer la tuya."
+
+[[keys.items]]
+keys = ["F1", "F1"]
+title = "Intercambiar idiomas"
+text = "Vuelve a pulsarla con una captura abierta para traducir en sentido contrario."
+
+[tools]
+fig = "La captura"
+lede = "<b>Una captura con la que trabajar.</b> Se queda donde la seleccionaste, con las herramientas debajo."
+
+[[tools.items]]
+title = "Anota"
+text = "Rectángulos, elipses, flechas, el lápiz y números, en seis colores. Las anotaciones tienen su propia capa, así que cambiar de idioma nunca las mueve."
+
+[[tools.items]]
+title = "¿Te faltó una línea? Tira de un borde"
+text = "Arrastra un borde o una esquina. Transeen recorta de nuevo a partir de la misma pantalla congelada y vuelve a traducir al soltar."
+
+[[tools.items]]
+title = "Fíjala y sigue capturando"
+text = "Una captura fijada flota en la pantalla como una imagen propia. Guarda tantas como necesites; haz clic derecho en una para copiarla, guardarla o cambiarla."
+
+[[tools.items]]
+title = "Copia lo que ves"
+text = "<kbd>⌘C</kbd> copia la imagen con tus anotaciones, incluso mientras la traducción sigue llegando. <kbd>⌘S</kbd> la guarda en PNG."
+
+[[tools.items]]
+title = "Léela como texto"
+text = "Abre la traducción completa junto al original, como una lista que puedes seleccionar y copiar."
+
+[[tools.items]]
+title = "Abre una imagen"
+text = "También sirve una captura que te hayan enviado. Pulsa <kbd>⌘O</kbd> y se abre con las mismas herramientas."
+
+[services]
+fig = "Traducción"
+lede = "<b>Tres formas de traducir.</b> Elige una en Ajustes y cámbiala cuando quieras. El reconocimiento siempre ocurre en tu Mac."
+privacy = "<b>La captura nunca sale de tu Mac.</b> Transeen no guarda historial de capturas ni graba nunca de forma continua. Con la Traducción de Apple o un modelo local, el texto también se queda en el Mac."
+
+[[services.items]]
+title = "Traducción de Apple"
+tag = "Predeterminada"
+text = "La traducción integrada en macOS. Descarga una vez el paquete de idioma y funciona sin conexión."
+facts = [["Se ejecuta", "En este Mac"], ["Descarga", "Por paquete de idioma"], ["Velocidad", "En grupos de 8 líneas"]]
+
+[[services.items]]
+title = "Modelo de traducción local"
+tag = "Chip de Apple"
+text = "Index-Translate 2B o Hy-MT2 1.8B, ejecutado por el propio Transeen. Mejor con textos técnicos y etiquetas de interfaz."
+facts = [["Se ejecuta", "En este Mac"], ["Descarga", "Unos 1,1 GB, verificada"], ["Memoria", "Se libera tras 5 minutos sin uso"]]
+
+[[services.items]]
+title = "API de LLM"
+tag = "Tu endpoint"
+text = "Cualquier endpoint chat/completions compatible con OpenAI, remoto por HTTPS o un servidor en localhost."
+facts = [["Envía", "Solo el texto reconocido"], ["Clave", "Guardada en tu llavero"], ["Respuestas", "Se muestran al llegar"]]
+
+[langs]
+fig = "Idiomas"
+lede = "<b>Ocho idiomas, en cualquier sentido.</b> De cualquiera de ellos a cualquier otro, con el idioma de origen detectado por ti."
+body = "La app también habla tu idioma: cada ventana, menú y mensaje sigue el que elijas. Una página que ya está en tu idioma se traduce a tu otro idioma."
+caption = "8 idiomas × 7 destinos = 56 direcciones"
+
+[changes]
+fig = "Novedades"
+lede = "<b>Lo último.</b> Versiones pequeñas y frecuentes. La lista completa está en GitHub."
+full = "Historial completo"
+
+[changes.notes]
+"0.11.2" = [
+  "<b>Las imágenes siguen siendo imágenes.</b> Una fila de miniaturas junto al texto ya no se lee como palabras ni se cubre con una traducción. Una línea dudosa se vuelve a leer ampliada y solo se conserva si se lee igual.",
+  "<b>El chino dentro del inglés se mantiene.</b> Una palabra china en una frase en inglés sigue en chino en vez de convertirse en letras latinas.",
+  "<b>Las herramientas de dibujo siempre dibujan.</b> Una flecha que empieza sobre un número o un recuadro ya no recoge esa anotación. La captura se queda donde se tomó; solo una captura fijada se mueve con el ratón.",
+]
+"0.11.1" = [
+  "<b>Se traduce cada frase.</b> Un párrafo largo que un modelo local tardaba en responder se vuelve a enviar solo, en lugar de quedarse con el original.",
+  "<b>Primero se congela la pantalla.</b> F1 mantiene en la imagen el menú, la ventana emergente o la ayuda abiertos de otra app, que conserva el foco.",
+  "<b>Un borrado más limpio.</b> Letras como la g y la y ya no dejan marcas, y una flecha flotante ya no se convierte en caracteres sueltos.",
+]
+
+[activation]
+fig = "Activación"
+lede = "<b>Un código, un Mac, para siempre.</b> Sin suscripción y sin necesidad de cuenta."
+code_label = "Formato del código de activación: TR seguido de seis grupos de cuatro caracteres"
+license = "Licencia permanente"
+where = "Introdúcelo en Activación y cuenta… de la barra de menús."
+ask = "Preguntar por un código"
+how = "Cómo activar"
+items = [
+  "<b>Desbloquea la captura, la anotación y la traducción</b> en un Mac.",
+  "<b>Activa sin iniciar sesión.</b> Se guarda un ID de instalación aleatorio en tu llavero; nunca se lee tu número de serie.",
+  "<b>Si quieres, vincúlalo a una cuenta de iTool</b> para restaurarlo al reinstalar.",
+  "<b>Código abierto con licencia MIT.</b> Compílalo tú mismo; las versiones independientes usan su propio servicio de activación.",
+  "Los códigos SM- de StupidMirror e IT- de iTool Pro son de otros productos y no funcionan aquí.",
+]
+
+[faq]
+fig = "Preguntas"
+lede = "<b>Preguntas.</b> Para cualquier otra cosa, pregunta en GitHub Discussions."
+
+[[faq.items]]
+q = "¿Con qué apps funciona?"
+a = "Con cualquier app que muestre texto en pantalla: navegadores, chat y correo, lectores de PDF, juegos, herramientas de diseño y vídeo, escritorios remotos y máquinas virtuales. Transeen traduce los píxeles que seleccionas, así que no necesita extensiones ni que la app lo admita, y un mismo marco puede abarcar ventanas de varias apps. El vídeo que una app protege de la grabación de pantalla sale en negro, como en cualquier captura."
+
+[[faq.items]]
+q = "¿En qué Mac funciona Transeen?"
+a = "En macOS 26 o posterior, con chip de Apple o Intel: es una sola app universal. Los modelos de traducción locales necesitan un chip de Apple. La interfaz sigue tu idioma: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español o Deutsch."
+
+[[faq.items]]
+q = "¿Funciona sin conexión?"
+a = "Sí, una vez activado. La captura, la anotación, la Traducción de Apple y los modelos locales funcionan sin conexión cuando ya están descargados sus paquetes de idioma o el modelo. La activación sigue siendo válida sin red y se vuelve a comprobar más o menos una vez al día. Una API de LLM necesita conexión con tu endpoint."
+
+[[faq.items]]
+q = "¿Qué sale de mi Mac?"
+a = "Con la Traducción de Apple o un modelo local, nada: la captura, el texto reconocido y la traducción se quedan en este Mac. Con una API de LLM solo el texto reconocido va al endpoint que configures, nunca la captura. La activación envía tu código y un ID de instalación aleatorio, y la búsqueda de actualizaciones contacta con GitHub."
+
+[[faq.items]]
+q = "¿Puedo usar otro modelo?"
+a = "Sí. En Ajustes → General → Traducción, descarga Index-Translate 2B o Hy-MT2 1.8B (unos 1,1 GB cada uno), que se ejecutan dentro de Transeen, o introduce cualquier endpoint chat/completions compatible con OpenAI, un nombre de modelo y, si lo necesita, una clave que se guarda en tu llavero. Los endpoints remotos deben usar HTTPS; un servidor en localhost puede usar HTTP sin clave."
+
+[[faq.items]]
+q = "¿Puede traducir una imagen que ya tengo?"
+a = "Sí. Elige Abrir imagen… en el lanzador o pulsa <kbd>⌘O</kbd>; la imagen se abre en la misma ventana, con las mismas herramientas."
+
+[[faq.items]]
+q = "¿Qué precisión tiene?"
+a = "Depende del servicio de traducción. Las maquetaciones densas, las fórmulas y los términos especializados pueden necesitar correcciones, así que compara con el original con <kbd>Tab</kbd>, o abre el texto completo, antes de fiarte de un detalle."
+
+[[faq.items]]
+q = "¿Transeen es de código abierto?"
+a = "Sí, con <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">licencia MIT</a>, uso comercial incluido. La app oficial necesita un código TR-; la licencia del código no incluye el servicio de activación alojado, así que las versiones independientes usan el suyo."
+
+[[faq.items]]
+q = "¿Cómo se actualiza?"
+a = "Elige Buscar actualizaciones… en la barra de menús o el lanzador. Transeen consulta GitHub Releases y abre la descarga cuando hay una versión más reciente."
+
+[closing]
+title = "Léelo <span>donde está.</span>"
+lead = "Descarga Transeen, pulsa F1 y selecciona lo primero que no pudiste leer."
+source = "Ver el código fuente"
+meta = ["App universal", "{size} MB", "Firmada y notarizada"]
+
+[software]
+description = "Una app nativa de la barra de menús de macOS que traduce el texto de la zona de pantalla o la imagen que selecciones, en cualquier app, y redibuja la traducción en la misma imagen conservando su posición, tamaño y color. Incluye anotación, capturas fijadas, copia y exportación a PNG."
+category = "Traducción de pantalla"
+os = "macOS 26 o posterior"
+processor = "Chip de Apple o Intel"
+features = [
+  "Traduce en su sitio cualquier zona de pantalla seleccionada, conservando posición, tamaño y color",
+  "Funciona en cualquier app, sin extensiones: lee los píxeles de la pantalla",
+  "Una selección puede abarcar ventanas de varias apps",
+  "Funciona a pantalla completa y en todos los Spaces; los menús y las ayudas abiertos se quedan en la imagen",
+  "Reconocimiento de texto en el dispositivo con Apple Vision",
+  "Traducción de Apple en el dispositivo, un modelo de traducción local integrado o cualquier endpoint compatible con OpenAI",
+  "Chino simplificado, chino tradicional, inglés, japonés, coreano, francés, español y alemán, en cualquier dirección",
+  "Una interfaz en esos mismos ocho idiomas",
+  "Las traducciones aparecen a medida que llegan, con un contador en la barra de herramientas",
+  "Compara original y traducción con Tab, o mantén pulsada la barra espaciadora para echar un vistazo",
+  "Tira de un borde de la captura para recortarla y traducirla de nuevo",
+  "Recuadros, elipses, flechas, trazos de lápiz y números en una capa aparte",
+  "Copia, guarda en PNG o fija capturas sobre todas las apps mientras sigues capturando",
+  "Vuelve a pulsar F1 en una captura abierta para intercambiar los idiomas",
+  "Pulsa R al seleccionar para tomar de nuevo la última zona capturada",
+  "Traduce imágenes abiertas desde el disco",
+]
+
+[guide]
+name = "Guía de configuración"
+title = "Configura Transeen <span>en cinco pasos.</span>"
+lead = "De la descarga a tu primera captura traducida. Necesitas un Mac con macOS 26 o posterior y un código de activación TR-."
+all_shortcuts = "Todos los atajos"
+toc = "En esta página"
+next_title = "Descarga Transeen {version}"
+next_text = "Una sola app universal para macOS 26 o posterior, firmada y notarizada."
+back = "Volver a Transeen"
+
+[guide.howto]
+name = "Cómo traducir una captura de pantalla en un Mac con Transeen"
+supply = "Un código de activación TR-"
+tools = ["Un Mac con macOS 26 o posterior", "Transeen"]
+steps = [
+  { name = "Instalar", text = "Descarga el DMG de GitHub Releases, arrastra Transeen a Aplicaciones y ábrelo. Se ejecuta en la barra de menús." },
+  { name = "Activar", text = "Elige Activación y cuenta… en el menú de la barra de menús, introduce tu código TR- y elige Activar este Mac." },
+  { name = "Permitir la grabación de pantalla", text = "Activa Transeen en Ajustes del Sistema, Privacidad y seguridad, Grabación de pantalla y audio del sistema." },
+  { name = "Elegir idiomas", text = "Elige el idioma de origen y el de destino, y descarga con antelación los paquetes de idioma de Apple que necesites en Ajustes, General, Traducción." },
+  { name = "Traducir una zona", text = "En cualquier app, pulsa F1, selecciona parte de la pantalla y lee la traducción en su sitio. Pulsa Tab para compararla con el original." },
+]
+
+[[guide.sections]]
+id = "install"
+title = "Instalar"
+body = """
+<ol>
+  <li>Descarga el DMG más reciente de <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a>. Ocupa unos {about} MB y es una sola app universal para chip de Apple e Intel.</li>
+  <li>Abre el DMG y arrastra Transeen a Aplicaciones.</li>
+  <li>Abre Transeen desde Aplicaciones. Vive en la barra de menús, así que busca su icono allí y no en el Dock.</li>
+</ol>
+<p>La app y el DMG están firmados con un Developer ID y notarizados por Apple, así que macOS los abre sin avisos. En la misma página hay un ZIP y sumas de verificación SHA-256. La interfaz sigue el idioma de tu Mac: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español o Deutsch.</p>
+"""
+
+[[guide.sections]]
+id = "activate"
+title = "Activar"
+body = """
+<ol>
+  <li>Elige <strong>Activación y cuenta…</strong> en el menú de la barra de menús, o <strong>Activar Transeen</strong> en la ventana de inicio.</li>
+  <li>Introduce tu código, que tiene la forma <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>, y elige <strong>Activar este Mac</strong>. No hace falta iniciar sesión.</li>
+  <li>Si quieres, inicia sesión en una cuenta de iTool con Google, GitHub o tu correo y vincula la licencia. Al iniciar sesión en la misma cuenta más adelante, se restaura.</li>
+</ol>
+<p>La activación guarda un ID de instalación aleatorio y un recibo en tu llavero; nunca lee el número de serie del Mac. Un código cubre un Mac, y vincular una cuenta no crea una segunda licencia. Los códigos SM- de StupidMirror e IT- de iTool Pro son de otros productos y no funcionan aquí. Para conseguir un código, <a href="https://github.com/LiuTianjie/Transeen/discussions">pregunta en GitHub Discussions</a>.</p>
+"""
+
+[[guide.sections]]
+id = "permission"
+title = "Permitir la grabación de pantalla"
+body = """
+<p>La primera vez que capturas, Transeen pide el permiso de grabación de pantalla. Solo usa la imagen de la pantalla, nunca el audio, y solo cuando pulsas un atajo de captura. No guarda historial ni graba nunca de forma continua.</p>
+<ol>
+  <li>Elige <strong>Abrir Ajustes del Sistema…</strong>, o ve a Ajustes del Sistema → Privacidad y seguridad → Grabación de pantalla y audio del sistema.</li>
+  <li>Busca Transeen y actívalo.</li>
+  <li>Vuelve a Transeen. Lo comprueba de nuevo por sí solo y muestra <strong>Todo listo</strong>; elige <strong>Seleccionar un área</strong> para continuar.</li>
+</ol>
+<p>Si está activado pero sigue sin funcionar, usa <strong>Comprobar de nuevo</strong> o <strong>Volver a abrir</strong> en la misma ventana.</p>
+"""
+
+[[guide.sections]]
+id = "languages"
+title = "Elegir idiomas"
+body = """
+<p>La ventana de inicio tiene dos menús, <strong>Idioma de origen</strong> e <strong>Idioma de destino</strong>. Deja el origen en <strong>Detección auto</strong> o elige uno de los ocho idiomas: chino simplificado, chino tradicional, inglés, japonés, coreano, francés, español y alemán. Cualquiera se traduce a cualquier otro.</p>
+<p>Con una captura abierta, la dirección que aparece bajo las herramientas (por ejemplo JA → ES) cambia cualquiera de los dos idiomas, y al volver a pulsar <kbd>F1</kbd> se intercambian.</p>
+<p>La Traducción de Apple necesita un paquete de idioma para cada par. La guía que se abre la primera vez, y después Ajustes → General → Traducción, muestran los paquetes de tu idioma de destino con su estado. <strong>Descargar</strong> obtiene uno antes de que tu primera captura lo necesite; a partir de ahí la traducción se hace en tu Mac, sin conexión. Los paquetes también aparecen en Ajustes del Sistema → General → Idioma y región → Idiomas de traducción.</p>
+"""
+
+[[guide.sections]]
+id = "translate"
+title = "Traducir una zona"
+body = """
+<ol>
+  <li>En cualquier app, pulsa <kbd>F1</kbd>. La pantalla se congela y se oscurece. En el teclado de un portátil es <kbd>fn</kbd> <kbd>F1</kbd>, salvo que las teclas F funcionen como teclas de función estándar.</li>
+  <li>Pasa el puntero para ajustarte a un párrafo, un campo o una ventana y haz clic, o dibuja tu propio marco. Un marco puede abarcar ventanas de varias apps. <kbd>Esc</kbd> o un clic derecho cancela.</li>
+  <li>¿El mismo sitio que la última vez? Pulsa <kbd>R</kbd> mientras seleccionas y se toma de nuevo la zona de la última captura, incluso tras reiniciar.</li>
+  <li>Lee la traducción donde estaba el texto. Las líneas aparecen a medida que se traducen. Pulsa <kbd>Tab</kbd> para cambiar al original y volver, o mantén pulsada la <kbd>barra espaciadora</kbd> para echarle un vistazo.</li>
+  <li>¿Te faltó un trozo? Arrastra un borde o una esquina de la captura. Se recorta de nuevo a partir de la misma pantalla congelada, tus anotaciones se quedan en su sitio y se vuelve a traducir al soltar.</li>
+  <li>¿Al revés? Pulsa <kbd>F1</kbd> otra vez con la captura abierta y los dos idiomas se intercambian.</li>
+</ol>
+<p>Transeen lee los píxeles de la pantalla, así que funciona igual en todas las apps, incluidas las de pantalla completa y en todos los Spaces, y un menú o una ayuda abiertos se quedan en la imagen. <kbd>F1</kbd> es el único atajo que funciona en cualquier app desde el primer momento. Para capturar y anotar sin traducir, elige <strong>Anotar</strong> en el menú de la barra de menús o asígnale una tecla en Ajustes → Atajos; pulsa <kbd>T</kbd> en esa ventana si al final quieres la traducción. Para traducir una imagen que ya tienes, elige <strong>Abrir imagen…</strong> o pulsa <kbd>⌘O</kbd>.</p>
+"""
+
+[[guide.sections]]
+id = "mark"
+title = "Anotar"
+body = """
+<p>Elige una herramienta en la barra de herramientas o pulsa su tecla: <kbd>R</kbd> para un rectángulo, <kbd>O</kbd> para una elipse, <kbd>A</kbd> para una flecha, <kbd>P</kbd> para el lápiz y <kbd>V</kbd> para seleccionar y mover. Una herramienta de dibujo siempre dibuja, aunque empieces sobre una anotación; usa <kbd>V</kbd> para coger una. Los números cuentan desde 1 y conservan su valor al deshacer y rehacer.</p>
+<p>Elige uno de los seis colores y de los tres grosores, o abre los controles deslizantes para cualquier color y un grosor de 1 a 10. <kbd>⌘Z</kbd> y <kbd>⌘⇧Z</kbd> deshacen y rehacen; <kbd>Supr</kbd> elimina la anotación seleccionada. Las anotaciones tienen su propia capa, así que alternar entre original y traducción nunca las mueve.</p>
+"""
+
+[[guide.sections]]
+id = "keep"
+title = "Copiar, guardar o fijar"
+body = """
+<ul>
+  <li><kbd>⌘C</kbd> copia la imagen tal como la ves, anotaciones incluidas, incluso mientras se está traduciendo. De forma predeterminada también cierra la captura; desactiva <strong>Cerrar la captura después de copiar</strong> en Ajustes para mantenerla abierta.</li>
+  <li><kbd>⌘S</kbd> la guarda en PNG.</li>
+  <li><strong>Fijar en pantalla</strong> deja la imagen en la pantalla como una ventana flotante propia y termina la captura, para que la siguiente empiece enseguida. Una captura fijada se queda encima de la app a la que cambies. Arrástrala adonde quieras y guarda tantas como necesites; haz clic derecho en una para copiarla, guardarla, alternar entre original y traducción o cerrarla.</li>
+  <li><strong>Texto</strong> abre la traducción completa junto al original, lista para copiar.</li>
+</ul>
+"""
+
+[[guide.sections]]
+id = "model"
+title = "Elegir un servicio de traducción"
+body = """
+<p>Abre Ajustes (<kbd>⌘,</kbd>) → General → Traducción y elige un <strong>Servicio de traducción</strong>. El reconocimiento de texto siempre ocurre en tu Mac.</p>
+<h3>Traducción de Apple (en el dispositivo)</h3>
+<p>La opción predeterminada. Usa los paquetes de idioma del paso 4, funciona sin conexión y no envía nada a ningún sitio. Las líneas se traducen en grupos de ocho, así que una captura larga se va completando mientras lees.</p>
+<h3>Modelo de traducción local</h3>
+<p>Descarga Index-Translate 2B o Hy-MT2 1.8B, de unos 1,1 GB cada uno. El modelo se ejecuta dentro de Transeen, sin cuenta, sin otra app y sin red. Necesita un Mac con chip de Apple. La primera traducción tarda unos segundos en cargar el modelo, y su memoria se libera tras cinco minutos sin uso. <strong>Eliminar modelo</strong> lo quita de nuevo.</p>
+<h3>API de LLM</h3>
+<p>Cualquier endpoint chat/completions compatible con OpenAI. Rellena:</p>
+<ul>
+  <li><strong>Endpoint</strong>, la URL completa, por ejemplo <code>https://api.openai.com/v1/chat/completions</code>;</li>
+  <li><strong>Nombre del modelo</strong>;</li>
+  <li>la clave de API, si el servicio la necesita, y después <strong>Guardar clave</strong>. Se guarda en tu llavero. <strong>Probar conexión</strong> la comprueba.</li>
+</ul>
+<p>También sirve un servidor en tu propio Mac: las direcciones locales pueden usar HTTP sin clave, por ejemplo <code>http://localhost:11434/v1/chat/completions</code> para Ollama. Las direcciones remotas deben usar HTTPS. Este modo solo envía el texto reconocido, nunca la captura. Si una solicitud falla, Transeen muestra el error y conserva la imagen original.</p>
+"""
+
+[[guide.sections]]
+id = "shortcuts"
+title = "Atajos de teclado"
+body = """
+<div class="table-wrap">
+  <table class="keys-table">
+    <thead><tr><th scope="col">Predeterminado</th><th scope="col">Acción</th></tr></thead>
+    <tbody>
+      <tr><td><kbd>F1</kbd></td><td>Seleccionar una zona y traducirla, desde cualquier app</td></tr>
+      <tr><td><kbd>R</kbd> al seleccionar</td><td>Tomar de nuevo la zona de la última captura</td></tr>
+      <tr><td><kbd>F1</kbd> con una captura abierta</td><td>Intercambiar los idiomas, o traducir una captura de «Anotar»</td></tr>
+      <tr><td><kbd>Tab</kbd></td><td>Alternar entre original y traducción</td></tr>
+      <tr><td>Mantener <kbd>Espacio</kbd></td><td>Echar un vistazo al original</td></tr>
+      <tr><td><kbd>T</kbd></td><td>Traducir, o reintentar</td></tr>
+      <tr><td><kbd>D</kbd></td><td>Intercambiar los idiomas</td></tr>
+      <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>Rectángulo, elipse, flecha, lápiz</td></tr>
+      <tr><td><kbd>V</kbd></td><td>Seleccionar y mover anotaciones</td></tr>
+      <tr><td><kbd>⌘C</kbd></td><td>Copiar la imagen</td></tr>
+      <tr><td><kbd>⌘S</kbd></td><td>Guardar en PNG</td></tr>
+      <tr><td><kbd>⌘Z</kbd> <kbd>⌘⇧Z</kbd></td><td>Deshacer, rehacer</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Cerrar la captura, o cancelar la selección</td></tr>
+      <tr><td><kbd>⌘O</kbd></td><td>Abrir una imagen</td></tr>
+      <tr><td><kbd>⌘,</kbd></td><td>Abrir Ajustes</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Cámbialos en Ajustes → Atajos; <strong>Restaurar todos los atajos predeterminados</strong> los devuelve a su estado inicial. <strong>Anotar</strong> y <strong>Ver el original en cualquier lugar</strong> no tienen tecla hasta que les asignes una. Los atajos globales necesitan <kbd>⌘</kbd>, <kbd>⌥</kbd> o <kbd>⌃</kbd>, o una tecla F.</p>
+"""
+
+[[guide.sections]]
+id = "troubleshooting"
+title = "Solución de problemas"
+body = """
+<h3>No pasa nada al pulsar F1</h3>
+<p>En el teclado de un portátil, F1 cambia el brillo a menos que mantengas pulsada <kbd>fn</kbd> o actives «Usar las teclas F1, F2, etc. como teclas de función estándar» en Ajustes del Sistema → Teclado → Atajos de teclado → Teclas de función. También puede que otra app ocupe F1; Transeen te avisa cuando no puede registrar un atajo. Elige otra tecla en Ajustes → Atajos, o empieza desde <strong>Capturar y traducir</strong> en el menú de la barra de menús.</p>
+<h3>La captura sale vacía o el permiso se pide una y otra vez</h3>
+<p>Abre <strong>Permiso de pantalla…</strong> en el menú de la barra de menús. Si Ajustes del Sistema ya muestra Transeen activado, desactívalo y vuelve a activarlo, y luego elige <strong>Volver a abrir</strong>.</p>
+<h3>Una parte de la ventana sale en negro</h3>
+<p>Algunas apps protegen el vídeo y otros contenidos de la grabación de pantalla, y salen en negro en cualquier captura. Transeen no puede leer ni traducir esa parte; el resto del marco funciona con normalidad.</p>
+<h3>La Traducción de Apple no empieza</h3>
+<p>Puede que falte el paquete de idioma de ese par o que aún se esté descargando. Descárgalo en Ajustes → General → Traducción, o revisa Ajustes del Sistema → General → Idioma y región → Idiomas de traducción, y vuelve a intentarlo.</p>
+<h3>El modelo local no se inicia</h3>
+<p>Inténtalo otra vez. Si sigue fallando, elimina el modelo en Ajustes → General → Traducción y descárgalo de nuevo; una descarga que no supera la verificación se elimina sola.</p>
+<h3>Parte del texto sale mal traducido</h3>
+<p>Las maquetaciones densas, las fórmulas y los términos especializados pueden confundir al reconocimiento o a la traducción. Compara con el original (<kbd>Tab</kbd>), abre <strong>Texto</strong> para ver la traducción completa o selecciona una zona más pequeña.</p>
+"""
+
+[[guide.sections]]
+id = "build"
+title = "Compilar desde el código fuente"
+body = """
+<p>Transeen tiene <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">licencia MIT</a>. Necesitas Xcode 26.4 o posterior, Swift 6 y XcodeGen.</p>
+<pre><code>brew install xcodegen
+git clone https://github.com/LiuTianjie/Transeen.git
+cd Transeen
+./scripts/build.sh</code></pre>
+<p>La app se genera en <code>dist/Transeen.app</code>. Sin una identidad Developer ID, la compilación se firma ad hoc; define <code>TRANSEEN_SIGNING_IDENTITY</code> para obtener una compilación firmada. Las pruebas son <code>./scripts/test.sh</code>, <code>./scripts/test-license.sh</code> y <code>./scripts/test-lifecycle.sh</code>. El servicio de activación alojado pertenece a la app oficial, así que una distribución independiente necesita su propio servidor de licencias.</p>
+"""

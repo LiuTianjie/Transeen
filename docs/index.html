@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Transeen: Translate Text on Your Mac Screen, in Place</title>
-    <meta name="description" content="Press F1, select any part of your Mac screen and read it in your language, inside the same picture. On-device OCR, Apple Translation, a built-in local model or your own. macOS 26+." />
-    <meta name="keywords" content="screenshot translator for Mac, translate screen on Mac, screen translation app, OCR translation, translate text in images, in-place translation, offline translation, Transeen" />
+    <title>Transeen: Translate Text on Your Mac Screen, in Any App</title>
+    <meta name="description" content="Press F1 in any app, select part of your Mac screen and read it in your language, inside the same picture. On-device OCR, Apple Translation, a built-in local model or your own. macOS 26+." />
+    <meta name="keywords" content="screenshot translator for Mac, translate screen on Mac, screen translation app, OCR translation, translate text in images, translate any app, in-place translation, offline translation, Transeen" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="LiuTianjie" />
     <meta name="theme-color" content="#08090a" />
@@ -15,13 +15,23 @@
     <meta name="format-detection" content="telephone=no" />
     <link rel="canonical" href="https://transeen.itool.tech/" />
     <link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
     <link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
     <link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Transeen" />
     <meta property="og:url" content="https://transeen.itool.tech/" />
     <meta property="og:title" content="Transeen: translate your Mac screen, in place" />
-    <meta property="og:description" content="Press F1, select any part of the screen and Transeen redraws the text in your language, inside the same picture." />
+    <meta property="og:description" content="Press F1 in any app, select part of the screen and Transeen redraws the text in your language, inside the same picture." />
     <meta property="og:image" content="https://transeen.itool.tech/assets/og-image.jpg?v=ae1b9d808442" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
@@ -29,9 +39,15 @@
     <meta property="og:image:alt" content="A Japanese train booking page on a Mac, its selected card translated into English in place, with the Transeen toolbar below it" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:locale:alternate" content="zh_TW" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="ko_KR" />
+    <meta property="og:locale:alternate" content="fr_FR" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta property="og:locale:alternate" content="de_DE" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Transeen: translate your Mac screen, in place" />
-    <meta name="twitter:description" content="Press F1, select any part of the screen and Transeen redraws the text in your language, inside the same picture." />
+    <meta name="twitter:description" content="Press F1 in any app, select part of the screen and Transeen redraws the text in your language, inside the same picture." />
     <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image.jpg?v=ae1b9d808442" />
     <meta name="twitter:image:alt" content="A Japanese train booking page on a Mac, its selected card translated into English in place, with the Transeen toolbar below it" />
     <script type="application/ld+json">
@@ -43,52 +59,102 @@
             "@id": "https://transeen.itool.tech/#organization",
             "name": "Transeen",
             "url": "https://transeen.itool.tech/",
-            "logo": { "@type": "ImageObject", "url": "https://transeen.itool.tech/assets/icon-512.png", "width": 512, "height": 512 },
-            "sameAs": ["https://github.com/LiuTianjie/Transeen"],
-            "parentOrganization": { "@type": "Organization", "name": "iTool", "url": "https://itool.tech/" }
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://transeen.itool.tech/assets/icon-512.png",
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://github.com/LiuTianjie/Transeen"
+            ],
+            "parentOrganization": {
+              "@type": "Organization",
+              "name": "iTool",
+              "url": "https://itool.tech/"
+            }
           },
           {
             "@type": "WebSite",
             "@id": "https://transeen.itool.tech/#website",
             "url": "https://transeen.itool.tech/",
             "name": "Transeen",
-            "inLanguage": ["en", "zh-CN"],
-            "publisher": { "@id": "https://transeen.itool.tech/#organization" }
+            "inLanguage": [
+              "en",
+              "zh-Hans",
+              "zh-Hant",
+              "ja",
+              "ko",
+              "fr",
+              "es",
+              "de"
+            ],
+            "publisher": {
+              "@id": "https://transeen.itool.tech/#organization"
+            }
           },
           {
             "@type": "WebPage",
             "@id": "https://transeen.itool.tech/#webpage",
             "url": "https://transeen.itool.tech/",
-            "name": "Transeen: Translate Text on Your Mac Screen, in Place",
-            "description": "Press F1, select any part of your Mac screen and read it in your language, inside the same picture. On-device OCR, Apple Translation, a built-in local model or your own. macOS 26+.",
+            "name": "Transeen: Translate Text on Your Mac Screen, in Any App",
+            "description": "Press F1 in any app, select part of your Mac screen and read it in your language, inside the same picture. On-device OCR, Apple Translation, a built-in local model or your own. macOS 26+.",
             "inLanguage": "en",
-            "isPartOf": { "@id": "https://transeen.itool.tech/#website" },
-            "about": { "@id": "https://transeen.itool.tech/#software" },
-            "primaryImageOfPage": { "@type": "ImageObject", "url": "https://transeen.itool.tech/assets/og-image.jpg", "width": 1200, "height": 630 },
-            "dateModified": "2026-10-30"
+            "isPartOf": {
+              "@id": "https://transeen.itool.tech/#website"
+            },
+            "about": {
+              "@id": "https://transeen.itool.tech/#software"
+            },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://transeen.itool.tech/assets/og-image.jpg",
+              "width": 1200,
+              "height": 630
+            },
+            "datePublished": "2026-10-28",
+            "dateModified": "2026-10-31"
           },
           {
             "@type": "SoftwareApplication",
             "@id": "https://transeen.itool.tech/#software",
             "name": "Transeen",
-            "description": "A native macOS menu bar app that translates the text inside any screen region or image you select and draws the translation back into the same picture, keeping its position, size and color. Includes annotation, pinning and copy or PNG export.",
+            "description": "A native macOS menu bar app that translates the text inside any screen region or image you select, in any app, and draws the translation back into the same picture, keeping its position, size and color. Includes annotation, pinning and copy or PNG export.",
             "url": "https://transeen.itool.tech/",
             "applicationCategory": "UtilitiesApplication",
             "applicationSubCategory": "Screen translation",
             "operatingSystem": "macOS 26 or later",
             "processorRequirements": "Apple silicon or Intel",
-            "softwareVersion": "0.11.1",
+            "softwareVersion": "0.11.2",
             "datePublished": "2026-10-28",
-            "dateModified": "2026-10-30",
-            "fileSize": "9.6 MB",
+            "dateModified": "2026-10-31",
+            "fileSize": "10.4 MB",
+            "inLanguage": [
+              "en",
+              "zh-Hans",
+              "zh-Hant",
+              "ja",
+              "ko",
+              "fr",
+              "es",
+              "de"
+            ],
             "downloadUrl": "https://github.com/LiuTianjie/Transeen/releases/latest",
             "installUrl": "https://github.com/LiuTianjie/Transeen/releases/latest",
             "releaseNotes": "https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md",
-            "softwareHelp": { "@type": "CreativeWork", "url": "https://transeen.itool.tech/guide/" },
+            "softwareHelp": {
+              "@type": "CreativeWork",
+              "url": "https://transeen.itool.tech/guide/"
+            },
             "image": "https://transeen.itool.tech/assets/og-image.jpg",
-            "screenshot": ["https://transeen.itool.tech/assets/preview.webp"],
+            "screenshot": [
+              "https://transeen.itool.tech/assets/preview.webp"
+            ],
             "featureList": [
               "Translate any selected screen region in place, keeping position, size and color",
+              "Works in any app, with no plug-ins: it reads the pixels on the screen",
+              "One selection can span windows from several apps",
+              "Works over full-screen apps and on every Space; open menus and tooltips stay in the picture",
               "On-device text recognition with Apple Vision",
               "Apple on-device translation, a built-in local translation model, or any OpenAI-compatible endpoint",
               "Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German, in any direction",
@@ -97,14 +163,20 @@
               "Compare original and translation with Tab, or hold Space to peek",
               "Pull an edge of a capture to re-crop and translate it again",
               "Boxes, ellipses, arrows, pen strokes and numbered notes on a separate layer",
-              "Copy, save as PNG, or pin captures to the screen as floating pictures while you keep capturing",
+              "Copy, save as PNG, or pin captures above every app as floating pictures while you keep capturing",
               "Press F1 again on an open capture to swap the languages",
               "Press R while selecting to take the last captured area again",
               "Translate images opened from disk"
             ],
             "license": "https://opensource.org/licenses/MIT",
-            "author": { "@type": "Person", "name": "LiuTianjie", "url": "https://github.com/LiuTianjie" },
-            "publisher": { "@id": "https://transeen.itool.tech/#organization" }
+            "author": {
+              "@type": "Person",
+              "name": "LiuTianjie",
+              "url": "https://github.com/LiuTianjie"
+            },
+            "publisher": {
+              "@id": "https://transeen.itool.tech/#organization"
+            }
           },
           {
             "@type": "SoftwareSourceCode",
@@ -114,22 +186,90 @@
             "programmingLanguage": "Swift",
             "runtimePlatform": "macOS 26",
             "license": "https://opensource.org/licenses/MIT",
-            "targetProduct": { "@id": "https://transeen.itool.tech/#software" }
+            "targetProduct": {
+              "@id": "https://transeen.itool.tech/#software"
+            }
           },
           {
             "@type": "FAQPage",
             "@id": "https://transeen.itool.tech/#faq",
             "inLanguage": "en",
-            "isPartOf": { "@id": "https://transeen.itool.tech/#website" },
+            "isPartOf": {
+              "@id": "https://transeen.itool.tech/#website"
+            },
             "mainEntity": [
-              { "@type": "Question", "name": "Which Macs does Transeen run on?", "acceptedAnswer": { "@type": "Answer", "text": "macOS 26 or later, on Apple silicon or Intel: it is one universal app. The local translation models need Apple silicon. The interface follows your language: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español or Deutsch." } },
-              { "@type": "Question", "name": "Does it work offline?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, once it is activated. Capture, annotation, Apple Translation and the local models work offline after their language packs or model are downloaded. An activation stays valid through network outages and is checked again about once a day. An LLM API needs a connection to your endpoint." } },
-              { "@type": "Question", "name": "What leaves my Mac?", "acceptedAnswer": { "@type": "Answer", "text": "With Apple Translation or a local model, nothing: the screenshot, the recognized text and the translation stay on this Mac. With an LLM API only the recognized text goes to the endpoint you set, never the screenshot. Activation sends your code and a random installation ID, and update checks contact GitHub." } },
-              { "@type": "Question", "name": "Can I use a different model?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. In Settings → General → Translation, download Index-Translate 2B or Hy-MT2 1.8B (about 1.1 GB each), which run inside Transeen, or enter any OpenAI-compatible chat/completions endpoint, a model name and, if it needs one, a key kept in your Keychain. Remote endpoints must use HTTPS; a server on localhost can use HTTP without a key." } },
-              { "@type": "Question", "name": "Can it translate an image I already have?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Choose Open Image… in the launcher or press ⌘O; the picture opens in the same window, with the same tools." } },
-              { "@type": "Question", "name": "How accurate is it?", "acceptedAnswer": { "@type": "Answer", "text": "That depends on the translation service. Dense layouts, formulas and specialist terms can need correcting, so compare with the original using Tab, or open the full text, before you rely on a detail." } },
-              { "@type": "Question", "name": "Is Transeen open source?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, under the MIT license, commercial use included. The official app needs a TR- code; the source license does not include the hosted activation service, so independent builds bring their own." } },
-              { "@type": "Question", "name": "How do I update?", "acceptedAnswer": { "@type": "Answer", "text": "Choose Check for Updates… in the menu bar or the launcher. Transeen checks GitHub Releases and opens the download when a newer version exists." } }
+              {
+                "@type": "Question",
+                "name": "Which apps does it work with?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Any app that shows text on the screen: browsers, chat and mail, PDF readers, games, design and video tools, remote desktops and virtual machines. Transeen translates the pixels you select, so it needs no plug-in or support from the app, and one frame can take in windows from several apps. Video that an app protects from screen recording comes out black, as it does in any screenshot."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which Macs does Transeen run on?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "macOS 26 or later, on Apple silicon or Intel: it is one universal app. The local translation models need Apple silicon. The interface follows your language: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español or Deutsch."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does it work offline?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, once it is activated. Capture, annotation, Apple Translation and the local models work offline after their language packs or model are downloaded. An activation stays valid through network outages and is checked again about once a day. An LLM API needs a connection to your endpoint."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What leaves my Mac?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "With Apple Translation or a local model, nothing: the screenshot, the recognized text and the translation stay on this Mac. With an LLM API only the recognized text goes to the endpoint you set, never the screenshot. Activation sends your code and a random installation ID, and update checks contact GitHub."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use a different model?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. In Settings → General → Translation, download Index-Translate 2B or Hy-MT2 1.8B (about 1.1 GB each), which run inside Transeen, or enter any OpenAI-compatible chat/completions endpoint, a model name and, if it needs one, a key kept in your Keychain. Remote endpoints must use HTTPS; a server on localhost can use HTTP without a key."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can it translate an image I already have?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Choose Open Image… in the launcher or press ⌘O; the picture opens in the same window, with the same tools."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How accurate is it?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "That depends on the translation service. Dense layouts, formulas and specialist terms can need correcting, so compare with the original using Tab, or open the full text, before you rely on a detail."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Transeen open source?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, under the MIT license, commercial use included. The official app needs a TR- code; the source license does not include the hosted activation service, so independent builds bring their own."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I update?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Choose Check for Updates… in the menu bar or the launcher. Transeen checks GitHub Releases and opens the download when a newer version exists."
+                }
+              }
             ]
           }
         ]
@@ -140,7 +280,7 @@
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=a9e04b962aeb" />
     <link rel="manifest" href="site.webmanifest" />
     <link rel="preload" href="assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="assets/site.css?v=0ba230f96315" />
+    <link rel="stylesheet" href="assets/site.css?v=1c3da10917de" />
     <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
@@ -220,13 +360,25 @@
         <a class="brand" href="./" aria-label="Transeen home"><img src="assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
         <nav class="nav-links" aria-label="Main">
           <a href="#how">How it works</a>
+          <a href="#apps">Any app</a>
           <a href="#tools">Tools</a>
           <a href="#languages">Languages</a>
-          <a href="#activation">Activation</a>
           <a href="guide/">Guide</a>
         </nav>
         <div class="nav-end">
-          <a class="nav-lang" href="zh/" hreflang="zh-CN" lang="zh-CN">中文</a>
+          <details class="langmenu">
+            <summary aria-label="Language: English"><svg aria-hidden="true"><use href="#ui-globe" /></svg><span>English</span></summary>
+            <ul role="list">
+              <li><a href="./" aria-current="page">English</a></li>
+              <li><a href="zh/" hreflang="zh-Hans" lang="zh-CN">简体中文</a></li>
+              <li><a href="zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></li>
+              <li><a href="ja/" hreflang="ja" lang="ja">日本語</a></li>
+              <li><a href="ko/" hreflang="ko" lang="ko">한국어</a></li>
+              <li><a href="fr/" hreflang="fr" lang="fr">Français</a></li>
+              <li><a href="es/" hreflang="es" lang="es">Español</a></li>
+              <li><a href="de/" hreflang="de" lang="de">Deutsch</a></li>
+            </ul>
+          </details>
           <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/latest">Download</a>
         </div>
       </div>
@@ -237,12 +389,12 @@
         <span data-top></span>
         <div class="wrap">
           <h1 class="hero-title load" id="hero-title">Translate your screen, <span>in place.</span></h1>
-          <p class="hero-lead load" style="--d: 120">Press F1 and select anything you can’t read. Transeen redraws it in your language, inside the same picture, at the same size and in the same color.</p>
+          <p class="hero-lead load" style="--d: 120">Press F1 in any app and select what you can’t read. Transeen redraws it in your language, inside the same picture, at the same size and in the same color.</p>
           <div class="hero-actions load" style="--d: 220">
             <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Download for Mac</a>
             <a class="link-arrow" href="guide/">Setup guide</a>
           </div>
-          <p class="hero-meta load" style="--d: 300"><span>v0.11.1</span><span>macOS 26+</span><span>Apple silicon &amp; Intel</span><span>Notarized by Apple</span></p>
+          <p class="hero-meta load" style="--d: 300"><span>v0.11.2</span><span>macOS 26+</span><span>Apple silicon &amp; Intel</span><span>Notarized by Apple</span></p>
 
           <div class="hero-stage load" style="--d: 380">
             <div class="demo" tabindex="0" role="group" aria-roledescription="demonstration" aria-labelledby="demo-label">
@@ -336,86 +488,91 @@
             <p class="fig">Fig 1.0 &nbsp;How it works</p>
             <h2 class="lede" id="how-title"><b>One key, four steps.</b> Transeen reads the pixels you select and sets your language back into them, without leaving the Mac.</h2>
           </div>
-          <ol class="grid grid-4 reveal" role="list">
-            <li class="cell">
+          <ol class="grid grid-4 reveal figs" role="list">
+            <li class="cell" style="--n: 0">
               <!-- part:fig-select -->
-              <svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <svg class="art art-select" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
                 <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
-                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" style="--d:60" />
-                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" style="--d:120" />
-                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" style="--d:180" />
+                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="fx-lit" style="--d:60; --i:0" />
+                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="fx-lit" style="--d:120; --i:1" />
+                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="fx-lit" style="--d:180; --i:2" />
                 <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
                 <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
-                <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="blue" />
-                <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="blue" />
-                <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="blue" />
-                <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="blue" />
-                <path d="M94.3 59.9 L197.0 119.3 L154.0 144.1 L51.2 84.8 Z" class="blue" stroke-dasharray="2 3" opacity="0.6" />
+                <g class="fx-frame">
+                  <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="blue" />
+                  <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="blue" />
+                  <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="blue" />
+                  <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="blue" />
+                  <path d="M94.3 59.9 L197.0 119.3 L154.0 144.1 L51.2 84.8 Z" class="blue fx-ants" stroke-dasharray="2 3" opacity="0.6" />
+                </g>
               </svg>
               <!-- /part:fig-select -->
               <p class="fig">1.1 &nbsp;Select</p>
               <h3>Frame what you can’t read</h3>
               <p>The screen holds still. Hover to snap to a paragraph, a field or a window, or drag a frame of your own.</p>
             </li>
-            <li class="cell" style="--d: 120">
+            <li class="cell" style="--d: 120; --n: 1">
               <!-- part:fig-recognize -->
-              <svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <svg class="art art-recognize" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
                 <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
                 <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
                 <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
-                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="hi" style="--d:60" />
-                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" class="blue" style="--d:290" />
-                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="hi" style="--d:120" />
-                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" class="blue" style="--d:380" />
-                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="hi" style="--d:180" />
-                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" class="blue" style="--d:470" />
+                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="hi fx-read" style="--d:60; --i:0" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" class="blue fx-trace" style="--d:290; --i:0" />
+                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="hi fx-read" style="--d:120; --i:1" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" class="blue fx-trace" style="--d:380; --i:1" />
+                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="hi fx-read" style="--d:180; --i:2" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" class="blue fx-trace" style="--d:470; --i:2" />
+                <path d="M96.7 58.6 L199.4 117.9" pathLength="1" class="blue fx-scan" />
               </svg>
               <!-- /part:fig-recognize -->
               <p class="fig">1.2 &nbsp;Recognize</p>
               <h3>Each line is read on your Mac</h3>
               <p>Apple’s Vision framework finds every line and its style. Nothing is uploaded to do it.</p>
             </li>
-            <li class="cell" style="--d: 240">
+            <li class="cell" style="--d: 240; --n: 2">
               <!-- part:fig-lift -->
-              <svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <svg class="art art-lift" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
-                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" stroke-dasharray="2 3" opacity="0.7" />
-                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" stroke-dasharray="2 3" opacity="0.7" />
-                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" stroke-dasharray="2 3" opacity="0.7" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" class="fx-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:0" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" class="fx-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:1" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" class="fx-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:2" />
                 <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
                 <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
                 <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
-                <path d="M94.3 18.5 L156.4 54.4" pathLength="1" class="hi" style="--d:360" />
-                <path d="M94.3 62.7 L94.3 24.1" stroke-dasharray="1.5 3" opacity="0.7" />
-                <path d="M79.9 26.8 L173.1 80.6" pathLength="1" class="hi" style="--d:420" />
-                <path d="M79.9 71.0 L79.9 32.3" stroke-dasharray="1.5 3" opacity="0.7" />
-                <path d="M65.6 35.1 L113.4 62.7" pathLength="1" class="hi" style="--d:480" />
-                <path d="M65.6 79.3 L65.6 40.6" stroke-dasharray="1.5 3" opacity="0.7" />
+                <path d="M94.3 18.5 L156.4 54.4" pathLength="1" class="hi fx-rise" style="--d:360; --i:0" />
+                <path d="M94.3 62.7 L94.3 24.1" class="fx-guide" stroke-dasharray="1.5 3" opacity="0.7" style="--i:0" />
+                <path d="M79.9 26.8 L173.1 80.6" pathLength="1" class="hi fx-rise" style="--d:420; --i:1" />
+                <path d="M79.9 71.0 L79.9 32.3" class="fx-guide" stroke-dasharray="1.5 3" opacity="0.7" style="--i:1" />
+                <path d="M65.6 35.1 L113.4 62.7" pathLength="1" class="hi fx-rise" style="--d:480; --i:2" />
+                <path d="M65.6 79.3 L65.6 40.6" class="fx-guide" stroke-dasharray="1.5 3" opacity="0.7" style="--i:2" />
               </svg>
               <!-- /part:fig-lift -->
               <p class="fig">1.3 &nbsp;Lift</p>
               <h3>Only the ink comes off</h3>
               <p>The letters are lifted out and the background underneath them is rebuilt, gradient or texture included.</p>
             </li>
-            <li class="cell" style="--d: 360">
+            <li class="cell" style="--d: 360; --n: 3">
               <!-- part:fig-set -->
-              <svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <svg class="art art-set" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
                 <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
                 <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
                 <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
                 <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" opacity="0.35" />
-                <path d="M94.3 68.2 L170.8 112.4" pathLength="1" class="blue" stroke-width="1.6" style="--d:90" />
+                <path d="M94.3 68.2 L170.8 112.4" pathLength="1" class="blue fx-write" style="--d:90; --i:0" stroke-width="1.6" />
                 <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" opacity="0.35" />
-                <path d="M79.9 76.5 L134.9 108.2" pathLength="1" class="blue" stroke-width="1.6" style="--d:180" />
+                <path d="M79.9 76.5 L134.9 108.2" pathLength="1" class="blue fx-write" style="--d:180; --i:1" stroke-width="1.6" />
                 <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" opacity="0.35" />
-                <path d="M65.6 84.8 L134.9 124.8" pathLength="1" class="blue" stroke-width="1.6" style="--d:270" />
-                <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="hi" />
-                <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="hi" />
-                <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="hi" />
-                <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="hi" />
+                <path d="M65.6 84.8 L134.9 124.8" pathLength="1" class="blue fx-write" style="--d:270; --i:2" stroke-width="1.6" />
+                <g class="fx-mark">
+                  <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="hi" />
+                  <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="hi" />
+                  <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="hi" />
+                  <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="hi" />
+                </g>
               </svg>
               <!-- /part:fig-set -->
               <p class="fig">1.4 &nbsp;Set</p>
@@ -426,10 +583,68 @@
         </div>
       </section>
 
+      <section class="section" id="apps" aria-labelledby="apps-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 2.0 &nbsp;Any app</p>
+            <h2 class="lede" id="apps-title"><b>Any app, and across apps.</b> Transeen reads the pixels on your screen, so it works wherever text appears, with nothing to install in the app.</h2>
+          </div>
+          <div class="apps-layout">
+            <figure class="apps-figure reveal figs" style="--n: 0">
+              <!-- part:fig-apps -->
+              <svg class="art art-apps" viewBox="0 0 298 205" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M104.8 8.0 L221.9 75.6 L125.1 131.5 L8.0 63.9 Z" class="fill" stroke="none" />
+                <path d="M104.8 8.0 L221.9 75.6 L125.1 131.5 L8.0 63.9 Z" pathLength="1" style="--d:0" />
+                <path d="M94.7 13.8 L211.8 81.4" pathLength="1" style="--d:60" />
+                <path d="M104.3 13.5 L112.1 18.1" pathLength="1" class="hi" style="--d:60" />
+                <path d="M92.4 25.5 L171.2 71.0" pathLength="1" style="--d:100" />
+                <path d="M82.3 31.4 L140.8 65.2" pathLength="1" style="--d:136" />
+                <path d="M72.2 37.2 L166.7 91.8" pathLength="1" style="--d:172" />
+                <path d="M62.0 43.1 L86.8 57.4" pathLength="1" style="--d:208" />
+                <path d="M51.9 48.9 L76.7 63.2" pathLength="1" style="--d:244" />
+                <path d="M41.8 54.8 L66.5 69.1" pathLength="1" style="--d:280" />
+                <path d="M31.6 60.6 L56.4 74.9" pathLength="1" style="--d:316" />
+                <path d="M92.4 60.6 L104.8 67.8" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:208; --i:0" />
+                <path d="M82.3 66.5 L124.0 90.5" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:244; --i:1" />
+                <path d="M72.2 72.3 L83.4 78.8" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:280; --i:2" />
+                <path d="M62.0 78.2 L92.4 95.7" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:316; --i:3" />
+                <path d="M167.9 73.0 L289.5 143.2 L197.1 196.5 L75.5 126.3 Z" class="fill" stroke="none" />
+                <path d="M167.9 73.0 L289.5 143.2 L197.1 196.5 L75.5 126.3 Z" pathLength="1" style="--d:160" />
+                <path d="M157.7 78.8 L279.3 149.0" pathLength="1" style="--d:220" />
+                <path d="M167.3 78.5 L175.2 83.1" pathLength="1" class="hi" style="--d:220" />
+                <path d="M155.5 90.5 L241.0 139.9" pathLength="1" style="--d:260" />
+                <path d="M207.3 143.8 L236.5 160.8" pathLength="1" style="--d:332" />
+                <path d="M115.0 113.9 L193.8 159.4" pathLength="1" style="--d:404" />
+                <path d="M104.8 119.8 L154.4 148.4" pathLength="1" style="--d:440" />
+                <path d="M145.4 96.4 L201.6 128.9" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:296; --i:0" />
+                <path d="M135.2 102.2 L199.4 139.3" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:332; --i:1" />
+                <path d="M125.1 108.1 L167.9 132.8" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:368; --i:2" />
+                <g class="fx-frame">
+                  <path d="M104.8 60.0 L93.6 53.5 L82.3 60.0" pathLength="1" class="blue" />
+                  <path d="M217.4 125.0 L228.7 131.5 L217.4 138.0" pathLength="1" class="blue" />
+                  <path d="M174.6 149.7 L185.9 156.2 L197.1 149.7" pathLength="1" class="blue" />
+                  <path d="M62.0 84.7 L50.8 78.2 L62.0 71.7" pathLength="1" class="blue" />
+                  <path d="M93.6 53.5 L228.7 131.5 L185.9 156.2 L50.8 78.2 Z" class="blue fx-ants" stroke-dasharray="2 3" opacity="0.6" />
+                </g>
+              </svg>
+              <!-- /part:fig-apps -->
+              <figcaption class="matrix-caption">One frame across two apps’ windows, translated as one picture</figcaption>
+            </figure>
+            <ul class="apps-list reveal" role="list" style="--d: 150">
+              <li><b>No plug-ins, no integrations</b><span>Browsers, chat, PDFs, games, design tools, remote desktops: if it is on the screen, it can be translated. Even text you can’t select.</span></li>
+              <li><b>One frame across several apps</b><span>A frame can cover windows from different apps at once. Every line inside it is translated in the same capture.</span></li>
+              <li><b>Over full-screen apps, on every Space</b><span>F1 works in a full-screen app and on any desktop. An open menu, popover or tooltip stays in the picture, and the app keeps focus.</span></li>
+              <li><b>Snaps to what is there</b><span>Hover and the frame finds the paragraph, field or window under the pointer, in whatever app it belongs to.</span></li>
+              <li><b>Pins float over every app</b><span>A pinned translation stays above whatever you switch to, so you can read it next to the app you are working in.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section class="section" aria-labelledby="keys-title">
         <div class="wrap">
           <div class="section-head reveal">
-            <p class="fig">Fig 2.0 &nbsp;Keyboard</p>
+            <p class="fig">Fig 3.0 &nbsp;Keyboard</p>
             <h2 class="lede" id="keys-title"><b>Made for the keyboard.</b> The original is always one key away, and so is the last place you looked.</h2>
           </div>
           <div class="keys-panel reveal">
@@ -445,7 +660,7 @@
       <section class="section" id="tools" aria-labelledby="tools-title">
         <div class="wrap">
           <div class="section-head reveal">
-            <p class="fig">Fig 3.0 &nbsp;The capture</p>
+            <p class="fig">Fig 4.0 &nbsp;The capture</p>
             <h2 class="lede" id="tools-title"><b>A capture you can work with.</b> It stays where you selected it, with the tools underneath.</h2>
           </div>
           <ul class="grid grid-3 reveal" role="list">
@@ -486,7 +701,7 @@
       <section class="section" id="services" aria-labelledby="services-title">
         <div class="wrap">
           <div class="section-head reveal">
-            <p class="fig">Fig 4.0 &nbsp;Translation</p>
+            <p class="fig">Fig 5.0 &nbsp;Translation</p>
             <h2 class="lede" id="services-title"><b>Three ways to translate.</b> Pick one in Settings, change it any time. Recognition always happens on your Mac.</h2>
           </div>
           <ul class="grid grid-3 providers reveal" role="list">
@@ -526,12 +741,12 @@
         <div class="wrap lang-layout">
           <div class="reveal">
             <div class="section-head">
-              <p class="fig">Fig 5.0 &nbsp;Languages</p>
+              <p class="fig">Fig 6.0 &nbsp;Languages</p>
               <h2 class="lede" id="languages-title"><b>Eight languages, either way.</b> From any of them into any other, with the source detected for you.</h2>
               <p class="body-copy">The app speaks your language too: every window, menu and message follows the one you choose. A page already in your language is translated into your other one.</p>
             </div>
             <ul class="lang-list" role="list">
-              <li lang="en">English <small>EN</small></li>
+              <li>English <small>EN</small></li>
               <li lang="zh-Hans">简体中文 <small>ZH-HANS</small></li>
               <li lang="zh-Hant">繁體中文 <small>ZH-HANT</small></li>
               <li lang="ja">日本語 <small>JA</small></li>
@@ -634,24 +849,24 @@
       <section class="section" id="changes" aria-labelledby="changes-title">
         <div class="wrap">
           <div class="section-head reveal">
-            <p class="fig">Fig 6.0 &nbsp;Changelog</p>
+            <p class="fig">Fig 7.0 &nbsp;Changelog</p>
             <h2 class="lede" id="changes-title"><b>Recently shipped.</b> Small releases, often. The full list is on GitHub.</h2>
           </div>
           <div class="notes reveal">
+            <article class="note">
+              <p class="note-meta"><b>0.11.2</b><time datetime="2026-10-31">Oct 31, 2026</time></p>
+              <ul>
+                <li><b>Pictures stay pictures.</b> A row of thumbnails next to the text is no longer read as words and covered with a translation. A line the recognizer is unsure of is read again, magnified, and kept only if it reads the same.</li>
+                <li><b>Chinese inside English is kept.</b> A Chinese word in an English sentence stays Chinese instead of turning into Latin letters.</li>
+                <li><b>Drawing tools always draw.</b> An arrow started on a number or a box no longer picks that mark up. The capture stays where it was taken; only a pin moves with the mouse.</li>
+              </ul>
+            </article>
             <article class="note">
               <p class="note-meta"><b>0.11.1</b><time datetime="2026-10-30">Oct 30, 2026</time></p>
               <ul>
                 <li><b>Every sentence is translated.</b> A long paragraph a local model was slow on is sent again on its own, instead of keeping its original.</li>
                 <li><b>The screen freezes first.</b> F1 keeps another app’s open menu, popover or tooltip in the picture, and that app keeps focus.</li>
                 <li><b>Cleaner erasing.</b> Letters like g and y no longer leave marks, and a floating arrow no longer turns into stray characters.</li>
-              </ul>
-            </article>
-            <article class="note">
-              <p class="note-meta"><b>0.11.0</b><time datetime="2026-10-30">Oct 30, 2026</time></p>
-              <ul>
-                <li><b>The interface follows your language.</b> Every window, menu and message, in any of the eight languages.</li>
-                <li><b>Translations appear as they arrive.</b> The first paragraphs show before the last are done, with a count in the toolbar.</li>
-                <li><b>A native macOS look</b> for the home window, the menu bar panel, the first-run guide and Settings.</li>
               </ul>
             </article>
           </div>
@@ -662,7 +877,7 @@
       <section class="section" id="activation" aria-labelledby="activation-title">
         <div class="wrap">
           <div class="section-head reveal">
-            <p class="fig">Fig 7.0 &nbsp;Activation</p>
+            <p class="fig">Fig 8.0 &nbsp;Activation</p>
             <h2 class="lede" id="activation-title"><b>One code, one Mac, for good.</b> No subscription and no account required.</h2>
           </div>
           <div class="license reveal">
@@ -691,10 +906,14 @@
       <section class="section" id="faq" aria-labelledby="faq-title">
         <div class="wrap faq-layout">
           <div class="section-head reveal">
-            <p class="fig">Fig 8.0 &nbsp;Questions</p>
+            <p class="fig">Fig 9.0 &nbsp;Questions</p>
             <h2 class="lede" id="faq-title"><b>Questions.</b> Anything else, ask in GitHub Discussions.</h2>
           </div>
           <div class="faq reveal">
+            <details>
+              <summary>Which apps does it work with?</summary>
+              <p>Any app that shows text on the screen: browsers, chat and mail, PDF readers, games, design and video tools, remote desktops and virtual machines. Transeen translates the pixels you select, so it needs no plug-in or support from the app, and one frame can take in windows from several apps. Video that an app protects from screen recording comes out black, as it does in any screenshot.</p>
+            </details>
             <details>
               <summary>Which Macs does Transeen run on?</summary>
               <p>macOS 26 or later, on Apple silicon or Intel: it is one universal app. The local translation models need Apple silicon. The interface follows your language: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español or Deutsch.</p>
@@ -740,7 +959,7 @@
             <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Download for Mac</a>
             <a class="link-arrow" href="https://github.com/LiuTianjie/Transeen">View the source</a>
           </div>
-          <p class="hero-meta"><span>Universal app</span><span>9.6 MB</span><span>Signed and notarized</span></p>
+          <p class="hero-meta"><span>Universal app</span><span>10.4 MB</span><span>Signed and notarized</span></p>
         </div>
       </section>
     </main>
@@ -750,14 +969,14 @@
         <div class="footer-grid">
           <div class="footer-brand">
             <a class="brand" href="./"><img src="assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
-            <p>A native Mac app that translates what’s on your screen, in place. Made by iTool.</p>
+            <p>A native Mac app that translates what’s on your screen, in place, in any app. Made by iTool.</p>
           </div>
           <nav aria-labelledby="footer-product">
             <h2 id="footer-product">Product</h2>
             <ul>
               <li><a href="#how">How it works</a></li>
+              <li><a href="#apps">Any app</a></li>
               <li><a href="#tools">Tools</a></li>
-              <li><a href="#languages">Languages</a></li>
               <li><a href="#activation">Activation</a></li>
             </ul>
           </nav>
@@ -784,16 +1003,26 @@
             <ul>
               <li><a href="https://itool.tech/">iTool</a></li>
               <li><a href="https://stupidmirror.itool.tech/">StupidMirror</a></li>
-              <li><a href="zh/" hreflang="zh-CN" lang="zh-CN">Transeen 中文</a></li>
             </ul>
           </nav>
         </div>
+        <nav class="footer-langs" aria-label="Language">
+          <svg aria-hidden="true"><use href="#ui-globe" /></svg>
+          <a href="./" aria-current="page">English</a>
+          <a href="zh/" hreflang="zh-Hans" lang="zh-CN">简体中文</a>
+          <a href="zh-hant/" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a>
+          <a href="ja/" hreflang="ja" lang="ja">日本語</a>
+          <a href="ko/" hreflang="ko" lang="ko">한국어</a>
+          <a href="fr/" hreflang="fr" lang="fr">Français</a>
+          <a href="es/" hreflang="es" lang="es">Español</a>
+          <a href="de/" hreflang="de" lang="de">Deutsch</a>
+        </nav>
         <div class="footer-end">
           <p>© 2026 LiuTianjie. Released under the MIT license.</p>
           <p>Mac, macOS and Apple silicon are trademarks of Apple Inc.</p>
         </div>
       </div>
     </footer>
-    <script src="assets/site.js?v=58b37f6c2bf3" defer></script>
+    <script src="assets/site.js?v=3d79e1bf1e0f" defer></script>
   </body>
 </html>

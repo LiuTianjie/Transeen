@@ -25,6 +25,23 @@
   color-scheme: dark;
 }
 
+:root:lang(zh-Hant) {
+  --sans: "Geist", "PingFang TC", "PingFang HK", "Microsoft JhengHei", system-ui, sans-serif;
+}
+
+:root:lang(ja) {
+  --sans: "Geist", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+}
+
+:root:lang(ko) {
+  --sans: "Geist", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  word-break: keep-all;
+}
+
+:root:lang(ja) {
+  line-break: strict;
+}
+
 *,
 *::before,
 *::after {
@@ -202,13 +219,11 @@ code {
   color: var(--fg-2);
 }
 
-.nav-links a,
-.nav-lang {
+.nav-links a {
   transition: color 0.2s;
 }
 
-.nav-links a:hover,
-.nav-lang:hover {
+.nav-links a:hover {
   color: var(--fg);
 }
 
@@ -217,10 +232,6 @@ code {
   align-items: center;
   gap: 18px;
   font-size: 14px;
-}
-
-.nav-lang {
-  color: var(--fg-2);
 }
 
 /* Buttons */
@@ -326,7 +337,7 @@ code {
   font-weight: inherit;
 }
 
-:lang(zh) .lede {
+:is(:lang(zh), :lang(ja), :lang(ko)) .lede {
   max-width: 22em;
   letter-spacing: -0.01em;
   line-height: 1.22;
@@ -339,7 +350,7 @@ code {
   line-height: 1.65;
 }
 
-:lang(zh) .body-copy {
+:is(:lang(zh), :lang(ja), :lang(ko)) .body-copy {
   max-width: 36em;
   line-height: 1.8;
 }
@@ -361,7 +372,7 @@ code {
   text-wrap: balance;
 }
 
-:lang(zh) .hero-title {
+:is(:lang(zh), :lang(ja), :lang(ko)) .hero-title {
   max-width: 14em;
   font-size: clamp(40px, 6.6vw, 80px);
   line-height: 1.08;
@@ -376,9 +387,14 @@ code {
   font-weight: inherit;
 }
 
+/* A phrase that must stay on one line, such as German "an Ort und Stelle". */
+.hero-title span.nb {
+  white-space: nowrap;
+}
+
 .guide-hero h1 span,
-:lang(zh) .hero-title .nb,
-:lang(zh) .hero-title span {
+:is(:lang(zh), :lang(ja), :lang(ko)) .hero-title .nb,
+:is(:lang(zh), :lang(ja), :lang(ko)) .hero-title span {
   display: inline-block;
 }
 
@@ -391,7 +407,7 @@ code {
   text-wrap: pretty;
 }
 
-:lang(zh) .hero-lead {
+:is(:lang(zh), :lang(ja), :lang(ko)) .hero-lead {
   max-width: 30em;
   line-height: 1.75;
 }
@@ -1157,6 +1173,18 @@ code {
   letter-spacing: 0.02em;
 }
 
+.chip:lang(zh-Hant) {
+  --sans: "Geist", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+}
+
+.chip:lang(zh-Hans) {
+  --sans: "Geist", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+.chip:lang(ko) {
+  --sans: "Geist", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+}
+
 .chip {
   height: 30px;
   padding: 0 12px;
@@ -1237,8 +1265,26 @@ code {
   border-top: 1px solid var(--line);
 }
 
+/* The four steps get equal columns with the separators drawn in the gaps, so every figure is the
+   same size and the captions under them line up. */
 .grid-4 {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 56px;
+}
+
+.grid-4 .cell,
+.grid-4 .cell + .cell {
+  padding-inline: 0;
+  border-left: 0;
+}
+
+.grid-4 .cell + .cell::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -28px;
+  border-left: 1px solid var(--line);
 }
 
 .grid-3 {
@@ -1289,7 +1335,7 @@ code {
   line-height: 1.6;
 }
 
-:lang(zh) .cell p {
+:is(:lang(zh), :lang(ja), :lang(ko)) .cell p {
   line-height: 1.8;
 }
 
@@ -1311,17 +1357,20 @@ code {
   color: var(--blue);
 }
 
-.art [pathLength] {
+/* Lines that draw in carry pathLength="1". The rules select them by tag and :not() of the dashed
+   lines, not by [pathLength]: Chrome does not restart a transition whose rule matches on that
+   mixed-case SVG attribute when an ancestor's class changes, so the lines never drew in. */
+.art path:not([stroke-dasharray]) {
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
 }
 
-.js .reveal .art [pathLength] {
+.js .reveal .art path:not([stroke-dasharray]) {
   stroke-dashoffset: 1;
   transition: stroke-dashoffset 1.4s var(--ease) calc(var(--d, 0) * 1ms + 200ms);
 }
 
-.js .reveal.in .art [pathLength] {
+.js .reveal.in .art path:not([stroke-dasharray]) {
   stroke-dashoffset: 0;
 }
 
@@ -1739,7 +1788,7 @@ code {
   line-height: 1.65;
 }
 
-:lang(zh) .faq details p {
+:is(:lang(zh), :lang(ja), :lang(ko)) .faq details p {
   line-height: 1.85;
 }
 
@@ -1820,6 +1869,10 @@ code {
   color: var(--fg);
 }
 
+.footer-langs + .footer-end {
+  margin-top: 24px;
+}
+
 .footer-end {
   display: flex;
   flex-wrap: wrap;
@@ -1859,7 +1912,7 @@ code {
   letter-spacing: -0.042em;
 }
 
-:lang(zh) .guide-hero h1 {
+:is(:lang(zh), :lang(ja), :lang(ko)) .guide-hero h1 {
   line-height: 1.12;
   letter-spacing: -0.02em;
 }
@@ -1971,8 +2024,8 @@ code {
   line-height: 1.7;
 }
 
-:lang(zh) .doc p,
-:lang(zh) .doc li {
+:is(:lang(zh), :lang(ja), :lang(ko)) .doc p,
+:is(:lang(zh), :lang(ja), :lang(ko)) .doc li {
   line-height: 1.9;
 }
 
@@ -2153,6 +2206,315 @@ code {
   margin-top: 16px;
 }
 
+/* Figures that keep moving. Each step's figure plays its part of the capture in turn: --n is the
+   step, so the four take turns over one 8-second cycle, and --i staggers the lines inside one.
+   A loop starts once the figure has drawn in (.is-live, added by site.js after the reveal) and
+   pauses while it is off screen. Every keyframe ends on the figure as it is drawn, which is also
+   what reduced motion and the share cards show. */
+
+.art {
+  --cycle: 8s;
+  --slot: calc(var(--n, 0) * var(--cycle) / 4);
+}
+
+.figs .art [class*="fx-"],
+.figs .fx-frame,
+.figs .fx-mark {
+  animation-duration: var(--cycle);
+  animation-timing-function: var(--ease);
+  animation-iteration-count: infinite;
+  animation-delay: calc(var(--slot) + var(--i, 0) * 180ms);
+  animation-play-state: paused;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.figs.is-live:not(.is-away) .art [class*="fx-"],
+.figs.is-live:not(.is-away) .fx-frame,
+.figs.is-live:not(.is-away) .fx-mark {
+  animation-play-state: running;
+}
+
+.figs.is-live .art-select .fx-frame,
+.figs.is-live .art-apps .fx-frame {
+  animation-name: fx-frame;
+  animation-delay: var(--slot);
+}
+
+.figs.is-live .fx-ants {
+  animation: fx-ants 1.6s linear infinite;
+  animation-play-state: inherit;
+}
+
+.figs.is-live .art-select .fx-lit {
+  animation-name: fx-lit;
+}
+
+.figs.is-live .fx-read {
+  animation-name: fx-read;
+}
+
+.figs.is-live .fx-trace {
+  animation-name: fx-trace;
+}
+
+.figs.is-live .fx-scan {
+  animation-name: fx-scan;
+  animation-delay: var(--slot);
+  transform-box: view-box;
+}
+
+.figs.is-live .fx-rise {
+  animation-name: fx-rise;
+}
+
+.figs.is-live .fx-guide {
+  animation-name: fx-guide;
+}
+
+.figs.is-live .fx-hole {
+  animation-name: fx-hole;
+}
+
+.figs.is-live .fx-write {
+  animation-name: fx-write;
+}
+
+.figs.is-live .art-set .fx-mark {
+  animation-name: fx-mark;
+  animation-delay: calc(var(--slot) + 700ms);
+}
+
+.figs.is-live .art-apps .fx-new {
+  animation-name: fx-write;
+  animation-delay: calc(var(--slot) + 900ms + var(--i, 0) * 110ms);
+}
+
+/* The scan line is hidden except while it sweeps. */
+.art .fx-scan {
+  opacity: 0;
+}
+
+/* A window in the apps figure is filled with the page colour, so the one in front hides the
+   lines of the one behind. */
+.art .fill {
+  fill: var(--bg);
+}
+
+@keyframes fx-frame {
+  0%, 30%, 100% { transform: none; opacity: 1; }
+  6% { transform: scale(1.08); opacity: 0.2; }
+  14% { transform: scale(0.985); opacity: 1; }
+}
+
+@keyframes fx-ants {
+  to { stroke-dashoffset: -10; }
+}
+
+@keyframes fx-lit {
+  0%, 26%, 100% { color: #5a5e66; }
+  10%, 18% { color: var(--fg); }
+}
+
+@keyframes fx-read {
+  0%, 32%, 100% { opacity: 1; }
+  12% { opacity: 0.35; }
+}
+
+@keyframes fx-trace {
+  0%, 4% { stroke-dashoffset: 1; }
+  20%, 100% { stroke-dashoffset: 0; }
+}
+
+@keyframes fx-scan {
+  0% { opacity: 0; transform: none; }
+  4% { opacity: 0.9; }
+  22% { opacity: 0.9; transform: translate(-47.8px, 27.6px); }
+  26%, 100% { opacity: 0; transform: translate(-47.8px, 27.6px); }
+}
+
+@keyframes fx-rise {
+  0%, 30%, 100% { transform: none; opacity: 1; }
+  4% { transform: translateY(26px); opacity: 0; }
+  20% { transform: translateY(-2px); opacity: 1; }
+}
+
+@keyframes fx-guide {
+  0%, 4% { opacity: 0; }
+  14%, 100% { opacity: 0.7; }
+}
+
+@keyframes fx-hole {
+  0% { stroke-dashoffset: 0; }
+  30%, 100% { stroke-dashoffset: -10; }
+}
+
+@keyframes fx-write {
+  0%, 4% { stroke-dashoffset: 1; }
+  22%, 100% { stroke-dashoffset: 0; }
+}
+
+@keyframes fx-mark {
+  0%, 22%, 100% { transform: none; opacity: 1; }
+  4% { transform: scale(1.06); opacity: 0.3; }
+  12% { transform: scale(0.99); opacity: 1; }
+}
+
+/* Any app */
+
+.apps-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: center;
+}
+
+.apps-figure .art {
+  aspect-ratio: auto;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.apps-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.apps-list li {
+  display: grid;
+  gap: 6px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg-2);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.apps-list b {
+  color: var(--fg);
+  font-size: 15.5px;
+  font-weight: 540;
+  letter-spacing: -0.01em;
+}
+
+/* Language menu */
+
+.langmenu {
+  position: relative;
+}
+
+.langmenu summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  color: var(--fg-2);
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.langmenu summary::-webkit-details-marker {
+  display: none;
+}
+
+.langmenu summary:hover,
+.langmenu[open] summary {
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.langmenu summary svg {
+  width: 15px;
+  height: 15px;
+}
+
+.langmenu ul {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 60;
+  display: grid;
+  min-width: 168px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border-radius: 12px;
+  background: rgba(22, 23, 25, 0.96);
+  box-shadow: 0 0 0 1px var(--line-strong), 0 24px 48px -16px rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+.langmenu a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 7px;
+  color: var(--fg-2);
+  font-size: 14px;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.langmenu a:hover {
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.langmenu a[aria-current="page"] {
+  color: var(--fg);
+}
+
+.langmenu a[aria-current="page"]::after {
+  content: "✓";
+  float: right;
+  color: var(--blue);
+}
+
+.footer-langs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.footer-langs svg {
+  width: 15px;
+  height: 15px;
+  color: var(--fg-3);
+}
+
+.footer-langs a {
+  color: var(--fg-2);
+  transition: color 0.2s;
+}
+
+.footer-langs a:hover,
+.footer-langs a[aria-current="page"] {
+  color: var(--fg);
+}
+
+.lost-langs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+  margin-top: 8px;
+  color: var(--fg-2);
+  font-size: 14px;
+}
+
+.lost-langs a:hover {
+  color: var(--fg);
+}
+
 /* Reveal on scroll */
 
 .js .reveal {
@@ -2215,16 +2577,29 @@ code {
   }
 
   .grid-4 {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .grid-4 .cell:nth-child(3) {
-    padding-left: 0;
-    border-left: 0;
+  .grid-4 .cell:nth-child(3)::before {
+    display: none;
   }
 
-  .grid-4 .cell:nth-child(n + 3) {
+  .grid-4 .cell:nth-child(n + 3)::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: -28px;
     border-top: 1px solid var(--line);
+  }
+
+  .grid-4 .cell:nth-child(4)::after {
+    left: -28px;
+    right: 0;
+  }
+
+  .apps-layout {
+    grid-template-columns: 1fr;
   }
 
   .grid-3 {
@@ -2263,7 +2638,7 @@ code {
   }
 
   .guide {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .toc {
@@ -2283,10 +2658,9 @@ code {
     grid-template-columns: 1fr;
   }
 
-  .grid-4 .cell,
-  .grid-4 .cell + .cell {
-    padding-left: 0;
-    border-left: 0;
+  .grid-4 .cell::before,
+  .grid-4 .cell::after {
+    display: none;
   }
 
   .grid-4 .cell + .cell {
@@ -2370,5 +2744,11 @@ code {
   .js .load {
     opacity: 1;
     transform: none;
+  }
+
+  .figs .art [class*="fx-"],
+  .figs .fx-frame,
+  .figs .fx-mark {
+    animation: none !important;
   }
 }

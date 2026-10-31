@@ -1,0 +1,476 @@
+# 简体中文
+
+[meta]
+title = "Transeen｜Mac 截图翻译与屏幕翻译，任意软件里译文留在原处"
+description = "在任意软件里按 F1，框选 Mac 屏幕任意区域，Transeen 把译文直接画回原图，位置、字号和颜色都不变。跨软件框选也行。本机 OCR 识别，支持 Apple 本机翻译、内置本地模型和自选接口，可标注、钉图、对照原文。"
+keywords = "Mac 截图翻译, 屏幕翻译, Mac 翻译软件, OCR 翻译, 图片翻译, 原位翻译, 任意软件翻译, 离线翻译, Transeen"
+og_title = "Transeen｜框选屏幕，译文留在原处"
+og_description = "在任意软件里按 F1 框选屏幕，Transeen 把文字换成你的语言，直接画回同一张图里。"
+image_alt = "Mac 上的日文订票页面，框选的车次卡片在原处换成了中文，下方是 Transeen 工具栏"
+guide_title = "Mac 怎么截图翻译？Transeen 使用指南：安装、激活与快捷键"
+guide_description = "五步装好 Transeen：下载、激活、开启屏幕录制、选择语言、框选翻译。附完整快捷键表、内置本地翻译模型与兼容 OpenAI 接口的配置方法，以及常见问题的解决办法。"
+guide_keywords = "Mac 截图翻译教程, Transeen 使用指南, 屏幕录制权限, Mac 翻译快捷键, 本地翻译模型, 离线翻译"
+guide_og_title = "五步装好 Transeen"
+guide_og_description = "从下载到第一次在 Mac 上截图翻译，附完整快捷键与模型配置。"
+
+[ui]
+skip = "跳到正文"
+home = "Transeen 首页"
+main_nav = "主导航"
+how = "工作原理"
+apps = "任意软件"
+tools = "工具"
+languages = "语言"
+activation = "激活"
+guide = "使用指南"
+download = "下载"
+download_mac = "下载 Mac 版"
+setup_guide = "使用指南"
+language = "语言"
+tagline = "原生 Mac 应用，在任意软件里把屏幕上的文字原处翻译。来自 iTool。"
+product = "产品"
+help = "帮助"
+shortcuts = "键盘快捷键"
+questions = "提问"
+report = "报告问题"
+source = "源码"
+releases = "版本发布"
+changelog = "更新记录"
+licensing = "授权说明"
+more = "iTool 的其他产品"
+copyright = "© 2026 LiuTianjie。以 MIT 许可证发布。"
+trademarks = "Mac、macOS 和 Apple 芯片是 Apple Inc. 的商标。"
+breadcrumb = "面包屑"
+date = "{y} 年 {m} 月 {d} 日"
+
+[hero]
+title = "<b class=\"nb\">框选屏幕，</b><span>译文留在原处。</span>"
+lead = "在任意软件里按 F1，框住看不懂的地方。Transeen 把文字换成你的语言，画回同一张图里，位置、字号和颜色都不变。"
+meta = ["v{version}", "macOS 26+", "Apple 芯片与 Intel", "已通过 Apple 公证"]
+
+[demo]
+role = "演示"
+label = "演示：在一个日文订票页面上按下 F1，框选车次卡片。卡片里的每一行被识别出来，在原来的位置换成中文。选中演示后按住空格可以看原文。"
+chips = "把演示翻译成"
+hint = "按住截图可以看原文"
+replay = "重播"
+
+[how]
+fig = "工作原理"
+lede = "<b>一个键，四步。</b>Transeen 读取你框住的像素，再把你的语言放回去，全程不离开这台 Mac。"
+
+[[how.cells]]
+label = "框选"
+title = "框住看不懂的地方"
+text = "屏幕先定格。鼠标停在段落、输入框或窗口上会自动吸附，也可以自己拖一个框。"
+
+[[how.cells]]
+label = "识别"
+title = "每一行在本机识别"
+text = "Apple 的 Vision 框架找出每一行文字和它的样式，不需要上传任何东西。"
+
+[[how.cells]]
+label = "取字"
+title = "只取走字迹"
+text = "把文字从画面上取下来，再补全下面的背景，渐变和纹理也会还原。"
+
+[[how.cells]]
+label = "落字"
+title = "译文回到原来的位置"
+text = "位置、字号、颜色都不变。只有放不下时，才会收窄或换行。"
+
+[apps]
+fig = "任意软件"
+lede = "<b>任意软件，也能跨软件。</b>Transeen 读的是屏幕上的像素，所以文字出现在哪里，就能在哪里翻译，软件里什么都不用装。"
+caption = "一个框跨过两个软件的窗口，作为一张图一起翻译"
+
+[[apps.items]]
+title = "不用插件，不用适配"
+text = "浏览器、聊天软件、PDF、游戏、设计工具、远程桌面，只要显示在屏幕上就能翻。连选不中、复制不了的字也行。"
+
+[[apps.items]]
+title = "一个框跨多个软件"
+text = "一个框可以同时框住不同软件的窗口，里面的每一行都在同一张截图里翻译。"
+
+[[apps.items]]
+title = "全屏软件里、每个桌面上都能用"
+text = "全屏的软件里、任何一个桌面上都能按 F1。打开着的菜单、弹出框和提示会留在画面里，那个软件也不会失去焦点。"
+
+[[apps.items]]
+title = "自动吸附到眼前的内容"
+text = "鼠标停住，框就会找到指针下的段落、输入框或窗口，不管它属于哪个软件。"
+
+[[apps.items]]
+title = "钉图浮在所有软件之上"
+text = "钉住的译文会停在你切换到的任何软件上方，可以一边看译文，一边在原来的软件里操作。"
+
+[keys]
+fig = "键盘"
+lede = "<b>为键盘而做。</b>原文永远只差一个键，上次截的位置也是。"
+space = "空格"
+
+[[keys.items]]
+keys = ["F1"]
+title = "框选并翻译"
+text = "在任何软件里都能用。笔记本键盘上按 fn F1。"
+
+[[keys.items]]
+keys = ["R"]
+title = "还是那块区域"
+text = "框选时按 R，直接截上一次的位置，重启后也记得。"
+
+[[keys.items]]
+keys = ["Tab"]
+title = "原文与译文"
+text = "整张截图来回切换。"
+
+[[keys.items]]
+keys = ["{space}"]
+title = "偷看原文"
+text = "按住看原文，松开回到译文。"
+
+[[keys.items]]
+keys = ["F1", "F1"]
+title = "交换语言"
+text = "截图开着时再按一次，换个方向翻译。"
+
+[tools]
+fig = "截图"
+lede = "<b>截下来，接着用。</b>截图停在你框选的位置，工具就在下面。"
+
+[[tools.items]]
+title = "直接标注"
+text = "矩形、椭圆、箭头、画笔和数字序号，六种颜色。标注在单独的图层上，切换语言也不会移位。"
+
+[[tools.items]]
+title = "漏了一行？拖一下边"
+text = "拖动边缘或四角，Transeen 从同一张定格画面重新裁切，松手后再翻译一次。"
+
+[[tools.items]]
+title = "钉在屏幕上，继续截"
+text = "钉住的截图浮在屏幕上，成为一张独立的图，想钉几张都行；右键可以复制、保存或切换原文。"
+
+[[tools.items]]
+title = "所见即所复制"
+text = "<kbd>⌘C</kbd> 连同标注一起复制，译文还在陆续出现时也可以。<kbd>⌘S</kbd> 存为 PNG。"
+
+[[tools.items]]
+title = "当文字读"
+text = "打开完整译文，和原文并排列出，可以选中、复制。"
+
+[[tools.items]]
+title = "打开一张图片"
+text = "别人发来的截图也能翻。按 <kbd>⌘O</kbd> 打开，工具完全一样。"
+
+[services]
+fig = "翻译服务"
+lede = "<b>三种翻译方式。</b>在设置里选一种，随时可以换。文字识别始终在本机完成。"
+privacy = "<b>截图永远不会离开你的 Mac。</b>Transeen 不保存截图历史，也从不连续录屏。用 Apple 翻译或本地模型时，文字也留在本机。"
+
+[[services.items]]
+title = "Apple 本机翻译"
+tag = "默认"
+text = "macOS 自带的翻译。语言包下载一次，之后离线可用。"
+facts = [["运行位置", "这台 Mac"], ["需要下载", "对应语言包"], ["出字方式", "每 8 行一组"]]
+
+[[services.items]]
+title = "本地翻译模型"
+tag = "Apple 芯片"
+text = "Index-Translate 2B 或 Hy-MT2 1.8B，由 Transeen 自己运行。开发文档和界面文字译得更准。"
+facts = [["运行位置", "这台 Mac"], ["需要下载", "约 1.1 GB，下载后校验"], ["内存", "空闲 5 分钟后释放"]]
+
+[[services.items]]
+title = "大模型接口"
+tag = "自选地址"
+text = "任意兼容 OpenAI 的 chat/completions 接口，远端走 HTTPS，也可以是本机 localhost 上的服务。"
+facts = [["发送内容", "只有识别出的文字"], ["密钥", "保存在钥匙串"], ["出字方式", "边返回边显示"]]
+
+[langs]
+fig = "语言"
+lede = "<b>八种语言，任意互译。</b>从其中任何一种译成另一种，原文语言可以自动识别。"
+body = "应用本身也说你的语言：每个窗口、菜单和提示都跟随你选的母语。本来就是母语的页面，会译成你的另一种语言。"
+caption = "8 种语言 × 7 个目标 = 56 个方向"
+
+[changes]
+fig = "更新记录"
+lede = "<b>最近更新。</b>小步快跑，完整记录在 GitHub 上。"
+full = "完整更新记录"
+
+[changes.notes]
+"0.11.2" = [
+  "<b>图片不再被当成字。</b>文字旁边的一排缩略图不会再被识别成文字、擦掉后盖上译文。拿不准的一行会放大再读一次，两次读得一样才保留。",
+  "<b>英文里的中文保持原样。</b>英文句子里夹着的中文词，不会再变成乱码的拉丁字母。",
+  "<b>绘图工具按下就画。</b>箭头从编号或方框上起笔，不会再把那个标注拿起来。截图停在截取的位置，只有钉图会跟着鼠标移动。",
+]
+"0.11.1" = [
+  "<b>每句都会翻译。</b>本地模型没来得及回答的长段落会单独再发一次，不再保留原文。",
+  "<b>先定格屏幕。</b>按 F1 时，其他软件打开的菜单、弹出框和提示都留在画面里，那个软件也不会失去焦点。",
+  "<b>擦得更干净。</b>g、y 这类下伸字母不再留痕，悬浮的箭头按钮也不再变成乱码。",
+]
+
+[activation]
+fig = "激活"
+lede = "<b>一个激活码，一台 Mac，永久有效。</b>不订阅，也不强制登录。"
+code_label = "激活码格式：TR 加六组四位字符"
+license = "永久授权"
+where = "在菜单栏选择“激活与账号…”输入。"
+ask = "咨询激活码"
+how = "怎么激活"
+items = [
+  "<b>解锁截图、标注和翻译，</b>适用于一台 Mac。",
+  "<b>无需登录即可激活。</b>钥匙串里只保存一个随机安装 ID，从不读取序列号。",
+  "<b>可选绑定 iTool 账号，</b>重装后登录即可恢复。",
+  "<b>MIT 开源。</b>可以自己构建；独立构建需要自备激活服务。",
+  "StupidMirror 的 SM- 码和 iTool Pro 的 IT- 码属于其他产品，这里不能用。",
+]
+
+[faq]
+fig = "常见问题"
+lede = "<b>常见问题。</b>还有别的，到 GitHub Discussions 提问。"
+
+[[faq.items]]
+q = "支持哪些软件？"
+a = "屏幕上显示文字的软件都行：浏览器、聊天和邮件、PDF 阅读器、游戏、设计和视频工具、远程桌面和虚拟机。Transeen 翻译的是你框住的像素，不需要插件，也不需要软件本身支持；一个框还可以同时框住几个软件的窗口。被软件设为禁止录屏的视频会显示成黑色，任何截图都一样。"
+
+[[faq.items]]
+q = "Transeen 支持哪些 Mac？"
+a = "需要 macOS 26 或更高版本，Apple 芯片和 Intel 都支持，是同一个通用应用；本地翻译模型需要 Apple 芯片。应用界面跟随你选的母语，可选简体中文、繁體中文、English、日本語、한국어、Français、Español 和 Deutsch。"
+
+[[faq.items]]
+q = "可以离线使用吗？"
+a = "可以，激活之后即可。下载好语言包或本地模型后，截图、标注、Apple 翻译和本地模型都能离线运行。断网时授权依然有效，大约每天重新校验一次。大模型接口需要连接你设置的地址。"
+
+[[faq.items]]
+q = "哪些数据会离开我的 Mac？"
+a = "使用 Apple 翻译或本地模型时，没有：截图、识别出的文字和译文都留在这台 Mac 上。使用大模型接口时，只把识别出的文字发送到你设置的地址，不发送截图。激活时会发送激活码和一个随机安装 ID，检查更新会访问 GitHub。"
+
+[[faq.items]]
+q = "可以换别的模型吗？"
+a = "可以。在 设置 → 通用 → 翻译 里下载 Index-Translate 2B 或 Hy-MT2 1.8B（各约 1.1 GB），由 Transeen 自己在本机运行；也可以填写任意兼容 OpenAI 的 chat/completions 地址和模型名，需要时再填密钥，密钥保存在钥匙串中。远端地址必须使用 HTTPS；本机 localhost 上的服务可以用 HTTP，也可以不填密钥。"
+
+[[faq.items]]
+q = "能翻译已有的图片吗？"
+a = "可以。在启动面板选择“打开图片…”或按 <kbd>⌘O</kbd>，图片会在同样的窗口里打开，工具也完全一样。"
+
+[[faq.items]]
+q = "翻译准确吗？"
+a = "取决于所选的翻译服务。密集排版、公式和专业术语可能需要修正；依赖某个细节之前，请按 <kbd>Tab</kbd> 对照原文，或打开完整译文核对。"
+
+[[faq.items]]
+q = "Transeen 开源吗？"
+a = "开源，采用 <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">MIT 许可证</a>，允许商业使用。官方应用需要 TR- 激活码；源码许可证不包含托管的激活服务，独立构建需要配置自己的授权后端。"
+
+[[faq.items]]
+q = "怎么更新？"
+a = "在菜单栏或启动面板选择“检查更新…”。Transeen 会查看 GitHub Releases，有新版本时打开下载页面。"
+
+[closing]
+title = "<b class=\"nb\">就在原处，</b><span>读懂它。</span>"
+lead = "下载 Transeen，按 F1，框住第一个你看不懂的地方。"
+source = "查看源码"
+meta = ["通用应用", "{size} MB", "已签名并公证"]
+
+[software]
+description = "原生 macOS 菜单栏应用：在任意软件里框选屏幕区域或打开一张图片，Transeen 在本机识别文字，并把译文画回同一张图里，保留原来的位置、字号和颜色。支持标注、钉图、复制和存为 PNG。"
+category = "屏幕翻译"
+os = "macOS 26 或更高版本"
+processor = "Apple 芯片或 Intel"
+features = [
+  "框选屏幕任意区域原处翻译，保留位置、字号和颜色",
+  "任意软件都能用，无需插件：直接读取屏幕像素",
+  "一个框可以同时框住多个软件的窗口",
+  "全屏软件中、每个桌面上都能用，打开着的菜单和提示会留在画面里",
+  "用 Apple Vision 在本机识别文字",
+  "Apple 本机翻译、内置本地翻译模型，或任意兼容 OpenAI 的接口",
+  "简体中文、繁体中文、英语、日语、韩语、法语、西班牙语和德语，任意方向互译",
+  "应用界面同样支持这八种语言",
+  "译文陆续出现，工具栏显示进度",
+  "按 Tab 对照原文，按住空格临时查看",
+  "拖动截图边缘重新裁切并再次翻译",
+  "矩形、椭圆、箭头、画笔和数字序号，标注在独立图层上",
+  "复制、存为 PNG，或把截图钉在所有软件之上，同时继续截图",
+  "截图打开时再按 F1 交换语言",
+  "框选时按 R 沿用上一次的区域",
+  "翻译从磁盘打开的图片",
+]
+
+[guide]
+name = "使用指南"
+title = "五步装好 Transeen，<span>然后按 F1。</span>"
+lead = "从下载到第一次截图翻译。你需要一台 macOS 26 或更高版本的 Mac，和一个 TR- 激活码。"
+all_shortcuts = "全部快捷键"
+toc = "本页内容"
+next_title = "下载 Transeen {version}"
+next_text = "一个通用版本，支持 macOS 26 或更高版本，已签名并经 Apple 公证。"
+back = "返回首页"
+
+[guide.howto]
+name = "如何用 Transeen 在 Mac 上截图翻译"
+supply = "一个 TR- 激活码"
+tools = ["一台 macOS 26 或更高版本的 Mac", "Transeen"]
+steps = [
+  { name = "安装", text = "从 GitHub Releases 下载 DMG，把 Transeen 拖进“应用程序”并打开。它常驻在菜单栏。" },
+  { name = "激活", text = "在菜单栏菜单中选择“激活与账号…”，输入 TR- 激活码，选择“激活这台 Mac”。" },
+  { name = "开启屏幕录制", text = "在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中打开 Transeen。" },
+  { name = "选择语言", text = "选好原文语言和译文语言，并在设置 → 通用 → 翻译中提前下载需要的 Apple 语言包。" },
+  { name = "框选翻译", text = "在任意软件里按 F1 框选屏幕的一部分，在原处读译文。按 Tab 对照原文。" },
+]
+
+[[guide.sections]]
+id = "install"
+title = "安装"
+body = """
+<ol>
+  <li>从 <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a> 下载最新的 DMG。大约 {about} MB，一个通用版本同时支持 Apple 芯片和 Intel。</li>
+  <li>打开 DMG，把 Transeen 拖进“应用程序”。</li>
+  <li>从“应用程序”打开 Transeen。它常驻在菜单栏，不在程序坞里，请在菜单栏找它的图标。</li>
+</ol>
+<p>应用和 DMG 都用 Developer ID 签名并经过 Apple 公证，macOS 打开时不会弹出警告。同一个发布页还有 ZIP 和 SHA-256 校验值。界面语言跟随系统：简体中文、繁體中文、English、日本語、한국어、Français、Español、Deutsch。</p>
+"""
+
+[[guide.sections]]
+id = "activate"
+title = "激活"
+body = """
+<ol>
+  <li>在菜单栏菜单中选择 <strong>激活与账号…</strong>，或在主窗口中选择 <strong>激活 Transeen</strong>。</li>
+  <li>输入激活码，格式是 <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>，然后选择 <strong>激活这台 Mac</strong>。无需登录。</li>
+  <li>如果愿意，可以用 Google、GitHub 或邮箱登录 iTool 账号并绑定授权。以后登录同一账号即可恢复。</li>
+</ol>
+<p>激活只在钥匙串里保存一个随机安装 ID 和一份凭证，不读取 Mac 的序列号。一个激活码对应一台 Mac，绑定账号不会多出一份授权。StupidMirror 的 SM- 和 iTool Pro 的 IT- 激活码属于其他产品，在这里不能用。想要激活码，请<a href="https://github.com/LiuTianjie/Transeen/discussions">在 GitHub Discussions 留言</a>。</p>
+"""
+
+[[guide.sections]]
+id = "permission"
+title = "开启屏幕录制"
+body = """
+<p>第一次截图时，Transeen 会请求屏幕录制权限。它只用屏幕画面，不录音，而且只在你按下截图快捷键时才截取。它不保存历史，也从不持续录屏。</p>
+<ol>
+  <li>选择 <strong>打开系统设置…</strong>，或前往系统设置 → 隐私与安全性 → 屏幕与系统音频录制。</li>
+  <li>找到 Transeen 并打开开关。</li>
+  <li>回到 Transeen。它会自动重新检查并显示 <strong>已准备好</strong>，选择 <strong>开始框选</strong> 继续。</li>
+</ol>
+<p>如果开关已打开但仍不生效，在同一个窗口里点 <strong>重新检查</strong> 或 <strong>重新打开</strong>。</p>
+"""
+
+[[guide.sections]]
+id = "languages"
+title = "选择语言"
+body = """
+<p>主窗口有两个菜单：<strong>原文语言</strong> 和 <strong>译文语言</strong>。原文可以保持 <strong>自动识别</strong>，也可以从八种语言中选一种：简体中文、繁体中文、英语、日语、韩语、法语、西班牙语、德语。任意两种之间都能互译。</p>
+<p>截图打开时，工具下方的方向（例如 JA → ZH）可以改任一边的语言；再按一次 <kbd>F1</kbd> 就交换两边。</p>
+<p>Apple 翻译每一对语言都需要语言包。首次启动的引导，以及之后的设置 → 通用 → 翻译，会列出目标语言需要的语言包和状态。点 <strong>下载</strong> 提前装好，第一次截图就不用等；之后翻译完全在本机离线完成。语言包也可以在系统设置 → 通用 → 语言与地区 → 翻译语言中查看。</p>
+"""
+
+[[guide.sections]]
+id = "translate"
+title = "框选翻译"
+body = """
+<ol>
+  <li>在任意软件里按 <kbd>F1</kbd>。屏幕会定格并变暗。在笔记本键盘上是 <kbd>fn</kbd> <kbd>F1</kbd>，除非你把 F 键设成了标准功能键。</li>
+  <li>移动指针会自动吸附到段落、输入框或窗口，点一下即可；也可以自己拖一个框，一个框可以跨过几个软件的窗口。<kbd>Esc</kbd> 或右键取消。</li>
+  <li>和上次同一个位置？框选时按 <kbd>R</kbd>，直接沿用上一次截图的区域，重启后也有效。</li>
+  <li>译文出现在原文所在的位置，逐行翻好逐行显示。按 <kbd>Tab</kbd> 在原文和译文之间切换，按住 <kbd>空格</kbd> 临时看原文。</li>
+  <li>少框了一点？拖动截图的边或角。它会从同一张定格画面重新裁切，标注留在原处，松手后重新翻译。</li>
+  <li>方向反了？截图打开时再按一次 <kbd>F1</kbd>，两种语言会对调。</li>
+</ol>
+<p>Transeen 读的是屏幕像素，所以在每个软件里用法都一样，全屏软件和每个桌面也包括在内，打开着的菜单或提示也会留在画面里。<kbd>F1</kbd> 是默认唯一在任何软件里都能用的快捷键。只想截图标注、不翻译，可以在菜单栏菜单中选择 <strong>截图标注</strong>，或在设置 → 快捷键中给它分配一个键；在那个窗口里按 <kbd>T</kbd> 仍可翻译。要翻译已有的图片，选择 <strong>打开图片…</strong> 或按 <kbd>⌘O</kbd>。</p>
+"""
+
+[[guide.sections]]
+id = "mark"
+title = "标注"
+body = """
+<p>在工具栏选工具，或直接按键：<kbd>R</kbd> 矩形、<kbd>O</kbd> 椭圆、<kbd>A</kbd> 箭头、<kbd>P</kbd> 画笔、<kbd>V</kbd> 选择和移动。绘图工具按下就画，从已有的标注上起笔也一样；要拿起某个标注，用 <kbd>V</kbd>。序号标注从 1 开始递增，撤销和重做后编号不变。</p>
+<p>有六种颜色和三种粗细可选，也可以打开滑块选任意颜色和 1 到 10 的线宽。<kbd>⌘Z</kbd> 和 <kbd>⌘⇧Z</kbd> 撤销、重做，<kbd>Delete</kbd> 删除选中的标注。标注在单独的图层上，切换原文和译文时不会移动。</p>
+"""
+
+[[guide.sections]]
+id = "keep"
+title = "复制、保存或钉图"
+body = """
+<ul>
+  <li><kbd>⌘C</kbd> 按你看到的样子复制图片，包括标注，即使译文还在生成也可以。默认复制后会关闭截图；在设置中关掉 <strong>复制后关闭截图</strong> 即可保留。</li>
+  <li><kbd>⌘S</kbd> 存成 PNG。</li>
+  <li><strong>钉到屏幕</strong> 把图片留在屏幕上，成为一个独立的浮动窗口，同时结束本次截图，马上可以截下一张。钉图会停在你切换到的软件上方，可以拖到任何地方，想留几张都行；右键可复制、保存、切换原文和译文或关闭。</li>
+  <li><strong>文字</strong> 打开完整译文，与原文并排，方便复制。</li>
+</ul>
+"""
+
+[[guide.sections]]
+id = "model"
+title = "选择翻译服务"
+body = """
+<p>打开设置（<kbd>⌘,</kbd>）→ 通用 → 翻译，选择 <strong>翻译服务</strong>。文字识别始终在本机完成。</p>
+<h3>Apple 本机翻译</h3>
+<p>默认选项。使用第 4 步的语言包，离线运行，不向任何地方发送内容。文字每 8 行一组翻译，长截图会边看边填满。</p>
+<h3>本地翻译模型</h3>
+<p>下载 Index-Translate 2B 或 Hy-MT2 1.8B，每个约 1.1 GB。模型在 Transeen 内部运行，不需要账号、不需要另装应用，也不联网。需要 Apple 芯片的 Mac。首次翻译要几秒钟加载模型，空闲 5 分钟后自动释放内存。<strong>删除模型</strong> 可以再移除它。</p>
+<h3>大模型接口</h3>
+<p>任何兼容 OpenAI 的 chat/completions 接口。依次填写：</p>
+<ul>
+  <li><strong>接口地址</strong>，完整 URL，例如 <code>https://api.openai.com/v1/chat/completions</code>；</li>
+  <li><strong>模型名称</strong>；</li>
+  <li>服务需要时填写 API Key，然后点 <strong>保存密钥</strong>，它会存进钥匙串。<strong>测试连接</strong> 可以检查是否可用。</li>
+</ul>
+<p>本机上的服务也可以：本地地址可以用 HTTP，也不需要密钥，例如 Ollama 的 <code>http://localhost:11434/v1/chat/completions</code>。远程地址必须用 HTTPS。这种方式只发送识别出的文字，从不发送截图。请求失败时，Transeen 会显示错误并保留原图。</p>
+"""
+
+[[guide.sections]]
+id = "shortcuts"
+title = "键盘快捷键"
+body = """
+<div class="table-wrap">
+  <table class="keys-table">
+    <thead><tr><th scope="col">默认按键</th><th scope="col">作用</th></tr></thead>
+    <tbody>
+      <tr><td><kbd>F1</kbd></td><td>在任意软件里框选区域并翻译</td></tr>
+      <tr><td>框选时按 <kbd>R</kbd></td><td>沿用上一次截图的区域</td></tr>
+      <tr><td>截图打开时按 <kbd>F1</kbd></td><td>交换语言，或翻译“截图标注”的截图</td></tr>
+      <tr><td><kbd>Tab</kbd></td><td>切换原文和译文</td></tr>
+      <tr><td>按住 <kbd>空格</kbd></td><td>临时查看原文</td></tr>
+      <tr><td><kbd>T</kbd></td><td>翻译或重试</td></tr>
+      <tr><td><kbd>D</kbd></td><td>交换语言</td></tr>
+      <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>矩形、椭圆、箭头、画笔</td></tr>
+      <tr><td><kbd>V</kbd></td><td>选择和移动标注</td></tr>
+      <tr><td><kbd>⌘C</kbd></td><td>复制图片</td></tr>
+      <tr><td><kbd>⌘S</kbd></td><td>存为 PNG</td></tr>
+      <tr><td><kbd>⌘Z</kbd> <kbd>⌘⇧Z</kbd></td><td>撤销、重做</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>关闭截图，或取消框选</td></tr>
+      <tr><td><kbd>⌘O</kbd></td><td>打开图片</td></tr>
+      <tr><td><kbd>⌘,</kbd></td><td>打开设置</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>每一项都可以在设置 → 快捷键中修改，<strong>恢复全部默认快捷键</strong> 可以还原。<strong>截图标注</strong> 和 <strong>全局对照原文</strong> 默认没有按键，需要在那里设置。全局快捷键需要搭配 <kbd>⌘</kbd>、<kbd>⌥</kbd> 或 <kbd>⌃</kbd>，也可以用 F 功能键。</p>
+"""
+
+[[guide.sections]]
+id = "troubleshooting"
+title = "常见问题排查"
+body = """
+<h3>按 F1 没有反应</h3>
+<p>在笔记本键盘上，F1 默认调节亮度，需要按住 <kbd>fn</kbd>，或在系统设置 → 键盘 → 键盘快捷键 → 功能键中打开“将 F1、F2 等键用作标准功能键”。也可能是其他软件占用了 F1，Transeen 无法注册快捷键时会提示你。可以在设置 → 快捷键中换一个键，或从菜单栏菜单的 <strong>截图翻译</strong> 开始。</p>
+<h3>截图是空的，或一直提示授权</h3>
+<p>打开菜单栏菜单中的 <strong>屏幕权限…</strong>。如果系统设置里 Transeen 已经是打开的，先关掉再打开，然后选择 <strong>重新打开</strong>。</p>
+<h3>窗口有一块是黑的</h3>
+<p>有些软件会禁止录屏，保护视频等内容，这部分在任何截图里都是黑色。Transeen 读不到也翻译不了这部分，框里的其他内容照常翻译。</p>
+<h3>Apple 翻译没有开始</h3>
+<p>这对语言的语言包可能没有下载或还在下载。在设置 → 通用 → 翻译中下载，或到系统设置 → 通用 → 语言与地区 → 翻译语言中查看，然后再试一次。</p>
+<h3>本地模型启动不了</h3>
+<p>先重试一次。仍不行的话，在设置 → 通用 → 翻译中删除模型后重新下载；校验失败的下载会被自动删除。</p>
+<h3>部分文字翻译不对</h3>
+<p>密集排版、公式和专业术语可能让识别或翻译出错。按 <kbd>Tab</kbd> 对照原文，打开 <strong>文字</strong> 查看完整译文，或框选更小的区域。</p>
+"""
+
+[[guide.sections]]
+id = "build"
+title = "从源码构建"
+body = """
+<p>Transeen 以 <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 许可证</a>开源。需要 Xcode 26.4 或更高版本、Swift 6 和 XcodeGen。</p>
+<pre><code>brew install xcodegen
+git clone https://github.com/LiuTianjie/Transeen.git
+cd Transeen
+./scripts/build.sh</code></pre>
+<p>应用会生成在 <code>dist/Transeen.app</code>。没有 Developer ID 证书时使用临时签名；设置 <code>TRANSEEN_SIGNING_IDENTITY</code> 可生成正式签名的版本。测试脚本是 <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code> 和 <code>./scripts/test-lifecycle.sh</code>。托管的激活服务只属于官方版本，独立分发需要自己的授权后端。</p>
+"""

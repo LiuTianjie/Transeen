@@ -1,7 +1,12 @@
 (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
   const still = () => reduce.matches || document.documentElement.hasAttribute("data-still");
-  const zh = document.documentElement.lang.startsWith("zh");
+  // The page's language as the app names it: zh-CN is Simplified Chinese, zh-Hant Traditional.
+  const pageLang = (() => {
+    const lang = document.documentElement.lang;
+    if (lang.startsWith("zh")) return /Hant|TW|HK|MO/.test(lang) ? "zh-Hant" : "zh-Hans";
+    return lang.split("-")[0];
+  })();
 
   // Sticky navigation picks up its border once the page moves under it.
   const nav = document.querySelector(".nav");
@@ -26,6 +31,23 @@
     reveals.forEach((el) => seen.observe(el));
   } else {
     reveals.forEach((el) => el.classList.add("in"));
+  }
+
+  // The step figures loop once they have drawn in, and pause while they are off screen.
+  const figs = document.querySelectorAll(".figs");
+  if (figs.length && "IntersectionObserver" in window && !document.documentElement.hasAttribute("data-still")) {
+    const away = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const el = entry.target;
+        el.classList.toggle("is-away", !entry.isIntersecting);
+        if (entry.isIntersecting && !el.classList.contains("is-live") && !el.dataset.waiting) {
+          el.dataset.waiting = "1";
+          // The reveal draws the lines in about 1.9 s; the loop starts after it.
+          setTimeout(() => el.classList.add("is-live"), still() ? 0 : 2000);
+        }
+      }
+    });
+    figs.forEach((el) => away.observe(el));
   }
 
   // Guide: mark the section being read in the table of contents.
@@ -68,10 +90,19 @@
     const replay = document.querySelector(".replay");
     const blocks = [...card.querySelectorAll("[data-k]")];
 
-    const ui = zh
-      ? { original: "原文", translation: "译文", copy: "复制", translating: "正在翻译…", done: (n) => `已翻译 ${n} 处`, peek: "按住看原文 (空格)", release: "松开完成" }
-      : { original: "Original", translation: "Translation", copy: "Copy", translating: "Translating…", done: (n) => `Translated ${n} items`, peek: "Hold to See Original (Space)", release: "Release to finish" };
-    const short = { en: "EN", "zh-Hans": "中文", "zh-Hant": "繁中", ko: "KO", fr: "FR", es: "ES", de: "DE" };
+    // The toolbar speaks the page's language, with the app's own words for it.
+    const words = {
+      en: { original: "Original", translation: "Translation", copy: "Copy", translating: "Translating…", done: (n) => `Translated ${n} items`, peek: "Hold to See Original (Space)", release: "Release to finish" },
+      "zh-Hans": { original: "原文", translation: "译文", copy: "复制", translating: "正在翻译…", done: (n) => `已翻译 ${n} 处`, peek: "按住看原文（空格）", release: "松开完成" },
+      "zh-Hant": { original: "原文", translation: "譯文", copy: "拷貝", translating: "正在翻譯…", done: (n) => `已翻譯 ${n} 處`, peek: "按住看原文（空白鍵）", release: "放開完成" },
+      ja: { original: "原文", translation: "訳文", copy: "コピー", translating: "翻訳中…", done: (n) => `${n} 件を翻訳しました`, peek: "押し続けて原文を表示（スペース）", release: "離すと完了" },
+      ko: { original: "원문", translation: "번역", copy: "복사", translating: "번역 중…", done: (n) => `${n}개 번역됨`, peek: "누르고 있으면 원문 보기(스페이스)", release: "떼면 완료" },
+      fr: { original: "Original", translation: "Traduction", copy: "Copier", translating: "Traduction…", done: (n) => `${n} éléments traduits`, peek: "Maintenir pour voir l’original (Espace)", release: "Relâchez pour terminer" },
+      es: { original: "Original", translation: "Traducción", copy: "Copiar", translating: "Traduciendo…", done: (n) => `${n} elementos traducidos`, peek: "Mantén pulsado para ver el original (Espacio)", release: "Suelta para terminar" },
+      de: { original: "Original", translation: "Übersetzung", copy: "Kopieren", translating: "Übersetze…", done: (n) => `${n} Stellen übersetzt`, peek: "Gedrückt halten für Original (Leertaste)", release: "Loslassen zum Abschließen" },
+    };
+    const ui = words[pageLang] ?? words.en;
+    const short = { en: "EN", "zh-Hans": "中文", "zh-Hant": "繁中", ja: "JA", ko: "KO", fr: "FR", es: "ES", de: "DE" };
     const text = {
       label: { ja: "選択中の列車", en: "Selected train", "zh-Hans": "已选列车", "zh-Hant": "已選列車", ko: "선택한 열차", fr: "Train choisi", es: "Tren elegido", de: "Gewählter Zug" },
       badge: { ja: "残りわずか", en: "Few seats left", "zh-Hans": "余票不多", "zh-Hant": "座位不多", ko: "잔여석 적음", fr: "Presque complet", es: "Quedan pocas", de: "Fast ausgebucht" },
@@ -89,7 +120,9 @@
     toolbar.querySelector('[data-ui="translation"]').textContent = ui.translation;
     toolbar.querySelector('[data-ui="copy"]').textContent = ui.copy;
 
-    const state = { target: zh ? "zh-Hans" : "en", view: "original", run: 0, ready: false, scale: 1, crop: 0 };
+    // The demo page is Japanese, so a Japanese reader sees it translated into English.
+    const pressed = document.querySelector('.chip[aria-pressed="true"]')?.dataset.lang;
+    const state = { target: pressed ?? (pageLang === "ja" ? "en" : pageLang), view: "original", run: 0, ready: false, scale: 1, crop: 0 };
     const W = 1000;
     const H = 620;
 

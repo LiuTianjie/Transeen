@@ -1,16 +1,18 @@
-<svg class="art" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+<svg class="art art-set" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
   <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
   <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
   <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
   <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
   <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" opacity="0.35" />
-  <path d="M94.3 68.2 L170.8 112.4" pathLength="1" class="blue" stroke-width="1.6" style="--d:90" />
+  <path d="M94.3 68.2 L170.8 112.4" pathLength="1" class="blue fx-write" style="--d:90; --i:0" stroke-width="1.6" />
   <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" opacity="0.35" />
-  <path d="M79.9 76.5 L134.9 108.2" pathLength="1" class="blue" stroke-width="1.6" style="--d:180" />
+  <path d="M79.9 76.5 L134.9 108.2" pathLength="1" class="blue fx-write" style="--d:180; --i:1" stroke-width="1.6" />
   <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" opacity="0.35" />
-  <path d="M65.6 84.8 L134.9 124.8" pathLength="1" class="blue" stroke-width="1.6" style="--d:270" />
-  <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="hi" />
-  <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="hi" />
-  <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="hi" />
-  <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="hi" />
+  <path d="M65.6 84.8 L134.9 124.8" pathLength="1" class="blue fx-write" style="--d:270; --i:2" stroke-width="1.6" />
+  <g class="fx-mark">
+    <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="hi" />
+    <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="hi" />
+    <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="hi" />
+    <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="hi" />
+  </g>
 </svg>

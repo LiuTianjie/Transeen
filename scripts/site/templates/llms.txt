@@ -1,0 +1,38 @@
+# Transeen
+
+> Transeen is a native macOS menu bar app (macOS 26 or later, Apple silicon and Intel). Press F1 (fn-F1 on most laptop keyboards) in any app, select any part of the screen or open an image, and Transeen recognizes the text on the Mac and draws the translation back into the same picture, keeping its position, size and color. It reads the pixels on the screen, so it works in every app without plug-ins, over full-screen apps and on every Space, and one selection can span windows from several apps. Captures can be compared with the original, marked up, re-cropped by dragging an edge, copied, saved as PNG or pinned above every app as floating pictures while new captures continue. Pressing F1 again on an open capture swaps the languages, and pressing R while selecting takes the last captured area again.
+
+- Website: https://transeen.itool.tech/ (also in {homes})
+- Setup guide: https://transeen.itool.tech/guide/ (also in {guides})
+- Download: https://github.com/LiuTianjie/Transeen/releases/latest (version {version}, signed and notarized DMG, about {size} MB)
+- Source: https://github.com/LiuTianjie/Transeen (MIT license, Swift 6)
+
+## What it does
+
+- Translates a selected screen region in place: Apple Vision text recognition on the Mac, pixel-aware text style estimation, and the translation set where the original text was.
+- Works in any app: browsers, chat and mail, PDF readers, games, design tools, remote desktops and virtual machines. No plug-in or app support is needed, because it translates the screen's pixels; content an app protects from screen recording (some video) is captured as black.
+- One selection can span windows from several apps; hovering snaps the frame to the paragraph, field or window under the pointer in whichever app it belongs to.
+- The screen is frozen when F1 is pressed: another app's open menu, popover or tooltip stays in the picture, and that app keeps focus. Selection works over full-screen apps and on every Space and display.
+- Translation services, chosen in Settings → General → Translation:
+  - Apple Translation (on device): the default, offline after the language pack is installed.
+  - Local Translation Model: download Index-Translate 2B or Hy-MT2 1.8B (about 1.1 GB each) inside the app; the model runs in Transeen itself with no account, no extra app and no network. Requires Apple silicon.
+  - LLM API: any OpenAI-compatible chat completions endpoint. Only the recognized text is sent, never the screenshot.
+- Languages: Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German, in any direction; the source language can be detected.
+- The app interface, and this website, come in the same eight languages.
+- Compare original and translation with Tab; hold Space to peek at the original.
+- Sentences that contain code or file names are translated whole; the code and file names keep their own pixels and move with the translation.
+- F1 is the only default global shortcut. Capturing for annotation and comparing from any app have no shortcut until one is set in Settings; every shortcut can be changed there.
+- Annotation on a separate layer: rectangle, ellipse, arrow, pen and numbered notes, with undo and redo. Drawing tools always draw; the pointer (V) selects and moves marks.
+- Copy with Command-C, save PNG with Command-S, pin a capture to the screen as a floating picture that stays above other apps (drag it anywhere, right-click to copy, save, switch original and translation or close), open the full text view, or translate an image opened from disk.
+- No screenshot history and no continuous capture.
+
+## Activation
+
+The official app needs a Transeen TR- activation code: a perpetual license for one Mac, activated without signing in, optionally bound to an iTool account for recovery. StupidMirror SM- and iTool Pro IT- codes do not work. Ask about codes in GitHub Discussions: https://github.com/LiuTianjie/Transeen/discussions
+
+## Docs
+
+- [Setup guide](https://transeen.itool.tech/guide/): install, activate, screen recording permission, languages, shortcuts, model setup, troubleshooting, building from source
+- [README](https://github.com/LiuTianjie/Transeen/blob/main/README.md)
+- [Licensing](https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md)
+- [Changelog](https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md)

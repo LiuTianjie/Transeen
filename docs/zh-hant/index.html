@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Transeen｜Mac 截圖翻譯與螢幕翻譯，任何 App 裡譯文都留在原處</title>
+    <meta name="description" content="在任何 App 裡按 F1，框選 Mac 螢幕上的任一區域，Transeen 把譯文直接畫回原圖，位置、字級和顏色都不變，也能跨 App 框選。本機 OCR 辨識，支援 Apple 本機翻譯、內建本機模型與自選介面，可標註、釘圖、對照原文。" />
+    <meta name="keywords" content="Mac 截圖翻譯, 螢幕翻譯, Mac 翻譯軟體, OCR 翻譯, 圖片翻譯, 原位翻譯, 跨 App 翻譯, 離線翻譯, Transeen" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="LiuTianjie" />
+    <meta name="theme-color" content="#08090a" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="https://transeen.itool.tech/zh-hant/" />
+    <link rel="alternate" hreflang="en" href="https://transeen.itool.tech/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://transeen.itool.tech/zh/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://transeen.itool.tech/zh/" />
+    <link rel="alternate" hreflang="zh" href="https://transeen.itool.tech/zh/" />
+    <link rel="alternate" hreflang="zh-Hant" href="https://transeen.itool.tech/zh-hant/" />
+    <link rel="alternate" hreflang="zh-TW" href="https://transeen.itool.tech/zh-hant/" />
+    <link rel="alternate" hreflang="zh-HK" href="https://transeen.itool.tech/zh-hant/" />
+    <link rel="alternate" hreflang="ja" href="https://transeen.itool.tech/ja/" />
+    <link rel="alternate" hreflang="ko" href="https://transeen.itool.tech/ko/" />
+    <link rel="alternate" hreflang="fr" href="https://transeen.itool.tech/fr/" />
+    <link rel="alternate" hreflang="es" href="https://transeen.itool.tech/es/" />
+    <link rel="alternate" hreflang="de" href="https://transeen.itool.tech/de/" />
+    <link rel="alternate" hreflang="x-default" href="https://transeen.itool.tech/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Transeen" />
+    <meta property="og:url" content="https://transeen.itool.tech/zh-hant/" />
+    <meta property="og:title" content="Transeen｜框選螢幕，譯文留在原處" />
+    <meta property="og:description" content="在任何 App 裡按 F1 框選螢幕，Transeen 把文字換成你的語言，直接畫回同一張圖裡。" />
+    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-zh-hant.jpg?v=111a5cf7e802" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mac 上的日文訂票網頁，框選的車次卡片在原處換成了繁體中文，下方是 Transeen 工具列" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="ko_KR" />
+    <meta property="og:locale:alternate" content="fr_FR" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Transeen｜框選螢幕，譯文留在原處" />
+    <meta name="twitter:description" content="在任何 App 裡按 F1 框選螢幕，Transeen 把文字換成你的語言，直接畫回同一張圖裡。" />
+    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-zh-hant.jpg?v=111a5cf7e802" />
+    <meta name="twitter:image:alt" content="Mac 上的日文訂票網頁，框選的車次卡片在原處換成了繁體中文，下方是 Transeen 工具列" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://transeen.itool.tech/#organization",
+            "name": "Transeen",
+            "url": "https://transeen.itool.tech/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://transeen.itool.tech/assets/icon-512.png",
+              "width": 512,
+              "height": 512
+            },
+            "sameAs": [
+              "https://github.com/LiuTianjie/Transeen"
+            ],
+            "parentOrganization": {
+              "@type": "Organization",
+              "name": "iTool",
+              "url": "https://itool.tech/"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://transeen.itool.tech/#website",
+            "url": "https://transeen.itool.tech/",
+            "name": "Transeen",
+            "inLanguage": [
+              "en",
+              "zh-Hans",
+              "zh-Hant",
+              "ja",
+              "ko",
+              "fr",
+              "es",
+              "de"
+            ],
+            "publisher": {
+              "@id": "https://transeen.itool.tech/#organization"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://transeen.itool.tech/zh-hant/#webpage",
+            "url": "https://transeen.itool.tech/zh-hant/",
+            "name": "Transeen｜Mac 截圖翻譯與螢幕翻譯，任何 App 裡譯文都留在原處",
+            "description": "在任何 App 裡按 F1，框選 Mac 螢幕上的任一區域，Transeen 把譯文直接畫回原圖，位置、字級和顏色都不變，也能跨 App 框選。本機 OCR 辨識，支援 Apple 本機翻譯、內建本機模型與自選介面，可標註、釘圖、對照原文。",
+            "inLanguage": "zh-Hant",
+            "isPartOf": {
+              "@id": "https://transeen.itool.tech/#website"
+            },
+            "about": {
+              "@id": "https://transeen.itool.tech/#software"
+            },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://transeen.itool.tech/assets/og-image-zh-hant.jpg",
+              "width": 1200,
+              "height": 630
+            },
+            "datePublished": "2026-10-28",
+            "dateModified": "2026-10-31"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://transeen.itool.tech/#software",
+            "name": "Transeen",
+            "description": "原生 macOS 選單列 App：在任何 App 裡框選螢幕區域或打開一張圖片，Transeen 在本機辨識文字，再把譯文畫回同一張圖裡，保留原本的位置、字級和顏色。支援標註、釘圖、拷貝與存成 PNG。",
+            "url": "https://transeen.itool.tech/zh-hant/",
+            "applicationCategory": "UtilitiesApplication",
+            "applicationSubCategory": "螢幕翻譯",
+            "operatingSystem": "macOS 26 或更新版本",
+            "processorRequirements": "Apple 晶片或 Intel",
+            "softwareVersion": "0.11.2",
+            "datePublished": "2026-10-28",
+            "dateModified": "2026-10-31",
+            "fileSize": "10.4 MB",
+            "inLanguage": [
+              "en",
+              "zh-Hans",
+              "zh-Hant",
+              "ja",
+              "ko",
+              "fr",
+              "es",
+              "de"
+            ],
+            "downloadUrl": "https://github.com/LiuTianjie/Transeen/releases/latest",
+            "installUrl": "https://github.com/LiuTianjie/Transeen/releases/latest",
+            "releaseNotes": "https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md",
+            "softwareHelp": {
+              "@type": "CreativeWork",
+              "url": "https://transeen.itool.tech/zh-hant/guide/"
+            },
+            "image": "https://transeen.itool.tech/assets/og-image-zh-hant.jpg",
+            "screenshot": [
+              "https://transeen.itool.tech/assets/preview-zh-hant.webp"
+            ],
+            "featureList": [
+              "框選螢幕任一區域原處翻譯，保留位置、字級和顏色",
+              "任何 App 都能用，不需外掛：直接讀取螢幕像素",
+              "一個框可以同時框住多個 App 的視窗",
+              "全螢幕 App 中、每個桌面上都能用，開著的選單和提示會留在畫面裡",
+              "以 Apple Vision 在本機辨識文字",
+              "Apple 本機翻譯、內建本機翻譯模型，或任何相容 OpenAI 的介面",
+              "簡體中文、繁體中文、英文、日文、韓文、法文、西班牙文和德文，任意方向互譯",
+              "App 介面同樣支援這八種語言",
+              "譯文陸續出現，工具列顯示進度",
+              "按 Tab 對照原文，按住空白鍵暫時查看",
+              "拖動截圖邊緣重新裁切並再次翻譯",
+              "矩形、橢圓、箭頭、畫筆和數字編號，標註在獨立圖層上",
+              "拷貝、存成 PNG，或把截圖釘在所有 App 上方，同時繼續截圖",
+              "截圖開著時再按 F1 交換語言",
+              "框選時按 R 沿用上一次的區域",
+              "翻譯從磁碟打開的圖片"
+            ],
+            "license": "https://opensource.org/licenses/MIT",
+            "author": {
+              "@type": "Person",
+              "name": "LiuTianjie",
+              "url": "https://github.com/LiuTianjie"
+            },
+            "publisher": {
+              "@id": "https://transeen.itool.tech/#organization"
+            }
+          },
+          {
+            "@type": "SoftwareSourceCode",
+            "@id": "https://transeen.itool.tech/#source",
+            "name": "Transeen source code",
+            "codeRepository": "https://github.com/LiuTianjie/Transeen",
+            "programmingLanguage": "Swift",
+            "runtimePlatform": "macOS 26",
+            "license": "https://opensource.org/licenses/MIT",
+            "targetProduct": {
+              "@id": "https://transeen.itool.tech/#software"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://transeen.itool.tech/zh-hant/#faq",
+            "inLanguage": "zh-Hant",
+            "isPartOf": {
+              "@id": "https://transeen.itool.tech/#website"
+            },
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "支援哪些 App？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "螢幕上會顯示文字的 App 都可以：瀏覽器、聊天和郵件、PDF 閱讀器、遊戲、設計與影片工具、遠端桌面和虛擬機器。Transeen 翻譯的是你框住的像素，不需要外掛，也不需要 App 本身支援；一個框還能同時框住好幾個 App 的視窗。被 App 設為禁止螢幕錄製的影片會顯示成黑色，任何截圖都一樣。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Transeen 支援哪些 Mac？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "需要 macOS 26 或更新版本，Apple 晶片和 Intel 都支援，是同一個通用 App；本機翻譯模型需要 Apple 晶片。App 介面會跟隨你選的母語，可選简体中文、繁體中文、English、日本語、한국어、Français、Español 和 Deutsch。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "可以離線使用嗎？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "可以，啟用之後就行。下載好語言包或本機模型後，截圖、標註、Apple 翻譯和本機模型都能離線執行。斷網時授權依然有效，大約每天重新驗證一次。大模型介面需要連線到你設定的位址。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "哪些資料會離開我的 Mac？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "使用 Apple 翻譯或本機模型時，沒有：截圖、辨識出的文字和譯文都留在這台 Mac 上。使用大模型介面時，只會把辨識出的文字傳送到你設定的位址，不會傳送截圖。啟用時會傳送啟用碼和一個隨機安裝 ID，檢查更新會連到 GitHub。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "可以換別的模型嗎？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "可以。在 設定 → 一般 → 翻譯 裡下載 Index-Translate 2B 或 Hy-MT2 1.8B（各約 1.1 GB），由 Transeen 自己在本機執行；也可以填寫任何相容 OpenAI 的 chat/completions 位址和模型名稱，需要時再填金鑰，金鑰會存在鑰匙圈中。遠端位址必須使用 HTTPS；本機 localhost 上的服務可以用 HTTP，也可以不填金鑰。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "能翻譯已經有的圖片嗎？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "可以。在啟動面板選擇「打開圖片…」或按 ⌘O，圖片會在同樣的視窗裡打開，工具也完全一樣。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "翻譯準確嗎？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "取決於所選的翻譯服務。密集的版面、公式和專業術語可能需要修正；在依賴某個細節之前，請按 Tab 對照原文，或打開完整譯文核對。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Transeen 開源嗎？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "開源，採用 MIT 授權條款，允許商業使用。官方 App 需要 TR- 啟用碼；原始碼授權不包含代管的啟用服務，獨立建置需要設定自己的授權後端。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "怎麼更新？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "在選單列或啟動面板選擇「檢查更新…」。Transeen 會查看 GitHub Releases，有新版本時打開下載頁面。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <link rel="icon" href="../favicon.ico" sizes="48x48" />
+    <link rel="icon" href="../assets/app-icon.svg?v=8d9ae33a2b93" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=a9e04b962aeb" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <link rel="preload" href="../assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../assets/site.css?v=1c3da10917de" />
+    <script>document.documentElement.classList.add("js")</script>
+  </head>
+  <body>
+    <!-- part:sprite -->
+    <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;overflow:hidden">
+      <symbol id="ui-cursorarrow" viewBox="0 0 20 20">
+        <path d="M5.6 2.9v12.8l3.2-3 2.2 4.6 2.1-.9-2.2-4.5 4.5-.3Z" fill="currentColor" stroke="currentColor" stroke-width="0.7" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-rectangle" viewBox="0 0 20 20">
+        <rect x="2.6" y="5" width="14.8" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.45" />
+      </symbol>
+      <symbol id="ui-circle" viewBox="0 0 20 20">
+        <circle cx="10" cy="10" r="7.1" fill="none" stroke="currentColor" stroke-width="1.45" />
+      </symbol>
+      <symbol id="ui-arrow" viewBox="0 0 20 20">
+        <path d="M4.8 15.2 15 5M7.6 5H15v7.4" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-pencil" viewBox="0 0 20 20">
+        <path d="M4 16l.9-3.4 8.4-8.4a1.6 1.6 0 0 1 2.3 0l.2.2a1.6 1.6 0 0 1 0 2.3L7.4 15.1Z" fill="currentColor" />
+      </symbol>
+      <symbol id="ui-number" viewBox="0 0 20 20">
+        <circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.35" />
+        <path d="M8.5 7.7 10.6 6.4v7.4" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-text" viewBox="0 0 20 20">
+        <path d="M3.4 5.4h13.2M3.4 8.8h9.2M3.4 12.2h13.2M3.4 15.6h7.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </symbol>
+      <symbol id="ui-pin" viewBox="0 0 20 20">
+        <path d="M7 3.4h6M8.2 3.4v5.3l-2.6 2.9h8.8l-2.6-2.9V3.4M10 11.6v5.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-ellipsis" viewBox="0 0 20 20">
+        <circle cx="4.4" cy="10" r="1.35" fill="currentColor" /><circle cx="10" cy="10" r="1.35" fill="currentColor" /><circle cx="15.6" cy="10" r="1.35" fill="currentColor" />
+      </symbol>
+      <symbol id="ui-copy" viewBox="0 0 20 20">
+        <path d="M7.4 5.2V4.3c0-.8.6-1.4 1.4-1.4h4.4l3 3v7.3c0 .8-.6 1.4-1.4 1.4h-.9" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round" />
+        <path d="M5.2 5.4h4.4l3 3v7.4c0 .8-.6 1.4-1.4 1.4H5.2c-.8 0-1.4-.6-1.4-1.4V6.8c0-.8.6-1.4 1.4-1.4Z" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-check" viewBox="0 0 20 20">
+        <path d="M4.8 10.6 8.3 14l7-7.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-xmark" viewBox="0 0 20 20">
+        <path d="M5.4 5.4l9.2 9.2M14.6 5.4l-9.2 9.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </symbol>
+      <symbol id="ui-globe" viewBox="0 0 20 20">
+        <g fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="10" cy="10" r="7.3" /><ellipse cx="10" cy="10" rx="3.1" ry="7.3" />
+          <path d="M2.7 10h14.6M3.9 6.2h12.2M3.9 13.8h12.2" />
+        </g>
+      </symbol>
+      <symbol id="ui-swap" viewBox="0 0 20 20">
+        <path d="M6.6 4 3.4 7.2l3.2 3.2M3.4 7.2h12.2M13.4 9.6l3.2 3.2-3.2 3.2M16.6 12.8H4.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-viewfinder" viewBox="0 0 20 20">
+        <path d="M3.4 7V5.2c0-1 .8-1.8 1.8-1.8H7M13 3.4h1.8c1 0 1.8.8 1.8 1.8V7M16.6 13v1.8c0 1-.8 1.8-1.8 1.8H13M7 16.6H5.2c-1 0-1.8-.8-1.8-1.8V13" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+      </symbol>
+      <symbol id="cur-arrow" viewBox="0 0 24 24">
+        <path d="M4.5 2.5v16.4l4.2-4 2.9 6.6 3-1.3-2.8-6.4h5.9Z" fill="#000" stroke="#fff" stroke-width="1.3" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-download" viewBox="0 0 20 20">
+        <path d="M10 3.5v9.2M6.4 9.3 10 12.9l3.6-3.6M4.2 16.2h11.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-lock" viewBox="0 0 20 20">
+        <rect x="4.2" y="8.6" width="11.6" height="8.4" rx="2" fill="none" stroke="currentColor" stroke-width="1.4" />
+        <path d="M6.8 8.6V6.4a3.2 3.2 0 0 1 6.4 0v2.2" fill="none" stroke="currentColor" stroke-width="1.4" />
+      </symbol>
+      <symbol id="ui-replay" viewBox="0 0 20 20">
+        <path d="M4.6 10a5.4 5.4 0 1 0 1.6-3.8M4.4 3.6v3h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="ui-crop" viewBox="0 0 20 20">
+        <path d="M6 2.8V14h11.2M2.8 6H14v11.2" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" />
+      </symbol>
+    </svg>
+    <!-- /part:sprite -->
+    <a class="skip" href="#main">跳到內文</a>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Transeen 首頁"><img src="../assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
+        <nav class="nav-links" aria-label="主選單">
+          <a href="#how">運作方式</a>
+          <a href="#apps">任何 App</a>
+          <a href="#tools">工具</a>
+          <a href="#languages">語言</a>
+          <a href="guide/">使用指南</a>
+        </nav>
+        <div class="nav-end">
+          <details class="langmenu">
+            <summary aria-label="語言: 繁體中文"><svg aria-hidden="true"><use href="#ui-globe" /></svg><span>繁體中文</span></summary>
+            <ul role="list">
+              <li><a href="../" hreflang="en" lang="en">English</a></li>
+              <li><a href="../zh/" hreflang="zh-Hans" lang="zh-CN">简体中文</a></li>
+              <li><a href="./" aria-current="page">繁體中文</a></li>
+              <li><a href="../ja/" hreflang="ja" lang="ja">日本語</a></li>
+              <li><a href="../ko/" hreflang="ko" lang="ko">한국어</a></li>
+              <li><a href="../fr/" hreflang="fr" lang="fr">Français</a></li>
+              <li><a href="../es/" hreflang="es" lang="es">Español</a></li>
+              <li><a href="../de/" hreflang="de" lang="de">Deutsch</a></li>
+            </ul>
+          </details>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/latest">下載</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <span data-top></span>
+        <div class="wrap">
+          <h1 class="hero-title load" id="hero-title"><b class="nb">框選螢幕，</b><span>譯文留在原處。</span></h1>
+          <p class="hero-lead load" style="--d: 120">在任何 App 裡按 F1，框住看不懂的地方。Transeen 把文字換成你的語言，畫回同一張圖裡，位置、字級和顏色都不變。</p>
+          <div class="hero-actions load" style="--d: 220">
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
+            <a class="link-arrow" href="guide/">使用指南</a>
+          </div>
+          <p class="hero-meta load" style="--d: 300"><span>v0.11.2</span><span>macOS 26+</span><span>Apple 晶片與 Intel</span><span>已通過 Apple 公證</span></p>
+
+          <div class="hero-stage load" style="--d: 380">
+            <div class="demo" tabindex="0" role="group" aria-roledescription="示範" aria-labelledby="demo-label">
+              <p class="sr-only" id="demo-label">示範：在一個日文訂票網頁上按下 F1，框選車次卡片。卡片裡的每一行被辨識出來，在原本的位置換成繁體中文。選取示範後按住空白鍵可以看原文。</p>
+              <div class="demo-viewport">
+                <!-- part:demo -->
+                <div class="window" aria-hidden="true" lang="ja">
+                  <div class="chrome">
+                    <span class="lights"><i></i><i></i><i></i></span>
+                    <span class="address">soramichi.example.jp/reserve</span>
+                  </div>
+                  <div class="site-bar">
+                    <span class="site-logo"><svg viewBox="0 0 26 26" fill="none" stroke="#b6262c" stroke-width="2.2" stroke-linecap="round"><path d="M4 18c4-9 14-9 18 0" /><path d="M8 18c2.5-4.5 7.5-4.5 10 0" /></svg>そらみち</span>
+                    <span>予約</span>
+                    <span>運行情報</span>
+                    <span>時刻表</span>
+                    <span class="site-login">ログイン</span>
+                  </div>
+                  <div class="page">
+                    <div class="page-list">
+                      <p class="steps-bar"><b>1 列車を選ぶ</b><span>2 座席</span><span>3 お支払い</span></p>
+                      <p class="route">東京 → 京都</p>
+                      <p class="route-date">11月14日（金）・大人1名</p>
+                      <div class="trains">
+                        <div class="train"><span class="train-time">8:30<small>→ 10:45</small></span><span class="train-name"><b>しらかぜ 21号</b><span>2時間15分</span></span><span class="mark ok"><i>○</i>空席あり</span></div>
+                        <div class="train is-picked"><span class="train-time">9:00<small>→ 11:15</small></span><span class="train-name"><b>しらかぜ 23号</b><span>2時間15分</span></span><span class="mark low"><i>△</i>残りわずか</span></div>
+                        <div class="train"><span class="train-time">9:30<small>→ 11:45</small></span><span class="train-name"><b>しらかぜ 25号</b><span>2時間15分</span></span><span class="mark ok"><i>○</i>空席あり</span></div>
+                        <div class="train"><span class="train-time">10:00<small>→ 12:15</small></span><span class="train-name"><b>しらかぜ 27号</b><span>2時間15分</span></span><span class="mark out"><i>×</i>満席</span></div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-head"><span class="card-label" data-k="label">選択中の列車</span><span class="badge" data-k="badge">残りわずか</span></div>
+                      <p class="card-train" data-k="train">しらかぜ 23号</p>
+                      <div class="legs">
+                        <div class="leg"><b>9:00</b><span data-k="from">東京</span></div>
+                        <div class="legs-line"><span data-k="dur">2時間15分</span></div>
+                        <div class="leg"><b>11:15</b><span data-k="to">京都</span></div>
+                      </div>
+                      <p class="card-seat" data-k="seat">指定席・7号車 12番E席（窓側）</p>
+                      <div class="card-price"><b>¥14,170</b><span data-k="fare">大人1名・税込</span></div>
+                      <span class="card-buy"><span data-k="buy">予約へ進む</span></span>
+                      <p class="card-note" data-k="note">発車6分前まで、何度でも変更できます。</p>
+                    </div>
+                  </div>
+                  <div class="press"><kbd>F1</kbd></div>
+                  <div class="frame"><div class="frame-ui"><i></i><i></i><i></i><i></i><span class="frame-size"></span></div><div class="scan"></div></div>
+                  <div class="hits"></div>
+                  <div class="cursor"><svg viewBox="0 0 24 24"><use href="#cur-arrow" /></svg></div>
+                  <div class="toolbar">
+                    <div class="tb-row">
+                      <span class="tb-seg"><button type="button" tabindex="-1" data-view="original" aria-pressed="false" data-ui="original">原文</button><button type="button" tabindex="-1" data-view="translation" aria-pressed="true" data-ui="translation">译文</button></span>
+                      <span class="tb-icon is-on"><svg><use href="#ui-cursorarrow" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-rectangle" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-circle" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-arrow" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-pencil" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-number" /></svg></span>
+                      <span class="tb-sep"></span>
+                      <span class="tb-icon"><svg><use href="#ui-text" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-pin" /></svg></span>
+                      <span class="tb-icon"><svg><use href="#ui-ellipsis" /></svg></span>
+                      <span class="tb-copy" data-ui="copy">复制</span>
+                      <span class="tb-icon"><svg><use href="#ui-xmark" /></svg></span>
+                    </div>
+                    <p class="tb-foot"><b data-ui="dir">JA → 中文</b><span data-ui="status"></span></p>
+                  </div>
+                </div>
+                <!-- /part:demo -->
+              </div>
+            </div>
+            <div class="demo-controls">
+              <div class="langs" role="group" aria-label="把示範翻譯成">
+                <span class="langs-label">JA →</span>
+                <button class="chip" type="button" data-lang="zh-Hant" aria-pressed="true">繁體中文</button>
+                <button class="chip" type="button" data-lang="en" lang="en" aria-pressed="false">English</button>
+                <button class="chip" type="button" data-lang="zh-Hans" lang="zh-Hans" aria-pressed="false">简体中文</button>
+                <button class="chip" type="button" data-lang="ko" lang="ko" aria-pressed="false">한국어</button>
+                <button class="chip" type="button" data-lang="fr" lang="fr" aria-pressed="false">Français</button>
+                <button class="chip" type="button" data-lang="es" lang="es" aria-pressed="false">Español</button>
+                <button class="chip" type="button" data-lang="de" lang="de" aria-pressed="false">Deutsch</button>
+              </div>
+              <p class="demo-hint"><span>按住截圖可以看原文</span><button class="replay" type="button"><svg aria-hidden="true"><use href="#ui-replay" /></svg>重播</button></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 1.0 &nbsp;運作方式</p>
+            <h2 class="lede" id="how-title"><b>一個鍵，四個步驟。</b>Transeen 讀取你框住的像素，再把你的語言放回去，全程不離開這台 Mac。</h2>
+          </div>
+          <ol class="grid grid-4 reveal figs" role="list">
+            <li class="cell" style="--n: 0">
+              <!-- part:fig-select -->
+              <svg class="art art-select" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
+                <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
+                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="fx-lit" style="--d:60; --i:0" />
+                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="fx-lit" style="--d:120; --i:1" />
+                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="fx-lit" style="--d:180; --i:2" />
+                <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
+                <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
+                <g class="fx-frame">
+                  <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="blue" />
+                  <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="blue" />
+                  <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="blue" />
+                  <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="blue" />
+                  <path d="M94.3 59.9 L197.0 119.3 L154.0 144.1 L51.2 84.8 Z" class="blue fx-ants" stroke-dasharray="2 3" opacity="0.6" />
+                </g>
+              </svg>
+              <!-- /part:fig-select -->
+              <p class="fig">1.1 &nbsp;框選</p>
+              <h3>框住看不懂的地方</h3>
+              <p>螢幕先定格。游標停在段落、輸入欄位或視窗上會自動吸附，也可以自己拖一個框。</p>
+            </li>
+            <li class="cell" style="--d: 120; --n: 1">
+              <!-- part:fig-recognize -->
+              <svg class="art art-recognize" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
+                <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
+                <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
+                <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
+                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="hi fx-read" style="--d:60; --i:0" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" class="blue fx-trace" style="--d:290; --i:0" />
+                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="hi fx-read" style="--d:120; --i:1" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" class="blue fx-trace" style="--d:380; --i:1" />
+                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="hi fx-read" style="--d:180; --i:2" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" class="blue fx-trace" style="--d:470; --i:2" />
+                <path d="M96.7 58.6 L199.4 117.9" pathLength="1" class="blue fx-scan" />
+              </svg>
+              <!-- /part:fig-recognize -->
+              <p class="fig">1.2 &nbsp;辨識</p>
+              <h3>每一行都在本機辨識</h3>
+              <p>Apple 的 Vision 框架找出每一行文字和它的樣式，不需要上傳任何東西。</p>
+            </li>
+            <li class="cell" style="--d: 240; --n: 2">
+              <!-- part:fig-lift -->
+              <svg class="art art-lift" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" class="fx-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:0" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" class="fx-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:1" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" class="fx-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:2" />
+                <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
+                <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
+                <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
+                <path d="M94.3 18.5 L156.4 54.4" pathLength="1" class="hi fx-rise" style="--d:360; --i:0" />
+                <path d="M94.3 62.7 L94.3 24.1" class="fx-guide" stroke-dasharray="1.5 3" opacity="0.7" style="--i:0" />
+                <path d="M79.9 26.8 L173.1 80.6" pathLength="1" class="hi fx-rise" style="--d:420; --i:1" />
+                <path d="M79.9 71.0 L79.9 32.3" class="fx-guide" stroke-dasharray="1.5 3" opacity="0.7" style="--i:1" />
+                <path d="M65.6 35.1 L113.4 62.7" pathLength="1" class="hi fx-rise" style="--d:480; --i:2" />
+                <path d="M65.6 79.3 L65.6 40.6" class="fx-guide" stroke-dasharray="1.5 3" opacity="0.7" style="--i:2" />
+              </svg>
+              <!-- /part:fig-lift -->
+              <p class="fig">1.3 &nbsp;取字</p>
+              <h3>只取走字跡</h3>
+              <p>把文字從畫面上取下來，再補齊底下的背景，漸層和紋理也會還原。</p>
+            </li>
+            <li class="cell" style="--d: 360; --n: 3">
+              <!-- part:fig-set -->
+              <svg class="art art-set" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
+                <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
+                <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
+                <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" opacity="0.35" />
+                <path d="M94.3 68.2 L170.8 112.4" pathLength="1" class="blue fx-write" style="--d:90; --i:0" stroke-width="1.6" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" opacity="0.35" />
+                <path d="M79.9 76.5 L134.9 108.2" pathLength="1" class="blue fx-write" style="--d:180; --i:1" stroke-width="1.6" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" opacity="0.35" />
+                <path d="M65.6 84.8 L134.9 124.8" pathLength="1" class="blue fx-write" style="--d:270; --i:2" stroke-width="1.6" />
+                <g class="fx-mark">
+                  <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="hi" />
+                  <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="hi" />
+                  <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="hi" />
+                  <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="hi" />
+                </g>
+              </svg>
+              <!-- /part:fig-set -->
+              <p class="fig">1.4 &nbsp;落字</p>
+              <h3>譯文回到原本的位置</h3>
+              <p>位置、字級、顏色都不變。只有放不下時，才會縮窄或換行。</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="apps" aria-labelledby="apps-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 2.0 &nbsp;任何 App</p>
+            <h2 class="lede" id="apps-title"><b>任何 App，也能跨 App。</b>Transeen 讀的是螢幕上的像素，所以文字出現在哪裡，就能在哪裡翻譯，App 裡什麼都不用裝。</h2>
+          </div>
+          <div class="apps-layout">
+            <figure class="apps-figure reveal figs" style="--n: 0">
+              <!-- part:fig-apps -->
+              <svg class="art art-apps" viewBox="0 0 298 205" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M104.8 8.0 L221.9 75.6 L125.1 131.5 L8.0 63.9 Z" class="fill" stroke="none" />
+                <path d="M104.8 8.0 L221.9 75.6 L125.1 131.5 L8.0 63.9 Z" pathLength="1" style="--d:0" />
+                <path d="M94.7 13.8 L211.8 81.4" pathLength="1" style="--d:60" />
+                <path d="M104.3 13.5 L112.1 18.1" pathLength="1" class="hi" style="--d:60" />
+                <path d="M92.4 25.5 L171.2 71.0" pathLength="1" style="--d:100" />
+                <path d="M82.3 31.4 L140.8 65.2" pathLength="1" style="--d:136" />
+                <path d="M72.2 37.2 L166.7 91.8" pathLength="1" style="--d:172" />
+                <path d="M62.0 43.1 L86.8 57.4" pathLength="1" style="--d:208" />
+                <path d="M51.9 48.9 L76.7 63.2" pathLength="1" style="--d:244" />
+                <path d="M41.8 54.8 L66.5 69.1" pathLength="1" style="--d:280" />
+                <path d="M31.6 60.6 L56.4 74.9" pathLength="1" style="--d:316" />
+                <path d="M92.4 60.6 L104.8 67.8" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:208; --i:0" />
+                <path d="M82.3 66.5 L124.0 90.5" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:244; --i:1" />
+                <path d="M72.2 72.3 L83.4 78.8" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:280; --i:2" />
+                <path d="M62.0 78.2 L92.4 95.7" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:316; --i:3" />
+                <path d="M167.9 73.0 L289.5 143.2 L197.1 196.5 L75.5 126.3 Z" class="fill" stroke="none" />
+                <path d="M167.9 73.0 L289.5 143.2 L197.1 196.5 L75.5 126.3 Z" pathLength="1" style="--d:160" />
+                <path d="M157.7 78.8 L279.3 149.0" pathLength="1" style="--d:220" />
+                <path d="M167.3 78.5 L175.2 83.1" pathLength="1" class="hi" style="--d:220" />
+                <path d="M155.5 90.5 L241.0 139.9" pathLength="1" style="--d:260" />
+                <path d="M207.3 143.8 L236.5 160.8" pathLength="1" style="--d:332" />
+                <path d="M115.0 113.9 L193.8 159.4" pathLength="1" style="--d:404" />
+                <path d="M104.8 119.8 L154.4 148.4" pathLength="1" style="--d:440" />
+                <path d="M145.4 96.4 L201.6 128.9" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:296; --i:0" />
+                <path d="M135.2 102.2 L199.4 139.3" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:332; --i:1" />
+                <path d="M125.1 108.1 L167.9 132.8" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:368; --i:2" />
+                <g class="fx-frame">
+                  <path d="M104.8 60.0 L93.6 53.5 L82.3 60.0" pathLength="1" class="blue" />
+                  <path d="M217.4 125.0 L228.7 131.5 L217.4 138.0" pathLength="1" class="blue" />
+                  <path d="M174.6 149.7 L185.9 156.2 L197.1 149.7" pathLength="1" class="blue" />
+                  <path d="M62.0 84.7 L50.8 78.2 L62.0 71.7" pathLength="1" class="blue" />
+                  <path d="M93.6 53.5 L228.7 131.5 L185.9 156.2 L50.8 78.2 Z" class="blue fx-ants" stroke-dasharray="2 3" opacity="0.6" />
+                </g>
+              </svg>
+              <!-- /part:fig-apps -->
+              <figcaption class="matrix-caption">一個框跨過兩個 App 的視窗，當成一張圖一起翻譯</figcaption>
+            </figure>
+            <ul class="apps-list reveal" role="list" style="--d: 150">
+              <li><b>不用外掛，也不用整合</b><span>瀏覽器、聊天軟體、PDF、遊戲、設計工具、遠端桌面，只要顯示在螢幕上就能翻。連選不起來、拷貝不了的字也可以。</span></li>
+              <li><b>一個框跨好幾個 App</b><span>一個框可以同時框住不同 App 的視窗，裡面的每一行都在同一張截圖裡翻譯。</span></li>
+              <li><b>全螢幕 App 裡、每個桌面上都能用</b><span>在全螢幕的 App 裡、任何一個桌面上都能按 F1。開著的選單、彈出視窗和提示會留在畫面裡，那個 App 也不會失去焦點。</span></li>
+              <li><b>自動吸附眼前的內容</b><span>游標停住，框就會找到底下的段落、輸入欄位或視窗，不管它屬於哪個 App。</span></li>
+              <li><b>釘圖浮在所有 App 上方</b><span>釘住的譯文會停在你切換到的任何 App 上方，可以一邊看譯文，一邊在原本的 App 裡操作。</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="keys-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 3.0 &nbsp;鍵盤</p>
+            <h2 class="lede" id="keys-title"><b>為鍵盤而設計。</b>原文永遠只差一個鍵，上次截圖的位置也是。</h2>
+          </div>
+          <div class="keys-panel reveal">
+            <div class="key-cell"><span class="caps"><kbd>F1</kbd></span><p><b>框選並翻譯</b>在任何 App 裡都能用。筆電鍵盤上按 fn F1。</p></div>
+            <div class="key-cell"><span class="caps"><kbd>R</kbd></span><p><b>還是那塊區域</b>框選時按 R，直接沿用上一次的位置，重新開機後也記得。</p></div>
+            <div class="key-cell"><span class="caps"><kbd>Tab</kbd></span><p><b>原文與譯文</b>整張截圖來回切換。</p></div>
+            <div class="key-cell"><span class="caps"><kbd>空白鍵</kbd></span><p><b>偷看原文</b>按住看原文，放開回到譯文。</p></div>
+            <div class="key-cell"><span class="caps"><kbd>F1</kbd><kbd>F1</kbd></span><p><b>交換語言</b>截圖開著時再按一次，換個方向翻譯。</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="tools" aria-labelledby="tools-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 4.0 &nbsp;截圖</p>
+            <h2 class="lede" id="tools-title"><b>截下來，接著用。</b>截圖停在你框選的位置，工具就在下方。</h2>
+          </div>
+          <ul class="grid grid-3 reveal" role="list">
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-rectangle" /></svg>
+              <h3>直接標註</h3>
+              <p>矩形、橢圓、箭頭、畫筆和數字編號，六種顏色。標註在獨立的圖層上，切換語言也不會移位。</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-crop" /></svg>
+              <h3>漏了一行？拖一下邊</h3>
+              <p>拖動邊緣或四角，Transeen 會從同一張定格畫面重新裁切，放開後再翻譯一次。</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-pin" /></svg>
+              <h3>釘在螢幕上，繼續截</h3>
+              <p>釘住的截圖會浮在螢幕上，成為一張獨立的圖，想釘幾張都行；按右鍵可以拷貝、儲存或切換原文。</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-copy" /></svg>
+              <h3>所見即所拷貝</h3>
+              <p><kbd>⌘C</kbd> 連同標註一起拷貝，譯文還在陸續出現時也可以。<kbd>⌘S</kbd> 存成 PNG。</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-text" /></svg>
+              <h3>當成文字讀</h3>
+              <p>打開完整譯文，和原文並排列出，可以選取、拷貝。</p>
+            </li>
+            <li class="cell">
+              <svg class="cell-icon" aria-hidden="true"><use href="#ui-viewfinder" /></svg>
+              <h3>打開一張圖片</h3>
+              <p>別人傳來的截圖也能翻。按 <kbd>⌘O</kbd> 打開，工具完全一樣。</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="services" aria-labelledby="services-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 5.0 &nbsp;翻譯服務</p>
+            <h2 class="lede" id="services-title"><b>三種翻譯方式。</b>在設定裡選一種，隨時可以換。文字辨識一律在本機完成。</h2>
+          </div>
+          <ul class="grid grid-3 providers reveal" role="list">
+            <li class="cell">
+              <h3>Apple 本機翻譯 <span class="tag">預設</span></h3>
+              <p>macOS 內建的翻譯。語言包下載一次，之後就能離線使用。</p>
+              <ul class="facts">
+                <li><span>執行位置</span><span>這台 Mac</span></li>
+                <li><span>需要下載</span><span>對應的語言包</span></li>
+                <li><span>出字方式</span><span>每 8 行一組</span></li>
+              </ul>
+            </li>
+            <li class="cell">
+              <h3>本機翻譯模型 <span class="tag">Apple 晶片</span></h3>
+              <p>Index-Translate 2B 或 Hy-MT2 1.8B，由 Transeen 自己執行。開發文件和介面文字譯得更準。</p>
+              <ul class="facts">
+                <li><span>執行位置</span><span>這台 Mac</span></li>
+                <li><span>需要下載</span><span>約 1.1 GB，下載後驗證</span></li>
+                <li><span>記憶體</span><span>閒置 5 分鐘後釋放</span></li>
+              </ul>
+            </li>
+            <li class="cell">
+              <h3>大模型介面 <span class="tag">自選位址</span></h3>
+              <p>任何相容 OpenAI 的 chat/completions 介面，遠端走 HTTPS，也可以是本機 localhost 上的服務。</p>
+              <ul class="facts">
+                <li><span>傳送內容</span><span>只有辨識出的文字</span></li>
+                <li><span>金鑰</span><span>存在鑰匙圈</span></li>
+                <li><span>出字方式</span><span>邊回傳邊顯示</span></li>
+              </ul>
+            </li>
+          </ul>
+          <p class="privacy reveal"><svg aria-hidden="true"><use href="#ui-lock" /></svg><span><b>截圖永遠不會離開你的 Mac。</b>Transeen 不保存截圖紀錄，也從不持續錄影。使用 Apple 翻譯或本機模型時，文字也留在本機。</span></p>
+        </div>
+      </section>
+
+      <section class="section" id="languages" aria-labelledby="languages-title">
+        <div class="wrap lang-layout">
+          <div class="reveal">
+            <div class="section-head">
+              <p class="fig">Fig 6.0 &nbsp;語言</p>
+              <h2 class="lede" id="languages-title"><b>八種語言，任意互譯。</b>從其中任何一種譯成另一種，原文語言可以自動辨識。</h2>
+              <p class="body-copy">App 本身也說你的語言：每個視窗、選單和提示都會跟隨你選的母語。本來就是母語的網頁，會譯成你的另一種語言。</p>
+            </div>
+            <ul class="lang-list" role="list">
+              <li>繁體中文 <small>ZH-HANT</small></li>
+              <li lang="en">English <small>EN</small></li>
+              <li lang="zh-Hans">简体中文 <small>ZH-HANS</small></li>
+              <li lang="ja">日本語 <small>JA</small></li>
+              <li lang="ko">한국어 <small>KO</small></li>
+              <li lang="fr">Français <small>FR</small></li>
+              <li lang="es">Español <small>ES</small></li>
+              <li lang="de">Deutsch <small>DE</small></li>
+            </ul>
+          </div>
+          <figure class="reveal" style="--d: 150">
+            <!-- part:matrix -->
+            <svg class="matrix" viewBox="0 0 340 330" aria-hidden="true" focusable="false">
+              <text x="58" y="22" text-anchor="middle">EN</text>
+              <text x="32" y="43.5" text-anchor="middle">EN</text>
+              <text x="92" y="22" text-anchor="middle">简</text>
+              <text x="32" y="77.5" text-anchor="middle">简</text>
+              <text x="126" y="22" text-anchor="middle">繁</text>
+              <text x="32" y="111.5" text-anchor="middle">繁</text>
+              <text x="160" y="22" text-anchor="middle">日</text>
+              <text x="32" y="145.5" text-anchor="middle">日</text>
+              <text x="194" y="22" text-anchor="middle">한</text>
+              <text x="32" y="179.5" text-anchor="middle">한</text>
+              <text x="228" y="22" text-anchor="middle">FR</text>
+              <text x="32" y="213.5" text-anchor="middle">FR</text>
+              <text x="262" y="22" text-anchor="middle">ES</text>
+              <text x="32" y="247.5" text-anchor="middle">ES</text>
+              <text x="296" y="22" text-anchor="middle">DE</text>
+              <text x="32" y="281.5" text-anchor="middle">DE</text>
+              <circle class="self" cx="58" cy="40" r="3.5" />
+              <circle class="dot" cx="92" cy="40" r="3.5" style="--d:1" />
+              <circle class="dot" cx="126" cy="40" r="3.5" style="--d:2" />
+              <circle class="dot" cx="160" cy="40" r="3.5" style="--d:3" />
+              <circle class="dot" cx="194" cy="40" r="3.5" style="--d:4" />
+              <circle class="dot" cx="228" cy="40" r="3.5" style="--d:5" />
+              <circle class="dot" cx="262" cy="40" r="3.5" style="--d:6" />
+              <circle class="dot" cx="296" cy="40" r="3.5" style="--d:7" />
+              <circle class="dot" cx="58" cy="74" r="3.5" style="--d:1" />
+              <circle class="self" cx="92" cy="74" r="3.5" />
+              <circle class="dot" cx="126" cy="74" r="3.5" style="--d:3" />
+              <circle class="dot" cx="160" cy="74" r="3.5" style="--d:4" />
+              <circle class="dot" cx="194" cy="74" r="3.5" style="--d:5" />
+              <circle class="dot" cx="228" cy="74" r="3.5" style="--d:6" />
+              <circle class="dot" cx="262" cy="74" r="3.5" style="--d:7" />
+              <circle class="dot" cx="296" cy="74" r="3.5" style="--d:8" />
+              <circle class="dot" cx="58" cy="108" r="3.5" style="--d:2" />
+              <circle class="dot" cx="92" cy="108" r="3.5" style="--d:3" />
+              <circle class="self" cx="126" cy="108" r="3.5" />
+              <circle class="dot" cx="160" cy="108" r="3.5" style="--d:5" />
+              <circle class="dot" cx="194" cy="108" r="3.5" style="--d:6" />
+              <circle class="dot" cx="228" cy="108" r="3.5" style="--d:7" />
+              <circle class="dot" cx="262" cy="108" r="3.5" style="--d:8" />
+              <circle class="dot" cx="296" cy="108" r="3.5" style="--d:9" />
+              <circle class="dot" cx="58" cy="142" r="3.5" style="--d:3" />
+              <circle class="dot" cx="92" cy="142" r="3.5" style="--d:4" />
+              <circle class="dot" cx="126" cy="142" r="3.5" style="--d:5" />
+              <circle class="self" cx="160" cy="142" r="3.5" />
+              <circle class="dot" cx="194" cy="142" r="3.5" style="--d:7" />
+              <circle class="dot" cx="228" cy="142" r="3.5" style="--d:8" />
+              <circle class="dot" cx="262" cy="142" r="3.5" style="--d:9" />
+              <circle class="dot" cx="296" cy="142" r="3.5" style="--d:10" />
+              <circle class="dot" cx="58" cy="176" r="3.5" style="--d:4" />
+              <circle class="dot" cx="92" cy="176" r="3.5" style="--d:5" />
+              <circle class="dot" cx="126" cy="176" r="3.5" style="--d:6" />
+              <circle class="dot" cx="160" cy="176" r="3.5" style="--d:7" />
+              <circle class="self" cx="194" cy="176" r="3.5" />
+              <circle class="dot" cx="228" cy="176" r="3.5" style="--d:9" />
+              <circle class="dot" cx="262" cy="176" r="3.5" style="--d:10" />
+              <circle class="dot" cx="296" cy="176" r="3.5" style="--d:11" />
+              <circle class="dot" cx="58" cy="210" r="3.5" style="--d:5" />
+              <circle class="dot" cx="92" cy="210" r="3.5" style="--d:6" />
+              <circle class="dot" cx="126" cy="210" r="3.5" style="--d:7" />
+              <circle class="dot" cx="160" cy="210" r="3.5" style="--d:8" />
+              <circle class="dot" cx="194" cy="210" r="3.5" style="--d:9" />
+              <circle class="self" cx="228" cy="210" r="3.5" />
+              <circle class="dot" cx="262" cy="210" r="3.5" style="--d:11" />
+              <circle class="dot" cx="296" cy="210" r="3.5" style="--d:12" />
+              <circle class="dot" cx="58" cy="244" r="3.5" style="--d:6" />
+              <circle class="dot" cx="92" cy="244" r="3.5" style="--d:7" />
+              <circle class="dot" cx="126" cy="244" r="3.5" style="--d:8" />
+              <circle class="dot" cx="160" cy="244" r="3.5" style="--d:9" />
+              <circle class="dot" cx="194" cy="244" r="3.5" style="--d:10" />
+              <circle class="dot" cx="228" cy="244" r="3.5" style="--d:11" />
+              <circle class="self" cx="262" cy="244" r="3.5" />
+              <circle class="dot" cx="296" cy="244" r="3.5" style="--d:13" />
+              <circle class="dot" cx="58" cy="278" r="3.5" style="--d:7" />
+              <circle class="dot" cx="92" cy="278" r="3.5" style="--d:8" />
+              <circle class="dot" cx="126" cy="278" r="3.5" style="--d:9" />
+              <circle class="dot" cx="160" cy="278" r="3.5" style="--d:10" />
+              <circle class="dot" cx="194" cy="278" r="3.5" style="--d:11" />
+              <circle class="dot" cx="228" cy="278" r="3.5" style="--d:12" />
+              <circle class="dot" cx="262" cy="278" r="3.5" style="--d:13" />
+              <circle class="self" cx="296" cy="278" r="3.5" />
+            </svg>
+            <!-- /part:matrix -->
+            <figcaption class="matrix-caption">8 種語言 × 7 個目標 = 56 個方向</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="changes" aria-labelledby="changes-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 7.0 &nbsp;更新紀錄</p>
+            <h2 class="lede" id="changes-title"><b>最近更新。</b>小步快跑，完整紀錄在 GitHub 上。</h2>
+          </div>
+          <div class="notes reveal">
+            <article class="note">
+              <p class="note-meta"><b>0.11.2</b><time datetime="2026-10-31">2026 年 10 月 31 日</time></p>
+              <ul>
+                <li><b>圖片不再被當成字。</b>文字旁邊的一排縮圖不會再被辨識成文字、擦掉後蓋上譯文。拿不準的一行會放大再讀一次，兩次讀得一樣才保留。</li>
+                <li><b>英文裡的中文保持原樣。</b>英文句子裡夾著的中文詞，不會再變成亂碼的拉丁字母。</li>
+                <li><b>繪圖工具一按就畫。</b>箭頭從編號或方框上起筆，不會再把那個標註拿起來。截圖停在截取的位置，只有釘圖會跟著滑鼠移動。</li>
+              </ul>
+            </article>
+            <article class="note">
+              <p class="note-meta"><b>0.11.1</b><time datetime="2026-10-30">2026 年 10 月 30 日</time></p>
+              <ul>
+                <li><b>每一句都會翻譯。</b>本機模型來不及回應的長段落會單獨再送一次，不再保留原文。</li>
+                <li><b>先定格螢幕。</b>按 F1 時，其他 App 開著的選單、彈出視窗和提示都會留在畫面裡，那個 App 也不會失去焦點。</li>
+                <li><b>擦得更乾淨。</b>g、y 這類下伸字母不再留下痕跡，浮動的箭頭按鈕也不再變成亂碼。</li>
+              </ul>
+            </article>
+          </div>
+          <p class="reveal" style="margin-top: 28px"><a class="link-arrow" href="https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md">完整更新紀錄</a></p>
+        </div>
+      </section>
+
+      <section class="section" id="activation" aria-labelledby="activation-title">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <p class="fig">Fig 8.0 &nbsp;啟用</p>
+            <h2 class="lede" id="activation-title"><b>一組啟用碼，一台 Mac，永久有效。</b>不用訂閱，也不強制登入。</h2>
+          </div>
+          <div class="license reveal">
+            <div class="license-code">
+              <p class="code-line" aria-label="啟用碼格式：TR 加上六組四位字元">TR<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX</p>
+              <div class="license-price">
+                <b>永久授權</b>
+                <span>在選單列選擇「啟用與帳號…」輸入。</span>
+              </div>
+              <div class="license-actions">
+                <a class="button" href="https://github.com/LiuTianjie/Transeen/discussions">詢問啟用碼</a>
+                <a class="link-arrow" href="guide/#activate">如何啟用</a>
+              </div>
+            </div>
+            <ul class="license-list" role="list">
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>解鎖截圖、標註與翻譯，</b>適用於一台 Mac。</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>不用登入就能啟用。</b>鑰匙圈裡只保存一個隨機安裝 ID，從不讀取序號。</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>可選擇綁定 iTool 帳號，</b>重新安裝後登入即可恢復。</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>以 MIT 開源。</b>可以自己建置；獨立建置需要自備啟用服務。</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-xmark" /></svg><span>StupidMirror 的 SM- 碼和 iTool Pro 的 IT- 碼屬於其他產品，這裡不能用。</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq" aria-labelledby="faq-title">
+        <div class="wrap faq-layout">
+          <div class="section-head reveal">
+            <p class="fig">Fig 9.0 &nbsp;常見問題</p>
+            <h2 class="lede" id="faq-title"><b>常見問題。</b>還有其他問題，歡迎到 GitHub Discussions 提問。</h2>
+          </div>
+          <div class="faq reveal">
+            <details>
+              <summary>支援哪些 App？</summary>
+              <p>螢幕上會顯示文字的 App 都可以：瀏覽器、聊天和郵件、PDF 閱讀器、遊戲、設計與影片工具、遠端桌面和虛擬機器。Transeen 翻譯的是你框住的像素，不需要外掛，也不需要 App 本身支援；一個框還能同時框住好幾個 App 的視窗。被 App 設為禁止螢幕錄製的影片會顯示成黑色，任何截圖都一樣。</p>
+            </details>
+            <details>
+              <summary>Transeen 支援哪些 Mac？</summary>
+              <p>需要 macOS 26 或更新版本，Apple 晶片和 Intel 都支援，是同一個通用 App；本機翻譯模型需要 Apple 晶片。App 介面會跟隨你選的母語，可選简体中文、繁體中文、English、日本語、한국어、Français、Español 和 Deutsch。</p>
+            </details>
+            <details>
+              <summary>可以離線使用嗎？</summary>
+              <p>可以，啟用之後就行。下載好語言包或本機模型後，截圖、標註、Apple 翻譯和本機模型都能離線執行。斷網時授權依然有效，大約每天重新驗證一次。大模型介面需要連線到你設定的位址。</p>
+            </details>
+            <details>
+              <summary>哪些資料會離開我的 Mac？</summary>
+              <p>使用 Apple 翻譯或本機模型時，沒有：截圖、辨識出的文字和譯文都留在這台 Mac 上。使用大模型介面時，只會把辨識出的文字傳送到你設定的位址，不會傳送截圖。啟用時會傳送啟用碼和一個隨機安裝 ID，檢查更新會連到 GitHub。</p>
+            </details>
+            <details>
+              <summary>可以換別的模型嗎？</summary>
+              <p>可以。在 設定 → 一般 → 翻譯 裡下載 Index-Translate 2B 或 Hy-MT2 1.8B（各約 1.1 GB），由 Transeen 自己在本機執行；也可以填寫任何相容 OpenAI 的 chat/completions 位址和模型名稱，需要時再填金鑰，金鑰會存在鑰匙圈中。遠端位址必須使用 HTTPS；本機 localhost 上的服務可以用 HTTP，也可以不填金鑰。</p>
+            </details>
+            <details>
+              <summary>能翻譯已經有的圖片嗎？</summary>
+              <p>可以。在啟動面板選擇「打開圖片…」或按 <kbd>⌘O</kbd>，圖片會在同樣的視窗裡打開，工具也完全一樣。</p>
+            </details>
+            <details>
+              <summary>翻譯準確嗎？</summary>
+              <p>取決於所選的翻譯服務。密集的版面、公式和專業術語可能需要修正；在依賴某個細節之前，請按 <kbd>Tab</kbd> 對照原文，或打開完整譯文核對。</p>
+            </details>
+            <details>
+              <summary>Transeen 開源嗎？</summary>
+              <p>開源，採用 <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 授權條款</a>，允許商業使用。官方 App 需要 TR- 啟用碼；原始碼授權不包含代管的啟用服務，獨立建置需要設定自己的授權後端。</p>
+            </details>
+            <details>
+              <summary>怎麼更新？</summary>
+              <p>在選單列或啟動面板選擇「檢查更新…」。Transeen 會查看 GitHub Releases，有新版本時打開下載頁面。</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing" aria-labelledby="closing-title">
+        <div class="wrap reveal">
+          <span class="f1" aria-hidden="true">F1</span>
+          <h2 class="hero-title" id="closing-title"><b class="nb">就在原處，</b><span>讀懂它。</span></h2>
+          <p class="hero-lead">下載 Transeen，按 F1，框住第一個你看不懂的地方。</p>
+          <div class="hero-actions">
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
+            <a class="link-arrow" href="https://github.com/LiuTianjie/Transeen">查看原始碼</a>
+          </div>
+          <p class="hero-meta"><span>通用 App</span><span>10.4 MB</span><span>已簽署並公證</span></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./"><img src="../assets/app-icon.png?v=190ed02980f8" width="22" height="22" alt="" />Transeen</a>
+            <p>原生 Mac App，在任何 App 裡把螢幕上的文字原處翻譯。來自 iTool。</p>
+          </div>
+          <nav aria-labelledby="footer-product">
+            <h2 id="footer-product">產品</h2>
+            <ul>
+              <li><a href="#how">運作方式</a></li>
+              <li><a href="#apps">任何 App</a></li>
+              <li><a href="#tools">工具</a></li>
+              <li><a href="#activation">啟用</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-help">
+            <h2 id="footer-help">說明</h2>
+            <ul>
+              <li><a href="guide/">使用指南</a></li>
+              <li><a href="guide/#shortcuts">鍵盤快速鍵</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/discussions">提問</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/issues">回報問題</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-source">
+            <h2 id="footer-source">原始碼</h2>
+            <ul>
+              <li><a href="https://github.com/LiuTianjie/Transeen">GitHub</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/releases">版本發布</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md">更新紀錄</a></li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md">授權說明</a></li>
+            </ul>
+          </nav>
+          <nav aria-labelledby="footer-more">
+            <h2 id="footer-more">iTool 的其他產品</h2>
+            <ul>
+              <li><a href="https://itool.tech/">iTool</a></li>
+              <li><a href="https://stupidmirror.itool.tech/">StupidMirror</a></li>
+            </ul>
+          </nav>
+        </div>
+        <nav class="footer-langs" aria-label="語言">
+          <svg aria-hidden="true"><use href="#ui-globe" /></svg>
+          <a href="../" hreflang="en" lang="en">English</a>
+          <a href="../zh/" hreflang="zh-Hans" lang="zh-CN">简体中文</a>
+          <a href="./" aria-current="page">繁體中文</a>
+          <a href="../ja/" hreflang="ja" lang="ja">日本語</a>
+          <a href="../ko/" hreflang="ko" lang="ko">한국어</a>
+          <a href="../fr/" hreflang="fr" lang="fr">Français</a>
+          <a href="../es/" hreflang="es" lang="es">Español</a>
+          <a href="../de/" hreflang="de" lang="de">Deutsch</a>
+        </nav>
+        <div class="footer-end">
+          <p>© 2026 LiuTianjie。以 MIT 授權條款發布。</p>
+          <p>Mac、macOS 和 Apple 晶片是 Apple Inc. 的商標。</p>
+        </div>
+      </div>
+    </footer>
+    <script src="../assets/site.js?v=3d79e1bf1e0f" defer></script>
+  </body>
+</html>
