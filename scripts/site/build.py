@@ -566,10 +566,8 @@ def home_main(loc, w):
             '      <li class="cell">',
             f'        <h3>{item["title"]} <span class="tag">{item["tag"]}</span></h3>',
             f"        <p>{item['text']}</p>",
-            '        <ul class="facts">',
+            "      </li>",
         ]
-        block += [f"          <li><span>{label}</span><span>{value}</span></li>" for label, value in item["facts"]]
-        block += ["        </ul>", "      </li>"]
     block += [
         "    </ul>",
         f'    <p class="privacy reveal"><svg aria-hidden="true"><use href="#ui-lock" /></svg><span>{services["privacy"]}</span></p>',
@@ -615,7 +613,7 @@ def home_main(loc, w):
             f'        <p class="note-meta"><b>{release["version"]}</b><time datetime="{release["date"]}">{day(w, release["date"])}</time></p>',
             "        <ul>",
         ]
-        block += [f"          <li>{note}</li>" for note in changes["notes"][release["version"]]]
+        block += [f"          <li>{note}</li>" for note in changes["notes"][release["version"]][:2]]
         block += ["        </ul>", "      </article>"]
     block += [
         "    </div>",

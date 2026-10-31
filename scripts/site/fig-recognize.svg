@@ -3,11 +3,11 @@
   <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
   <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
   <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
-  <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="hi fx-read" style="--d:60; --i:0" />
-  <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" class="blue fx-trace" style="--d:290; --i:0" />
-  <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="hi fx-read" style="--d:120; --i:1" />
-  <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" class="blue fx-trace" style="--d:380; --i:1" />
-  <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="hi fx-read" style="--d:180; --i:2" />
-  <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" class="blue fx-trace" style="--d:470; --i:2" />
-  <path d="M96.7 58.6 L199.4 117.9" pathLength="1" class="blue fx-scan" />
+  <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="hi" style="--d:60" />
+  <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" class="blue lp-trace" style="--d:290; --i:0" />
+  <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="hi" style="--d:120" />
+  <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" class="blue lp-trace" style="--d:380; --i:1" />
+  <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="hi" style="--d:180" />
+  <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" class="blue lp-trace" style="--d:470; --i:2" />
+  <path d="M96.7 58.6 L199.4 117.9" pathLength="1" class="blue lp-scan" stroke-width="1.4" style="--dx: -47.8px; --dy: 27.6px" />
 </svg>

@@ -203,15 +203,15 @@
                 "name": "Avec quelles apps fonctionne-t-il ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Toute app qui affiche du texte à l’écran : navigateurs, messageries et mail, lecteurs PDF, jeux, outils de design et de vidéo, bureaux à distance et machines virtuelles. Transeen traduit les pixels que vous sélectionnez : il n’a besoin d’aucune extension ni de la prise en charge de l’app, et un cadre peut englober les fenêtres de plusieurs apps. Une vidéo qu’une app protège de l’enregistrement d’écran apparaît en noir, comme dans toute capture d’écran."
+                  "text": "Toute app qui affiche du texte à l’écran. Transeen traduit les pixels sélectionnés : aucune extension n’est nécessaire, et un cadre peut couvrir plusieurs apps. Une vidéo protégée de l’enregistrement d’écran apparaît en noir, comme dans toute capture."
                 }
               },
               {
                 "@type": "Question",
-                "name": "Sur quels Mac fonctionne Transeen ?",
+                "name": "Sur quels Mac fonctionne-t-il ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "macOS 26 ou version ultérieure, sur puce Apple ou Intel : c’est une seule app universelle. Les modèles de traduction locaux nécessitent une puce Apple. L’interface suit votre langue : English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español ou Deutsch."
+                  "text": "macOS 26 ou version ultérieure, sur puce Apple ou Intel. Les modèles locaux nécessitent une puce Apple."
                 }
               },
               {
@@ -219,7 +219,7 @@
                 "name": "Fonctionne-t-il hors ligne ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Oui, une fois activé. La capture, l’annotation, la Traduction Apple et les modèles locaux fonctionnent hors ligne après le téléchargement de leurs packs de langue ou du modèle. L’activation reste valable sans réseau et est revérifiée environ une fois par jour. Une API de LLM a besoin d’une connexion à votre point d’accès."
+                  "text": "Oui, une fois activé et le pack de langue ou le modèle téléchargé. Seule une API de LLM a besoin du réseau."
                 }
               },
               {
@@ -227,7 +227,7 @@
                 "name": "Qu’est-ce qui quitte mon Mac ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Avec la Traduction Apple ou un modèle local, rien : la capture, le texte reconnu et la traduction restent sur ce Mac. Avec une API de LLM, seul le texte reconnu part vers le point d’accès que vous avez défini, jamais la capture. L’activation envoie votre code et un identifiant d’installation aléatoire, et la recherche de mises à jour contacte GitHub."
+                  "text": "Avec la Traduction Apple ou un modèle local, rien. Avec une API de LLM, seul le texte reconnu part vers votre point d’accès, jamais la capture."
                 }
               },
               {
@@ -235,7 +235,7 @@
                 "name": "Puis-je utiliser un autre modèle ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Oui. Dans Réglages → Général → Traduction, téléchargez Index-Translate 2B ou Hy-MT2 1.8B (environ 1,1 Go chacun), qui s’exécutent dans Transeen, ou saisissez un point d’accès chat/completions compatible OpenAI, un nom de modèle et, si besoin, une clé gardée dans votre trousseau. Les points d’accès distants doivent utiliser HTTPS ; un serveur en localhost peut utiliser HTTP sans clé."
+                  "text": "Oui : téléchargez Index-Translate 2B ou Hy-MT2 1.8B dans les réglages, ou saisissez une API compatible OpenAI. Les clés restent dans votre trousseau."
                 }
               },
               {
@@ -243,7 +243,7 @@
                 "name": "Peut-il traduire une image que j’ai déjà ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Oui. Choisissez Ouvrir une image… dans le lanceur ou appuyez sur ⌘O : l’image s’ouvre dans la même fenêtre, avec les mêmes outils."
+                  "text": "Oui. Appuyez sur ⌘O : elle s’ouvre avec les mêmes outils."
                 }
               },
               {
@@ -251,7 +251,7 @@
                 "name": "Quelle est sa précision ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Cela dépend du service de traduction. Les mises en page denses, les formules et les termes spécialisés peuvent demander des corrections : comparez avec l’original grâce à Tab, ou ouvrez le texte complet, avant de vous fier à un détail."
+                  "text": "Cela dépend du service de traduction. Appuyez sur Tab pour vérifier l’original avant de vous fier à un détail."
                 }
               },
               {
@@ -259,7 +259,7 @@
                 "name": "Transeen est-il open source ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Oui, sous licence MIT, usage commercial compris. L’app officielle nécessite un code TR- ; la licence du code source n’inclut pas le service d’activation hébergé, les versions indépendantes fournissent donc le leur."
+                  "text": "Oui, sous licence MIT. L’app officielle nécessite un code TR-."
                 }
               },
               {
@@ -267,7 +267,7 @@
                 "name": "Comment mettre à jour ?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Choisissez Rechercher des mises à jour… dans la barre des menus ou le lanceur. Transeen consulte GitHub Releases et ouvre le téléchargement quand une version plus récente existe."
+                  "text": "Choisissez Rechercher des mises à jour… dans la barre des menus."
                 }
               }
             ]
@@ -280,7 +280,7 @@
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png?v=a9e04b962aeb" />
     <link rel="manifest" href="../site.webmanifest" />
     <link rel="preload" href="../assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="../assets/site.css?v=1c3da10917de" />
+    <link rel="stylesheet" href="../assets/site.css?v=6ba6dce15c66" />
     <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
@@ -389,7 +389,7 @@
         <span data-top></span>
         <div class="wrap">
           <h1 class="hero-title load" id="hero-title">Traduisez votre écran, <span>sur place.</span></h1>
-          <p class="hero-lead load" style="--d: 120">Appuyez sur F1 dans n’importe quelle app et sélectionnez ce que vous ne pouvez pas lire. Transeen le redessine dans votre langue, dans la même image, à la même taille et dans la même couleur.</p>
+          <p class="hero-lead load" style="--d: 120">Appuyez sur F1 dans n’importe quelle app et sélectionnez ce que vous ne lisez pas. La traduction prend la place, la taille et la couleur de l’original.</p>
           <div class="hero-actions load" style="--d: 220">
             <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Télécharger pour Mac</a>
             <a class="link-arrow" href="guide/">Guide d’installation</a>
@@ -398,7 +398,7 @@
 
           <div class="hero-stage load" style="--d: 380">
             <div class="demo" tabindex="0" role="group" aria-roledescription="démonstration" aria-labelledby="demo-label">
-              <p class="sr-only" id="demo-label">Démonstration : sur une page japonaise de réservation de train, on appuie sur F1 et on sélectionne la carte de réservation. Ses lignes sont reconnues puis redessinées en français aux mêmes endroits. Maintenez Espace quand elle a le focus pour voir l’original.</p>
+              <p class="sr-only" id="demo-label">Démonstration : sur une page japonaise de réservation de train, on appuie sur F1 et on sélectionne la carte de réservation. Ses lignes sont reconnues puis redessinées aux mêmes endroits dans une autre langue, une langue après l’autre. Maintenez Espace quand elle a le focus pour voir l’original.</p>
               <div class="demo-viewport">
                 <!-- part:demo -->
                 <div class="window" aria-hidden="true" lang="ja">
@@ -476,7 +476,7 @@
                 <button class="chip" type="button" data-lang="es" lang="es" aria-pressed="false">Español</button>
                 <button class="chip" type="button" data-lang="de" lang="de" aria-pressed="false">Deutsch</button>
               </div>
-              <p class="demo-hint"><span>Maintenez la capture enfoncée pour voir l’original</span><button class="replay" type="button"><svg aria-hidden="true"><use href="#ui-replay" /></svg>Rejouer</button></p>
+              <p class="demo-hint"><span>Maintenez pour voir l’original</span><button class="replay" type="button"><svg aria-hidden="true"><use href="#ui-replay" /></svg>Rejouer</button></p>
             </div>
           </div>
         </div>
@@ -486,7 +486,7 @@
         <div class="wrap">
           <div class="section-head reveal">
             <p class="fig">Fig 1.0 &nbsp;Fonctionnement</p>
-            <h2 class="lede" id="how-title"><b>Une touche, quatre étapes.</b> Transeen lit les pixels que vous sélectionnez et y replace votre langue, sans rien faire sortir du Mac.</h2>
+            <h2 class="lede" id="how-title"><b>Une touche, quatre étapes.</b> Tout se passe sur votre Mac.</h2>
           </div>
           <ol class="grid grid-4 reveal figs" role="list">
             <li class="cell" style="--n: 0">
@@ -494,23 +494,28 @@
               <svg class="art art-select" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
                 <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
-                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="fx-lit" style="--d:60; --i:0" />
-                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="fx-lit" style="--d:120; --i:1" />
-                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="fx-lit" style="--d:180; --i:2" />
+                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="hi lp-lit" style="--d:60; --i:0" />
+                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="hi lp-lit" style="--d:120; --i:1" />
+                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="hi lp-lit" style="--d:180; --i:2" />
                 <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
                 <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
-                <g class="fx-frame">
+                <g class="lp-grow" style="transform-origin: 94.3px 59.9px">
+                  <path d="M94.3 59.9 L197.0 119.3 L154.0 144.1 L51.2 84.8 Z" class="blue lp-ants" stroke-dasharray="2 3" opacity="0.6" />
+                </g>
+                <g class="lp-snap" style="transform-origin: 124.1px 102.0px">
                   <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="blue" />
                   <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="blue" />
                   <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="blue" />
                   <path d="M63.2 91.7 L51.2 84.8 L63.2 77.9" pathLength="1" class="blue" />
-                  <path d="M94.3 59.9 L197.0 119.3 L154.0 144.1 L51.2 84.8 Z" class="blue fx-ants" stroke-dasharray="2 3" opacity="0.6" />
+                </g>
+                <g transform="translate(94.3 59.9)">
+                  <path d="M0 0 L0 11.2 L2.8 8.6 L4.9 13.1 L6.9 12.2 L4.9 7.8 L8.6 7.8 Z" class="hi lp-cursor" fill="currentColor" stroke="#08090a" stroke-width="0.9" stroke-dasharray="none" style="--dx: 59.8px; --dy: 84.2px" />
                 </g>
               </svg>
               <!-- /part:fig-select -->
               <p class="fig">1.1 &nbsp;Sélection</p>
-              <h3>Encadrez ce que vous ne lisez pas</h3>
-              <p>L’écran se fige. Survolez un paragraphe, un champ ou une fenêtre pour vous y caler, ou tracez votre propre cadre.</p>
+              <h3>Encadrez</h3>
+              <p>L’écran se fige. Calez-vous sur un paragraphe ou tracez votre cadre.</p>
             </li>
             <li class="cell" style="--d: 120; --n: 1">
               <!-- part:fig-recognize -->
@@ -519,40 +524,40 @@
                 <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
                 <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
                 <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
-                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="hi fx-read" style="--d:60; --i:0" />
-                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" class="blue fx-trace" style="--d:290; --i:0" />
-                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="hi fx-read" style="--d:120; --i:1" />
-                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" class="blue fx-trace" style="--d:380; --i:1" />
-                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="hi fx-read" style="--d:180; --i:2" />
-                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" class="blue fx-trace" style="--d:470; --i:2" />
-                <path d="M96.7 58.6 L199.4 117.9" pathLength="1" class="blue fx-scan" />
+                <path d="M94.3 68.2 L156.4 104.1" pathLength="1" class="hi" style="--d:60" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" class="blue lp-trace" style="--d:290; --i:0" />
+                <path d="M79.9 76.5 L173.1 130.3" pathLength="1" class="hi" style="--d:120" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" class="blue lp-trace" style="--d:380; --i:1" />
+                <path d="M65.6 84.8 L113.4 112.4" pathLength="1" class="hi" style="--d:180" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" class="blue lp-trace" style="--d:470; --i:2" />
+                <path d="M96.7 58.6 L199.4 117.9" pathLength="1" class="blue lp-scan" stroke-width="1.4" style="--dx: -47.8px; --dy: 27.6px" />
               </svg>
               <!-- /part:fig-recognize -->
               <p class="fig">1.2 &nbsp;Lecture</p>
-              <h3>Chaque ligne est lue sur votre Mac</h3>
-              <p>Le framework Vision d’Apple repère chaque ligne et son style. Rien n’est envoyé pour cela.</p>
+              <h3>Lu sur votre Mac</h3>
+              <p>Apple Vision trouve chaque ligne. Rien n’est envoyé.</p>
             </li>
             <li class="cell" style="--d: 240; --n: 2">
               <!-- part:fig-lift -->
               <svg class="art art-lift" viewBox="0 0 256 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                 <path d="M111.0 42.0 L244.9 119.3 L144.5 177.2 L10.6 100.0 Z" pathLength="1" />
-                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" class="fx-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:0" />
-                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" class="fx-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:1" />
-                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" class="fx-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:2" />
+                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" class="lp-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:0" />
+                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" class="lp-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:1" />
+                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" class="lp-hole" stroke-dasharray="2 3" opacity="0.7" style="--i:2" />
                 <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
                 <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
                 <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
-                <path d="M94.3 18.5 L156.4 54.4" pathLength="1" class="hi fx-rise" style="--d:360; --i:0" />
-                <path d="M94.3 62.7 L94.3 24.1" class="fx-guide" stroke-dasharray="1.5 3" opacity="0.7" style="--i:0" />
-                <path d="M79.9 26.8 L173.1 80.6" pathLength="1" class="hi fx-rise" style="--d:420; --i:1" />
-                <path d="M79.9 71.0 L79.9 32.3" class="fx-guide" stroke-dasharray="1.5 3" opacity="0.7" style="--i:1" />
-                <path d="M65.6 35.1 L113.4 62.7" pathLength="1" class="hi fx-rise" style="--d:480; --i:2" />
-                <path d="M65.6 79.3 L65.6 40.6" class="fx-guide" stroke-dasharray="1.5 3" opacity="0.7" style="--i:2" />
+                <path d="M94.3 18.5 L156.4 54.4" pathLength="1" class="hi lp-rise" style="--d:360; --i:0; --dy: 49.7px" />
+                <path d="M94.3 62.7 L94.3 24.1" class="lp-hole" stroke-dasharray="1.5 3" opacity="0.7" style="--i:0" />
+                <path d="M79.9 26.8 L173.1 80.6" pathLength="1" class="hi lp-rise" style="--d:420; --i:1; --dy: 49.7px" />
+                <path d="M79.9 71.0 L79.9 32.3" class="lp-hole" stroke-dasharray="1.5 3" opacity="0.7" style="--i:1" />
+                <path d="M65.6 35.1 L113.4 62.7" pathLength="1" class="hi lp-rise" style="--d:480; --i:2; --dy: 49.7px" />
+                <path d="M65.6 79.3 L65.6 40.6" class="lp-hole" stroke-dasharray="1.5 3" opacity="0.7" style="--i:2" />
               </svg>
               <!-- /part:fig-lift -->
               <p class="fig">1.3 &nbsp;Extraction</p>
-              <h3>Seule l’encre s’en va</h3>
-              <p>Les lettres sont retirées et le fond situé dessous est reconstitué, dégradé ou texture compris.</p>
+              <h3>L’encre s’en va</h3>
+              <p>Les lettres partent, le fond dessous est reconstitué.</p>
             </li>
             <li class="cell" style="--d: 360; --n: 3">
               <!-- part:fig-set -->
@@ -561,13 +566,10 @@
                 <path d="M108.6 59.9 L192.3 108.2" pathLength="1" style="--d:0" />
                 <path d="M51.2 93.1 L130.1 138.6" pathLength="1" style="--d:240" />
                 <path d="M36.9 101.3 L72.8 122.0" pathLength="1" style="--d:300" />
-                <path d="M95.5 63.4 L164.8 103.4 L155.2 108.9 L85.9 68.9 Z" pathLength="1" opacity="0.35" />
-                <path d="M94.3 68.2 L170.8 112.4" pathLength="1" class="blue fx-write" style="--d:90; --i:0" stroke-width="1.6" />
-                <path d="M81.1 71.7 L181.5 129.6 L172.0 135.1 L71.6 77.2 Z" pathLength="1" opacity="0.35" />
-                <path d="M79.9 76.5 L134.9 108.2" pathLength="1" class="blue fx-write" style="--d:180; --i:1" stroke-width="1.6" />
-                <path d="M66.8 79.9 L121.8 111.7 L112.2 117.2 L57.2 85.5 Z" pathLength="1" opacity="0.35" />
-                <path d="M65.6 84.8 L134.9 124.8" pathLength="1" class="blue fx-write" style="--d:270; --i:2" stroke-width="1.6" />
-                <g class="fx-mark">
+                <path d="M94.3 68.2 L170.8 112.4" pathLength="1" class="blue lp-write" style="--d:90; --i:0" stroke-width="1.6" />
+                <path d="M79.9 76.5 L134.9 108.2" pathLength="1" class="blue lp-write" style="--d:180; --i:1" stroke-width="1.6" />
+                <path d="M65.6 84.8 L134.9 124.8" pathLength="1" class="blue lp-write" style="--d:270; --i:2" stroke-width="1.6" />
+                <g class="lp-snap is-late" style="transform-origin: 124.1px 102.0px">
                   <path d="M106.2 66.8 L94.3 59.9 L82.3 66.8" pathLength="1" class="hi" />
                   <path d="M185.1 112.4 L197.0 119.3 L185.1 126.2" pathLength="1" class="hi" />
                   <path d="M142.1 137.2 L154.0 144.1 L166.0 137.2" pathLength="1" class="hi" />
@@ -576,8 +578,8 @@
               </svg>
               <!-- /part:fig-set -->
               <p class="fig">1.4 &nbsp;Pose</p>
-              <h3>Votre texte reprend sa place</h3>
-              <p>Même position, même taille, même couleur. Une ligne n’est resserrée ou coupée que si la traduction ne tient pas.</p>
+              <h3>Remise en place</h3>
+              <p>Même place, même taille, même couleur, dans votre langue.</p>
             </li>
           </ol>
         </div>
@@ -587,7 +589,7 @@
         <div class="wrap">
           <div class="section-head reveal">
             <p class="fig">Fig 2.0 &nbsp;Toutes les apps</p>
-            <h2 class="lede" id="apps-title"><b>Dans n’importe quelle app, et d’une app à l’autre.</b> Transeen lit les pixels de votre écran : il fonctionne partout où du texte s’affiche, sans rien installer dans l’app.</h2>
+            <h2 class="lede" id="apps-title"><b>Dans toute app, et d’une app à l’autre.</b> Transeen lit les pixels : rien à installer dans l’app.</h2>
           </div>
           <div class="apps-layout">
             <figure class="apps-figure reveal figs" style="--n: 0">
@@ -601,41 +603,52 @@
                 <path d="M82.3 31.4 L140.8 65.2" pathLength="1" style="--d:136" />
                 <path d="M72.2 37.2 L166.7 91.8" pathLength="1" style="--d:172" />
                 <path d="M62.0 43.1 L86.8 57.4" pathLength="1" style="--d:208" />
+                <path d="M92.4 60.6 L113.8 73.0" pathLength="1" class="lp-old" style="--i:0" />
+                <path d="M92.4 60.6 L104.8 67.8" pathLength="1" class="blue lp-new" stroke-width="1.5" style="--d:208; --i:0" />
                 <path d="M51.9 48.9 L76.7 63.2" pathLength="1" style="--d:244" />
+                <path d="M82.3 66.5 L126.2 91.8" pathLength="1" class="lp-old" style="--i:1" />
+                <path d="M82.3 66.5 L124.0 90.5" pathLength="1" class="blue lp-new" stroke-width="1.5" style="--d:244; --i:1" />
                 <path d="M41.8 54.8 L66.5 69.1" pathLength="1" style="--d:280" />
+                <path d="M72.2 72.3 L86.8 80.8" pathLength="1" class="lp-old" style="--i:2" />
+                <path d="M72.2 72.3 L83.4 78.8" pathLength="1" class="blue lp-new" stroke-width="1.5" style="--d:280; --i:2" />
                 <path d="M31.6 60.6 L56.4 74.9" pathLength="1" style="--d:316" />
-                <path d="M92.4 60.6 L104.8 67.8" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:208; --i:0" />
-                <path d="M82.3 66.5 L124.0 90.5" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:244; --i:1" />
-                <path d="M72.2 72.3 L83.4 78.8" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:280; --i:2" />
-                <path d="M62.0 78.2 L92.4 95.7" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:316; --i:3" />
+                <path d="M62.0 78.2 L96.9 98.3" pathLength="1" class="lp-old" style="--i:3" />
+                <path d="M62.0 78.2 L92.4 95.7" pathLength="1" class="blue lp-new" stroke-width="1.5" style="--d:316; --i:3" />
                 <path d="M167.9 73.0 L289.5 143.2 L197.1 196.5 L75.5 126.3 Z" class="fill" stroke="none" />
                 <path d="M167.9 73.0 L289.5 143.2 L197.1 196.5 L75.5 126.3 Z" pathLength="1" style="--d:160" />
                 <path d="M157.7 78.8 L279.3 149.0" pathLength="1" style="--d:220" />
                 <path d="M167.3 78.5 L175.2 83.1" pathLength="1" class="hi" style="--d:220" />
                 <path d="M155.5 90.5 L241.0 139.9" pathLength="1" style="--d:260" />
+                <path d="M145.4 96.4 L210.6 134.1" pathLength="1" class="lp-old" style="--i:4" />
+                <path d="M145.4 96.4 L203.9 130.2" pathLength="1" class="blue lp-new" stroke-width="1.5" style="--d:296; --i:4" />
                 <path d="M207.3 143.8 L236.5 160.8" pathLength="1" style="--d:332" />
+                <path d="M135.2 102.2 L201.6 140.6" pathLength="1" class="lp-old" style="--i:5" />
+                <path d="M135.2 102.2 L192.6 135.4" pathLength="1" class="blue lp-new" stroke-width="1.5" style="--d:332; --i:5" />
+                <path d="M125.1 108.1 L181.4 140.6" pathLength="1" class="lp-old" style="--i:6" />
+                <path d="M125.1 108.1 L179.1 139.3" pathLength="1" class="blue lp-new" stroke-width="1.5" style="--d:368; --i:6" />
                 <path d="M115.0 113.9 L193.8 159.4" pathLength="1" style="--d:404" />
                 <path d="M104.8 119.8 L154.4 148.4" pathLength="1" style="--d:440" />
-                <path d="M145.4 96.4 L201.6 128.9" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:296; --i:0" />
-                <path d="M135.2 102.2 L199.4 139.3" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:332; --i:1" />
-                <path d="M125.1 108.1 L167.9 132.8" pathLength="1" class="blue fx-new" stroke-width="1.5" style="--d:368; --i:2" />
-                <g class="fx-frame">
+                <g class="lp-grow" style="transform-origin: 93.6px 53.5px">
+                  <path d="M93.6 53.5 L228.7 131.5 L185.9 156.2 L50.8 78.2 Z" class="blue lp-ants" stroke-dasharray="2 3" opacity="0.6" />
+                </g>
+                <g class="lp-snap" style="transform-origin: 139.7px 104.8px">
                   <path d="M104.8 60.0 L93.6 53.5 L82.3 60.0" pathLength="1" class="blue" />
                   <path d="M217.4 125.0 L228.7 131.5 L217.4 138.0" pathLength="1" class="blue" />
                   <path d="M174.6 149.7 L185.9 156.2 L197.1 149.7" pathLength="1" class="blue" />
                   <path d="M62.0 84.7 L50.8 78.2 L62.0 71.7" pathLength="1" class="blue" />
-                  <path d="M93.6 53.5 L228.7 131.5 L185.9 156.2 L50.8 78.2 Z" class="blue fx-ants" stroke-dasharray="2 3" opacity="0.6" />
+                </g>
+                <g transform="translate(93.6 53.5)">
+                  <path d="M0 0 L0 11.2 L2.8 8.6 L4.9 13.1 L6.9 12.2 L4.9 7.8 L8.6 7.8 Z" class="hi lp-cursor" fill="currentColor" stroke="#08090a" stroke-width="0.9" stroke-dasharray="none" style="--dx: 92.3px; --dy: 102.7px" />
                 </g>
               </svg>
               <!-- /part:fig-apps -->
-              <figcaption class="matrix-caption">Un seul cadre sur les fenêtres de deux apps, traduit comme une seule image</figcaption>
+              <figcaption class="matrix-caption">Un cadre sur deux apps</figcaption>
             </figure>
             <ul class="apps-list reveal" role="list" style="--d: 150">
-              <li><b>Ni extension, ni intégration</b><span>Navigateurs, messageries, PDF, jeux, outils de design, bureaux à distance : si c’est à l’écran, ça se traduit. Même le texte que vous ne pouvez pas sélectionner.</span></li>
-              <li><b>Un cadre sur plusieurs apps</b><span>Un cadre peut couvrir en même temps les fenêtres de plusieurs apps. Chaque ligne à l’intérieur est traduite dans la même capture.</span></li>
-              <li><b>En plein écran, sur tous les Spaces</b><span>F1 fonctionne dans une app en plein écran et sur n’importe quel bureau. Un menu, une fenêtre contextuelle ou une infobulle ouverts restent dans l’image, et l’app garde le focus.</span></li>
-              <li><b>Il se cale sur ce qui est là</b><span>Survolez : le cadre trouve le paragraphe, le champ ou la fenêtre sous le pointeur, quelle que soit l’app.</span></li>
-              <li><b>Les épingles flottent au-dessus de tout</b><span>Une traduction épinglée reste au-dessus de l’app que vous ouvrez ensuite : vous la lisez à côté de celle dans laquelle vous travaillez.</span></li>
+              <li><b>Sans extension</b><span>Navigateurs, messageries, PDF, jeux, bureaux à distance. Même le texte non sélectionnable.</span></li>
+              <li><b>Un cadre, plusieurs apps</b><span>Les fenêtres de plusieurs apps dans une seule capture.</span></li>
+              <li><b>En plein écran aussi</b><span>Menus et infobulles ouverts restent dans l’image.</span></li>
+              <li><b>Les épingles restent devant</b><span>La traduction reste à côté de l’app où vous travaillez.</span></li>
             </ul>
           </div>
         </div>
@@ -645,14 +658,14 @@
         <div class="wrap">
           <div class="section-head reveal">
             <p class="fig">Fig 3.0 &nbsp;Clavier</p>
-            <h2 class="lede" id="keys-title"><b>Pensé pour le clavier.</b> L’original est toujours à une touche, comme la dernière zone que vous avez regardée.</h2>
+            <h2 class="lede" id="keys-title"><b>Pensé pour le clavier.</b> L’original est toujours à une touche.</h2>
           </div>
           <div class="keys-panel reveal">
-            <div class="key-cell"><span class="caps"><kbd>F1</kbd></span><p><b>Sélectionner et traduire</b>Depuis n’importe quelle app. Sur un clavier de portable, fn F1.</p></div>
-            <div class="key-cell"><span class="caps"><kbd>R</kbd></span><p><b>Même zone</b>Pendant la sélection, reprend la zone de la dernière capture, même après un redémarrage.</p></div>
-            <div class="key-cell"><span class="caps"><kbd>Tab</kbd></span><p><b>Original ou traduction</b>Basculez toute la capture d’un côté à l’autre.</p></div>
-            <div class="key-cell"><span class="caps"><kbd>Espace</kbd></span><p><b>Coup d’œil</b>Maintenez pour voir l’original, relâchez pour lire votre langue.</p></div>
-            <div class="key-cell"><span class="caps"><kbd>F1</kbd><kbd>F1</kbd></span><p><b>Inverser les langues</b>Réappuyez sur une capture ouverte pour traduire dans l’autre sens.</p></div>
+            <div class="key-cell"><span class="caps"><kbd>F1</kbd></span><p><b>Traduire</b>Depuis toute app.</p></div>
+            <div class="key-cell"><span class="caps"><kbd>R</kbd></span><p><b>Même zone</b>Reprend le dernier cadre.</p></div>
+            <div class="key-cell"><span class="caps"><kbd>Tab</kbd></span><p><b>Basculer</b>Original ou traduction.</p></div>
+            <div class="key-cell"><span class="caps"><kbd>Espace</kbd></span><p><b>Coup d’œil</b>Maintenez pour l’original.</p></div>
+            <div class="key-cell"><span class="caps"><kbd>F1</kbd><kbd>F1</kbd></span><p><b>Inverser</b>Traduire dans l’autre sens.</p></div>
           </div>
         </div>
       </section>
@@ -661,38 +674,38 @@
         <div class="wrap">
           <div class="section-head reveal">
             <p class="fig">Fig 4.0 &nbsp;La capture</p>
-            <h2 class="lede" id="tools-title"><b>Une capture avec laquelle travailler.</b> Elle reste là où vous l’avez prise, avec les outils juste en dessous.</h2>
+            <h2 class="lede" id="tools-title"><b>Une capture avec laquelle travailler.</b> Les outils juste en dessous.</h2>
           </div>
           <ul class="grid grid-3 reveal" role="list">
             <li class="cell">
               <svg class="cell-icon" aria-hidden="true"><use href="#ui-rectangle" /></svg>
               <h3>Annotez</h3>
-              <p>Rectangles, ellipses, flèches, crayon et numéros, en six couleurs. Les annotations ont leur propre calque : changer de langue ne les déplace jamais.</p>
+              <p>Cadres, flèches, crayon et numéros, sur leur propre calque.</p>
             </li>
             <li class="cell">
               <svg class="cell-icon" aria-hidden="true"><use href="#ui-crop" /></svg>
-              <h3>Une ligne oubliée ? Tirez un bord</h3>
-              <p>Faites glisser un bord ou un coin. Transeen recadre à partir du même écran figé et retraduit quand vous relâchez.</p>
+              <h3>Tirez un bord</h3>
+              <p>Une ligne oubliée ? Tirez le bord, c’est retraduit.</p>
             </li>
             <li class="cell">
               <svg class="cell-icon" aria-hidden="true"><use href="#ui-pin" /></svg>
-              <h3>Épinglez, continuez à capturer</h3>
-              <p>Une épingle flotte à l’écran comme une image à part. Gardez-en autant que nécessaire ; un clic droit pour la copier, l’enregistrer ou basculer.</p>
+              <h3>Épinglez</h3>
+              <p>Gardez-la à l’écran et continuez à capturer.</p>
             </li>
             <li class="cell">
               <svg class="cell-icon" aria-hidden="true"><use href="#ui-copy" /></svg>
-              <h3>Copiez ce que vous voyez</h3>
-              <p><kbd>⌘C</kbd> copie l’image avec vos annotations, même pendant que la traduction arrive. <kbd>⌘S</kbd> l’enregistre en PNG.</p>
+              <h3>Copiez</h3>
+              <p><kbd>⌘C</kbd> copie ce que vous voyez, annotations comprises.</p>
             </li>
             <li class="cell">
               <svg class="cell-icon" aria-hidden="true"><use href="#ui-text" /></svg>
-              <h3>Lisez-la en texte</h3>
-              <p>Ouvrez la traduction complète à côté de l’original, sous forme de liste à sélectionner et copier.</p>
+              <h3>Lisez en texte</h3>
+              <p>La traduction complète, prête à copier.</p>
             </li>
             <li class="cell">
               <svg class="cell-icon" aria-hidden="true"><use href="#ui-viewfinder" /></svg>
               <h3>Ouvrez une image</h3>
-              <p>Une capture qu’on vous a envoyée fonctionne aussi. Appuyez sur <kbd>⌘O</kbd> : elle s’ouvre avec les mêmes outils.</p>
+              <p><kbd>⌘O</kbd> pour une capture que vous avez déjà.</p>
             </li>
           </ul>
         </div>
@@ -702,38 +715,23 @@
         <div class="wrap">
           <div class="section-head reveal">
             <p class="fig">Fig 5.0 &nbsp;Traduction</p>
-            <h2 class="lede" id="services-title"><b>Trois façons de traduire.</b> Choisissez-en une dans les réglages, changez quand vous voulez. La reconnaissance se fait toujours sur votre Mac.</h2>
+            <h2 class="lede" id="services-title"><b>Trois façons de traduire.</b> La reconnaissance reste sur votre Mac.</h2>
           </div>
           <ul class="grid grid-3 providers reveal" role="list">
             <li class="cell">
               <h3>Traduction Apple <span class="tag">Par défaut</span></h3>
-              <p>La traduction intégrée à macOS. Téléchargez une fois le pack de langue et elle fonctionne hors ligne.</p>
-              <ul class="facts">
-                <li><span>Exécution</span><span>Sur ce Mac</span></li>
-                <li><span>Téléchargement</span><span>Par pack de langue</span></li>
-                <li><span>Affichage</span><span>Par groupes de 8 lignes</span></li>
-              </ul>
+              <p>Intégrée à macOS. Hors ligne une fois le pack de langue installé.</p>
             </li>
             <li class="cell">
-              <h3>Modèle de traduction local <span class="tag">Puce Apple</span></h3>
-              <p>Index-Translate 2B ou Hy-MT2 1.8B, exécuté par Transeen lui-même. Meilleur sur les textes techniques et les libellés d’interface.</p>
-              <ul class="facts">
-                <li><span>Exécution</span><span>Sur ce Mac</span></li>
-                <li><span>Téléchargement</span><span>Environ 1,1 Go, vérifié</span></li>
-                <li><span>Mémoire</span><span>Libérée après 5 min d’inactivité</span></li>
-              </ul>
+              <h3>Modèle local <span class="tag">Puce Apple</span></h3>
+              <p>Index-Translate ou Hy-MT2, exécuté par Transeen.</p>
             </li>
             <li class="cell">
               <h3>API de LLM <span class="tag">Votre point d’accès</span></h3>
-              <p>Tout point d’accès chat/completions compatible OpenAI, distant en HTTPS ou serveur en localhost.</p>
-              <ul class="facts">
-                <li><span>Envoie</span><span>Le texte reconnu uniquement</span></li>
-                <li><span>Clé</span><span>Gardée dans le trousseau</span></li>
-                <li><span>Réponses</span><span>Affichées à l’arrivée</span></li>
-              </ul>
+              <p>Toute API compatible OpenAI. Seul le texte est envoyé.</p>
             </li>
           </ul>
-          <p class="privacy reveal"><svg aria-hidden="true"><use href="#ui-lock" /></svg><span><b>La capture ne quitte jamais votre Mac.</b> Transeen ne garde aucun historique et n’enregistre jamais l’écran en continu. Avec la Traduction Apple ou un modèle local, le texte reste lui aussi sur le Mac.</span></p>
+          <p class="privacy reveal"><svg aria-hidden="true"><use href="#ui-lock" /></svg><span><b>La capture ne quitte jamais votre Mac.</b> Ni historique, ni enregistrement continu.</span></p>
         </div>
       </section>
 
@@ -742,8 +740,8 @@
           <div class="reveal">
             <div class="section-head">
               <p class="fig">Fig 6.0 &nbsp;Langues</p>
-              <h2 class="lede" id="languages-title"><b>Huit langues, dans les deux sens.</b> De n’importe laquelle vers n’importe quelle autre, la langue source étant détectée pour vous.</h2>
-              <p class="body-copy">L’app parle aussi votre langue : chaque fenêtre, menu et message suit celle que vous choisissez. Une page déjà dans votre langue est traduite dans votre autre langue.</p>
+              <h2 class="lede" id="languages-title"><b>Huit langues, dans tous les sens.</b> La langue source est détectée.</h2>
+              <p class="body-copy">L’app elle-même parle ces huit langues.</p>
             </div>
             <ul class="lang-list" role="list">
               <li>Français <small>FR</small></li>
@@ -776,72 +774,72 @@
               <text x="296" y="22" text-anchor="middle">DE</text>
               <text x="32" y="281.5" text-anchor="middle">DE</text>
               <circle class="self" cx="58" cy="40" r="3.5" />
-              <circle class="dot" cx="92" cy="40" r="3.5" style="--d:1" />
-              <circle class="dot" cx="126" cy="40" r="3.5" style="--d:2" />
-              <circle class="dot" cx="160" cy="40" r="3.5" style="--d:3" />
-              <circle class="dot" cx="194" cy="40" r="3.5" style="--d:4" />
-              <circle class="dot" cx="228" cy="40" r="3.5" style="--d:5" />
-              <circle class="dot" cx="262" cy="40" r="3.5" style="--d:6" />
-              <circle class="dot" cx="296" cy="40" r="3.5" style="--d:7" />
-              <circle class="dot" cx="58" cy="74" r="3.5" style="--d:1" />
+              <circle class="dot" cx="92" cy="40" r="3.5" style="--r:0; --d:1" />
+              <circle class="dot" cx="126" cy="40" r="3.5" style="--r:0; --d:2" />
+              <circle class="dot" cx="160" cy="40" r="3.5" style="--r:0; --d:3" />
+              <circle class="dot" cx="194" cy="40" r="3.5" style="--r:0; --d:4" />
+              <circle class="dot" cx="228" cy="40" r="3.5" style="--r:0; --d:5" />
+              <circle class="dot" cx="262" cy="40" r="3.5" style="--r:0; --d:6" />
+              <circle class="dot" cx="296" cy="40" r="3.5" style="--r:0; --d:7" />
+              <circle class="dot" cx="58" cy="74" r="3.5" style="--r:1; --d:1" />
               <circle class="self" cx="92" cy="74" r="3.5" />
-              <circle class="dot" cx="126" cy="74" r="3.5" style="--d:3" />
-              <circle class="dot" cx="160" cy="74" r="3.5" style="--d:4" />
-              <circle class="dot" cx="194" cy="74" r="3.5" style="--d:5" />
-              <circle class="dot" cx="228" cy="74" r="3.5" style="--d:6" />
-              <circle class="dot" cx="262" cy="74" r="3.5" style="--d:7" />
-              <circle class="dot" cx="296" cy="74" r="3.5" style="--d:8" />
-              <circle class="dot" cx="58" cy="108" r="3.5" style="--d:2" />
-              <circle class="dot" cx="92" cy="108" r="3.5" style="--d:3" />
+              <circle class="dot" cx="126" cy="74" r="3.5" style="--r:1; --d:3" />
+              <circle class="dot" cx="160" cy="74" r="3.5" style="--r:1; --d:4" />
+              <circle class="dot" cx="194" cy="74" r="3.5" style="--r:1; --d:5" />
+              <circle class="dot" cx="228" cy="74" r="3.5" style="--r:1; --d:6" />
+              <circle class="dot" cx="262" cy="74" r="3.5" style="--r:1; --d:7" />
+              <circle class="dot" cx="296" cy="74" r="3.5" style="--r:1; --d:8" />
+              <circle class="dot" cx="58" cy="108" r="3.5" style="--r:2; --d:2" />
+              <circle class="dot" cx="92" cy="108" r="3.5" style="--r:2; --d:3" />
               <circle class="self" cx="126" cy="108" r="3.5" />
-              <circle class="dot" cx="160" cy="108" r="3.5" style="--d:5" />
-              <circle class="dot" cx="194" cy="108" r="3.5" style="--d:6" />
-              <circle class="dot" cx="228" cy="108" r="3.5" style="--d:7" />
-              <circle class="dot" cx="262" cy="108" r="3.5" style="--d:8" />
-              <circle class="dot" cx="296" cy="108" r="3.5" style="--d:9" />
-              <circle class="dot" cx="58" cy="142" r="3.5" style="--d:3" />
-              <circle class="dot" cx="92" cy="142" r="3.5" style="--d:4" />
-              <circle class="dot" cx="126" cy="142" r="3.5" style="--d:5" />
+              <circle class="dot" cx="160" cy="108" r="3.5" style="--r:2; --d:5" />
+              <circle class="dot" cx="194" cy="108" r="3.5" style="--r:2; --d:6" />
+              <circle class="dot" cx="228" cy="108" r="3.5" style="--r:2; --d:7" />
+              <circle class="dot" cx="262" cy="108" r="3.5" style="--r:2; --d:8" />
+              <circle class="dot" cx="296" cy="108" r="3.5" style="--r:2; --d:9" />
+              <circle class="dot" cx="58" cy="142" r="3.5" style="--r:3; --d:3" />
+              <circle class="dot" cx="92" cy="142" r="3.5" style="--r:3; --d:4" />
+              <circle class="dot" cx="126" cy="142" r="3.5" style="--r:3; --d:5" />
               <circle class="self" cx="160" cy="142" r="3.5" />
-              <circle class="dot" cx="194" cy="142" r="3.5" style="--d:7" />
-              <circle class="dot" cx="228" cy="142" r="3.5" style="--d:8" />
-              <circle class="dot" cx="262" cy="142" r="3.5" style="--d:9" />
-              <circle class="dot" cx="296" cy="142" r="3.5" style="--d:10" />
-              <circle class="dot" cx="58" cy="176" r="3.5" style="--d:4" />
-              <circle class="dot" cx="92" cy="176" r="3.5" style="--d:5" />
-              <circle class="dot" cx="126" cy="176" r="3.5" style="--d:6" />
-              <circle class="dot" cx="160" cy="176" r="3.5" style="--d:7" />
+              <circle class="dot" cx="194" cy="142" r="3.5" style="--r:3; --d:7" />
+              <circle class="dot" cx="228" cy="142" r="3.5" style="--r:3; --d:8" />
+              <circle class="dot" cx="262" cy="142" r="3.5" style="--r:3; --d:9" />
+              <circle class="dot" cx="296" cy="142" r="3.5" style="--r:3; --d:10" />
+              <circle class="dot" cx="58" cy="176" r="3.5" style="--r:4; --d:4" />
+              <circle class="dot" cx="92" cy="176" r="3.5" style="--r:4; --d:5" />
+              <circle class="dot" cx="126" cy="176" r="3.5" style="--r:4; --d:6" />
+              <circle class="dot" cx="160" cy="176" r="3.5" style="--r:4; --d:7" />
               <circle class="self" cx="194" cy="176" r="3.5" />
-              <circle class="dot" cx="228" cy="176" r="3.5" style="--d:9" />
-              <circle class="dot" cx="262" cy="176" r="3.5" style="--d:10" />
-              <circle class="dot" cx="296" cy="176" r="3.5" style="--d:11" />
-              <circle class="dot" cx="58" cy="210" r="3.5" style="--d:5" />
-              <circle class="dot" cx="92" cy="210" r="3.5" style="--d:6" />
-              <circle class="dot" cx="126" cy="210" r="3.5" style="--d:7" />
-              <circle class="dot" cx="160" cy="210" r="3.5" style="--d:8" />
-              <circle class="dot" cx="194" cy="210" r="3.5" style="--d:9" />
+              <circle class="dot" cx="228" cy="176" r="3.5" style="--r:4; --d:9" />
+              <circle class="dot" cx="262" cy="176" r="3.5" style="--r:4; --d:10" />
+              <circle class="dot" cx="296" cy="176" r="3.5" style="--r:4; --d:11" />
+              <circle class="dot" cx="58" cy="210" r="3.5" style="--r:5; --d:5" />
+              <circle class="dot" cx="92" cy="210" r="3.5" style="--r:5; --d:6" />
+              <circle class="dot" cx="126" cy="210" r="3.5" style="--r:5; --d:7" />
+              <circle class="dot" cx="160" cy="210" r="3.5" style="--r:5; --d:8" />
+              <circle class="dot" cx="194" cy="210" r="3.5" style="--r:5; --d:9" />
               <circle class="self" cx="228" cy="210" r="3.5" />
-              <circle class="dot" cx="262" cy="210" r="3.5" style="--d:11" />
-              <circle class="dot" cx="296" cy="210" r="3.5" style="--d:12" />
-              <circle class="dot" cx="58" cy="244" r="3.5" style="--d:6" />
-              <circle class="dot" cx="92" cy="244" r="3.5" style="--d:7" />
-              <circle class="dot" cx="126" cy="244" r="3.5" style="--d:8" />
-              <circle class="dot" cx="160" cy="244" r="3.5" style="--d:9" />
-              <circle class="dot" cx="194" cy="244" r="3.5" style="--d:10" />
-              <circle class="dot" cx="228" cy="244" r="3.5" style="--d:11" />
+              <circle class="dot" cx="262" cy="210" r="3.5" style="--r:5; --d:11" />
+              <circle class="dot" cx="296" cy="210" r="3.5" style="--r:5; --d:12" />
+              <circle class="dot" cx="58" cy="244" r="3.5" style="--r:6; --d:6" />
+              <circle class="dot" cx="92" cy="244" r="3.5" style="--r:6; --d:7" />
+              <circle class="dot" cx="126" cy="244" r="3.5" style="--r:6; --d:8" />
+              <circle class="dot" cx="160" cy="244" r="3.5" style="--r:6; --d:9" />
+              <circle class="dot" cx="194" cy="244" r="3.5" style="--r:6; --d:10" />
+              <circle class="dot" cx="228" cy="244" r="3.5" style="--r:6; --d:11" />
               <circle class="self" cx="262" cy="244" r="3.5" />
-              <circle class="dot" cx="296" cy="244" r="3.5" style="--d:13" />
-              <circle class="dot" cx="58" cy="278" r="3.5" style="--d:7" />
-              <circle class="dot" cx="92" cy="278" r="3.5" style="--d:8" />
-              <circle class="dot" cx="126" cy="278" r="3.5" style="--d:9" />
-              <circle class="dot" cx="160" cy="278" r="3.5" style="--d:10" />
-              <circle class="dot" cx="194" cy="278" r="3.5" style="--d:11" />
-              <circle class="dot" cx="228" cy="278" r="3.5" style="--d:12" />
-              <circle class="dot" cx="262" cy="278" r="3.5" style="--d:13" />
+              <circle class="dot" cx="296" cy="244" r="3.5" style="--r:6; --d:13" />
+              <circle class="dot" cx="58" cy="278" r="3.5" style="--r:7; --d:7" />
+              <circle class="dot" cx="92" cy="278" r="3.5" style="--r:7; --d:8" />
+              <circle class="dot" cx="126" cy="278" r="3.5" style="--r:7; --d:9" />
+              <circle class="dot" cx="160" cy="278" r="3.5" style="--r:7; --d:10" />
+              <circle class="dot" cx="194" cy="278" r="3.5" style="--r:7; --d:11" />
+              <circle class="dot" cx="228" cy="278" r="3.5" style="--r:7; --d:12" />
+              <circle class="dot" cx="262" cy="278" r="3.5" style="--r:7; --d:13" />
               <circle class="self" cx="296" cy="278" r="3.5" />
             </svg>
             <!-- /part:matrix -->
-            <figcaption class="matrix-caption">8 langues × 7 cibles = 56 directions</figcaption>
+            <figcaption class="matrix-caption">8 × 7 = 56 directions</figcaption>
           </figure>
         </div>
       </section>
@@ -850,23 +848,21 @@
         <div class="wrap">
           <div class="section-head reveal">
             <p class="fig">Fig 7.0 &nbsp;Nouveautés</p>
-            <h2 class="lede" id="changes-title"><b>Dernières versions.</b> De petites versions, souvent. La liste complète est sur GitHub.</h2>
+            <h2 class="lede" id="changes-title"><b>Dernières versions.</b></h2>
           </div>
           <div class="notes reveal">
             <article class="note">
               <p class="note-meta"><b>0.11.2</b><time datetime="2026-10-31">31 octobre 2026</time></p>
               <ul>
-                <li><b>Les images restent des images.</b> Une rangée de vignettes à côté du texte n’est plus lue comme des mots ni recouverte d’une traduction. Une ligne douteuse est relue agrandie et n’est gardée que si elle se lit pareil.</li>
-                <li><b>Le chinois dans l’anglais est conservé.</b> Un mot chinois dans une phrase anglaise reste en chinois au lieu de devenir des lettres latines.</li>
-                <li><b>Les outils de dessin dessinent toujours.</b> Une flèche commencée sur un numéro ou un cadre ne saisit plus cette annotation. La capture reste là où elle a été prise ; seule une épingle suit la souris.</li>
+                <li><b>Les images restent des images.</b> Les vignettes à côté du texte ne sont plus traduites.</li>
+                <li><b>Les outils de dessin dessinent toujours,</b> et la capture reste où vous l’avez prise.</li>
               </ul>
             </article>
             <article class="note">
               <p class="note-meta"><b>0.11.1</b><time datetime="2026-10-30">30 octobre 2026</time></p>
               <ul>
-                <li><b>Chaque phrase est traduite.</b> Un long paragraphe sur lequel un modèle local était lent est renvoyé seul, au lieu de garder l’original.</li>
-                <li><b>L’écran se fige d’abord.</b> F1 garde dans l’image le menu, la fenêtre contextuelle ou l’infobulle d’une autre app, qui garde le focus.</li>
-                <li><b>Un effacement plus propre.</b> Les lettres comme g et y ne laissent plus de traces, et une flèche flottante ne devient plus des caractères parasites.</li>
+                <li><b>Chaque phrase est traduite,</b> même les plus lentes pour un modèle local.</li>
+                <li><b>L’écran se fige d’abord :</b> les menus ouverts restent dans l’image.</li>
               </ul>
             </article>
           </div>
@@ -878,7 +874,7 @@
         <div class="wrap">
           <div class="section-head reveal">
             <p class="fig">Fig 8.0 &nbsp;Activation</p>
-            <h2 class="lede" id="activation-title"><b>Un code, un Mac, pour de bon.</b> Ni abonnement, ni compte obligatoire.</h2>
+            <h2 class="lede" id="activation-title"><b>Un code, un Mac, pour de bon.</b> Sans abonnement ni compte.</h2>
           </div>
           <div class="license reveal">
             <div class="license-code">
@@ -893,11 +889,10 @@
               </div>
             </div>
             <ul class="license-list" role="list">
-              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Déverrouille capture, annotation et traduction</b> sur un Mac.</span></li>
-              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Activation sans connexion.</b> Un identifiant d’installation aléatoire est gardé dans votre trousseau ; le numéro de série n’est jamais lu.</span></li>
-              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Associez-le si vous le souhaitez à un compte iTool</b> pour le restaurer après une réinstallation.</span></li>
-              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Open source sous licence MIT.</b> Compilez-le vous-même ; les versions indépendantes fournissent leur propre service d’activation.</span></li>
-              <li><svg aria-hidden="true"><use href="#ui-xmark" /></svg><span>Les codes SM- de StupidMirror et IT- d’iTool Pro sont d’autres produits et ne fonctionnent pas ici.</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Tout est déverrouillé</b> sur un Mac.</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Sans connexion.</b> Le numéro de série n’est jamais lu.</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span><b>Open source</b> sous licence MIT.</span></li>
+              <li><svg aria-hidden="true"><use href="#ui-xmark" /></svg><span>Les codes SM- et IT- sont pour d’autres produits.</span></li>
             </ul>
           </div>
         </div>
@@ -907,44 +902,44 @@
         <div class="wrap faq-layout">
           <div class="section-head reveal">
             <p class="fig">Fig 9.0 &nbsp;Questions</p>
-            <h2 class="lede" id="faq-title"><b>Questions.</b> Pour tout le reste, posez votre question dans GitHub Discussions.</h2>
+            <h2 class="lede" id="faq-title"><b>Questions.</b></h2>
           </div>
           <div class="faq reveal">
             <details>
               <summary>Avec quelles apps fonctionne-t-il ?</summary>
-              <p>Toute app qui affiche du texte à l’écran : navigateurs, messageries et mail, lecteurs PDF, jeux, outils de design et de vidéo, bureaux à distance et machines virtuelles. Transeen traduit les pixels que vous sélectionnez : il n’a besoin d’aucune extension ni de la prise en charge de l’app, et un cadre peut englober les fenêtres de plusieurs apps. Une vidéo qu’une app protège de l’enregistrement d’écran apparaît en noir, comme dans toute capture d’écran.</p>
+              <p>Toute app qui affiche du texte à l’écran. Transeen traduit les pixels sélectionnés : aucune extension n’est nécessaire, et un cadre peut couvrir plusieurs apps. Une vidéo protégée de l’enregistrement d’écran apparaît en noir, comme dans toute capture.</p>
             </details>
             <details>
-              <summary>Sur quels Mac fonctionne Transeen ?</summary>
-              <p>macOS 26 ou version ultérieure, sur puce Apple ou Intel : c’est une seule app universelle. Les modèles de traduction locaux nécessitent une puce Apple. L’interface suit votre langue : English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español ou Deutsch.</p>
+              <summary>Sur quels Mac fonctionne-t-il ?</summary>
+              <p>macOS 26 ou version ultérieure, sur puce Apple ou Intel. Les modèles locaux nécessitent une puce Apple.</p>
             </details>
             <details>
               <summary>Fonctionne-t-il hors ligne ?</summary>
-              <p>Oui, une fois activé. La capture, l’annotation, la Traduction Apple et les modèles locaux fonctionnent hors ligne après le téléchargement de leurs packs de langue ou du modèle. L’activation reste valable sans réseau et est revérifiée environ une fois par jour. Une API de LLM a besoin d’une connexion à votre point d’accès.</p>
+              <p>Oui, une fois activé et le pack de langue ou le modèle téléchargé. Seule une API de LLM a besoin du réseau.</p>
             </details>
             <details>
               <summary>Qu’est-ce qui quitte mon Mac ?</summary>
-              <p>Avec la Traduction Apple ou un modèle local, rien : la capture, le texte reconnu et la traduction restent sur ce Mac. Avec une API de LLM, seul le texte reconnu part vers le point d’accès que vous avez défini, jamais la capture. L’activation envoie votre code et un identifiant d’installation aléatoire, et la recherche de mises à jour contacte GitHub.</p>
+              <p>Avec la Traduction Apple ou un modèle local, rien. Avec une API de LLM, seul le texte reconnu part vers votre point d’accès, jamais la capture.</p>
             </details>
             <details>
               <summary>Puis-je utiliser un autre modèle ?</summary>
-              <p>Oui. Dans Réglages → Général → Traduction, téléchargez Index-Translate 2B ou Hy-MT2 1.8B (environ 1,1 Go chacun), qui s’exécutent dans Transeen, ou saisissez un point d’accès chat/completions compatible OpenAI, un nom de modèle et, si besoin, une clé gardée dans votre trousseau. Les points d’accès distants doivent utiliser HTTPS ; un serveur en localhost peut utiliser HTTP sans clé.</p>
+              <p>Oui : téléchargez Index-Translate 2B ou Hy-MT2 1.8B dans les réglages, ou saisissez une API compatible OpenAI. Les clés restent dans votre trousseau.</p>
             </details>
             <details>
               <summary>Peut-il traduire une image que j’ai déjà ?</summary>
-              <p>Oui. Choisissez Ouvrir une image… dans le lanceur ou appuyez sur <kbd>⌘O</kbd> : l’image s’ouvre dans la même fenêtre, avec les mêmes outils.</p>
+              <p>Oui. Appuyez sur <kbd>⌘O</kbd> : elle s’ouvre avec les mêmes outils.</p>
             </details>
             <details>
               <summary>Quelle est sa précision ?</summary>
-              <p>Cela dépend du service de traduction. Les mises en page denses, les formules et les termes spécialisés peuvent demander des corrections : comparez avec l’original grâce à <kbd>Tab</kbd>, ou ouvrez le texte complet, avant de vous fier à un détail.</p>
+              <p>Cela dépend du service de traduction. Appuyez sur <kbd>Tab</kbd> pour vérifier l’original avant de vous fier à un détail.</p>
             </details>
             <details>
               <summary>Transeen est-il open source ?</summary>
-              <p>Oui, sous <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">licence MIT</a>, usage commercial compris. L’app officielle nécessite un code TR- ; la licence du code source n’inclut pas le service d’activation hébergé, les versions indépendantes fournissent donc le leur.</p>
+              <p>Oui, sous <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">licence MIT</a>. L’app officielle nécessite un code TR-.</p>
             </details>
             <details>
               <summary>Comment mettre à jour ?</summary>
-              <p>Choisissez Rechercher des mises à jour… dans la barre des menus ou le lanceur. Transeen consulte GitHub Releases et ouvre le téléchargement quand une version plus récente existe.</p>
+              <p>Choisissez Rechercher des mises à jour… dans la barre des menus.</p>
             </details>
           </div>
         </div>
@@ -954,7 +949,7 @@
         <div class="wrap reveal">
           <span class="f1" aria-hidden="true">F1</span>
           <h2 class="hero-title" id="closing-title">Lisez-le <span>là où il est.</span></h2>
-          <p class="hero-lead">Téléchargez Transeen, appuyez sur F1 et sélectionnez la première chose que vous n’arriviez pas à lire.</p>
+          <p class="hero-lead">Appuyez sur F1 et sélectionnez la première chose que vous ne lisiez pas.</p>
           <div class="hero-actions">
             <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Télécharger pour Mac</a>
             <a class="link-arrow" href="https://github.com/LiuTianjie/Transeen">Voir le code source</a>
@@ -1023,6 +1018,6 @@
         </div>
       </div>
     </footer>
-    <script src="../assets/site.js?v=3d79e1bf1e0f" defer></script>
+    <script src="../assets/site.js?v=258bbec2d37e" defer></script>
   </body>
 </html>

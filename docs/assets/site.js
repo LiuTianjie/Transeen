@@ -34,7 +34,7 @@
   }
 
   // The step figures loop once they have drawn in, and pause while they are off screen.
-  const figs = document.querySelectorAll(".figs");
+  const figs = document.querySelectorAll(".figs, .matrix");
   if (figs.length && "IntersectionObserver" in window && !document.documentElement.hasAttribute("data-still")) {
     const away = new IntersectionObserver((entries) => {
       for (const entry of entries) {
@@ -125,6 +125,7 @@
     const state = { target: pressed ?? (pageLang === "ja" ? "en" : pageLang), view: "original", run: 0, ready: false, scale: 1, crop: 0 };
     const W = 1000;
     const H = 620;
+    let peeking = false;
 
     // The window keeps its 1000-point layout and is scaled to the column; narrow screens show its
     // right half, where the capture is, so the text stays readable.
@@ -313,10 +314,28 @@
         demo.classList.add("is-done");
         toolbar.classList.add("is-live");
         state.ready = true;
+        await next(run);
       } catch (error) {
         if (error !== "stale") throw error;
       }
     }
+
+    // Unless the reader has taken over, the demo holds the finished capture, then captures again
+    // into the next language. It waits while it is off screen or the tab is hidden.
+    let manual = false;
+    let visible = true;
+    const order = [...chips].map((chip) => chip.dataset.lang);
+    async function next(run) {
+      if (manual) return;
+      await sleep(4200, run);
+      while (!visible || document.hidden) await sleep(400, run);
+      if (manual || peeking) return;
+      state.target = order[(order.indexOf(state.target) + 1) % order.length];
+      play();
+    }
+    const takeOver = () => {
+      manual = true;
+    };
 
     async function retarget(lang) {
       state.target = lang;
@@ -339,19 +358,28 @@
       }
     }
 
-    chips.forEach((chip) => chip.addEventListener("click", () => retarget(chip.dataset.lang)));
-    replay?.addEventListener("click", play);
+    chips.forEach((chip) =>
+      chip.addEventListener("click", () => {
+        takeOver();
+        retarget(chip.dataset.lang);
+      })
+    );
+    replay?.addEventListener("click", () => {
+      manual = false;
+      play();
+    });
     viewButtons.forEach((b) =>
       b.addEventListener("click", () => {
+        takeOver();
         if (state.ready) setView(b.dataset.view);
       })
     );
 
-    let peeking = false;
     demo.addEventListener("keydown", (event) => {
       if (event.key !== " ") return;
       event.preventDefault();
       if (state.ready && !peeking) {
+        takeOver();
         peeking = true;
         setView("original");
       }
@@ -365,6 +393,7 @@
     demo.addEventListener("blur", unpeek);
     demo.addEventListener("pointerdown", (event) => {
       if (state.ready && !event.target.closest(".toolbar")) {
+        takeOver();
         peeking = true;
         setView("original");
       }
@@ -379,13 +408,12 @@
       return;
     }
     const rect = demo.getBoundingClientRect();
-    if (rect.top < innerHeight && rect.bottom > 0) {
-      start();
-      return;
-    }
-    new IntersectionObserver(([entry], observer) => {
-      if (entry.isIntersecting) {
-        observer.disconnect();
+    let started = rect.top < innerHeight && rect.bottom > 0;
+    if (started) start();
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !started) {
+        started = true;
         start();
       }
     }).observe(demo);

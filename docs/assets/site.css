@@ -1439,29 +1439,6 @@ code {
   text-transform: uppercase;
 }
 
-.facts {
-  display: grid;
-  gap: 0;
-  margin-top: 22px;
-  padding: 0;
-  list-style: none;
-  font-size: 13.5px;
-}
-
-.facts li {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 10px 0;
-  border-top: 1px solid var(--line);
-  color: var(--fg-2);
-}
-
-.facts li span:last-child {
-  color: var(--fg);
-  text-align: right;
-}
-
 .privacy {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -1564,6 +1541,23 @@ code {
 .js .reveal.in .matrix .dot {
   opacity: 1;
   transform: none;
+}
+
+/* Once drawn, the matrix lights one source language's row at a time: each language in turn
+   translating into the other seven. */
+.matrix.is-live .dot {
+  animation: lp-row 8s var(--ease) infinite;
+  animation-delay: calc(var(--r) * 1s);
+}
+
+.matrix.is-live.is-away .dot {
+  animation-play-state: paused;
+}
+
+@keyframes lp-row {
+  0%, 12.5%, 100% { fill: var(--fg-2); transform: none; }
+  3% { fill: var(--blue); transform: scale(1.45); }
+  8% { fill: var(--blue); transform: scale(1.15); }
 }
 
 .matrix-caption {
@@ -2206,93 +2200,109 @@ code {
   margin-top: 16px;
 }
 
-/* Figures that keep moving. Each step's figure plays its part of the capture in turn: --n is the
-   step, so the four take turns over one 8-second cycle, and --i staggers the lines inside one.
-   A loop starts once the figure has drawn in (.is-live, added by site.js after the reveal) and
-   pauses while it is off screen. Every keyframe ends on the figure as it is drawn, which is also
-   what reduced motion and the share cards show. */
+/* Figures that keep moving. Each figure acts out its step over and over: the frame is dragged
+   out, the lines are boxed, lifted and written back. The loops start once a figure has drawn in
+   (.is-live, added by site.js after the reveal) and pause while it is off screen. --n staggers
+   the four steps so they move one after another, and --i staggers the lines inside one. Every
+   loop starts and ends on the figure as it is drawn, which is what reduced motion and the share
+   cards show, so nothing jumps when a loop restarts. */
 
 .art {
-  --cycle: 8s;
-  --slot: calc(var(--n, 0) * var(--cycle) / 4);
+  --loop: 5.6s;
+  --at: calc(var(--n, 0) * 700ms);
 }
 
-.figs .art [class*="fx-"],
-.figs .fx-frame,
-.figs .fx-mark {
-  animation-duration: var(--cycle);
+.figs .art [class*="lp-"] {
+  animation-duration: var(--loop);
   animation-timing-function: var(--ease);
   animation-iteration-count: infinite;
-  animation-delay: calc(var(--slot) + var(--i, 0) * 180ms);
+  animation-delay: var(--at);
   animation-play-state: paused;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.figs.is-live:not(.is-away) .art [class*="fx-"],
-.figs.is-live:not(.is-away) .fx-frame,
-.figs.is-live:not(.is-away) .fx-mark {
-  animation-play-state: running;
-}
-
-.figs.is-live .art-select .fx-frame,
-.figs.is-live .art-apps .fx-frame {
-  animation-name: fx-frame;
-  animation-delay: var(--slot);
-}
-
-.figs.is-live .fx-ants {
-  animation: fx-ants 1.6s linear infinite;
-  animation-play-state: inherit;
-}
-
-.figs.is-live .art-select .fx-lit {
-  animation-name: fx-lit;
-}
-
-.figs.is-live .fx-read {
-  animation-name: fx-read;
-}
-
-.figs.is-live .fx-trace {
-  animation-name: fx-trace;
-}
-
-.figs.is-live .fx-scan {
-  animation-name: fx-scan;
-  animation-delay: var(--slot);
+  animation-fill-mode: both;
   transform-box: view-box;
 }
 
-.figs.is-live .fx-rise {
-  animation-name: fx-rise;
+.figs.is-live:not(.is-away) .art [class*="lp-"] {
+  animation-play-state: running;
 }
 
-.figs.is-live .fx-guide {
-  animation-name: fx-guide;
+/* The pointer drags the dashed frame open from its first corner to the opposite one. */
+.figs.is-live .lp-cursor {
+  animation-name: lp-cursor;
 }
 
-.figs.is-live .fx-hole {
-  animation-name: fx-hole;
+.figs.is-live .lp-grow {
+  animation-name: lp-grow;
 }
 
-.figs.is-live .fx-write {
-  animation-name: fx-write;
+.figs.is-live .lp-ants {
+  animation: lp-ants 1.4s linear infinite;
+  animation-play-state: inherit;
 }
 
-.figs.is-live .art-set .fx-mark {
-  animation-name: fx-mark;
-  animation-delay: calc(var(--slot) + 700ms);
+/* Then the corner marks snap onto it and the lines inside light up. */
+.figs.is-live .lp-snap {
+  animation-name: lp-snap;
 }
 
-.figs.is-live .art-apps .fx-new {
-  animation-name: fx-write;
-  animation-delay: calc(var(--slot) + 900ms + var(--i, 0) * 110ms);
+.figs.is-live .lp-snap.is-late {
+  animation-name: lp-snap-late;
 }
 
-/* The scan line is hidden except while it sweeps. */
-.art .fx-scan {
+.figs.is-live .lp-lit {
+  animation-name: lp-lit;
+  animation-delay: calc(var(--at) + var(--i, 0) * 90ms);
+}
+
+/* Recognize: a scan line sweeps down and each line is boxed as it passes. */
+.figs.is-live .lp-scan {
+  animation-name: lp-scan;
+}
+
+.figs.is-live .lp-trace {
+  animation-name: lp-trace;
+  animation-delay: calc(var(--at) + var(--i, 0) * 260ms);
+}
+
+/* Lift: the letters sink onto the page and rise off it again. */
+.figs.is-live .lp-rise {
+  animation-name: lp-rise;
+  animation-delay: calc(var(--at) + var(--i, 0) * 140ms);
+}
+
+.figs.is-live .lp-hole {
+  animation-name: lp-hole;
+  animation-delay: calc(var(--at) + var(--i, 0) * 140ms);
+}
+
+/* Set: the translations are written into the outlines one by one. */
+.figs.is-live .lp-write {
+  animation-name: lp-write;
+  animation-delay: calc(var(--at) + var(--i, 0) * 240ms);
+}
+
+/* Any app: inside the frame, both apps' lines turn into the translation one after another. */
+.figs.is-live .lp-new {
+  animation-name: lp-write-late;
+  animation-delay: calc(var(--at) + var(--i, 0) * 110ms);
+}
+
+.figs.is-live .lp-old {
+  animation-name: lp-old;
+  animation-delay: calc(var(--at) + var(--i, 0) * 110ms);
+}
+
+/* The pointer and the scan line only show while they move; the replaced lines only before
+   their translation arrives. */
+.art .lp-cursor,
+.art .lp-scan,
+.art .lp-old {
   opacity: 0;
+}
+
+.art .lp-scan {
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 3px rgba(10, 132, 255, 0.9));
 }
 
 /* A window in the apps figure is filled with the page colour, so the one in front hides the
@@ -2301,63 +2311,87 @@ code {
   fill: var(--bg);
 }
 
-@keyframes fx-frame {
-  0%, 30%, 100% { transform: none; opacity: 1; }
-  6% { transform: scale(1.08); opacity: 0.2; }
-  14% { transform: scale(0.985); opacity: 1; }
+@keyframes lp-cursor {
+  0%, 4% { opacity: 0; transform: none; }
+  8% { opacity: 1; transform: none; }
+  30% { opacity: 1; transform: translate(var(--dx), var(--dy)); }
+  36% { opacity: 1; transform: translate(var(--dx), var(--dy)) scale(0.85); }
+  42% { opacity: 1; transform: translate(var(--dx), var(--dy)); }
+  50%, 100% { opacity: 0; transform: translate(var(--dx), var(--dy)); }
 }
 
-@keyframes fx-ants {
+@keyframes lp-grow {
+  0%, 4% { opacity: 0; transform: scale(0.02); }
+  8% { opacity: 1; transform: scale(0.02); }
+  30%, 84% { opacity: 1; transform: none; }
+  96%, 100% { opacity: 0; transform: none; }
+}
+
+@keyframes lp-ants {
   to { stroke-dashoffset: -10; }
 }
 
-@keyframes fx-lit {
-  0%, 26%, 100% { color: #5a5e66; }
-  10%, 18% { color: var(--fg); }
+@keyframes lp-snap {
+  0%, 30% { opacity: 0; transform: scale(1.14); }
+  38% { opacity: 1; transform: scale(0.97); }
+  44%, 84% { opacity: 1; transform: none; }
+  96%, 100% { opacity: 0; transform: none; }
 }
 
-@keyframes fx-read {
-  0%, 32%, 100% { opacity: 1; }
-  12% { opacity: 0.35; }
+@keyframes lp-snap-late {
+  0%, 66% { opacity: 0; transform: scale(1.14); }
+  74% { opacity: 1; transform: scale(0.97); }
+  80%, 100% { opacity: 1; transform: none; }
 }
 
-@keyframes fx-trace {
-  0%, 4% { stroke-dashoffset: 1; }
-  20%, 100% { stroke-dashoffset: 0; }
+@keyframes lp-lit {
+  0%, 36% { color: #5a5e66; }
+  44%, 84% { color: var(--fg); }
+  96%, 100% { color: #5a5e66; }
 }
 
-@keyframes fx-scan {
-  0% { opacity: 0; transform: none; }
-  4% { opacity: 0.9; }
-  22% { opacity: 0.9; transform: translate(-47.8px, 27.6px); }
-  26%, 100% { opacity: 0; transform: translate(-47.8px, 27.6px); }
+@keyframes lp-scan {
+  0%, 4% { opacity: 0; transform: none; }
+  8% { opacity: 1; transform: none; }
+  50% { opacity: 1; transform: translate(var(--dx), var(--dy)); }
+  56%, 100% { opacity: 0; transform: translate(var(--dx), var(--dy)); }
 }
 
-@keyframes fx-rise {
-  0%, 30%, 100% { transform: none; opacity: 1; }
-  4% { transform: translateY(26px); opacity: 0; }
-  20% { transform: translateY(-2px); opacity: 1; }
+@keyframes lp-trace {
+  0%, 16% { stroke-dashoffset: 1; }
+  30%, 100% { stroke-dashoffset: 0; }
 }
 
-@keyframes fx-guide {
-  0%, 4% { opacity: 0; }
-  14%, 100% { opacity: 0.7; }
+@keyframes lp-rise {
+  0%, 6% { opacity: 1; transform: none; }
+  20% { opacity: 0; transform: translateY(var(--dy)); }
+  32% { opacity: 0; transform: translateY(var(--dy)); }
+  34% { opacity: 1; transform: translateY(var(--dy)); }
+  58%, 100% { opacity: 1; transform: none; }
 }
 
-@keyframes fx-hole {
-  0% { stroke-dashoffset: 0; }
-  30%, 100% { stroke-dashoffset: -10; }
+@keyframes lp-hole {
+  0%, 20% { opacity: 0; }
+  34%, 100% { opacity: 0.7; }
 }
 
-@keyframes fx-write {
-  0%, 4% { stroke-dashoffset: 1; }
-  22%, 100% { stroke-dashoffset: 0; }
+@keyframes lp-write {
+  0%, 8% { stroke-dashoffset: 0; opacity: 1; }
+  16% { stroke-dashoffset: 0; opacity: 0; }
+  18% { stroke-dashoffset: 1; opacity: 1; }
+  38%, 100% { stroke-dashoffset: 0; opacity: 1; }
 }
 
-@keyframes fx-mark {
-  0%, 22%, 100% { transform: none; opacity: 1; }
-  4% { transform: scale(1.06); opacity: 0.3; }
-  12% { transform: scale(0.99); opacity: 1; }
+@keyframes lp-write-late {
+  0%, 44% { stroke-dashoffset: 1; opacity: 1; }
+  58%, 86% { stroke-dashoffset: 0; opacity: 1; }
+  96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes lp-old {
+  0%, 44% { opacity: 1; }
+  52%, 86% { opacity: 0; }
+  96%, 100% { opacity: 1; }
 }
 
 /* Any app */
@@ -2746,9 +2780,8 @@ code {
     transform: none;
   }
 
-  .figs .art [class*="fx-"],
-  .figs .fx-frame,
-  .figs .fx-mark {
+  .figs .art [class*="lp-"],
+  .matrix .dot {
     animation: none !important;
   }
 }

@@ -46,228 +46,218 @@ months = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August"
 
 [hero]
 title = "Übersetze deinen Bildschirm, <span class=\"nb\">an Ort und Stelle.</span>"
-lead = "Drück in jeder App F1 und wähle aus, was du nicht lesen kannst. Transeen zeichnet es in deiner Sprache neu, im selben Bild, in derselben Größe und derselben Farbe."
+lead = "Drück in jeder App F1 und wähle aus, was du nicht lesen kannst. Die Übersetzung nimmt Platz, Größe und Farbe des Originals ein."
 meta = ["v{version}", "macOS 26+", "Apple-Chip und Intel", "Von Apple beglaubigt"]
 
 [demo]
 role = "Vorführung"
-label = "Vorführung: Auf einer japanischen Zugbuchungsseite wird F1 gedrückt und die Buchungskarte ausgewählt. Ihre Zeilen werden erkannt und an denselben Stellen auf Deutsch neu gezeichnet. Halte die Leertaste gedrückt, während die Vorführung den Fokus hat, um das Original zu sehen."
+label = "Vorführung: Auf einer japanischen Zugbuchungsseite wird F1 gedrückt und die Buchungskarte ausgewählt. Ihre Zeilen werden erkannt und an denselben Stellen in einer anderen Sprache neu gezeichnet, eine Sprache nach der anderen. Halte die Leertaste gedrückt, während die Vorführung den Fokus hat, um das Original zu sehen."
 chips = "Vorführung übersetzen ins"
-hint = "Halte die Aufnahme gedrückt, um das Original zu sehen"
+hint = "Gedrückt halten für das Original"
 replay = "Wiederholen"
 
 [how]
 fig = "So funktioniert’s"
-lede = "<b>Eine Taste, vier Schritte.</b> Transeen liest die Pixel, die du auswählst, und setzt deine Sprache zurück hinein, ohne dass etwas den Mac verlässt."
+lede = "<b>Eine Taste, vier Schritte.</b> Alles auf deinem Mac."
 
 [[how.cells]]
 label = "Auswählen"
-title = "Rahm ein, was du nicht lesen kannst"
-text = "Der Bildschirm hält still. Fahr über einen Absatz, ein Feld oder ein Fenster, um daran einzurasten, oder zieh einen eigenen Rahmen."
+title = "Einrahmen"
+text = "Der Bildschirm hält still. Rasten oder selbst einen Rahmen ziehen."
 
 [[how.cells]]
 label = "Erkennen"
-title = "Jede Zeile wird auf deinem Mac gelesen"
-text = "Apples Vision-Framework findet jede Zeile und ihren Stil. Dafür wird nichts hochgeladen."
+title = "Auf dem Mac gelesen"
+text = "Apple Vision findet jede Zeile. Nichts wird hochgeladen."
 
 [[how.cells]]
 label = "Abheben"
-title = "Nur die Schrift geht ab"
-text = "Die Buchstaben werden herausgelöst und der Hintergrund darunter wiederhergestellt, Verlauf oder Struktur inklusive."
+title = "Die Schrift geht ab"
+text = "Die Buchstaben gehen ab, der Hintergrund wird ergänzt."
 
 [[how.cells]]
 label = "Setzen"
-title = "Deine kommen, wo sie waren"
-text = "Gleiche Position, Größe und Farbe. Eine Zeile wird nur schmaler gesetzt oder umbrochen, wenn die Übersetzung nicht passt."
+title = "Zurück an ihren Platz"
+text = "Gleicher Ort, gleiche Größe und Farbe, in deiner Sprache."
 
 [apps]
 fig = "Jede App"
-lede = "<b>In jeder App, auch über Apps hinweg.</b> Transeen liest die Pixel auf deinem Bildschirm und funktioniert deshalb überall, wo Text erscheint, ohne dass du in der App etwas installierst."
-caption = "Ein Rahmen über die Fenster zweier Apps, als ein Bild übersetzt"
+lede = "<b>In jeder App, auch über Apps hinweg.</b> Transeen liest die Pixel, in der App ist nichts zu installieren."
+caption = "Ein Rahmen über zwei Apps"
 
 [[apps.items]]
-title = "Keine Plug-ins, keine Integrationen"
-text = "Browser, Chats, PDFs, Spiele, Design-Tools, Remote-Desktops: Was auf dem Bildschirm steht, lässt sich übersetzen. Auch Text, den du nicht markieren kannst."
+title = "Ohne Plug-ins"
+text = "Browser, Chats, PDFs, Spiele, Remote-Desktops. Auch Text, den du nicht markieren kannst."
 
 [[apps.items]]
-title = "Ein Rahmen über mehrere Apps"
-text = "Ein Rahmen kann Fenster verschiedener Apps zugleich umfassen. Jede Zeile darin wird in derselben Aufnahme übersetzt."
+title = "Ein Rahmen, mehrere Apps"
+text = "Fenster verschiedener Apps in einer Aufnahme."
 
 [[apps.items]]
-title = "Im Vollbild und auf jedem Space"
-text = "F1 funktioniert in einer App im Vollbild und auf jedem Schreibtisch. Ein offenes Menü, Popover oder Tooltip bleibt im Bild, und die App behält den Fokus."
+title = "Auch im Vollbild"
+text = "Offene Menüs und Tooltips bleiben im Bild."
 
 [[apps.items]]
-title = "Rastet an dem ein, was da ist"
-text = "Halt den Zeiger an, und der Rahmen findet den Absatz, das Feld oder das Fenster darunter, egal zu welcher App es gehört."
-
-[[apps.items]]
-title = "Angeheftetes schwebt über allen Apps"
-text = "Eine angeheftete Übersetzung bleibt über der App, zu der du wechselst. So liest du sie direkt neben der App, in der du arbeitest."
+title = "Angeheftetes bleibt vorn"
+text = "Die Übersetzung bleibt neben der App, in der du arbeitest."
 
 [keys]
 fig = "Tastatur"
-lede = "<b>Für die Tastatur gemacht.</b> Das Original ist immer nur eine Taste entfernt, genau wie die Stelle, die du zuletzt angesehen hast."
+lede = "<b>Für die Tastatur gemacht.</b> Das Original ist immer eine Taste entfernt."
 space = "Leertaste"
 
 [[keys.items]]
 keys = ["F1"]
-title = "Auswählen und übersetzen"
-text = "Aus jeder App. Auf einer Laptop-Tastatur fn F1."
+title = "Übersetzen"
+text = "Aus jeder App."
 
 [[keys.items]]
 keys = ["R"]
 title = "Derselbe Bereich"
-text = "Beim Auswählen den Bereich der letzten Aufnahme erneut nehmen, auch nach einem Neustart."
+text = "Letzten Rahmen erneut."
 
 [[keys.items]]
 keys = ["Tab"]
-title = "Original oder Übersetzung"
-text = "Die ganze Aufnahme hin- und herschalten."
+title = "Umschalten"
+text = "Original oder Übersetzung."
 
 [[keys.items]]
 keys = ["{space}"]
-title = "Kurz nachsehen"
-text = "Gedrückt halten für das Original, loslassen für deine Sprache."
+title = "Nachsehen"
+text = "Halten für das Original."
 
 [[keys.items]]
 keys = ["F1", "F1"]
-title = "Sprachen tauschen"
-text = "Bei einer offenen Aufnahme erneut drücken, um in die andere Richtung zu übersetzen."
+title = "Tauschen"
+text = "In die andere Richtung."
 
 [tools]
 fig = "Die Aufnahme"
-lede = "<b>Eine Aufnahme, mit der du arbeiten kannst.</b> Sie bleibt, wo du sie ausgewählt hast, mit den Werkzeugen darunter."
+lede = "<b>Eine Aufnahme zum Weiterarbeiten.</b> Die Werkzeuge direkt darunter."
 
 [[tools.items]]
 title = "Markieren"
-text = "Rechtecke, Ellipsen, Pfeile, Stift und Nummern in sechs Farben. Markierungen liegen auf einer eigenen Ebene, beim Sprachwechsel verrutschen sie nie."
+text = "Rahmen, Pfeile, Stift und Nummern, auf eigener Ebene."
 
 [[tools.items]]
-title = "Zeile verpasst? Zieh am Rand"
-text = "Zieh einen Rand oder eine Ecke. Transeen schneidet aus demselben eingefrorenen Bildschirm neu zu und übersetzt erneut, wenn du loslässt."
+title = "Am Rand ziehen"
+text = "Zeile vergessen? Rand ziehen, und es wird neu übersetzt."
 
 [[tools.items]]
-title = "Anheften und weiter aufnehmen"
-text = "Ein angeheftetes Bild schwebt als eigenes Bild auf dem Bildschirm. Behalte so viele, wie du brauchst; per Rechtsklick kopieren, sichern oder umschalten."
+title = "Anheften"
+text = "Auf dem Bildschirm lassen und weiter aufnehmen."
 
 [[tools.items]]
-title = "Kopiere, was du siehst"
-text = "<kbd>⌘C</kbd> kopiert das Bild mit deinen Markierungen, auch während die Übersetzung noch eintrifft. <kbd>⌘S</kbd> sichert ein PNG."
+title = "Kopieren"
+text = "<kbd>⌘C</kbd> kopiert, was du siehst, mit Markierungen."
 
 [[tools.items]]
 title = "Als Text lesen"
-text = "Öffne die ganze Übersetzung neben dem Original als Liste zum Markieren und Kopieren."
+text = "Die ganze Übersetzung, bereit zum Kopieren."
 
 [[tools.items]]
-title = "Ein Bild öffnen"
-text = "Auch ein Screenshot, den dir jemand geschickt hat, funktioniert. Drück <kbd>⌘O</kbd>, und er öffnet sich mit denselben Werkzeugen."
+title = "Bild öffnen"
+text = "<kbd>⌘O</kbd> für Screenshots, die du schon hast."
 
 [services]
 fig = "Übersetzung"
-lede = "<b>Drei Wege zu übersetzen.</b> Wähl einen in den Einstellungen und wechsle jederzeit. Die Texterkennung passiert immer auf deinem Mac."
-privacy = "<b>Der Screenshot verlässt nie deinen Mac.</b> Transeen speichert keinen Verlauf und nimmt nie dauerhaft auf. Mit der Apple-Übersetzung oder einem lokalen Modell bleibt auch der Text auf dem Mac."
+lede = "<b>Drei Wege zu übersetzen.</b> Die Erkennung bleibt immer auf deinem Mac."
+privacy = "<b>Der Screenshot verlässt nie deinen Mac.</b> Kein Verlauf, keine Daueraufnahme."
 
 [[services.items]]
 title = "Apple-Übersetzung"
 tag = "Standard"
-text = "Die in macOS eingebaute Übersetzung. Lade einmal das Sprachpaket, dann funktioniert sie offline."
-facts = [["Läuft", "Auf diesem Mac"], ["Download", "Pro Sprachpaket"], ["Tempo", "In Gruppen zu 8 Zeilen"]]
+text = "In macOS eingebaut. Offline, sobald das Sprachpaket da ist."
 
 [[services.items]]
-title = "Lokales Übersetzungsmodell"
+title = "Lokales Modell"
 tag = "Apple-Chip"
-text = "Index-Translate 2B oder Hy-MT2 1.8B, von Transeen selbst ausgeführt. Besser bei Entwicklertexten und Oberflächenbeschriftungen."
-facts = [["Läuft", "Auf diesem Mac"], ["Download", "Etwa 1,1 GB, geprüft"], ["Speicher", "Nach 5 Minuten Leerlauf frei"]]
+text = "Index-Translate oder Hy-MT2, von Transeen selbst ausgeführt."
 
 [[services.items]]
 title = "LLM-API"
 tag = "Dein Endpunkt"
-text = "Jeder OpenAI-kompatible chat/completions-Endpunkt, entfernt über HTTPS oder ein Server auf localhost."
-facts = [["Sendet", "Nur erkannten Text"], ["Schlüssel", "Im Schlüsselbund"], ["Antworten", "Erscheinen beim Eintreffen"]]
+text = "Jede OpenAI-kompatible API. Gesendet wird nur der Text."
 
 [langs]
 fig = "Sprachen"
-lede = "<b>Acht Sprachen, in jede Richtung.</b> Von jeder in jede andere, die Ausgangssprache wird für dich erkannt."
-body = "Auch die App spricht deine Sprache: Jedes Fenster, Menü und jede Meldung folgt der Sprache, die du wählst. Eine Seite, die schon in deiner Sprache ist, wird in deine zweite Sprache übersetzt."
-caption = "8 Sprachen × 7 Ziele = 56 Richtungen"
+lede = "<b>Acht Sprachen, in jede Richtung.</b> Die Ausgangssprache wird erkannt."
+body = "Auch die App spricht alle acht."
+caption = "8 × 7 = 56 Richtungen"
 
 [changes]
 fig = "Neuigkeiten"
-lede = "<b>Zuletzt veröffentlicht.</b> Kleine Versionen, oft. Die vollständige Liste steht auf GitHub."
+lede = "<b>Zuletzt veröffentlicht.</b>"
 full = "Vollständiges Änderungsprotokoll"
 
 [changes.notes]
 "0.11.2" = [
-  "<b>Bilder bleiben Bilder.</b> Eine Reihe Vorschaubilder neben dem Text wird nicht mehr als Wörter gelesen und mit einer Übersetzung überdeckt. Eine unsichere Zeile wird vergrößert erneut gelesen und nur behalten, wenn sie gleich gelesen wird.",
-  "<b>Chinesisch im Englischen bleibt.</b> Ein chinesisches Wort in einem englischen Satz bleibt chinesisch, statt zu lateinischen Buchstaben zu werden.",
-  "<b>Zeichenwerkzeuge zeichnen immer.</b> Ein Pfeil, der auf einer Nummer oder einem Rahmen beginnt, greift diese Markierung nicht mehr. Die Aufnahme bleibt, wo sie entstand; nur ein angeheftetes Bild folgt der Maus.",
+  "<b>Bilder bleiben Bilder.</b> Vorschaubilder neben dem Text werden nicht mehr übersetzt.",
+  "<b>Zeichenwerkzeuge zeichnen immer,</b> und die Aufnahme bleibt, wo du sie gemacht hast.",
 ]
 "0.11.1" = [
-  "<b>Jeder Satz wird übersetzt.</b> Ein langer Absatz, bei dem ein lokales Modell zu langsam war, wird allein erneut gesendet, statt im Original zu bleiben.",
-  "<b>Zuerst friert der Bildschirm ein.</b> F1 behält das offene Menü, Popover oder den Tooltip einer anderen App im Bild, und diese App behält den Fokus.",
-  "<b>Saubereres Entfernen.</b> Buchstaben wie g und y hinterlassen keine Spuren mehr, und ein schwebender Pfeil wird nicht mehr zu wirren Zeichen.",
+  "<b>Jeder Satz wird übersetzt,</b> auch wenn ein lokales Modell langsam war.",
+  "<b>Zuerst friert der Bildschirm ein:</b> offene Menüs bleiben im Bild.",
 ]
 
 [activation]
 fig = "Aktivierung"
-lede = "<b>Ein Code, ein Mac, für immer.</b> Kein Abo und kein Konto nötig."
+lede = "<b>Ein Code, ein Mac, für immer.</b> Kein Abo, kein Konto."
 code_label = "Format des Aktivierungscodes: TR, gefolgt von sechs Gruppen aus je vier Zeichen"
 license = "Dauerlizenz"
 where = "Gib ihn in der Menüleiste unter Aktivierung &amp; Konto… ein."
 ask = "Nach einem Code fragen"
 how = "So aktivierst du"
 items = [
-  "<b>Schaltet Aufnahme, Markierung und Übersetzung frei,</b> für einen Mac.",
-  "<b>Aktivieren ohne Anmeldung.</b> Im Schlüsselbund liegt nur eine zufällige Installations-ID; die Seriennummer wird nie gelesen.",
-  "<b>Optional mit einem iTool-Konto verknüpfen,</b> um sie nach einer Neuinstallation wiederherzustellen.",
-  "<b>Open Source unter MIT.</b> Bau es selbst; unabhängige Builds bringen ihren eigenen Aktivierungsdienst mit.",
-  "SM-Codes von StupidMirror und IT-Codes von iTool Pro gehören zu anderen Produkten und funktionieren hier nicht.",
+  "<b>Schaltet alles frei,</b> für einen Mac.",
+  "<b>Ohne Anmeldung.</b> Die Seriennummer wird nie gelesen.",
+  "<b>Open Source</b> unter der MIT-Lizenz.",
+  "SM- und IT-Codes gehören zu anderen Produkten.",
 ]
 
 [faq]
 fig = "Fragen"
-lede = "<b>Fragen.</b> Alles Weitere fragst du am besten in GitHub Discussions."
+lede = "<b>Fragen.</b>"
 
 [[faq.items]]
 q = "Mit welchen Apps funktioniert es?"
-a = "Mit jeder App, die Text auf dem Bildschirm zeigt: Browser, Chat und Mail, PDF-Reader, Spiele, Design- und Video-Tools, Remote-Desktops und virtuelle Maschinen. Transeen übersetzt die Pixel, die du auswählst; es braucht also weder ein Plug-in noch Unterstützung durch die App, und ein Rahmen kann Fenster mehrerer Apps umfassen. Video, das eine App vor Bildschirmaufnahmen schützt, erscheint schwarz, wie in jedem Screenshot."
+a = "Mit jeder App, die Text auf dem Bildschirm zeigt. Transeen übersetzt die ausgewählten Pixel, braucht also kein Plug-in, und ein Rahmen kann mehrere Apps umfassen. Video, das vor Bildschirmaufnahmen geschützt ist, erscheint schwarz, wie in jedem Screenshot."
 
 [[faq.items]]
-q = "Auf welchen Macs läuft Transeen?"
-a = "macOS 26 oder neuer, auf Apple-Chip oder Intel: Es ist eine einzige universelle App. Die lokalen Übersetzungsmodelle brauchen einen Apple-Chip. Die Oberfläche folgt deiner Sprache: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español oder Deutsch."
+q = "Auf welchen Macs läuft es?"
+a = "macOS 26 oder neuer, auf Apple-Chip oder Intel. Die lokalen Modelle brauchen einen Apple-Chip."
 
 [[faq.items]]
 q = "Funktioniert es offline?"
-a = "Ja, sobald es aktiviert ist. Aufnahme, Markierung, Apple-Übersetzung und die lokalen Modelle laufen offline, wenn ihre Sprachpakete oder das Modell geladen sind. Eine Aktivierung bleibt auch ohne Netz gültig und wird etwa einmal am Tag erneut geprüft. Eine LLM-API braucht eine Verbindung zu deinem Endpunkt."
+a = "Ja, sobald es aktiviert ist und das Sprachpaket oder Modell geladen ist. Nur eine LLM-API braucht eine Verbindung."
 
 [[faq.items]]
 q = "Was verlässt meinen Mac?"
-a = "Mit der Apple-Übersetzung oder einem lokalen Modell nichts: Screenshot, erkannter Text und Übersetzung bleiben auf diesem Mac. Mit einer LLM-API geht nur der erkannte Text an den Endpunkt, den du festlegst, nie der Screenshot. Die Aktivierung sendet deinen Code und eine zufällige Installations-ID, und die Suche nach Updates fragt bei GitHub an."
+a = "Mit der Apple-Übersetzung oder einem lokalen Modell nichts. Mit einer LLM-API geht nur der erkannte Text an deinen Endpunkt, nie der Screenshot."
 
 [[faq.items]]
 q = "Kann ich ein anderes Modell nutzen?"
-a = "Ja. Lade unter Einstellungen → Allgemein → Übersetzung Index-Translate 2B oder Hy-MT2 1.8B (je etwa 1,1 GB), die in Transeen laufen, oder gib einen OpenAI-kompatiblen chat/completions-Endpunkt, einen Modellnamen und bei Bedarf einen Schlüssel ein, der in deinem Schlüsselbund liegt. Entfernte Endpunkte müssen HTTPS nutzen; ein Server auf localhost darf HTTP ohne Schlüssel verwenden."
+a = "Ja: Lade Index-Translate 2B oder Hy-MT2 1.8B in den Einstellungen oder gib eine OpenAI-kompatible API ein. Schlüssel bleiben im Schlüsselbund."
 
 [[faq.items]]
-q = "Kann es ein Bild übersetzen, das ich schon habe?"
-a = "Ja. Wähl im Starter „Bild öffnen…“ oder drück <kbd>⌘O</kbd>; das Bild öffnet sich im selben Fenster mit denselben Werkzeugen."
+q = "Kann es ein vorhandenes Bild übersetzen?"
+a = "Ja. Drück <kbd>⌘O</kbd>, und es öffnet sich mit denselben Werkzeugen."
 
 [[faq.items]]
 q = "Wie genau ist es?"
-a = "Das hängt vom Übersetzungsdienst ab. Dichte Layouts, Formeln und Fachbegriffe müssen manchmal korrigiert werden. Vergleich deshalb mit <kbd>Tab</kbd> das Original oder öffne den ganzen Text, bevor du dich auf ein Detail verlässt."
+a = "Das hängt vom Übersetzungsdienst ab. Prüf mit <kbd>Tab</kbd> das Original, bevor du dich auf ein Detail verlässt."
 
 [[faq.items]]
 q = "Ist Transeen Open Source?"
-a = "Ja, unter der <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">MIT-Lizenz</a>, auch für kommerzielle Nutzung. Die offizielle App braucht einen TR-Code; die Lizenz des Quellcodes umfasst nicht den gehosteten Aktivierungsdienst, unabhängige Builds bringen deshalb ihren eigenen mit."
+a = "Ja, unter der <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">MIT-Lizenz</a>. Die offizielle App braucht einen TR-Code."
 
 [[faq.items]]
 q = "Wie aktualisiere ich?"
-a = "Wähl in der Menüleiste oder im Starter „Nach Updates suchen…“. Transeen prüft GitHub Releases und öffnet den Download, wenn es eine neuere Version gibt."
+a = "Wähl in der Menüleiste „Nach Updates suchen…“."
 
 [closing]
 title = "Lies es <span>dort, wo es steht.</span>"
-lead = "Lade Transeen, drück F1 und wähle das Erste, was du nicht lesen konntest."
+lead = "Drück F1 und wähle das Erste, was du nicht lesen konntest."
 source = "Quellcode ansehen"
 meta = ["Universelle App", "{size} MB", "Signiert und beglaubigt"]
 

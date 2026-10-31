@@ -16,67 +16,67 @@
   <text x="296" y="22" text-anchor="middle">DE</text>
   <text x="32" y="281.5" text-anchor="middle">DE</text>
   <circle class="self" cx="58" cy="40" r="3.5" />
-  <circle class="dot" cx="92" cy="40" r="3.5" style="--d:1" />
-  <circle class="dot" cx="126" cy="40" r="3.5" style="--d:2" />
-  <circle class="dot" cx="160" cy="40" r="3.5" style="--d:3" />
-  <circle class="dot" cx="194" cy="40" r="3.5" style="--d:4" />
-  <circle class="dot" cx="228" cy="40" r="3.5" style="--d:5" />
-  <circle class="dot" cx="262" cy="40" r="3.5" style="--d:6" />
-  <circle class="dot" cx="296" cy="40" r="3.5" style="--d:7" />
-  <circle class="dot" cx="58" cy="74" r="3.5" style="--d:1" />
+  <circle class="dot" cx="92" cy="40" r="3.5" style="--r:0; --d:1" />
+  <circle class="dot" cx="126" cy="40" r="3.5" style="--r:0; --d:2" />
+  <circle class="dot" cx="160" cy="40" r="3.5" style="--r:0; --d:3" />
+  <circle class="dot" cx="194" cy="40" r="3.5" style="--r:0; --d:4" />
+  <circle class="dot" cx="228" cy="40" r="3.5" style="--r:0; --d:5" />
+  <circle class="dot" cx="262" cy="40" r="3.5" style="--r:0; --d:6" />
+  <circle class="dot" cx="296" cy="40" r="3.5" style="--r:0; --d:7" />
+  <circle class="dot" cx="58" cy="74" r="3.5" style="--r:1; --d:1" />
   <circle class="self" cx="92" cy="74" r="3.5" />
-  <circle class="dot" cx="126" cy="74" r="3.5" style="--d:3" />
-  <circle class="dot" cx="160" cy="74" r="3.5" style="--d:4" />
-  <circle class="dot" cx="194" cy="74" r="3.5" style="--d:5" />
-  <circle class="dot" cx="228" cy="74" r="3.5" style="--d:6" />
-  <circle class="dot" cx="262" cy="74" r="3.5" style="--d:7" />
-  <circle class="dot" cx="296" cy="74" r="3.5" style="--d:8" />
-  <circle class="dot" cx="58" cy="108" r="3.5" style="--d:2" />
-  <circle class="dot" cx="92" cy="108" r="3.5" style="--d:3" />
+  <circle class="dot" cx="126" cy="74" r="3.5" style="--r:1; --d:3" />
+  <circle class="dot" cx="160" cy="74" r="3.5" style="--r:1; --d:4" />
+  <circle class="dot" cx="194" cy="74" r="3.5" style="--r:1; --d:5" />
+  <circle class="dot" cx="228" cy="74" r="3.5" style="--r:1; --d:6" />
+  <circle class="dot" cx="262" cy="74" r="3.5" style="--r:1; --d:7" />
+  <circle class="dot" cx="296" cy="74" r="3.5" style="--r:1; --d:8" />
+  <circle class="dot" cx="58" cy="108" r="3.5" style="--r:2; --d:2" />
+  <circle class="dot" cx="92" cy="108" r="3.5" style="--r:2; --d:3" />
   <circle class="self" cx="126" cy="108" r="3.5" />
-  <circle class="dot" cx="160" cy="108" r="3.5" style="--d:5" />
-  <circle class="dot" cx="194" cy="108" r="3.5" style="--d:6" />
-  <circle class="dot" cx="228" cy="108" r="3.5" style="--d:7" />
-  <circle class="dot" cx="262" cy="108" r="3.5" style="--d:8" />
-  <circle class="dot" cx="296" cy="108" r="3.5" style="--d:9" />
-  <circle class="dot" cx="58" cy="142" r="3.5" style="--d:3" />
-  <circle class="dot" cx="92" cy="142" r="3.5" style="--d:4" />
-  <circle class="dot" cx="126" cy="142" r="3.5" style="--d:5" />
+  <circle class="dot" cx="160" cy="108" r="3.5" style="--r:2; --d:5" />
+  <circle class="dot" cx="194" cy="108" r="3.5" style="--r:2; --d:6" />
+  <circle class="dot" cx="228" cy="108" r="3.5" style="--r:2; --d:7" />
+  <circle class="dot" cx="262" cy="108" r="3.5" style="--r:2; --d:8" />
+  <circle class="dot" cx="296" cy="108" r="3.5" style="--r:2; --d:9" />
+  <circle class="dot" cx="58" cy="142" r="3.5" style="--r:3; --d:3" />
+  <circle class="dot" cx="92" cy="142" r="3.5" style="--r:3; --d:4" />
+  <circle class="dot" cx="126" cy="142" r="3.5" style="--r:3; --d:5" />
   <circle class="self" cx="160" cy="142" r="3.5" />
-  <circle class="dot" cx="194" cy="142" r="3.5" style="--d:7" />
-  <circle class="dot" cx="228" cy="142" r="3.5" style="--d:8" />
-  <circle class="dot" cx="262" cy="142" r="3.5" style="--d:9" />
-  <circle class="dot" cx="296" cy="142" r="3.5" style="--d:10" />
-  <circle class="dot" cx="58" cy="176" r="3.5" style="--d:4" />
-  <circle class="dot" cx="92" cy="176" r="3.5" style="--d:5" />
-  <circle class="dot" cx="126" cy="176" r="3.5" style="--d:6" />
-  <circle class="dot" cx="160" cy="176" r="3.5" style="--d:7" />
+  <circle class="dot" cx="194" cy="142" r="3.5" style="--r:3; --d:7" />
+  <circle class="dot" cx="228" cy="142" r="3.5" style="--r:3; --d:8" />
+  <circle class="dot" cx="262" cy="142" r="3.5" style="--r:3; --d:9" />
+  <circle class="dot" cx="296" cy="142" r="3.5" style="--r:3; --d:10" />
+  <circle class="dot" cx="58" cy="176" r="3.5" style="--r:4; --d:4" />
+  <circle class="dot" cx="92" cy="176" r="3.5" style="--r:4; --d:5" />
+  <circle class="dot" cx="126" cy="176" r="3.5" style="--r:4; --d:6" />
+  <circle class="dot" cx="160" cy="176" r="3.5" style="--r:4; --d:7" />
   <circle class="self" cx="194" cy="176" r="3.5" />
-  <circle class="dot" cx="228" cy="176" r="3.5" style="--d:9" />
-  <circle class="dot" cx="262" cy="176" r="3.5" style="--d:10" />
-  <circle class="dot" cx="296" cy="176" r="3.5" style="--d:11" />
-  <circle class="dot" cx="58" cy="210" r="3.5" style="--d:5" />
-  <circle class="dot" cx="92" cy="210" r="3.5" style="--d:6" />
-  <circle class="dot" cx="126" cy="210" r="3.5" style="--d:7" />
-  <circle class="dot" cx="160" cy="210" r="3.5" style="--d:8" />
-  <circle class="dot" cx="194" cy="210" r="3.5" style="--d:9" />
+  <circle class="dot" cx="228" cy="176" r="3.5" style="--r:4; --d:9" />
+  <circle class="dot" cx="262" cy="176" r="3.5" style="--r:4; --d:10" />
+  <circle class="dot" cx="296" cy="176" r="3.5" style="--r:4; --d:11" />
+  <circle class="dot" cx="58" cy="210" r="3.5" style="--r:5; --d:5" />
+  <circle class="dot" cx="92" cy="210" r="3.5" style="--r:5; --d:6" />
+  <circle class="dot" cx="126" cy="210" r="3.5" style="--r:5; --d:7" />
+  <circle class="dot" cx="160" cy="210" r="3.5" style="--r:5; --d:8" />
+  <circle class="dot" cx="194" cy="210" r="3.5" style="--r:5; --d:9" />
   <circle class="self" cx="228" cy="210" r="3.5" />
-  <circle class="dot" cx="262" cy="210" r="3.5" style="--d:11" />
-  <circle class="dot" cx="296" cy="210" r="3.5" style="--d:12" />
-  <circle class="dot" cx="58" cy="244" r="3.5" style="--d:6" />
-  <circle class="dot" cx="92" cy="244" r="3.5" style="--d:7" />
-  <circle class="dot" cx="126" cy="244" r="3.5" style="--d:8" />
-  <circle class="dot" cx="160" cy="244" r="3.5" style="--d:9" />
-  <circle class="dot" cx="194" cy="244" r="3.5" style="--d:10" />
-  <circle class="dot" cx="228" cy="244" r="3.5" style="--d:11" />
+  <circle class="dot" cx="262" cy="210" r="3.5" style="--r:5; --d:11" />
+  <circle class="dot" cx="296" cy="210" r="3.5" style="--r:5; --d:12" />
+  <circle class="dot" cx="58" cy="244" r="3.5" style="--r:6; --d:6" />
+  <circle class="dot" cx="92" cy="244" r="3.5" style="--r:6; --d:7" />
+  <circle class="dot" cx="126" cy="244" r="3.5" style="--r:6; --d:8" />
+  <circle class="dot" cx="160" cy="244" r="3.5" style="--r:6; --d:9" />
+  <circle class="dot" cx="194" cy="244" r="3.5" style="--r:6; --d:10" />
+  <circle class="dot" cx="228" cy="244" r="3.5" style="--r:6; --d:11" />
   <circle class="self" cx="262" cy="244" r="3.5" />
-  <circle class="dot" cx="296" cy="244" r="3.5" style="--d:13" />
-  <circle class="dot" cx="58" cy="278" r="3.5" style="--d:7" />
-  <circle class="dot" cx="92" cy="278" r="3.5" style="--d:8" />
-  <circle class="dot" cx="126" cy="278" r="3.5" style="--d:9" />
-  <circle class="dot" cx="160" cy="278" r="3.5" style="--d:10" />
-  <circle class="dot" cx="194" cy="278" r="3.5" style="--d:11" />
-  <circle class="dot" cx="228" cy="278" r="3.5" style="--d:12" />
-  <circle class="dot" cx="262" cy="278" r="3.5" style="--d:13" />
+  <circle class="dot" cx="296" cy="244" r="3.5" style="--r:6; --d:13" />
+  <circle class="dot" cx="58" cy="278" r="3.5" style="--r:7; --d:7" />
+  <circle class="dot" cx="92" cy="278" r="3.5" style="--r:7; --d:8" />
+  <circle class="dot" cx="126" cy="278" r="3.5" style="--r:7; --d:9" />
+  <circle class="dot" cx="160" cy="278" r="3.5" style="--r:7; --d:10" />
+  <circle class="dot" cx="194" cy="278" r="3.5" style="--r:7; --d:11" />
+  <circle class="dot" cx="228" cy="278" r="3.5" style="--r:7; --d:12" />
+  <circle class="dot" cx="262" cy="278" r="3.5" style="--r:7; --d:13" />
   <circle class="self" cx="296" cy="278" r="3.5" />
 </svg>
