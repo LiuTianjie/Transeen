@@ -32,7 +32,7 @@
     <meta property="og:url" content="https://transeen.itool.tech/de/guide/" />
     <meta property="og:title" content="Transeen in fünf Schritten einrichten" />
     <meta property="og:description" content="Vom Download bis zum ersten übersetzten Screenshot auf dem Mac, mit allen Kurzbefehlen und der Modell-Einrichtung." />
-    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-de.jpg?v=a8090a06a71d" />
+    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-de.jpg?v=052fe8148f7c" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -46,11 +46,11 @@
     <meta property="og:locale:alternate" content="fr_FR" />
     <meta property="og:locale:alternate" content="es_ES" />
     <meta property="article:published_time" content="2026-10-28" />
-    <meta property="article:modified_time" content="2026-10-31" />
+    <meta property="article:modified_time" content="2026-11-01" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Transeen in fünf Schritten einrichten" />
     <meta name="twitter:description" content="Vom Download bis zum ersten übersetzten Screenshot auf dem Mac, mit allen Kurzbefehlen und der Modell-Einrichtung." />
-    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-de.jpg?v=a8090a06a71d" />
+    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-de.jpg?v=052fe8148f7c" />
     <meta name="twitter:image:alt" content="Eine japanische Zugbuchungsseite auf einem Mac, die ausgewählte Karte an Ort und Stelle ins Deutsche übersetzt, darunter die Symbolleiste von Transeen" />
     <script type="application/ld+json">
       {
@@ -105,7 +105,7 @@
             "mainEntityOfPage": "https://transeen.itool.tech/de/guide/",
             "image": "https://transeen.itool.tech/assets/og-image-de.jpg",
             "datePublished": "2026-10-28",
-            "dateModified": "2026-10-31",
+            "dateModified": "2026-11-01",
             "author": {
               "@type": "Person",
               "name": "LiuTianjie",
@@ -208,7 +208,7 @@
     <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=a9e04b962aeb" />
     <link rel="manifest" href="../../site.webmanifest" />
     <link rel="preload" href="../../assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="../../assets/site.css?v=6ba6dce15c66" />
+    <link rel="stylesheet" href="../../assets/site.css?v=7c3bd6e21ae5" />
     <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
@@ -294,6 +294,7 @@
           <a href="./" aria-current="page">Anleitung</a>
         </nav>
         <div class="nav-end">
+          <a class="nav-pricing" href="../#pricing">Preis</a>
           <details class="langmenu">
             <summary aria-label="Sprache: Deutsch"><svg aria-hidden="true"><use href="#ui-globe" /></svg><span>Deutsch</span></summary>
             <ul role="list">
@@ -307,7 +308,7 @@
               <li><a href="./" aria-current="page">Deutsch</a></li>
             </ul>
           </details>
-          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/latest">Laden</a>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg">Laden</a>
         </div>
       </div>
     </header>
@@ -320,7 +321,7 @@
           <h1 class="load" id="guide-title" style="--d: 60">Transeen einrichten, <span>in fünf Schritten.</span></h1>
           <p class="hero-lead load" style="--d: 140">Vom Download bis zum ersten übersetzten Screenshot. Du brauchst einen Mac mit macOS 26 oder neuer und einen TR-Aktivierungscode.</p>
           <div class="hero-actions load" style="--d: 220">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Für Mac laden</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Für Mac laden</a>
             <a class="link-arrow" href="#shortcuts">Alle Kurzbefehle</a>
           </div>
         </div>
@@ -338,6 +339,8 @@
             <li><a href="#mark">Markieren</a></li>
             <li><a href="#keep">Kopieren, sichern oder anheften</a></li>
             <li><a href="#model">Einen Übersetzungsdienst wählen</a></li>
+            <li><a href="#scroll">Scroll-Aufnahme</a></li>
+            <li><a href="#history">Letzte Aufnahmen</a></li>
             <li><a href="#shortcuts">Tastaturkurzbefehle</a></li>
             <li><a href="#troubleshooting">Fehlerbehebung</a></li>
             <li><a href="#build">Aus dem Quellcode bauen</a></li>
@@ -348,11 +351,12 @@
           <section id="install" aria-labelledby="install-title">
             <h2 id="install-title"><small>01</small>Installieren</h2>
             <ol>
-              <li>Lade das neueste DMG von <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a>. Es ist etwa 10 MB groß, eine universelle App für Apple-Chip und Intel.</li>
+              <li>Lade das neueste DMG von <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a>. Es ist etwa 11 MB groß, eine universelle App für Apple-Chip und Intel.</li>
               <li>Öffne das DMG und zieh Transeen in den Ordner „Programme“.</li>
               <li>Öffne Transeen aus „Programme“. Es lebt in der Menüleiste; such sein Symbol also dort und nicht im Dock.</li>
             </ol>
             <p>App und DMG sind mit einer Developer ID signiert und von Apple beglaubigt, macOS öffnet sie deshalb ohne Warnung. Ein ZIP und SHA-256-Prüfsummen liegen auf derselben Seite. Die Oberfläche folgt der Sprache deines Macs: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español oder Deutsch.</p>
+            <p>Die Einführung hat vier Schritte: Beispielübersetzung, Lesesprache, Bildschirmzugriff und erste Aufnahme. Das Beispiel braucht weder Aktivierung noch Berechtigung; dein Fortschritt bleibt gespeichert. Echte Aufnahmen benötigen eine Aktivierung. Ist die Übersetzung noch nicht bereit, kannst du zunächst Bilder annotieren.</p>
           </section>
 
           <section id="activate" aria-labelledby="activate-title">
@@ -362,12 +366,12 @@
               <li>Gib deinen Code ein, der wie <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code> aussieht, und wähl <strong>Diesen Mac aktivieren</strong>. Eine Anmeldung ist nicht nötig.</li>
               <li>Wenn du möchtest, meld dich mit Google, GitHub oder E-Mail bei einem iTool-Konto an und verknüpfe die Lizenz. Mit einer späteren Anmeldung beim selben Konto stellst du sie wieder her.</li>
             </ol>
-            <p>Die Aktivierung legt nur eine zufällige Installations-ID und einen Beleg im Schlüsselbund ab; die Seriennummer deines Macs wird nie gelesen. Ein Code gilt für einen Mac, und das Verknüpfen eines Kontos erzeugt keine zweite Lizenz. SM-Codes von StupidMirror und IT-Codes von iTool Pro gehören zu anderen Produkten und funktionieren hier nicht. Einen Code bekommst du, wenn du <a href="https://github.com/LiuTianjie/Transeen/discussions">in GitHub Discussions fragst</a>.</p>
+            <p>Die Aktivierung legt nur eine zufällige Installations-ID und einen Beleg im Schlüsselbund ab; die Seriennummer deines Macs wird nie gelesen. Ein Code gilt für einen Mac, und das Verknüpfen eines Kontos erzeugt keine zweite Lizenz. SM-Codes von StupidMirror und IT-Codes von iTool Pro gehören zu anderen Produkten und funktionieren hier nicht. Einen Code bekommst du, wenn du <a href="https://wzyp.cn/item/gq2xie">einen auf 链动小铺 kaufst</a>.</p>
           </section>
 
           <section id="permission" aria-labelledby="permission-title">
             <h2 id="permission-title"><small>03</small>Bildschirmaufnahme erlauben</h2>
-            <p>Bei der ersten Aufnahme fragt Transeen nach der Berechtigung zur Bildschirmaufnahme. Es nutzt nur das Bildschirmbild, nie Ton, und nur, wenn du einen Aufnahme-Kurzbefehl drückst. Es speichert keinen Verlauf und nimmt nie dauerhaft auf.</p>
+            <p>Transeen benötigt die Berechtigung zur Bildschirmaufnahme für den gewählten Bereich, ohne Audio. Nur während einer Scroll-Aufnahme werden wiederholt Bilder erfasst. Letzte Aufnahmen bleiben lokal; ihre Speicherung lässt sich löschen oder deaktivieren.</p>
             <ol>
               <li>Wähl <strong>Systemeinstellungen öffnen…</strong> oder geh zu Systemeinstellungen → Datenschutz &amp; Sicherheit → Bildschirm- &amp; Systemaudioaufnahme.</li>
               <li>Such Transeen und schalte es ein.</li>
@@ -380,7 +384,7 @@
             <h2 id="languages-title"><small>04</small>Sprachen wählen</h2>
             <p>Das Startfenster hat zwei Menüs, <strong>Ausgangssprache</strong> und <strong>Zielsprache</strong>. Lass die Ausgangssprache auf <strong>Automatisch</strong> oder wähl eine der acht Sprachen: vereinfachtes Chinesisch, traditionelles Chinesisch, Englisch, Japanisch, Koreanisch, Französisch, Spanisch und Deutsch. Jede lässt sich in jede andere übersetzen.</p>
             <p>Bei einer offenen Aufnahme ändert die Richtung unter den Werkzeugen (zum Beispiel JA → DE) eine der beiden Sprachen, und ein erneutes <kbd>F1</kbd> tauscht sie.</p>
-            <p>Die Apple-Übersetzung braucht für jedes Sprachpaar ein Sprachpaket. Die Einführung beim ersten Start und später Einstellungen → Allgemein → Übersetzung zeigen die Pakete für deine Zielsprache mit ihrem Status. <strong>Laden</strong> holt eines, bevor deine erste Aufnahme es braucht; danach läuft die Übersetzung offline auf deinem Mac. Die Pakete stehen auch unter Systemeinstellungen → Allgemein → Sprache &amp; Region → Übersetzungssprachen.</p>
+            <p>Bereite Apple-Sprachpakete, ein lokales Modell oder eine API in den Übersetzungseinstellungen der Einführung oder unter Einstellungen → Allgemein → Übersetzung vor. Installierte Apple-Sprachpakete funktionieren offline.</p>
           </section>
 
           <section id="translate" aria-labelledby="translate-title">
@@ -389,7 +393,7 @@
               <li>Drück in jeder App <kbd>F1</kbd>. Der Bildschirm hält still und wird abgedunkelt. Auf einer Laptop-Tastatur ist das <kbd>fn</kbd> <kbd>F1</kbd>, außer die F-Tasten arbeiten als Standard-Funktionstasten.</li>
               <li>Fahr über einen Absatz, ein Feld oder ein Fenster, damit der Rahmen einrastet, und klick, oder zieh einen eigenen Rahmen. Ein Rahmen kann Fenster mehrerer Apps umfassen. <kbd>Esc</kbd> oder ein Rechtsklick bricht ab.</li>
               <li>Dieselbe Stelle wie beim letzten Mal? Drück beim Auswählen <kbd>R</kbd>, und der Bereich der letzten Aufnahme wird erneut genommen, auch nach einem Neustart.</li>
-              <li>Lies die Übersetzung dort, wo der Text stand. Die Zeilen erscheinen, sobald sie übersetzt sind. Mit <kbd>Tab</kbd> wechselst du zum Original und zurück, mit gedrückter <kbd>Leertaste</kbd> siehst du kurz nach.</li>
+              <li>Tab oder Leertaste schaltet zwischen Original und Übersetzung um; erneut drücken zum Zurückschalten.</li>
               <li>Etwas vergessen? Zieh einen Rand oder eine Ecke der Aufnahme. Sie wird aus demselben eingefrorenen Bildschirm neu zugeschnitten, deine Markierungen bleiben an ihrem Platz, und beim Loslassen wird erneut übersetzt.</li>
               <li>Falsche Richtung? Drück erneut <kbd>F1</kbd>, während die Aufnahme offen ist, und die beiden Sprachen tauschen.</li>
             </ol>
@@ -400,6 +404,7 @@
             <h2 id="mark-title"><small>06</small>Markieren</h2>
             <p>Wähl ein Werkzeug in der Symbolleiste oder drück seine Taste: <kbd>R</kbd> für ein Rechteck, <kbd>O</kbd> für eine Ellipse, <kbd>A</kbd> für einen Pfeil, <kbd>P</kbd> für den Stift und <kbd>V</kbd> zum Auswählen und Bewegen. Ein Zeichenwerkzeug zeichnet immer, auch wenn du auf einer vorhandenen Markierung beginnst; mit <kbd>V</kbd> greifst du eine Markierung. Nummern zählen ab 1 und behalten ihren Wert beim Widerrufen und Wiederholen.</p>
             <p>Wähl eine von sechs Farben und drei Stärken oder öffne die Regler für jede Farbe und eine Stärke von 1 bis 10. <kbd>⌘Z</kbd> und <kbd>⌘⇧Z</kbd> widerrufen und wiederholen; <kbd>Entf</kbd> löscht die ausgewählte Markierung. Markierungen liegen auf einer eigenen Ebene, beim Wechsel zwischen Original und Übersetzung verrutschen sie nie.</p>
+            <p>Füge mehrzeiligen Text, transparente Hervorhebungen und deckende Abdeckungen hinzu. Doppelklick bearbeitet Text, ⌘Return bestätigt, Esc bricht ab. Abdeckungen werden in kopierte, gespeicherte, angeheftete und aufbewahrte Bilder integriert.</p>
           </section>
 
           <section id="keep" aria-labelledby="keep-title">
@@ -410,6 +415,7 @@
               <li><strong>Am Bildschirm anheften</strong> lässt das Bild als eigenes schwebendes Fenster auf dem Bildschirm und beendet die Aufnahme, damit die nächste sofort beginnen kann. Ein angeheftetes Bild bleibt über der App, zu der du wechselst. Zieh es, wohin du willst, und behalte so viele, wie du brauchst; per Rechtsklick kopierst, sicherst, schaltest du zwischen Original und Übersetzung um oder schließt es.</li>
               <li><strong>Text</strong> öffnet die ganze Übersetzung neben dem Original, bereit zum Kopieren.</li>
             </ul>
+            <p>Scrolle über angeheftete Bilder zum Zoomen, mit Option zum Ändern der Deckkraft. Das Menü bietet Klickdurchleitung und Miniaturansicht. Über die Menüleiste lassen sich alle Bilder einblenden, ausblenden oder für Klicks entsperren.</p>
           </section>
 
           <section id="model" aria-labelledby="model-title">
@@ -429,8 +435,18 @@
             <p>Ein Server auf deinem eigenen Mac geht auch: Lokale Adressen dürfen einfaches HTTP nutzen und brauchen keinen Schlüssel, zum Beispiel <code>http://localhost:11434/v1/chat/completions</code> für Ollama. Entfernte Adressen müssen HTTPS nutzen. Dieser Modus sendet nur den erkannten Text, nie den Screenshot. Schlägt eine Anfrage fehl, zeigt Transeen den Fehler und behält das Originalbild.</p>
           </section>
 
+          <section id="scroll" aria-labelledby="scroll-title">
+            <h2 id="scroll-title"><small>09</small>Scroll-Aufnahme</h2>
+            <p>Wähle die Scroll-Aufnahme, markiere den scrollenden Inhalt, starte, scrolle langsam nach unten und schließe ab. Der Bereich muss keinem Fenster entsprechen. Optionales automatisches Scrollen benötigt die Bedienungshilfen-Berechtigung. Vermeide feste Seitenleisten und bewegte Inhalte. Bei fehlender Übereinstimmung scrolle zum letzten Bereich zurück oder behalte den erfassten Teil. Nur vertikal auf einem Bildschirm, maximal 30.000 Pixel hoch und 60 Millionen Pixel insgesamt. Der Ansichtszoom verändert die Exportauflösung nicht.</p>
+          </section>
+
+          <section id="history" aria-labelledby="history-title">
+            <h2 id="history-title"><small>10</small>Letzte Aufnahmen</h2>
+            <p>Öffne die letzten Aufnahmen im Startfenster oder in der Menüleiste. Standardmäßig werden sie 7 Tage lokal aufbewahrt, maximal 50 Bilder oder 200 MB. Wähle 1, 7 oder 30 Tage in den Einstellungen. Lösche einzelne Bilder, alle Bilder oder deaktiviere die Speicherung, um den Verlauf zu entfernen. Wiederhergestellte Bilder enthalten zusammengeführte Anmerkungen und Abdeckungen, keine versteckten Originale oder Rückgängig-Ebenen.</p>
+          </section>
+
           <section id="shortcuts" aria-labelledby="shortcuts-title">
-            <h2 id="shortcuts-title"><small>09</small>Tastaturkurzbefehle</h2>
+            <h2 id="shortcuts-title"><small>11</small>Tastaturkurzbefehle</h2>
             <div class="table-wrap">
               <table class="keys-table">
                 <thead><tr><th scope="col">Standard</th><th scope="col">Aktion</th></tr></thead>
@@ -439,7 +455,7 @@
                   <tr><td><kbd>R</kbd> beim Auswählen</td><td>Den Bereich der letzten Aufnahme erneut nehmen</td></tr>
                   <tr><td><kbd>F1</kbd> bei offener Aufnahme</td><td>Sprachen tauschen oder eine „Markieren“-Aufnahme übersetzen</td></tr>
                   <tr><td><kbd>Tab</kbd></td><td>Zwischen Original und Übersetzung umschalten</td></tr>
-                  <tr><td><kbd>Leertaste</kbd> halten</td><td>Kurz das Original ansehen</td></tr>
+                  <tr><td><kbd>Leertaste</kbd></td><td>Tab oder Leertaste schaltet zwischen Original und Übersetzung um; erneut drücken zum Zurückschalten.</td></tr>
                   <tr><td><kbd>T</kbd></td><td>Übersetzen oder erneut versuchen</td></tr>
                   <tr><td><kbd>D</kbd></td><td>Sprachen tauschen</td></tr>
                   <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>Rechteck, Ellipse, Pfeil, Stift</td></tr>
@@ -457,7 +473,7 @@
           </section>
 
           <section id="troubleshooting" aria-labelledby="troubleshooting-title">
-            <h2 id="troubleshooting-title"><small>10</small>Fehlerbehebung</h2>
+            <h2 id="troubleshooting-title"><small>12</small>Fehlerbehebung</h2>
             <h3>Beim Drücken von F1 passiert nichts</h3>
             <p>Auf einer Laptop-Tastatur ändert F1 die Helligkeit, außer du hältst <kbd>fn</kbd> oder schaltest unter Systemeinstellungen → Tastatur → Tastaturkurzbefehle → Funktionstasten „F1, F2 usw. als Standard-Funktionstasten verwenden“ ein. Auch eine andere App kann F1 belegen; Transeen meldet es, wenn es einen Kurzbefehl nicht registrieren kann. Wähl unter Einstellungen → Kurzbefehle eine andere Taste oder starte über <strong>Aufnehmen &amp; übersetzen</strong> im Menü der Menüleiste.</p>
             <h3>Die Aufnahme ist leer, oder die Berechtigung wird immer wieder abgefragt</h3>
@@ -473,7 +489,7 @@
           </section>
 
           <section id="build" aria-labelledby="build-title">
-            <h2 id="build-title"><small>11</small>Aus dem Quellcode bauen</h2>
+            <h2 id="build-title"><small>13</small>Aus dem Quellcode bauen</h2>
             <p>Transeen steht unter der <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT-Lizenz</a>. Du brauchst Xcode 26.4 oder neuer, Swift 6 und XcodeGen.</p>
             <pre><code>brew install xcodegen
 git clone https://github.com/LiuTianjie/Transeen.git
@@ -486,10 +502,10 @@ cd Transeen
 
       <section class="guide-next" aria-labelledby="next-title">
         <div class="wrap">
-          <h2 id="next-title">Transeen 0.11.2 laden</h2>
+          <h2 id="next-title">Transeen 0.12.0 laden</h2>
           <p>Eine universelle App für macOS 26 oder neuer, signiert und beglaubigt.</p>
           <div class="hero-actions">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Für Mac laden</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Für Mac laden</a>
             <a class="link-arrow" href="../">Zurück zu Transeen</a>
           </div>
         </div>
@@ -509,7 +525,7 @@ cd Transeen
               <li><a href="../#how">So funktioniert’s</a></li>
               <li><a href="../#apps">Jede App</a></li>
               <li><a href="../#tools">Werkzeuge</a></li>
-              <li><a href="../#activation">Aktivierung</a></li>
+              <li><a href="../#pricing">Preis</a></li>
             </ul>
           </nav>
           <nav aria-labelledby="footer-help">
@@ -555,6 +571,6 @@ cd Transeen
         </div>
       </div>
     </footer>
-    <script src="../../assets/site.js?v=258bbec2d37e" defer></script>
+    <script src="../../assets/site.js?v=1ca5879f978d" defer></script>
   </body>
 </html>

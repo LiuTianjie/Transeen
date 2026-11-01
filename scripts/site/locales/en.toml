@@ -15,6 +15,7 @@ guide_og_title = "Set up Transeen in five steps"
 guide_og_description = "From the download to your first translated screenshot on a Mac, with every shortcut and model setup."
 
 [ui]
+pricing = "Pricing"
 skip = "Skip to content"
 home = "Transeen home"
 main_nav = "Main"
@@ -52,7 +53,7 @@ meta = ["v{version}", "macOS 26+", "Apple silicon &amp; Intel", "Notarized by Ap
 
 [demo]
 role = "demonstration"
-label = "Demonstration: on a Japanese train booking page, F1 is pressed and the booking card is selected. Its lines are recognized and redrawn in another language in the same places, one language after another. Hold Space while it has focus to see the original."
+label = "Demonstration: on a Japanese train booking page, F1 is pressed and the booking card is selected. Its lines are recognized and redrawn in another language in the same places, one language after another.Switch original / translation (Space)."
 chips = "Translate the demonstration into"
 hint = "Hold the capture to see the original"
 replay = "Replay"
@@ -124,8 +125,8 @@ text = "Original or translation."
 
 [[keys.items]]
 keys = ["{space}"]
-title = "Peek"
-text = "Hold to see the original."
+title = "Toggle"
+text = "Press again to switch back."
 
 [[keys.items]]
 keys = ["F1", "F1"]
@@ -160,10 +161,22 @@ text = "The full translation, ready to copy."
 title = "Open an image"
 text = "<kbd>⌘O</kbd> works on screenshots you already have."
 
+[[tools.items]]
+title = "Scrolling capture"
+text = "Select a region, scroll down and stitch a long image with a live preview."
+
+[[tools.items]]
+title = "Recent captures"
+text = "Restore a recent capture. Stored on this Mac, with retention controls."
+
+[[tools.items]]
+title = "Cover private details"
+text = "Solid redactions cover sensitive pixels in copied, saved and retained images."
+
 [services]
 fig = "Translation"
 lede = "<b>Three ways to translate.</b> Recognition always stays on your Mac."
-privacy = "<b>The screenshot never leaves your Mac.</b> No history, no continuous recording."
+privacy = "<b>Screenshots stay on your Mac.</b> Recent captures are stored locally and can be disabled or cleared."
 
 [[services.items]]
 title = "Apple Translation"
@@ -192,6 +205,7 @@ lede = "<b>Recently shipped.</b>"
 full = "Full changelog"
 
 [changes.notes]
+"0.12.0" = ["<b>Capture more.</b> Scrolling screenshots, text, highlights, redactions and local recent captures.", "<b>A clearer start.</b> A four-step guide, consistent settings colors, press-to-toggle comparison and a scrolling-start crash fix."]
 "0.11.2" = [
   "<b>Pictures stay pictures.</b> Thumbnails next to text are no longer translated.",
   "<b>Drawing tools always draw,</b> and the capture stays where you took it.",
@@ -202,12 +216,13 @@ full = "Full changelog"
 ]
 
 [activation]
-fig = "Activation"
-lede = "<b>One code, one Mac, for good.</b> No subscription, no account."
-code_label = "Activation code format: TR followed by six groups of four characters"
+fig = "Pricing & activation"
+lede = "<b>One payment. Yours for good.</b> All features on one Mac."
 license = "Perpetual license"
 where = "Enter it in Activation &amp; Account… in the menu bar."
-ask = "Ask about a code"
+buy = "Buy an activation code"
+billing = "One-time payment · CNY"
+shop = "Purchase on 链动小铺. Final price is shown at checkout."
 how = "How to activate"
 items = [
   "<b>Unlocks everything</b> on one Mac.",
@@ -277,13 +292,16 @@ features = [
   "Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German, in any direction",
   "An interface in the same eight languages",
   "Translations appear as they arrive, with a count in the toolbar",
-  "Compare original and translation with Tab, or hold Space to peek",
+  "Toggle original and translation with Tab or Space; press again to switch back.",
   "Pull an edge of a capture to re-crop and translate it again",
   "Boxes, ellipses, arrows, pen strokes and numbered notes on a separate layer",
   "Copy, save as PNG, or pin captures above every app as floating pictures while you keep capturing",
   "Press F1 again on an open capture to swap the languages",
   "Press R while selecting to take the last captured area again",
   "Translate images opened from disk",
+  "Scrolling capture: Select a region, scroll down and stitch a long image with a live preview.",
+  "Recent captures: Restore a recent capture. Stored on this Mac, with retention controls.",
+  "Cover private details: Solid redactions cover sensitive pixels in copied, saved and retained images.",
 ]
 
 [guide]
@@ -318,6 +336,7 @@ body = """
   <li>Open Transeen from Applications. It lives in the menu bar, so look for its icon there rather than in the Dock.</li>
 </ol>
 <p>The app and the DMG are signed with a Developer ID and notarized by Apple, so macOS opens them without a warning. A ZIP and SHA-256 checksums are on the same release page. The interface follows your Mac’s language: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español or Deutsch.</p>
+<p>The four-step first-run guide lets you try a sample translation, choose your reading language, prepare screen access and take your first capture. The sample needs no activation or permission, and the guide remembers your place. Activation is required for a real capture. If translation is not ready, you can start with annotation.</p>
 """
 
 [[guide.sections]]
@@ -329,14 +348,14 @@ body = """
   <li>Enter your code, which looks like <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>, and choose <strong>Activate This Mac</strong>. No sign-in is needed.</li>
   <li>If you like, sign in to an iTool account with Google, GitHub or email and link the license. Signing in to the same account later restores it.</li>
 </ol>
-<p>Activation keeps a random installation ID and a receipt in your Keychain; it never reads your Mac’s serial number. One code covers one Mac, and linking an account does not create a second license. StupidMirror SM- and iTool Pro IT- codes are separate products and don’t work here. To get a code, <a href="https://github.com/LiuTianjie/Transeen/discussions">ask in GitHub Discussions</a>.</p>
+<p>Activation keeps a random installation ID and a receipt in your Keychain; it never reads your Mac’s serial number. One code covers one Mac, and linking an account does not create a second license. StupidMirror SM- and iTool Pro IT- codes are separate products and don’t work here. To get a code, <a href="{purchase}">buy one on 链动小铺</a>.</p>
 """
 
 [[guide.sections]]
 id = "permission"
 title = "Allow screen recording"
 body = """
-<p>The first time you capture, Transeen asks for the Screen Recording permission. It uses the screen image only, never audio, and only when you press a capture shortcut. It keeps no history and never records continuously.</p>
+<p>Transeen needs Screen Recording access for the region you select. It captures screen images without audio. Scrolling capture takes repeated images only while that session is running; recent captures are kept locally and can be cleared or disabled.</p>
 <ol>
   <li>Choose <strong>Open System Settings…</strong>, or go to System Settings → Privacy &amp; Security → Screen &amp; System Audio Recording.</li>
   <li>Find Transeen and turn it on.</li>
@@ -351,7 +370,7 @@ title = "Choose languages"
 body = """
 <p>The home window has two menus, <strong>Source Language</strong> and <strong>Target Language</strong>. Leave the source on <strong>Auto Detect</strong> or choose one of the eight languages: Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German. Any of them translates into any other.</p>
 <p>On an open capture, the direction under the tools (for example JA → EN) changes either language, and pressing <kbd>F1</kbd> again swaps them.</p>
-<p>Apple Translation needs a language pack for each pair. The guide that opens on first launch, and Settings → General → Translation later, list the packs for your target language with their status. <strong>Download</strong> fetches one before your first capture needs it; after that the translation runs on your Mac, offline. Packs are also listed in System Settings → General → Language &amp; Region → Translation Languages.</p>
+<p>Prepare Apple language packs, download a local model or configure an API from the guide’s translation settings or Settings → General → Translation. Apple Translation works offline once the required packs are installed.</p>
 """
 
 [[guide.sections]]
@@ -362,7 +381,7 @@ body = """
   <li>In any app, press <kbd>F1</kbd>. The screen holds still and dims. On a laptop keyboard that is <kbd>fn</kbd> <kbd>F1</kbd>, unless the F keys work as standard function keys.</li>
   <li>Hover to snap to a paragraph, a field or a window and click, or drag a frame of your own. A frame can cover windows from several apps. <kbd>Esc</kbd> or a right click cancels.</li>
   <li>Same place as last time? Press <kbd>R</kbd> while selecting and the last capture’s area is taken again, even after a restart.</li>
-  <li>Read the translation where the text was. Lines appear as they are translated. Press <kbd>Tab</kbd> to switch to the original and back, or hold <kbd>Space</kbd> to peek at it.</li>
+  <li>Toggle original and translation with Tab or Space; press again to switch back.</li>
   <li>Missed a bit? Drag an edge or corner of the capture. It re-crops from the same frozen screen, keeps your marks in place and translates again when you let go.</li>
   <li>Wrong way round? Press <kbd>F1</kbd> again while the capture is open and the two languages swap.</li>
 </ol>
@@ -375,6 +394,7 @@ title = "Mark it up"
 body = """
 <p>Choose a tool on the toolbar or press its key: <kbd>R</kbd> for a rectangle, <kbd>O</kbd> for an ellipse, <kbd>A</kbd> for an arrow, <kbd>P</kbd> for the pen and <kbd>V</kbd> to select and move. A drawing tool always draws, even when you start on an existing mark; use <kbd>V</kbd> to pick a mark up. Numbered notes count up from 1 and keep their numbers through undo and redo.</p>
 <p>Pick one of six colors and three widths, or open the sliders for any color and a width from 1 to 10. <kbd>⌘Z</kbd> and <kbd>⌘⇧Z</kbd> undo and redo; <kbd>Delete</kbd> removes the selected mark. Marks sit on their own layer, so switching between original and translation never moves them.</p>
+<p>Add editable multiline text, translucent highlights or solid redactions. Double-click text to edit, press ⌘Return to finish or Esc to cancel. Redactions are flattened into copied, saved, pinned and retained images.</p>
 """
 
 [[guide.sections]]
@@ -387,6 +407,7 @@ body = """
   <li><strong>Pin to Screen</strong> leaves the picture on the screen as a floating window of its own and ends the capture, so the next one can start straight away. A pin stays above the app you switch to. Drag it anywhere and keep as many as you need; right-click one to copy, save, switch between original and translation or close it.</li>
   <li><strong>Text</strong> opens the full translation next to the original, ready to copy.</li>
 </ul>
+<p>Scroll over a pin to zoom; hold Option while scrolling to change opacity. Use its menu for click-through and thumbnail mode. The menu bar can show or hide all pins and unlock click-through.</p>
 """
 
 [[guide.sections]]
@@ -409,6 +430,20 @@ body = """
 """
 
 [[guide.sections]]
+id = "scroll"
+title = "Scrolling capture"
+body = """
+<p>Choose Scrolling Capture, drag a region around the scrolling content, click Start, scroll down slowly and click Finish. The region does not need to match a window. Optional automatic scrolling needs Accessibility access. Avoid fixed sidebars and moving content; if matching fails, scroll back toward the last overlap or finish with the captured portion. Vertical capture is limited to one display, 30,000 pixels high and 60 million pixels. View and zoom the result without reducing its export resolution.</p>
+"""
+
+[[guide.sections]]
+id = "history"
+title = "Recent captures"
+body = """
+<p>Open Recent Captures from the home window or menu bar. Images are retained locally for 7 days by default, up to 50 images or 200 MB; choose 1, 7 or 30 days in Settings. Delete an image, clear all, or disable retention to remove the history. Restored images have flattened annotations and redactions, without hidden originals or undo layers.</p>
+"""
+
+[[guide.sections]]
 id = "shortcuts"
 title = "Keyboard shortcuts"
 body = """
@@ -420,7 +455,7 @@ body = """
       <tr><td><kbd>R</kbd> while selecting</td><td>Take the last capture’s area again</td></tr>
       <tr><td><kbd>F1</kbd> on an open capture</td><td>Swap the languages, or translate a Markup capture</td></tr>
       <tr><td><kbd>Tab</kbd></td><td>Switch original and translation</td></tr>
-      <tr><td>Hold <kbd>Space</kbd></td><td>Peek at the original</td></tr>
+      <tr><td><kbd>Space</kbd></td><td>Toggle original and translation with Tab or Space; press again to switch back.</td></tr>
       <tr><td><kbd>T</kbd></td><td>Translate, or try again</td></tr>
       <tr><td><kbd>D</kbd></td><td>Swap the languages</td></tr>
       <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>Rectangle, ellipse, arrow, pen</td></tr>

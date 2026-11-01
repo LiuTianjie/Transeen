@@ -125,7 +125,7 @@ struct LauncherView: View {
         .padding(compact ? 10 : 14)
         .padding(.top, compact ? 0 : 6)
         .frame(width: compact ? 320 : 340)
-        .background { if !compact { VisualEffectBackground(material: .popover).ignoresSafeArea() } }
+        .settingsSurface()
         .fixedSize(horizontal: false, vertical: true)
         .onAppear { permission.refresh() }
     }

@@ -155,12 +155,12 @@ struct CaptureHistoryView: View {
                                     Button { restore(entry) } label: { Image(systemName: "arrow.uturn.backward") }.help(L("恢复截图"))
                                     Button { history.remove(entry.id) } label: { Image(systemName: "trash") }.help(L("删除截图"))
                                 }.buttonStyle(.borderless)
-                            }.padding(10).background(.background, in: RoundedRectangle(cornerRadius: 12))
+                            }.padding(10).background(SettingsAppearance.panel, in: RoundedRectangle(cornerRadius: 12))
                         }
                     }.padding(16)
                 }
             }
-        }.frame(minWidth: 650, minHeight: 440)
+        }.frame(minWidth: 650, minHeight: 440).settingsSurface()
             .onAppear { history.prune() }
             .alert(L("清空最近截图？"), isPresented: $confirmsClear) {
                 Button(L("清空"), role: .destructive) { history.clear() }

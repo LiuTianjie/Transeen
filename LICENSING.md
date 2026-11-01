@@ -18,5 +18,7 @@ The source code is licensed under [MIT](LICENSE), including commercial use.
 The MIT license does not provide access to the official hosted activation
 service. Independent distributions can configure their own backend.
 
-For activation-code availability, visit the [product website](https://transeen.itool.tech/#activate).
+A perpetual license for one Mac costs **CNY 49.90**, paid once.
+[Buy a TR- activation code on 链动小铺](https://wzyp.cn/item/gq2xie)
+or see [website pricing](https://transeen.itool.tech/#pricing). The final checkout price is shown by the shop.
 For the server contract and operating model, see [supabase/README.md](supabase/README.md).

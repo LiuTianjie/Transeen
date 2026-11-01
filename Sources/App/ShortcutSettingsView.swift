@@ -18,7 +18,7 @@ struct ShortcutSettingsView: View {
                 }
             }
             Section { Button(L("恢复全部默认快捷键")) { shortcuts.restoreDefaults() } }
-        }.formStyle(.grouped)
+        }.settingsForm()
             .onDisappear { shortcuts.recording = nil }
     }
 }

@@ -28,6 +28,7 @@ origin = site["origin"]
 version = site["version"]
 repo = site["repository"]
 download = site["download"]
+purchase = site["purchase"]
 
 if sys.argv[1:] == ["--locales"]:
     for loc in locales:
@@ -62,7 +63,7 @@ for code, data in words.items():
 
 REDIRECT = (r'<script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"'
             r'+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>')
-TOOL_ICONS = ["rectangle", "crop", "pin", "copy", "text", "viewfinder"]
+TOOL_ICONS = ["rectangle", "crop", "pin", "copy", "text", "viewfinder", "crop", "copy", "rectangle"]
 FIGURES = ["fig-select", "fig-recognize", "fig-lift", "fig-set"]
 CODES = {"en": "EN", "zh-Hans": "ZH-HANS", "zh-Hant": "ZH-HANT", "ja": "JA", "ko": "KO", "fr": "FR", "es": "ES", "de": "DE"}
 
@@ -77,7 +78,7 @@ def plain(fragment):
 
 
 def fill(text):
-    return text.replace("{version}", version).replace("{size}", site["size_mb"]).replace("{about}", site["size_about"])
+    return text.replace("{version}", version).replace("{size}", site["size_mb"]).replace("{about}", site["size_about"]).replace("{purchase}", purchase)
 
 
 def path(loc, guide=False):
@@ -188,6 +189,7 @@ def home_graph(loc, w):
             "inLanguage": [other["hreflang"][0] for other in locales],
             "downloadUrl": download,
             "installUrl": download,
+            "offers": {"@type": "Offer", "price": site["price"], "priceCurrency": site["currency"], "url": purchase},
             "releaseNotes": f"{repo}/blob/main/CHANGELOG.md",
             "softwareHelp": {"@type": "CreativeWork", "url": address(loc, True)},
             "image": image_of(loc),
@@ -367,6 +369,7 @@ def header(loc, guide, w):
         f'      <a href="{link(loc, guide, loc, True)}"{current}>{u["guide"]}</a>',
         "    </nav>",
         '    <div class="nav-end">',
+        f'      <a class="nav-pricing" href="{home("#pricing")}">{u["pricing"]}</a>',
     ]
     out += ["      " + line for line in language_menu(loc, guide, w)]
     out += [
@@ -400,7 +403,7 @@ def footer(loc, guide, w):
         f'          <li><a href="{home("#how")}">{u["how"]}</a></li>',
         f'          <li><a href="{home("#apps")}">{u["apps"]}</a></li>',
         f'          <li><a href="{home("#tools")}">{u["tools"]}</a></li>',
-        f'          <li><a href="{home("#activation")}">{u["activation"]}</a></li>',
+        f'          <li><a href="{home("#pricing")}">{u["pricing"]}</a></li>',
         "        </ul>",
         "      </nav>",
         '      <nav aria-labelledby="footer-help">',
@@ -625,27 +628,29 @@ def home_main(loc, w):
     sections.append(block)
 
     act = w["activation"]
-    block = ['<section class="section" id="activation" aria-labelledby="activation-title">', '  <div class="wrap">']
+    block = ['<section class="section" id="pricing" aria-labelledby="activation-title">', '  <div class="wrap">', '    <span id="activation" aria-hidden="true"></span>', '    <span id="activate" aria-hidden="true"></span>']
     block += ["    " + line for line in section_head(f"Fig 8.0 &nbsp;{act['fig']}", "activation-title", act["lede"])]
     block += [
         '    <div class="license reveal">',
         '      <div class="license-code">',
-        f'        <p class="code-line" aria-label="{esc(act["code_label"])}">TR<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX<span>-</span>XXXX</p>',
+        f'        <p class="license-name">Transeen <span>{act["license"]}</span></p>',
         '        <div class="license-price">',
-        f"          <b>{act['license']}</b>",
-        f"          <span>{act['where']}</span>",
+        f'          <p class="price-amount"><span>¥</span>{site["price"]}</p>',
+        f'          <span>{act["billing"]}</span>',
         "        </div>",
         '        <div class="license-actions">',
-        f'          <a class="button" href="{repo}/discussions">{act["ask"]}</a>',
+        f'          <a class="button" href="{purchase}">{act["buy"]}</a>',
         f'          <a class="link-arrow" href="{link(loc, False, loc, True, "#activate")}">{act["how"]}</a>',
         "        </div>",
         "      </div>",
-        '      <ul class="license-list" role="list">',
+        '      <div class="license-details">',
+        f'        <p class="license-instruction">{act["where"]}</p>',
+        '        <ul class="license-list" role="list">',
     ]
     for n, item in enumerate(act["items"]):
         icon = "xmark" if n == len(act["items"]) - 1 else "check"
         block.append(f'        <li><svg aria-hidden="true"><use href="#ui-{icon}" /></svg><span>{item}</span></li>')
-    block += ["      </ul>", "    </div>", "  </div>", "</section>", ""]
+    block += ["        </ul>", "      </div>", "    </div>", f'    <p class="license-shop">{act["shop"]}</p>', "  </div>", "</section>", ""]
     sections.append(block)
 
     faq = w["faq"]
@@ -791,7 +796,8 @@ def llms():
     guides = ", ".join(f"{loc['name']} {address(loc, True)}" for loc in locales[1:])
     text = (here / "templates" / "llms.txt").read_text()
     return (text.replace("{version}", version).replace("{size}", site["size_mb"])
-            .replace("{homes}", homes).replace("{guides}", guides))
+            .replace("{homes}", homes).replace("{guides}", guides)
+            .replace("{purchase}", purchase).replace("{price}", site["price"]))
 
 
 def not_found():

@@ -67,10 +67,19 @@ import CoreText
             try await Task.sleep(for: .milliseconds(20))
         }
         controller.state.annotations.select(nil)
-        precondition(controller.handleShortcut(NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [], timestamp: 0, windowNumber: 0, context: nil, characters: " ", charactersIgnoringModifiers: " ", isARepeat: false, keyCode: 49)!))
-        precondition(controller.state.peeking && controller.state.overlay && !controller.state.showingTranslation, "Holding peek must temporarily display the original without changing the chosen layer")
-        controller.endPeek()
-        precondition(controller.state.showingTranslation && !controller.state.peeking, "Releasing peek must restore the translation")
+        for (keyCode, characters) in [(UInt16(49), " "), (UInt16(48), "\t")] {
+            func key(_ type: NSEvent.EventType, repeating: Bool = false) -> NSEvent {
+                NSEvent.keyEvent(with: type, location: .zero, modifierFlags: [], timestamp: 0, windowNumber: 0, context: nil,
+                                characters: characters, charactersIgnoringModifiers: characters, isARepeat: repeating, keyCode: keyCode)!
+            }
+            precondition(controller.handleShortcut(key(.keyDown)))
+            precondition(!controller.state.showingTranslation, "One press must switch to the original")
+            precondition(controller.handleShortcut(key(.keyDown, repeating: true)))
+            precondition(!controller.handleShortcut(key(.keyUp)))
+            precondition(!controller.state.showingTranslation, "Holding or releasing the key must keep the chosen layer")
+            precondition(controller.handleShortcut(key(.keyDown)))
+            precondition(controller.state.showingTranslation, "A second press must switch back to the translation")
+        }
         precondition(controller.repeatTranslateShortcut(), "The translate shortcut must act on an open result")
         precondition(controller.state.source == .zhHans && controller.state.target == .en && controller.state.working,
                      "Pressing the translate shortcut on a translated result must swap the languages and translate again")

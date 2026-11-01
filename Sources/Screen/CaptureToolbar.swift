@@ -145,7 +145,7 @@ struct CaptureToolbar: View {
             HStack(spacing: 4) {
                 compareButton(L("原文"), selected: !state.showingTranslation, id: "original")
                 compareButton(L("译文"), selected: state.showingTranslation, id: "translation")
-            }.help(state.shortcuts.help(L("切换原文 / 译文"), .compare) + "；" + state.shortcuts.help(L("按住看原文"), .peek))
+            }.help(state.shortcuts.help(L("切换原文 / 译文"), .compare) + "；" + state.shortcuts.help(L("切换原文 / 译文"), .peek))
         } else {
             Button { action("translate") } label: {
                 Label(L("翻译"), systemImage: "translate").font(.system(size: 12, weight: .medium))

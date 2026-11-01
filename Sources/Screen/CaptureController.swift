@@ -17,7 +17,6 @@ final class CaptureController {
     private var generation = 0
     private var monitor: Any?
     private var completionTask: Task<Void, Never>?
-    private var heldPeekKey: UInt16?
     private var original = NSImage()
     private var translated: NSImage?
     /// Pixels the result can be re-cropped from (the frozen display, or an opened
@@ -95,7 +94,7 @@ final class CaptureController {
         // menu or popover closes as soon as anything takes focus from it. Nothing here activates
         // Transeen; the overlay is a non-activating panel, so that app stays frontmost throughout.
         // Our own windows on screen (Home, Settings, a pin) are part of it too, as in any screenshot.
-        let ours = Set(NSApp.windows.filter { window in !window.isVisible || window is CapturePanel || leaving.contains { $0 === window } }.map { CGWindowID($0.windowNumber) })
+        let ours = Set(NSApp.windows.filter { window in !window.isVisible || window is CapturePanel || leaving.contains { $0 === window } }.compactMap { $0.windowNumber > 0 ? CGWindowID(exactly: $0.windowNumber) : nil })
         let screens = NSScreen.screens.map { (screen: $0, display: ScreenCaptureService.Display($0)) }
         work = Task { [weak self] in
             let frames = await withTaskGroup(of: (CGDirectDisplayID, CGImage?).self) { group in
@@ -174,7 +173,6 @@ final class CaptureController {
         scrollingSession?.stop(); scrollingSession = nil
         captureSettings = nil
         completionTask?.cancel(); completionTask = nil
-        heldPeekKey = nil; state.peeking = false
         generation += 1
         work?.cancel(); work = nil; partialTask?.cancel(); partialTask = nil
         backend?.cancel(); backend = nil
@@ -233,7 +231,7 @@ final class CaptureController {
                 state.working = false; state.copyCompleted = false
                 translated = nil
                 state.translated = false; state.textBlocks = []; state.warning = nil
-                state.failed = false; state.noText = false; state.peeking = false
+                state.failed = false; state.noText = false
                 start.changed = true
                 resizeStart = start
             }
@@ -398,7 +396,7 @@ final class CaptureController {
                 Self.logger.notice("kept \(reason.rawValue, privacy: .public) blocks=\(indices.map(String.init).joined(separator: ","), privacy: .public)")
             }
             let swap = state.shortcuts.binding(.captureTranslate).map { " · " + L("再按 %@ 交换语言", $0.display) } ?? ""
-            state.status = translations.isEmpty ? L("没有需要翻译的文字") + swap : L("已翻译 %ld 处", translations.count) + " · " + state.shortcuts.help(L("按住看原文"), .peek) + swap
+            state.status = translations.isEmpty ? L("没有需要翻译的文字") + swap : L("已翻译 %ld 处", translations.count) + " · " + state.shortcuts.help(L("切换原文 / 译文"), .peek) + swap
             displayCurrent()
         } catch {
             guard valid(token) else { return }
@@ -459,10 +457,6 @@ final class CaptureController {
         case "zoomIn": panel?.zoomDocument(by: 1.25)
         case "zoomOut": panel?.zoomDocument(by: 0.8)
         case "zoomReset": panel?.resetDocumentZoom()
-        case "peek":
-            guard state.translated, state.overlay, !state.peeking else { return }
-            state.peeking = true; displayCurrent()
-        case "peek.end": endPeek()
         case "tool.rectangle", "tool.ellipse", "tool.arrow", "tool.pen", "tool.move", "tool.number", "tool.text", "tool.highlight", "tool.redact":
             guard let tool = AnnotationTool(rawValue: String(id.dropFirst(5))) else { return }
             panel?.canvas.cancelInteraction()
@@ -583,18 +577,12 @@ final class CaptureController {
         }
     }
     private func installKeys() {
-        monitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp, .flagsChanged]) { [weak self] event in
+        monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
             guard let self else { return event }
-            if event.type == .keyUp, self.heldPeekKey == event.keyCode { self.endPeek(); return nil }
-            if event.type == .flagsChanged, self.heldPeekKey != nil,
-               let binding = self.state.shortcuts.binding(.peek),
-               UInt64(event.modifierFlags.rawValue) & binding.flags != binding.flags { self.endPeek() }
-            guard event.type == .keyDown else { return event }
             // Number/color editors keep their own typing, deletion and text undo.
             if event.window?.firstResponder is NSTextView { return event }
             // A focused pin takes its own Esc and ⌘C.
             if event.window is PinnedImagePanel { return event }
-            if self.heldPeekKey == event.keyCode, event.isARepeat { return nil }
             // Do not steal editing keys from settings or save panels.
             guard self.selecting || event.window is CapturePanel || event.window?.styleMask.contains(.nonactivatingPanel) == true else { return event }
             return self.handleShortcut(event) ? nil : event
@@ -602,6 +590,7 @@ final class CaptureController {
     }
 
     @discardableResult func handleShortcut(_ event: NSEvent) -> Bool {
+        guard event.type == .keyDown else { return false }
         if state.scrollable, event.modifierFlags.intersection([.command, .option, .control]) == .command {
             if ["+", "="].contains(event.charactersIgnoringModifiers ?? "") { panel?.zoomDocument(by: 1.25); return true }
             if event.charactersIgnoringModifiers == "-" { panel?.zoomDocument(by: 0.8); return true }
@@ -621,16 +610,9 @@ final class CaptureController {
             }
             return false
         }
-        if action == .peek { heldPeekKey = event.keyCode }
+        if action.command == "toggle", event.isARepeat { return true }
         self.action(action.command)
         return true
-    }
-
-    func endPeek() {
-        heldPeekKey = nil
-        guard state.peeking else { return }
-        state.peeking = false
-        displayCurrent()
     }
 
     #if DEBUG

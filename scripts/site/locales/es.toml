@@ -14,6 +14,7 @@ guide_og_title = "Configura Transeen en cinco pasos"
 guide_og_description = "De la descarga a tu primera captura traducida en un Mac, con todos los atajos y la configuración de modelos."
 
 [ui]
+pricing = "Precio"
 skip = "Saltar al contenido"
 home = "Inicio de Transeen"
 main_nav = "Navegación principal"
@@ -51,7 +52,7 @@ meta = ["v{version}", "macOS 26+", "Chip de Apple e Intel", "Notarizada por Appl
 
 [demo]
 role = "demostración"
-label = "Demostración: en una página japonesa de reserva de trenes se pulsa F1 y se selecciona la tarjeta de la reserva. Sus líneas se reconocen y se redibujan en los mismos lugares en otro idioma, un idioma tras otro. Mantén pulsada la barra espaciadora cuando tenga el foco para ver el original."
+label = "Demostración: en una página japonesa de reserva de trenes se pulsa F1 y se selecciona la tarjeta de la reserva. Sus líneas se reconocen y se redibujan en los mismos lugares en otro idioma, un idioma tras otro.Original / traducción (Espacio)."
 chips = "Traducir la demostración al"
 hint = "Mantén pulsado para ver el original"
 replay = "Repetir"
@@ -123,8 +124,8 @@ text = "Original o traducción."
 
 [[keys.items]]
 keys = ["{space}"]
-title = "Vistazo"
-text = "Mantén para ver el original."
+title = "Alternar"
+text = "Pulsa de nuevo para volver."
 
 [[keys.items]]
 keys = ["F1", "F1"]
@@ -159,10 +160,22 @@ text = "La traducción completa, lista para copiar."
 title = "Abre una imagen"
 text = "<kbd>⌘O</kbd> para capturas que ya tienes."
 
+[[tools.items]]
+title = "Captura con desplazamiento"
+text = "Selecciona un área y desplázate para unir una imagen larga con vista previa."
+
+[[tools.items]]
+title = "Capturas recientes"
+text = "Recupera capturas guardadas en este Mac y elige cuánto tiempo conservarlas."
+
+[[tools.items]]
+title = "Oculta datos privados"
+text = "Las censuras opacas se integran en las imágenes copiadas, guardadas y conservadas."
+
 [services]
 fig = "Traducción"
 lede = "<b>Tres formas de traducir.</b> El reconocimiento siempre se queda en tu Mac."
-privacy = "<b>La captura nunca sale de tu Mac.</b> Sin historial ni grabación continua."
+privacy = "<b>Las capturas se quedan en tu Mac.</b> Puedes borrar o desactivar el historial local."
 
 [[services.items]]
 title = "Traducción de Apple"
@@ -191,6 +204,7 @@ lede = "<b>Lo último.</b>"
 full = "Historial completo"
 
 [changes.notes]
+"0.12.0" = ["<b>Más herramientas de captura.</b> Desplazamiento, texto, resaltado, censura y capturas recientes locales.", "<b>Un inicio más claro.</b> Guía de cuatro pasos, colores unificados, comparación con una pulsación y arreglo del cierre al iniciar una captura larga."]
 "0.11.2" = [
   "<b>Las imágenes siguen siendo imágenes.</b> Las miniaturas junto al texto ya no se traducen.",
   "<b>Las herramientas de dibujo siempre dibujan,</b> y la captura se queda donde la tomaste.",
@@ -201,12 +215,13 @@ full = "Historial completo"
 ]
 
 [activation]
-fig = "Activación"
-lede = "<b>Un código, un Mac, para siempre.</b> Sin suscripción ni cuenta."
-code_label = "Formato del código de activación: TR seguido de seis grupos de cuatro caracteres"
+fig = "Precio y activación"
+lede = "<b>Un pago, para siempre.</b> Todas las funciones en un Mac."
 license = "Licencia permanente"
 where = "Introdúcelo en Activación y cuenta… de la barra de menús."
-ask = "Preguntar por un código"
+buy = "Comprar un código"
+billing = "Pago único · CNY"
+shop = "Compra en 链动小铺. El precio final se muestra al pagar."
 how = "Cómo activar"
 items = [
   "<b>Lo desbloquea todo</b> en un Mac.",
@@ -276,13 +291,16 @@ features = [
   "Chino simplificado, chino tradicional, inglés, japonés, coreano, francés, español y alemán, en cualquier dirección",
   "Una interfaz en esos mismos ocho idiomas",
   "Las traducciones aparecen a medida que llegan, con un contador en la barra de herramientas",
-  "Compara original y traducción con Tab, o mantén pulsada la barra espaciadora para echar un vistazo",
+  "Tab o Espacio alterna entre original y traducción; pulsa de nuevo para volver.",
   "Tira de un borde de la captura para recortarla y traducirla de nuevo",
   "Recuadros, elipses, flechas, trazos de lápiz y números en una capa aparte",
   "Copia, guarda en PNG o fija capturas sobre todas las apps mientras sigues capturando",
   "Vuelve a pulsar F1 en una captura abierta para intercambiar los idiomas",
   "Pulsa R al seleccionar para tomar de nuevo la última zona capturada",
   "Traduce imágenes abiertas desde el disco",
+  "Captura con desplazamiento: Selecciona un área y desplázate para unir una imagen larga con vista previa.",
+  "Capturas recientes: Recupera capturas guardadas en este Mac y elige cuánto tiempo conservarlas.",
+  "Oculta datos privados: Las censuras opacas se integran en las imágenes copiadas, guardadas y conservadas.",
 ]
 
 [guide]
@@ -317,6 +335,7 @@ body = """
   <li>Abre Transeen desde Aplicaciones. Vive en la barra de menús, así que busca su icono allí y no en el Dock.</li>
 </ol>
 <p>La app y el DMG están firmados con un Developer ID y notarizados por Apple, así que macOS los abre sin avisos. En la misma página hay un ZIP y sumas de verificación SHA-256. La interfaz sigue el idioma de tu Mac: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español o Deutsch.</p>
+<p>La guía inicial tiene cuatro pasos: probar una traducción, elegir el idioma de lectura, preparar el acceso a la pantalla y hacer la primera captura. El ejemplo no requiere activación ni permisos y la guía recuerda tu progreso. Las capturas reales requieren activación. Si la traducción no está lista, puedes empezar anotando.</p>
 """
 
 [[guide.sections]]
@@ -328,14 +347,14 @@ body = """
   <li>Introduce tu código, que tiene la forma <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>, y elige <strong>Activar este Mac</strong>. No hace falta iniciar sesión.</li>
   <li>Si quieres, inicia sesión en una cuenta de iTool con Google, GitHub o tu correo y vincula la licencia. Al iniciar sesión en la misma cuenta más adelante, se restaura.</li>
 </ol>
-<p>La activación guarda un ID de instalación aleatorio y un recibo en tu llavero; nunca lee el número de serie del Mac. Un código cubre un Mac, y vincular una cuenta no crea una segunda licencia. Los códigos SM- de StupidMirror e IT- de iTool Pro son de otros productos y no funcionan aquí. Para conseguir un código, <a href="https://github.com/LiuTianjie/Transeen/discussions">pregunta en GitHub Discussions</a>.</p>
+<p>La activación guarda un ID de instalación aleatorio y un recibo en tu llavero; nunca lee el número de serie del Mac. Un código cubre un Mac, y vincular una cuenta no crea una segunda licencia. Los códigos SM- de StupidMirror e IT- de iTool Pro son de otros productos y no funcionan aquí. Para conseguir un código, <a href="{purchase}">compra uno en 链动小铺</a>.</p>
 """
 
 [[guide.sections]]
 id = "permission"
 title = "Permitir la grabación de pantalla"
 body = """
-<p>La primera vez que capturas, Transeen pide el permiso de grabación de pantalla. Solo usa la imagen de la pantalla, nunca el audio, y solo cuando pulsas un atajo de captura. No guarda historial ni graba nunca de forma continua.</p>
+<p>Transeen necesita permiso de grabación de pantalla para el área seleccionada, sin audio. La captura con desplazamiento toma imágenes sucesivas solo durante la sesión. Las capturas recientes se guardan localmente y puedes borrarlas o desactivar su conservación.</p>
 <ol>
   <li>Elige <strong>Abrir Ajustes del Sistema…</strong>, o ve a Ajustes del Sistema → Privacidad y seguridad → Grabación de pantalla y audio del sistema.</li>
   <li>Busca Transeen y actívalo.</li>
@@ -350,7 +369,7 @@ title = "Elegir idiomas"
 body = """
 <p>La ventana de inicio tiene dos menús, <strong>Idioma de origen</strong> e <strong>Idioma de destino</strong>. Deja el origen en <strong>Detección auto</strong> o elige uno de los ocho idiomas: chino simplificado, chino tradicional, inglés, japonés, coreano, francés, español y alemán. Cualquiera se traduce a cualquier otro.</p>
 <p>Con una captura abierta, la dirección que aparece bajo las herramientas (por ejemplo JA → ES) cambia cualquiera de los dos idiomas, y al volver a pulsar <kbd>F1</kbd> se intercambian.</p>
-<p>La Traducción de Apple necesita un paquete de idioma para cada par. La guía que se abre la primera vez, y después Ajustes → General → Traducción, muestran los paquetes de tu idioma de destino con su estado. <strong>Descargar</strong> obtiene uno antes de que tu primera captura lo necesite; a partir de ahí la traducción se hace en tu Mac, sin conexión. Los paquetes también aparecen en Ajustes del Sistema → General → Idioma y región → Idiomas de traducción.</p>
+<p>Prepara los idiomas de Apple, un modelo local o una API desde la configuración de traducción de la guía o Ajustes → General → Traducción. Los idiomas de Apple instalados funcionan sin conexión.</p>
 """
 
 [[guide.sections]]
@@ -361,7 +380,7 @@ body = """
   <li>En cualquier app, pulsa <kbd>F1</kbd>. La pantalla se congela y se oscurece. En el teclado de un portátil es <kbd>fn</kbd> <kbd>F1</kbd>, salvo que las teclas F funcionen como teclas de función estándar.</li>
   <li>Pasa el puntero para ajustarte a un párrafo, un campo o una ventana y haz clic, o dibuja tu propio marco. Un marco puede abarcar ventanas de varias apps. <kbd>Esc</kbd> o un clic derecho cancela.</li>
   <li>¿El mismo sitio que la última vez? Pulsa <kbd>R</kbd> mientras seleccionas y se toma de nuevo la zona de la última captura, incluso tras reiniciar.</li>
-  <li>Lee la traducción donde estaba el texto. Las líneas aparecen a medida que se traducen. Pulsa <kbd>Tab</kbd> para cambiar al original y volver, o mantén pulsada la <kbd>barra espaciadora</kbd> para echarle un vistazo.</li>
+  <li>Tab o Espacio alterna entre original y traducción; pulsa de nuevo para volver.</li>
   <li>¿Te faltó un trozo? Arrastra un borde o una esquina de la captura. Se recorta de nuevo a partir de la misma pantalla congelada, tus anotaciones se quedan en su sitio y se vuelve a traducir al soltar.</li>
   <li>¿Al revés? Pulsa <kbd>F1</kbd> otra vez con la captura abierta y los dos idiomas se intercambian.</li>
 </ol>
@@ -374,6 +393,7 @@ title = "Anotar"
 body = """
 <p>Elige una herramienta en la barra de herramientas o pulsa su tecla: <kbd>R</kbd> para un rectángulo, <kbd>O</kbd> para una elipse, <kbd>A</kbd> para una flecha, <kbd>P</kbd> para el lápiz y <kbd>V</kbd> para seleccionar y mover. Una herramienta de dibujo siempre dibuja, aunque empieces sobre una anotación; usa <kbd>V</kbd> para coger una. Los números cuentan desde 1 y conservan su valor al deshacer y rehacer.</p>
 <p>Elige uno de los seis colores y de los tres grosores, o abre los controles deslizantes para cualquier color y un grosor de 1 a 10. <kbd>⌘Z</kbd> y <kbd>⌘⇧Z</kbd> deshacen y rehacen; <kbd>Supr</kbd> elimina la anotación seleccionada. Las anotaciones tienen su propia capa, así que alternar entre original y traducción nunca las mueve.</p>
+<p>Añade texto de varias líneas, resaltados translúcidos y censuras opacas. Haz doble clic en el texto para editar, pulsa ⌘Return para terminar o Esc para cancelar. Las censuras se fusionan en las imágenes copiadas, guardadas, fijadas y conservadas.</p>
 """
 
 [[guide.sections]]
@@ -386,6 +406,7 @@ body = """
   <li><strong>Fijar en pantalla</strong> deja la imagen en la pantalla como una ventana flotante propia y termina la captura, para que la siguiente empiece enseguida. Una captura fijada se queda encima de la app a la que cambies. Arrástrala adonde quieras y guarda tantas como necesites; haz clic derecho en una para copiarla, guardarla, alternar entre original y traducción o cerrarla.</li>
   <li><strong>Texto</strong> abre la traducción completa junto al original, lista para copiar.</li>
 </ul>
+<p>Desplázate sobre una imagen fijada para ampliar, o con Option para ajustar la opacidad. Su menú permite atravesar clics y usar miniaturas. La barra de menús permite mostrar, ocultar o desbloquear todas las imágenes fijadas.</p>
 """
 
 [[guide.sections]]
@@ -408,6 +429,20 @@ body = """
 """
 
 [[guide.sections]]
+id = "scroll"
+title = "Captura con desplazamiento"
+body = """
+<p>Elige la captura con desplazamiento, encuadra el contenido, pulsa Iniciar, baja lentamente y pulsa Finalizar. El área no tiene que coincidir con una ventana. El desplazamiento automático opcional requiere permiso de Accesibilidad. Evita barras laterales fijas y contenido en movimiento. Si falla la alineación, vuelve al área anterior o termina con la parte capturada. Solo captura vertical en una pantalla, hasta 30 000 píxeles de alto y 60 millones de píxeles. El zoom de vista no reduce la resolución exportada.</p>
+"""
+
+[[guide.sections]]
+id = "history"
+title = "Capturas recientes"
+body = """
+<p>Abre Capturas recientes desde el inicio o la barra de menús. Se conservan localmente 7 días por defecto, hasta 50 imágenes o 200 MB; puedes elegir 1, 7 o 30 días en Ajustes. Borra una imagen, todas, o desactiva la conservación para eliminar el historial. Las imágenes restauradas tienen anotaciones y censuras fusionadas, sin originales ocultos ni capas de deshacer.</p>
+"""
+
+[[guide.sections]]
 id = "shortcuts"
 title = "Atajos de teclado"
 body = """
@@ -419,7 +454,7 @@ body = """
       <tr><td><kbd>R</kbd> al seleccionar</td><td>Tomar de nuevo la zona de la última captura</td></tr>
       <tr><td><kbd>F1</kbd> con una captura abierta</td><td>Intercambiar los idiomas, o traducir una captura de «Anotar»</td></tr>
       <tr><td><kbd>Tab</kbd></td><td>Alternar entre original y traducción</td></tr>
-      <tr><td>Mantener <kbd>Espacio</kbd></td><td>Echar un vistazo al original</td></tr>
+      <tr><td><kbd>Espacio</kbd></td><td>Tab o Espacio alterna entre original y traducción; pulsa de nuevo para volver.</td></tr>
       <tr><td><kbd>T</kbd></td><td>Traducir, o reintentar</td></tr>
       <tr><td><kbd>D</kbd></td><td>Intercambiar los idiomas</td></tr>
       <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>Rectángulo, elipse, flecha, lápiz</td></tr>

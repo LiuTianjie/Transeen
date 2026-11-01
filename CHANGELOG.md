@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.12.0
+
+- Add website pricing and direct activation-code purchase, and refresh the eight-language website and guides for the current capture tools.
+- Prevent a crash when starting scrolling capture after opening or closing utility windows: ignore invalid WindowServer IDs in both scrolling and regular capture.
+- Unify settings, onboarding, activation, permission, and configuration windows with one neutral light/dark surface palette, including sheet and popover backgrounds.
+- Replace the first-run checklist with a resumable, four-step guide: an interactive translation sample, reading language, screen access, and the first capture. Use a shared layout grid, fixed navigation, and consistent control alignment across all steps.
+- Space and comparison shortcuts now toggle the original and translation on each press; releasing or holding the key does not switch back.
 - Add editable multiline text annotations, translucent highlights, and solid privacy redactions. Redactions are flattened into copied, saved, pinned and retained images.
 - Add vertical scrolling capture with a live preview, optional automatic scrolling, verified overlap stitching and explicit failure/size-limit feedback. Tall results can be scrolled and zoomed while keeping full-resolution export.
 - Add pin zoom, opacity controls, click-through, thumbnail mode and menu-bar actions to hide/show or unlock all pins.

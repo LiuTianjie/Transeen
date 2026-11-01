@@ -58,7 +58,10 @@ struct PermissionGuide: View {
                     Text(peeking ? L("原文") : L("译文")).foregroundStyle(.secondary)
                 }.font(.system(size: 10))
                 Spacer()
-                HoldToCompare(peeking: $peeking).frame(width: 91, height: 20)
+                Button { peeking.toggle() } label: {
+                    Label(L("原文 / 译文"), systemImage: "eye")
+                }.buttonStyle(.borderless).font(.system(size: 11))
+                    .help(L("切换原文 / 译文"))
             }.padding(.top, 12).padding(.bottom, 23)
 
             Divider()
@@ -94,7 +97,7 @@ struct PermissionGuide: View {
                                         Button(L("重新打开")) { permission.relaunch() }
                                     }.controlSize(.small)
                                 }
-                            }.font(.system(size: 12)).lineSpacing(3).padding(18).frame(width: 285, alignment: .leading)
+                            }.font(.system(size: 12)).lineSpacing(3).padding(18).frame(width: 285, alignment: .leading).settingsSurface()
                         }
                 }
             }.padding(.vertical, 20)
@@ -107,7 +110,7 @@ struct PermissionGuide: View {
         }
         .padding(.horizontal, 28).padding(.top, 30).padding(.bottom, 24)
         .frame(width: 440)
-        .background(Color(nsColor: .windowBackgroundColor))
+        .settingsSurface()
         .task {
             while !Task.isCancelled {
                 permission.refresh()
@@ -131,7 +134,7 @@ struct PermissionGuide: View {
             previewRow("command", peeking ? "Keyboard shortcuts" : L("键盘快捷键"), "⌘ K")
                 .padding(.bottom, 7)
         }
-        .background(Color(nsColor: .textBackgroundColor).opacity(0.55), in: RoundedRectangle(cornerRadius: 8))
+        .background(SettingsAppearance.panel, in: RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color(nsColor: .separatorColor).opacity(0.25), lineWidth: 0.5))
         .overlay {
             ViewfinderCorners()
@@ -167,38 +170,5 @@ private struct ViewfinderCorners: Shape {
             path.addLine(to: CGPoint(x: x + sx * length, y: y))
         }
         return path
-    }
-}
-
-/// NSButton supplies native tracking/hover. Translation reappears on mouse-up,
-/// including when the pointer leaves the button during the hold.
-private struct HoldToCompare: NSViewRepresentable {
-    @Binding var peeking: Bool
-    func makeNSView(context: Context) -> CompareButton {
-        let button = CompareButton(title: L("按住看原文"), target: nil, action: nil)
-        button.bezelStyle = .inline
-        button.controlSize = .small
-        button.font = .systemFont(ofSize: 11)
-        button.image = NSImage(systemSymbolName: "eye", accessibilityDescription: nil)
-        button.imagePosition = .imageLeading
-        button.setAccessibilityLabel(L("对照示例原文"))
-        button.setAccessibilityHelp(L("按住显示英文，松开显示中文"))
-        return button
-    }
-    func updateNSView(_ view: CompareButton, context: Context) { view.onPeek = { peeking = $0 } }
-}
-private final class CompareButton: NSButton {
-    var onPeek: ((Bool) -> Void)?
-    override func mouseDown(with event: NSEvent) {
-        onPeek?(true)
-        super.mouseDown(with: event)
-        onPeek?(false)
-    }
-    override func accessibilityPerformPress() -> Bool {
-        onPeek?(true)
-        Task { @MainActor [weak self] in
-            try? await Task.sleep(for: .seconds(2)); self?.onPeek?(false)
-        }
-        return true
     }
 }

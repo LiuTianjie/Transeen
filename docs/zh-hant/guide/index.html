@@ -32,7 +32,7 @@
     <meta property="og:url" content="https://transeen.itool.tech/zh-hant/guide/" />
     <meta property="og:title" content="五個步驟裝好 Transeen" />
     <meta property="og:description" content="從下載到第一次在 Mac 上截圖翻譯，附完整快速鍵與模型設定。" />
-    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-zh-hant.jpg?v=111a5cf7e802" />
+    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-zh-hant.jpg?v=ad3d3432a665" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -46,11 +46,11 @@
     <meta property="og:locale:alternate" content="es_ES" />
     <meta property="og:locale:alternate" content="de_DE" />
     <meta property="article:published_time" content="2026-10-28" />
-    <meta property="article:modified_time" content="2026-10-31" />
+    <meta property="article:modified_time" content="2026-11-01" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="五個步驟裝好 Transeen" />
     <meta name="twitter:description" content="從下載到第一次在 Mac 上截圖翻譯，附完整快速鍵與模型設定。" />
-    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-zh-hant.jpg?v=111a5cf7e802" />
+    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-zh-hant.jpg?v=ad3d3432a665" />
     <meta name="twitter:image:alt" content="Mac 上的日文訂票網頁，框選的車次卡片在原處換成了繁體中文，下方是 Transeen 工具列" />
     <script type="application/ld+json">
       {
@@ -105,7 +105,7 @@
             "mainEntityOfPage": "https://transeen.itool.tech/zh-hant/guide/",
             "image": "https://transeen.itool.tech/assets/og-image-zh-hant.jpg",
             "datePublished": "2026-10-28",
-            "dateModified": "2026-10-31",
+            "dateModified": "2026-11-01",
             "author": {
               "@type": "Person",
               "name": "LiuTianjie",
@@ -208,7 +208,7 @@
     <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=a9e04b962aeb" />
     <link rel="manifest" href="../../site.webmanifest" />
     <link rel="preload" href="../../assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="../../assets/site.css?v=6ba6dce15c66" />
+    <link rel="stylesheet" href="../../assets/site.css?v=7c3bd6e21ae5" />
     <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
@@ -294,6 +294,7 @@
           <a href="./" aria-current="page">使用指南</a>
         </nav>
         <div class="nav-end">
+          <a class="nav-pricing" href="../#pricing">定價</a>
           <details class="langmenu">
             <summary aria-label="語言: 繁體中文"><svg aria-hidden="true"><use href="#ui-globe" /></svg><span>繁體中文</span></summary>
             <ul role="list">
@@ -307,7 +308,7 @@
               <li><a href="../../de/guide/" hreflang="de" lang="de">Deutsch</a></li>
             </ul>
           </details>
-          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/latest">下載</a>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg">下載</a>
         </div>
       </div>
     </header>
@@ -320,7 +321,7 @@
           <h1 class="load" id="guide-title" style="--d: 60">五個步驟裝好 Transeen，<span>然後按 F1。</span></h1>
           <p class="hero-lead load" style="--d: 140">從下載到第一次截圖翻譯。你需要一台 macOS 26 或更新版本的 Mac，和一組 TR- 啟用碼。</p>
           <div class="hero-actions load" style="--d: 220">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
             <a class="link-arrow" href="#shortcuts">所有快速鍵</a>
           </div>
         </div>
@@ -338,6 +339,8 @@
             <li><a href="#mark">標註</a></li>
             <li><a href="#keep">拷貝、儲存或釘圖</a></li>
             <li><a href="#model">選擇翻譯服務</a></li>
+            <li><a href="#scroll">捲動長截圖</a></li>
+            <li><a href="#history">最近截圖</a></li>
             <li><a href="#shortcuts">鍵盤快速鍵</a></li>
             <li><a href="#troubleshooting">疑難排解</a></li>
             <li><a href="#build">從原始碼建置</a></li>
@@ -348,11 +351,12 @@
           <section id="install" aria-labelledby="install-title">
             <h2 id="install-title"><small>01</small>安裝</h2>
             <ol>
-              <li>從 <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a> 下載最新的 DMG。大約 10 MB，一個通用版本同時支援 Apple 晶片和 Intel。</li>
+              <li>從 <a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a> 下載最新的 DMG。大約 11 MB，一個通用版本同時支援 Apple 晶片和 Intel。</li>
               <li>打開 DMG，把 Transeen 拖進「應用程式」。</li>
               <li>從「應用程式」打開 Transeen。它常駐在選單列，不在 Dock 裡，請在選單列找它的圖像。</li>
             </ol>
             <p>App 和 DMG 都以 Developer ID 簽署並通過 Apple 公證，macOS 打開時不會跳出警告。同一個發布頁還有 ZIP 和 SHA-256 檢查碼。介面語言會跟隨系統：简体中文、繁體中文、English、日本語、한국어、Français、Español、Deutsch。</p>
+            <p>首次開啟會經過四步引導：體驗示範翻譯、選擇閱讀語言、準備截圖權限、開始第一次截圖。示範不需啟用或授權，引導會記住進度。實際截圖需要啟用；翻譯服務尚未就緒時，可以先使用截圖標註。</p>
           </section>
 
           <section id="activate" aria-labelledby="activate-title">
@@ -362,12 +366,12 @@
               <li>輸入啟用碼，格式是 <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>，然後選擇 <strong>啟用這台 Mac</strong>。不需要登入。</li>
               <li>如果願意，可以用 Google、GitHub 或電子郵件登入 iTool 帳號並綁定授權。之後登入同一個帳號就能恢復。</li>
             </ol>
-            <p>啟用只會在鑰匙圈裡保存一個隨機安裝 ID 和一份憑證，不會讀取 Mac 的序號。一組啟用碼對應一台 Mac，綁定帳號不會多出一份授權。StupidMirror 的 SM- 和 iTool Pro 的 IT- 啟用碼屬於其他產品，在這裡不能用。想要啟用碼，請<a href="https://github.com/LiuTianjie/Transeen/discussions">到 GitHub Discussions 留言</a>。</p>
+            <p>啟用只會在鑰匙圈裡保存一個隨機安裝 ID 和一份憑證，不會讀取 Mac 的序號。一組啟用碼對應一台 Mac，綁定帳號不會多出一份授權。StupidMirror 的 SM- 和 iTool Pro 的 IT- 啟用碼屬於其他產品，在這裡不能用。想要啟用碼，請<a href="https://wzyp.cn/item/gq2xie">前往鏈動小鋪購買</a>。</p>
           </section>
 
           <section id="permission" aria-labelledby="permission-title">
             <h2 id="permission-title"><small>03</small>開啟螢幕錄製</h2>
-            <p>第一次截圖時，Transeen 會要求螢幕錄製權限。它只使用螢幕畫面，不錄音，而且只在你按下截圖快速鍵時才擷取。它不保存紀錄，也從不持續錄影。</p>
+            <p>Transeen 需要螢幕錄製權限來擷取你選取的區域，只取畫面，不錄音。長截圖只在工作階段進行時連續取圖；最近截圖儲存在本機，可以清空或停用保留。</p>
             <ol>
               <li>選擇 <strong>打開系統設定…</strong>，或前往系統設定 → 隱私權與安全性 → 螢幕與系統音訊錄製。</li>
               <li>找到 Transeen 並打開開關。</li>
@@ -380,7 +384,7 @@
             <h2 id="languages-title"><small>04</small>選擇語言</h2>
             <p>主視窗有兩個選單：<strong>原文語言</strong> 和 <strong>譯文語言</strong>。原文可以維持 <strong>自動識別</strong>，也可以從八種語言中選一種：簡體中文、繁體中文、英文、日文、韓文、法文、西班牙文、德文。任兩種之間都能互譯。</p>
             <p>截圖打開時，工具下方的方向（例如 JA → 繁中）可以改任一邊的語言；再按一次 <kbd>F1</kbd> 就交換兩邊。</p>
-            <p>Apple 翻譯的每一組語言都需要語言包。第一次啟動時的導覽，以及之後的設定 → 一般 → 翻譯，會列出譯文語言需要的語言包和狀態。點 <strong>下載</strong> 先裝好，第一次截圖就不用等；之後翻譯完全在本機離線完成。語言包也可以在系統設定 → 一般 → 語言與地區 → 翻譯語言中查看。</p>
+            <p>在引導的翻譯設定或「設定 → 一般 → 翻譯」中準備 Apple 語言套件、下載本機模型或設定 API。Apple 語言套件安裝後即可離線翻譯。</p>
           </section>
 
           <section id="translate" aria-labelledby="translate-title">
@@ -389,7 +393,7 @@
               <li>在任何 App 裡按 <kbd>F1</kbd>。螢幕會定格並變暗。在筆電鍵盤上是 <kbd>fn</kbd> <kbd>F1</kbd>，除非你把 F 鍵設成了標準功能鍵。</li>
               <li>移動游標會自動吸附到段落、輸入欄位或視窗，點一下即可；也可以自己拖一個框，一個框可以跨過好幾個 App 的視窗。<kbd>Esc</kbd> 或按右鍵取消。</li>
               <li>和上次同一個位置？框選時按 <kbd>R</kbd>，直接沿用上一次截圖的區域，重新開機後也有效。</li>
-              <li>譯文會出現在原文所在的位置，一行翻好就顯示一行。按 <kbd>Tab</kbd> 在原文和譯文之間切換，按住 <kbd>空白鍵</kbd> 暫時看原文。</li>
+              <li>按 Tab 或空白鍵切換原文與譯文，再按一次切回。</li>
               <li>少框了一點？拖動截圖的邊或角。它會從同一張定格畫面重新裁切，標註留在原處，放開後重新翻譯。</li>
               <li>方向反了？截圖打開時再按一次 <kbd>F1</kbd>，兩種語言會對調。</li>
             </ol>
@@ -400,6 +404,7 @@
             <h2 id="mark-title"><small>06</small>標註</h2>
             <p>在工具列選工具，或直接按鍵：<kbd>R</kbd> 矩形、<kbd>O</kbd> 橢圓、<kbd>A</kbd> 箭頭、<kbd>P</kbd> 畫筆、<kbd>V</kbd> 選擇與移動。繪圖工具一按就畫，從現有的標註上起筆也一樣；要拿起某個標註，請用 <kbd>V</kbd>。編號標註從 1 開始遞增，還原和重做後編號不變。</p>
             <p>有六種顏色和三種粗細可選，也可以打開滑桿選任何顏色和 1 到 10 的線寬。<kbd>⌘Z</kbd> 和 <kbd>⌘⇧Z</kbd> 還原、重做，<kbd>Delete</kbd> 刪除選取的標註。標註在獨立的圖層上，切換原文和譯文時不會移動。</p>
+            <p>亦可加入多行文字、半透明醒目標示與實色隱私遮擋。按兩下文字編輯，⌘Return 完成，Esc 取消。遮擋會合併至拷貝、儲存、釘圖及歷史圖片中。</p>
           </section>
 
           <section id="keep" aria-labelledby="keep-title">
@@ -410,6 +415,7 @@
               <li><strong>釘到螢幕</strong> 把圖片留在螢幕上，成為一個獨立的浮動視窗，同時結束這次截圖，馬上可以截下一張。釘圖會停在你切換到的 App 上方，可以拖到任何地方，想留幾張都行；按右鍵可以拷貝、儲存、切換原文和譯文或關閉。</li>
               <li><strong>文字</strong> 打開完整譯文，與原文並排，方便拷貝。</li>
             </ul>
+            <p>在釘圖上捲動可縮放，按住 Option 捲動可調整透明度；右鍵選單可設定滑鼠穿透與縮圖模式。選單列可統一顯示、隱藏釘圖或解除穿透。</p>
           </section>
 
           <section id="model" aria-labelledby="model-title">
@@ -429,8 +435,18 @@
             <p>本機上的服務也可以：本機位址可以用 HTTP，也不需要金鑰，例如 Ollama 的 <code>http://localhost:11434/v1/chat/completions</code>。遠端位址必須使用 HTTPS。這種方式只傳送辨識出的文字，從不傳送截圖。請求失敗時，Transeen 會顯示錯誤並保留原圖。</p>
           </section>
 
+          <section id="scroll" aria-labelledby="scroll-title">
+            <h2 id="scroll-title"><small>09</small>捲動長截圖</h2>
+            <p>選擇「捲動長截圖」，自由框選內容，按「開始」，緩慢向下捲動，最後按「完成」。選取範圍不必綁定視窗。自動捲動是選用功能，需要輔助使用權限。避開固定側欄與動態內容；無法對齊時，可向上捲回上一段或保留已拼接內容。只支援單螢幕縱向截圖，最長 30,000 像素、最多 6,000 萬像素。長圖可捲動檢視與縮放，拷貝與輸出保留原始解析度。</p>
+          </section>
+
+          <section id="history" aria-labelledby="history-title">
+            <h2 id="history-title"><small>10</small>最近截圖</h2>
+            <p>從主視窗或選單列開啟「最近截圖」。預設本機保留 7 天，最多 50 張或 200 MB，可在設定中選擇 1、7 或 30 天。可刪除單張或清空；停用保留會刪除紀錄。恢復的是已合併標註與遮擋的圖片，不包含被遮擋的底圖或復原圖層。</p>
+          </section>
+
           <section id="shortcuts" aria-labelledby="shortcuts-title">
-            <h2 id="shortcuts-title"><small>09</small>鍵盤快速鍵</h2>
+            <h2 id="shortcuts-title"><small>11</small>鍵盤快速鍵</h2>
             <div class="table-wrap">
               <table class="keys-table">
                 <thead><tr><th scope="col">預設按鍵</th><th scope="col">功能</th></tr></thead>
@@ -439,7 +455,7 @@
                   <tr><td>框選時按 <kbd>R</kbd></td><td>沿用上一次截圖的區域</td></tr>
                   <tr><td>截圖打開時按 <kbd>F1</kbd></td><td>交換語言，或翻譯「截圖標註」的截圖</td></tr>
                   <tr><td><kbd>Tab</kbd></td><td>切換原文和譯文</td></tr>
-                  <tr><td>按住 <kbd>空白鍵</kbd></td><td>暫時查看原文</td></tr>
+                  <tr><td><kbd>空白鍵</kbd></td><td>按 Tab 或空白鍵切換原文與譯文，再按一次切回。</td></tr>
                   <tr><td><kbd>T</kbd></td><td>翻譯或重試</td></tr>
                   <tr><td><kbd>D</kbd></td><td>交換語言</td></tr>
                   <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>矩形、橢圓、箭頭、畫筆</td></tr>
@@ -457,7 +473,7 @@
           </section>
 
           <section id="troubleshooting" aria-labelledby="troubleshooting-title">
-            <h2 id="troubleshooting-title"><small>10</small>疑難排解</h2>
+            <h2 id="troubleshooting-title"><small>12</small>疑難排解</h2>
             <h3>按 F1 沒有反應</h3>
             <p>在筆電鍵盤上，F1 預設是調整亮度，需要按住 <kbd>fn</kbd>，或在系統設定 → 鍵盤 → 鍵盤快速鍵 → 功能鍵中打開「將 F1、F2 等鍵作為標準功能鍵使用」。也可能是其他 App 佔用了 F1，Transeen 無法註冊快速鍵時會提示你。可以在設定 → 快速鍵中換一個鍵，或從選單列選單的 <strong>截圖翻譯</strong> 開始。</p>
             <h3>截圖是空的，或一直要求授權</h3>
@@ -473,7 +489,7 @@
           </section>
 
           <section id="build" aria-labelledby="build-title">
-            <h2 id="build-title"><small>11</small>從原始碼建置</h2>
+            <h2 id="build-title"><small>13</small>從原始碼建置</h2>
             <p>Transeen 以 <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT 授權條款</a>開源。需要 Xcode 26.4 或更新版本、Swift 6 和 XcodeGen。</p>
             <pre><code>brew install xcodegen
 git clone https://github.com/LiuTianjie/Transeen.git
@@ -486,10 +502,10 @@ cd Transeen
 
       <section class="guide-next" aria-labelledby="next-title">
         <div class="wrap">
-          <h2 id="next-title">下載 Transeen 0.11.2</h2>
+          <h2 id="next-title">下載 Transeen 0.12.0</h2>
           <p>一個通用版本，支援 macOS 26 或更新版本，已簽署並通過 Apple 公證。</p>
           <div class="hero-actions">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
             <a class="link-arrow" href="../">回到首頁</a>
           </div>
         </div>
@@ -509,7 +525,7 @@ cd Transeen
               <li><a href="../#how">運作方式</a></li>
               <li><a href="../#apps">任何 App</a></li>
               <li><a href="../#tools">工具</a></li>
-              <li><a href="../#activation">啟用</a></li>
+              <li><a href="../#pricing">定價</a></li>
             </ul>
           </nav>
           <nav aria-labelledby="footer-help">
@@ -555,6 +571,6 @@ cd Transeen
         </div>
       </div>
     </footer>
-    <script src="../../assets/site.js?v=258bbec2d37e" defer></script>
+    <script src="../../assets/site.js?v=1ca5879f978d" defer></script>
   </body>
 </html>

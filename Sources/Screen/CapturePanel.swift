@@ -27,7 +27,6 @@ final class CaptureState {
     var failed = false
     var automaticallyTranslates = false
     var noText = false
-    var peeking = false
     var hasTranslatedOnce = false
     var copyCompleted = false
     var finishing = false
@@ -35,7 +34,7 @@ final class CaptureState {
     /// The crop's pixel size while an edge is dragged. Not `status`, which re-measures the toolbar.
     var cropReadout: String?
     var compactProgress: Bool { working && !hasTranslatedOnce && !annotating && annotations.selectedID == nil }
-    var showingTranslation: Bool { overlay && !peeking }
+    var showingTranslation: Bool { overlay }
     let annotations = AnnotationStore()
 }
 
@@ -230,7 +229,6 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
         if liveFrame == nil { contentRect = frame.insetBy(dx: Self.margin, dy: Self.margin) }
         refreshUI()
     }
-    func windowDidResignKey(_ notification: Notification) { onAction?("peek.end") }
     func finishCopy() async {
         guard !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion else { return }
         await NSAnimationContext.runAnimationGroup { context in

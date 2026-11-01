@@ -34,7 +34,9 @@ enum ScreenCaptureService {
         guard let display = content.displays.first(where: { $0.displayID == screen.displayID }) else { throw ScreenCaptureError.noDisplay }
         // Window IDs also work when ScreenCaptureKit omits this process from its application list.
         // The session creates its outline and controls before preparing this source.
-        let ours = Set(NSApp.windows.map { CGWindowID($0.windowNumber) })
+        // Detached/closed AppKit windows can have a negative windowNumber.
+        // They have no WindowServer ID to exclude; a trapping UInt32 conversion would crash capture.
+        let ours = Set(NSApp.windows.compactMap { $0.windowNumber > 0 ? CGWindowID(exactly: $0.windowNumber) : nil })
         let excluded = content.windows.filter {
             ours.contains($0.windowID) || $0.owningApplication?.processID == ProcessInfo.processInfo.processIdentifier
         }

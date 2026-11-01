@@ -10,6 +10,7 @@
   <a href="https://github.com/LiuTianjie/Transeen/releases/latest">Download</a> ·
   <a href="https://transeen.itool.tech/">Website</a> (<a href="https://transeen.itool.tech/zh-hant/">繁中</a>, <a href="https://transeen.itool.tech/ja/">日本語</a>, <a href="https://transeen.itool.tech/ko/">한국어</a>, <a href="https://transeen.itool.tech/fr/">FR</a>, <a href="https://transeen.itool.tech/es/">ES</a>, <a href="https://transeen.itool.tech/de/">DE</a>) ·
   <a href="https://transeen.itool.tech/guide/">Setup guide</a> ·
+  <a href="https://wzyp.cn/item/gq2xie">Buy activation code · CNY 49.90</a> ·
   <a href="CHANGELOG.md">Changelog</a> ·
   <a href="README.zh-CN.md">简体中文</a>
 </p>
@@ -18,7 +19,7 @@
 
 Transeen is a macOS menu bar app that keeps translation close to what you are reading. Select a screen region or open an image, translate the text in place, compare it with the original, then annotate, copy, save, or pin the result.
 
-**The official app requires a Transeen TR- activation code.** Activate this Mac without signing in, or optionally bind the license to your iTool account. The source code is MIT licensed, including commercial use. [Licensing](LICENSING.md).
+**The official app requires a Transeen TR- activation code: CNY 49.90 for a perpetual license on one Mac.** [Buy on 链动小铺](https://wzyp.cn/item/gq2xie). Activate this Mac without signing in, or optionally bind the license to your iTool account. The source code is MIT licensed, including commercial use. [Licensing](LICENSING.md).
 
 ## What it does
 
@@ -35,7 +36,7 @@ Transeen is a macOS menu bar app that keeps translation close to what you are re
 
 1. Download the universal Mac app from GitHub Releases, move it to Applications, and open it. Requires macOS 26 or later.
 2. Open “激活与账号…” and enter your TR- code. SM- and IT- codes are different products.
-3. The first-run guide walks through Screen Recording, translation languages, and downloading Apple language packs ahead of time.
+3. The four-step guide lets you try an interactive sample, choose your reading language, prepare screen access and start your first capture. It remembers your place; the sample needs no activation or permission. Prepare a language pack, local model or API in translation settings, or start with annotation.
 4. Press F1 to select a region and translate it. On a laptop keyboard that is Fn–F1, unless the F keys are set to work as standard function keys. Every shortcut can be changed in Settings.
 
 | Action | Default shortcut |
@@ -43,13 +44,13 @@ Transeen is a macOS menu bar app that keeps translation close to what you are re
 | Capture and translate | `F1` |
 | Select the last captured area again | `R`, while selecting |
 | Swap languages | `F1` again, while the result is open |
-| Compare original and translation | `Tab` |
+| Toggle original and translation | `Tab` / `Space` |
 | Copy / save PNG | `⌘C` / `⌘S` |
 | Undo / redo | `⌘Z` / `⌘⇧Z` |
 
 Capturing for annotation and comparing from anywhere have no shortcut until you set one.
 
-The current app interface is in Simplified Chinese. Translation supports the languages listed in the app.
+The interface and translation support Simplified Chinese, Traditional Chinese, English, Japanese, Korean, French, Spanish and German. Space and comparison shortcuts toggle on each press; releasing the key does not switch back.
 
 ## Build from source
 

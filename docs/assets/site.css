@@ -1625,7 +1625,7 @@ code {
   font-weight: 520;
 }
 
-/* Activation */
+/* Pricing & activation */
 
 .license {
   display: grid;
@@ -1662,10 +1662,64 @@ code {
   gap: 6px;
 }
 
-.license-price b {
-  font-size: 22px;
-  font-weight: 540;
-  letter-spacing: -0.02em;
+.license-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 550;
+}
+
+.license-name span {
+  display: block;
+  margin-top: 4px;
+  color: var(--fg-2);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.license-price .price-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  color: var(--fg);
+  font-size: clamp(52px, 6vw, 76px);
+  font-weight: 550;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+.license-price .price-amount span {
+  color: inherit;
+  font-size: 0.44em;
+  letter-spacing: 0;
+}
+
+.license-details {
+  padding: clamp(28px, 4vw, 44px);
+}
+
+.license-instruction {
+  margin: 0 0 24px;
+  font-size: 16px;
+}
+
+.license-shop {
+  margin: 16px 0 0;
+  color: var(--fg-2);
+  font-size: 13px;
+}
+
+.nav-pricing {
+  white-space: nowrap;
+}
+
+.nav-links {
+  gap: clamp(12px, 1.8vw, 24px);
+}
+
+.nav-links a {
+  white-space: nowrap;
 }
 
 .license-price span {
@@ -1676,7 +1730,7 @@ code {
 .license-list {
   display: grid;
   align-content: start;
-  padding: clamp(28px, 4vw, 44px);
+  padding: 0;
   list-style: none;
   margin: 0;
 }
@@ -2784,4 +2838,13 @@ code {
   .matrix .dot {
     animation: none !important;
   }
+}
+
+@media (max-width: 480px) {
+  .nav-inner { gap: 12px; }
+  .nav-inner .brand { flex-shrink: 0; }
+  .nav-end { gap: 10px; font-size: 12px; }
+  .nav-end .button.small { padding-inline: 10px; font-size: 12px; }
+  .langmenu summary { padding-inline: 4px; }
+  .langmenu summary span { display: none; }
 }

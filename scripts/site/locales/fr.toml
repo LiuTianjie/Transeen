@@ -14,6 +14,7 @@ guide_og_title = "Configurer Transeen en cinq étapes"
 guide_og_description = "Du téléchargement à votre première capture traduite sur un Mac, avec tous les raccourcis et la configuration des modèles."
 
 [ui]
+pricing = "Tarifs"
 skip = "Aller au contenu"
 home = "Accueil Transeen"
 main_nav = "Navigation principale"
@@ -51,7 +52,7 @@ meta = ["v{version}", "macOS 26+", "Puce Apple et Intel", "Notarisé par Apple"]
 
 [demo]
 role = "démonstration"
-label = "Démonstration : sur une page japonaise de réservation de train, on appuie sur F1 et on sélectionne la carte de réservation. Ses lignes sont reconnues puis redessinées aux mêmes endroits dans une autre langue, une langue après l’autre. Maintenez Espace quand elle a le focus pour voir l’original."
+label = "Démonstration : sur une page japonaise de réservation de train, on appuie sur F1 et on sélectionne la carte de réservation. Ses lignes sont reconnues puis redessinées aux mêmes endroits dans une autre langue, une langue après l’autre.Original / traduction (Espace)."
 chips = "Traduire la démonstration en"
 hint = "Maintenez pour voir l’original"
 replay = "Rejouer"
@@ -123,8 +124,8 @@ text = "Original ou traduction."
 
 [[keys.items]]
 keys = ["{space}"]
-title = "Coup d’œil"
-text = "Maintenez pour l’original."
+title = "Alterner"
+text = "Appuyez à nouveau pour revenir."
 
 [[keys.items]]
 keys = ["F1", "F1"]
@@ -159,10 +160,22 @@ text = "La traduction complète, prête à copier."
 title = "Ouvrez une image"
 text = "<kbd>⌘O</kbd> pour une capture que vous avez déjà."
 
+[[tools.items]]
+title = "Capture défilante"
+text = "Sélectionnez une zone et faites défiler pour assembler une longue image avec aperçu."
+
+[[tools.items]]
+title = "Captures récentes"
+text = "Retrouvez vos captures locales et choisissez leur durée de conservation."
+
+[[tools.items]]
+title = "Masquer les détails privés"
+text = "Les masquages opaques sont intégrés aux images copiées, enregistrées et conservées."
+
 [services]
 fig = "Traduction"
 lede = "<b>Trois façons de traduire.</b> La reconnaissance reste sur votre Mac."
-privacy = "<b>La capture ne quitte jamais votre Mac.</b> Ni historique, ni enregistrement continu."
+privacy = "<b>Les captures restent sur votre Mac.</b> L’historique local peut être effacé ou désactivé."
 
 [[services.items]]
 title = "Traduction Apple"
@@ -191,6 +204,7 @@ lede = "<b>Dernières versions.</b>"
 full = "Historique complet"
 
 [changes.notes]
+"0.12.0" = ["<b>Des captures enrichies.</b> Défilement, texte, surlignage, masquage et captures récentes locales.", "<b>Un démarrage simplifié.</b> Guide en quatre étapes, couleurs unifiées, comparaison par pression et correction du plantage au démarrage du défilement."]
 "0.11.2" = [
   "<b>Les images restent des images.</b> Les vignettes à côté du texte ne sont plus traduites.",
   "<b>Les outils de dessin dessinent toujours,</b> et la capture reste où vous l’avez prise.",
@@ -201,12 +215,13 @@ full = "Historique complet"
 ]
 
 [activation]
-fig = "Activation"
-lede = "<b>Un code, un Mac, pour de bon.</b> Sans abonnement ni compte."
-code_label = "Format du code d’activation : TR suivi de six groupes de quatre caractères"
+fig = "Tarif et activation"
+lede = "<b>Un achat, pour toujours.</b> Toutes les fonctions sur un Mac."
 license = "Licence à vie"
 where = "Saisissez-le dans Activation et compte… de la barre des menus."
-ask = "Demander un code"
+buy = "Acheter un code"
+billing = "Paiement unique · CNY"
+shop = "Achat sur 链动小铺. Le prix final est indiqué au moment du paiement."
 how = "Comment activer"
 items = [
   "<b>Tout est déverrouillé</b> sur un Mac.",
@@ -276,13 +291,16 @@ features = [
   "Chinois simplifié, chinois traditionnel, anglais, japonais, coréen, français, espagnol et allemand, dans tous les sens",
   "Une interface dans ces huit langues",
   "Les traductions s’affichent à l’arrivée, avec un compteur dans la barre d’outils",
-  "Comparer original et traduction avec Tab, ou maintenir Espace pour jeter un œil",
+  "Tab ou Espace alterne entre original et traduction ; appuyez à nouveau pour revenir.",
   "Tirer un bord de la capture pour recadrer et retraduire",
   "Cadres, ellipses, flèches, crayon et numéros sur un calque séparé",
   "Copier, enregistrer en PNG ou épingler les captures au-dessus de toutes les apps tout en continuant à capturer",
   "Réappuyer sur F1 sur une capture ouverte pour inverser les langues",
   "Appuyer sur R pendant la sélection pour reprendre la dernière zone",
   "Traduire des images ouvertes depuis le disque",
+  "Capture défilante: Sélectionnez une zone et faites défiler pour assembler une longue image avec aperçu.",
+  "Captures récentes: Retrouvez vos captures locales et choisissez leur durée de conservation.",
+  "Masquer les détails privés: Les masquages opaques sont intégrés aux images copiées, enregistrées et conservées.",
 ]
 
 [guide]
@@ -317,6 +335,7 @@ body = """
   <li>Ouvrez Transeen depuis Applications. Il vit dans la barre des menus : cherchez son icône là plutôt que dans le Dock.</li>
 </ol>
 <p>L’app et le DMG sont signés avec un Developer ID et notarisés par Apple : macOS les ouvre sans avertissement. Un ZIP et des sommes de contrôle SHA-256 se trouvent sur la même page. L’interface suit la langue de votre Mac : English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español ou Deutsch.</p>
+<p>Le guide initial propose quatre étapes : essayer une traduction, choisir la langue de lecture, préparer l’accès à l’écran et prendre une première capture. L’exemple ne nécessite ni activation ni autorisation et votre progression est conservée. Une vraie capture nécessite l’activation. Si la traduction n’est pas prête, commencez par l’annotation.</p>
 """
 
 [[guide.sections]]
@@ -328,14 +347,14 @@ body = """
   <li>Saisissez votre code, de la forme <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>, puis choisissez <strong>Activer ce Mac</strong>. Aucune connexion n’est nécessaire.</li>
   <li>Si vous le souhaitez, connectez-vous à un compte iTool avec Google, GitHub ou une adresse e-mail et associez-y la licence. Vous la restaurerez en vous reconnectant au même compte.</li>
 </ol>
-<p>L’activation garde un identifiant d’installation aléatoire et un reçu dans votre trousseau ; elle ne lit jamais le numéro de série de votre Mac. Un code couvre un Mac, et associer un compte ne crée pas de seconde licence. Les codes SM- de StupidMirror et IT- d’iTool Pro sont d’autres produits et ne fonctionnent pas ici. Pour obtenir un code, <a href="https://github.com/LiuTianjie/Transeen/discussions">demandez dans GitHub Discussions</a>.</p>
+<p>L’activation garde un identifiant d’installation aléatoire et un reçu dans votre trousseau ; elle ne lit jamais le numéro de série de votre Mac. Un code couvre un Mac, et associer un compte ne crée pas de seconde licence. Les codes SM- de StupidMirror et IT- d’iTool Pro sont d’autres produits et ne fonctionnent pas ici. Pour obtenir un code, <a href="{purchase}">achetez un code sur 链动小铺</a>.</p>
 """
 
 [[guide.sections]]
 id = "permission"
 title = "Autoriser l’enregistrement de l’écran"
 body = """
-<p>À la première capture, Transeen demande l’autorisation d’enregistrer l’écran. Il n’utilise que l’image de l’écran, jamais l’audio, et seulement quand vous appuyez sur un raccourci de capture. Il ne garde aucun historique et n’enregistre jamais en continu.</p>
+<p>Transeen utilise l’autorisation d’enregistrement de l’écran pour la zone sélectionnée, sans audio. La capture défilante prend des images successives uniquement pendant la session. Les captures récentes restent en local ; leur conservation peut être effacée ou désactivée.</p>
 <ol>
   <li>Choisissez <strong>Ouvrir Réglages Système…</strong>, ou allez dans Réglages Système → Confidentialité et sécurité → Enregistrement de l’écran et de l’audio du système.</li>
   <li>Trouvez Transeen et activez-le.</li>
@@ -350,7 +369,7 @@ title = "Choisir les langues"
 body = """
 <p>La fenêtre d’accueil propose deux menus, <strong>Langue source</strong> et <strong>Langue cible</strong>. Laissez la source sur <strong>Détection auto</strong> ou choisissez l’une des huit langues : chinois simplifié, chinois traditionnel, anglais, japonais, coréen, français, espagnol et allemand. Chacune se traduit vers toutes les autres.</p>
 <p>Sur une capture ouverte, la direction affichée sous les outils (par exemple JA → FR) permet de changer l’une ou l’autre langue, et une nouvelle pression sur <kbd>F1</kbd> les inverse.</p>
-<p>La Traduction Apple a besoin d’un pack de langue pour chaque paire. Le guide qui s’ouvre au premier lancement, puis Réglages → Général → Traduction, listent les packs de votre langue cible avec leur état. <strong>Télécharger</strong> en récupère un avant que votre première capture en ait besoin ; ensuite la traduction se fait sur votre Mac, hors ligne. Les packs figurent aussi dans Réglages Système → Général → Langue et région → Langues de traduction.</p>
+<p>Préparez les langues Apple, un modèle local ou une API dans les réglages de traduction du guide ou Réglages → Général → Traduction. Les langues Apple installées fonctionnent hors ligne.</p>
 """
 
 [[guide.sections]]
@@ -361,7 +380,7 @@ body = """
   <li>Dans n’importe quelle app, appuyez sur <kbd>F1</kbd>. L’écran se fige et s’assombrit. Sur un clavier de portable, c’est <kbd>fn</kbd> <kbd>F1</kbd>, sauf si les touches F servent de touches de fonction standard.</li>
   <li>Survolez pour vous caler sur un paragraphe, un champ ou une fenêtre et cliquez, ou tracez votre propre cadre. Un cadre peut couvrir les fenêtres de plusieurs apps. <kbd>Échap</kbd> ou un clic droit annule.</li>
   <li>Même endroit que la dernière fois ? Appuyez sur <kbd>R</kbd> pendant la sélection : la zone de la dernière capture est reprise, même après un redémarrage.</li>
-  <li>Lisez la traduction là où se trouvait le texte. Les lignes apparaissent au fil de la traduction. Appuyez sur <kbd>Tab</kbd> pour passer à l’original et revenir, ou maintenez <kbd>Espace</kbd> pour y jeter un œil.</li>
+  <li>Tab ou Espace alterne entre original et traduction ; appuyez à nouveau pour revenir.</li>
   <li>Il manque un bout ? Faites glisser un bord ou un coin de la capture. Elle est recadrée à partir du même écran figé, vos annotations restent en place, et elle est retraduite quand vous relâchez.</li>
   <li>Dans le mauvais sens ? Appuyez de nouveau sur <kbd>F1</kbd> pendant que la capture est ouverte : les deux langues s’inversent.</li>
 </ol>
@@ -374,6 +393,7 @@ title = "Annoter"
 body = """
 <p>Choisissez un outil dans la barre d’outils ou appuyez sur sa touche : <kbd>R</kbd> pour un rectangle, <kbd>O</kbd> pour une ellipse, <kbd>A</kbd> pour une flèche, <kbd>P</kbd> pour le crayon et <kbd>V</kbd> pour sélectionner et déplacer. Un outil de dessin dessine toujours, même en partant d’une annotation existante ; utilisez <kbd>V</kbd> pour en saisir une. Les numéros comptent à partir de 1 et gardent leur valeur après annuler et rétablir.</p>
 <p>Choisissez l’une des six couleurs et des trois épaisseurs, ou ouvrez les curseurs pour une couleur quelconque et une épaisseur de 1 à 10. <kbd>⌘Z</kbd> et <kbd>⌘⇧Z</kbd> annulent et rétablissent ; <kbd>Suppr</kbd> efface l’annotation sélectionnée. Les annotations ont leur propre calque : passer de l’original à la traduction ne les déplace jamais.</p>
+<p>Ajoutez du texte multiligne, des surlignages translucides et des masquages opaques. Double-cliquez sur le texte pour le modifier, validez avec ⌘Return ou annulez avec Esc. Les masquages sont fusionnés dans les images copiées, enregistrées, épinglées et conservées.</p>
 """
 
 [[guide.sections]]
@@ -386,6 +406,7 @@ body = """
   <li><strong>Épingler à l’écran</strong> laisse l’image à l’écran dans une fenêtre flottante à part et termine la capture, pour enchaîner aussitôt sur la suivante. Une épingle reste au-dessus de l’app vers laquelle vous basculez. Déplacez-la où vous voulez et gardez-en autant que nécessaire ; un clic droit permet de la copier, l’enregistrer, basculer entre original et traduction ou la fermer.</li>
   <li><strong>Texte</strong> ouvre la traduction complète à côté de l’original, prête à être copiée.</li>
 </ul>
+<p>Faites défiler sur une épingle pour zoomer, avec Option pour régler l’opacité. Son menu propose le passage des clics et le mode miniature. La barre des menus permet d’afficher, masquer ou déverrouiller toutes les épingles.</p>
 """
 
 [[guide.sections]]
@@ -408,6 +429,20 @@ body = """
 """
 
 [[guide.sections]]
+id = "scroll"
+title = "Capture défilante"
+body = """
+<p>Choisissez la capture défilante, encadrez le contenu, cliquez sur Démarrer, faites défiler lentement vers le bas, puis terminez. La zone n’a pas besoin de correspondre à une fenêtre. Le défilement automatique facultatif nécessite l’autorisation Accessibilité. Évitez les barres latérales fixes et les animations. En cas de mauvais alignement, remontez vers la zone précédente ou gardez la partie capturée. Capture verticale sur un seul écran, limitée à 30 000 pixels de haut et 60 millions de pixels. Le zoom de consultation ne réduit pas la résolution exportée.</p>
+"""
+
+[[guide.sections]]
+id = "history"
+title = "Captures récentes"
+body = """
+<p>Ouvrez les captures récentes depuis l’accueil ou la barre des menus. Conservation locale de 7 jours par défaut, jusqu’à 50 images ou 200 Mo ; choisissez 1, 7 ou 30 jours dans les réglages. Supprimez une image, effacez tout ou désactivez la conservation pour supprimer l’historique. Les images restaurées fusionnent annotations et masquages, sans original caché ni calques d’annulation.</p>
+"""
+
+[[guide.sections]]
 id = "shortcuts"
 title = "Raccourcis clavier"
 body = """
@@ -419,7 +454,7 @@ body = """
       <tr><td><kbd>R</kbd> pendant la sélection</td><td>Reprendre la zone de la dernière capture</td></tr>
       <tr><td><kbd>F1</kbd> sur une capture ouverte</td><td>Inverser les langues, ou traduire une capture « Annoter »</td></tr>
       <tr><td><kbd>Tab</kbd></td><td>Basculer entre original et traduction</td></tr>
-      <tr><td>Maintenir <kbd>Espace</kbd></td><td>Jeter un œil à l’original</td></tr>
+      <tr><td><kbd>Espace</kbd></td><td>Tab ou Espace alterne entre original et traduction ; appuyez à nouveau pour revenir.</td></tr>
       <tr><td><kbd>T</kbd></td><td>Traduire, ou réessayer</td></tr>
       <tr><td><kbd>D</kbd></td><td>Inverser les langues</td></tr>
       <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>Rectangle, ellipse, flèche, crayon</td></tr>

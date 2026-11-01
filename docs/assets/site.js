@@ -92,14 +92,14 @@
 
     // The toolbar speaks the page's language, with the app's own words for it.
     const words = {
-      en: { original: "Original", translation: "Translation", copy: "Copy", translating: "Translating…", done: (n) => `Translated ${n} items`, peek: "Hold to See Original (Space)", release: "Release to finish" },
-      "zh-Hans": { original: "原文", translation: "译文", copy: "复制", translating: "正在翻译…", done: (n) => `已翻译 ${n} 处`, peek: "按住看原文（空格）", release: "松开完成" },
-      "zh-Hant": { original: "原文", translation: "譯文", copy: "拷貝", translating: "正在翻譯…", done: (n) => `已翻譯 ${n} 處`, peek: "按住看原文（空白鍵）", release: "放開完成" },
-      ja: { original: "原文", translation: "訳文", copy: "コピー", translating: "翻訳中…", done: (n) => `${n} 件を翻訳しました`, peek: "押し続けて原文を表示（スペース）", release: "離すと完了" },
-      ko: { original: "원문", translation: "번역", copy: "복사", translating: "번역 중…", done: (n) => `${n}개 번역됨`, peek: "누르고 있으면 원문 보기(스페이스)", release: "떼면 완료" },
-      fr: { original: "Original", translation: "Traduction", copy: "Copier", translating: "Traduction…", done: (n) => `${n} éléments traduits`, peek: "Maintenir pour voir l’original (Espace)", release: "Relâchez pour terminer" },
-      es: { original: "Original", translation: "Traducción", copy: "Copiar", translating: "Traduciendo…", done: (n) => `${n} elementos traducidos`, peek: "Mantén pulsado para ver el original (Espacio)", release: "Suelta para terminar" },
-      de: { original: "Original", translation: "Übersetzung", copy: "Kopieren", translating: "Übersetze…", done: (n) => `${n} Stellen übersetzt`, peek: "Gedrückt halten für Original (Leertaste)", release: "Loslassen zum Abschließen" },
+      en: { original: "Original", translation: "Translation", copy: "Copy", translating: "Translating…", done: (n) => `Translated ${n} items`, peek: "Switch original / translation (Space)", release: "Release to finish" },
+      "zh-Hans": { original: "原文", translation: "译文", copy: "复制", translating: "正在翻译…", done: (n) => `已翻译 ${n} 处`, peek: "切换原文 / 译文（空格）", release: "松开完成" },
+      "zh-Hant": { original: "原文", translation: "譯文", copy: "拷貝", translating: "正在翻譯…", done: (n) => `已翻譯 ${n} 處`, peek: "切換原文 / 譯文（空白鍵）", release: "放開完成" },
+      ja: { original: "原文", translation: "訳文", copy: "コピー", translating: "翻訳中…", done: (n) => `${n} 件を翻訳しました`, peek: "原文・訳文を切り替え（スペース）", release: "離すと完了" },
+      ko: { original: "원문", translation: "번역", copy: "복사", translating: "번역 중…", done: (n) => `${n}개 번역됨`, peek: "원문 / 번역 전환 (스페이스)", release: "떼면 완료" },
+      fr: { original: "Original", translation: "Traduction", copy: "Copier", translating: "Traduction…", done: (n) => `${n} éléments traduits`, peek: "Original / traduction (Espace)", release: "Relâchez pour terminer" },
+      es: { original: "Original", translation: "Traducción", copy: "Copiar", translating: "Traduciendo…", done: (n) => `${n} elementos traducidos`, peek: "Original / traducción (Espacio)", release: "Suelta para terminar" },
+      de: { original: "Original", translation: "Übersetzung", copy: "Kopieren", translating: "Übersetze…", done: (n) => `${n} Stellen übersetzt`, peek: "Original / Übersetzung (Leertaste)", release: "Loslassen zum Abschließen" },
     };
     const ui = words[pageLang] ?? words.en;
     const short = { en: "EN", "zh-Hans": "中文", "zh-Hant": "繁中", ja: "JA", ko: "KO", fr: "FR", es: "ES", de: "DE" };
@@ -378,10 +378,9 @@
     demo.addEventListener("keydown", (event) => {
       if (event.key !== " ") return;
       event.preventDefault();
-      if (state.ready && !peeking) {
+      if (state.ready && !event.repeat && !peeking) {
         takeOver();
-        peeking = true;
-        setView("original");
+        setView(state.view === "original" ? "translation" : "original");
       }
     });
     const unpeek = () => {
@@ -389,7 +388,6 @@
       peeking = false;
       setView("translation");
     };
-    demo.addEventListener("keyup", (event) => event.key === " " && unpeek());
     demo.addEventListener("blur", unpeek);
     demo.addEventListener("pointerdown", (event) => {
       if (state.ready && !event.target.closest(".toolbar")) {

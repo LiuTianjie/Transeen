@@ -32,7 +32,7 @@
     <meta property="og:url" content="https://transeen.itool.tech/ja/guide/" />
     <meta property="og:title" content="5 つのステップで Transeen を準備" />
     <meta property="og:description" content="ダウンロードから Mac で最初のスクリーンショットを翻訳するまで。ショートカットとモデルの設定も。" />
-    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-ja.jpg?v=12284236ee29" />
+    <meta property="og:image" content="https://transeen.itool.tech/assets/og-image-ja.jpg?v=011cf0cb45d2" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -46,11 +46,11 @@
     <meta property="og:locale:alternate" content="es_ES" />
     <meta property="og:locale:alternate" content="de_DE" />
     <meta property="article:published_time" content="2026-10-28" />
-    <meta property="article:modified_time" content="2026-10-31" />
+    <meta property="article:modified_time" content="2026-11-01" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="5 つのステップで Transeen を準備" />
     <meta name="twitter:description" content="ダウンロードから Mac で最初のスクリーンショットを翻訳するまで。ショートカットとモデルの設定も。" />
-    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-ja.jpg?v=12284236ee29" />
+    <meta name="twitter:image" content="https://transeen.itool.tech/assets/og-image-ja.jpg?v=011cf0cb45d2" />
     <meta name="twitter:image:alt" content="Mac に表示した日本語の列車予約ページ。選んだカードがその場で英語に翻訳され、下に Transeen のツールバーがある" />
     <script type="application/ld+json">
       {
@@ -105,7 +105,7 @@
             "mainEntityOfPage": "https://transeen.itool.tech/ja/guide/",
             "image": "https://transeen.itool.tech/assets/og-image-ja.jpg",
             "datePublished": "2026-10-28",
-            "dateModified": "2026-10-31",
+            "dateModified": "2026-11-01",
             "author": {
               "@type": "Person",
               "name": "LiuTianjie",
@@ -208,7 +208,7 @@
     <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png?v=a9e04b962aeb" />
     <link rel="manifest" href="../../site.webmanifest" />
     <link rel="preload" href="../../assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="../../assets/site.css?v=6ba6dce15c66" />
+    <link rel="stylesheet" href="../../assets/site.css?v=7c3bd6e21ae5" />
     <script>document.documentElement.classList.add("js")</script>
   </head>
   <body>
@@ -294,6 +294,7 @@
           <a href="./" aria-current="page">ガイド</a>
         </nav>
         <div class="nav-end">
+          <a class="nav-pricing" href="../#pricing">料金</a>
           <details class="langmenu">
             <summary aria-label="言語: 日本語"><svg aria-hidden="true"><use href="#ui-globe" /></svg><span>日本語</span></summary>
             <ul role="list">
@@ -307,7 +308,7 @@
               <li><a href="../../de/guide/" hreflang="de" lang="de">Deutsch</a></li>
             </ul>
           </details>
-          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/latest">ダウンロード</a>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg">ダウンロード</a>
         </div>
       </div>
     </header>
@@ -320,7 +321,7 @@
           <h1 class="load" id="guide-title" style="--d: 60">Transeen の準備は、<span>5 つのステップ。</span></h1>
           <p class="hero-lead load" style="--d: 140">ダウンロードから、最初のスクリーンショットを翻訳するまで。macOS 26 以降の Mac と、TR- アクティベーションコードが必要です。</p>
           <div class="hero-actions load" style="--d: 220">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Mac 版をダウンロード</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Mac 版をダウンロード</a>
             <a class="link-arrow" href="#shortcuts">すべてのショートカット</a>
           </div>
         </div>
@@ -338,6 +339,8 @@
             <li><a href="#mark">注釈を付ける</a></li>
             <li><a href="#keep">コピー、保存、ピン留め</a></li>
             <li><a href="#model">翻訳サービスを選ぶ</a></li>
+            <li><a href="#scroll">スクロールキャプチャ</a></li>
+            <li><a href="#history">最近のキャプチャ</a></li>
             <li><a href="#shortcuts">キーボードショートカット</a></li>
             <li><a href="#troubleshooting">困ったときは</a></li>
             <li><a href="#build">ソースからビルド</a></li>
@@ -348,11 +351,12 @@
           <section id="install" aria-labelledby="install-title">
             <h2 id="install-title"><small>01</small>インストール</h2>
             <ol>
-              <li><a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a> から最新の DMG をダウンロードします。約 10 MB で、Apple シリコンと Intel の両方に対応したユニバーサル App です。</li>
+              <li><a href="https://github.com/LiuTianjie/Transeen/releases/latest">GitHub Releases</a> から最新の DMG をダウンロードします。約 11 MB で、Apple シリコンと Intel の両方に対応したユニバーサル App です。</li>
               <li>DMG を開き、Transeen をアプリケーションフォルダにドラッグします。</li>
               <li>アプリケーションフォルダから Transeen を開きます。メニューバーで動作するので、Dock ではなくメニューバーのアイコンを探してください。</li>
             </ol>
             <p>App と DMG は Developer ID で署名され、Apple の公証を受けているので、macOS は警告なしで開きます。同じリリースページに ZIP と SHA-256 チェックサムもあります。画面表示は Mac の言語に合わせます：English、简体中文、繁體中文、日本語、한국어、Français、Español、Deutsch。</p>
+            <p>初回ガイドは、サンプル翻訳、読む言語、画面収録の準備、最初のキャプチャの4段階です。サンプルに認証や権限は不要で、進行状況は保存されます。実際のキャプチャには認証が必要です。翻訳の準備ができていなくても、注釈用のキャプチャから始められます。</p>
           </section>
 
           <section id="activate" aria-labelledby="activate-title">
@@ -362,12 +366,12 @@
               <li><code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code> の形式のコードを入力し、<strong>この Mac をアクティベート</strong> を選びます。ログインは不要です。</li>
               <li>必要なら Google、GitHub、メールで iTool アカウントにログインし、ライセンスを連携します。あとで同じアカウントにログインすれば復元できます。</li>
             </ol>
-            <p>アクティベーションでは、ランダムなインストール ID とレシートをキーチェーンに保存するだけで、Mac のシリアル番号は読み取りません。1 つのコードで Mac 1 台分です。アカウントに連携してもライセンスは増えません。StupidMirror の SM- コードと iTool Pro の IT- コードは別製品のもので、ここでは使えません。コードの入手は <a href="https://github.com/LiuTianjie/Transeen/discussions">GitHub Discussions で問い合わせてください</a>。</p>
+            <p>アクティベーションでは、ランダムなインストール ID とレシートをキーチェーンに保存するだけで、Mac のシリアル番号は読み取りません。1 つのコードで Mac 1 台分です。アカウントに連携してもライセンスは増えません。StupidMirror の SM- コードと iTool Pro の IT- コードは別製品のもので、ここでは使えません。コードの入手は <a href="https://wzyp.cn/item/gq2xie">链动小铺で購入できます</a>。</p>
           </section>
 
           <section id="permission" aria-labelledby="permission-title">
             <h2 id="permission-title"><small>03</small>画面収録を許可</h2>
-            <p>初めてキャプチャするとき、Transeen は画面収録の許可を求めます。使うのは画面の画像だけで、音声は使いません。キャプチャのショートカットを押したときにしか画面を取得せず、履歴も残さず、録画し続けることもありません。</p>
+            <p>選択した範囲のキャプチャには画面収録の許可が必要です。音声は録音しません。スクロールキャプチャ中のみ画像を繰り返し取得します。最近のキャプチャはローカル保存で、削除や保存の無効化ができます。</p>
             <ol>
               <li><strong>システム設定を開く…</strong> を選ぶか、システム設定 → プライバシーとセキュリティ → 画面収録とシステムオーディオ録音 を開きます。</li>
               <li>Transeen を見つけてオンにします。</li>
@@ -380,7 +384,7 @@
             <h2 id="languages-title"><small>04</small>言語を選ぶ</h2>
             <p>ホームウインドウには <strong>原文の言語</strong> と <strong>翻訳先の言語</strong> の 2 つのメニューがあります。原文は <strong>自動検出</strong> のままにするか、8 つの言語から選びます：簡体字中国語、繁体字中国語、英語、日本語、韓国語、フランス語、スペイン語、ドイツ語。どの言語からでも他のどの言語にも翻訳できます。</p>
             <p>キャプチャを開いているときは、ツールの下にある方向（例：EN → JA）でどちらの言語も変えられます。もう一度 <kbd>F1</kbd> を押すと入れ替わります。</p>
-            <p>Apple 翻訳には、言語の組み合わせごとに言語パックが必要です。初回起動時のガイドと、その後は 設定 → 一般 → 翻訳 に、翻訳先の言語に必要なパックと状態が表示されます。<strong>ダウンロード</strong> で先に入れておけば、最初のキャプチャで待ちません。以後の翻訳は Mac 上でオフラインで行われます。言語パックは システム設定 → 一般 → 言語と地域 → 翻訳言語 でも確認できます。</p>
+            <p>ガイドの翻訳設定、または設定 → 一般 → 翻訳で Apple の言語パック、ローカルモデル、API を準備します。言語パックのインストール後はオフラインで翻訳できます。</p>
           </section>
 
           <section id="translate" aria-labelledby="translate-title">
@@ -389,7 +393,7 @@
               <li>どのアプリでも <kbd>F1</kbd> を押します。画面が静止して暗くなります。ノートパソコンのキーボードでは <kbd>fn</kbd> <kbd>F1</kbd> です（F キーを標準のファンクションキーとして使う設定にしている場合を除く）。</li>
               <li>ポインタを合わせて段落や入力欄、ウインドウに吸着させてクリックするか、自分で範囲をドラッグします。範囲は複数のアプリのウインドウにまたがっても構いません。<kbd>Esc</kbd> か右クリックでキャンセルします。</li>
               <li>前回と同じ場所なら、範囲を選ぶときに <kbd>R</kbd> を押すと前回のキャプチャの範囲をもう一度使います。再起動後も有効です。</li>
-              <li>訳文は元の文字があった場所に表示され、翻訳できた行から順に出てきます。<kbd>Tab</kbd> で原文と訳文を切り替え、<kbd>スペース</kbd> を押し続けると原文をのぞけます。</li>
+              <li>Tab またはスペースで原文と訳文を切り替えます。もう一度押すと戻ります。</li>
               <li>少し足りなければ、キャプチャの端か角をドラッグします。同じ静止画面から切り抜き直し、注釈はそのままに、離すともう一度翻訳します。</li>
               <li>向きが逆なら、キャプチャを開いたまま <kbd>F1</kbd> をもう一度押すと 2 つの言語が入れ替わります。</li>
             </ol>
@@ -400,6 +404,7 @@
             <h2 id="mark-title"><small>06</small>注釈を付ける</h2>
             <p>ツールバーでツールを選ぶか、キーを押します：<kbd>R</kbd> 四角形、<kbd>O</kbd> 楕円、<kbd>A</kbd> 矢印、<kbd>P</kbd> ペン、<kbd>V</kbd> 選択と移動。描画ツールは、既存の注釈の上から描き始めても必ず描きます。注釈をつかむときは <kbd>V</kbd> を使います。番号は 1 から増えていき、取り消しややり直しをしても変わりません。</p>
             <p>6 色と 3 種類の太さから選ぶか、スライダーで任意の色と 1〜10 の線の太さを選べます。<kbd>⌘Z</kbd> と <kbd>⌘⇧Z</kbd> で取り消しとやり直し、<kbd>Delete</kbd> で選択した注釈を削除します。注釈は別のレイヤーにあるので、原文と訳文を切り替えても動きません。</p>
+            <p>複数行テキスト、半透明のハイライト、不透明な塗りつぶしも追加できます。テキストをダブルクリックして編集し、⌘Return で確定、Esc でキャンセルします。塗りつぶしはコピー、保存、ピン留め、履歴画像に統合されます。</p>
           </section>
 
           <section id="keep" aria-labelledby="keep-title">
@@ -410,6 +415,7 @@
               <li><strong>画面にピン留め</strong> は、画像を独立した浮動ウインドウとして画面に残し、キャプチャを終えるので、すぐに次のキャプチャを始められます。ピンは切り替えた先のアプリの上にとどまります。どこにでもドラッグでき、いくつでも残せます。右クリックでコピー、保存、原文と訳文の切り替え、閉じるができます。</li>
               <li><strong>テキスト</strong> で、訳文の全文を原文と並べて開き、そのままコピーできます。</li>
             </ul>
+            <p>ピン留め画像上のスクロールで拡大縮小、Option を押しながらで不透明度を調整。メニューからクリック透過やサムネイル表示を選べます。メニューバーで全画像の表示・非表示や透過解除ができます。</p>
           </section>
 
           <section id="model" aria-labelledby="model-title">
@@ -429,8 +435,18 @@
             <p>自分の Mac で動かすサーバも使えます。ローカルのアドレスは HTTP のままでよく、キーも不要です。例えば Ollama なら <code>http://localhost:11434/v1/chat/completions</code>。リモートのアドレスには HTTPS が必要です。このモードで送るのは認識した文字だけで、スクリーンショットは送りません。リクエストが失敗すると、Transeen はエラーを表示して元の画像を残します。</p>
           </section>
 
+          <section id="scroll" aria-labelledby="scroll-title">
+            <h2 id="scroll-title"><small>09</small>スクロールキャプチャ</h2>
+            <p>スクロールキャプチャを選び、スクロールする内容を囲み、開始を押してゆっくり下へスクロールし、完了を押します。範囲をウインドウに合わせる必要はありません。自動スクロールにはアクセシビリティ権限が必要です。固定サイドバーや動く内容を避けてください。位置合わせに失敗したら前の範囲まで戻るか、取得済みの部分で完了できます。1画面で縦方向のみ、高さ30,000ピクセル、合計6,000万ピクセルまで。表示を拡大縮小しても書き出し解像度は維持されます。</p>
+          </section>
+
+          <section id="history" aria-labelledby="history-title">
+            <h2 id="history-title"><small>10</small>最近のキャプチャ</h2>
+            <p>ホーム画面またはメニューバーから最近のキャプチャを開きます。既定は7日間、最大50枚または200 MBです。設定で1・7・30日を選べます。個別削除や全削除ができ、保存を無効にすると履歴も消えます。復元画像には注釈と塗りつぶしが統合され、隠れた元画像や取り消し履歴は含みません。</p>
+          </section>
+
           <section id="shortcuts" aria-labelledby="shortcuts-title">
-            <h2 id="shortcuts-title"><small>09</small>キーボードショートカット</h2>
+            <h2 id="shortcuts-title"><small>11</small>キーボードショートカット</h2>
             <div class="table-wrap">
               <table class="keys-table">
                 <thead><tr><th scope="col">初期設定</th><th scope="col">操作</th></tr></thead>
@@ -439,7 +455,7 @@
                   <tr><td>範囲選択中に <kbd>R</kbd></td><td>前回のキャプチャの範囲をもう一度使う</td></tr>
                   <tr><td>キャプチャを開いて <kbd>F1</kbd></td><td>言語を入れ替え、または「注釈」のキャプチャを翻訳</td></tr>
                   <tr><td><kbd>Tab</kbd></td><td>原文と訳文を切り替え</td></tr>
-                  <tr><td><kbd>スペース</kbd> を押し続ける</td><td>原文をのぞく</td></tr>
+                  <tr><td><kbd>スペース</kbd></td><td>Tab またはスペースで原文と訳文を切り替えます。もう一度押すと戻ります。</td></tr>
                   <tr><td><kbd>T</kbd></td><td>翻訳、または再試行</td></tr>
                   <tr><td><kbd>D</kbd></td><td>言語を入れ替え</td></tr>
                   <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>四角形、楕円、矢印、ペン</td></tr>
@@ -457,7 +473,7 @@
           </section>
 
           <section id="troubleshooting" aria-labelledby="troubleshooting-title">
-            <h2 id="troubleshooting-title"><small>10</small>困ったときは</h2>
+            <h2 id="troubleshooting-title"><small>12</small>困ったときは</h2>
             <h3>F1 を押しても何も起きない</h3>
             <p>ノートパソコンのキーボードでは、<kbd>fn</kbd> を押さないと F1 は明るさの調整になります。または システム設定 → キーボード → キーボードショートカット → ファンクションキー で「F1、F2 などのキーを標準のファンクションキーとして使用」をオンにします。他のアプリが F1 を使っている場合もあり、ショートカットを登録できないときは Transeen が知らせます。設定 → ショートカット で別のキーを選ぶか、メニューバーのメニューの <strong>キャプチャして翻訳</strong> から始めてください。</p>
             <h3>キャプチャが空になる、または許可を何度も求められる</h3>
@@ -473,7 +489,7 @@
           </section>
 
           <section id="build" aria-labelledby="build-title">
-            <h2 id="build-title"><small>11</small>ソースからビルド</h2>
+            <h2 id="build-title"><small>13</small>ソースからビルド</h2>
             <p>Transeen は <a href="https://github.com/LiuTianjie/Transeen/blob/main/LICENSE">MIT ライセンス</a>です。Xcode 26.4 以降、Swift 6、XcodeGen が必要です。</p>
             <pre><code>brew install xcodegen
 git clone https://github.com/LiuTianjie/Transeen.git
@@ -486,10 +502,10 @@ cd Transeen
 
       <section class="guide-next" aria-labelledby="next-title">
         <div class="wrap">
-          <h2 id="next-title">Transeen 0.11.2 をダウンロード</h2>
+          <h2 id="next-title">Transeen 0.12.0 をダウンロード</h2>
           <p>macOS 26 以降向けのユニバーサル App。署名と公証を済ませています。</p>
           <div class="hero-actions">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/latest"><svg aria-hidden="true"><use href="#ui-download" /></svg>Mac 版をダウンロード</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Mac 版をダウンロード</a>
             <a class="link-arrow" href="../">Transeen のトップへ</a>
           </div>
         </div>
@@ -509,7 +525,7 @@ cd Transeen
               <li><a href="../#how">仕組み</a></li>
               <li><a href="../#apps">どのアプリでも</a></li>
               <li><a href="../#tools">ツール</a></li>
-              <li><a href="../#activation">アクティベーション</a></li>
+              <li><a href="../#pricing">料金</a></li>
             </ul>
           </nav>
           <nav aria-labelledby="footer-help">
@@ -555,6 +571,6 @@ cd Transeen
         </div>
       </div>
     </footer>
-    <script src="../../assets/site.js?v=258bbec2d37e" defer></script>
+    <script src="../../assets/site.js?v=1ca5879f978d" defer></script>
   </body>
 </html>

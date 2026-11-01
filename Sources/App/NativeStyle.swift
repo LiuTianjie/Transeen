@@ -1,6 +1,37 @@
 import SwiftUI
 import AppKit
 
+/// Opaque neutral surfaces shared by settings windows, sheets, and popovers.
+/// System materials can pick up wallpaper tint, so they are not used here.
+enum SettingsAppearance {
+    static var canvasColor: NSColor { neutral(light: 1, dark: 32 / 255) }
+    static var canvas: Color { Color(nsColor: canvasColor) }
+    static var panel: Color { Color(nsColor: neutral(light: 247 / 255, dark: 40 / 255)) }
+    static var sidebar: Color { Color(nsColor: neutral(light: 249 / 255, dark: 36 / 255)) }
+    static var border: Color { Color.primary.opacity(0.075) }
+
+    private static func neutral(light: CGFloat, dark: CGFloat) -> NSColor {
+        NSColor(name: nil) { appearance in
+            let value = appearance.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua ? dark : light
+            return NSColor(srgbRed: value, green: value, blue: value, alpha: 1)
+        }
+    }
+}
+
+extension View {
+    func settingsSurface() -> some View {
+        background(SettingsAppearance.canvas.ignoresSafeArea())
+            .presentationBackground(SettingsAppearance.canvas)
+    }
+
+    func settingsForm() -> some View {
+        formStyle(.grouped)
+            .scrollContentBackground(.hidden)
+            .backgroundStyle(SettingsAppearance.panel)
+            .background(SettingsAppearance.canvas)
+    }
+}
+
 enum TilePalette {
     static let blue = [Color(red: 0.30, green: 0.58, blue: 1.0), Color(red: 0.12, green: 0.38, blue: 0.92)]
     static let orange = [Color(red: 1.0, green: 0.66, blue: 0.22), Color(red: 0.97, green: 0.47, blue: 0.10)]
@@ -66,20 +97,7 @@ struct CardGroup<Content: View>: View {
     var body: some View {
         VStack(spacing: 0) { content }
             .padding(4)
-            .background(.fill.quinary, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(.separator.opacity(0.5), lineWidth: 0.5))
+            .background(SettingsAppearance.panel, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(SettingsAppearance.border, lineWidth: 0.5))
     }
-}
-
-struct VisualEffectBackground: NSViewRepresentable {
-    var material: NSVisualEffectView.Material
-
-    func makeNSView(context: Context) -> NSVisualEffectView {
-        let view = NSVisualEffectView()
-        view.material = material
-        view.blendingMode = .behindWindow
-        view.state = .followsWindowActiveState
-        return view
-    }
-    func updateNSView(_ view: NSVisualEffectView, context: Context) { view.material = material }
 }

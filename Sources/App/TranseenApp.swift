@@ -38,6 +38,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     private var homeWindow: NSWindow?
     private var historyWindow: NSWindow?
     private var onboardingWindow: NSWindow?
+    private var terminating = false
     private var launcherPopover: NSPopover?
     private var launcherClickMonitor: Any?
     private var statusMenu: NSMenu?
@@ -130,8 +131,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         #endif
         // "introduced" marks installs from before the guide existed.
         let onboarded = UserDefaults.standard.bool(forKey: "onboarded") || UserDefaults.standard.bool(forKey: "introduced")
-        if permission.pendingMode != nil { showPermissionGuide() }
-        else if !onboarded { showOnboarding() }
+        if UserDefaults.standard.bool(forKey: "onboardingInProgress") || !onboarded { showOnboarding() }
+        else if permission.pendingMode != nil { showPermissionGuide() }
         else { showHome() }
     }
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -141,6 +142,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     func applicationDidBecomeActive(_ notification: Notification) { license.validateInBackgroundIfNeeded() }
     func applicationDidResignActive(_ notification: Notification) { launcherPopover?.performClose(nil) }
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        terminating = true
         capture.close()
         Task { [weak self] in
             await self?.capture.flushHistory()
@@ -222,6 +224,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             return
         }
         permission.pendingMode = nil
+        onboardingWindow?.close()
         permissionWindow?.orderOut(nil)
         permissionWindow?.contentView = nil
         permissionWindow = nil
@@ -234,6 +237,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 480, height: 445), styleMask: [.titled, .closable], backing: .buffered, defer: false)
             window.title = "Transeen"
             window.isReleasedWhenClosed = false
+            window.backgroundColor = SettingsAppearance.canvasColor
+            window.titlebarAppearsTransparent = true
             window.delegate = self
             let view = PermissionGuide(permission: permission, continueCapture: { [weak self] in
                 guard let self else { return }; start(permission.pendingMode ?? .translate)
@@ -259,7 +264,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     func windowWillClose(_ notification: Notification) {
         guard let window = notification.object as? NSWindow else { return }
         if window === onboardingWindow {
-            UserDefaults.standard.set(true, forKey: "onboarded")
+            if !terminating {
+                UserDefaults.standard.set(true, forKey: "onboarded")
+                UserDefaults.standard.set(false, forKey: "onboardingInProgress")
+                UserDefaults.standard.removeObject(forKey: "onboardingStep")
+            }
             settings.shortcuts.recording = nil
             window.contentView = nil
             onboardingWindow = nil
@@ -273,19 +282,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         launcherPopover?.performClose(nil)
         homeWindow?.orderOut(nil)
         if onboardingWindow == nil {
-            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 540, height: 680), styleMask: [.titled, .closable, .fullSizeContentView], backing: .buffered, defer: false)
+            let initialStep = UserDefaults.standard.bool(forKey: "onboardingInProgress") ? UserDefaults.standard.integer(forKey: "onboardingStep") : 0
+            UserDefaults.standard.set(true, forKey: "onboardingInProgress")
+            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 780, height: 620), styleMask: [.titled, .closable, .fullSizeContentView], backing: .buffered, defer: false)
             window.title = L("开始使用 Transeen")
             window.titleVisibility = .hidden
             window.titlebarAppearsTransparent = true
-            window.isMovableByWindowBackground = true
+            window.isMovableByWindowBackground = false
             window.isReleasedWhenClosed = false
+            window.backgroundColor = SettingsAppearance.canvasColor
+            window.titlebarAppearsTransparent = true
             window.delegate = self
             let host = NSHostingView(rootView: OnboardingView(settings: settings, permission: permission, license: license,
-                showLicense: { [weak self] in self?.showLicense() },
-                finish: { [weak self] startCapture in
+                initialStep: initialStep,
+                stepChanged: { UserDefaults.standard.set($0, forKey: "onboardingStep") },
+                finish: { [weak self] mode in
                     guard let self else { return }
                     onboardingWindow?.close()
-                    if startCapture { start(.translate) } else { showHome() }
+                    if let mode { start(mode) } else { showHome() }
                 }))
             window.contentView = host
             onboardingWindow = window
@@ -306,6 +320,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             let window = NSWindow(contentRect: CGRect(x: 0, y: 0, width: 720, height: 540), styleMask: [.titled, .closable, .resizable, .miniaturizable], backing: .buffered, defer: false)
             window.title = L("最近截图")
             window.isReleasedWhenClosed = false
+            window.backgroundColor = SettingsAppearance.canvasColor
+            window.titlebarAppearsTransparent = true
             window.contentView = NSHostingView(rootView: CaptureHistoryView(history: .shared) { [weak self] entry in
                 guard let self, let image = CaptureHistory.shared.image(entry.id) else { return }
                 self.historyWindow?.orderOut(nil)
@@ -363,6 +379,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             window.titleVisibility = .hidden
             window.titlebarAppearsTransparent = true
             window.isReleasedWhenClosed = false
+            window.backgroundColor = SettingsAppearance.canvasColor
+            window.titlebarAppearsTransparent = true
             window.isMovableByWindowBackground = true
             let host = ClearHostingView(rootView: launcher())
             host.sizingOptions = [.preferredContentSize]
@@ -416,6 +434,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 380), styleMask: [.titled, .closable], backing: .buffered, defer: false)
             window.title = L("Transeen · 激活与账号")
             window.isReleasedWhenClosed = false
+            window.backgroundColor = SettingsAppearance.canvasColor
+            window.titlebarAppearsTransparent = true
             let host = NSHostingView(rootView: LicenseView(manager: license, done: { [weak self] in
                 guard let self else { return }
                 licenseWindow?.orderOut(nil)
@@ -479,11 +499,12 @@ private struct SettingsView: View {
                         Text(pane.subtitle).font(.system(size: 12)).foregroundStyle(.secondary)
                     }
                 }.padding(.horizontal, 28).padding(.top, 34).padding(.bottom, 4)
-                content.formStyle(.grouped).scrollContentBackground(.hidden)
+                content.settingsForm()
             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .background(Color(nsColor: .windowBackgroundColor))
+                .background(SettingsAppearance.canvas)
         }
         .frame(minWidth: 720, maxWidth: .infinity, minHeight: 580, maxHeight: .infinity)
+        .settingsSurface()
         .ignoresSafeArea()
         .languagePacks(packs, for: settings)
         .onChange(of: pane) { settings.shortcuts.recording = nil }
@@ -527,7 +548,7 @@ private struct SettingsView: View {
         .padding(12)
         .frame(width: 210)
         .frame(maxHeight: .infinity)
-        .background(VisualEffectBackground(material: .sidebar).ignoresSafeArea())
+        .background(SettingsAppearance.sidebar.ignoresSafeArea())
     }
 
     @ViewBuilder private var content: some View {

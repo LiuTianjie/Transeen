@@ -70,7 +70,7 @@ struct LicenseView: View {
                 Spacer()
                 Button(manager.state.isActivated ? L("开始使用") : L("稍后"), action: done).disabled(busy)
             }
-        }.padding(26).frame(width: 500).fixedSize(horizontal: false, vertical: true)
+        }.padding(26).frame(width: 500).fixedSize(horizontal: false, vertical: true).settingsSurface()
     }
     private func activate() { run { try await manager.activate(code: code); code = ""; message = L("激活成功。") } }
     private func run(_ action: @escaping @MainActor () async throws -> Void) {

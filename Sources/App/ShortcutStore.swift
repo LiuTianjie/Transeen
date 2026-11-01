@@ -6,6 +6,7 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
     case lastArea
     case compare, translate, direction, rectangle, ellipse, arrow, pen, move, copy, save, undo, redo, close
     case annotate, pin, reselect, text, highlight, redact
+    // Preserve the stored binding for the former hold-to-compare shortcut.
     case peek
     case openImage, settings, quit
     var id: String { rawValue }
@@ -45,7 +46,7 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
         case .annotate: L("展开 / 收起标注")
         case .pin: L("钉到屏幕")
         case .reselect: L("重新框选")
-        case .peek: L("按住对照原文")
+        case .peek: L("切换原文 / 译文")
         case .openImage: L("打开图片")
         case .settings: L("打开设置")
         case .quit: L("退出 Transeen")
@@ -53,7 +54,7 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
     }
     var command: String {
         switch self {
-        case .compare, .globalCompare: "toggle"
+        case .compare, .globalCompare, .peek: "toggle"
         case .rectangle, .ellipse, .arrow, .pen, .move, .text, .highlight, .redact: "tool." + rawValue
         default: rawValue
         }
@@ -152,9 +153,12 @@ final class ShortcutStore {
     func label(_ action: ShortcutAction) -> String { binding(action)?.display ?? L("未设置") }
     func help(_ text: String, _ action: ShortcutAction) -> String { binding(action).map { "\(text)（\($0.display)）" } ?? text }
     func action(for event: NSEvent, group: String) -> ShortcutAction? {
-        guard recording == nil, !event.isARepeat else { return nil }
+        guard recording == nil else { return nil }
         let key = KeyBinding(event)
-        return ShortcutAction.allCases.first { $0.group == group && binding($0) == key }
+        let action = ShortcutAction.allCases.first { $0.group == group && binding($0) == key }
+        // Comparison repeats must reach the controller so it can consume them without toggling.
+        guard !event.isARepeat || action?.command == "toggle" else { return nil }
+        return action
     }
     @discardableResult func set(_ key: KeyBinding?, for action: ShortcutAction) -> Bool {
         if let key {
