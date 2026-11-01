@@ -8,7 +8,7 @@ struct CaptureToolbar: View {
     @State private var showsStyle = false
     @State private var showsText = false
     @FocusState private var numberFocused: Bool
-    private let colors: [NSColor] = [.systemRed, .systemOrange, .systemYellow, .systemGreen, .systemBlue, .white]
+    private let colors: [NSColor] = [.systemRed, .systemOrange, .systemYellow, .systemGreen, .systemBlue, .white, .black]
     private let toolbarWidth: CGFloat = 536
     private var showsInspector: Bool { state.annotations.selectedID != nil || (state.annotating && state.annotations.tool != .move) }
     private var effectiveTool: AnnotationTool { state.annotations.selected?.tool ?? state.annotations.tool }
@@ -18,18 +18,7 @@ struct CaptureToolbar: View {
                 HStack(spacing: 8) {
                     comparison.frame(width: 84)
                     separator
-                    HStack(spacing: 2) {
-                        ForEach(AnnotationTool.allCases) { tool in
-                            Button {
-                                animate { action("tool." + (state.annotations.tool == tool ? AnnotationTool.move.rawValue : tool.rawValue)) }
-                            } label: { icon(tool.symbol) }
-                                .buttonStyle(CaptureToolbarButtonStyle(selected: state.annotations.tool == tool && (tool != .move || state.annotations.selectedID != nil)))
-                                .help(tool == .number ? L("编号 · 下一个：%ld", state.annotations.nextNumber) : tool.title)
-                                .accessibilityLabel(tool.title)
-                                .accessibilityAddTraits(state.annotations.tool == tool ? .isSelected : [])
-                        }
-                    }
-                    separator
+                    Spacer(minLength: 0)
                     HStack(spacing: 2) {
                         Button { showsText.toggle() } label: {
                             Label(L("文字"), systemImage: "text.alignleft").font(.system(size: 11, weight: .medium)).frame(width: 52, height: 30)
@@ -49,6 +38,22 @@ struct CaptureToolbar: View {
                         iconButton("xmark", state.shortcuts.help(L("关闭"), .close), "close")
                     }
                 }.padding(.horizontal, 10).padding(.vertical, 7).frame(width: toolbarWidth)
+
+                HStack(spacing: 8) {
+                    HStack(spacing: 2) {
+                        ForEach(AnnotationTool.allCases) { tool in
+                            Button {
+                                animate { action("tool." + (state.annotations.tool == tool ? AnnotationTool.move.rawValue : tool.rawValue)) }
+                            } label: { icon(tool.symbol) }
+                                .buttonStyle(CaptureToolbarButtonStyle(selected: state.annotations.tool == tool && (tool != .move || state.annotations.selectedID != nil)))
+                                .help(tool == .number ? L("编号 · 下一个：%ld", state.annotations.nextNumber) : tool.title)
+                                .accessibilityLabel(tool.title)
+                                .accessibilityAddTraits(state.annotations.tool == tool ? .isSelected : [])
+                        }
+                    }
+                    Spacer(minLength: 0)
+                    Text(effectiveTool.title).font(.system(size: 11)).foregroundStyle(CaptureAppearance.secondary)
+                }.padding(.horizontal, 10).padding(.bottom, 4).frame(width: toolbarWidth)
 
                 Rectangle().fill(CaptureAppearance.foreground.opacity(0.08)).frame(height: 0.5).padding(.horizontal, 10)
                 HStack(alignment: .top, spacing: 12) {
@@ -159,6 +164,7 @@ struct CaptureToolbar: View {
 
     private var inspector: some View {
         HStack(spacing: 10) {
+            if effectiveTool != .redact {
             HStack(spacing: 4) {
                 ForEach(Array(colors.enumerated()), id: \.offset) { index, color in
                     Button { state.annotations.color = color } label: {
@@ -167,11 +173,13 @@ struct CaptureToolbar: View {
                             .padding(3)
                             .overlay(Circle().strokeBorder(state.annotations.color == color ? Color(nsColor: color) : .clear, lineWidth: 1))
                             .frame(width: 24, height: 28)
-                    }.buttonStyle(.plain).accessibilityLabel([L("红色"), L("橙色"), L("黄色"), L("绿色"), L("蓝色"), L("白色")][index])
+                    }.buttonStyle(.plain).accessibilityLabel([L("红色"), L("橙色"), L("黄色"), L("绿色"), L("蓝色"), L("白色"), L("黑色")][index])
                 }
             }
             separator
-            if let number = state.annotations.selected?.number {
+            if effectiveTool == .text {
+                Button(L("编辑文字…")) { action("editText") }.disabled(state.annotations.selected?.tool != .text)
+            } else if let number = state.annotations.selected?.number {
                 Button { showsStyle = true } label: {
                     Label(L("编号 %ld", number), systemImage: "pencil").font(.system(size: 11)).frame(width: 92, height: 28)
                 }.buttonStyle(CaptureToolbarButtonStyle()).help(L("修改编号数字")).accessibilityLabel(L("修改编号数字"))
@@ -191,6 +199,10 @@ struct CaptureToolbar: View {
                 .buttonStyle(CaptureToolbarButtonStyle())
                 .help(L("自定义颜色与粗细")).accessibilityLabel(L("自定义颜色与粗细"))
                 .popover(isPresented: $showsStyle, arrowEdge: .bottom) { stylePicker }
+            } else {
+                Label(L("实色覆盖，导出后隐藏原始像素"), systemImage: "lock.fill")
+                    .font(.system(size: 11)).foregroundStyle(CaptureAppearance.secondary)
+            }
             Spacer(minLength: 0)
             HStack(spacing: 4) {
                 iconButton("arrow.uturn.backward", state.shortcuts.help(L("撤销"), .undo), "undo").disabled(!state.annotations.canUndo)
@@ -213,6 +225,18 @@ struct CaptureToolbar: View {
                 }
             }
             ColorPicker(L("颜色"), selection: Binding(get: { Color(nsColor: state.annotations.color) }, set: { state.annotations.color = NSColor($0) }))
+            if effectiveTool == .text {
+                HStack {
+                    Text(L("字号"))
+                    Slider(value: Binding(get: { Double(state.annotations.selected?.fontSize ?? state.annotations.fontSize) }, set: {
+                        state.annotations.fontSize = CGFloat($0)
+                        state.annotations.modifySelected { $0.fontSize = state.annotations.fontSize }
+                    }), in: 12...72, step: 1, onEditingChanged: { editing in
+                        if editing { state.annotations.beginEdit() } else { state.annotations.commitEdit() }
+                    })
+                    Text("\(Int(state.annotations.selected?.fontSize ?? state.annotations.fontSize))").monospacedDigit()
+                }
+            } else {
             HStack(spacing: 10) {
                 Text(effectiveTool == .number ? L("大小") : L("粗细")).font(.system(size: 12))
                 Slider(value: Binding(get: { Double(state.annotations.width) }, set: { state.annotations.width = CGFloat($0) }), in: 1...10, step: 1, onEditingChanged: { editing in
@@ -220,17 +244,27 @@ struct CaptureToolbar: View {
                     })
                     .controlSize(.small).accessibilityLabel(effectiveTool == .number ? L("编号大小") : L("线宽"))
             }
-        }.padding(16).frame(width: 240).onDisappear { state.annotations.commitEdit() }
+            }
+        }.padding(16).frame(width: 260).onDisappear { state.annotations.commitEdit() }
     }
 
     private var moreMenu: some View {
         Menu {
             Button(L("保存图片…"), systemImage: "square.and.arrow.down") { action("save") }
             Button(L("重新框选"), systemImage: "viewfinder") { action("reselect") }
+            if state.scrollable {
+                Divider()
+                Button(L("放大"), systemImage: "plus.magnifyingglass") { action("zoomIn") }
+                Button(L("缩小"), systemImage: "minus.magnifyingglass") { action("zoomOut") }
+                Button(L("适合宽度"), systemImage: "arrow.left.and.right") { action("zoomReset") }
+            }
             Divider()
             Button(L("撤销"), systemImage: "arrow.uturn.backward") { action("undo") }.disabled(!state.annotations.canUndo)
             Button(L("重做"), systemImage: "arrow.uturn.forward") { action("redo") }.disabled(!state.annotations.canRedo)
             Button(L("删除选中标注"), systemImage: "trash") { action("delete") }.disabled(state.annotations.selectedID == nil)
+            if state.annotations.selected?.tool == .text {
+                Button(L("编辑文字…"), systemImage: "textformat") { action("editText") }
+            }
             if state.annotations.selected?.tool == .number {
                 Button(L("修改编号…"), systemImage: "number") { showsStyle = true }
             }

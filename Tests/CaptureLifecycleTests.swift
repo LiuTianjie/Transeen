@@ -21,7 +21,7 @@ import CoreText
         let line = CTLineCreateWithAttributedString(NSAttributedString(string: "Privacy and security settings", attributes: [.font: NSFont.systemFont(ofSize: 25), .foregroundColor: NSColor.black]))
         ctx.textPosition = CGPoint(x: 30, y: 100); CTLineDraw(line, ctx)
         let picture = NSImage(cgImage: ctx.makeImage()!, size: NSSize(width: 600, height: 200))
-        let controller = CaptureController()
+        let controller = CaptureController(history: nil)
         controller.authorize = { true }
         let areaSuite = "transeen.area.tests.\(UUID().uuidString)"
         controller.defaults = UserDefaults(suiteName: areaSuite)!

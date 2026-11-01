@@ -23,4 +23,5 @@ jobs:
           ./scripts/test.sh
           ./scripts/test-license.sh
           ./scripts/test-lifecycle.sh
+          ./scripts/test-capture-tools.sh
           ./scripts/test-local-models.sh

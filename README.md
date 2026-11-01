@@ -23,10 +23,13 @@ Transeen is a macOS menu bar app that keeps translation close to what you are re
 ## What it does
 
 - **Translate in place.** Local Vision OCR, pixel-aware text layout, and original/translation comparison. A full text view keeps longer translations readable.
-- **Annotate independently.** Arrows, shapes, pen strokes, and numbered markers stay on a separate layer with undo and redo.
+- **Annotate independently.** Arrows, shapes, pen strokes, numbers, text, highlights and solid redactions stay on a separate layer with undo and redo. Double-click text to edit; ⌘Return commits and Esc cancels the edit. Redacted pixels are covered in exported images.
 - **Choose a provider.** Apple on-device translation, a downloadable local translation model (Index-Translate 2B or Hy-MT2 1.8B, about 1.1 GB, Apple silicon), or an OpenAI-compatible remote model. Only the remote mode sends anything off the Mac, and then recognized text only, not screenshots.
-- **Keep a small footprint.** Menu bar access, configurable shortcuts, pinned images, PNG export, and clipboard copy. No screenshot history or continuous capture.
+- **Keep a small footprint.** Menu bar access, configurable shortcuts, pinned images, PNG export, and clipboard copy. Pins support scroll-to-zoom, ⌥scroll for opacity, thumbnail mode and click-through; show/hide or unlock all pins from the menu bar.
 - **Check for updates.** Choose “检查更新…” in the menu bar or launcher to find the latest GitHub release and its download.
+
+- **Scrolling capture.** Select scrolling content, start, scroll down while watching the preview, then finish and annotate. Optional auto-scroll requires Accessibility access. Vertical capture only, up to 30,000 pixels high / 60 million pixels. Animation, fixed sidebars or changing layouts can prevent alignment; the captured portion is retained and the problem is shown. Tall results support scrolling and zooming without reducing export resolution.
+- **Recent captures.** Locally retain up to 50 captures / 200 MB for 7 days by default. Choose 1, 7 or 30 days; delete individual images or clear all. Disabling retention clears history. Restored images have flattened annotations, without hidden originals or undo layers.
 
 ## Get started
 
@@ -63,6 +66,7 @@ The app is written to `dist/Transeen.app`. Without a Developer ID identity, the 
 ./scripts/test.sh
 ./scripts/test-license.sh
 ./scripts/test-lifecycle.sh
+./scripts/test-capture-tools.sh
 ```
 
 The tests cover image layout, translation protocol, activation state, version comparisons, and capture lifecycle. Real Apple translation can be checked separately with `TRANSEEN_TEST_APPLE=1 ./scripts/test-lifecycle.sh` after installing the language packs.

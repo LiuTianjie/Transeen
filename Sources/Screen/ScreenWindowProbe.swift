@@ -2,6 +2,21 @@ import AppKit
 import CoreGraphics
 
 enum ScreenWindowProbe {
+    /// Resolve the real target even when capture was started from our menu-bar popover.
+    static func application(at point: CGPoint) -> NSRunningApplication? {
+        guard let info = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] else { return nil }
+        let top = NSScreen.screens.first(where: { $0.frame.origin == .zero })?.frame.maxY ?? 0
+        let quartzPoint = CGPoint(x: point.x, y: top - point.y)
+        for item in info {
+            guard let pid = item[kCGWindowOwnerPID as String] as? pid_t, pid != ProcessInfo.processInfo.processIdentifier,
+                  (item[kCGWindowLayer as String] as? Int ?? 0) == 0,
+                  let dictionary = item[kCGWindowBounds as String] as? [String: Any],
+                  let bounds = CGRect(dictionaryRepresentation: dictionary as CFDictionary), bounds.contains(quartzPoint) else { continue }
+            return NSRunningApplication(processIdentifier: pid)
+        }
+        return nil
+    }
+
     static func hoverBounds(at point: CGPoint, excludingPID pid: pid_t) -> CGRect? {
         let candidates = onscreenCandidates(excludingPID: pid)
         if let bounds = ScreenTranslate.topmostBounds(at: point, candidates: candidates) {

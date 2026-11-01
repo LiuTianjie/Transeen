@@ -31,6 +31,7 @@ final class CaptureState {
     var hasTranslatedOnce = false
     var copyCompleted = false
     var finishing = false
+    var scrollable = false
     /// The crop's pixel size while an edge is dragged. Not `status`, which re-measures the toolbar.
     var cropReadout: String?
     var compactProgress: Bool { working && !hasTranslatedOnce && !annotating && annotations.selectedID == nil }
@@ -50,6 +51,7 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
     private let liveView = NSView()
     private let liveImage = CALayer()
     private var liveFrame: CGRect?
+    private var documentScroll: NSScrollView?
     private let chromePanel: NSPanel
     private let hosting: NSHostingView<CaptureToolbar>
     var onAction: ((String) -> Void)?
@@ -124,6 +126,31 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
         }
         makeKey()
     }
+    func presentScrollable(image: NSImage, rect: CGRect) {
+        let scroll = NSScrollView()
+        scroll.hasVerticalScroller = true
+        scroll.hasHorizontalScroller = true
+        scroll.autohidesScrollers = true
+        scroll.drawsBackground = true
+        scroll.backgroundColor = .windowBackgroundColor
+        scroll.allowsMagnification = true
+        scroll.minMagnification = 0.25
+        scroll.maxMagnification = 4
+        canvas.removeFromSuperview()
+        canvas.frame = CGRect(origin: .zero, size: image.size)
+        scroll.documentView = canvas
+        contentView?.addSubview(scroll, positioned: .below, relativeTo: border)
+        documentScroll = scroll
+        present(image: image, rect: rect)
+        scroll.contentView.scroll(to: CGPoint(x: 0, y: max(0, image.size.height - scroll.contentSize.height)))
+        scroll.reflectScrolledClipView(scroll.contentView)
+    }
+    func zoomDocument(by factor: CGFloat) {
+        guard let scroll = documentScroll else { return }
+        canvas.commitText()
+        scroll.magnification = min(scroll.maxMagnification, max(scroll.minMagnification, scroll.magnification * factor))
+    }
+    func resetDocumentZoom() { documentScroll?.magnification = 1 }
     /// Start dragging an edge: the window grows to the whole frozen frame (`frame`,
     /// in screen points) and stays put, so only layers move until `endLiveCrop`.
     func beginLiveCrop(source: CGImage, frame sourceFrame: CGRect) {
@@ -159,7 +186,8 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
         CATransaction.begin(); CATransaction.setDisableActions(true)
         if liveFrame == nil { setFrame(rect.insetBy(dx: -Self.margin, dy: -Self.margin), display: false) }
         let local = rect.offsetBy(dx: -frame.minX, dy: -frame.minY)
-        canvas.frame = local
+        if let scroll = documentScroll { scroll.frame = local }
+        else { canvas.frame = local }
         border.frame = local
         border.needsLayout = true
         liveView.frame = local

@@ -29,7 +29,7 @@ private struct PreviewBoard: View {
         let directory = URL(fileURLWithPath: "build/previews", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         for dark in [false, true] {
-            for kind in ["ready", "annotating", "editing-number", "editing-rectangle", "working", "failed", "empty"] {
+            for kind in ["ready", "annotating", "editing-number", "editing-rectangle", "editing-text", "highlight", "redact", "working", "failed", "empty"] {
                 let state = CaptureState()
                 state.direction = "EN → 中文"
                 switch kind {
@@ -41,6 +41,11 @@ private struct PreviewBoard: View {
                 case "editing-rectangle":
                     state.translated = true
                     state.annotations.append(Annotation(tool: .rectangle, points: [CGPoint(x: 10, y: 10), CGPoint(x: 90, y: 60)], color: .systemBlue, width: 8))
+                case "editing-text":
+                    state.annotating = true; state.annotations.tool = .text
+                    state.annotations.append(Annotation(tool: .text, points: [CGPoint(x: 20, y: 100)], color: .systemBlue, width: 4, text: "文字标注", fontSize: 22))
+                case "highlight": state.annotating = true; state.annotations.tool = .highlight; state.annotations.color = .systemYellow
+                case "redact": state.annotating = true; state.annotations.tool = .redact
                 case "working": state.working = true; state.automaticallyTranslates = true; state.status = "正在识别与翻译…"
                 case "failed": state.failed = true; state.automaticallyTranslates = true; state.status = "连接失败，请重试。"
                 default: state.noText = true; state.automaticallyTranslates = true; state.status = "没有识别到文字，可重新框选或重试。"

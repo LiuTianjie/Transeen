@@ -17,6 +17,36 @@ enum ScreenCaptureError: LocalizedError {
 }
 
 enum ScreenCaptureService {
+    /// Reuse the display/filter for a scrolling session instead of discovering windows for every frame.
+    @MainActor final class SnapshotSource {
+        private let filter: SCContentFilter
+        private let configuration: SCStreamConfiguration
+        init(filter: SCContentFilter, configuration: SCStreamConfiguration) {
+            self.filter = filter; self.configuration = configuration
+        }
+        func capture() async throws -> CGImage {
+            try await SCScreenshotManager.captureImage(contentFilter: filter, configuration: configuration)
+        }
+    }
+
+    @MainActor static func scrollingSource(rect: CGRect, display screen: Display) async throws -> SnapshotSource {
+        let content = try await SCShareableContent.excludingDesktopWindows(false, onScreenWindowsOnly: true)
+        guard let display = content.displays.first(where: { $0.displayID == screen.displayID }) else { throw ScreenCaptureError.noDisplay }
+        // Window IDs also work when ScreenCaptureKit omits this process from its application list.
+        // The session creates its outline and controls before preparing this source.
+        let ours = Set(NSApp.windows.map { CGWindowID($0.windowNumber) })
+        let excluded = content.windows.filter {
+            ours.contains($0.windowID) || $0.owningApplication?.processID == ProcessInfo.processInfo.processIdentifier
+        }
+        let filter = SCContentFilter(display: display, excludingWindows: excluded)
+        let configuration = SCStreamConfiguration()
+        configuration.sourceRect = ScreenTranslate.captureSourceRect(appKitRect: rect, screenFrame: screen.frame)
+        configuration.width = max(1, Int((rect.width * screen.backingScaleFactor).rounded()))
+        configuration.height = max(1, Int((rect.height * screen.backingScaleFactor).rounded()))
+        configuration.showsCursor = false
+        return SnapshotSource(filter: filter, configuration: configuration)
+    }
+
     /// The few facts about an `NSScreen` the capture needs, so the capture can run off the main actor.
     struct Display: Sendable {
         var frame: CGRect

@@ -36,15 +36,50 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     private var status: NSStatusItem?
     private var settingsWindow: NSWindow?
     private var homeWindow: NSWindow?
+    private var historyWindow: NSWindow?
     private var onboardingWindow: NSWindow?
     private var launcherPopover: NSPopover?
     private var launcherClickMonitor: Any?
     private var statusMenu: NSMenu?
 
+    /// The app icon's scan corners and text lines, simplified for the menu bar.
+    private static let statusBarIcon: NSImage = {
+        let image = NSImage(size: NSSize(width: 18, height: 18), flipped: false) { _ in
+            NSColor.black.setStroke()
+            for flipX in [false, true] {
+                for flipY in [false, true] {
+                    func point(_ x: CGFloat, _ y: CGFloat) -> NSPoint {
+                        NSPoint(x: flipX ? 18 - x : x, y: flipY ? 18 - y : y)
+                    }
+                    let corner = NSBezierPath()
+                    corner.move(to: point(0.75, 4.6))
+                    corner.line(to: point(0.75, 2.95))
+                    corner.curve(to: point(2.95, 0.75), controlPoint1: point(0.75, 1.73), controlPoint2: point(1.73, 0.75))
+                    corner.line(to: point(4.6, 0.75))
+                    corner.lineWidth = 1.4
+                    corner.lineCapStyle = .round
+                    corner.stroke()
+                }
+            }
+            let lines = NSBezierPath()
+            lines.move(to: NSPoint(x: 4.2, y: 10.85))
+            lines.line(to: NSPoint(x: 13.8, y: 10.85))
+            lines.move(to: NSPoint(x: 4.2, y: 7.15))
+            lines.line(to: NSPoint(x: 10.7, y: 7.15))
+            lines.lineWidth = 1.65
+            lines.lineCapStyle = .round
+            lines.stroke()
+            return true
+        }
+        image.isTemplate = true
+        image.accessibilityDescription = "Transeen"
+        return image
+    }()
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        item.button?.image = NSImage(systemSymbolName: "viewfinder", accessibilityDescription: "Transeen")
+        item.button?.image = Self.statusBarIcon
         item.button?.target = self
         item.button?.action = #selector(toggleLauncher)
         item.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
@@ -65,6 +100,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             case .globalCompare: capture.action("toggle")
             case .captureTranslate: if !capture.repeatTranslateShortcut() { start(.translate) }
             case .captureScreenshot: start(.screenshot)
+            case .captureScrolling: start(.scrolling)
+            case .togglePins: capture.togglePins()
+            case .showHistory: showHistory()
             default: break
             }
         }
@@ -102,6 +140,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     }
     func applicationDidBecomeActive(_ notification: Notification) { license.validateInBackgroundIfNeeded() }
     func applicationDidResignActive(_ notification: Notification) { launcherPopover?.performClose(nil) }
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        capture.close()
+        Task { [weak self] in
+            await self?.capture.flushHistory()
+            sender.reply(toApplicationShouldTerminate: true)
+        }
+        return .terminateLater
+    }
     func applicationWillTerminate(_ notification: Notification) {
         stopMonitoringLauncherClicks()
         capture.close()
@@ -134,6 +180,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         menu.addItem(.separator())
         menu.addItem(menuItem(settings.shortcuts.help(L("截图翻译"), .captureTranslate), action: #selector(translateCapture)))
         menu.addItem(menuItem(settings.shortcuts.help(L("截图标注"), .captureScreenshot), action: #selector(screenshot)))
+        menu.addItem(menuItem(settings.shortcuts.help(L("滚动长截图"), .captureScrolling), action: #selector(scrollingCapture)))
+        menu.addItem(menuItem(L("最近截图…"), action: #selector(showHistory)))
+        menu.addItem(menuItem(L("显示 / 隐藏所有钉图"), action: #selector(togglePins)))
+        menu.addItem(menuItem(L("解除所有钉图穿透"), action: #selector(unlockPins)))
         menu.addItem(menuItem(L("关闭当前截图"), action: #selector(closeCapture)))
         menu.addItem(.separator())
         menu.addItem(menuItem(L("新手引导…"), action: #selector(showOnboarding)))
@@ -159,7 +209,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         }
     }
     private func refreshShortcutLabels() {
-        for (index, action, title) in [(2, ShortcutAction.captureTranslate, L("截图翻译")), (3, .captureScreenshot, L("截图标注"))] {
+        for (index, action, title) in [(2, ShortcutAction.captureTranslate, L("截图翻译")), (3, .captureScreenshot, L("截图标注")), (4, .captureScrolling, L("滚动长截图"))] {
             statusMenu?.item(at: index)?.title = settings.shortcuts.help(title, action)
         }
     }
@@ -246,6 +296,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     }
     @objc private func translateCapture() { start(.translate) }
     @objc private func screenshot() { start(.screenshot) }
+    @objc private func scrollingCapture() { start(.scrolling) }
+    @objc private func togglePins() { capture.togglePins() }
+    @objc private func unlockPins() { capture.unlockPins() }
+    @objc private func showHistory() {
+        launcherPopover?.performClose(nil)
+        CaptureHistory.shared.prune()
+        if historyWindow == nil {
+            let window = NSWindow(contentRect: CGRect(x: 0, y: 0, width: 720, height: 540), styleMask: [.titled, .closable, .resizable, .miniaturizable], backing: .buffered, defer: false)
+            window.title = L("最近截图")
+            window.isReleasedWhenClosed = false
+            window.contentView = NSHostingView(rootView: CaptureHistoryView(history: .shared) { [weak self] entry in
+                guard let self, let image = CaptureHistory.shared.image(entry.id) else { return }
+                self.historyWindow?.orderOut(nil)
+                self.capture.openImage(image, settings: self.settings, historyID: entry.id)
+            })
+            window.center(); historyWindow = window
+        }
+        NSApp.activate(ignoringOtherApps: true)
+        historyWindow?.makeKeyAndOrderFront(nil)
+    }
     @objc private func closeCapture() { capture.close() }
     @objc private func quit() { NSApp.terminate(nil) }
     private func launcher(compact: Bool = false) -> LauncherView {
@@ -256,6 +326,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             showOnboarding: { [weak self] in self?.showOnboarding() },
             openImage: { [weak self] in self?.openImage() },
             closeCapture: { [weak self] in self?.capture.close() },
+            showHistory: { [weak self] in self?.showHistory() },
+            togglePins: { [weak self] in self?.capture.togglePins() },
             quit: { NSApp.terminate(nil) }, showLicense: { [weak self] in self?.showLicense() }, checkForUpdates: { [weak self] in self?.checkForUpdates() }, license: license, compact: compact)
     }
     @objc private func toggleLauncher() {
@@ -465,6 +537,7 @@ private struct SettingsView: View {
                 Section(L("捕获")) {
                     ShortcutRow(shortcuts: settings.shortcuts, action: .captureTranslate)
                     ShortcutRow(shortcuts: settings.shortcuts, action: .captureScreenshot)
+                    ShortcutRow(shortcuts: settings.shortcuts, action: .captureScrolling)
                     if !settings.shortcuts.message.isEmpty { Text(settings.shortcuts.message).font(.caption).foregroundStyle(.secondary) }
                     VStack(alignment: .leading, spacing: 3) {
                         Toggle(L("复制后关闭截图"), isOn: $settings.copyCloses)

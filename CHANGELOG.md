@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Add editable multiline text annotations, translucent highlights, and solid privacy redactions. Redactions are flattened into copied, saved, pinned and retained images.
+- Add vertical scrolling capture with a live preview, optional automatic scrolling, verified overlap stitching and explicit failure/size-limit feedback. Tall results can be scrolled and zoomed while keeping full-resolution export.
+- Add pin zoom, opacity controls, click-through, thumbnail mode and menu-bar actions to hide/show or unlock all pins.
+- Add local recent-capture recovery with 1/7/30-day retention, individual deletion and clear-all. History keeps flattened images only, up to 50 captures / 200 MB.
+- Show the frozen selection without the system window entrance animation, and use a menu-bar template matching the application icon.
+
 ## 0.11.2
 
 - A picture next to the text, such as a row of screenshot thumbnails, is no longer read as words, erased and covered with a translation ("望开！"). A line the recogniser is unsure of is read again, magnified, and kept only if it reads the same.

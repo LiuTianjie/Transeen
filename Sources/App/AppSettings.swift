@@ -1,9 +1,9 @@
 import Foundation
 
 enum CaptureMode: String, CaseIterable, Identifiable {
-    case translate, screenshot
+    case translate, screenshot, scrolling
     var id: String { rawValue }
-    var title: String { switch self { case .translate: L("截屏翻译"); case .screenshot: L("截图标注") } }
+    var title: String { switch self { case .translate: L("截屏翻译"); case .screenshot: L("截图标注"); case .scrolling: L("滚动长截图") } }
 }
 
 enum TranslationService: String, CaseIterable, Identifiable {

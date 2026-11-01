@@ -9,6 +9,8 @@ final class CaptureController {
     private var selectors: [ScreenSelectionPanel] = []
     private var selectionFrames: [CGDirectDisplayID: CGImage] = [:]
     private var panel: CapturePanel?
+    private var scrollingSession: ScrollingCaptureSession?
+    private var captureSettings: AppSettings?
     /// Pictures pinned from earlier captures; `close()` leaves them alone.
     private(set) var pins: [PinnedImagePanel] = []
     private var work: Task<Void, Never>?
@@ -38,11 +40,15 @@ final class CaptureController {
     var onReselect: ((CaptureMode) -> Void)?
     /// Called once the selection and result windows are gone.
     var onFinished: (() -> Void)?
-    var isActive: Bool { selecting || panel != nil || !selectors.isEmpty }
+    var isActive: Bool { selecting || panel != nil || !selectors.isEmpty || scrollingSession != nil }
     var pasteboard = NSPasteboard.general
     var defaults = UserDefaults.standard
     /// The crop is an area of the screen (not an opened picture), worth selecting again.
     private var cropIsScreenArea = false
+    private var historyID: UUID?
+    private var historyTasks: [UUID: Task<Void, Never>] = [:]
+    private let history: CaptureHistory?
+    init(history: CaptureHistory? = .shared) { self.history = history }
     /// The area of the last screen capture, in screen points, kept across launches.
     var lastArea: CGRect? {
         get {
@@ -60,11 +66,13 @@ final class CaptureController {
     func begin(mode: CaptureMode, settings: AppSettings, leaving: [NSWindow] = []) {
         guard authorize() else { return }
         close()
+        historyID = UUID()
         guard CGPreflightScreenCaptureAccess() else {
             onError?(L("请在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中允许 Transeen，随后重新打开应用。"))
             return
         }
         self.mode = mode
+        captureSettings = settings
         Self.logger.notice("begin mode=\(mode.rawValue, privacy: .public)")
         direction = TranslationDirection(source: settings.source, target: settings.target)
         detectsSource = settings.detectsSource
@@ -73,13 +81,13 @@ final class CaptureController {
         backendError = nil
         do { backend = try settings.makeBackend() } catch {
             backendError = error.localizedDescription
-            if mode != .screenshot { onError?(error.localizedDescription); return }
+            if mode == .translate { onError?(error.localizedDescription); return }
         }
         state = CaptureState()
         state.shortcuts = settings.shortcuts
-        state.automaticallyTranslates = mode != .screenshot
+        state.automaticallyTranslates = mode == .translate
         state.copyCloses = settings.copyCloses
-        state.overlay = mode != .screenshot
+        state.overlay = mode == .translate
         updateLanguageState()
         selecting = true
         let token = generation
@@ -128,9 +136,10 @@ final class CaptureController {
 
     /// Import an existing screenshot. Display points may shrink to the screen,
     /// while the backing pixels and annotation export retain the file's resolution.
-    func openImage(_ input: NSImage, settings: AppSettings) {
+    func openImage(_ input: NSImage, settings: AppSettings, historyID: UUID? = nil) {
         guard authorize() else { return }
         close()
+        self.historyID = historyID ?? UUID()
         guard input.size.width > 0, input.size.height > 0 else { return }
         mode = .screenshot
         direction = TranslationDirection(source: settings.source, target: settings.target)
@@ -145,18 +154,25 @@ final class CaptureController {
         updateLanguageState()
         let image = (input.copy() as? NSImage) ?? input
         let visible = NSScreen.main?.visibleFrame ?? CGRect(x: 0, y: 0, width: 1200, height: 800)
-        let factor = min(1, (visible.width - 80) / image.size.width, (visible.height - 180) / image.size.height)
+        let factor = min(1, (visible.width - 80) / image.size.width)
+        let needsScroll = image.size.height * factor > visible.height - 180
         image.size = CGSize(width: image.size.width * factor, height: image.size.height * factor)
         original = image
-        let rect = CGRect(x: visible.midX - image.size.width / 2, y: visible.midY - image.size.height / 2,
-                          width: image.size.width, height: image.size.height)
-        present(image, rect: rect, source: image.cgImage(forProposedRect: nil, context: nil, hints: nil).map { ($0, rect) })
+        let height = min(image.size.height, visible.height - 180)
+        let rect = CGRect(x: visible.midX - image.size.width / 2, y: visible.midY - height / 2,
+                          width: image.size.width, height: height)
+        state.scrollable = needsScroll
+        present(image, rect: rect, source: needsScroll ? nil : image.cgImage(forProposedRect: nil, context: nil, hints: nil).map { ($0, rect) })
         installKeys()
     }
 
     func close() {
         let wasActive = isActive
         defer { if wasActive { onFinished?() } }
+        rememberCapture()
+        historyID = nil
+        scrollingSession?.stop(); scrollingSession = nil
+        captureSettings = nil
         completionTask?.cancel(); completionTask = nil
         heldPeekKey = nil; state.peeking = false
         generation += 1
@@ -169,6 +185,21 @@ final class CaptureController {
         cropSource = nil; resizeStart = nil; cropIsScreenArea = false
     }
 
+    private func rememberCapture() {
+        guard let id = historyID, let panel, let history, history.isEnabled else { return }
+        panel.canvas.commitText()
+        guard let image = export()?.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return }
+        let taskID = UUID()
+        historyTasks[taskID] = Task { [weak self] in
+            await history.record(image, id: id)
+            self?.historyTasks[taskID] = nil
+        }
+    }
+
+    func flushHistory() async {
+        for task in Array(historyTasks.values) { await task.value }
+    }
+
     private func present(_ image: NSImage, rect: CGRect, source: (image: CGImage, frame: CGRect)?) {
         cropSource = source
         crop = rect
@@ -177,7 +208,8 @@ final class CaptureController {
         panel.onResize = { [weak self] phase, edges, delta in self?.resize(phase, edges: edges, by: delta) }
         panel.allowsCropResize = source != nil
         self.panel = panel
-        panel.present(image: image, rect: rect)
+        if state.scrollable { panel.presentScrollable(image: image, rect: rect) }
+        else { panel.present(image: image, rect: rect) }
     }
 
     /// Dragging the result's edges re-crops the same frozen frame. Marks stay over the
@@ -228,6 +260,21 @@ final class CaptureController {
         guard !rect.isNull, rect.width >= ScreenTranslate.minimumSelection, rect.height >= ScreenTranslate.minimumSelection else { close(); return }
         lastArea = rect
         selectors.forEach { $0.orderOut(nil) }; selectors = []; selecting = false
+        if mode == .scrolling, let settings = captureSettings {
+            selectionFrames = [:]
+            let session = ScrollingCaptureSession(rect: rect, screen: screen, application: ScreenWindowProbe.application(at: CGPoint(x: rect.midX, y: rect.midY)))
+            scrollingSession = session
+            session.onCancel = { [weak self] in self?.close() }
+            session.onFinish = { [weak self] pixels in
+                guard let self else { return }
+                self.scrollingSession = nil
+                let image = NSImage(cgImage: pixels, size: CGSize(width: CGFloat(pixels.width) / screen.backingScaleFactor, height: CGFloat(pixels.height) / screen.backingScaleFactor))
+                self.openImage(image, settings: settings)
+            }
+            if let monitor { NSEvent.removeMonitor(monitor); self.monitor = nil }
+            session.show()
+            return
+        }
         let display = ScreenCaptureService.Display(screen)
         let frozen = selectionFrames[display.displayID]
         selectionFrames = [:]
@@ -249,7 +296,7 @@ final class CaptureController {
                 }
                 guard valid(token) else { return }
                 original = image
-                state.automaticallyTranslates = requestedMode != .screenshot
+                state.automaticallyTranslates = requestedMode == .translate
                 // Commit the automatic state before the toolbar's first frame.
                 state.working = state.automaticallyTranslates
                 state.status = state.automaticallyTranslates ? L("正在识别与翻译…") : ""
@@ -406,17 +453,23 @@ final class CaptureController {
             translated = nil; state.textBlocks = []; displayCurrent(); restart()
             return
         }
+        if id != "layout" { panel?.canvas.commitText() }
         switch id {
+        case "editText": panel?.canvas.editSelectedText()
+        case "zoomIn": panel?.zoomDocument(by: 1.25)
+        case "zoomOut": panel?.zoomDocument(by: 0.8)
+        case "zoomReset": panel?.resetDocumentZoom()
         case "peek":
             guard state.translated, state.overlay, !state.peeking else { return }
             state.peeking = true; displayCurrent()
         case "peek.end": endPeek()
-        case "tool.rectangle", "tool.ellipse", "tool.arrow", "tool.pen", "tool.move", "tool.number":
+        case "tool.rectangle", "tool.ellipse", "tool.arrow", "tool.pen", "tool.move", "tool.number", "tool.text", "tool.highlight", "tool.redact":
             guard let tool = AnnotationTool(rawValue: String(id.dropFirst(5))) else { return }
             panel?.canvas.cancelInteraction()
             state.annotations.select(nil)
             state.annotating = tool != .move
             state.annotations.tool = tool
+            if tool == .highlight { state.annotations.color = .systemYellow }
             panel?.refreshUI(); panel?.makeKey()
         case "layout":
             let token = generation
@@ -460,6 +513,7 @@ final class CaptureController {
             guard resizeStart == nil, let image = export() else { return }
             pasteboard.clearContents()
             if pasteboard.writeObjects([image]) {
+                rememberCapture()
                 completionTask?.cancel()
                 state.copyCompleted = true
                 panel?.refreshUI()
@@ -491,12 +545,23 @@ final class CaptureController {
         guard let panel, resizeStart == nil, let shown = export() else { return }
         let translation = state.showingTranslation && translated != nil
         let other = translated.flatMap { state.annotations.export(translation ? original : $0) }
-        let pinned = PinnedImagePanel(image: shown, alternate: other, showsTranslation: translation, rect: panel.contentRect)
+        var rect = panel.contentRect
+        if state.scrollable {
+            let factor = min(rect.width / shown.size.width, rect.height / shown.size.height)
+            let size = CGSize(width: shown.size.width * factor, height: shown.size.height * factor)
+            rect = CGRect(x: rect.midX - size.width / 2, y: rect.midY - size.height / 2, width: size.width, height: size.height)
+        }
+        let pinned = PinnedImagePanel(image: shown, alternate: other, showsTranslation: translation, rect: rect)
         pinned.onClose = { [weak self] closed in self?.pins.removeAll { $0 === closed } }
         pins.append(pinned)
         pinned.show()
         close()
     }
+    func togglePins() {
+        if pins.contains(where: { $0.isVisible }) { pins.forEach { $0.orderOut(nil) } }
+        else { pins.forEach { $0.orderFrontRegardless() } }
+    }
+    func unlockPins() { pins.forEach { $0.isClickThrough = false; $0.orderFrontRegardless() } }
     private func save() {
         guard let image = export(), let cg = image.cgImage(forProposedRect: nil, context: nil, hints: nil),
               let png = NSBitmapImageRep(cgImage: cg).representation(using: .png, properties: [:]) else { return }
@@ -510,6 +575,7 @@ final class CaptureController {
             do {
                 try png.write(to: url, options: .atomic)
                 if let self, self.generation == token {
+                    self.rememberCapture()
                     self.state.failed = false; self.state.status = L("已保存图片"); self.panel?.refreshUI()
                 }
             }
@@ -536,6 +602,11 @@ final class CaptureController {
     }
 
     @discardableResult func handleShortcut(_ event: NSEvent) -> Bool {
+        if state.scrollable, event.modifierFlags.intersection([.command, .option, .control]) == .command {
+            if ["+", "="].contains(event.charactersIgnoringModifiers ?? "") { panel?.zoomDocument(by: 1.25); return true }
+            if event.charactersIgnoringModifiers == "-" { panel?.zoomDocument(by: 0.8); return true }
+            if event.charactersIgnoringModifiers == "0" { panel?.resetDocumentZoom(); return true }
+        }
         if selecting, state.shortcuts.action(for: event, group: "框选") == .lastArea { selectLastArea(); return true }
         guard let action = state.shortcuts.action(for: event, group: "截图窗口"), !selecting || action == .close else {
             guard !selecting, state.shortcuts.recording == nil, let selected = state.annotations.selected else { return false }
@@ -581,7 +652,7 @@ final class CaptureController {
         detectsSource = false
         sourceApplication = nil
         state = CaptureState()
-        state.overlay = mode != .screenshot
+        state.overlay = mode == .translate
         updateLanguageState()
         let display = ScreenCaptureService.Display(screen)
         // Treat the fixture as the full frozen screen; choose that entire screen.

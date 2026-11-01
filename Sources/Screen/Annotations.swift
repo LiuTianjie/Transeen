@@ -1,10 +1,10 @@
 import AppKit
 
 enum AnnotationTool: String, CaseIterable, Identifiable {
-    case move, rectangle, ellipse, arrow, pen, number
+    case move, rectangle, ellipse, arrow, pen, number, text, highlight, redact
     var id: String { rawValue }
-    var title: String { switch self { case .move: L("选择 / 移动"); case .rectangle: L("矩形"); case .ellipse: L("椭圆"); case .arrow: L("箭头"); case .pen: L("画笔"); case .number: L("编号") } }
-    var symbol: String { switch self { case .move: "cursorarrow"; case .rectangle: "rectangle"; case .ellipse: "circle"; case .arrow: "arrow.up.right"; case .pen: "pencil"; case .number: "1.circle" } }
+    var title: String { switch self { case .move: L("选择 / 移动"); case .rectangle: L("矩形"); case .ellipse: L("椭圆"); case .arrow: L("箭头"); case .pen: L("画笔"); case .number: L("编号"); case .text: L("文字标注"); case .highlight: L("高亮"); case .redact: L("隐私遮挡") } }
+    var symbol: String { switch self { case .move: "cursorarrow"; case .rectangle: "rectangle"; case .ellipse: "circle"; case .arrow: "arrow.up.right"; case .pen: "pencil"; case .number: "1.circle"; case .text: "textformat"; case .highlight: "highlighter"; case .redact: "rectangle.fill" } }
 }
 
 struct Annotation: Equatable, Identifiable {
@@ -14,6 +14,13 @@ struct Annotation: Equatable, Identifiable {
     var color: NSColor
     var width: CGFloat
     var number: Int? = nil
+    var text = ""
+    var fontSize: CGFloat = 22
+    var textWidth: CGFloat = 300
+
+    private var attributedText: NSAttributedString {
+        NSAttributedString(string: text, attributes: [.font: NSFont.systemFont(ofSize: fontSize, weight: .medium), .foregroundColor: color])
+    }
 
     private var numberText: NSAttributedString {
         let rgb = color.usingColorSpace(.sRGB) ?? .systemRed
@@ -25,6 +32,10 @@ struct Annotation: Equatable, Identifiable {
     }
     var bounds: CGRect {
         guard let first = points.first else { return .zero }
+        if tool == .text {
+            let size = attributedText.boundingRect(with: CGSize(width: textWidth, height: .greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading]).size
+            return CGRect(x: first.x, y: first.y - ceil(size.height), width: max(8, ceil(size.width)), height: max(fontSize, ceil(size.height)))
+        }
         if tool == .number {
             let diameter = max(20 + width * 2, numberText.size().width + 12)
             return CGRect(x: first.x - diameter / 2, y: first.y - diameter / 2, width: diameter, height: diameter)
@@ -38,7 +49,7 @@ struct Annotation: Equatable, Identifiable {
         switch tool {
         case .move: break
         case .number, .ellipse: path.addEllipse(in: bounds)
-        case .rectangle: path.addRect(bounds)
+        case .rectangle, .text, .highlight, .redact: path.addRect(bounds)
         case .pen:
             path.move(to: start)
             for point in points.dropFirst() { path.addLine(to: point) }
@@ -56,6 +67,23 @@ struct Annotation: Equatable, Identifiable {
     func draw() {
         guard !points.isEmpty, let context = NSGraphicsContext.current?.cgContext else { return }
         context.saveGState()
+        defer { context.restoreGState() }
+        if tool == .text {
+            attributedText.draw(with: bounds, options: [.usesLineFragmentOrigin, .usesFontLeading])
+            return
+        }
+        if tool == .redact {
+            // Solid pixels, never a translucent blur. Redactions are drawn last.
+            context.setFillColor(NSColor.black.cgColor)
+            context.fill(bounds.integral)
+            return
+        }
+        if tool == .highlight {
+            context.setBlendMode(.multiply)
+            context.setFillColor(color.withAlphaComponent(0.3).cgColor)
+            context.fill(bounds)
+            return
+        }
         context.addPath(path)
         if tool == .number {
             context.setFillColor(color.cgColor); context.fillPath()
@@ -66,14 +94,14 @@ struct Annotation: Equatable, Identifiable {
             context.setLineWidth(width); context.setLineCap(.round); context.setLineJoin(.round)
             context.strokePath()
         }
-        context.restoreGState()
     }
     func contains(_ point: CGPoint, interior: Bool = false) -> Bool {
+        if [.text, .highlight, .redact].contains(tool) { return bounds.contains(point) }
         if tool == .number || (interior && (tool == .rectangle || tool == .ellipse)), path.contains(point) { return true }
         return path.copy(strokingWithWidth: width + 10, lineCap: .round, lineJoin: .round, miterLimit: 10).contains(point)
     }
     var handles: [CGPoint] {
-        if tool == .number { return [] }
+        if tool == .number || tool == .text { return [] }
         if tool == .arrow { return [points.first, points.last].compactMap { $0 } }
         let rect = bounds.insetBy(dx: -4, dy: -4)
         return [CGPoint(x: rect.minX, y: rect.minY), CGPoint(x: rect.maxX, y: rect.minY),
@@ -92,7 +120,7 @@ struct Annotation: Equatable, Identifiable {
         if tool == .arrow {
             let index = handle == 0 ? 0 : points.count - 1
             result.points[index] = CGPoint(x: points[index].x + delta.x, y: points[index].y + delta.y)
-        } else if tool != .number, (0...3).contains(handle) {
+        } else if tool != .number && tool != .text, (0...3).contains(handle) {
             let rect = bounds
             let left = handle == 0 || handle == 3, bottom = handle == 0 || handle == 1
             let anchor = CGPoint(x: left ? rect.maxX : rect.minX, y: bottom ? rect.maxY : rect.minY)
@@ -112,6 +140,7 @@ final class AnnotationStore {
         var selectedID: UUID?
     }
     var tool: AnnotationTool = .move
+    var fontSize: CGFloat = 22
     private var drawingColor = NSColor.systemRed
     private var drawingWidth: CGFloat = 4
     var color: NSColor {
@@ -138,7 +167,10 @@ final class AnnotationStore {
     func select(_ id: UUID?) {
         commitEdit()
         selectedID = marks.contains { $0.id == id } ? id : nil
-        if let selected { drawingColor = selected.color; drawingWidth = selected.width }
+        if let selected {
+            drawingColor = selected.color; drawingWidth = selected.width
+            if selected.tool == .text { fontSize = selected.fontSize }
+        }
         onChange?()
     }
     func hit(at point: CGPoint, interior: Bool = false) -> Annotation? {
@@ -223,7 +255,8 @@ final class AnnotationStore {
         NSGraphicsContext.current = context
         context.cgContext.scaleBy(x: CGFloat(cg.width) / image.size.width, y: CGFloat(cg.height) / image.size.height)
         image.draw(in: CGRect(origin: .zero, size: image.size))
-        for mark in marks { mark.draw() }
+        for mark in marks where mark.tool != .redact { mark.draw() }
+        for mark in marks where mark.tool == .redact { mark.draw() }
         context.flushGraphics()
         NSGraphicsContext.restoreGraphicsState()
         bitmap.size = image.size
@@ -232,13 +265,15 @@ final class AnnotationStore {
     }
 }
 
-final class AnnotationCanvas: NSView {
+final class AnnotationCanvas: NSView, NSTextViewDelegate {
     let annotations: AnnotationStore
     var image = NSImage() { didSet { needsDisplay = true } }
     /// Off while a layer behind the canvas shows the picture; the marks are still drawn.
     var showsImage = true { didSet { needsDisplay = true } }
     var draft: Annotation?
     var onEditNumber: (() -> Void)?
+    private var textEditor: NSTextView?
+    private var editingText: Annotation?
     private struct EditGesture {
         var original: Annotation
         var start: CGPoint
@@ -264,8 +299,9 @@ final class AnnotationCanvas: NSView {
         } else if showsImage {
             image.draw(in: bounds, from: .zero, operation: .copy, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.none.rawValue])
         }
-        for mark in annotations.marks { mark.draw() }
+        for mark in annotations.marks where mark.tool != .redact && mark.id != editingText?.id { mark.draw() }
         draft?.draw()
+        for mark in annotations.marks where mark.tool == .redact { mark.draw() }
         if let selected = annotations.selected, draft == nil { drawSelection(selected) }
     }
     private func drawSelection(_ mark: Annotation) {
@@ -314,6 +350,7 @@ final class AnnotationCanvas: NSView {
         return CGPoint(x: min(max(p.x, 0), bounds.width), y: min(max(p.y, 0), bounds.height))
     }
     override func mouseDown(with event: NSEvent) {
+        commitText()
         window?.makeKey(); window?.makeFirstResponder(self)
         let location = point(event)
         // The handles of the selected mark, the one just drawn too, reshape it with any tool.
@@ -324,12 +361,18 @@ final class AnnotationCanvas: NSView {
         if let mark = pickable(at: location) {
             annotations.select(mark.id)
             if event.clickCount == 2, mark.tool == .number { onEditNumber?(); return }
+            if event.clickCount == 2, mark.tool == .text { beginText(mark); return }
             beginEditing(mark, at: location)
             return
         }
         annotations.select(nil)
         // The capture window stays where it is; only a pin moves with the mouse.
         guard annotations.tool != .move else { return }
+        if annotations.tool == .text {
+            beginText(Annotation(tool: .text, points: [CGPoint(x: min(location.x, max(0, bounds.width - 80)), y: max(40, location.y))], color: annotations.color, width: annotations.width, fontSize: annotations.fontSize,
+                                 textWidth: min(300, max(80, bounds.width - location.x))))
+            return
+        }
         draft = Annotation(tool: annotations.tool, points: [location], color: annotations.color, width: annotations.width,
                            number: annotations.tool == .number ? annotations.nextNumber : nil)
         needsDisplay = true
@@ -341,6 +384,7 @@ final class AnnotationCanvas: NSView {
         switch annotations.tool {
         case .move: annotations.hit(at: location, interior: true)
         case .number: annotations.marks.last { $0.tool == .number && $0.contains(location) }
+        case .text: annotations.marks.last { $0.tool == .text && $0.contains(location) }
         default: nil
         }
     }
@@ -378,7 +422,56 @@ final class AnnotationCanvas: NSView {
         draft = nil; needsDisplay = true
     }
     func cancelInteraction() {
+        commitText()
         annotations.cancelEdit(); editing = nil; draft = nil; needsDisplay = true
+    }
+    func editSelectedText() {
+        guard let mark = annotations.selected, mark.tool == .text else { return }
+        beginText(mark)
+    }
+    private func beginText(_ mark: Annotation) {
+        commitText()
+        editingText = mark
+        let anchor = mark.points[0]
+        let height = min(max(80, mark.bounds.height + 24), max(40, anchor.y))
+        let editor = NSTextView(frame: CGRect(x: anchor.x, y: anchor.y - height, width: min(mark.textWidth, bounds.width - anchor.x), height: height))
+        editor.isRichText = false
+        editor.font = .systemFont(ofSize: mark.fontSize, weight: .medium)
+        editor.textColor = mark.color
+        editor.backgroundColor = NSColor.textBackgroundColor.withAlphaComponent(0.95)
+        editor.insertionPointColor = .labelColor
+        editor.textContainerInset = .zero
+        editor.textContainer?.lineFragmentPadding = 0
+        editor.string = mark.text
+        editor.delegate = self
+        textEditor = editor
+        addSubview(editor)
+        window?.makeFirstResponder(editor)
+        editor.selectAll(nil)
+        needsDisplay = true
+    }
+    func commitText(cancel: Bool = false) {
+        guard let editor = textEditor, var mark = editingText else { return }
+        textEditor = nil; editingText = nil
+        editor.delegate = nil
+        mark.text = editor.string.trimmingCharacters(in: .whitespacesAndNewlines)
+        if window?.firstResponder === editor { window?.makeFirstResponder(self) }
+        editor.removeFromSuperview()
+        if !cancel {
+            if annotations.marks.contains(where: { $0.id == mark.id }) {
+                if mark.text.isEmpty { annotations.select(mark.id); annotations.deleteSelected() }
+                else { annotations.update(mark) }
+            } else if !mark.text.isEmpty { annotations.append(mark) }
+        }
+        needsDisplay = true
+    }
+    func textDidEndEditing(_ notification: Notification) { commitText() }
+    func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        if commandSelector == #selector(NSResponder.cancelOperation(_:)) { commitText(cancel: true); window?.makeFirstResponder(self); return true }
+        if commandSelector == #selector(NSResponder.insertNewline(_:)), NSApp.currentEvent?.modifierFlags.contains(.command) == true {
+            commitText(); window?.makeFirstResponder(self); return true
+        }
+        return false
     }
     override func menu(for event: NSEvent) -> NSMenu? {
         guard let mark = annotations.hit(at: point(event), interior: true) else { return nil }
@@ -388,10 +481,15 @@ final class AnnotationCanvas: NSView {
             let edit = NSMenuItem(title: L("修改编号…"), action: #selector(editNumber), keyEquivalent: "")
             edit.target = self; menu.addItem(edit)
         }
+        if mark.tool == .text {
+            let edit = NSMenuItem(title: L("编辑文字…"), action: #selector(editText), keyEquivalent: "")
+            edit.target = self; menu.addItem(edit)
+        }
         let delete = NSMenuItem(title: L("删除标注"), action: #selector(deleteMark), keyEquivalent: "")
         delete.target = self; menu.addItem(delete)
         return menu
     }
     @objc private func editNumber() { onEditNumber?() }
+    @objc private func editText() { editSelectedText() }
     @objc private func deleteMark() { annotations.deleteSelected() }
 }

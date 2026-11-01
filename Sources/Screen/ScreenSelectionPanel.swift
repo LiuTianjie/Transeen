@@ -22,6 +22,9 @@ final class ScreenSelectionPanel: NSPanel {
         )
         canvas.onDragEnded = { [weak self] rect in self?.onDragEnded?(rect) }
         canvas.onCancel = { [weak self] in self?.onCancel?() }
+        // The full-screen backdrop must appear in place, without AppKit animating
+        // the frozen desktop as though it were an ordinary panel.
+        animationBehavior = .none
         setFrame(screen.frame, display: true)
         isFloatingPanel = true
         level = .screenSaver

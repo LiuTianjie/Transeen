@@ -2,16 +2,16 @@ import AppKit
 import Carbon
 
 enum ShortcutAction: String, CaseIterable, Identifiable {
-    case captureTranslate, captureScreenshot, globalCompare
+    case captureTranslate, captureScreenshot, globalCompare, captureScrolling, togglePins, showHistory
     case lastArea
     case compare, translate, direction, rectangle, ellipse, arrow, pen, move, copy, save, undo, redo, close
-    case annotate, pin, reselect
+    case annotate, pin, reselect, text, highlight, redact
     case peek
     case openImage, settings, quit
     var id: String { rawValue }
     var group: String {
         switch self {
-        case .captureTranslate, .captureScreenshot, .globalCompare: "全局"
+        case .captureTranslate, .captureScreenshot, .globalCompare, .captureScrolling, .togglePins, .showHistory: "全局"
         case .openImage, .settings, .quit: "应用"
         case .lastArea: "框选"
         default: "截图窗口"
@@ -21,6 +21,12 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
         switch self {
         case .captureTranslate: L("截图翻译")
         case .captureScreenshot: L("截图标注")
+        case .captureScrolling: L("滚动长截图")
+        case .togglePins: L("显示 / 隐藏所有钉图")
+        case .showHistory: L("最近截图")
+        case .text: L("文字标注")
+        case .highlight: L("高亮")
+        case .redact: L("隐私遮挡")
         case .globalCompare: L("全局对照原文")
         case .lastArea: L("选择上次的区域")
         case .compare: L("原文 / 译文")
@@ -48,7 +54,7 @@ enum ShortcutAction: String, CaseIterable, Identifiable {
     var command: String {
         switch self {
         case .compare, .globalCompare: "toggle"
-        case .rectangle, .ellipse, .arrow, .pen, .move: "tool." + rawValue
+        case .rectangle, .ellipse, .arrow, .pen, .move, .text, .highlight, .redact: "tool." + rawValue
         default: rawValue
         }
     }

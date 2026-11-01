@@ -10,6 +10,8 @@ struct LauncherView: View {
     var showOnboarding: () -> Void
     var openImage: () -> Void
     var closeCapture: () -> Void
+    var showHistory: () -> Void
+    var togglePins: () -> Void
     var quit: () -> Void
     var showLicense: () -> Void
     var checkForUpdates: () -> Void
@@ -61,6 +63,12 @@ struct LauncherView: View {
                             shortcut: settings.shortcuts.binding(.captureTranslate)?.display) { start(.translate) }
                 LauncherRow(symbol: "pencil.tip.crop.circle.fill", colors: TilePalette.orange, title: L("截图标注"), detail: L("框选后标注，不翻译"),
                             shortcut: settings.shortcuts.binding(.captureScreenshot)?.display) { start(.screenshot) }
+                LauncherRow(symbol: "arrow.down.to.line.compact", colors: TilePalette.blue, title: L("滚动长截图"), detail: L("滚动页面，自动拼接为长图"),
+                            shortcut: settings.shortcuts.binding(.captureScrolling)?.display) { start(.scrolling) }
+                LauncherRow(symbol: "clock.arrow.circlepath", colors: TilePalette.purple, title: L("最近截图"), detail: L("恢复最近关闭、复制或保存的截图"),
+                            shortcut: settings.shortcuts.binding(.showHistory)?.display, action: showHistory)
+                LauncherRow(symbol: "pin", colors: TilePalette.orange, title: L("显示 / 隐藏钉图"), detail: L("滚轮缩放 · ⌥滚轮调透明度"),
+                            shortcut: settings.shortcuts.binding(.togglePins)?.display, action: togglePins)
                 LauncherRow(symbol: "photo.fill", colors: TilePalette.purple, title: L("打开图片…"), detail: L("打开本地图片"),
                             shortcut: settings.shortcuts.binding(.openImage)?.display, action: openImage)
                 if !permission.granted {
