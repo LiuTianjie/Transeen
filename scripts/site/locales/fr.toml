@@ -204,6 +204,7 @@ lede = "<b>Dernières versions.</b>"
 full = "Historique complet"
 
 [changes.notes]
+"0.12.1" = ["<b>Des titres épais bien reconnus.</b> Les grandes lettres grasses ne sont plus prises pour un fond sombre, évitant les couleurs inversées et les restes du texte original.", "<b>Un espacement préservé.</b> Les grands titres traduits restent dans la hauteur initiale ; le texte courant conserve sa mise en page."]
 "0.12.0" = ["<b>Des captures enrichies.</b> Défilement, texte, surlignage, masquage et captures récentes locales.", "<b>Un démarrage simplifié.</b> Guide en quatre étapes, couleurs unifiées, comparaison par pression et correction du plantage au démarrage du défilement."]
 "0.11.2" = [
   "<b>Les images restent des images.</b> Les vignettes à côté du texte ne sont plus traduites.",

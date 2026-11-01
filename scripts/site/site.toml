@@ -1,7 +1,7 @@
 # Facts every page shares. scripts/site/build.py reads this with the strings in locales/.
 
 origin = "https://transeen.itool.tech"
-version = "0.12.0"
+version = "0.12.1"
 # The day this version came out, the day the pages last changed, and the site's first day.
 released = 2026-11-01
 modified = 2026-11-01
@@ -9,7 +9,7 @@ published = 2026-10-28
 # The DMG on the release page, in megabytes: exact for structured data, rounded for prose.
 size_mb = "11.3"
 size_about = "11"
-download = "https://github.com/LiuTianjie/Transeen/releases/download/v0.12.0/Transeen-0.12.0.dmg"
+download = "https://github.com/LiuTianjie/Transeen/releases/download/v0.12.1/Transeen-0.12.1.dmg"
 repository = "https://github.com/LiuTianjie/Transeen"
 purchase = "https://wzyp.cn/item/gq2xie"
 price = "49.90"
@@ -17,12 +17,12 @@ currency = "CNY"
 
 # The two newest releases, shown on the home pages. Each language has their notes.
 [[release]]
-version = "0.12.0"
+version = "0.12.1"
 date = 2026-11-01
 
 [[release]]
-version = "0.11.2"
-date = 2026-10-31
+version = "0.12.0"
+date = 2026-11-01
 
 # Every language the site is written in, in the order menus list them. dir is the folder under
 # docs/, lang the page's lang attribute, hreflang the values search engines see for it, og the

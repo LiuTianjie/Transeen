@@ -204,6 +204,7 @@ lede = "<b>Lo último.</b>"
 full = "Historial completo"
 
 [changes.notes]
+"0.12.1" = ["<b>Títulos gruesos legibles.</b> Las letras grandes en negrita ya no se confunden con un fondo oscuro, evitando colores invertidos y restos del original.", "<b>Se conserva el espaciado.</b> Los títulos grandes traducidos se ajustan a la altura original; el texto normal mantiene su distribución."]
 "0.12.0" = ["<b>Más herramientas de captura.</b> Desplazamiento, texto, resaltado, censura y capturas recientes locales.", "<b>Un inicio más claro.</b> Guía de cuatro pasos, colores unificados, comparación con una pulsación y arreglo del cierre al iniciar una captura larga."]
 "0.11.2" = [
   "<b>Las imágenes siguen siendo imágenes.</b> Las miniaturas junto al texto ya no se traducen.",

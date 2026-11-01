@@ -204,6 +204,7 @@ lede = "<b>Zuletzt veröffentlicht.</b>"
 full = "Vollständiges Änderungsprotokoll"
 
 [changes.notes]
+"0.12.1" = ["<b>Fette Überschriften richtig erkennen.</b> Große, fette Buchstaben werden nicht mehr als dunkler Hintergrund erkannt; invertierte Farben und Reste des Originaltexts entfallen.", "<b>Abstände beibehalten.</b> Große übersetzte Überschriften bleiben innerhalb der ursprünglichen Schrifthöhe; normaler Text behält sein Layout."]
 "0.12.0" = ["<b>Mehr Aufnahmefunktionen.</b> Scroll-Aufnahmen, Text, Hervorhebungen, Abdeckungen und lokaler Verlauf.", "<b>Einfacher starten.</b> Vier Schritte, einheitliche Einstellungsfarben, Umschalten per Tastendruck und behobener Absturz beim Aufnahmestart."]
 "0.11.2" = [
   "<b>Bilder bleiben Bilder.</b> Vorschaubilder neben dem Text werden nicht mehr übersetzt.",
