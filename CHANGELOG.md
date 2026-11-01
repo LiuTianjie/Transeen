@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.12.1
+
+- Recognize heavy display lettering as text instead of mistaking its strokes for a solid background, preventing inverted translation colors and unerased source letters.
+- Keep translated headings of 64pt and above within the original ink height so stacked large titles retain their spacing. Ordinary interface and body text keep their existing layout.
+
 ## 0.12.0
 
 - Keep Escape available in capture results when an annotation editor has focus, and route windowless key events through the focused capture window.

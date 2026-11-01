@@ -135,6 +135,19 @@ enum Fitter {
         let column = room.column, wide = room.wide, growth = room.growth, snug = room.snug
         let sourceLines = block.lines.count
 
+        // Large display type needs an ink-height check: a CJK replacement for
+        // tight all-capital Latin can collide with the next row at equal point sizes.
+        // Keep the established fit for ordinary UI and body text (below 64pt).
+        // Keep a display line inside its source ink height, preserving the gaps
+        // between stacked headings. Fits already inside keep their size/baseline.
+        func singleLineBounds(_ text: String, font: NSFont) -> CGRect? {
+            guard block.style.size >= 64, sourceLines == 1, block.chips.isEmpty,
+                  block.lines[0].inlineBounds == nil else { return nil }
+            return CTLineGetImageBounds(CTLineCreateWithAttributedString(attributed(text, font: font)), nil)
+        }
+        let topLimit = block.rect.minY
+        let bottomLimit = block.rect.maxY
+
         struct Fit { var lines: [(text: String, width: CGFloat)]; var shrink: CGFloat; var pitch: CGFloat; var width: CGFloat }
         let sourcePitch = room.pitch, span = room.span
         func attempt(_ shrink: CGFloat, _ width: CGFloat, grow: Bool) -> Fit? {
@@ -142,6 +155,8 @@ enum Fitter {
             // Half a point of tolerance: the source itself must fit its own width.
             let lines = wrap(text, font: font, width: width / scale + 0.5)
             guard lines.allSatisfy({ $0.width * scale <= width + scale * 0.5 }) else { return nil }
+            if lines.count == 1, let bounds = singleLineBounds(lines[0].text, font: font),
+               bounds.height * scale > bottomLimit - topLimit { return nil }
             // A smaller type size should not pull a paragraph's baselines up
             // and leave an artificial hole before the next source block.
             let natural = sourceLines > 1 ? sourcePitch : sourcePitch * shrink
@@ -187,6 +202,12 @@ enum Fitter {
             // Keep the middle of the text where the middle of the source was.
             let last = block.lines[block.lines.count - 1].ink.baseline
             first = (block.firstBaseline + last) / 2 - CGFloat(fit.lines.count - 1) * fit.pitch / 2
+        }
+        if fit.lines.count == 1,
+           let bounds = singleLineBounds(fit.lines[0].text, font: block.style.font(size: placement.size)) {
+            let lower = topLimit + bounds.maxY * scale
+            let upper = bottomLimit + bounds.minY * scale
+            if lower <= upper { first = min(upper, max(lower, first)) }
         }
         for (index, line) in fit.lines.enumerated() {
             let width = line.width * scale

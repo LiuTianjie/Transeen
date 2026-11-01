@@ -340,9 +340,9 @@ enum InkAnalyzer {
             ink.trimmedTrailingWidth += words[words.count - 1].maxX - words[words.count - 1].minX
             words.removeLast(); trimmed = true; ink.trimmedTrailing = true
         }
-        // Mostly ink is not text: the box was edged by what surrounds a filled
-        // button, and the button itself was taken for the letters. Its paper is the
-        // colour most of the box is made of.
+        // A filled button can be taken for ink when its box includes the surrounding
+        // page. Its fill must be connected across the box: bold letters can occupy
+        // most of it too, but remain separate glyphs, not a continuous backdrop.
         if paper == nil, text == nil {
             var inked = 0
             for y in top...bottom { for x in left...right where ink.alpha(x, y) >= 0.5 { inked += 1 } }
@@ -359,7 +359,8 @@ enum InkAnalyzer {
                 }
                 if let most = bins.values.max(by: { $0.count < $1.count }) {
                     let fill = RGB(r: most.r / Float(most.count), g: most.g / Float(most.count), b: most.b / Float(most.count))
-                    if fill.distance(to: background.color(x: left, y: top)) > 20 {
+                    if fill.distance(to: background.color(x: left, y: top)) > 20,
+                       spansBackdrop(image, colour: fill, in: inner) {
                         return measure(image, box: box, paper: fill, verticalBounds: verticalBounds, horizontalBounds: horizontalBounds)
                     }
                 }
@@ -575,6 +576,41 @@ enum InkAnalyzer {
         return (centres[best.k], max(40, others))
     }
 
+    /// A background surrounds the glyphs as one connected surface. Area alone
+    /// cannot distinguish that surface from a heavy display face's separate letters.
+    private static func spansBackdrop(_ image: PixelImage, colour: RGB, in rect: PixelRect) -> Bool {
+        guard rect.width > 1, rect.height > 1 else { return false }
+        let width = rect.width, height = rect.height
+        var remaining = [Bool](repeating: false, count: width * height)
+        for y in 0..<height {
+            for x in 0..<width {
+                remaining[y * width + x] = image[x + rect.minX, y + rect.minY].distance(to: colour) <= 20
+            }
+        }
+        let requiredWidth = Int(ceil(CGFloat(width) * 0.9))
+        let requiredHeight = Int(ceil(CGFloat(height) * 0.9))
+        var stack: [Int] = []
+        for seed in remaining.indices where remaining[seed] {
+            remaining[seed] = false
+            stack.append(seed)
+            var left = seed % width, right = left, top = seed / width, bottom = top
+            func visit(_ index: Int) {
+                if remaining[index] { remaining[index] = false; stack.append(index) }
+            }
+            while let index = stack.popLast() {
+                let x = index % width, y = index / width
+                left = min(left, x); right = max(right, x)
+                top = min(top, y); bottom = max(bottom, y)
+                if right - left + 1 >= requiredWidth, bottom - top + 1 >= requiredHeight { return true }
+                if x > 0 { visit(index - 1) }
+                if x + 1 < width { visit(index + 1) }
+                if y > 0 { visit(index - width) }
+                if y + 1 < height { visit(index + width) }
+            }
+        }
+        return false
+    }
+
     /// Flat when most of the window is one colour, smooth when a plane explains
     /// the non-ink pixels, otherwise a picture.
     static func estimateBackground(_ image: PixelImage, window: PixelRect, box: CGRect? = nil) -> Background {
@@ -593,7 +629,8 @@ enum InkAnalyzer {
             if let dominant = bins.values.max(by: { $0.count < $1.count }) {
                 let mode = dominant.reduce(RGB(r: 0, g: 0, b: 0), +) * (1 / Float(dominant.count))
                 let close = bins.values.joined().filter { $0.distance(to: mode) <= 6 }
-                if !close.isEmpty, close.count * 20 >= interior.width * interior.height * 9 {
+                if !close.isEmpty, close.count * 20 >= interior.width * interior.height * 9,
+                   spansBackdrop(image, colour: mode, in: interior) {
                     return .flat(close.reduce(RGB(r: 0, g: 0, b: 0), +) * (1 / Float(close.count)))
                 }
             }
@@ -619,7 +656,7 @@ enum InkAnalyzer {
                 let mode = RGB(r: top.r / Float(top.count), g: top.g / Float(top.count), b: top.b / Float(top.count))
                 // One colour, not a stretch of a gradient or a picture: nearly all of the rim within a hair of it.
                 let close = ring.filter { $0.distance(to: mode) <= 6 }
-                if close.count * 10 >= ring.count * 6 {
+                if close.count * 10 >= ring.count * 6, spansBackdrop(image, colour: mode, in: outer) {
                     let sum = close.reduce(RGB(r: 0, g: 0, b: 0)) { $0 + $1 }
                     return .flat(sum * (1 / Float(close.count)))
                 }
