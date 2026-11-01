@@ -4,6 +4,7 @@
 
 ## 0.12.0
 
+- Keep Escape available in capture results when an annotation editor has focus, and route windowless key events through the focused capture window.
 - Add website pricing and direct activation-code purchase, and refresh the eight-language website and guides for the current capture tools.
 - Prevent a crash when starting scrolling capture after opening or closing utility windows: ignore invalid WindowServer IDs in both scrolling and regular capture.
 - Unify settings, onboarding, activation, permission, and configuration windows with one neutral light/dark surface palette, including sheet and popover backgrounds.

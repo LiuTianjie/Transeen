@@ -111,6 +111,9 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
     }
     override var canBecomeKey: Bool { true }
     override var canBecomeMain: Bool { false }
+    func ownsKeyboardWindow(_ window: NSWindow?) -> Bool {
+        window === self || window === chromePanel
+    }
     func present(image: NSImage, rect: CGRect) {
         place(rect)
         canvas.image = image

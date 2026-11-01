@@ -23,6 +23,28 @@ import CoreText
         let picture = NSImage(cgImage: ctx.makeImage()!, size: NSSize(width: 600, height: 200))
         let controller = CaptureController(history: nil)
         controller.authorize = { true }
+        func escape(in window: NSWindow?) -> NSEvent {
+            NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [], timestamp: 0,
+                            windowNumber: window?.windowNumber ?? 0, context: nil, characters: "\u{1b}",
+                            charactersIgnoringModifiers: "\u{1b}", isARepeat: false, keyCode: 53)!
+        }
+        controller.preview(picture)
+        let resultWindow = NSApp.windows.compactMap { $0 as? CapturePanel }.first { $0.isVisible }!
+        let editor = NSTextView(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        resultWindow.contentView!.addSubview(editor)
+        resultWindow.makeFirstResponder(editor)
+        precondition(resultWindow.firstResponder === editor)
+        precondition(controller.routeCaptureKey(escape(in: resultWindow)) == nil && !controller.isActive,
+                     "Esc must close a capture even when its text editor has focus")
+        controller.preview(picture)
+        let settingsWindow = NSWindow(contentRect: .zero, styleMask: .titled, backing: .buffered, defer: false)
+        precondition(controller.routeCaptureKey(escape(in: settingsWindow)) != nil && controller.isPresenting,
+                     "Esc in an unrelated app window must not close the capture")
+        precondition(controller.routeCaptureKey(escape(in: nil)) == nil && !controller.isActive,
+                     "An event without a window must use the focused capture window")
+        controller.previewSelecting(picture, mode: .screenshot, backend: SlowBackend())
+        precondition(controller.routeCaptureKey(escape(in: nil)) == nil && !controller.isActive,
+                     "Esc must cancel selection")
         let areaSuite = "transeen.area.tests.\(UUID().uuidString)"
         controller.defaults = UserDefaults(suiteName: areaSuite)!
         defer { UserDefaults.standard.removePersistentDomain(forName: areaSuite) }

@@ -579,14 +579,24 @@ final class CaptureController {
     private func installKeys() {
         monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
             guard let self else { return event }
-            // Number/color editors keep their own typing, deletion and text undo.
-            if event.window?.firstResponder is NSTextView { return event }
-            // A focused pin takes its own Esc and ⌘C.
-            if event.window is PinnedImagePanel { return event }
-            // Do not steal editing keys from settings or save panels.
-            guard self.selecting || event.window is CapturePanel || event.window?.styleMask.contains(.nonactivatingPanel) == true else { return event }
-            return self.handleShortcut(event) ? nil : event
+            return self.routeCaptureKey(event)
         }
+    }
+
+    func routeCaptureKey(_ event: NSEvent) -> NSEvent? {
+        guard event.type == .keyDown else { return event }
+        let window = event.window ?? NSApp.keyWindow
+        // Pins, settings and save panels own their keyboard input.
+        if window is PinnedImagePanel { return event }
+        guard selecting || panel?.ownsKeyboardWindow(window) == true else { return event }
+        // Closing must work even while a toolbar text/number editor has focus.
+        if state.shortcuts.action(for: event, group: "截图窗口") == .close {
+            close()
+            return nil
+        }
+        // Keep ordinary typing, deletion and text undo inside the editor.
+        if window?.firstResponder is NSTextView { return event }
+        return handleShortcut(event) ? nil : event
     }
 
     @discardableResult func handleShortcut(_ event: NSEvent) -> Bool {
