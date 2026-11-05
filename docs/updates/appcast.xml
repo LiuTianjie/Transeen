@@ -6,13 +6,13 @@
     <description>Transeen updates</description>
     <language>en</language>
     <item>
-      <title>Transeen 0.15.0</title>
-      <pubDate>Thu, 05 Nov 2026 10:58:46 +0000</pubDate>
-      <sparkle:version>21</sparkle:version>
-      <sparkle:shortVersionString>0.15.0</sparkle:shortVersionString>
+      <title>Transeen 0.15.1</title>
+      <pubDate>Thu, 05 Nov 2026 12:15:01 +0000</pubDate>
+      <sparkle:version>22</sparkle:version>
+      <sparkle:shortVersionString>0.15.1</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-      <description><![CDATA[<ul><li>Transeen is now part of the iTool yearly membership (CNY 99 a year, every iTool product). Capture, markup, image import and translation need you to sign in to an iTool account with an active yearly membership; TR- activation codes are no longer sold or accepted. Codes bound to an iTool account were converted to yearly memberships.</li><li>Account &amp; Membership… shows your tier and expiry. Monthly members can upgrade, non-members can join on itool.tech, and Refresh Membership checks again after paying. Transeen also re-checks on launch, when it becomes active, after wake and when the network returns.</li><li>After a successful check Transeen works offline for up to 7 days, never past the end of the membership; setting the clock back requires a new check. A refunded or lapsed membership closes the gate at the next successful check, and signing out clears the cached membership.</li><li>Membership is checked through itool.tech, which works where supabase.co is blocked, with Supabase as a fallback.</li></ul>]]></description>
-      <enclosure url="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.zip" type="application/octet-stream" sparkle:edSignature="4EQGqCQROaQK9+uTZVlQz84Exip/aILe2rxVg+67BWf8tsq9u91V5eWUs7TND1spKPlhoy4YoadPYSjB+IUICg==" length="11048236" />
+      <description><![CDATA[<ul><li>Signing in with Google or GitHub no longer crashes Transeen. 0.15.0 quit as soon as the sign-in browser started, because the system reported back on a background thread the app did not expect.</li></ul>]]></description>
+      <enclosure url="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.1/Transeen-0.15.1.zip" type="application/octet-stream" sparkle:edSignature="bd5/6IvQTf7ULoBZ2ZaP3Q/ncfPPthzvVhb1bk5+7sZ63wnL6eHpGj8nP0D2xMFdjKTkY/Qpmri6iC5OOpjDDg==" length="11062291" />
     </item>
   </channel>
 </rss>
