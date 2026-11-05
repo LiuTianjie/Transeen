@@ -27,7 +27,7 @@ Transeen is a macOS menu bar app that keeps translation close to what you are re
 - **Annotate independently.** Arrows, shapes, pen strokes, numbers, text, highlights and solid redactions stay on a separate layer with undo and redo. Double-click text to edit; ⌘Return commits and Esc cancels the edit. Redacted pixels are covered in exported images.
 - **Choose a provider.** Apple on-device translation, a downloadable local translation model (Index-Translate 2B or Hy-MT2 1.8B, about 1.1 GB, Apple silicon), or an OpenAI-compatible remote model. Only the remote mode sends anything off the Mac, and then recognized text only, not screenshots.
 - **Keep a small footprint.** Menu bar access, configurable shortcuts, pinned images, PNG export, and clipboard copy. Pins support scroll-to-zoom, ⌥scroll for opacity, thumbnail mode and click-through; show/hide or unlock all pins from the menu bar.
-- **Check for updates.** Choose “检查更新…” in the menu bar or launcher to find the latest GitHub release and its download.
+- **Updates.** Transeen checks for a new version once a day and, after you agree, downloads, verifies and installs it in place with [Sparkle](https://sparkle-project.org). “检查更新…” in the menu bar or launcher checks right away.
 
 - **Scrolling capture.** Select scrolling content, start, scroll down while watching the preview, then finish and annotate. Optional auto-scroll requires Accessibility access. Vertical capture only, up to 30,000 pixels high / 60 million pixels. Animation, fixed sidebars or changing layouts can prevent alignment; the captured portion is retained and the problem is shown. Tall results support scrolling and zooming without reducing export resolution.
 - **Recent captures.** Locally retain up to 50 captures / 200 MB for 7 days by default. Choose 1, 7 or 30 days; delete individual images or clear all. Disabling retention clears history. Restored images have flattened annotations, without hidden originals or undo layers.
@@ -61,7 +61,7 @@ brew install xcodegen
 ./scripts/build.sh
 ```
 
-The app is written to `dist/Transeen.app`. Without a Developer ID identity, the build uses ad-hoc signing. Set `TRANSEEN_SIGNING_IDENTITY` for a signed local build. Hosted activation access is separate from the MIT source license; configure your own licensing backend for an independent distribution.
+The app is written to `dist/Transeen.app`. Without a Developer ID identity, the build uses ad-hoc signing. Set `TRANSEEN_SIGNING_IDENTITY` for a signed local build. Only Developer ID builds read the update feed; ad-hoc builds link to the GitHub release instead. Release steps are in [docs/RELEASING.md](docs/RELEASING.md). Hosted activation access is separate from the MIT source license; configure your own licensing backend for an independent distribution.
 
 ```sh
 ./scripts/test.sh
@@ -74,7 +74,7 @@ The tests cover image layout, translation protocol, activation state, version co
 
 ## Privacy and limits
 
-Screenshots, OCR and local-model translation stay on the Mac; the only network use of a local model is its one-time download. External model mode sends extracted text to the endpoint you choose. Licensing uses a random installation ID and a Keychain receipt, not hardware serial numbers. Update checks contact GitHub.
+Screenshots, OCR and local-model translation stay on the Mac; the only network use of a local model is its one-time download. External model mode sends extracted text to the endpoint you choose. Licensing uses a random installation ID and a Keychain receipt, not hardware serial numbers. Update checks read the feed on transeen.itool.tech and download from GitHub Releases; they send no system profile.
 
 Dense layouts, specialist terminology, and formulas can still need correction. Translation quality depends on the provider. Always compare important details with the original.
 

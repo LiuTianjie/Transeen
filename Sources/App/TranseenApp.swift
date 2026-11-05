@@ -27,7 +27,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
     let settings = AppSettings()
     let capture = CaptureController()
     let license = LicenseManager.live()
-    private let updates = UpdateChecker()
+    private let updates = AppUpdater()
     private var licenseWindow: NSWindow?
     private var licenseObservation: AnyCancellable?
     private let shortcuts = GlobalShortcuts()
@@ -93,6 +93,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
             self?.capture.close()
         }
         Task { await license.bootstrap() }
+        updates.start()
         capture.onReselect = { [weak self] mode in self?.start(mode) }
         capture.onError = { [weak self] message in self?.notice(message) }
         shortcuts.onPressed = { [weak self] action in

@@ -16,5 +16,11 @@
 <key>NSAppTransportSecurity</key><dict><key>NSAllowsLocalNetworking</key><true/></dict>
 <key>TranseenLicenseEndpoint</key><string>https://mkbeusztkzffnzjdwmqk.supabase.co/functions/v1/transeen-license</string>
 <key>TranseenLicensePublishableKey</key><string>sb_publishable_GVf42S8a5aU4NHxMSFmTNA_LB6i6vlz</string>
+<key>SUFeedURL</key><string>$(TRANSEEN_UPDATE_FEED_URL)</string>
+<key>SUPublicEDKey</key><string>amCBzzdTNLauVV8wwWZpJ3jqmuGA3DpHFh6b+b8KGg4=</string>
+<key>SUEnableAutomaticChecks</key><true/>
+<key>SUScheduledCheckInterval</key><integer>86400</integer>
+<key>SUAutomaticallyUpdate</key><false/>
+<key>SUVerifyUpdateBeforeExtraction</key><true/>
 <key>CFBundleURLTypes</key><array><dict><key>CFBundleURLName</key><string>Transeen authentication</string><key>CFBundleURLSchemes</key><array><string>transeen</string></array></dict></array>
 </dict></plist>

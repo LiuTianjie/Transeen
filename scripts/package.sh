@@ -37,7 +37,10 @@ fi
 ditto -c -k --sequesterRsrc --keepParent dist/Transeen.app "dist/Transeen-$transeen_package_version.zip"
 (cd dist && shasum -a 256 "Transeen-$transeen_package_version.dmg" "Transeen-$transeen_package_version.zip") > "dist/Transeen-$transeen_package_version.sha256"
 if [[ -n "${TRANSEEN_NOTARY_PROFILE:-}" ]]; then
+  # Sparkle installs the zip. Its appcast goes to docs/updates/ only once the release is public.
+  ./scripts/generate-appcast.sh "dist/Transeen-$transeen_package_version.zip" "dist/appcast-$transeen_package_version.xml"
   print "Signed and notarized packages: dist/Transeen-$transeen_package_version.dmg and .zip"
+  print "Update feed: dist/appcast-$transeen_package_version.xml"
 else
   print "Signed packages (not notarized): dist/Transeen-$transeen_package_version.dmg and .zip"
 fi

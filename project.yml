@@ -14,6 +14,14 @@ settings:
     CODE_SIGN_INJECT_BASE_ENTITLEMENTS: NO
     MARKETING_VERSION: '0.13.0'
     CURRENT_PROJECT_VERSION: '19'
+    # Sparkle's appcast. scripts/build.sh sets it for Developer ID builds; when it is
+    # empty, AppUpdater leaves Sparkle off and falls back to the GitHub release check.
+    TRANSEEN_UPDATE_FEED_URL: ''
+packages:
+  # Signed in-place updates. scripts/sparkle-tools.sh pins the release tools to the same version.
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    exactVersion: 2.10.0
 targets:
   Transeen:
     type: application
@@ -27,6 +35,8 @@ targets:
         INFOPLIST_FILE: Info.plist
         PRODUCT_NAME: Transeen
         ENABLE_USER_SCRIPT_SANDBOXING: NO
+    dependencies:
+      - package: Sparkle
     postBuildScripts:
       - name: Embed llama-server
         basedOnDependencyAnalysis: false
@@ -45,6 +55,19 @@ targets:
           else
             codesign --force --sign "$identity" --options runtime --timestamp "$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/Helpers/llama-server"
           fi
+      - name: Sign Sparkle
+        basedOnDependencyAnalysis: false
+        script: |
+          # Notarization needs every helper inside Sparkle.framework signed with the
+          # Developer ID and hardened runtime, inside out. Ad hoc builds keep Xcode's signature.
+          identity="${EXPANDED_CODE_SIGN_IDENTITY:--}"
+          [ "$identity" = "-" ] && exit 0
+          sparkle="$TARGET_BUILD_DIR/$FRAMEWORKS_FOLDER_PATH/Sparkle.framework"
+          [ -d "$sparkle" ] || { echo "error: Sparkle.framework was not embedded"; exit 1; }
+          for part in Versions/B/XPCServices/Downloader.xpc Versions/B/XPCServices/Installer.xpc Versions/B/Updater.app Versions/B/Autoupdate; do
+            codesign --force --sign "$identity" --options runtime --timestamp --preserve-metadata=entitlements "$sparkle/$part"
+          done
+          codesign --force --sign "$identity" --options runtime --timestamp "$sparkle"
 schemes:
   Transeen:
     build:

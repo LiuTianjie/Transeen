@@ -13,6 +13,8 @@ fi
 transeen_signing_args=("CODE_SIGN_IDENTITY=${transeen_signing_identity:--}")
 if [[ -n "$transeen_signing_identity" ]]; then
   transeen_signing_args+=("ENABLE_HARDENED_RUNTIME=YES" "OTHER_CODE_SIGN_FLAGS=--timestamp")
+  # Only a Developer ID build can replace a signed install, so only it reads the update feed.
+  transeen_signing_args+=("TRANSEEN_UPDATE_FEED_URL=${TRANSEEN_UPDATE_FEED_URL:-https://transeen.itool.tech/updates/appcast.xml}")
 else
   print 'Building with ad-hoc signing. Set TRANSEEN_SIGNING_IDENTITY for stable screen-recording permissions.'
 fi
