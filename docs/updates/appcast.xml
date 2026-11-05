@@ -6,13 +6,13 @@
     <description>Transeen updates</description>
     <language>en</language>
     <item>
-      <title>Transeen 0.15.1</title>
-      <pubDate>Thu, 05 Nov 2026 12:15:01 +0000</pubDate>
-      <sparkle:version>22</sparkle:version>
-      <sparkle:shortVersionString>0.15.1</sparkle:shortVersionString>
+      <title>Transeen 0.15.2</title>
+      <pubDate>Thu, 05 Nov 2026 13:07:47 +0000</pubDate>
+      <sparkle:version>23</sparkle:version>
+      <sparkle:shortVersionString>0.15.2</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-      <description><![CDATA[<ul><li>Signing in with Google or GitHub no longer crashes Transeen. 0.15.0 quit as soon as the sign-in browser started, because the system reported back on a background thread the app did not expect.</li></ul>]]></description>
-      <enclosure url="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.1/Transeen-0.15.1.zip" type="application/octet-stream" sparkle:edSignature="bd5/6IvQTf7ULoBZ2ZaP3Q/ncfPPthzvVhb1bk5+7sZ63wnL6eHpGj8nP0D2xMFdjKTkY/Qpmri6iC5OOpjDDg==" length="11062291" />
+      <description><![CDATA[<ul><li>Google and GitHub sign-in now opens as a tab in your own browser, where you may already be signed in, instead of a separate sign-in window. The browser hands the result back to Transeen on this Mac; the panel shows a Cancel button while it waits.</li></ul>]]></description>
+      <enclosure url="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.2/Transeen-0.15.2.zip" type="application/octet-stream" sparkle:edSignature="+MfpJ0LoOWv1nnz4tXmbrv20RNttZa6U8SdyadtOl1cnr/kdbF19FMMZ7ubh3HN1C4vKiBFoDmDtOc1uUho2Bw==" length="11072338" />
     </item>
   </channel>
 </rss>
