@@ -45,6 +45,7 @@ final class PinnedImagePanel: NSPanel {
         }
         picture.onMagnify = { [weak self] value in self?.zoom(by: 1 + value, anchor: NSEvent.mouseLocation) }
         picture.onDoubleClick = { [weak self] in self?.toggleThumbnail() }
+        picture.toolTip = L("滚轮缩放 · ⌥滚轮调透明度")
         contentView = picture
         animationBehavior = .none
     }

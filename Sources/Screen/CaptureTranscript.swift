@@ -34,7 +34,6 @@ struct CaptureTranscript: View {
             }.frame(maxHeight: 380)
             Divider()
             HStack {
-                Text(L("文字可选择、复制")).font(.system(size: 11)).foregroundStyle(.secondary)
                 Spacer()
                 Button(action: copy) {
                     Label(state.textCopyCompleted ? L("已复制") : L("复制文字"), systemImage: state.textCopyCompleted ? "checkmark" : "doc.on.doc")

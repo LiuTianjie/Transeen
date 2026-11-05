@@ -47,14 +47,37 @@ struct CaptureToolbarButtonStyle: ButtonStyle {
         configuration.label
             .foregroundStyle(enabled ? (selected && !neutralSelection ? CaptureAppearance.accent : CaptureAppearance.foreground) : CaptureAppearance.secondary.opacity(0.4))
             .background {
-                RoundedRectangle(cornerRadius: 6)
+                RoundedRectangle(cornerRadius: 7, style: .continuous)
                     .fill(selected && !neutralSelection ? CaptureAppearance.accent.opacity(0.11) : CaptureAppearance.foreground.opacity(configuration.isPressed && enabled ? 0.12 : selected ? 0.065 : hovering && enabled ? 0.045 : 0))
             }
             .overlay {
-                if focused { RoundedRectangle(cornerRadius: 6).strokeBorder(CaptureAppearance.accent, lineWidth: 1.5) }
+                if focused { RoundedRectangle(cornerRadius: 7, style: .continuous).strokeBorder(CaptureAppearance.accent, lineWidth: 1.5) }
             }
-            .contentShape(RoundedRectangle(cornerRadius: 6))
+            .contentShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
             .onHover { hovering = $0 }
             .animation(reduceMotion ? nil : CaptureAppearance.quick, value: hovering)
+    }
+}
+
+/// One half of the original / translation switch: the chosen side is a raised chip.
+struct CaptureSegmentStyle: ButtonStyle {
+    var selected: Bool
+    @Environment(\.colorScheme) private var scheme
+    @State private var hovering = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundStyle(selected ? CaptureAppearance.foreground : CaptureAppearance.secondary)
+            .background {
+                if selected {
+                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                        .fill(scheme == .dark ? Color.white.opacity(0.16) : Color.white)
+                        .shadow(color: .black.opacity(scheme == .dark ? 0 : 0.12), radius: 1, y: 0.5)
+                } else if hovering || configuration.isPressed {
+                    RoundedRectangle(cornerRadius: 6, style: .continuous).fill(CaptureAppearance.foreground.opacity(configuration.isPressed ? 0.08 : 0.04))
+                }
+            }
+            .contentShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+            .onHover { hovering = $0 }
     }
 }

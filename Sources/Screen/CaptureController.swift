@@ -228,7 +228,7 @@ final class CaptureController {
             if !start.changed {
                 generation += 1; work?.cancel(); backend?.cancel(); partialTask?.cancel(); partialTask = nil
                 completionTask?.cancel(); completionTask = nil
-                state.working = false; state.paused = false; state.copyCompleted = false
+                state.working = false; state.paused = false; state.copyCompleted = false; state.pendingOutput = nil
                 translated = nil
                 state.translated = false; state.textBlocks = []; state.warning = nil
                 state.failed = false; state.noText = false
@@ -356,7 +356,7 @@ final class CaptureController {
             guard valid(token) else { return }
             guard let analysis, analysis.recognized > 0 else {
                 Self.logger.notice("recognition returned no text")
-                state.noText = true; state.working = false; state.status = L("没有识别到文字，可重新框选或重试。"); panel?.refreshUI(); return
+                state.noText = true; state.working = false; state.pendingOutput = nil; state.status = L("没有识别到文字"); panel?.refreshUI(); return
             }
             if let source = analysis.detectedSource {
                 pair = TranslationDirection(source: source, target: analysis.redirectedTarget ?? pair.target)
@@ -388,20 +388,21 @@ final class CaptureController {
             state.textBlocks = readingOrder.map { CaptureTextBlock(id: $0, original: analysis.blocks[$0].original, translation: translations[$0]) }
             state.warning = output.warning
             if composed.cut > 0 || composed.placed.count < translations.filter({ $0.value != analysis.blocks[$0.key].original }).count {
-                state.warning = [output.warning, L("部分译文超出原位置，请在「文字」中查看全文。")].compactMap { $0 }.joined(separator: " ")
+                state.warning = [output.warning, L("部分译文超出原位置")].compactMap { $0 }.joined(separator: " ")
             }
             state.working = false
             Self.logger.notice("translation completed blocks=\(composed.blocks.count, privacy: .public) placed=\(composed.placed.count, privacy: .public) cut=\(composed.cut, privacy: .public)")
             for (reason, indices) in Dictionary(grouping: composed.blocks.indices.filter { composed.blocks[$0].kept != nil }, by: { composed.blocks[$0].kept! }) {
                 Self.logger.notice("kept \(reason.rawValue, privacy: .public) blocks=\(indices.map(String.init).joined(separator: ","), privacy: .public)")
             }
-            let swap = state.shortcuts.binding(.captureTranslate).map { " · " + L("再按 %@ 交换语言", $0.display) } ?? ""
-            state.status = translations.isEmpty ? L("没有需要翻译的文字") + swap : L("已翻译 %ld 处", translations.count) + " · " + state.shortcuts.help(L("切换原文 / 译文"), .peek) + swap
+            state.status = translations.isEmpty ? L("没有需要翻译的文字") : L("已翻译 %ld 处", translations.count)
             displayCurrent()
+            // A copy, pin or save asked for mid-translation gets the finished picture.
+            if let pending = state.pendingOutput { state.pendingOutput = nil; action(pending) }
         } catch {
             guard valid(token) else { return }
             Self.logger.error("translation failed domain=\((error as NSError).domain, privacy: .public) code=\((error as NSError).code)")
-            state.failed = true; state.working = false; state.status = error.localizedDescription; panel?.refreshUI()
+            state.failed = true; state.working = false; state.pendingOutput = nil; state.status = error.localizedDescription; panel?.refreshUI()
         }
     }
     /// Draws what is translated so far, at most every 150 ms, while the rest is on its way.
@@ -442,8 +443,8 @@ final class CaptureController {
         generation += 1; work?.cancel(); backend?.cancel(); partialTask?.cancel(); partialTask = nil
         completionTask?.cancel(); completionTask = nil
         translated = nil
-        state.working = false; state.paused = true; state.overlay = false; state.warning = nil
-        state.status = L("已暂停翻译") + " · " + state.shortcuts.help(L("继续翻译"), state.pauseKey)
+        state.working = false; state.paused = true; state.overlay = false; state.warning = nil; state.pendingOutput = nil
+        state.status = L("已暂停翻译")
         Self.logger.notice("translation paused")
         displayCurrent()
     }
@@ -494,6 +495,10 @@ final class CaptureController {
             if state.annotating && state.annotations.tool == .move { state.annotations.tool = .pen }
             if !state.annotating { state.annotations.tool = .move }
             panel?.refreshUI()
+        case "copy" where state.working, "pin" where state.working, "save" where state.working:
+            // Never hand out a half-drawn picture: finish first. The same request again withdraws it.
+            state.pendingOutput = state.pendingOutput == id ? nil : id
+            panel?.refreshUI()
         case "pin": pin()
         case "reselect": onReselect?(mode)
         case "original": state.overlay = false; displayCurrent()
@@ -525,7 +530,6 @@ final class CaptureController {
             pasteboard.clearContents()
             state.textCopyCompleted = pasteboard.setString(text, forType: .string)
         case "copy":
-            // Whatever is on screen right now; a running translation never blocks copying.
             guard resizeStart == nil, let image = export() else { return }
             pasteboard.clearContents()
             if pasteboard.writeObjects([image]) {

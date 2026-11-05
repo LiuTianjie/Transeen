@@ -35,6 +35,9 @@ final class CaptureState {
     var cropReadout: String?
     /// A translation stopped by the comparison key before it finished; the same key resumes it.
     var paused = false
+    /// Copy, pin or save asked for while translating; it runs once the translation is done,
+    /// so a half-drawn picture never leaves the capture.
+    var pendingOutput: String?
     /// The bound comparison key that pauses and resumes a translation.
     var pauseKey: ShortcutAction { shortcuts.binding(.peek) != nil ? .peek : .compare }
     var compactProgress: Bool { working && !hasTranslatedOnce && !annotating && annotations.selectedID == nil }
@@ -226,8 +229,9 @@ final class CapturePanel: NSPanel, NSWindowDelegate {
         let screen = NSScreen.screens.first { $0.frame.contains(CGPoint(x: content.midX, y: content.midY)) } ?? NSScreen.main
         let visible = screen?.visibleFrame ?? content
         let x = max(visible.minX + 8, min(content.midX - size.width / 2, visible.maxX - size.width - 8))
-        var y = content.minY - size.height - 12
-        if y < visible.minY + 4 { y = min(content.maxY + 12, visible.maxY - size.height - 4) }
+        // Clear of the resize band; the toolbar's own transparent padding makes the visible gap.
+        var y = content.minY - size.height - Self.margin
+        if y < visible.minY + 4 { y = min(content.maxY + Self.margin, visible.maxY - size.height - 4) }
         return CGRect(x: x, y: y, width: size.width, height: size.height)
     }
     func windowDidMove(_ notification: Notification) {

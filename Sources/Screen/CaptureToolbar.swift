@@ -9,80 +9,59 @@ struct CaptureToolbar: View {
     @State private var showsText = false
     @FocusState private var numberFocused: Bool
     private let colors: [NSColor] = [.systemRed, .systemOrange, .systemYellow, .systemGreen, .systemBlue, .white, .black]
-    private let toolbarWidth: CGFloat = 536
+    private let toolbarWidth: CGFloat = 452
     private var showsInspector: Bool { state.annotations.selectedID != nil || (state.annotating && state.annotations.tool != .move) }
     private var effectiveTool: AnnotationTool { state.annotations.selected?.tool ?? state.annotations.tool }
+    /// Something the reader must see in full: a failure, or a translation that did not fit.
+    private var problem: String? { state.failed ? state.status : state.warning }
 
     var body: some View {
         VStack(spacing: 0) {
-                HStack(spacing: 8) {
-                    comparison.frame(width: 84)
-                    separator
-                    Spacer(minLength: 0)
-                    HStack(spacing: 2) {
-                        Button { showsText.toggle() } label: {
-                            Label(L("文字"), systemImage: "text.alignleft").font(.system(size: 11, weight: .medium)).frame(width: 52, height: 30)
-                        }.buttonStyle(CaptureToolbarButtonStyle(selected: showsText))
-                            .disabled(state.textBlocks.isEmpty)
-                            .help(L("查看完整译文和原文，复制文字"))
+            HStack(spacing: 6) {
+                comparison
+                languageMenu
+                Spacer(minLength: 0)
+                HStack(spacing: 2) {
+                    if !state.textBlocks.isEmpty {
+                        iconButton("text.alignleft", L("查看完整译文和原文，复制文字"), selected: showsText) { showsText.toggle() }
                             .popover(isPresented: $showsText, arrowEdge: .bottom) {
                                 CaptureTranscript(state: state) { action("copyText") }
                             }
-                        iconButton("pin", state.shortcuts.help(L("钉到屏幕上，可继续截图"), .pin), "pin")
-                        moreMenu
-                        Button { action("copy") } label: {
-                            Label(state.copyCompleted ? L("已复制") : L("复制"), systemImage: state.copyCompleted ? "checkmark" : "doc.on.doc")
-                                .font(.system(size: 11, weight: .semibold)).frame(minWidth: 44)
-                        }.buttonStyle(.borderedProminent).controlSize(.regular)
-                            .help(state.shortcuts.help(L("复制图片"), .copy))
-                        iconButton("xmark", state.shortcuts.help(L("关闭"), .close), "close")
+                            .transition(.opacity)
                     }
-                }.padding(.horizontal, 10).padding(.vertical, 7).frame(width: toolbarWidth)
-
-                HStack(spacing: 8) {
-                    HStack(spacing: 2) {
-                        ForEach(AnnotationTool.allCases) { tool in
-                            Button {
-                                animate { action("tool." + (state.annotations.tool == tool ? AnnotationTool.move.rawValue : tool.rawValue)) }
-                            } label: { icon(tool.symbol) }
-                                .buttonStyle(CaptureToolbarButtonStyle(selected: state.annotations.tool == tool && (tool != .move || state.annotations.selectedID != nil)))
-                                .help(tool == .number ? L("编号 · 下一个：%ld", state.annotations.nextNumber) : tool.title)
-                                .accessibilityLabel(tool.title)
-                                .accessibilityAddTraits(state.annotations.tool == tool ? .isSelected : [])
-                        }
-                    }
-                    Spacer(minLength: 0)
-                    Text(effectiveTool.title).font(.system(size: 11)).foregroundStyle(CaptureAppearance.secondary)
-                }.padding(.horizontal, 10).padding(.bottom, 4).frame(width: toolbarWidth)
-
-                Rectangle().fill(CaptureAppearance.foreground.opacity(0.08)).frame(height: 0.5).padding(.horizontal, 10)
-                HStack(alignment: .top, spacing: 12) {
-                    languageMenu
-                    Spacer(minLength: 0)
-                    HStack(alignment: .top, spacing: 4) {
-                        if state.failed || state.noText || state.warning != nil {
-                            Image(systemName: state.failed ? "exclamationmark.circle" : "info.circle")
-                        }
-                        Text(state.cropReadout ?? state.warning ?? (state.status.isEmpty ? L("拖动边缘调整范围 · 选择工具标注") : state.working ? state.status + " · " + stopHint : state.status))
-                            .lineLimit(3).fixedSize(horizontal: false, vertical: true)
-                    }.font(.system(size: 11))
-                        .foregroundStyle(state.failed ? Color.red : state.warning != nil ? Color.orange : CaptureAppearance.secondary)
-                        .multilineTextAlignment(.leading)
-                        .textSelection(.enabled)
-                }.padding(.horizontal, 12).padding(.vertical, 8).frame(width: toolbarWidth)
-
-                if showsInspector {
-                    Rectangle().fill(CaptureAppearance.foreground.opacity(0.08)).frame(height: 0.5).padding(.horizontal, 10)
-                    inspector
-                        .transition(.opacity)
+                    iconButton("pin", state.pendingOutput == "pin" ? L("翻译完成后钉到屏幕") : state.shortcuts.help(L("钉到屏幕上，可继续截图"), .pin),
+                               selected: state.pendingOutput == "pin") { action("pin") }
+                    moreMenu
+                    copyButton.padding(.horizontal, 2)
+                    iconButton("xmark", state.shortcuts.help(L("关闭"), .close)) { action("close") }
                 }
+            }.padding(.horizontal, 8).padding(.top, 8).padding(.bottom, 2)
+
+            HStack(spacing: 8) {
+                tools
+                Spacer(minLength: 8)
+                statusLine
+            }.padding(.horizontal, 8).padding(.bottom, 6)
+
+            if let problem {
+                divider
+                problemRow(problem).transition(.opacity)
+            }
+            if showsInspector {
+                divider
+                inspector.transition(.opacity)
+            }
         }
-        .modifier(CaptureSurface(radius: 10))
+        .frame(width: toolbarWidth)
+        .modifier(CaptureSurface(radius: 12))
         .padding(8)
         .fixedSize()
         .allowsHitTesting(!state.finishing)
         .animation(reduceMotion ? nil : CaptureAppearance.quick, value: showsInspector)
         .animation(reduceMotion ? nil : CaptureAppearance.quick, value: state.copyCompleted)
+        .animation(reduceMotion ? nil : CaptureAppearance.quick, value: state.pendingOutput)
+        .animation(reduceMotion ? nil : CaptureAppearance.quick, value: state.textBlocks.isEmpty)
+        .animation(reduceMotion ? nil : CaptureAppearance.quick, value: problem)
         .onChange(of: state.annotating) { _, _ in action("layout") }
         .onChange(of: state.annotations.selectedID) { _, _ in showsStyle = false; action("layout") }
         .onChange(of: state.requestsNumberEdit) { _, requested in
@@ -91,8 +70,53 @@ struct CaptureToolbar: View {
         .onChange(of: state.annotations.tool) { _, _ in action("layout") }
         .onChange(of: state.translated) { _, _ in action("layout") }
         .onChange(of: state.working) { _, _ in action("layout") }
-        .onChange(of: state.status) { _, _ in action("layout") }
-        .onChange(of: state.warning) { _, _ in action("layout") }
+        .onChange(of: problem) { _, _ in action("layout") }
+    }
+
+    private var divider: some View {
+        Rectangle().fill(CaptureAppearance.foreground.opacity(0.08)).frame(height: 0.5).padding(.horizontal, 10)
+    }
+
+    // MARK: Translation
+
+    @ViewBuilder private var comparison: some View {
+        Group {
+            if state.failed || state.noText {
+                slotButton(L("重试"), "arrow.clockwise", state.shortcuts.help(L("翻译选中区域"), .translate)) { action("translate") }
+            } else if state.working {
+                slotButton(L("暂停"), "pause.fill", state.shortcuts.help(L("暂停翻译"), state.pauseKey)) { action("pause") }
+            } else if state.paused {
+                slotButton(L("继续"), "play.fill", state.shortcuts.help(L("继续翻译"), state.pauseKey)) { action("pause") }
+            } else if state.translated {
+                HStack(spacing: 2) {
+                    compareButton(L("原文"), selected: !state.showingTranslation, id: "original")
+                    compareButton(L("译文"), selected: state.showingTranslation, id: "translation")
+                }
+                .padding(2)
+                .background(CaptureAppearance.foreground.opacity(0.06), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .help(state.shortcuts.help(L("切换原文 / 译文"), .peek))
+            } else {
+                slotButton(L("翻译"), "translate", state.shortcuts.help(L("翻译选中区域"), .translate)) { action("translate") }
+            }
+        }
+        // One width for every state, so nothing beside it moves when the state changes.
+        .frame(width: 92, alignment: .leading)
+    }
+
+    private func slotButton(_ title: String, _ symbol: String, _ help: String, _ run: @escaping () -> Void) -> some View {
+        Button(action: run) {
+            Label(title, systemImage: symbol).font(.system(size: 12, weight: .medium))
+                .frame(width: 92, height: 30)
+                .background(CaptureAppearance.foreground.opacity(0.06), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        }.buttonStyle(CaptureToolbarButtonStyle()).help(help)
+    }
+
+    private func compareButton(_ label: String, selected: Bool, id: String) -> some View {
+        Button { animate { action(id) } } label: {
+            Text(label).font(.system(size: 12, weight: selected ? .semibold : .regular))
+                .frame(width: 43, height: 26)
+        }.buttonStyle(CaptureSegmentStyle(selected: selected))
+            .accessibilityAddTraits(selected ? .isSelected : [])
     }
 
     private var languageMenu: some View {
@@ -119,107 +143,158 @@ struct CaptureToolbar: View {
             Divider()
             Button(L("交换语言")) { action("direction") }
         } label: {
-            HStack(spacing: 4) {
-                Image(systemName: "globe")
-                Text(state.detectsSource && state.textBlocks.isEmpty ? L("自动") + " → \(state.target.shortName)" : state.direction)
-            }.font(.system(size: 11, weight: .medium))
-        }.menuStyle(.borderlessButton).fixedSize().help(L("更改原文或译文语言"))
+            Text(state.detectsSource && state.textBlocks.isEmpty ? L("自动") + " → \(state.target.shortName)" : state.direction)
+                .font(.system(size: 12, weight: .medium)).monospacedDigit()
+        }
+        .menuStyle(.borderlessButton).fixedSize()
+        .tint(CaptureAppearance.foreground)
+        .help(state.shortcuts.help(L("更改原文或译文语言"), .direction))
     }
 
-    /// The comparison key pauses a running translation; name whichever one is bound.
-    private var stopHint: String { state.shortcuts.help(L("暂停翻译"), state.pauseKey) }
-
-    private var separator: some View {
-        Rectangle().fill(CaptureAppearance.foreground.opacity(0.13)).frame(width: 1, height: 16)
-    }
-
-    @ViewBuilder private var comparison: some View {
-        if state.failed || state.noText {
-            Button { action("translate") } label: {
-                Label(L("重试"), systemImage: "arrow.clockwise").font(.system(size: 12, weight: .medium))
-                    .frame(width: 84, height: 30)
-            }.buttonStyle(CaptureToolbarButtonStyle()).help(state.status)
-        } else if state.working {
-            Button { action("pause") } label: {
-                HStack(spacing: 6) {
-                    ProgressView().controlSize(.mini)
-                    Text(L("翻译中")).font(.system(size: 11))
-                }.frame(width: 84, height: 30)
-            }.buttonStyle(CaptureToolbarButtonStyle()).help(stopHint)
-        } else if state.paused {
-            Button { action("pause") } label: {
-                Label(L("继续"), systemImage: "play.fill").font(.system(size: 12, weight: .medium))
-                    .frame(width: 84, height: 30)
-            }.buttonStyle(CaptureToolbarButtonStyle()).help(state.shortcuts.help(L("继续翻译"), state.pauseKey))
-        } else if state.translated {
-            HStack(spacing: 4) {
-                compareButton(L("原文"), selected: !state.showingTranslation, id: "original")
-                compareButton(L("译文"), selected: state.showingTranslation, id: "translation")
-            }.help(state.shortcuts.help(L("切换原文 / 译文"), .compare) + "；" + state.shortcuts.help(L("切换原文 / 译文"), .peek))
-        } else {
-            Button { action("translate") } label: {
-                Label(L("翻译"), systemImage: "translate").font(.system(size: 12, weight: .medium))
-                    .frame(width: 84, height: 30)
-            }.buttonStyle(CaptureToolbarButtonStyle()).help(state.shortcuts.help(L("翻译选中区域"), .translate))
+    private var statusText: String {
+        if let readout = state.cropReadout { return readout }
+        switch state.pendingOutput {
+        case "copy": return L("翻译完成后复制")
+        case "pin": return L("翻译完成后钉到屏幕")
+        case "save": return L("翻译完成后保存")
+        default: return state.failed ? "" : state.status
         }
     }
 
-    private func compareButton(_ label: String, selected: Bool, id: String) -> some View {
-        Button { animate { action(id) } } label: {
-            Text(label).font(.system(size: 11, weight: selected ? .semibold : .regular))
-                .frame(width: 40, height: 30)
-        }.buttonStyle(CaptureToolbarButtonStyle(selected: selected, neutralSelection: true))
-            .accessibilityAddTraits(selected ? .isSelected : [])
+    private var statusLine: some View {
+        HStack(spacing: 6) {
+            if state.working && state.cropReadout == nil { ProgressView().controlSize(.mini) }
+            Text(statusText).lineLimit(1).truncationMode(.middle)
+        }
+        .font(.system(size: 11)).monospacedDigit()
+        .foregroundStyle(CaptureAppearance.secondary)
+        .help(statusText)
+    }
+
+    private func problemRow(_ message: String) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 6) {
+            Image(systemName: state.failed ? "exclamationmark.circle.fill" : "info.circle.fill")
+                .foregroundStyle(state.failed ? Color.red : Color.orange)
+            Text(message).foregroundStyle(state.failed ? Color.red : CaptureAppearance.foreground)
+                .lineLimit(3).fixedSize(horizontal: false, vertical: true).textSelection(.enabled)
+            Spacer(minLength: 0)
+            if !state.failed && !state.textBlocks.isEmpty {
+                Button(L("查看全文")) { showsText = true }.buttonStyle(.link)
+            }
+        }
+        .font(.system(size: 11))
+        .padding(.horizontal, 12).padding(.vertical, 8)
+    }
+
+    // MARK: Output
+
+    private var copyButton: some View {
+        let pending = state.pendingOutput == "copy"
+        return Button { action("copy") } label: {
+            HStack(spacing: 5) {
+                Image(systemName: state.copyCompleted ? "checkmark" : "doc.on.doc")
+                    .symbolEffect(.pulse, isActive: pending && !reduceMotion)
+                    .contentTransition(.symbolEffect(.replace))
+                Text(state.copyCompleted ? L("已复制") : L("复制"))
+            }
+            .font(.system(size: 12, weight: .semibold)).frame(minWidth: 54)
+        }
+        .buttonStyle(.borderedProminent).controlSize(.regular)
+        .help(pending ? L("翻译完成后复制") : state.shortcuts.help(L("复制图片"), .copy))
+    }
+
+    private var moreMenu: some View {
+        Menu {
+            Button(L("保存图片…"), systemImage: "square.and.arrow.down") { action("save") }
+            Button(L("重新框选"), systemImage: "viewfinder") { action("reselect") }
+            if state.scrollable {
+                Divider()
+                Button(L("放大"), systemImage: "plus.magnifyingglass") { action("zoomIn") }
+                Button(L("缩小"), systemImage: "minus.magnifyingglass") { action("zoomOut") }
+                Button(L("适合宽度"), systemImage: "arrow.left.and.right") { action("zoomReset") }
+            }
+            Divider()
+            Button(L("撤销"), systemImage: "arrow.uturn.backward") { action("undo") }.disabled(!state.annotations.canUndo)
+            Button(L("重做"), systemImage: "arrow.uturn.forward") { action("redo") }.disabled(!state.annotations.canRedo)
+            Button(L("删除选中标注"), systemImage: "trash") { action("delete") }.disabled(state.annotations.selectedID == nil)
+            if state.annotations.selected?.tool == .text {
+                Button(L("编辑文字…"), systemImage: "character.cursor.ibeam") { action("editText") }
+            }
+            if state.annotations.selected?.tool == .number {
+                Button(L("修改编号…"), systemImage: "number") { showsStyle = true }
+            }
+            Divider()
+            Button(L("交换语言") + " · \(state.direction)", systemImage: "arrow.left.arrow.right") { action("direction") }
+            Button(L("重新翻译"), systemImage: "arrow.clockwise") { action("translate") }.disabled(state.working)
+        } label: { icon("ellipsis") }
+            .menuIndicator(.hidden).menuStyle(.borderlessButton).fixedSize().frame(width: 30, height: 30)
+            .tint(CaptureAppearance.foreground)
+            .help(L("保存与更多操作")).accessibilityLabel(L("更多操作"))
+    }
+
+    // MARK: Annotation
+
+    private var tools: some View {
+        HStack(spacing: 2) {
+            ForEach(AnnotationTool.allCases) { tool in
+                Button {
+                    animate { action("tool." + (state.annotations.tool == tool ? AnnotationTool.move.rawValue : tool.rawValue)) }
+                } label: { icon(tool.symbol) }
+                    .buttonStyle(CaptureToolbarButtonStyle(selected: state.annotations.tool == tool && (tool != .move || state.annotations.selectedID != nil)))
+                    .help(tool == .number ? L("编号 · 下一个：%ld", state.annotations.nextNumber) : tool.title)
+                    .accessibilityLabel(tool.title)
+                    .accessibilityAddTraits(state.annotations.tool == tool ? .isSelected : [])
+            }
+        }
     }
 
     private var inspector: some View {
         HStack(spacing: 10) {
             if effectiveTool != .redact {
-            HStack(spacing: 4) {
-                ForEach(Array(colors.enumerated()), id: \.offset) { index, color in
-                    Button { state.annotations.color = color } label: {
-                        Circle().fill(Color(nsColor: color)).frame(width: 12, height: 12)
-                            .overlay(Circle().strokeBorder(CaptureAppearance.foreground.opacity(0.2), lineWidth: 0.5))
-                            .padding(3)
-                            .overlay(Circle().strokeBorder(state.annotations.color == color ? Color(nsColor: color) : .clear, lineWidth: 1))
-                            .frame(width: 24, height: 28)
-                    }.buttonStyle(.plain).accessibilityLabel([L("红色"), L("橙色"), L("黄色"), L("绿色"), L("蓝色"), L("白色"), L("黑色")][index])
+                HStack(spacing: 2) {
+                    ForEach(Array(colors.enumerated()), id: \.offset) { index, color in
+                        Button { state.annotations.color = color } label: {
+                            Circle().fill(Color(nsColor: color)).frame(width: 14, height: 14)
+                                .overlay(Circle().strokeBorder(CaptureAppearance.foreground.opacity(0.18), lineWidth: 0.5))
+                                .padding(3)
+                                .overlay(Circle().strokeBorder(state.annotations.color == color ? CaptureAppearance.foreground.opacity(0.55) : .clear, lineWidth: 1.5))
+                                .frame(width: 26, height: 28)
+                                .contentShape(Rectangle())
+                        }.buttonStyle(.plain).accessibilityLabel([L("红色"), L("橙色"), L("黄色"), L("绿色"), L("蓝色"), L("白色"), L("黑色")][index])
+                            .accessibilityAddTraits(state.annotations.color == color ? .isSelected : [])
+                    }
                 }
-            }
-            separator
-            if effectiveTool == .text {
-                Button(L("编辑文字…")) { action("editText") }.disabled(state.annotations.selected?.tool != .text)
-            } else if let number = state.annotations.selected?.number {
-                Button { showsStyle = true } label: {
-                    Label(L("编号 %ld", number), systemImage: "pencil").font(.system(size: 11)).frame(width: 92, height: 28)
-                }.buttonStyle(CaptureToolbarButtonStyle()).help(L("修改编号数字")).accessibilityLabel(L("修改编号数字"))
-            } else {
-            HStack(spacing: 4) {
-                ForEach([CGFloat(2), 4, 8], id: \.self) { width in
-                    Button { state.annotations.width = width } label: {
-                        Capsule().fill(CaptureAppearance.foreground).frame(width: 15, height: width / 2)
-                            .frame(width: 28, height: 28)
-                    }.buttonStyle(CaptureToolbarButtonStyle(selected: state.annotations.width == width, neutralSelection: true))
-                        .help(effectiveTool == .number ? L("编号大小：%ld", Int(width)) : L("线宽：%ld", Int(width)))
-                        .accessibilityLabel(effectiveTool == .number ? L("编号大小：%ld", Int(width)) : L("线宽：%ld", Int(width)))
+                separator
+                if effectiveTool == .text {
+                    if state.annotations.selected?.tool == .text {
+                        iconButton("character.cursor.ibeam", L("编辑文字")) { action("editText") }
+                    }
+                } else if let number = state.annotations.selected?.number {
+                    Button { showsStyle = true } label: {
+                        Text("\(number)").font(.system(size: 12, weight: .semibold)).monospacedDigit().frame(minWidth: 30, minHeight: 28)
+                    }.buttonStyle(CaptureToolbarButtonStyle()).help(L("修改编号数字")).accessibilityLabel(L("修改编号数字"))
+                } else {
+                    HStack(spacing: 2) {
+                        ForEach([CGFloat(2), 4, 8], id: \.self) { width in
+                            Button { state.annotations.width = width } label: {
+                                Capsule().fill(CaptureAppearance.foreground).frame(width: 15, height: width / 2)
+                                    .frame(width: 28, height: 28)
+                            }.buttonStyle(CaptureToolbarButtonStyle(selected: state.annotations.width == width, neutralSelection: true))
+                                .help(effectiveTool == .number ? L("编号大小：%ld", Int(width)) : L("线宽：%ld", Int(width)))
+                                .accessibilityLabel(effectiveTool == .number ? L("编号大小：%ld", Int(width)) : L("线宽：%ld", Int(width)))
+                        }
+                    }
                 }
-            }
-            }
-            Button { showsStyle.toggle() } label: { icon("slider.horizontal.3") }
-                .buttonStyle(CaptureToolbarButtonStyle())
-                .help(L("自定义颜色与粗细")).accessibilityLabel(L("自定义颜色与粗细"))
-                .popover(isPresented: $showsStyle, arrowEdge: .bottom) { stylePicker }
-            } else {
-                Label(L("实色覆盖，导出后隐藏原始像素"), systemImage: "lock.fill")
-                    .font(.system(size: 11)).foregroundStyle(CaptureAppearance.secondary)
+                iconButton("slider.horizontal.3", L("自定义颜色与粗细")) { showsStyle.toggle() }
+                    .popover(isPresented: $showsStyle, arrowEdge: .bottom) { stylePicker }
             }
             Spacer(minLength: 0)
-            HStack(spacing: 4) {
-                iconButton("arrow.uturn.backward", state.shortcuts.help(L("撤销"), .undo), "undo").disabled(!state.annotations.canUndo)
-                iconButton("arrow.uturn.forward", state.shortcuts.help(L("重做"), .redo), "redo").disabled(!state.annotations.canRedo)
-                iconButton("trash", L("删除选中标注（Delete）"), "delete").disabled(state.annotations.selectedID == nil)
+            HStack(spacing: 2) {
+                iconButton("arrow.uturn.backward", state.shortcuts.help(L("撤销"), .undo)) { action("undo") }.disabled(!state.annotations.canUndo)
+                iconButton("arrow.uturn.forward", state.shortcuts.help(L("重做"), .redo)) { action("redo") }.disabled(!state.annotations.canRedo)
+                iconButton("trash", L("删除选中标注（Delete）")) { action("delete") }.disabled(state.annotations.selectedID == nil)
             }
-        }.padding(.horizontal, 10).padding(.vertical, 4).frame(width: toolbarWidth)
+        }.padding(.horizontal, 8).padding(.vertical, 5)
     }
 
     private var stylePicker: some View {
@@ -247,52 +322,28 @@ struct CaptureToolbar: View {
                     Text("\(Int(state.annotations.selected?.fontSize ?? state.annotations.fontSize))").monospacedDigit()
                 }
             } else {
-            HStack(spacing: 10) {
-                Text(effectiveTool == .number ? L("大小") : L("粗细")).font(.system(size: 12))
-                Slider(value: Binding(get: { Double(state.annotations.width) }, set: { state.annotations.width = CGFloat($0) }), in: 1...10, step: 1, onEditingChanged: { editing in
+                HStack(spacing: 10) {
+                    Text(effectiveTool == .number ? L("大小") : L("粗细")).font(.system(size: 12))
+                    Slider(value: Binding(get: { Double(state.annotations.width) }, set: { state.annotations.width = CGFloat($0) }), in: 1...10, step: 1, onEditingChanged: { editing in
                         if editing { state.annotations.beginEdit() } else { state.annotations.commitEdit() }
                     })
                     .controlSize(.small).accessibilityLabel(effectiveTool == .number ? L("编号大小") : L("线宽"))
-            }
+                }
             }
         }.padding(16).frame(width: 260).onDisappear { state.annotations.commitEdit() }
     }
 
-    private var moreMenu: some View {
-        Menu {
-            Button(L("保存图片…"), systemImage: "square.and.arrow.down") { action("save") }
-            Button(L("重新框选"), systemImage: "viewfinder") { action("reselect") }
-            if state.scrollable {
-                Divider()
-                Button(L("放大"), systemImage: "plus.magnifyingglass") { action("zoomIn") }
-                Button(L("缩小"), systemImage: "minus.magnifyingglass") { action("zoomOut") }
-                Button(L("适合宽度"), systemImage: "arrow.left.and.right") { action("zoomReset") }
-            }
-            Divider()
-            Button(L("撤销"), systemImage: "arrow.uturn.backward") { action("undo") }.disabled(!state.annotations.canUndo)
-            Button(L("重做"), systemImage: "arrow.uturn.forward") { action("redo") }.disabled(!state.annotations.canRedo)
-            Button(L("删除选中标注"), systemImage: "trash") { action("delete") }.disabled(state.annotations.selectedID == nil)
-            if state.annotations.selected?.tool == .text {
-                Button(L("编辑文字…"), systemImage: "textformat") { action("editText") }
-            }
-            if state.annotations.selected?.tool == .number {
-                Button(L("修改编号…"), systemImage: "number") { showsStyle = true }
-            }
-            Divider()
-            Button(L("交换语言") + " · \(state.direction)", systemImage: "arrow.left.arrow.right") { action("direction") }
-            Button(L("重新翻译"), systemImage: "arrow.clockwise") { action("translate") }.disabled(state.working)
-        } label: { icon("ellipsis") }
-            .menuIndicator(.hidden).menuStyle(.borderlessButton).fixedSize().frame(width: 28, height: 30)
-            .tint(CaptureAppearance.foreground)
-            .help(L("保存与更多操作")).accessibilityLabel(L("更多操作"))
-    }
+    // MARK: Parts
 
-    private func icon(_ name: String) -> some View {
-        Image(systemName: name).font(.system(size: 14, weight: .regular)).frame(width: 28, height: 30)
-            .contentShape(RoundedRectangle(cornerRadius: 6))
+    private var separator: some View {
+        Rectangle().fill(CaptureAppearance.foreground.opacity(0.13)).frame(width: 1, height: 16)
     }
-    private func iconButton(_ symbol: String, _ help: String, _ id: String, selected: Bool = false) -> some View {
-        Button { action(id) } label: { icon(symbol) }
+    private func icon(_ name: String) -> some View {
+        Image(systemName: name).font(.system(size: 14, weight: .regular)).frame(width: 30, height: 30)
+            .contentShape(RoundedRectangle(cornerRadius: 7))
+    }
+    private func iconButton(_ symbol: String, _ help: String, selected: Bool = false, _ run: @escaping () -> Void) -> some View {
+        Button(action: run) { icon(symbol) }
             .buttonStyle(CaptureToolbarButtonStyle(selected: selected))
             .help(help).accessibilityLabel(help)
     }

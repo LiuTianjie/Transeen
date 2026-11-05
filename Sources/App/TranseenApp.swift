@@ -284,7 +284,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         if onboardingWindow == nil {
             let initialStep = UserDefaults.standard.bool(forKey: "onboardingInProgress") ? UserDefaults.standard.integer(forKey: "onboardingStep") : 0
             UserDefaults.standard.set(true, forKey: "onboardingInProgress")
-            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 780, height: 620), styleMask: [.titled, .closable, .fullSizeContentView], backing: .buffered, defer: false)
+            let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 720, height: 560), styleMask: [.titled, .closable, .fullSizeContentView], backing: .buffered, defer: false)
             window.title = L("开始使用 Transeen")
             window.titleVisibility = .hidden
             window.titlebarAppearsTransparent = true

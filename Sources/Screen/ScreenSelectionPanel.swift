@@ -175,31 +175,21 @@ final class ScreenSelectionView: NSView {
                 NSColor.controlAccentColor.setStroke(); corners.stroke()
             }
         }
-        let prompt: String
-        if dragging {
-            prompt = "\(Int((highlight.width * pixelScale).rounded())) × \(Int((highlight.height * pixelScale).rounded())) px  ·  " + L("松开完成")
-        } else if hoverBounds != nil {
-            prompt = L("点击选中 · 拖动自选")
-        } else {
-            prompt = L("移动鼠标选择 · 拖动框选")
-        }
-        let chip = NSAttributedString(
-            string: prompt,
-            attributes: [
-                .font: NSFont.monospacedDigitSystemFont(ofSize: 12, weight: .medium),
-                .foregroundColor: NSColor.labelColor
-            ]
-        )
-        let heading = NSAttributedString(string: title, attributes: [.font: NSFont.systemFont(ofSize: 11), .foregroundColor: NSColor.secondaryLabelColor])
-        let size = NSSize(width: max(chip.size().width, heading.size().width) + 24, height: title.isEmpty ? 34 : 51)
+        // One line: what this capture does, then only the size once a drag starts.
+        let prompt = dragging ? "\(Int((highlight.width * pixelScale).rounded())) × \(Int((highlight.height * pixelScale).rounded()))" : title
+        guard !prompt.isEmpty else { return }
+        let chip = NSAttributedString(string: prompt, attributes: [
+            .font: NSFont.monospacedDigitSystemFont(ofSize: 12, weight: .medium),
+            .foregroundColor: NSColor.labelColor
+        ])
+        let size = NSSize(width: chip.size().width + 20, height: 26)
         let mousePoint = current ?? NSEvent.mouseLocation
         let mouse = convertFromScreen(CGRect(origin: mousePoint, size: .zero)).origin
         let chipRect = Self.hintRect(at: mouse, size: size, within: bounds)
-        let chipPath = NSBezierPath(roundedRect: chipRect, xRadius: 11, yRadius: 11)
+        let chipPath = NSBezierPath(roundedRect: chipRect, xRadius: 8, yRadius: 8)
         NSColor.windowBackgroundColor.setFill(); chipPath.fill()
         NSColor.separatorColor.setStroke(); chipPath.lineWidth = 0.75; chipPath.stroke()
-        chip.draw(at: NSPoint(x: chipRect.minX + 12, y: chipRect.minY + 9))
-        if !title.isEmpty { heading.draw(at: NSPoint(x: chipRect.minX + 12, y: chipRect.maxY - 21)) }
+        chip.draw(at: NSPoint(x: chipRect.minX + 10, y: chipRect.midY - chip.size().height / 2))
     }
 
     /// Accent brackets that run along the rounded outline through each corner's arc,

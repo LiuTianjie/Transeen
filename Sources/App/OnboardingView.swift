@@ -91,7 +91,7 @@ struct OnboardingView: View {
                 footer
             }
         }
-        .frame(minWidth: 780, maxWidth: .infinity, minHeight: 620, maxHeight: .infinity)
+        .frame(minWidth: 720, maxWidth: .infinity, minHeight: 560, maxHeight: .infinity)
         .settingsSurface()
         .ignoresSafeArea()
         .animation(reduceMotion ? nil : .easeInOut(duration: 0.18), value: step)
@@ -180,9 +180,6 @@ struct OnboardingView: View {
             Button(L("稍后再设置")) { finish(nil) }
                 .buttonStyle(.borderless).font(.system(size: 12)).foregroundStyle(.secondary)
                 .keyboardShortcut(.cancelAction)
-            Text(L("可随时从菜单栏打开「新手引导…」"))
-                .font(.system(size: 10)).foregroundStyle(.tertiary).lineSpacing(3)
-                .fixedSize(horizontal: false, vertical: true).padding(.top, 8)
         }
         .padding(.horizontal, 24).padding(.top, 46).padding(.bottom, 25)
         .frame(width: 184)
@@ -253,8 +250,9 @@ struct OnboardingView: View {
                     HStack { Spacer(); Button(L("准备翻译")) { showsServiceSettings = true } }.padding(.top, 14)
                 }
             }.onboardingPanel()
-            OnboardingNote(symbol: "info.circle", text: translationReady ? L("可以继续了。其他语言和工具，用到时再设置。") : L("不用等下载完成，也可以先体验截图和标注。"))
-                .padding(.top, 18)
+            if !translationReady {
+                OnboardingNote(symbol: "info.circle", text: L("不用等下载完成，也可以先体验截图和标注。")).padding(.top, 18)
+            }
         }
     }
 

@@ -5,11 +5,7 @@ Apple 本机翻译	Apple 本機翻譯	Apple Translation (on device)	Apple 翻訳
 设置翻译模型	設定翻譯模型	Set Up Translation Model	翻訳モデルを設定	번역 모델 설정	Configurer le modèle de traduction	Configurar modelo de traducción	Übersetzungsmodell einrichten
 设置	設定	Settings	設定	설정	Réglages	Ajustes	Einstellungen
 截图翻译	截圖翻譯	Capture & Translate	キャプチャして翻訳	캡처 후 번역	Capturer et traduire	Capturar y traducir	Aufnehmen & übersetzen
-框选一块区域，译文留在原处	框選一塊區域，譯文留在原處	Select an area; the translation stays in place	範囲を選ぶと、訳文がその場に表示されます	영역을 선택하면 번역이 제자리에 표시됩니다	Sélectionnez une zone, la traduction reste en place	Selecciona un área; la traducción queda en su sitio	Bereich wählen – die Übersetzung bleibt an Ort und Stelle
-框选后标注，不翻译	框選後標註，不翻譯	Select an area to mark up, without translating	範囲を選んで注釈（翻訳なし）	영역 선택 후 주석(번역 안 함)	Sélectionner pour annoter, sans traduire	Selecciona para anotar, sin traducir	Bereich wählen und markieren, ohne Übersetzung
 打开图片…	打開圖片…	Open Image…	画像を開く…	이미지 열기…	Ouvrir une image…	Abrir imagen…	Bild öffnen…
-打开本地图片	打開本機圖片	Open an image file	画像ファイルを開く	이미지 파일 열기	Ouvrir un fichier image	Abrir un archivo de imagen	Bilddatei öffnen
-已激活 · 授权与账号	已啟用 · 授權與帳號	Activated · License & Account	アクティベート済み · ライセンスとアカウント	활성화됨 · 라이선스 및 계정	Activé · Licence et compte	Activado · Licencia y cuenta	Aktiviert · Lizenz & Konto
 激活 Transeen	啟用 Transeen	Activate Transeen	Transeen をアクティベート	Transeen 활성화	Activer Transeen	Activar Transeen	Transeen aktivieren
 原文	原文	Original	原文	원문	Original	Original	Original
 原文语言	原文語言	Source Language	原文の言語	원문 언어	Langue source	Idioma de origen	Ausgangssprache
@@ -181,12 +177,9 @@ TR- 授权独立于 iTool Pro 和 StupidMirror。绑定账号后，可登录同�
 正在识别与翻译…	正在識別與翻譯…	Recognizing and translating…	認識して翻訳中…	인식 및 번역 중…	Reconnaissance et traduction…	Reconociendo y traduciendo…	Erkenne und übersetze…
 截图读取失败，请重新框选。	截圖讀取失敗，請重新框選。	Couldn’t read the capture. Select the area again.	キャプチャを読み込めませんでした。範囲を選び直してください。	캡처를 읽지 못했습니다. 영역을 다시 선택하세요.	Impossible de lire la capture. Resélectionnez la zone.	No se pudo leer la captura. Vuelve a seleccionar el área.	Aufnahme konnte nicht gelesen werden. Bereich neu auswählen.
 正在识别文字…	正在識別文字…	Recognizing text…	文字を認識中…	텍스트 인식 중…	Reconnaissance du texte…	Reconociendo texto…	Erkenne Text…
-没有识别到文字，可重新框选或重试。	沒有識別到文字，可重新框選或重試。	No text found. Select again or retry.	文字が見つかりません。範囲を選び直すか再試行してください。	텍스트를 찾지 못했습니다. 다시 선택하거나 다시 시도하세요.	Aucun texte trouvé. Resélectionnez ou réessayez.	No se encontró texto. Vuelve a seleccionar o reintenta.	Kein Text gefunden. Neu auswählen oder wiederholen.
 正在翻译…	正在翻譯…	Translating…	翻訳中…	번역 중…	Traduction…	Traduciendo…	Übersetze…
 翻译服务尚未就绪，请重试。	翻譯服務尚未就緒，請重試。	The translation service isn’t ready. Try again.	翻訳サービスの準備ができていません。もう一度試してください。	번역 서비스가 준비되지 않았습니다. 다시 시도하세요.	Le service de traduction n’est pas prêt. Réessayez.	El servicio de traducción no está listo. Inténtalo de nuevo.	Der Übersetzungsdienst ist nicht bereit. Bitte erneut versuchen.
 译文画面生成失败，请重试。	譯文畫面產生失敗，請重試。	Couldn’t draw the translation. Try again.	訳文の画像を作成できませんでした。もう一度試してください。	번역 화면을 만들지 못했습니다. 다시 시도하세요.	Impossible d’afficher la traduction. Réessayez.	No se pudo dibujar la traducción. Inténtalo de nuevo.	Übersetzung konnte nicht gezeichnet werden. Bitte erneut versuchen.
-部分译文超出原位置，请在「文字」中查看全文。	部分譯文超出原位置，請在「文字」中查看全文。	Some translations don’t fit in place; see the full text under “Text”.	一部の訳文が元の位置に収まりません。全文は「テキスト」で確認できます。	일부 번역이 제자리에 맞지 않습니다. 전체 내용은 ‘텍스트’에서 보세요.	Certaines traductions ne tiennent pas en place ; le texte complet est dans « Texte ».	Algunas traducciones no caben en su sitio; consulta el texto completo en «Texto».	Einige Übersetzungen passen nicht an ihren Platz; den ganzen Text gibt es unter „Text“.
-再按 %@ 交换语言	再按 %@ 交換語言	Press %@ again to swap languages	もう一度 %@ で言語を入れ替え	%@ 키를 다시 누르면 언어를 바꿉니다	Réappuyez sur %@ pour inverser les langues	Pulsa %@ otra vez para intercambiar idiomas	%@ erneut drücken, um Sprachen zu tauschen
 没有需要翻译的文字	沒有需要翻譯的文字	Nothing to translate	翻訳する文字はありません	번역할 텍스트가 없습니다	Rien à traduire	Nada que traducir	Nichts zu übersetzen
 已翻译 %ld 处	已翻譯 %ld 處	Translated %ld items	%ld 件を翻訳しました	%ld개 번역됨	%ld éléments traduits	%ld elementos traducidos	%ld Stellen übersetzt
 未能复制图片，请重试	未能拷貝圖片，請重試	Couldn’t copy the image. Try again	画像をコピーできませんでした。もう一度試してください	이미지를 복사하지 못했습니다. 다시 시도하세요	Impossible de copier l’image. Réessayez	No se pudo copiar la imagen. Inténtalo de nuevo	Bild konnte nicht kopiert werden. Bitte erneut versuchen
@@ -195,16 +188,13 @@ TR- 授权独立于 iTool Pro 和 StupidMirror。绑定账号后，可登录同�
 截图预览	截圖預覽	Capture Preview	キャプチャのプレビュー	캡처 미리보기	Aperçu de la capture	Vista previa de la captura	Aufnahmevorschau
 截图工具栏	截圖工具列	Capture Toolbar	キャプチャのツールバー	캡처 도구 막대	Barre d’outils de capture	Barra de herramientas de captura	Aufnahme-Symbolleiste
 编号 · 下一个：%ld	編號 · 下一個：%ld	Number · Next: %ld	番号 · 次：%ld	번호 · 다음: %ld	Numéro · Suivant : %ld	Número · Siguiente: %ld	Nummer · Nächste: %ld
-文字	文字	Text	テキスト	텍스트	Texte	Texto	Text
 查看完整译文和原文，复制文字	查看完整譯文和原文，拷貝文字	View the full translation and original, and copy text	訳文と原文の全文を表示してコピー	전체 번역과 원문을 보고 텍스트 복사	Voir la traduction et l’original complets, copier le texte	Ver la traducción y el original completos y copiar el texto	Ganze Übersetzung und Original ansehen, Text kopieren
 钉到屏幕上，可继续截图	釘到螢幕上，可繼續截圖	Pin to the screen and keep capturing	画面にピン留めしてキャプチャを続ける	화면에 고정하고 계속 캡처	Épingler à l’écran et continuer à capturer	Fijar en pantalla y seguir capturando	Am Bildschirm anheften und weiter aufnehmen
 已复制	已拷貝	Copied	コピーしました	복사됨	Copié	Copiado	Kopiert
 复制	拷貝	Copy	コピー	복사	Copier	Copiar	Kopieren
-拖动边缘调整范围 · 选择工具标注	拖動邊緣調整範圍 · 選擇工具標註	Drag edges to resize · Pick a tool to mark up	端をドラッグで範囲調整 · ツールを選んで注釈	가장자리를 끌어 크기 조정 · 도구를 골라 주석	Glissez les bords pour redimensionner · Choisissez un outil pour annoter	Arrastra los bordes para ajustar · Elige una herramienta para anotar	Ränder ziehen zum Anpassen · Werkzeug wählen zum Markieren
 自动	自動	Auto	自動	자동	Auto	Auto	Auto
 更改原文或译文语言	更改原文或譯文語言	Change source or target language	原文または翻訳先の言語を変更	원문 또는 번역 언어 변경	Changer la langue source ou cible	Cambiar idioma de origen o destino	Ausgangs- oder Zielsprache ändern
 重试	重試	Retry	再試行	다시 시도	Réessayer	Reintentar	Wiederholen
-翻译中	翻譯中	Translating	翻訳中	번역 중	Traduction	Traduciendo	Übersetze
 切换原文 / 译文	切換原文 / 譯文	Switch original / translation	原文 / 訳文を切り替え	원문 / 번역 전환	Basculer original / traduction	Alternar original / traducción	Original / Übersetzung umschalten
 翻译选中区域	翻譯選取區域	Translate the selected area	選択範囲を翻訳	선택 영역 번역	Traduire la zone sélectionnée	Traducir el área seleccionada	Ausgewählten Bereich übersetzen
 红色	紅色	Red	赤	빨간색	Rouge	Rojo	Rot
@@ -213,7 +203,6 @@ TR- 授权独立于 iTool Pro 和 StupidMirror。绑定账号后，可登录同�
 绿色	綠色	Green	緑	초록색	Vert	Verde	Grün
 蓝色	藍色	Blue	青	파란색	Bleu	Azul	Blau
 白色	白色	White	白	흰색	Blanc	Blanco	Weiß
-编号 %ld	編號 %ld	Number %ld	番号 %ld	번호 %ld	Numéro %ld	Número %ld	Nummer %ld
 修改编号数字	修改編號數字	Change the number	番号を変更	번호 변경	Modifier le numéro	Cambiar el número	Nummer ändern
 编号大小：%ld	編號大小：%ld	Number size: %ld	番号のサイズ：%ld	번호 크기: %ld	Taille du numéro : %ld	Tamaño del número: %ld	Nummerngröße: %ld
 线宽：%ld	線寬：%ld	Line width: %ld	線の太さ：%ld	선 굵기: %ld	Épaisseur : %ld	Grosor: %ld	Linienstärke: %ld
@@ -234,7 +223,6 @@ TR- 授权独立于 iTool Pro 和 StupidMirror。绑定账号后，可登录同�
 完整译文	完整譯文	Full Translation	訳文全体	전체 번역	Traduction complète	Traducción completa	Vollständige Übersetzung
 识别文字	識別文字	Recognized Text	認識したテキスト	인식한 텍스트	Texte reconnu	Texto reconocido	Erkannter Text
 对照原文	對照原文	Show Original	原文と比較	원문 함께 보기	Afficher l’original	Mostrar original	Original zeigen
-文字可选择、复制	文字可選擇、拷貝	Text can be selected and copied	テキストは選択してコピーできます	텍스트를 선택하고 복사할 수 있습니다	Le texte peut être sélectionné et copié	El texto se puede seleccionar y copiar	Text lässt sich auswählen und kopieren
 复制文字	拷貝文字	Copy Text	テキストをコピー	텍스트 복사	Copier le texte	Copiar texto	Text kopieren
 钉住的截图	釘住的截圖	Pinned Capture	ピン留めしたキャプチャ	고정된 캡처	Capture épinglée	Captura fijada	Angeheftete Aufnahme
 显示原文	顯示原文	Show Original	原文を表示	원문 보기	Afficher l’original	Mostrar original	Original zeigen
@@ -244,9 +232,6 @@ TR- 授权独立于 iTool Pro 和 StupidMirror。绑定账号后，可登录同�
 截取屏幕失败，请重试。	擷取螢幕失敗，請重試。	Screen capture failed. Try again.	画面をキャプチャできませんでした。もう一度試してください。	화면 캡처에 실패했습니다. 다시 시도하세요.	La capture d’écran a échoué. Réessayez.	Falló la captura de pantalla. Inténtalo de nuevo.	Bildschirmaufnahme fehlgeschlagen. Bitte erneut versuchen.
 空格	空白鍵	Space	スペース	스페이스	Espace	Espacio	Leertaste
 键%ld	鍵%ld	Key %ld	キー %ld	키 %ld	Touche %ld	Tecla %ld	Taste %ld
-松开完成	放開完成	Release to finish	離すと完了	떼면 완료	Relâchez pour terminer	Suelta para terminar	Loslassen zum Abschließen
-点击选中 · 拖动自选	點擊選取 · 拖動自選	Click to select · Drag to draw your own	クリックで選択 · ドラッグで自由に選択	클릭해 선택 · 끌어서 직접 선택	Cliquez pour sélectionner · Glissez pour tracer	Haz clic para seleccionar · Arrastra para dibujar	Klicken zum Auswählen · Ziehen für eigene Auswahl
-移动鼠标选择 · 拖动框选	移動滑鼠選擇 · 拖動框選	Move the pointer to choose · Drag to select an area	ポインタを動かして選択 · ドラッグで範囲選択	포인터를 움직여 선택 · 끌어서 영역 선택	Déplacez le pointeur pour choisir · Glissez pour sélectionner une zone	Mueve el puntero para elegir · Arrastra para seleccionar un área	Zeiger bewegen zum Wählen · Ziehen zum Auswählen
 %@原文	%@原文	%@ original	%@の原文	%@ 원문	%@ (original)	%@ (original)	%@ (Original)
 %@ 语言包没有下载完成	%@ 語言包沒有下載完成	The %@ language pack didn’t finish downloading	%@ の言語パックのダウンロードが完了していません	%@ 언어 팩 다운로드가 끝나지 않았습니다	Le pack de langue %@ n’a pas fini de se télécharger	El paquete de idioma %@ no terminó de descargarse	Das Sprachpaket %@ wurde nicht vollständig geladen
 这个版本没有附带本地模型运行组件，请重新安装 Transeen。	這個版本沒有附帶本機模型執行元件，請重新安裝 Transeen。	This build doesn’t include the local model runtime. Reinstall Transeen.	このビルドにはローカルモデルの実行コンポーネントが含まれていません。Transeen を再インストールしてください。	이 빌드에는 로컬 모델 실행 구성 요소가 없습니다. Transeen을 다시 설치하세요.	Cette version ne contient pas le moteur des modèles locaux. Réinstallez Transeen.	Esta versión no incluye el motor de modelos locales. Reinstala Transeen.	Diese Version enthält die Laufzeit für lokale Modelle nicht. Installiere Transeen neu.
@@ -284,9 +269,7 @@ TR- 授权独立于 iTool Pro 和 StupidMirror。绑定账号后，可登录同�
 语言、翻译服务与模型	語言、翻譯服務與模型	Languages, service, and models	言語・翻訳サービス・モデル	언어, 번역 서비스, 모델	Langues, service et modèles	Idiomas, servicio y modelos	Sprachen, Dienst und Modelle
 自定义每个操作的按键	自訂每個操作的按鍵	Choose a key for every action	操作ごとにキーを設定	작업마다 단축키 지정	Une touche pour chaque action	Una tecla para cada acción	Eine Taste für jede Aktion
 滚动长截图	捲動長截圖	Scrolling Capture	スクロール撮影	스크롤 캡처	Capture défilante	Captura con desplazamiento	Scroll-Aufnahme
-滚动页面，自动拼接为长图	捲動頁面，自動拼接為長圖	Scroll and stitch a long screenshot	スクロールして長い画像に結合	스크롤하여 긴 이미지로 연결	Faites défiler pour assembler une capture	Desplázate para unir una captura larga	Scrollen und zu einem langen Bild verbinden
 最近截图	最近截圖	Recent Captures	最近のキャプチャ	최근 캡처	Captures récentes	Capturas recientes	Letzte Aufnahmen
-恢复最近关闭、复制或保存的截图	恢復最近關閉、複製或儲存的截圖	Restore recently closed, copied or saved captures	最近閉じた・コピーした・保存した画像を復元	최근 닫거나 복사 또는 저장한 캡처 복원	Restaurer les captures fermées, copiées ou enregistrées	Recuperar capturas cerradas, copiadas o guardadas	Geschlossene, kopierte oder gespeicherte Aufnahmen öffnen
 显示 / 隐藏钉图	顯示 / 隱藏釘圖	Show / Hide Pins	ピン留め画像を表示／非表示	고정 이미지 표시 / 숨기기	Afficher / masquer les images épinglées	Mostrar / ocultar imágenes fijadas	Angeheftete Bilder ein-/ausblenden
 滚轮缩放 · ⌥滚轮调透明度	滾輪縮放 · ⌥滾輪調透明度	Scroll to zoom · ⌥Scroll for opacity	スクロールで拡大縮小 · ⌥で不透明度	스크롤로 확대 · ⌥스크롤로 불투명도	Défilement : zoom · ⌥ : opacité	Rueda: zoom · ⌥rueda: opacidad	Scrollen: Zoom · ⌥Scrollen: Deckkraft
 显示 / 隐藏所有钉图	顯示 / 隱藏所有釘圖	Show / Hide All Pins	すべてのピン留め画像を表示／非表示	모든 고정 이미지 표시 / 숨기기	Afficher / masquer toutes les images épinglées	Mostrar / ocultar todas las imágenes fijadas	Alle angehefteten Bilder ein-/ausblenden
@@ -313,7 +296,6 @@ TR- 授权独立于 iTool Pro 和 StupidMirror。绑定账号后，可登录同�
 清空	清空	Clear	消去	모두 지우기	Effacer	Vaciar	Leeren
 取消	取消	Cancel	キャンセル	취소	Annuler	Cancelar	Abbrechen
 黑色	黑色	Black	黒	검정	Noir	Negro	Schwarz
-实色覆盖，导出后隐藏原始像素	實色覆蓋，匯出後隱藏原始像素	Solid cover removes underlying pixels on export	書き出し時に元のピクセルを塗りつぶします	내보낼 때 원본 픽셀을 불투명하게 덮습니다	Le masque opaque remplace les pixels à l’export	La cobertura sólida reemplaza los píxeles al exportar	Deckende Fläche ersetzt beim Export die Originalpixel
 字号	字級	Font Size	文字サイズ	글꼴 크기	Taille du texte	Tamaño de letra	Schriftgröße
 放大	放大	Zoom In	拡大	확대	Agrandir	Ampliar	Vergrößern
 缩小	縮小	Zoom Out	縮小	축소	Réduire	Reducir	Verkleinern
@@ -354,7 +336,6 @@ TR- 授权独立于 iTool Pro 和 StupidMirror。绑定账号后，可登录同�
 翻译在这台 Mac 上完成。	翻譯在這台 Mac 上完成。	Translation happens on this Mac.	翻訳はこの Mac 上で行われます。	이 Mac에서 번역해요.	La traduction s’effectue sur ce Mac.	La traducción se realiza en este Mac.	Die Übersetzung erfolgt auf diesem Mac.
 更改…	更改…	Change…	変更…	변경…	Modifier…	Cambiar…	Ändern…
 常读的语言	常讀的語言	Language you read	よく読む言語	자주 읽는 언어	Langue que vous lisez	Idioma que lees	Häufig gelesene Sprache
-可以继续了。其他语言和工具，用到时再设置。	可以繼續了。其他語言和工具，用到時再設定。	You’re ready to continue. Set up other languages and tools as you need them.	次に進めます。他の言語やツールは必要なときに設定できます。	이제 계속하세요. 다른 언어와 도구는 필요할 때 설정하면 돼요.	Vous pouvez continuer. Configurez le reste selon vos besoins.	Ya puedes continuar. Configura otros idiomas y herramientas cuando los necesites.	Du kannst fortfahren. Weitere Sprachen und Werkzeuge richtest du bei Bedarf ein.
 不用等下载完成，也可以先体验截图和标注。	不用等下載完成，也可以先體驗截圖和標註。	You can try screenshots and markup without waiting for a download.	ダウンロードを待たずに、スクリーンショットや注釈を試せます。	다운로드를 기다리지 않고 스크린샷과 주석을 먼저 체험할 수 있어요.	Essayez les captures et l’annotation sans attendre le téléchargement.	Puedes probar capturas y anotaciones sin esperar a la descarga.	Screenshots und Markierungen kannst du ohne Download ausprobieren.
 下载语言包	下載語言包	Download language pack	言語パックをダウンロード	언어 팩 다운로드	Télécharger la langue	Descargar idioma	Sprachpaket laden
 只在你截图时，读取屏幕。	只在你截圖時，讀取螢幕。	Your screen, only when you capture.	画面を読むのは、撮影するときだけ。	캡처할 때만 화면을 읽어요.	Votre écran, uniquement lors des captures.	Tu pantalla, solo cuando capturas.	Bildschirmzugriff nur beim Aufnehmen.
@@ -381,7 +362,14 @@ Transeen 会留在菜单栏，随时等你框选。	Transeen 會留在選單列�
 在上面的文字上拖动框选，试试看。	在上方文字上拖動框選，試試看。	Drag across the text above to try it.	上の文字をドラッグして選んでみましょう。	위 텍스트를 드래그해 선택해 보세요.	Faites glisser sur le texte pour essayer.	Arrastra sobre el texto de arriba para probar.	Ziehe über den Text oben, um es auszuprobieren.
 试一下翻译	試一下翻譯	Try translation	翻訳を試す	번역 체험	Essayer la traduction	Probar traducción	Übersetzung testen
 原位翻译互动示例	原位翻譯互動示例	Interactive in-place translation sample	その場で翻訳する体験サンプル	원위치 번역 체험 예시	Exemple interactif de traduction sur place	Ejemplo interactivo de traducción en su sitio	Interaktives Beispiel für Übersetzung an Ort und Stelle
-可随时从菜单栏打开「新手引导…」	可隨時從選單列打開「新手導覽…」	Open “Getting Started…” from the menu bar any time	メニューバーの「はじめに…」からいつでも開けます	메뉴 막대의 ‘시작하기…’에서 언제든 열 수 있습니다	Rouvrez « Prise en main… » depuis la barre des menus	Abre «Primeros pasos…» desde la barra de menús cuando quieras	„Erste Schritte…“ jederzeit über die Menüleiste öffnen
 暂停翻译	暫停翻譯	Pause Translating	翻訳を一時停止	번역 일시정지	Mettre la traduction en pause	Pausar traducción	Übersetzung pausieren
 已暂停翻译	已暫停翻譯	Translation paused	翻訳を一時停止しました	번역을 일시정지했습니다	Traduction en pause	Traducción en pausa	Übersetzung pausiert
 继续翻译	繼續翻譯	Resume Translating	翻訳を再開	번역 계속	Reprendre la traduction	Reanudar traducción	Übersetzung fortsetzen
+没有识别到文字	沒有辨識到文字	No text found	テキストが見つかりません	텍스트를 찾지 못했습니다	Aucun texte trouvé	No se encontró texto	Kein Text gefunden
+部分译文超出原位置	部分譯文超出原位置	Some translations don’t fit in place	一部の訳文が元の位置に収まりません	일부 번역이 제자리에 맞지 않습니다	Certaines traductions ne tiennent pas en place	Algunas traducciones no caben en su sitio	Einige Übersetzungen passen nicht an ihren Platz
+翻译完成后钉到屏幕	翻譯完成後釘到螢幕	Pins when translated	翻訳後にピン留め	번역 후 고정	Épinglé après la traduction	Se fijará al traducir	Wird nach dem Übersetzen angeheftet
+暂停	暫停	Pause	一時停止	일시정지	Pause	Pausar	Pause
+翻译完成后复制	翻譯完成後拷貝	Copies when translated	翻訳後にコピー	번역 후 복사	Copié après la traduction	Se copiará al traducir	Wird nach dem Übersetzen kopiert
+翻译完成后保存	翻譯完成後儲存	Saves when translated	翻訳後に保存	번역 후 저장	Enregistré après la traduction	Se guardará al traducir	Wird nach dem Übersetzen gesichert
+查看全文	查看全文	Show All	全文を表示	전체 보기	Tout afficher	Ver todo	Alles zeigen
+编辑文字	編輯文字	Edit Text	テキストを編集	텍스트 편집	Modifier le texte	Editar texto	Text bearbeiten

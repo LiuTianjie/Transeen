@@ -4,7 +4,7 @@ enum AnnotationTool: String, CaseIterable, Identifiable {
     case move, rectangle, ellipse, arrow, pen, number, text, highlight, redact
     var id: String { rawValue }
     var title: String { switch self { case .move: L("选择 / 移动"); case .rectangle: L("矩形"); case .ellipse: L("椭圆"); case .arrow: L("箭头"); case .pen: L("画笔"); case .number: L("编号"); case .text: L("文字标注"); case .highlight: L("高亮"); case .redact: L("隐私遮挡") } }
-    var symbol: String { switch self { case .move: "cursorarrow"; case .rectangle: "rectangle"; case .ellipse: "circle"; case .arrow: "arrow.up.right"; case .pen: "pencil"; case .number: "1.circle"; case .text: "textformat"; case .highlight: "highlighter"; case .redact: "rectangle.fill" } }
+    var symbol: String { switch self { case .move: "cursorarrow"; case .rectangle: "rectangle"; case .ellipse: "circle"; case .arrow: "arrow.up.right"; case .pen: "pencil"; case .number: "1.circle"; case .text: "character.textbox"; case .highlight: "highlighter"; case .redact: "eye.slash" } }
 }
 
 struct Annotation: Equatable, Identifiable {

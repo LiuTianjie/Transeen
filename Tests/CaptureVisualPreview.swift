@@ -29,11 +29,11 @@ private struct PreviewBoard: View {
         let directory = URL(fileURLWithPath: "build/previews", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         for dark in [false, true] {
-            for kind in ["ready", "annotating", "editing-number", "editing-rectangle", "editing-text", "highlight", "redact", "working", "failed", "empty"] {
+            for kind in ["ready", "annotating", "editing-number", "editing-rectangle", "editing-text", "highlight", "redact", "working", "waiting", "paused", "warning", "failed", "empty"] {
                 let state = CaptureState()
                 state.direction = "EN → 中文"
                 switch kind {
-                case "ready": state.translated = true
+                case "ready": state.translated = true; state.status = "已翻译 12 处"; state.textBlocks = [CaptureTextBlock(id: 0, original: "Hello", translation: "你好")]
                 case "annotating": state.translated = true; state.annotating = true; state.annotations.tool = .number
                 case "editing-number":
                     state.translated = true
@@ -46,9 +46,14 @@ private struct PreviewBoard: View {
                     state.annotations.append(Annotation(tool: .text, points: [CGPoint(x: 20, y: 100)], color: .systemBlue, width: 4, text: "文字标注", fontSize: 22))
                 case "highlight": state.annotating = true; state.annotations.tool = .highlight; state.annotations.color = .systemYellow
                 case "redact": state.annotating = true; state.annotations.tool = .redact
-                case "working": state.working = true; state.automaticallyTranslates = true; state.status = "正在识别与翻译…"
+                case "working": state.working = true; state.automaticallyTranslates = true; state.status = "正在翻译… 3/8"
+                case "waiting": state.working = true; state.automaticallyTranslates = true; state.status = "正在翻译… 5/8"; state.pendingOutput = "copy"
+                case "paused": state.paused = true; state.automaticallyTranslates = true; state.status = "已暂停翻译"
+                case "warning":
+                    state.translated = true; state.status = "已翻译 12 处"; state.warning = "部分译文超出原位置"
+                    state.textBlocks = [CaptureTextBlock(id: 0, original: "Hello", translation: "你好")]
                 case "failed": state.failed = true; state.automaticallyTranslates = true; state.status = "连接失败，请重试。"
-                default: state.noText = true; state.automaticallyTranslates = true; state.status = "没有识别到文字，可重新框选或重试。"
+                default: state.noText = true; state.automaticallyTranslates = true; state.status = "没有识别到文字"
                 }
                 let host = NSHostingView(rootView: PreviewBoard(state: state, darkBackground: dark, title: "\(dark ? "Dark" : "Light") background · \(kind) · inactive window").environment(\.controlActiveState, .inactive))
                 let window = NSWindow(contentRect: NSRect(x: 100, y: 100, width: 680, height: 470), styleMask: [.borderless], backing: .buffered, defer: false)

@@ -47,10 +47,10 @@ struct LauncherView: View {
                     .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 1) {
                     Text("Transeen").font(.system(size: 13, weight: .semibold))
-                    Button(action: showLicense) {
-                        Text(license.state.isActivated ? L("已激活 · 授权与账号") : L("激活 Transeen"))
-                            .font(.system(size: 11)).foregroundStyle(license.state.isActivated ? AnyShapeStyle(.secondary) : AnyShapeStyle(.tint))
-                    }.buttonStyle(.plain)
+                    if !license.state.isActivated {
+                        Button(L("激活 Transeen"), action: showLicense)
+                            .buttonStyle(.plain).font(.system(size: 11)).foregroundStyle(.tint)
+                    }
                 }
                 Spacer()
                 Button(L("设置"), systemImage: "gearshape", action: showSettings)
@@ -58,21 +58,22 @@ struct LauncherView: View {
                     .help(settings.shortcuts.help(L("设置"), .settings)).accessibilityLabel(L("设置"))
             }.padding(.horizontal, 6)
 
-            VStack(spacing: 2) {
-                LauncherRow(symbol: "character.bubble.fill", colors: TilePalette.blue, title: L("截图翻译"), detail: L("框选一块区域，译文留在原处"),
+            VStack(spacing: 1) {
+                LauncherRow(symbol: "character.bubble.fill", colors: TilePalette.blue, title: L("截图翻译"),
                             shortcut: settings.shortcuts.binding(.captureTranslate)?.display) { start(.translate) }
-                LauncherRow(symbol: "pencil.tip.crop.circle.fill", colors: TilePalette.orange, title: L("截图标注"), detail: L("框选后标注，不翻译"),
+                LauncherRow(symbol: "pencil.tip.crop.circle.fill", colors: TilePalette.blue, title: L("截图标注"),
                             shortcut: settings.shortcuts.binding(.captureScreenshot)?.display) { start(.screenshot) }
-                LauncherRow(symbol: "arrow.down.to.line.compact", colors: TilePalette.blue, title: L("滚动长截图"), detail: L("滚动页面，自动拼接为长图"),
+                LauncherRow(symbol: "arrow.down.to.line.compact", colors: TilePalette.blue, title: L("滚动长截图"),
                             shortcut: settings.shortcuts.binding(.captureScrolling)?.display) { start(.scrolling) }
-                LauncherRow(symbol: "clock.arrow.circlepath", colors: TilePalette.purple, title: L("最近截图"), detail: L("恢复最近关闭、复制或保存的截图"),
+                Divider().padding(.horizontal, 8).padding(.vertical, 4)
+                LauncherRow(symbol: "clock.arrow.circlepath", colors: TilePalette.gray, title: L("最近截图"),
                             shortcut: settings.shortcuts.binding(.showHistory)?.display, action: showHistory)
-                LauncherRow(symbol: "pin", colors: TilePalette.orange, title: L("显示 / 隐藏钉图"), detail: L("滚轮缩放 · ⌥滚轮调透明度"),
+                LauncherRow(symbol: "pin.fill", colors: TilePalette.gray, title: L("显示 / 隐藏钉图"),
                             shortcut: settings.shortcuts.binding(.togglePins)?.display, action: togglePins)
-                LauncherRow(symbol: "photo.fill", colors: TilePalette.purple, title: L("打开图片…"), detail: L("打开本地图片"),
+                LauncherRow(symbol: "photo.fill", colors: TilePalette.gray, title: L("打开图片…"),
                             shortcut: settings.shortcuts.binding(.openImage)?.display, action: openImage)
                 if !permission.granted {
-                    LauncherRow(symbol: "exclamationmark.triangle.fill", colors: TilePalette.yellow, title: L("开启屏幕录制权限…"), detail: L("屏幕权限尚未开启"),
+                    LauncherRow(symbol: "exclamationmark.triangle.fill", colors: TilePalette.yellow, title: L("开启屏幕录制权限…"),
                                 shortcut: nil, action: showPermission)
                 }
             }
@@ -135,7 +136,6 @@ private struct LauncherRow: View {
     let symbol: String
     let colors: [Color]
     let title: String
-    let detail: String
     let shortcut: String?
     let action: () -> Void
     @State private var hovering = false
@@ -143,15 +143,12 @@ private struct LauncherRow: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 10) {
-                IconTile(symbol: symbol, colors: colors, size: 28)
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(title).font(.system(size: 13, weight: .medium))
-                    Text(detail).font(.system(size: 11)).foregroundStyle(.secondary).lineLimit(1)
-                }
+                IconTile(symbol: symbol, colors: colors, size: 24)
+                Text(title).font(.system(size: 13)).lineLimit(1)
                 Spacer(minLength: 6)
                 if let shortcut { KeyCaps(shortcut) }
             }
-            .padding(.horizontal, 6).padding(.vertical, 5)
+            .padding(.horizontal, 6).padding(.vertical, 4)
             .background(hovering ? Color.primary.opacity(0.07) : .clear, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
             .contentShape(Rectangle())
         }

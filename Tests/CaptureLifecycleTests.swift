@@ -210,9 +210,15 @@ import CoreText
         }
         precondition(controller.state.working)
         controller.action("copy")
-        precondition(board.readObjects(forClasses: [NSImage.self])?.count == 1 && controller.state.copyCompleted, "Copy must work while a translation is still running")
-        controller.close()
+        precondition(controller.state.pendingOutput == "copy" && board.readObjects(forClasses: [NSImage.self])?.isEmpty != false && !controller.state.copyCompleted,
+                     "Copy during a translation must wait instead of exporting a half-drawn picture")
+        controller.action("copy")
+        precondition(controller.state.pendingOutput == nil, "Copy again must withdraw the waiting copy")
+        controller.action("copy")
         await busyTask.value
+        precondition(controller.state.pendingOutput == nil && controller.state.copyCompleted && board.readObjects(forClasses: [NSImage.self])?.count == 1,
+                     "A waiting copy must run once the translation finishes")
+        controller.close()
         let stoppable = SlowBackend()
         let stoppableTask = Task { await controller.previewTranslation(picture, backend: stoppable) }
         for _ in 0..<200 {
@@ -340,7 +346,7 @@ import CoreText
         precondition(CaptureCrop.resized(area, edges: [.left], by: CGPoint(x: -500, y: 0), within: frame, minimum: 12) == CGRect(x: 0, y: 100, width: 200, height: 50))
         precondition(CaptureCrop.resized(area, edges: [.right, .top], by: CGPoint(x: -500, y: 30), within: frame, minimum: 12) == CGRect(x: 100, y: 100, width: 12, height: 80))
         precondition(CaptureCrop.resized(area, edges: [.bottom], by: CGPoint(x: 0, y: 90), within: frame, minimum: 12) == CGRect(x: 100, y: 138, width: 100, height: 12))
-        print("CaptureLifecycleTests: copy/close, copy during translation, pin, numbering and clipboard passed; close/reselect reject stale results; original toggle preserves annotations")
+        print("CaptureLifecycleTests: copy/close, deferred copy during translation, pin, numbering and clipboard passed; close/reselect reject stale results; original toggle preserves annotations")
         print("ResizeTests: edge re-crop, clamping, marks and history follow the origin, re-translation on release, rounded corner marks passed")
         print("ShortcutTests: F1 default, earlier settings not carried over, persistence, disable, conflicts, registration rollback, exact modifiers, recorder suppression and remapped capture dispatch passed")
         print("GlobalShortcuts: native Carbon register, conflict detection and unregister passed")
