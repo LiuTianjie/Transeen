@@ -6,13 +6,13 @@
     <description>Transeen updates</description>
     <language>en</language>
     <item>
-      <title>Transeen 0.14.0</title>
-      <pubDate>Thu, 05 Nov 2026 05:53:58 +0000</pubDate>
-      <sparkle:version>20</sparkle:version>
-      <sparkle:shortVersionString>0.14.0</sparkle:shortVersionString>
+      <title>Transeen 0.15.0</title>
+      <pubDate>Thu, 05 Nov 2026 10:58:46 +0000</pubDate>
+      <sparkle:version>21</sparkle:version>
+      <sparkle:shortVersionString>0.15.0</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-      <description><![CDATA[<ul><li>Update in place with Sparkle: Transeen checks once a day, shows the release notes, and after you agree downloads, verifies the signature of and installs the new version, then relaunches. Check for Updates… checks immediately. Updating from 0.13.0 or earlier still takes one manual download.</li></ul>]]></description>
-      <enclosure url="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.zip" type="application/octet-stream" sparkle:edSignature="V4foA5wOtc4vWtvcioXZ3q6NfYWNnokzw8q2QKY3x8sjb9tpM8mg500onHIyO6gJT2RjjHlhGQjylaclmue4AA==" length="11101442" />
+      <description><![CDATA[<ul><li>Transeen is now part of the iTool yearly membership (CNY 99 a year, every iTool product). Capture, markup, image import and translation need you to sign in to an iTool account with an active yearly membership; TR- activation codes are no longer sold or accepted. Codes bound to an iTool account were converted to yearly memberships.</li><li>Account &amp; Membership… shows your tier and expiry. Monthly members can upgrade, non-members can join on itool.tech, and Refresh Membership checks again after paying. Transeen also re-checks on launch, when it becomes active, after wake and when the network returns.</li><li>After a successful check Transeen works offline for up to 7 days, never past the end of the membership; setting the clock back requires a new check. A refunded or lapsed membership closes the gate at the next successful check, and signing out clears the cached membership.</li><li>Membership is checked through itool.tech, which works where supabase.co is blocked, with Supabase as a fallback.</li></ul>]]></description>
+      <enclosure url="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.zip" type="application/octet-stream" sparkle:edSignature="4EQGqCQROaQK9+uTZVlQz84Exip/aILe2rxVg+67BWf8tsq9u91V5eWUs7TND1spKPlhoy4YoadPYSjB+IUICg==" length="11048236" />
     </item>
   </channel>
 </rss>
