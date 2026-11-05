@@ -204,6 +204,7 @@ lede = "<b>Dernières versions.</b>"
 full = "Historique complet"
 
 [changes.notes]
+"0.15.1" = ["<b>Connexion Google et GitHub corrigée.</b> Transeen ne se ferme plus à l’ouverture du navigateur de connexion.", "<b>Même abonnement.</b> Rien d’autre ne change : mettez à jour dans l’app ou téléchargez à nouveau."]
 "0.15.0" = ["<b>Inclus dans iTool annuel.</b> Connectez-vous à iTool pour capturer, annoter et traduire ; l’abonnement annuel à 99 CNY couvre tous les produits iTool.", "<b>Fini les codes d’activation.</b> L’abonnement est vérifié en ligne et fonctionne hors ligne jusqu’à 7 jours."]
 "0.14.0" = ["<b>Mises à jour intégrées.</b> Transeen vérifie une fois par jour et, avec votre accord, télécharge, vérifie et installe la nouvelle version.", "<b>Un dernier téléchargement manuel.</b> Depuis la 0.13.0 ou avant, téléchargez cette version une fois ; les suivantes arrivent dans l’app."]
 "0.13.0" = ["<b>Mettre en pause.</b> Espace met la traduction en pause et affiche l’original ; appuyez à nouveau pour reprendre là où elle s’était arrêtée.", "<b>Pas de copie à moitié traduite.</b> Copier, épingler ou enregistrer attend l’image terminée, dans une barre d’outils sur deux lignes."]

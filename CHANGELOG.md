@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.15.1
+
+- Signing in with Google or GitHub no longer crashes Transeen. 0.15.0 quit as soon as the sign-in browser started, because the system reported back on a background thread the app did not expect.
+
 ## 0.15.0
 
 - Transeen is now part of the iTool yearly membership (CNY 99 a year, every iTool product). Capture, markup, image import and translation need you to sign in to an iTool account with an active yearly membership; TR- activation codes are no longer sold or accepted. Codes bound to an iTool account were converted to yearly memberships.

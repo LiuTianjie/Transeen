@@ -1,4 +1,5 @@
 import Foundation
+import AuthenticationServices
 
 final class TestClock: LicenseClock, @unchecked Sendable {
     private let lock = NSLock()
@@ -98,6 +99,7 @@ func makeManager(
         try await loginRequiredRefresh()
         try await accountChanges()
         try await wireClient()
+        try await oauthCompletionOffMain()
         check(ReleaseVersion("v0.10.0")! > ReleaseVersion("0.9.9")!, "version order")
         check(ReleaseVersion("0.7") == ReleaseVersion("0.7.0"), "version padding")
         check(ReleaseVersion("0.7.0-beta") == nil, "pre-release versions are ignored")
@@ -321,5 +323,51 @@ func makeManager(
         })
         do { _ = try await wrongProduct.entitlement(accessToken: "abc"); fatalError("FAILED: another product's answer must be refused") }
         catch {}
+    }
+
+    /// AuthenticationServices calls the completion handler on an XPC queue. In 0.15.0
+    /// the handler was main-actor isolated and trapped there (EXC_BREAKPOINT in
+    /// _dispatch_assert_queue_fail). Build it from main, as the app does, and call it
+    /// from background queues.
+    @MainActor static func oauthCompletionOffMain() async throws {
+        let callback = URL(string: "transeen://auth-callback?code=abc")!
+        func runOffMain(_ body: @escaping @Sendable (@escaping @Sendable (URL?, (any Error)?) -> Void) -> Void) async throws -> URL {
+            let result = LicenseOAuthResult()
+            let completion = LicenseOAuthSessions.releasing(UUID(), after: SystemLicenseOAuthBrowser.completion(for: result))
+            return try await withCheckedThrowingContinuation { continuation in
+                result.attach(continuation)
+                DispatchQueue(label: "test.xpc-reply").async {
+                    dispatchPrecondition(condition: .notOnQueue(.main))
+                    body(completion)
+                }
+            }
+        }
+
+        check(try await runOffMain { $0(callback, nil) } == callback, "callback URL delivered from a background queue")
+
+        do {
+            _ = try await runOffMain { $0(nil, ASWebAuthenticationSessionError(.canceledLogin)) }
+            fatalError("FAILED: cancel must throw")
+        } catch LicenseAuthError.cancelled {}
+
+        do {
+            _ = try await runOffMain { $0(nil, nil) }
+            fatalError("FAILED: no URL and no error must throw")
+        } catch LicenseAuthError.invalidCallback {}
+
+        // Concurrent and repeated calls resume the continuation exactly once.
+        check(try await runOffMain { completion in
+            DispatchQueue.concurrentPerform(iterations: 8) { _ in completion(callback, nil) }
+        } == callback, "repeated completion resumes once")
+
+        // A completion that arrives before the continuation is attached is kept.
+        let early = LicenseOAuthResult()
+        let completion = SystemLicenseOAuthBrowser.completion(for: early)
+        await withCheckedContinuation { (done: CheckedContinuation<Void, Never>) in
+            DispatchQueue.global().async { completion(callback, nil); done.resume() }
+        }
+        let url = try await withCheckedThrowingContinuation { early.attach($0) }
+        check(url == callback, "early completion delivered")
+        print("oauth completion off-main: ok")
     }
 }

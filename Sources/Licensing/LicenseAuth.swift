@@ -302,40 +302,133 @@ protocol LicenseOAuthBrowsing: Sendable {
 
 struct SystemLicenseOAuthBrowser: LicenseOAuthBrowsing {
     func open(_ url: URL, callbackScheme: String) async throws -> URL {
-        try await withCheckedThrowingContinuation { continuation in
-            DispatchQueue.main.async {
-                let session = ASWebAuthenticationSession(
-                    url: url,
-                    callbackURLScheme: callbackScheme
-                ) { callbackURL, error in
-                    if let callbackURL {
-                        continuation.resume(returning: callbackURL)
-                        return
-                    }
-                    if let error = error as? ASWebAuthenticationSessionError,
-                       error.code == .canceledLogin {
-                        continuation.resume(throwing: LicenseAuthError.cancelled)
-                        return
-                    }
-                    continuation.resume(throwing: error ?? LicenseAuthError.invalidCallback)
-                }
-                session.presentationContextProvider = LicenseOAuthPresentationAnchor.shared
-                session.prefersEphemeralWebBrowserSession = false
-                if !session.start() {
-                    continuation.resume(throwing: LicenseAuthError.invalidCallback)
-                }
+        let result = LicenseOAuthResult()
+        return try await withCheckedThrowingContinuation { continuation in
+            result.attach(continuation)
+            let completion = Self.completion(for: result)
+            Task { @MainActor in
+                LicenseOAuthSessions.shared.start(url: url, callbackScheme: callbackScheme, completion: completion)
+            }
+        }
+    }
+
+    /// AuthenticationServices calls this on its own XPC queue, not the main thread.
+    /// It is built in a nonisolated context so Swift does not infer main-actor
+    /// isolation for it (an isolated closure traps when called off-main), and it
+    /// only touches `LicenseOAuthResult`, which is thread-safe.
+    nonisolated static func completion(for result: LicenseOAuthResult) -> @Sendable (URL?, (any Error)?) -> Void {
+        { callbackURL, error in
+            if let callbackURL {
+                result.finish(.success(callbackURL))
+            } else if let error = error as? ASWebAuthenticationSessionError, error.code == .canceledLogin {
+                result.finish(.failure(LicenseAuthError.cancelled))
+            } else {
+                result.finish(.failure(error ?? LicenseAuthError.invalidCallback))
             }
         }
     }
 }
 
-private final class LicenseOAuthPresentationAnchor: NSObject, ASWebAuthenticationPresentationContextProviding {
-    static let shared = LicenseOAuthPresentationAnchor()
+/// Resumes the sign-in continuation exactly once, from whichever thread finishes first.
+final class LicenseOAuthResult: @unchecked Sendable {
+    private enum State {
+        case waiting
+        case attached(CheckedContinuation<URL, any Error>)
+        case early(Result<URL, any Error>)
+        case done
+    }
 
-    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        NSApp.windows.first(where: \.isVisible)
-            ?? NSApp.keyWindow
-            ?? NSApp.windows.first
-            ?? ASPresentationAnchor()
+    private let lock = NSLock()
+    private var state = State.waiting
+
+    func attach(_ continuation: CheckedContinuation<URL, any Error>) {
+        lock.lock()
+        switch state {
+        case .waiting:
+            state = .attached(continuation)
+            lock.unlock()
+        case .early(let result):
+            state = .done
+            lock.unlock()
+            continuation.resume(with: result)
+        case .attached, .done:
+            lock.unlock()
+        }
+    }
+
+    func finish(_ result: Result<URL, any Error>) {
+        lock.lock()
+        switch state {
+        case .waiting:
+            state = .early(result)
+            lock.unlock()
+        case .attached(let continuation):
+            state = .done
+            lock.unlock()
+            continuation.resume(with: result)
+        case .early, .done:
+            lock.unlock()
+        }
+    }
+}
+
+/// Keeps each session and its presentation provider alive until the session
+/// reports back; `presentationContextProvider` is weak and an unretained
+/// session can be torn down mid-flow.
+@MainActor
+final class LicenseOAuthSessions {
+    static let shared = LicenseOAuthSessions()
+    private var active: [UUID: (session: ASWebAuthenticationSession, anchor: any ASWebAuthenticationPresentationContextProviding)] = [:]
+
+    func start(url: URL, callbackScheme: String, completion: @escaping @Sendable (URL?, (any Error)?) -> Void) {
+        let id = UUID()
+        let session = ASWebAuthenticationSession(
+            url: url,
+            callbackURLScheme: callbackScheme,
+            completionHandler: Self.releasing(id, after: completion)
+        )
+        let anchor = LicenseOAuthPresentationAnchor(
+            window: NSApp.keyWindow
+                ?? NSApp.windows.first(where: \.isVisible)
+                ?? NSApp.windows.first
+                ?? ASPresentationAnchor()
+        )
+        session.presentationContextProvider = anchor
+        session.prefersEphemeralWebBrowserSession = false
+        active[id] = (session, anchor)
+        if !session.start() {
+            active[id] = nil
+            completion(nil, LicenseAuthError.invalidCallback)
+        }
+    }
+
+    /// Built outside the main actor for the same reason as
+    /// `SystemLicenseOAuthBrowser.completion(for:)`: the system calls it off-main.
+    nonisolated static func releasing(
+        _ id: UUID,
+        after completion: @escaping @Sendable (URL?, (any Error)?) -> Void
+    ) -> @Sendable (URL?, (any Error)?) -> Void {
+        { callbackURL, error in
+            completion(callbackURL, error)
+            Task { @MainActor in LicenseOAuthSessions.shared.release(id) }
+        }
+    }
+
+    private func release(_ id: UUID) {
+        active[id] = nil
+    }
+}
+
+/// The window is chosen on the main thread before the session starts, so
+/// answering the system's request reads no AppKit state and is safe on any thread.
+private final class LicenseOAuthPresentationAnchor: NSObject, ASWebAuthenticationPresentationContextProviding, @unchecked Sendable {
+    private let window: ASPresentationAnchor
+
+    init(window: ASPresentationAnchor) {
+        self.window = window
+    }
+
+    nonisolated func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        window
     }
 }
