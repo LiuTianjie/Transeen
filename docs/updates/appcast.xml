@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Transeen</title>
+    <link>https://transeen.itool.tech/updates/appcast.xml</link>
+    <description>Transeen updates</description>
+    <language>en</language>
+    <item>
+      <title>Transeen 0.14.0</title>
+      <pubDate>Thu, 05 Nov 2026 05:53:58 +0000</pubDate>
+      <sparkle:version>20</sparkle:version>
+      <sparkle:shortVersionString>0.14.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<ul><li>Update in place with Sparkle: Transeen checks once a day, shows the release notes, and after you agree downloads, verifies the signature of and installs the new version, then relaunches. Check for Updates… checks immediately. Updating from 0.13.0 or earlier still takes one manual download.</li></ul>]]></description>
+      <enclosure url="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.zip" type="application/octet-stream" sparkle:edSignature="V4foA5wOtc4vWtvcioXZ3q6NfYWNnokzw8q2QKY3x8sjb9tpM8mg500onHIyO6gJT2RjjHlhGQjylaclmue4AA==" length="11101442" />
+    </item>
+  </channel>
+</rss>
