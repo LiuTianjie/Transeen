@@ -8,6 +8,7 @@ struct LicenseView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var message: String?
+    @State private var browserSignIn: Task<Void, Never>?
     private var busy: Bool { manager.isSigningIn }
 
     var body: some View {
@@ -20,7 +21,9 @@ struct LicenseView: View {
                     Text(L("Transeen 包含在 iTool 年度会员中")).foregroundStyle(.secondary)
                 }
             }
-            if manager.authSession == nil {
+            if browserSignIn != nil {
+                waitingForBrowser
+            } else if manager.authSession == nil {
                 signInForm
             } else {
                 membership
@@ -41,8 +44,8 @@ struct LicenseView: View {
             Text(L("截图、标注、导入图片和翻译需要登录 iTool 账号，并拥有 iTool 年度会员。"))
                 .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             HStack {
-                Button(L("使用 Google 登录")) { run { try await manager.signIn(provider: .google) } }
-                Button(L("使用 GitHub 登录")) { run { try await manager.signIn(provider: .github) } }
+                Button(L("使用 Google 登录")) { signInInBrowser(.google) }
+                Button(L("使用 GitHub 登录")) { signInInBrowser(.github) }
             }
             TextField(L("邮箱"), text: $email).textFieldStyle(.roundedBorder)
             SecureField(L("密码"), text: $password).textFieldStyle(.roundedBorder).onSubmit(signInWithEmail)
@@ -123,6 +126,26 @@ struct LicenseView: View {
 
     static func day(_ date: Date) -> String {
         date.formatted(Date.FormatStyle(date: .long, time: .omitted).locale(InterfaceLanguage.shared.locale))
+    }
+
+    private var waitingForBrowser: some View {
+        HStack(spacing: 10) {
+            ProgressView().controlSize(.small)
+            Text(L("请在浏览器中完成登录")).font(.callout)
+            Spacer()
+            Button(L("取消")) { browserSignIn?.cancel() }
+        }
+    }
+
+    /// The sign-in page opens as a tab in the default browser; this panel waits and can cancel.
+    private func signInInBrowser(_ provider: LicenseAuthProvider) {
+        message = nil
+        browserSignIn = Task { @MainActor in
+            defer { browserSignIn = nil }
+            do { try await manager.signIn(provider: provider) } catch LicenseAuthError.cancelled {
+            } catch is CancellationError {
+            } catch { message = error.localizedDescription }
+        }
     }
 
     private func signInWithEmail() {

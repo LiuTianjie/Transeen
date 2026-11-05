@@ -1,5 +1,4 @@
 import Foundation
-import AuthenticationServices
 
 final class TestClock: LicenseClock, @unchecked Sendable {
     private let lock = NSLock()
@@ -99,7 +98,7 @@ func makeManager(
         try await loginRequiredRefresh()
         try await accountChanges()
         try await wireClient()
-        try await oauthCompletionOffMain()
+        try await loopbackOAuth()
         check(ReleaseVersion("v0.10.0")! > ReleaseVersion("0.9.9")!, "version order")
         check(ReleaseVersion("0.7") == ReleaseVersion("0.7.0"), "version padding")
         check(ReleaseVersion("0.7.0-beta") == nil, "pre-release versions are ignored")
@@ -325,49 +324,75 @@ func makeManager(
         catch {}
     }
 
-    /// AuthenticationServices calls the completion handler on an XPC queue. In 0.15.0
-    /// the handler was main-actor isolated and trapped there (EXC_BREAKPOINT in
-    /// _dispatch_assert_queue_fail). Build it from main, as the app does, and call it
-    /// from background queues.
-    @MainActor static func oauthCompletionOffMain() async throws {
-        let callback = URL(string: "transeen://auth-callback?code=abc")!
-        func runOffMain(_ body: @escaping @Sendable (@escaping @Sendable (URL?, (any Error)?) -> Void) -> Void) async throws -> URL {
-            let result = LicenseOAuthResult()
-            let completion = LicenseOAuthSessions.releasing(UUID(), after: SystemLicenseOAuthBrowser.completion(for: result))
-            return try await withCheckedThrowingContinuation { continuation in
-                result.attach(continuation)
-                DispatchQueue(label: "test.xpc-reply").async {
-                    dispatchPrecondition(condition: .notOnQueue(.main))
-                    body(completion)
+    /// GitHub / Google sign-in opens a tab in the person's browser and waits on a loopback
+    /// listener (LoopbackOAuth.swift). Here a URLSession request stands in for the browser.
+    static func loopbackOAuth() async throws {
+        let auth = URL(string: "https://example.supabase.co/auth/v1")!
+        let built = SupabaseLicenseAuthClient.authorizeURL(
+            authBase: auth, provider: .github, redirect: URL(string: "http://127.0.0.1:5555/linkshell/callback")!,
+            challenge: "abc", publishableKey: "sb_publishable_x")
+        let query = URLComponents(url: built, resolvingAgainstBaseURL: false)!.queryItems!
+        let value = { (name: String) in query.first { $0.name == name }?.value }
+        check(built.path == "/auth/v1/authorize", "authorize path")
+        check(value("redirect_to") == "http://127.0.0.1:5555/linkshell/callback", "loopback redirect")
+        check(value("code_challenge_method") == "s256" && value("code_challenge") == "abc", "PKCE challenge")
+        check(value("scopes") == "read:user user:email", "GitHub email scope")
+
+        func visit(_ suffix: String) async throws -> (URL, String) {
+            let opened = OpenedURL()
+            let task = Task {
+                try await LoopbackOAuth.run(productName: "Transeen", timeout: 10, open: { opened.set($0) }) { redirect in
+                    URL(string: "https://example.test/authorize?redirect_to=\(redirect.absoluteString)")!
                 }
             }
+            let authorize = try await opened.wait()
+            let redirect = URLComponents(url: authorize, resolvingAgainstBaseURL: false)!.queryItems!.first { $0.name == "redirect_to" }!.value!
+            check(redirect.hasPrefix("http://127.0.0.1:") && redirect.hasSuffix("/linkshell/callback"), "listener on loopback")
+            let (missing, notFound) = try await URLSession.shared.data(from: URL(string: redirect.replacingOccurrences(of: "/linkshell/callback", with: "/other"))!)
+            check((notFound as? HTTPURLResponse)?.statusCode == 404 && missing.isEmpty, "other paths 404")
+            let (body, response) = try await URLSession.shared.data(from: URL(string: redirect + suffix)!)
+            check((response as? HTTPURLResponse)?.statusCode == 200, "callback page served")
+            return (try await task.value, String(decoding: body, as: UTF8.self))
         }
 
-        check(try await runOffMain { $0(callback, nil) } == callback, "callback URL delivered from a background queue")
+        let (ok, okPage) = try await visit("?code=one-time")
+        check(try SupabaseLicenseAuthClient.authCode(from: ok) == "one-time", "code delivered")
+        check(okPage.contains("已完成授权"), "success page")
 
+        let (denied, _) = try await visit("?error=access_denied&error_description=nope")
+        do { _ = try SupabaseLicenseAuthClient.authCode(from: denied); fatalError("FAILED: denial must throw") }
+        catch LicenseAuthError.cancelled {}
+
+        let (failed, _) = try await visit("?error_code=bad_oauth_state&error_description=State%20expired")
+        do { _ = try SupabaseLicenseAuthClient.authCode(from: failed); fatalError("FAILED: error_code must throw") }
+        catch let LicenseAuthError.rejected(message) { check(message == "State expired", "provider message kept") }
+
+        // Nothing comes back: it gives up on its own.
         do {
-            _ = try await runOffMain { $0(nil, ASWebAuthenticationSessionError(.canceledLogin)) }
-            fatalError("FAILED: cancel must throw")
-        } catch LicenseAuthError.cancelled {}
+            _ = try await LoopbackOAuth.run(productName: "Transeen", timeout: 0.3, open: { _ in }) { $0 }
+            fatalError("FAILED: must time out")
+        } catch LoopbackOAuthError.timedOut {}
 
-        do {
-            _ = try await runOffMain { $0(nil, nil) }
-            fatalError("FAILED: no URL and no error must throw")
-        } catch LicenseAuthError.invalidCallback {}
+        // Cancelling the sign-in (closing the panel) ends the wait.
+        let waiting = Task { try await LoopbackOAuth.run(productName: "Transeen", timeout: 10, open: { _ in }) { $0 } }
+        try await Task.sleep(for: .milliseconds(100))
+        waiting.cancel()
+        do { _ = try await waiting.value; fatalError("FAILED: must cancel") }
+        catch LoopbackOAuthError.cancelled {}
+        print("loopback oauth: ok")
+    }
+}
 
-        // Concurrent and repeated calls resume the continuation exactly once.
-        check(try await runOffMain { completion in
-            DispatchQueue.concurrentPerform(iterations: 8) { _ in completion(callback, nil) }
-        } == callback, "repeated completion resumes once")
-
-        // A completion that arrives before the continuation is attached is kept.
-        let early = LicenseOAuthResult()
-        let completion = SystemLicenseOAuthBrowser.completion(for: early)
-        await withCheckedContinuation { (done: CheckedContinuation<Void, Never>) in
-            DispatchQueue.global().async { completion(callback, nil); done.resume() }
+final class OpenedURL: @unchecked Sendable {
+    private let lock = NSLock()
+    private var url: URL?
+    func set(_ url: URL) { lock.withLock { self.url = url } }
+    func wait() async throws -> URL {
+        for _ in 0..<200 {
+            let url = lock.withLock { self.url }
+            if let url { return url }
+            try await Task.sleep(for: .milliseconds(20))
         }
-        let url = try await withCheckedThrowingContinuation { early.attach($0) }
-        check(url == callback, "early completion delivered")
-        print("oauth completion off-main: ok")
+        fatalError("FAILED: the browser was never opened")
     }
 }

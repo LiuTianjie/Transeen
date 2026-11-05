@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.15.2
+
+- Google and GitHub sign-in now opens as a tab in your own browser, where you may already be signed in, instead of a separate sign-in window. The browser hands the result back to Transeen on this Mac; the panel shows a Cancel button while it waits.
+
 ## 0.15.1
 
 - Signing in with Google or GitHub no longer crashes Transeen. 0.15.0 quit as soon as the sign-in browser started, because the system reported back on a background thread the app did not expect.

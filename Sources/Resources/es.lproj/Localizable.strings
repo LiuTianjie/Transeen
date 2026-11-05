@@ -233,6 +233,8 @@
 "离线使用最多 7 天。连接网络后刷新会员状态即可继续使用。" = "Transeen funciona sin conexión hasta 7 días. Conéctate y actualiza tu membresía para seguir usándolo.";
 "正在确认会员状态…" = "Comprobando la membresía…";
 "升级年度会员" = "Mejorar a anual";
+"请在浏览器中完成登录" = "Termina de iniciar sesión en tu navegador";
+"取消" = "Cancelar";
 "选择 / 移动" = "Seleccionar / Mover";
 "编号" = "Número";
 "修改编号…" = "Cambiar número…";
@@ -269,7 +271,6 @@
 "删除截图" = "Eliminar captura";
 "清空最近截图？" = "¿Vaciar las capturas recientes?";
 "清空" = "Vaciar";
-"取消" = "Cancelar";
 "截图预览" = "Vista previa de la captura";
 "截图工具栏" = "Barra de herramientas de captura";
 "查看完整译文和原文，复制文字" = "Ver la traducción y el original completos y copiar el texto";

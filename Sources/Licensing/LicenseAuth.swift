@@ -1,5 +1,4 @@
 import AppKit
-import AuthenticationServices
 import CryptoKit
 import Foundation
 import Security
@@ -16,8 +15,6 @@ enum LicensePurchaseLinks {
         let locale = language == .zhHans || language == .zhHant ? "zh" : "en"
         return URL(string: "https://itool.tech/\(locale)/pro?from=transeen")!
     }
-    static let callbackScheme = "transeen"
-    static let callbackURL = URL(string: "transeen://auth-callback")!
 }
 
 struct LicenseAuthSession: Codable, Equatable, Sendable {
@@ -110,22 +107,10 @@ struct SupabaseLicenseAuthClient: LicenseAuthFlowPerforming {
 
         let verifier = Self.makeCodeVerifier()
         let challenge = Self.makeCodeChallenge(verifier)
-        var components = URLComponents(
-            url: authBase.appending(path: "authorize"),
-            resolvingAgainstBaseURL: false
-        )
-        components?.queryItems = [
-            URLQueryItem(name: "provider", value: provider.rawValue),
-            URLQueryItem(name: "redirect_to", value: LicensePurchaseLinks.callbackURL.absoluteString),
-            URLQueryItem(name: "code_challenge", value: challenge),
-            URLQueryItem(name: "code_challenge_method", value: "s256"),
-            URLQueryItem(name: "apikey", value: configuration.publishableKey)
-        ]
-        guard let authorizeURL = components?.url else {
-            throw LicenseAuthError.notConfigured
+        let key = configuration.publishableKey
+        let callbackURL = try await browser.authorize { redirect in
+            Self.authorizeURL(authBase: authBase, provider: provider, redirect: redirect, challenge: challenge, publishableKey: key)
         }
-
-        let callbackURL = try await browser.open(authorizeURL, callbackScheme: LicensePurchaseLinks.callbackScheme)
         let authCode = try Self.authCode(from: callbackURL)
         return try await exchange(authCode: authCode, codeVerifier: verifier, authBase: authBase)
     }
@@ -264,13 +249,29 @@ struct SupabaseLicenseAuthClient: LicenseAuthFlowPerforming {
         )
     }
 
-    private static func authCode(from callbackURL: URL) throws -> String {
+    static func authorizeURL(authBase: URL, provider: LicenseAuthProvider, redirect: URL, challenge: String, publishableKey: String) -> URL {
+        var components = URLComponents(url: authBase.appending(path: "authorize"), resolvingAgainstBaseURL: false)!
+        var items = [
+            URLQueryItem(name: "provider", value: provider.rawValue),
+            URLQueryItem(name: "redirect_to", value: redirect.absoluteString),
+            URLQueryItem(name: "code_challenge", value: challenge),
+            URLQueryItem(name: "code_challenge_method", value: "s256"),
+            URLQueryItem(name: "apikey", value: publishableKey)
+        ]
+        // Without user:email a GitHub account with a private address has none.
+        if provider == .github { items.append(URLQueryItem(name: "scopes", value: "read:user user:email")) }
+        components.queryItems = items
+        return components.url!
+    }
+
+    static func authCode(from callbackURL: URL) throws -> String {
         let components = URLComponents(url: callbackURL, resolvingAgainstBaseURL: false)
-        if let error = components?.queryItems?.first(where: { $0.name == "error" })?.value {
-            if error == "access_denied" {
+        let item = { (name: String) in components?.queryItems?.first(where: { $0.name == name })?.value }
+        if let error = item("error") ?? item("error_code") {
+            if error == "access_denied" || error == "no_code" {
                 throw LicenseAuthError.cancelled
             }
-            throw LicenseAuthError.rejected(error)
+            throw LicenseAuthError.rejected(item("error_description") ?? error)
         }
         if let code = components?.queryItems?.first(where: { $0.name == "code" })?.value, !code.isEmpty {
             return code
@@ -297,138 +298,23 @@ struct SupabaseLicenseAuthClient: LicenseAuthFlowPerforming {
 }
 
 protocol LicenseOAuthBrowsing: Sendable {
-    func open(_ url: URL, callbackScheme: String) async throws -> URL
+    /// Opens the authorize URL built for `redirect` and returns the URL the browser came back to.
+    func authorize(_ build: @escaping @Sendable (URL) -> URL) async throws -> URL
 }
 
+/// The person's own browser, back to a loopback listener (LoopbackOAuth.swift).
 struct SystemLicenseOAuthBrowser: LicenseOAuthBrowsing {
-    func open(_ url: URL, callbackScheme: String) async throws -> URL {
-        let result = LicenseOAuthResult()
-        return try await withCheckedThrowingContinuation { continuation in
-            result.attach(continuation)
-            let completion = Self.completion(for: result)
-            Task { @MainActor in
-                LicenseOAuthSessions.shared.start(url: url, callbackScheme: callbackScheme, completion: completion)
-            }
+    func authorize(_ build: @escaping @Sendable (URL) -> URL) async throws -> URL {
+        do {
+            let url = try await LoopbackOAuth.run(productName: "Transeen", authorize: build)
+            await MainActor.run { NSApp.activate() }
+            return url
+        } catch LoopbackOAuthError.cancelled {
+            throw LicenseAuthError.cancelled
+        } catch LoopbackOAuthError.timedOut {
+            throw LicenseAuthError.rejected("Sign-in timed out. Try again.")
+        } catch LoopbackOAuthError.unavailable {
+            throw LicenseAuthError.rejected("Could not start sign-in. Try again.")
         }
-    }
-
-    /// AuthenticationServices calls this on its own XPC queue, not the main thread.
-    /// It is built in a nonisolated context so Swift does not infer main-actor
-    /// isolation for it (an isolated closure traps when called off-main), and it
-    /// only touches `LicenseOAuthResult`, which is thread-safe.
-    nonisolated static func completion(for result: LicenseOAuthResult) -> @Sendable (URL?, (any Error)?) -> Void {
-        { callbackURL, error in
-            if let callbackURL {
-                result.finish(.success(callbackURL))
-            } else if let error = error as? ASWebAuthenticationSessionError, error.code == .canceledLogin {
-                result.finish(.failure(LicenseAuthError.cancelled))
-            } else {
-                result.finish(.failure(error ?? LicenseAuthError.invalidCallback))
-            }
-        }
-    }
-}
-
-/// Resumes the sign-in continuation exactly once, from whichever thread finishes first.
-final class LicenseOAuthResult: @unchecked Sendable {
-    private enum State {
-        case waiting
-        case attached(CheckedContinuation<URL, any Error>)
-        case early(Result<URL, any Error>)
-        case done
-    }
-
-    private let lock = NSLock()
-    private var state = State.waiting
-
-    func attach(_ continuation: CheckedContinuation<URL, any Error>) {
-        lock.lock()
-        switch state {
-        case .waiting:
-            state = .attached(continuation)
-            lock.unlock()
-        case .early(let result):
-            state = .done
-            lock.unlock()
-            continuation.resume(with: result)
-        case .attached, .done:
-            lock.unlock()
-        }
-    }
-
-    func finish(_ result: Result<URL, any Error>) {
-        lock.lock()
-        switch state {
-        case .waiting:
-            state = .early(result)
-            lock.unlock()
-        case .attached(let continuation):
-            state = .done
-            lock.unlock()
-            continuation.resume(with: result)
-        case .early, .done:
-            lock.unlock()
-        }
-    }
-}
-
-/// Keeps each session and its presentation provider alive until the session
-/// reports back; `presentationContextProvider` is weak and an unretained
-/// session can be torn down mid-flow.
-@MainActor
-final class LicenseOAuthSessions {
-    static let shared = LicenseOAuthSessions()
-    private var active: [UUID: (session: ASWebAuthenticationSession, anchor: any ASWebAuthenticationPresentationContextProviding)] = [:]
-
-    func start(url: URL, callbackScheme: String, completion: @escaping @Sendable (URL?, (any Error)?) -> Void) {
-        let id = UUID()
-        let session = ASWebAuthenticationSession(
-            url: url,
-            callbackURLScheme: callbackScheme,
-            completionHandler: Self.releasing(id, after: completion)
-        )
-        let anchor = LicenseOAuthPresentationAnchor(
-            window: NSApp.keyWindow
-                ?? NSApp.windows.first(where: \.isVisible)
-                ?? NSApp.windows.first
-                ?? ASPresentationAnchor()
-        )
-        session.presentationContextProvider = anchor
-        session.prefersEphemeralWebBrowserSession = false
-        active[id] = (session, anchor)
-        if !session.start() {
-            active[id] = nil
-            completion(nil, LicenseAuthError.invalidCallback)
-        }
-    }
-
-    /// Built outside the main actor for the same reason as
-    /// `SystemLicenseOAuthBrowser.completion(for:)`: the system calls it off-main.
-    nonisolated static func releasing(
-        _ id: UUID,
-        after completion: @escaping @Sendable (URL?, (any Error)?) -> Void
-    ) -> @Sendable (URL?, (any Error)?) -> Void {
-        { callbackURL, error in
-            completion(callbackURL, error)
-            Task { @MainActor in LicenseOAuthSessions.shared.release(id) }
-        }
-    }
-
-    private func release(_ id: UUID) {
-        active[id] = nil
-    }
-}
-
-/// The window is chosen on the main thread before the session starts, so
-/// answering the system's request reads no AppKit state and is safe on any thread.
-private final class LicenseOAuthPresentationAnchor: NSObject, ASWebAuthenticationPresentationContextProviding, @unchecked Sendable {
-    private let window: ASPresentationAnchor
-
-    init(window: ASPresentationAnchor) {
-        self.window = window
-    }
-
-    nonisolated func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        window
     }
 }
