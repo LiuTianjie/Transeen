@@ -52,7 +52,7 @@ struct CaptureToolbar: View {
                 inspector.transition(.opacity)
             }
         }
-        .frame(width: toolbarWidth)
+        .frame(minWidth: toolbarWidth)
         .modifier(CaptureSurface(radius: 12))
         .padding(8)
         .fixedSize()
@@ -79,7 +79,13 @@ struct CaptureToolbar: View {
 
     // MARK: Translation
 
-    @ViewBuilder private var comparison: some View {
+    // Every state sits on the widest one's footprint, so nothing beside it moves when the state
+    // changes, in any language.
+    private var comparison: some View {
+        slotFootprint.hidden().overlay { comparisonControl.frame(maxWidth: .infinity, maxHeight: .infinity) }
+    }
+
+    @ViewBuilder private var comparisonControl: some View {
         Group {
             if state.failed || state.noText {
                 slotButton(L("重试"), "arrow.clockwise", state.shortcuts.help(L("翻译选中区域"), .translate)) { action("translate") }
@@ -99,24 +105,46 @@ struct CaptureToolbar: View {
                 slotButton(L("翻译"), "translate", state.shortcuts.help(L("翻译选中区域"), .translate)) { action("translate") }
             }
         }
-        // One width for every state, so nothing beside it moves when the state changes.
-        .frame(width: 92, alignment: .leading)
+    }
+
+    private var slotFootprint: some View {
+        ZStack {
+            // Both halves take the wider label's width, as the segment splits evenly.
+            HStack(spacing: 2) {
+                ForEach(0..<2, id: \.self) { _ in
+                    ZStack { compareLabel(L("原文"), selected: true); compareLabel(L("译文"), selected: true) }
+                }
+            }.padding(2)
+            ForEach([L("重试"), L("暂停"), L("继续"), L("翻译")], id: \.self) { title in
+                slotLabel(title, "pause.fill")
+            }
+        }
     }
 
     private func slotButton(_ title: String, _ symbol: String, _ help: String, _ run: @escaping () -> Void) -> some View {
         Button(action: run) {
-            Label(title, systemImage: symbol).font(.system(size: 12, weight: .medium))
-                .frame(width: 92, height: 30)
+            slotLabel(title, symbol)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(CaptureAppearance.foreground.opacity(0.06), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
         }.buttonStyle(CaptureToolbarButtonStyle()).help(help)
     }
 
+    private func slotLabel(_ title: String, _ symbol: String) -> some View {
+        Label(title, systemImage: symbol).font(.system(size: 12, weight: .medium))
+            .lineLimit(1).padding(.horizontal, 12).frame(minWidth: 92, minHeight: 30)
+    }
+
     private func compareButton(_ label: String, selected: Bool, id: String) -> some View {
         Button { animate { action(id) } } label: {
-            Text(label).font(.system(size: 12, weight: selected ? .semibold : .regular))
-                .frame(width: 43, height: 26)
+            compareLabel(label, selected: selected).frame(maxWidth: .infinity)
         }.buttonStyle(CaptureSegmentStyle(selected: selected))
             .accessibilityAddTraits(selected ? .isSelected : [])
+    }
+
+    // Measured at the selected weight, so the segment does not resize as the selection moves.
+    private func compareLabel(_ label: String, selected: Bool) -> some View {
+        Text(label).font(.system(size: 12, weight: selected ? .semibold : .regular)).lineLimit(1)
+            .padding(.horizontal, 8).frame(minWidth: 43, minHeight: 26)
     }
 
     private var languageMenu: some View {
@@ -199,7 +227,7 @@ struct CaptureToolbar: View {
             }
             .font(.system(size: 12, weight: .semibold)).frame(minWidth: 54)
         }
-        .buttonStyle(.borderedProminent).controlSize(.regular)
+        .buttonStyle(.borderedProminent).controlSize(.regular).fixedSize()
         .help(pending ? L("翻译完成后复制") : state.shortcuts.help(L("复制图片"), .copy))
     }
 

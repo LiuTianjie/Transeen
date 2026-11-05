@@ -204,6 +204,7 @@ lede = "<b>Lo último.</b>"
 full = "Historial completo"
 
 [changes.notes]
+"0.13.0" = ["<b>Pausa a mitad de traducción.</b> Espacio pausa la traducción y muestra el original; pulsa de nuevo para seguir donde se quedó.", "<b>Sin copias a medias.</b> Copiar, fijar o guardar espera a la imagen terminada, en una barra de herramientas de dos filas."]
 "0.12.1" = ["<b>Títulos gruesos legibles.</b> Las letras grandes en negrita ya no se confunden con un fondo oscuro, evitando colores invertidos y restos del original.", "<b>Se conserva el espaciado.</b> Los títulos grandes traducidos se ajustan a la altura original; el texto normal mantiene su distribución."]
 "0.12.0" = ["<b>Más herramientas de captura.</b> Desplazamiento, texto, resaltado, censura y capturas recientes locales.", "<b>Un inicio más claro.</b> Guía de cuatro pasos, colores unificados, comparación con una pulsación y arreglo del cierre al iniciar una captura larga."]
 "0.11.2" = [
@@ -455,7 +456,7 @@ body = """
       <tr><td><kbd>R</kbd> al seleccionar</td><td>Tomar de nuevo la zona de la última captura</td></tr>
       <tr><td><kbd>F1</kbd> con una captura abierta</td><td>Intercambiar los idiomas, o traducir una captura de «Anotar»</td></tr>
       <tr><td><kbd>Tab</kbd></td><td>Alternar entre original y traducción</td></tr>
-      <tr><td><kbd>Espacio</kbd></td><td>Tab o Espacio alterna entre original y traducción; pulsa de nuevo para volver.</td></tr>
+      <tr><td><kbd>Espacio</kbd></td><td>Alternar entre original y traducción; mientras traduce, pausar y reanudar.</td></tr>
       <tr><td><kbd>T</kbd></td><td>Traducir, o reintentar</td></tr>
       <tr><td><kbd>D</kbd></td><td>Intercambiar los idiomas</td></tr>
       <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>Rectángulo, elipse, flecha, lápiz</td></tr>

@@ -204,6 +204,7 @@ lede = "<b>Dernières versions.</b>"
 full = "Historique complet"
 
 [changes.notes]
+"0.13.0" = ["<b>Mettre en pause.</b> Espace met la traduction en pause et affiche l’original ; appuyez à nouveau pour reprendre là où elle s’était arrêtée.", "<b>Pas de copie à moitié traduite.</b> Copier, épingler ou enregistrer attend l’image terminée, dans une barre d’outils sur deux lignes."]
 "0.12.1" = ["<b>Des titres épais bien reconnus.</b> Les grandes lettres grasses ne sont plus prises pour un fond sombre, évitant les couleurs inversées et les restes du texte original.", "<b>Un espacement préservé.</b> Les grands titres traduits restent dans la hauteur initiale ; le texte courant conserve sa mise en page."]
 "0.12.0" = ["<b>Des captures enrichies.</b> Défilement, texte, surlignage, masquage et captures récentes locales.", "<b>Un démarrage simplifié.</b> Guide en quatre étapes, couleurs unifiées, comparaison par pression et correction du plantage au démarrage du défilement."]
 "0.11.2" = [
@@ -455,7 +456,7 @@ body = """
       <tr><td><kbd>R</kbd> pendant la sélection</td><td>Reprendre la zone de la dernière capture</td></tr>
       <tr><td><kbd>F1</kbd> sur une capture ouverte</td><td>Inverser les langues, ou traduire une capture « Annoter »</td></tr>
       <tr><td><kbd>Tab</kbd></td><td>Basculer entre original et traduction</td></tr>
-      <tr><td><kbd>Espace</kbd></td><td>Tab ou Espace alterne entre original et traduction ; appuyez à nouveau pour revenir.</td></tr>
+      <tr><td><kbd>Espace</kbd></td><td>Basculer entre original et traduction ; pendant une traduction, la mettre en pause et la reprendre.</td></tr>
       <tr><td><kbd>T</kbd></td><td>Traduire, ou réessayer</td></tr>
       <tr><td><kbd>D</kbd></td><td>Inverser les langues</td></tr>
       <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>Rectangle, ellipse, flèche, crayon</td></tr>

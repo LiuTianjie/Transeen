@@ -1042,9 +1042,10 @@ code {
   transform: scale(var(--k, 1));
   transition: opacity 0.5s var(--ease);
   display: grid;
-  gap: 7px;
-  padding: 8px 10px 7px;
-  border-radius: 14px;
+  gap: 4px;
+  min-width: 452px;
+  padding: 8px 8px 6px;
+  border-radius: 12px;
   background: rgba(36, 36, 40, 0.86);
   box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.18), 0 18px 40px -12px rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(24px) saturate(1.6);
@@ -1066,41 +1067,132 @@ code {
 .tb-row {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
+/* The segment and the pause slot share one cell, so the row keeps its width in every state. */
+.tb-cmp {
+  display: grid;
+}
+
+.tb-cmp > * {
+  grid-area: 1 / 1;
+}
+
+/* Both halves take the wider label's width, like the app. */
 .tb-seg {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 2px;
+  min-width: 92px;
   padding: 2px;
-  margin-right: 6px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .tb-seg button {
-  height: 24px;
-  padding: 0 10px;
+  min-width: 43px;
+  height: 26px;
+  padding: 0 8px;
   border: 0;
   border-radius: 6px;
   background: none;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.62);
   font: inherit;
+  font-weight: 400;
+  white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
 .tb-seg button[aria-pressed="true"] {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   color: #fff;
+  font-weight: 600;
+}
+
+.tb-slot {
+  display: inline-flex;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 92px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  white-space: nowrap;
+}
+
+.tb-slot svg {
+  width: 12px;
+  height: 12px;
+}
+
+.toolbar.is-working .tb-slot {
+  visibility: visible;
+}
+
+.toolbar.is-working .tb-seg {
+  visibility: hidden;
+}
+
+.toolbar.is-working .tb-status::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 6px;
+  vertical-align: -1px;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  border-top-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: tb-spin 0.8s linear infinite;
+}
+
+@keyframes tb-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.tb-dir {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 4px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tb-dir svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0.7;
+}
+
+.tb-actions,
+.tb-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.tb-actions {
+  margin-left: auto;
 }
 
 .tb-icon {
   display: grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 7px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .tb-icon svg {
@@ -1113,37 +1205,41 @@ code {
   color: #fff;
 }
 
-.tb-sep {
-  width: 1px;
-  height: 18px;
-  margin: 0 4px;
-  background: rgba(255, 255, 255, 0.16);
-}
-
 .tb-copy {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 54px;
   height: 28px;
-  margin-left: 6px;
-  padding: 0 12px;
-  border-radius: 8px;
+  margin: 0 2px;
+  padding: 0 10px;
+  border-radius: 7px;
   background: var(--blue);
   color: #fff;
-}
-
-.tb-foot {
-  display: flex;
-  gap: 8px;
-  padding: 0 4px;
-  color: rgba(255, 255, 255, 0.56);
-  font-size: 11px;
-  font-variant-numeric: tabular-nums;
+  font-weight: 600;
   white-space: nowrap;
 }
 
-.tb-foot b {
-  color: rgba(255, 255, 255, 0.86);
-  font-weight: 500;
+.tb-copy svg {
+  width: 15px;
+  height: 15px;
+}
+
+.tb-tools {
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tb-status {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 11px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Demo controls under the window */

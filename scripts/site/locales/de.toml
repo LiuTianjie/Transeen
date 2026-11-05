@@ -204,6 +204,7 @@ lede = "<b>Zuletzt veröffentlicht.</b>"
 full = "Vollständiges Änderungsprotokoll"
 
 [changes.notes]
+"0.13.0" = ["<b>Übersetzung anhalten.</b> Die Leertaste hält eine Übersetzung an und zeigt das Original; erneut drücken setzt sie dort fort.", "<b>Keine halb fertigen Kopien.</b> Kopieren, Anheften und Sichern warten auf das fertige Bild, in einer zweizeiligen Werkzeugleiste."]
 "0.12.1" = ["<b>Fette Überschriften richtig erkennen.</b> Große, fette Buchstaben werden nicht mehr als dunkler Hintergrund erkannt; invertierte Farben und Reste des Originaltexts entfallen.", "<b>Abstände beibehalten.</b> Große übersetzte Überschriften bleiben innerhalb der ursprünglichen Schrifthöhe; normaler Text behält sein Layout."]
 "0.12.0" = ["<b>Mehr Aufnahmefunktionen.</b> Scroll-Aufnahmen, Text, Hervorhebungen, Abdeckungen und lokaler Verlauf.", "<b>Einfacher starten.</b> Vier Schritte, einheitliche Einstellungsfarben, Umschalten per Tastendruck und behobener Absturz beim Aufnahmestart."]
 "0.11.2" = [
@@ -455,7 +456,7 @@ body = """
       <tr><td><kbd>R</kbd> beim Auswählen</td><td>Den Bereich der letzten Aufnahme erneut nehmen</td></tr>
       <tr><td><kbd>F1</kbd> bei offener Aufnahme</td><td>Sprachen tauschen oder eine „Markieren“-Aufnahme übersetzen</td></tr>
       <tr><td><kbd>Tab</kbd></td><td>Zwischen Original und Übersetzung umschalten</td></tr>
-      <tr><td><kbd>Leertaste</kbd></td><td>Tab oder Leertaste schaltet zwischen Original und Übersetzung um; erneut drücken zum Zurückschalten.</td></tr>
+      <tr><td><kbd>Leertaste</kbd></td><td>Zwischen Original und Übersetzung umschalten; während der Übersetzung anhalten und fortsetzen.</td></tr>
       <tr><td><kbd>T</kbd></td><td>Übersetzen oder erneut versuchen</td></tr>
       <tr><td><kbd>D</kbd></td><td>Sprachen tauschen</td></tr>
       <tr><td><kbd>R</kbd> <kbd>O</kbd> <kbd>A</kbd> <kbd>P</kbd></td><td>Rechteck, Ellipse, Pfeil, Stift</td></tr>

@@ -42,20 +42,32 @@
   <div class="cursor"><svg viewBox="0 0 24 24"><use href="#cur-arrow" /></svg></div>
   <div class="toolbar">
     <div class="tb-row">
-      <span class="tb-seg"><button type="button" tabindex="-1" data-view="original" aria-pressed="false" data-ui="original">原文</button><button type="button" tabindex="-1" data-view="translation" aria-pressed="true" data-ui="translation">译文</button></span>
-      <span class="tb-icon is-on"><svg><use href="#ui-cursorarrow" /></svg></span>
-      <span class="tb-icon"><svg><use href="#ui-rectangle" /></svg></span>
-      <span class="tb-icon"><svg><use href="#ui-circle" /></svg></span>
-      <span class="tb-icon"><svg><use href="#ui-arrow" /></svg></span>
-      <span class="tb-icon"><svg><use href="#ui-pencil" /></svg></span>
-      <span class="tb-icon"><svg><use href="#ui-number" /></svg></span>
-      <span class="tb-sep"></span>
-      <span class="tb-icon"><svg><use href="#ui-text" /></svg></span>
-      <span class="tb-icon"><svg><use href="#ui-pin" /></svg></span>
-      <span class="tb-icon"><svg><use href="#ui-ellipsis" /></svg></span>
-      <span class="tb-copy" data-ui="copy">复制</span>
-      <span class="tb-icon"><svg><use href="#ui-xmark" /></svg></span>
+      <span class="tb-cmp">
+        <span class="tb-seg"><button type="button" tabindex="-1" data-view="original" aria-pressed="false" data-ui="original">原文</button><button type="button" tabindex="-1" data-view="translation" aria-pressed="true" data-ui="translation">译文</button></span>
+        <span class="tb-slot"><svg><use href="#ui-pause" /></svg><span data-ui="pause">暂停</span></span>
+      </span>
+      <b class="tb-dir"><span data-ui="dir">JA → 中文</span><svg><use href="#ui-chevron" /></svg></b>
+      <span class="tb-actions">
+        <span class="tb-icon"><svg><use href="#ui-text" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-pin" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-ellipsis" /></svg></span>
+        <span class="tb-copy"><svg><use href="#ui-copy" /></svg><span data-ui="copy">复制</span></span>
+        <span class="tb-icon"><svg><use href="#ui-xmark" /></svg></span>
+      </span>
     </div>
-    <p class="tb-foot"><b data-ui="dir">JA → 中文</b><span data-ui="status"></span></p>
+    <div class="tb-row tb-tools">
+      <span class="tb-group">
+        <span class="tb-icon is-on"><svg><use href="#ui-cursorarrow" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-rectangle" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-circle" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-arrow" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-pencil" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-number" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-textbox" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-highlighter" /></svg></span>
+        <span class="tb-icon"><svg><use href="#ui-redact" /></svg></span>
+      </span>
+      <span class="tb-status" data-ui="status"></span>
+    </div>
   </div>
 </div>

@@ -92,14 +92,14 @@
 
     // The toolbar speaks the page's language, with the app's own words for it.
     const words = {
-      en: { original: "Original", translation: "Translation", copy: "Copy", translating: "Translating…", done: (n) => `Translated ${n} items`, peek: "Switch original / translation (Space)", release: "Release to finish" },
-      "zh-Hans": { original: "原文", translation: "译文", copy: "复制", translating: "正在翻译…", done: (n) => `已翻译 ${n} 处`, peek: "切换原文 / 译文（空格）", release: "松开完成" },
-      "zh-Hant": { original: "原文", translation: "譯文", copy: "拷貝", translating: "正在翻譯…", done: (n) => `已翻譯 ${n} 處`, peek: "切換原文 / 譯文（空白鍵）", release: "放開完成" },
-      ja: { original: "原文", translation: "訳文", copy: "コピー", translating: "翻訳中…", done: (n) => `${n} 件を翻訳しました`, peek: "原文・訳文を切り替え（スペース）", release: "離すと完了" },
-      ko: { original: "원문", translation: "번역", copy: "복사", translating: "번역 중…", done: (n) => `${n}개 번역됨`, peek: "원문 / 번역 전환 (스페이스)", release: "떼면 완료" },
-      fr: { original: "Original", translation: "Traduction", copy: "Copier", translating: "Traduction…", done: (n) => `${n} éléments traduits`, peek: "Original / traduction (Espace)", release: "Relâchez pour terminer" },
-      es: { original: "Original", translation: "Traducción", copy: "Copiar", translating: "Traduciendo…", done: (n) => `${n} elementos traducidos`, peek: "Original / traducción (Espacio)", release: "Suelta para terminar" },
-      de: { original: "Original", translation: "Übersetzung", copy: "Kopieren", translating: "Übersetze…", done: (n) => `${n} Stellen übersetzt`, peek: "Original / Übersetzung (Leertaste)", release: "Loslassen zum Abschließen" },
+      en: { pause: "Pause", original: "Original", translation: "Translation", copy: "Copy", translating: "Translating…", done: (n) => `Translated ${n} items`, release: "Release to finish" },
+      "zh-Hans": { pause: "暂停", original: "原文", translation: "译文", copy: "复制", translating: "正在翻译…", done: (n) => `已翻译 ${n} 处`, release: "松开完成" },
+      "zh-Hant": { pause: "暫停", original: "原文", translation: "譯文", copy: "拷貝", translating: "正在翻譯…", done: (n) => `已翻譯 ${n} 處`, release: "放開完成" },
+      ja: { pause: "一時停止", original: "原文", translation: "訳文", copy: "コピー", translating: "翻訳中…", done: (n) => `${n} 件を翻訳しました`, release: "離すと完了" },
+      ko: { pause: "일시정지", original: "원문", translation: "번역", copy: "복사", translating: "번역 중…", done: (n) => `${n}개 번역됨`, release: "떼면 완료" },
+      fr: { pause: "Pause", original: "Original", translation: "Traduction", copy: "Copier", translating: "Traduction…", done: (n) => `${n} éléments traduits`, release: "Relâchez pour terminer" },
+      es: { pause: "Pausar", original: "Original", translation: "Traducción", copy: "Copiar", translating: "Traduciendo…", done: (n) => `${n} elementos traducidos`, release: "Suelta para terminar" },
+      de: { pause: "Pause", original: "Original", translation: "Übersetzung", copy: "Kopieren", translating: "Übersetze…", done: (n) => `${n} Stellen übersetzt`, release: "Loslassen zum Abschließen" },
     };
     const ui = words[pageLang] ?? words.en;
     const short = { en: "EN", "zh-Hans": "中文", "zh-Hant": "繁中", ja: "JA", ko: "KO", fr: "FR", es: "ES", de: "DE" };
@@ -119,6 +119,7 @@
     toolbar.querySelector('[data-ui="original"]').textContent = ui.original;
     toolbar.querySelector('[data-ui="translation"]').textContent = ui.translation;
     toolbar.querySelector('[data-ui="copy"]').textContent = ui.copy;
+    toolbar.querySelector('[data-ui="pause"]').textContent = ui.pause;
 
     // The demo page is Japanese, so a Japanese reader sees it translated into English.
     const pressed = document.querySelector('.chip[aria-pressed="true"]')?.dataset.lang;
@@ -215,7 +216,7 @@
     function reset() {
       state.ready = false;
       demo.classList.remove("is-captured", "is-dim", "is-snapped", "is-done");
-      toolbar.classList.remove("is-live");
+      toolbar.classList.remove("is-live", "is-working");
       hits.replaceChildren();
       scan.classList.remove("is-running");
       press.classList.remove("is-on");
@@ -232,13 +233,14 @@
       demo.classList.add("is-dim", "is-snapped", "is-captured", "is-done");
       cursor.classList.add("is-hidden");
       setView("translation");
-      status.textContent = `${ui.done(blocks.length)} · ${ui.peek}`;
+      status.textContent = ui.done(blocks.length);
       placeToolbar();
       toolbar.classList.add("is-live");
       state.ready = true;
     }
 
     async function translate(run, fast) {
+      toolbar.classList.add("is-working");
       const lines = blocks.flatMap((el) => textBox(el).map((r) => ({ el, r })));
       hits.replaceChildren(
         ...lines.map(({ r }, i) => {
@@ -279,8 +281,9 @@
         await sleep(fast ? 220 : 480, run);
       }
       state.view = "translation";
+      toolbar.classList.remove("is-working");
       hits.classList.remove("is-on");
-      status.textContent = `${ui.done(blocks.length)} · ${ui.peek}`;
+      status.textContent = ui.done(blocks.length);
     }
 
     async function play() {

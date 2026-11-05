@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 0.13.0
+
+- Press Space (or Tab) while a capture is still translating to pause it and show the original; press again to resume. Blocks already translated are kept, so resuming only translates what is left.
+- Copy, pin or save pressed during a translation now waits for the finished picture instead of exporting a half-drawn one. Pressing again withdraws the request.
+- A tighter two-row capture toolbar: one slot for original/translation, pause, resume and retry beside the language menu that keeps its width in every state and fits each interface language without truncation, the tools with a one-line status, and a separate row only for failures and translations that don't fit.
+- Clearer text and redaction tool icons, a full-text button that appears once text is recognized, and a one-line selection hint.
+- A simpler menu-bar launcher without subtitles, and a smaller first-run guide.
+
 ## 0.12.1
 
 - Recognize heavy display lettering as text instead of mistaking its strokes for a solid background, preventing inverted translation colors and unerased source letters.
