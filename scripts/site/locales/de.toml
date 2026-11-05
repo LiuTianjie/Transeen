@@ -204,6 +204,7 @@ lede = "<b>Zuletzt veröffentlicht.</b>"
 full = "Vollständiges Änderungsprotokoll"
 
 [changes.notes]
+"0.14.0" = ["<b>Updates in der App.</b> Transeen sucht einmal täglich und lädt, prüft und installiert die neue Version, sobald du zustimmst.", "<b>Ein letzter manueller Download.</b> Von 0.13.0 oder älter lädst du diese Version einmal selbst; spätere kommen über die App."]
 "0.13.0" = ["<b>Übersetzung anhalten.</b> Die Leertaste hält eine Übersetzung an und zeigt das Original; erneut drücken setzt sie dort fort.", "<b>Keine halb fertigen Kopien.</b> Kopieren, Anheften und Sichern warten auf das fertige Bild, in einer zweizeiligen Werkzeugleiste."]
 "0.12.1" = ["<b>Fette Überschriften richtig erkennen.</b> Große, fette Buchstaben werden nicht mehr als dunkler Hintergrund erkannt; invertierte Farben und Reste des Originaltexts entfallen.", "<b>Abstände beibehalten.</b> Große übersetzte Überschriften bleiben innerhalb der ursprünglichen Schrifthöhe; normaler Text behält sein Layout."]
 "0.12.0" = ["<b>Mehr Aufnahmefunktionen.</b> Scroll-Aufnahmen, Text, Hervorhebungen, Abdeckungen und lokaler Verlauf.", "<b>Einfacher starten.</b> Vier Schritte, einheitliche Einstellungsfarben, Umschalten per Tastendruck und behobener Absturz beim Aufnahmestart."]
@@ -270,7 +271,7 @@ a = "Ja, unter der <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LI
 
 [[faq.items]]
 q = "Wie aktualisiere ich?"
-a = "Wähl in der Menüleiste „Nach Updates suchen…“."
+a = "Transeen sucht einmal täglich und installiert eine neue Version, sobald du zustimmst. Für eine sofortige Suche wähl in der Menüleiste „Nach Updates suchen…“."
 
 [closing]
 title = "Lies es <span>dort, wo es steht.</span>"

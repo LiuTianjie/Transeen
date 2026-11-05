@@ -205,6 +205,7 @@ lede = "<b>Recently shipped.</b>"
 full = "Full changelog"
 
 [changes.notes]
+"0.14.0" = ["<b>Updates install themselves.</b> Transeen checks once a day and, when you agree, downloads, verifies and installs the new version.", "<b>One last manual download.</b> From 0.13.0 or earlier, download this version once; later ones arrive in the app."]
 "0.13.0" = ["<b>Pause mid-translation.</b> Space pauses a translation and shows the original; press again to resume where it stopped.", "<b>No half-drawn copies.</b> Copy, pin or save waits for the finished picture, in a tighter two-row toolbar."]
 "0.12.1" = ["<b>Heavy headings stay readable.</b> Large bold letters no longer turn into dark backgrounds or leave the original text behind.", "<b>Keep the spacing.</b> Large translated headings fit their original height; ordinary text keeps its established layout."]
 "0.12.0" = ["<b>Capture more.</b> Scrolling screenshots, text, highlights, redactions and local recent captures.", "<b>A clearer start.</b> A four-step guide, consistent settings colors, press-to-toggle comparison and a scrolling-start crash fix."]
@@ -271,7 +272,7 @@ a = "Yes, under the <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/L
 
 [[faq.items]]
 q = "How do I update?"
-a = "Choose Check for Updates… in the menu bar."
+a = "Transeen checks once a day and installs a new version after you agree. To check now, choose Check for Updates… in the menu bar."
 
 [closing]
 title = "Read it <span>where it is.</span>"

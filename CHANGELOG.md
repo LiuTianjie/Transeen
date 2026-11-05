@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.14.0
+
 - Update in place with Sparkle: Transeen checks once a day, shows the release notes, and after you agree downloads, verifies the signature of and installs the new version, then relaunches. Check for Updates… checks immediately. Updating from 0.13.0 or earlier still takes one manual download.
 
 ## 0.13.0

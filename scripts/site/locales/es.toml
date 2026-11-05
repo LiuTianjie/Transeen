@@ -204,6 +204,7 @@ lede = "<b>Lo último.</b>"
 full = "Historial completo"
 
 [changes.notes]
+"0.14.0" = ["<b>Actualizaciones integradas.</b> Transeen busca una vez al día y, si aceptas, descarga, verifica e instala la nueva versión.", "<b>Una última descarga manual.</b> Desde la 0.13.0 o anteriores, descarga esta versión una vez; las siguientes llegan en la app."]
 "0.13.0" = ["<b>Pausa a mitad de traducción.</b> Espacio pausa la traducción y muestra el original; pulsa de nuevo para seguir donde se quedó.", "<b>Sin copias a medias.</b> Copiar, fijar o guardar espera a la imagen terminada, en una barra de herramientas de dos filas."]
 "0.12.1" = ["<b>Títulos gruesos legibles.</b> Las letras grandes en negrita ya no se confunden con un fondo oscuro, evitando colores invertidos y restos del original.", "<b>Se conserva el espaciado.</b> Los títulos grandes traducidos se ajustan a la altura original; el texto normal mantiene su distribución."]
 "0.12.0" = ["<b>Más herramientas de captura.</b> Desplazamiento, texto, resaltado, censura y capturas recientes locales.", "<b>Un inicio más claro.</b> Guía de cuatro pasos, colores unificados, comparación con una pulsación y arreglo del cierre al iniciar una captura larga."]
@@ -270,7 +271,7 @@ a = "Sí, con <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE
 
 [[faq.items]]
 q = "¿Cómo se actualiza?"
-a = "Elige Buscar actualizaciones… en la barra de menús."
+a = "Transeen busca una vez al día e instala la nueva versión si aceptas. Para buscar ahora, elige Buscar actualizaciones… en la barra de menús."
 
 [closing]
 title = "Léelo <span>donde está.</span>"

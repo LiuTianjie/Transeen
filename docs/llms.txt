@@ -4,7 +4,7 @@
 
 - Website: https://transeen.itool.tech/ (also in 简体中文 https://transeen.itool.tech/zh/, 繁體中文 https://transeen.itool.tech/zh-hant/, 日本語 https://transeen.itool.tech/ja/, 한국어 https://transeen.itool.tech/ko/, Français https://transeen.itool.tech/fr/, Español https://transeen.itool.tech/es/, Deutsch https://transeen.itool.tech/de/)
 - Setup guide: https://transeen.itool.tech/guide/ (also in 简体中文 https://transeen.itool.tech/zh/guide/, 繁體中文 https://transeen.itool.tech/zh-hant/guide/, 日本語 https://transeen.itool.tech/ja/guide/, 한국어 https://transeen.itool.tech/ko/guide/, Français https://transeen.itool.tech/fr/guide/, Español https://transeen.itool.tech/es/guide/, Deutsch https://transeen.itool.tech/de/guide/)
-- Download: https://github.com/LiuTianjie/Transeen/releases/latest (version 0.13.0, signed and notarized DMG, about 11.3 MB)
+- Download: https://github.com/LiuTianjie/Transeen/releases/latest (version 0.14.0, signed and notarized DMG, about 12.3 MB)
 - Source: https://github.com/LiuTianjie/Transeen (MIT license, Swift 6)
 
 ## What it does

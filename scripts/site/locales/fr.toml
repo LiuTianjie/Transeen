@@ -204,6 +204,7 @@ lede = "<b>Dernières versions.</b>"
 full = "Historique complet"
 
 [changes.notes]
+"0.14.0" = ["<b>Mises à jour intégrées.</b> Transeen vérifie une fois par jour et, avec votre accord, télécharge, vérifie et installe la nouvelle version.", "<b>Un dernier téléchargement manuel.</b> Depuis la 0.13.0 ou avant, téléchargez cette version une fois ; les suivantes arrivent dans l’app."]
 "0.13.0" = ["<b>Mettre en pause.</b> Espace met la traduction en pause et affiche l’original ; appuyez à nouveau pour reprendre là où elle s’était arrêtée.", "<b>Pas de copie à moitié traduite.</b> Copier, épingler ou enregistrer attend l’image terminée, dans une barre d’outils sur deux lignes."]
 "0.12.1" = ["<b>Des titres épais bien reconnus.</b> Les grandes lettres grasses ne sont plus prises pour un fond sombre, évitant les couleurs inversées et les restes du texte original.", "<b>Un espacement préservé.</b> Les grands titres traduits restent dans la hauteur initiale ; le texte courant conserve sa mise en page."]
 "0.12.0" = ["<b>Des captures enrichies.</b> Défilement, texte, surlignage, masquage et captures récentes locales.", "<b>Un démarrage simplifié.</b> Guide en quatre étapes, couleurs unifiées, comparaison par pression et correction du plantage au démarrage du défilement."]
@@ -270,7 +271,7 @@ a = "Oui, sous <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENS
 
 [[faq.items]]
 q = "Comment mettre à jour ?"
-a = "Choisissez Rechercher des mises à jour… dans la barre des menus."
+a = "Transeen vérifie une fois par jour et installe la nouvelle version avec votre accord. Pour vérifier tout de suite, choisissez Rechercher des mises à jour… dans la barre des menus."
 
 [closing]
 title = "Lisez-le <span>là où il est.</span>"
