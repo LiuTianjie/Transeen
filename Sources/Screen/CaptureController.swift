@@ -228,7 +228,7 @@ final class CaptureController {
             if !start.changed {
                 generation += 1; work?.cancel(); backend?.cancel(); partialTask?.cancel(); partialTask = nil
                 completionTask?.cancel(); completionTask = nil
-                state.working = false; state.copyCompleted = false
+                state.working = false; state.paused = false; state.copyCompleted = false
                 translated = nil
                 state.translated = false; state.textBlocks = []; state.warning = nil
                 state.failed = false; state.noText = false
@@ -427,13 +427,28 @@ final class CaptureController {
     private func restart() {
         generation += 1; work?.cancel(); backend?.cancel(); partialTask?.cancel(); partialTask = nil
         let token = generation
-        state.failed = false; state.noText = false; state.working = true
+        state.failed = false; state.noText = false; state.working = true; state.paused = false
         state.warning = nil; state.textCopyCompleted = false
         state.status = L("正在识别与翻译…"); panel?.refreshUI()
         work = Task { [weak self] in
             guard let self else { return }
             await translateFrame(token: token)
         }
+    }
+    /// Pauses a running translation and drops whatever of it is drawn, back to the untouched
+    /// capture. Blocks already translated stay in the backend's cache, so resuming only
+    /// translates what was left.
+    private func pauseTranslation() {
+        generation += 1; work?.cancel(); backend?.cancel(); partialTask?.cancel(); partialTask = nil
+        completionTask?.cancel(); completionTask = nil
+        translated = nil
+        state.working = false; state.paused = true; state.overlay = false; state.warning = nil
+        state.status = L("已暂停翻译") + " · " + state.shortcuts.help(L("继续翻译"), state.pauseKey)
+        Self.logger.notice("translation paused")
+        displayCurrent()
+    }
+    private func resumeTranslation() {
+        state.overlay = true; restart()
     }
     func action(_ id: String) {
         if id == "close" { close(); return }
@@ -486,7 +501,14 @@ final class CaptureController {
             state.overlay = true
             if translated == nil { restart() } else { displayCurrent() }
         case "close": close()
-        case "toggle": state.overlay.toggle(); displayCurrent()
+        case "toggle":
+            // While translating, the comparison keys pause and resume it,
+            // so a half-drawn picture is never left on screen to be copied.
+            if state.working { pauseTranslation() }
+            else if state.paused { resumeTranslation() }
+            else { state.overlay.toggle(); displayCurrent() }
+        case "pause":
+            if state.working { pauseTranslation() } else if state.paused { resumeTranslation() }
         case "translate":
             guard !state.working else { return }
             state.overlay = true; restart()

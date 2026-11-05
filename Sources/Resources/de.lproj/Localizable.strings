@@ -251,6 +251,8 @@
 "再按 %@ 交换语言" = "%@ erneut drücken, um Sprachen zu tauschen";
 "没有需要翻译的文字" = "Nichts zu übersetzen";
 "已翻译 %ld 处" = "%ld Stellen übersetzt";
+"已暂停翻译" = "Übersetzung pausiert";
+"继续翻译" = "Übersetzung fortsetzen";
 "未能复制图片，请重试" = "Bild konnte nicht kopiert werden. Bitte erneut versuchen";
 "已保存图片" = "Bild gesichert";
 "截图" = "Aufnahme";
@@ -281,6 +283,7 @@
 "拖动边缘调整范围 · 选择工具标注" = "Ränder ziehen zum Anpassen · Werkzeug wählen zum Markieren";
 "自动" = "Auto";
 "更改原文或译文语言" = "Ausgangs- oder Zielsprache ändern";
+"暂停翻译" = "Übersetzung pausieren";
 "重试" = "Wiederholen";
 "翻译中" = "Übersetze";
 "翻译选中区域" = "Ausgewählten Bereich übersetzen";

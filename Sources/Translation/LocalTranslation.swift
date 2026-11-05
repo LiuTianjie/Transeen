@@ -299,6 +299,9 @@ final class LocalModelTranslationBackend: TranslationBackend {
                     try Task.checkCancellation()
                     if let text = answer.text {
                         result.translations[answer.index] = TranslationText.normalize(text, locale: target.speechLocale)
+                        // Cached per block, so a paused translation resumes from where it stopped.
+                        let source = jobs.first { $0.index == answer.index }?.source ?? direction.source
+                        self.cache.store(texts[answer.index], translation: result.translations[answer.index]!, direction: TranslationDirection(source: source, target: target).id)
                         var sofar = early
                         sofar.translations.merge(result.translations) { _, new in new }
                         progress(sofar)
@@ -317,6 +320,7 @@ final class LocalModelTranslationBackend: TranslationBackend {
                     let text = try await LocalChat.translate(texts[index], source: source, target: target, prompt: prompt,
                                                              endpoint: endpoint, timeout: 90)
                     result.translations[index] = TranslationText.normalize(text, locale: target.speechLocale)
+                    self.cache.store(texts[index], translation: result.translations[index]!, direction: TranslationDirection(source: source, target: target).id)
                     var sofar = early
                     sofar.translations.merge(result.translations) { _, new in new }
                     progress(sofar)

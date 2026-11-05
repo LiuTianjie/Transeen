@@ -213,6 +213,27 @@ import CoreText
         precondition(board.readObjects(forClasses: [NSImage.self])?.count == 1 && controller.state.copyCompleted, "Copy must work while a translation is still running")
         controller.close()
         await busyTask.value
+        let stoppable = SlowBackend()
+        let stoppableTask = Task { await controller.previewTranslation(picture, backend: stoppable) }
+        for _ in 0..<200 {
+            if stoppable.entered { break }
+            try await Task.sleep(for: .milliseconds(20))
+        }
+        precondition(controller.state.working)
+        let space = NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [], timestamp: 0, windowNumber: 0, context: nil, characters: " ", charactersIgnoringModifiers: " ", isARepeat: false, keyCode: 49)!
+        precondition(controller.handleShortcut(space), "Space must reach the capture while translating")
+        precondition(!controller.state.working && !controller.state.overlay && !controller.state.translated, "Space must stop a running translation and show the original")
+        await stoppableTask.value
+        precondition(!controller.state.translated && !controller.state.working && controller.state.paused, "A paused translation's late result must be discarded")
+        precondition(controller.handleShortcut(space), "Space must reach the capture while paused")
+        precondition(controller.state.working && controller.state.overlay && !controller.state.paused, "Space again must resume the paused translation")
+        for _ in 0..<300 {
+            if controller.state.translated || controller.state.failed { break }
+            try await Task.sleep(for: .milliseconds(20))
+        }
+        precondition(controller.state.translated && controller.state.showingTranslation, "A resumed translation must finish and show the result")
+        precondition(controller.handleShortcut(space) && !controller.state.showingTranslation && !controller.state.paused, "After it finishes, Space compares again")
+        controller.close()
         board.clearContents()
         controller.preview(picture)
         controller.action("copy")

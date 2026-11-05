@@ -251,6 +251,8 @@
 "再按 %@ 交换语言" = "Pulsa %@ otra vez para intercambiar idiomas";
 "没有需要翻译的文字" = "Nada que traducir";
 "已翻译 %ld 处" = "%ld elementos traducidos";
+"已暂停翻译" = "Traducción en pausa";
+"继续翻译" = "Reanudar traducción";
 "未能复制图片，请重试" = "No se pudo copiar la imagen. Inténtalo de nuevo";
 "已保存图片" = "Imagen guardada";
 "截图" = "Captura";
@@ -281,6 +283,7 @@
 "拖动边缘调整范围 · 选择工具标注" = "Arrastra los bordes para ajustar · Elige una herramienta para anotar";
 "自动" = "Auto";
 "更改原文或译文语言" = "Cambiar idioma de origen o destino";
+"暂停翻译" = "Pausar traducción";
 "重试" = "Reintentar";
 "翻译中" = "Traduciendo";
 "翻译选中区域" = "Traducir el área seleccionada";

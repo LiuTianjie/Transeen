@@ -251,6 +251,8 @@
 "再按 %@ 交换语言" = "Press %@ again to swap languages";
 "没有需要翻译的文字" = "Nothing to translate";
 "已翻译 %ld 处" = "Translated %ld items";
+"已暂停翻译" = "Translation paused";
+"继续翻译" = "Resume Translating";
 "未能复制图片，请重试" = "Couldn’t copy the image. Try again";
 "已保存图片" = "Image saved";
 "截图" = "Capture";
@@ -281,6 +283,7 @@
 "拖动边缘调整范围 · 选择工具标注" = "Drag edges to resize · Pick a tool to mark up";
 "自动" = "Auto";
 "更改原文或译文语言" = "Change source or target language";
+"暂停翻译" = "Pause Translating";
 "重试" = "Retry";
 "翻译中" = "Translating";
 "翻译选中区域" = "Translate the selected area";

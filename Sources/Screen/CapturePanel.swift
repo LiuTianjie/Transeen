@@ -33,6 +33,10 @@ final class CaptureState {
     var scrollable = false
     /// The crop's pixel size while an edge is dragged. Not `status`, which re-measures the toolbar.
     var cropReadout: String?
+    /// A translation stopped by the comparison key before it finished; the same key resumes it.
+    var paused = false
+    /// The bound comparison key that pauses and resumes a translation.
+    var pauseKey: ShortcutAction { shortcuts.binding(.peek) != nil ? .peek : .compare }
     var compactProgress: Bool { working && !hasTranslatedOnce && !annotating && annotations.selectedID == nil }
     var showingTranslation: Bool { overlay }
     let annotations = AnnotationStore()

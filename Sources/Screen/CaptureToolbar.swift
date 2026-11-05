@@ -63,7 +63,7 @@ struct CaptureToolbar: View {
                         if state.failed || state.noText || state.warning != nil {
                             Image(systemName: state.failed ? "exclamationmark.circle" : "info.circle")
                         }
-                        Text(state.cropReadout ?? state.warning ?? (state.status.isEmpty ? L("拖动边缘调整范围 · 选择工具标注") : state.status))
+                        Text(state.cropReadout ?? state.warning ?? (state.status.isEmpty ? L("拖动边缘调整范围 · 选择工具标注") : state.working ? state.status + " · " + stopHint : state.status))
                             .lineLimit(3).fixedSize(horizontal: false, vertical: true)
                     }.font(.system(size: 11))
                         .foregroundStyle(state.failed ? Color.red : state.warning != nil ? Color.orange : CaptureAppearance.secondary)
@@ -126,6 +126,9 @@ struct CaptureToolbar: View {
         }.menuStyle(.borderlessButton).fixedSize().help(L("更改原文或译文语言"))
     }
 
+    /// The comparison key pauses a running translation; name whichever one is bound.
+    private var stopHint: String { state.shortcuts.help(L("暂停翻译"), state.pauseKey) }
+
     private var separator: some View {
         Rectangle().fill(CaptureAppearance.foreground.opacity(0.13)).frame(width: 1, height: 16)
     }
@@ -137,10 +140,17 @@ struct CaptureToolbar: View {
                     .frame(width: 84, height: 30)
             }.buttonStyle(CaptureToolbarButtonStyle()).help(state.status)
         } else if state.working {
-            HStack(spacing: 6) {
-                ProgressView().controlSize(.mini)
-                Text(L("翻译中")).font(.system(size: 11))
-            }.frame(width: 84, height: 30).help(state.status)
+            Button { action("pause") } label: {
+                HStack(spacing: 6) {
+                    ProgressView().controlSize(.mini)
+                    Text(L("翻译中")).font(.system(size: 11))
+                }.frame(width: 84, height: 30)
+            }.buttonStyle(CaptureToolbarButtonStyle()).help(stopHint)
+        } else if state.paused {
+            Button { action("pause") } label: {
+                Label(L("继续"), systemImage: "play.fill").font(.system(size: 12, weight: .medium))
+                    .frame(width: 84, height: 30)
+            }.buttonStyle(CaptureToolbarButtonStyle()).help(state.shortcuts.help(L("继续翻译"), state.pauseKey))
         } else if state.translated {
             HStack(spacing: 4) {
                 compareButton(L("原文"), selected: !state.showingTranslation, id: "original")
