@@ -30,8 +30,9 @@ Transeen never reads hardware serial numbers.
 
 TR- activation codes are no longer sold or accepted, and 0.15.0 removes code
 activation from the app. Codes that had been bound to an iTool account were
-converted to yearly memberships on that account. If you activated a Mac without
-binding an account, contact the developer with your code.
+converted to yearly memberships on that account. Sign in with your iTool
+account to use Transeen; if your account has no yearly membership, get one at
+https://itool.tech/pro?from=transeen.
 
 ## Source license
 
