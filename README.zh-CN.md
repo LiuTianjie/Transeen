@@ -10,7 +10,7 @@
   <a href="https://github.com/LiuTianjie/Transeen/releases/latest">下载</a> ·
   <a href="https://transeen.itool.tech/zh/">官网</a> ·
   <a href="https://transeen.itool.tech/zh/guide/">使用指南</a> ·
-  <a href="https://wzyp.cn/item/gq2xie">购买激活码 · ¥49.90</a> ·
+  <a href="https://itool.tech/pro?from=transeen">iTool 年度会员 · ¥99/年</a> ·
   <a href="CHANGELOG.md">更新记录</a> ·
   <a href="README.md">English</a>
 </p>
@@ -19,7 +19,7 @@
 
 Transeen 是一款 macOS 菜单栏应用。框选屏幕区域或打开图片，在原处查看译文、对照原文，再标注、复制、保存或钉住结果。
 
-**官方应用需要 Transeen 专用 TR- 激活码，¥49.90，一台 Mac 永久授权。** [前往链动小铺购买](https://wzyp.cn/item/gq2xie)。 无需登录即可激活本机，也可以选择绑定 iTool 账号。源代码采用 MIT 许可证，允许商业使用。 [Licensing](LICENSING.md).
+**官方应用包含在 iTool 年度会员中：¥99/年，含全部 iTool 产品。** [在 itool.tech 开通](https://itool.tech/pro?from=transeen)。截图、标注、导入图片和翻译需要登录开通了年度会员的 iTool 账号（Google、GitHub 或邮箱）。源代码采用 MIT 许可证，允许商业使用。 [Licensing](LICENSING.md).
 
 ## 主要功能
 
@@ -34,8 +34,8 @@ Transeen 是一款 macOS 菜单栏应用。框选屏幕区域或打开图片，�
 ## 开始使用
 
 1. 从 GitHub Releases 下载 Mac 通用版本，移入“应用程序”后打开。需要 macOS 26 或更高版本。
-2. 打开“激活与账号…”，输入 TR- 激活码。SM- 和 IT- 是其他产品的激活码，不能通用。
-3. 四步引导依次体验交互示例、选择阅读语言、准备截屏权限、开始第一次截图，会记住当前进度。示例无需激活或授权；在翻译设置中准备语言包、本地模型或接口，也可以先使用截图标注。
+2. 打开“账号与会员…”，登录 iTool 账号。还没有年度会员时，选择开通或升级按钮，在 [itool.tech](https://itool.tech/pro?from=transeen) 付款后回到应用选择“刷新会员状态”。月度会员包含 iTool 网站和 LinkShell，不含 Transeen。
+3. 四步引导依次体验交互示例、选择阅读语言、准备截屏权限、开始第一次截图，会记住当前进度。示例无需登录或授权；在翻译设置中准备语言包、本地模型或接口，也可以先使用截图标注。
 4. 按 F1 框选翻译。笔记本键盘上是 Fn–F1，除非在系统设置里把 F 键设为标准功能键。所有快捷键都可以在设置里修改。
 
 | 操作 | 默认快捷键 |
@@ -60,7 +60,7 @@ brew install xcodegen
 ./scripts/build.sh
 ```
 
-应用生成于 `dist/Transeen.app`。没有 Developer ID 身份时使用临时签名；签名构建可设置 `TRANSEEN_SIGNING_IDENTITY`。只有 Developer ID 构建读取更新源，临时签名构建改为打开 GitHub 发布页。发版步骤见 [docs/RELEASING.md](docs/RELEASING.md)。托管激活服务与 MIT 源码许可分开；独立分发应配置自己的授权后端。
+应用生成于 `dist/Transeen.app`。没有 Developer ID 身份时使用临时签名；签名构建可设置 `TRANSEEN_SIGNING_IDENTITY`。只有 Developer ID 构建读取更新源，临时签名构建改为打开 GitHub 发布页。发版步骤见 [docs/RELEASING.md](docs/RELEASING.md)。托管的 iTool 会员校验与 MIT 源码许可分开；独立分发应配置自己的账号后端。
 
 ```sh
 ./scripts/test.sh
@@ -69,11 +69,11 @@ brew install xcodegen
 ./scripts/test-capture-tools.sh
 ```
 
-测试覆盖图像排版、翻译协议、授权状态、版本比较和截图生命周期。安装语言包后，可用 `TRANSEEN_TEST_APPLE=1 ./scripts/test-lifecycle.sh` 单独验证真实 Apple 翻译。
+测试覆盖图像排版、翻译协议、会员校验与离线规则、版本比较和截图生命周期。安装语言包后，可用 `TRANSEEN_TEST_APPLE=1 ./scripts/test-lifecycle.sh` 单独验证真实 Apple 翻译。
 
 ## 隐私与边界
 
-截图、OCR 和本地模型翻译都在本机处理，本地模型只在下载时联网一次。外部模型模式会将识别文字发送至你选择的接口。授权使用随机安装 ID 与钥匙串回执，不读取硬件序列号。检查更新会读取 transeen.itool.tech 上的更新源，并从 GitHub Releases 下载，不发送系统信息。
+截图、OCR 和本地模型翻译都在本机处理，本地模型只在下载时联网一次。外部模型模式会将识别文字发送至你选择的接口。会员校验会把 iTool 登录令牌发送到 itool.tech（备用 Supabase）；登录信息和最近一次校验保存在钥匙串中，不读取硬件序列号。检查更新会读取 transeen.itool.tech 上的更新源，并从 GitHub Releases 下载，不发送系统信息。
 
 密集排版、专业术语和公式仍可能需要修正。翻译质量取决于所选服务，重要内容请对照原文核实。
 

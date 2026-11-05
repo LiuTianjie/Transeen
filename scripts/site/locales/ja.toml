@@ -8,7 +8,7 @@ og_title = "Transeen：Mac の画面を、その場で翻訳"
 og_description = "どのアプリでも F1 を押して範囲を選ぶと、Transeen が文字をあなたの言語で同じ画像に描き直します。"
 image_alt = "Mac に表示した日本語の列車予約ページ。選んだカードがその場で英語に翻訳され、下に Transeen のツールバーがある"
 guide_title = "Mac でスクリーンショットを翻訳する方法：Transeen セットアップガイド"
-guide_description = "Transeen のインストール、アクティベート、画面収録の許可、最初の翻訳までを説明します。キーボードショートカットの一覧、内蔵ローカルモデルと OpenAI 互換 API の設定、よくある問題の解決方法も掲載しています。"
+guide_description = "Transeen のインストール、iTool へのログイン、画面収録の許可、最初の翻訳までを説明します。キーボードショートカットの一覧、内蔵ローカルモデルと OpenAI 互換 API の設定、よくある問題の解決方法も掲載しています。"
 guide_keywords = "Mac スクリーンショット 翻訳 方法, Transeen 使い方, 画面収録 許可, Mac 翻訳 ショートカット, ローカル翻訳モデル, オフライン翻訳"
 guide_og_title = "5 つのステップで Transeen を準備"
 guide_og_description = "ダウンロードから Mac で最初のスクリーンショットを翻訳するまで。ショートカットとモデルの設定も。"
@@ -22,7 +22,7 @@ how = "仕組み"
 apps = "どのアプリでも"
 tools = "ツール"
 languages = "言語"
-activation = "アクティベーション"
+activation = "メンバーシップ"
 guide = "ガイド"
 download = "ダウンロード"
 download_mac = "Mac 版をダウンロード"
@@ -203,6 +203,7 @@ lede = "<b>最近のリリース。</b>"
 full = "すべての変更履歴"
 
 [changes.notes]
+"0.15.0" = ["<b>iTool 年間メンバーシップに含まれます。</b>iTool にログインすればキャプチャ、注釈、翻訳が使えます。年 ¥99 ですべての iTool 製品。", "<b>アクティベーションコードは不要に。</b>メンバーシップはオンラインで確認し、オフラインでも最長 7 日間使えます。"]
 "0.14.0" = ["<b>アプリ内で自動アップデート。</b>1 日 1 回新しいバージョンを確認し、同意するとダウンロード、検証、インストールまで行います。", "<b>手動ダウンロードは今回まで。</b>0.13.0 以前からはこのバージョンを一度だけ手動でダウンロードしてください。以降はアプリ内で更新できます。"]
 "0.13.0" = ["<b>翻訳中に一時停止。</b>スペースで翻訳を止めて原文を表示し、もう一度押すと続きから再開します。", "<b>途中の画像はコピーされません。</b>コピー・ピン留め・保存は翻訳の完了を待ちます。ツールバーは 2 行に整理しました。"]
 "0.12.1" = ["<b>太い見出しを正しく認識。</b>大きな太字を暗い背景と誤認し、訳文の色が反転したり原文が残ったりする問題を修正。", "<b>行間を維持。</b>大きな見出しの訳文を元の文字の高さに収め、通常の文章は従来のレイアウトを維持。"]
@@ -217,19 +218,19 @@ full = "すべての変更履歴"
 ]
 
 [activation]
-fig = "料金と購入"
-lede = "<b>一度の購入で、ずっと。</b>Mac 1 台ですべての機能。"
-license = "永久ライセンス"
-where = "メニューバーの「アクティベーションとアカウント…」で入力します。"
-buy = "コードを購入"
-billing = "買い切り · 人民元"
-shop = "購入先は链动小铺です。お支払い金額は商品ページでご確認ください。"
-how = "アクティベートの方法"
+fig = "料金とメンバーシップ"
+lede = "<b>iTool 年間メンバーシップに含まれます。</b>ひとつの会員で、すべての iTool 製品。"
+license = "iTool 年間メンバーシップ"
+where = "メニューバーの「アカウントとメンバーシップ…」で、同じ iTool アカウントにログインします。"
+buy = "iTool 年間メンバーに登録"
+billing = "年額 · 人民元 · すべての iTool 製品"
+shop = "itool.tech で Alipay で支払います。月間メンバーシップは iTool のウェブサイトと LinkShell 用で、Transeen は含まれません。"
+how = "ログインの方法"
 items = [
-  "<b>すべての機能が使えます。</b>Mac 1 台分。",
-  "<b>ログイン不要。</b>シリアル番号は読みません。",
+  "<b>Transeen のすべての機能</b>と、ほかのすべての iTool 製品が使えます。",
+  "<b>Google、GitHub、メールでログイン。</b>シリアル番号は読みません。",
+  "<b>オフラインでも使えます。</b>確認の間隔は最長 7 日。",
   "<b>MIT ライセンスのオープンソース。</b>",
-  "SM- と IT- のコードは別製品用です。",
 ]
 
 [faq]
@@ -246,7 +247,7 @@ a = "macOS 26 以降の Apple シリコン搭載 Mac と Intel Mac。ローカ�
 
 [[faq.items]]
 q = "オフラインで使えますか？"
-a = "はい。アクティベートし、言語パックかモデルをダウンロードしておけば使えます。LLM API だけはネットワークが必要です。"
+a = "はい。ログインし、言語パックかモデルをダウンロードしておけば使えます。メンバーシップは少なくとも 7 日に一度オンラインで確認します。LLM API だけは翻訳のたびにネットワークが必要です。"
 
 [[faq.items]]
 q = "Mac の外に何が送られますか？"
@@ -266,7 +267,7 @@ a = "翻訳サービスによります。細かい点を頼りにする前に、
 
 [[faq.items]]
 q = "Transeen はオープンソースですか？"
-a = "はい、<a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">MIT ライセンス</a>です。公式の App には TR- コードが必要です。"
+a = "はい、<a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">MIT ライセンス</a>です。公式の App には iTool 年間メンバーシップが必要です。"
 
 [[faq.items]]
 q = "アップデートの方法は？"
@@ -308,7 +309,7 @@ features = [
 [guide]
 name = "セットアップガイド"
 title = "Transeen の準備は、<span>5 つのステップ。</span>"
-lead = "ダウンロードから、最初のスクリーンショットを翻訳するまで。macOS 26 以降の Mac と、TR- アクティベーションコードが必要です。"
+lead = "ダウンロードから、最初のスクリーンショットを翻訳するまで。macOS 26 以降の Mac と、年間メンバーシップのある iTool アカウントが必要です。"
 all_shortcuts = "すべてのショートカット"
 toc = "このページの内容"
 next_title = "Transeen {version} をダウンロード"
@@ -317,11 +318,11 @@ back = "Transeen のトップへ"
 
 [guide.howto]
 name = "Transeen で Mac のスクリーンショットを翻訳する方法"
-supply = "TR- アクティベーションコード"
+supply = "年間メンバーシップのある iTool アカウント"
 tools = ["macOS 26 以降の Mac", "Transeen"]
 steps = [
   { name = "インストール", text = "GitHub Releases から DMG をダウンロードし、Transeen をアプリケーションフォルダにドラッグして開きます。メニューバーで動作します。" },
-  { name = "アクティベート", text = "メニューバーのメニューで「アクティベーションとアカウント…」を選び、TR- コードを入力して「この Mac をアクティベート」を選びます。" },
+  { name = "ログイン", text = "メニューバーのメニューで「アカウントとメンバーシップ…」を選び、Google、GitHub、メールで iTool にログインします。" },
   { name = "画面収録を許可", text = "システム設定 → プライバシーとセキュリティ → 画面収録とシステムオーディオ録音 で Transeen をオンにします。" },
   { name = "言語を選ぶ", text = "原文と翻訳先の言語を選び、必要な Apple の言語パックを 設定 → 一般 → 翻訳 で先にダウンロードします。" },
   { name = "範囲を翻訳", text = "どのアプリでも F1 を押して画面の一部を選び、その場で訳文を読みます。Tab で原文と比べられます。" },
@@ -337,19 +338,19 @@ body = """
   <li>アプリケーションフォルダから Transeen を開きます。メニューバーで動作するので、Dock ではなくメニューバーのアイコンを探してください。</li>
 </ol>
 <p>App と DMG は Developer ID で署名され、Apple の公証を受けているので、macOS は警告なしで開きます。同じリリースページに ZIP と SHA-256 チェックサムもあります。画面表示は Mac の言語に合わせます：English、简体中文、繁體中文、日本語、한국어、Français、Español、Deutsch。</p>
-<p>初回ガイドは、サンプル翻訳、読む言語、画面収録の準備、最初のキャプチャの4段階です。サンプルに認証や権限は不要で、進行状況は保存されます。実際のキャプチャには認証が必要です。翻訳の準備ができていなくても、注釈用のキャプチャから始められます。</p>
+<p>初回ガイドは、サンプル翻訳、読む言語、画面収録の準備、最初のキャプチャの4段階です。サンプルにログインや権限は不要で、進行状況は保存されます。実際のキャプチャには年間メンバーシップのある iTool アカウントが必要です。翻訳の準備ができていなくても、注釈用のキャプチャから始められます。</p>
 """
 
 [[guide.sections]]
 id = "activate"
-title = "アクティベート"
+title = "ログイン"
 body = """
 <ol>
-  <li>メニューバーのメニューで <strong>アクティベーションとアカウント…</strong> を、またはホームウインドウで <strong>Transeen をアクティベート</strong> を選びます。</li>
-  <li><code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code> の形式のコードを入力し、<strong>この Mac をアクティベート</strong> を選びます。ログインは不要です。</li>
-  <li>必要なら Google、GitHub、メールで iTool アカウントにログインし、ライセンスを連携します。あとで同じアカウントにログインすれば復元できます。</li>
+  <li>メニューバーのメニューで <strong>アカウントとメンバーシップ…</strong> を、またはホームウインドウで <strong>iTool にログイン</strong> を選びます。</li>
+  <li>Google、GitHub、メールで iTool アカウントにログインします。</li>
+  <li>年間メンバーシップがない場合は <strong>iTool 年間メンバーに登録</strong>（月間メンバーは <strong>年間メンバーにアップグレード</strong>）を選び、itool.tech で Alipay で支払います。Transeen に戻ったら <strong>メンバーシップを更新</strong> を選びます。</li>
 </ol>
-<p>アクティベーションでは、ランダムなインストール ID とレシートをキーチェーンに保存するだけで、Mac のシリアル番号は読み取りません。1 つのコードで Mac 1 台分です。アカウントに連携してもライセンスは増えません。StupidMirror の SM- コードと iTool Pro の IT- コードは別製品のもので、ここでは使えません。コードの入手は <a href="{purchase}">链动小铺で購入できます</a>。</p>
+<p>キャプチャ、注釈、画像の読み込み、翻訳には <a href="https://itool.tech/pro?from=transeen">iTool 年間メンバーシップ</a>（年 ¥99、すべての iTool 製品を含む）が必要です。月間メンバーシップ（¥9.9）は iTool のウェブサイトと LinkShell のみです。Transeen はログイン情報と最後のメンバーシップ確認をキーチェーンに保存し、Mac のシリアル番号は読み取りません。確認に成功してから最長 7 日間オフラインで使え、メンバーシップの期限を過ぎることはありません。アクティベーションコードの販売と利用は終了しました。</p>
 """
 
 [[guide.sections]]
@@ -500,5 +501,5 @@ body = """
 git clone https://github.com/LiuTianjie/Transeen.git
 cd Transeen
 ./scripts/build.sh</code></pre>
-<p>App は <code>dist/Transeen.app</code> に書き出されます。Developer ID がない場合はアドホック署名になります。署名付きでビルドするには <code>TRANSEEN_SIGNING_IDENTITY</code> を設定します。テストは <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code>、<code>./scripts/test-lifecycle.sh</code> です。ホスト型のアクティベーションサービスは公式の App のものなので、独自に配布する場合は独自のライセンスバックエンドが必要です。</p>
+<p>App は <code>dist/Transeen.app</code> に書き出されます。Developer ID がない場合はアドホック署名になります。署名付きでビルドするには <code>TRANSEEN_SIGNING_IDENTITY</code> を設定します。テストは <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code>、<code>./scripts/test-lifecycle.sh</code> です。公式の App は iTool メンバーシップで認証するため、独自に配布する場合は独自のアカウントバックエンドが必要です。</p>
 """

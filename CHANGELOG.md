@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.15.0
+
+- Transeen is now part of the iTool yearly membership (CNY 99 a year, every iTool product). Capture, markup, image import and translation need you to sign in to an iTool account with an active yearly membership; TR- activation codes are no longer sold or accepted. Codes bound to an iTool account were converted to yearly memberships.
+- Account & Membership… shows your tier and expiry. Monthly members can upgrade, non-members can join on itool.tech, and Refresh Membership checks again after paying. Transeen also re-checks on launch, when it becomes active, after wake and when the network returns.
+- After a successful check Transeen works offline for up to 7 days, never past the end of the membership; setting the clock back requires a new check. A refunded or lapsed membership closes the gate at the next successful check, and signing out clears the cached membership.
+- Membership is checked through itool.tech, which works where supabase.co is blocked, with Supabase as a fallback.
+
 ## 0.14.0
 
 - Update in place with Sparkle: Transeen checks once a day, shows the release notes, and after you agree downloads, verifies the signature of and installs the new version, then relaunches. Check for Updates… checks immediately. Updating from 0.13.0 or earlier still takes one manual download.

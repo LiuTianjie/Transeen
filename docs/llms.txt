@@ -4,7 +4,7 @@
 
 - Website: https://transeen.itool.tech/ (also in 简体中文 https://transeen.itool.tech/zh/, 繁體中文 https://transeen.itool.tech/zh-hant/, 日本語 https://transeen.itool.tech/ja/, 한국어 https://transeen.itool.tech/ko/, Français https://transeen.itool.tech/fr/, Español https://transeen.itool.tech/es/, Deutsch https://transeen.itool.tech/de/)
 - Setup guide: https://transeen.itool.tech/guide/ (also in 简体中文 https://transeen.itool.tech/zh/guide/, 繁體中文 https://transeen.itool.tech/zh-hant/guide/, 日本語 https://transeen.itool.tech/ja/guide/, 한국어 https://transeen.itool.tech/ko/guide/, Français https://transeen.itool.tech/fr/guide/, Español https://transeen.itool.tech/es/guide/, Deutsch https://transeen.itool.tech/de/guide/)
-- Download: https://github.com/LiuTianjie/Transeen/releases/latest (version 0.14.0, signed and notarized DMG, about 12.3 MB)
+- Download: https://github.com/LiuTianjie/Transeen/releases/latest (version 0.15.0, signed and notarized DMG, about 12.3 MB)
 - Source: https://github.com/LiuTianjie/Transeen (MIT license, Swift 6)
 
 ## What it does
@@ -27,15 +27,15 @@
 - Scrolling capture: select a region, start, scroll down with a live preview, then finish. No window binding is required. Optional automatic scrolling needs Accessibility permission. Vertical capture on one display, up to 30,000 pixels high / 60 million pixels; ambiguous overlap is reported and the captured portion is retained.
 - Recent captures: locally retained for 7 days by default, up to 50 images / 200 MB. Choose 1, 7 or 30 days, delete images, clear all or disable retention. Only flattened images are kept, without hidden originals or undo layers.
 - Editable multiline text, highlights and solid privacy redactions; redactions are flattened into copied, saved, pinned and retained images. Pins support zoom, opacity, click-through and thumbnail mode.
-- A four-step first-run guide: sample translation, reading language, screen access and first capture. The sample needs no activation or permission, and progress is remembered.
+- A four-step first-run guide: sample translation, reading language, screen access and first capture. The sample needs no sign-in or permission, and progress is remembered.
 
-## Activation
+## Membership
 
-The official app needs a Transeen TR- activation code: a perpetual license for one Mac, activated without signing in, optionally bound to an iTool account for recovery. StupidMirror SM- and iTool Pro IT- codes do not work. Price: CNY 49.90, one-time payment. Buy an activation code on 链动小铺: https://wzyp.cn/item/gq2xie
+The official app is included in the iTool yearly membership: CNY 99 a year, covering every iTool product. Capture, markup, image import and translation require signing in to an iTool account (Google, GitHub or email) with an active yearly membership; the monthly membership (CNY 9.9) covers only the iTool website and LinkShell. Payment is with Alipay on itool.tech: https://itool.tech/pro?from=transeen. After a successful online check the app works offline for up to 7 days, never past the end of the membership. Activation codes are no longer sold or accepted.
 
 ## Docs
 
-- [Setup guide](https://transeen.itool.tech/guide/): install, activate, screen recording permission, languages, shortcuts, model setup, troubleshooting, building from source
+- [Setup guide](https://transeen.itool.tech/guide/): install, sign in, screen recording permission, languages, shortcuts, model setup, troubleshooting, building from source
 - [README](https://github.com/LiuTianjie/Transeen/blob/main/README.md)
 - [Licensing](https://github.com/LiuTianjie/Transeen/blob/main/LICENSING.md)
 - [Changelog](https://github.com/LiuTianjie/Transeen/blob/main/CHANGELOG.md)

@@ -14,8 +14,9 @@
 <key>NSHighResolutionCapable</key><true/>
 <key>NSScreenCaptureUsageDescription</key><string>截取你选择的屏幕区域，用于截图、标注和翻译。</string>
 <key>NSAppTransportSecurity</key><dict><key>NSAllowsLocalNetworking</key><true/></dict>
-<key>TranseenLicenseEndpoint</key><string>https://mkbeusztkzffnzjdwmqk.supabase.co/functions/v1/transeen-license</string>
-<key>TranseenLicensePublishableKey</key><string>sb_publishable_GVf42S8a5aU4NHxMSFmTNA_LB6i6vlz</string>
+<key>TranseenSupabaseURL</key><string>https://mkbeusztkzffnzjdwmqk.supabase.co</string>
+<key>TranseenSupabasePublishableKey</key><string>sb_publishable_GVf42S8a5aU4NHxMSFmTNA_LB6i6vlz</string>
+<key>TranseenEntitlementURL</key><string>https://itool.tech/api/membership/entitlement</string>
 <key>SUFeedURL</key><string>$(TRANSEEN_UPDATE_FEED_URL)</string>
 <key>SUPublicEDKey</key><string>amCBzzdTNLauVV8wwWZpJ3jqmuGA3DpHFh6b+b8KGg4=</string>
 <key>SUEnableAutomaticChecks</key><true/>

@@ -89,10 +89,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         observeInterfaceLanguage()
         capture.authorize = { [weak self] in self?.authorize() ?? false }
         licenseObservation = license.$state.dropFirst().sink { [weak self] state in
-            guard !state.isActivated else { return }
-            self?.capture.close()
+            // Signing out or an explicit "no membership" closes an open capture. A check that is
+            // merely in flight does not.
+            switch state {
+            case .signedOut, .notEntitled, .needsCheck: self?.capture.close()
+            case .checking, .entitled: break
+            }
         }
         Task { await license.bootstrap() }
+        license.startMonitoring()
         updates.start()
         capture.onReselect = { [weak self] mode in self?.start(mode) }
         capture.onError = { [weak self] message in self?.notice(message) }
@@ -140,7 +145,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         if !flag { showHome() }
         return true
     }
-    func applicationDidBecomeActive(_ notification: Notification) { license.validateInBackgroundIfNeeded() }
+    func applicationDidBecomeActive(_ notification: Notification) { license.revalidate(force: true) }
     func applicationDidResignActive(_ notification: Notification) { launcherPopover?.performClose(nil) }
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         terminating = true
@@ -192,7 +197,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         menu.addItem(menuItem(L("新手引导…"), action: #selector(showOnboarding)))
         menu.addItem(menuItem(L("屏幕权限…"), action: #selector(showPermissionGuide)))
         menu.addItem(menuItem(L("设置…"), action: #selector(showSettings)))
-        menu.addItem(menuItem(L("激活与账号…"), action: #selector(showLicense)))
+        menu.addItem(menuItem(L("账号与会员…"), action: #selector(showLicense)))
         menu.addItem(menuItem(L("检查更新…"), action: #selector(checkForUpdates)))
         menu.addItem(menuItem(L("退出 Transeen"), action: #selector(quit)))
         statusMenu = menu
@@ -205,7 +210,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
                 self.settings.shortcuts.message = ""
                 self.onboardingWindow?.title = L("开始使用 Transeen")
                 self.settingsWindow?.title = L("设置")
-                self.licenseWindow?.title = L("Transeen · 激活与账号")
+                self.licenseWindow?.title = L("Transeen · 账号与会员")
                 self.capture.refreshLanguage()
                 self.observeInterfaceLanguage()
             }
@@ -423,9 +428,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         }
         NSApp.activate(ignoringOtherApps: true); settingsWindow?.makeKeyAndOrderFront(nil)
     }
+    /// The gate for capture, markup, image import and translation: signed in to iTool with a
+    /// membership that includes Transeen. Otherwise the account window explains which is missing.
     private func authorize() -> Bool {
-        license.validateInBackgroundIfNeeded()
-        guard license.state.isActivated else { showLicense(); return false }
+        license.revalidate()
+        guard license.state.isEntitled else { showLicense(); return false }
         return true
     }
     @objc private func checkForUpdates() { launcherPopover?.performClose(nil); updates.check() }
@@ -433,14 +440,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSPo
         launcherPopover?.performClose(nil)
         if licenseWindow == nil {
             let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 380), styleMask: [.titled, .closable], backing: .buffered, defer: false)
-            window.title = L("Transeen · 激活与账号")
+            window.title = L("Transeen · 账号与会员")
             window.isReleasedWhenClosed = false
             window.backgroundColor = SettingsAppearance.canvasColor
             window.titlebarAppearsTransparent = true
             let host = NSHostingView(rootView: LicenseView(manager: license, done: { [weak self] in
                 guard let self else { return }
                 licenseWindow?.orderOut(nil)
-                // Activation opened from the guide returns to its next step.
+                // Opened from the guide, it returns to the guide's next step.
                 if let onboardingWindow { onboardingWindow.makeKeyAndOrderFront(nil) } else { showHome() }
             }))
             host.sizingOptions = [.preferredContentSize]

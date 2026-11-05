@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mac 怎麼截圖翻譯？Transeen 使用指南：安裝、啟用與快速鍵</title>
-    <meta name="description" content="五個步驟裝好 Transeen：下載、啟用、開啟螢幕錄製、選擇語言、框選翻譯。附完整快速鍵表、內建本機翻譯模型與相容 OpenAI 介面的設定方式，以及常見問題的解決辦法。" />
+    <title>Mac 怎麼截圖翻譯？Transeen 使用指南：安裝、登入與快速鍵</title>
+    <meta name="description" content="五個步驟裝好 Transeen：下載、登入 iTool 帳號、開啟螢幕錄製、選擇語言、框選翻譯。附完整快速鍵表、內建本機翻譯模型與相容 OpenAI 介面的設定方式，以及常見問題的解決辦法。" />
     <meta name="keywords" content="Mac 截圖翻譯教學, Transeen 使用指南, 螢幕錄製權限, Mac 翻譯快速鍵, 本機翻譯模型, 離線翻譯" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="LiuTianjie" />
@@ -99,7 +99,7 @@
             "@type": "TechArticle",
             "@id": "https://transeen.itool.tech/zh-hant/guide/#article",
             "headline": "五個步驟裝好 Transeen，然後按 F1。",
-            "description": "五個步驟裝好 Transeen：下載、啟用、開啟螢幕錄製、選擇語言、框選翻譯。附完整快速鍵表、內建本機翻譯模型與相容 OpenAI 介面的設定方式，以及常見問題的解決辦法。",
+            "description": "五個步驟裝好 Transeen：下載、登入 iTool 帳號、開啟螢幕錄製、選擇語言、框選翻譯。附完整快速鍵表、內建本機翻譯模型與相容 OpenAI 介面的設定方式，以及常見問題的解決辦法。",
             "inLanguage": "zh-Hant",
             "url": "https://transeen.itool.tech/zh-hant/guide/",
             "mainEntityOfPage": "https://transeen.itool.tech/zh-hant/guide/",
@@ -131,7 +131,7 @@
             "supply": [
               {
                 "@type": "HowToSupply",
-                "name": "一組 TR- 啟用碼"
+                "name": "一個開通了年度會員的 iTool 帳號"
               }
             ],
             "tool": [
@@ -155,9 +155,9 @@
               {
                 "@type": "HowToStep",
                 "position": 2,
-                "name": "啟用",
+                "name": "登入",
                 "url": "https://transeen.itool.tech/zh-hant/guide/#activate",
-                "text": "在選單列選單中選擇「啟用與帳號…」，輸入 TR- 啟用碼，選擇「啟用這台 Mac」。"
+                "text": "在選單列選單中選擇「帳號與會員…」，使用 Google、GitHub 或電子郵件登入 iTool 帳號。"
               },
               {
                 "@type": "HowToStep",
@@ -325,7 +325,7 @@
               <li><a href="../../de/guide/" hreflang="de" lang="de">Deutsch</a></li>
             </ul>
           </details>
-          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.dmg">下載</a>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.dmg">下載</a>
         </div>
       </div>
     </header>
@@ -336,9 +336,9 @@
         <div class="wrap">
           <nav class="crumbs load" aria-label="導覽路徑"><a href="../">Transeen</a><span aria-hidden="true">/</span><span aria-current="page">使用指南</span></nav>
           <h1 class="load" id="guide-title" style="--d: 60">五個步驟裝好 Transeen，<span>然後按 F1。</span></h1>
-          <p class="hero-lead load" style="--d: 140">從下載到第一次截圖翻譯。你需要一台 macOS 26 或更新版本的 Mac，和一組 TR- 啟用碼。</p>
+          <p class="hero-lead load" style="--d: 140">從下載到第一次截圖翻譯。你需要一台 macOS 26 或更新版本的 Mac，和一個開通了年度會員的 iTool 帳號。</p>
           <div class="hero-actions load" style="--d: 220">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
             <a class="link-arrow" href="#shortcuts">所有快速鍵</a>
           </div>
         </div>
@@ -349,7 +349,7 @@
           <p id="toc-title">本頁內容</p>
           <ol>
             <li><a href="#install">安裝</a></li>
-            <li><a href="#activate">啟用</a></li>
+            <li><a href="#activate">登入</a></li>
             <li><a href="#permission">開啟螢幕錄製</a></li>
             <li><a href="#languages">選擇語言</a></li>
             <li><a href="#translate">框選翻譯</a></li>
@@ -373,17 +373,17 @@
               <li>從「應用程式」打開 Transeen。它常駐在選單列，不在 Dock 裡，請在選單列找它的圖像。</li>
             </ol>
             <p>App 和 DMG 都以 Developer ID 簽署並通過 Apple 公證，macOS 打開時不會跳出警告。同一個發布頁還有 ZIP 和 SHA-256 檢查碼。介面語言會跟隨系統：简体中文、繁體中文、English、日本語、한국어、Français、Español、Deutsch。</p>
-            <p>首次開啟會經過四步引導：體驗示範翻譯、選擇閱讀語言、準備截圖權限、開始第一次截圖。示範不需啟用或授權，引導會記住進度。實際截圖需要啟用；翻譯服務尚未就緒時，可以先使用截圖標註。</p>
+            <p>首次開啟會經過四步引導：體驗示範翻譯、選擇閱讀語言、準備截圖權限、開始第一次截圖。示範不需登入或授權，引導會記住進度。實際截圖需要開通了年度會員的 iTool 帳號；翻譯服務尚未就緒時，可以先使用截圖標註。</p>
           </section>
 
           <section id="activate" aria-labelledby="activate-title">
-            <h2 id="activate-title"><small>02</small>啟用</h2>
+            <h2 id="activate-title"><small>02</small>登入</h2>
             <ol>
-              <li>在選單列選單中選擇 <strong>啟用與帳號…</strong>，或在主視窗中選擇 <strong>啟用 Transeen</strong>。</li>
-              <li>輸入啟用碼，格式是 <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>，然後選擇 <strong>啟用這台 Mac</strong>。不需要登入。</li>
-              <li>如果願意，可以用 Google、GitHub 或電子郵件登入 iTool 帳號並綁定授權。之後登入同一個帳號就能恢復。</li>
+              <li>在選單列選單中選擇 <strong>帳號與會員…</strong>，或在主視窗中選擇 <strong>登入 iTool 帳號</strong>。</li>
+              <li>使用 Google、GitHub 或電子郵件登入 iTool 帳號。</li>
+              <li>還沒有年度會員時，選擇 <strong>開通 iTool 年度會員</strong>（月度會員選擇 <strong>升級年度會員</strong>），在 itool.tech 用支付寶付款。回到 Transeen 後選擇 <strong>重新整理會員狀態</strong>。</li>
             </ol>
-            <p>啟用只會在鑰匙圈裡保存一個隨機安裝 ID 和一份憑證，不會讀取 Mac 的序號。一組啟用碼對應一台 Mac，綁定帳號不會多出一份授權。StupidMirror 的 SM- 和 iTool Pro 的 IT- 啟用碼屬於其他產品，在這裡不能用。想要啟用碼，請<a href="https://wzyp.cn/item/gq2xie">前往鏈動小鋪購買</a>。</p>
+            <p>截圖、標註、匯入圖片和翻譯需要 <a href="https://itool.tech/pro?from=transeen">iTool 年度會員</a>：¥99/年，含所有 iTool 產品。月度會員（¥9.9）只包含 iTool 網站和 LinkShell。Transeen 把登入資訊和最近一次會員確認保存在鑰匙圈裡，不會讀取 Mac 的序號。連網確認成功後可離線使用最多 7 天，且不會超過會員到期時間。啟用碼已停止銷售，也不再使用。</p>
           </section>
 
           <section id="permission" aria-labelledby="permission-title">
@@ -512,17 +512,17 @@
 git clone https://github.com/LiuTianjie/Transeen.git
 cd Transeen
 ./scripts/build.sh</code></pre>
-            <p>App 會產生在 <code>dist/Transeen.app</code>。沒有 Developer ID 憑證時會使用臨時簽署；設定 <code>TRANSEEN_SIGNING_IDENTITY</code> 可以產生正式簽署的版本。測試指令碼是 <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code> 和 <code>./scripts/test-lifecycle.sh</code>。代管的啟用服務只屬於官方版本，獨立發行需要自己的授權後端。</p>
+            <p>App 會產生在 <code>dist/Transeen.app</code>。沒有 Developer ID 憑證時會使用臨時簽署；設定 <code>TRANSEEN_SIGNING_IDENTITY</code> 可以產生正式簽署的版本。測試指令碼是 <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code> 和 <code>./scripts/test-lifecycle.sh</code>。官方 App 透過 iTool 會員授權，獨立發行需要自己的帳號後端。</p>
           </section>
         </article>
       </div>
 
       <section class="guide-next" aria-labelledby="next-title">
         <div class="wrap">
-          <h2 id="next-title">下載 Transeen 0.14.0</h2>
+          <h2 id="next-title">下載 Transeen 0.15.0</h2>
           <p>一個通用版本，支援 macOS 26 或更新版本，已簽署並通過 Apple 公證。</p>
           <div class="hero-actions">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>下載 Mac 版</a>
             <a class="link-arrow" href="../">回到首頁</a>
           </div>
         </div>

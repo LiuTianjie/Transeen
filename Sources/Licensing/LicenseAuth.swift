@@ -2,29 +2,23 @@ import AppKit
 import AuthenticationServices
 import CryptoKit
 import Foundation
-import LocalAuthentication
 import Security
-
-enum LicensePrincipal: String, Codable, Equatable, Sendable {
-    case installation
-    case account
-}
 
 enum LicenseAuthProvider: String, Equatable, Sendable {
     case google
     case github
 }
 
-/// OAuth callback + purchase URL alias.
-/// Purchase destination is URL(string: "https://transeen.itool.tech/#activate")!.
-/// Do not redeem iTool IT- codes here.
+/// Where the membership is bought and where sign-in returns to the app.
 enum LicensePurchaseLinks {
-    static let buyURL = URL(string: "https://transeen.itool.tech/#activate")!
+    /// itool.tech redirects to the visitor's language; `from` tells it which product sent them.
+    static func membershipURL(language: AppLanguage = InterfaceLanguage.shared.language) -> URL {
+        let locale = language == .zhHans || language == .zhHant ? "zh" : "en"
+        return URL(string: "https://itool.tech/\(locale)/pro?from=transeen")!
+    }
     static let callbackScheme = "transeen"
     static let callbackURL = URL(string: "transeen://auth-callback")!
 }
-
-
 
 struct LicenseAuthSession: Codable, Equatable, Sendable {
     var userID: UUID
@@ -73,98 +67,23 @@ protocol LicenseAuthFlowPerforming: Sendable {
 }
 
 final class KeychainLicenseAuthStore: LicenseAuthSessionStoring, @unchecked Sendable {
-    static let service = "com.transeen.app.auth.v1"
-    private static let account = "supabase-session"
-    private static let interactionLock = NSLock()
-
-    private let encoder = JSONEncoder()
-    private let decoder = JSONDecoder()
+    private let item = SilentKeychainItem(service: "com.transeen.app.auth.v1", account: "supabase-session")
 
     func load() throws -> LicenseAuthSession? {
-        try withoutLegacyKeychainInteraction {
-            var query = Self.nonInteractiveQuery
-            query[kSecReturnData as String] = true
-            query[kSecMatchLimit as String] = kSecMatchLimitOne
-
-            var result: CFTypeRef?
-            let status = SecItemCopyMatching(query as CFDictionary, &result)
-            if status == errSecItemNotFound {
-                return nil
-            }
-            guard status == errSecSuccess, let data = result as? Data else {
-                throw LicenseServiceError.storage("Could not access the saved sign-in session.")
-            }
-            do {
-                return try decoder.decode(LicenseAuthSession.self, from: data)
-            } catch {
-                throw LicenseServiceError.storage("The saved sign-in session is damaged and was not reset.")
-            }
+        guard let data = try item.read() else { return nil }
+        do {
+            return try JSONDecoder().decode(LicenseAuthSession.self, from: data)
+        } catch {
+            throw EntitlementServiceError.storage("The saved sign-in session is damaged.")
         }
     }
 
     func save(_ session: LicenseAuthSession) throws {
-        let data = try encoder.encode(session)
-        try withoutLegacyKeychainInteraction {
-            let updateStatus = SecItemUpdate(
-                Self.nonInteractiveQuery as CFDictionary,
-                [kSecValueData as String: data] as CFDictionary
-            )
-            if updateStatus == errSecSuccess {
-                return
-            }
-            guard updateStatus == errSecItemNotFound else {
-                throw LicenseServiceError.storage("Could not save the sign-in session.")
-            }
-
-            var attributes = Self.itemIdentity
-            attributes[kSecValueData as String] = data
-            let addStatus = SecItemAdd(attributes as CFDictionary, nil)
-            guard addStatus == errSecSuccess else {
-                throw LicenseServiceError.storage("Could not save the sign-in session.")
-            }
-        }
+        try item.write(try JSONEncoder().encode(session))
     }
 
     func clear() throws {
-        try withoutLegacyKeychainInteraction {
-            let status = SecItemDelete(Self.nonInteractiveQuery as CFDictionary)
-            guard status == errSecSuccess || status == errSecItemNotFound else {
-                throw LicenseServiceError.storage("Could not clear the sign-in session.")
-            }
-        }
-    }
-
-    static var itemIdentity: [String: Any] {
-        [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: Self.service,
-            kSecAttrAccount as String: Self.account
-        ]
-    }
-
-    static var nonInteractiveQuery: [String: Any] {
-        var query = itemIdentity
-        let context = LAContext()
-        context.interactionNotAllowed = true
-        query[kSecUseAuthenticationContext as String] = context
-        return query
-    }
-
-    private func withoutLegacyKeychainInteraction<Value>(_ operation: () throws -> Value) throws -> Value {
-        Self.interactionLock.lock()
-        defer { Self.interactionLock.unlock() }
-
-        var wasAllowed = DarwinBoolean(false)
-        let readStatus = SecKeychainGetUserInteractionAllowed(&wasAllowed)
-        guard readStatus == errSecSuccess else {
-            throw LicenseServiceError.storage("Could not access the saved sign-in session.")
-        }
-        let disableStatus = SecKeychainSetUserInteractionAllowed(false)
-        guard disableStatus == errSecSuccess else {
-            throw LicenseServiceError.storage("Could not access the saved sign-in session.")
-        }
-        defer { _ = SecKeychainSetUserInteractionAllowed(wasAllowed.boolValue) }
-        return try operation()
+        try item.delete()
     }
 }
 
@@ -268,7 +187,12 @@ struct SupabaseLicenseAuthClient: LicenseAuthFlowPerforming {
 
         let (data, response) = try await transport.data(for: request)
         guard (200..<300).contains(response.statusCode) else {
-            throw LicenseAuthError.rejected("Could not refresh the sign-in session.")
+            // 400/401/403 mean the refresh token is no longer valid. Anything else is an outage
+            // and must not sign the user out.
+            if [400, 401, 403].contains(response.statusCode) {
+                throw LicenseAuthError.rejected("Could not refresh the sign-in session.")
+            }
+            throw EntitlementServiceError.temporarilyUnavailable
         }
         return try Self.decodeSession(from: data, fallbackProvider: session.provider)
     }

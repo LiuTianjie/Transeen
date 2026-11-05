@@ -8,7 +8,7 @@ og_title = "Transeen: den Mac-Bildschirm an Ort und Stelle übersetzen"
 og_description = "Drück in jeder App F1, wähle einen Bereich, und Transeen zeichnet den Text in deiner Sprache ins selbe Bild."
 image_alt = "Eine japanische Zugbuchungsseite auf einem Mac, die ausgewählte Karte an Ort und Stelle ins Deutsche übersetzt, darunter die Symbolleiste von Transeen"
 guide_title = "Screenshot auf dem Mac übersetzen: Anleitung für Transeen"
-guide_description = "Transeen installieren, aktivieren, die Bildschirmaufnahme erlauben und den ersten Bereich übersetzen. Alle Tastaturkurzbefehle, die eingebauten lokalen Modelle, OpenAI-kompatible Endpunkte und Lösungen für häufige Probleme."
+guide_description = "Transeen installieren, bei iTool anmelden, die Bildschirmaufnahme erlauben und den ersten Bereich übersetzen. Alle Tastaturkurzbefehle, die eingebauten lokalen Modelle, OpenAI-kompatible Endpunkte und Lösungen für häufige Probleme."
 guide_keywords = "Screenshot übersetzen Mac Anleitung, Transeen Anleitung, Bildschirmaufnahme erlauben, Übersetzen Kurzbefehl Mac, lokales Übersetzungsmodell, Offline-Übersetzung"
 guide_og_title = "Transeen in fünf Schritten einrichten"
 guide_og_description = "Vom Download bis zum ersten übersetzten Screenshot auf dem Mac, mit allen Kurzbefehlen und der Modell-Einrichtung."
@@ -22,7 +22,7 @@ how = "So funktioniert’s"
 apps = "Jede App"
 tools = "Werkzeuge"
 languages = "Sprachen"
-activation = "Aktivierung"
+activation = "Mitgliedschaft"
 guide = "Anleitung"
 download = "Laden"
 download_mac = "Für Mac laden"
@@ -204,6 +204,7 @@ lede = "<b>Zuletzt veröffentlicht.</b>"
 full = "Vollständiges Änderungsprotokoll"
 
 [changes.notes]
+"0.15.0" = ["<b>In iTool Jahr enthalten.</b> Melde dich bei iTool an, um aufzunehmen, zu markieren und zu übersetzen; die Jahresmitgliedschaft für 99 CNY umfasst alle iTool-Produkte.", "<b>Keine Aktivierungscodes mehr.</b> Die Mitgliedschaft wird online geprüft und funktioniert bis zu 7 Tage offline."]
 "0.14.0" = ["<b>Updates in der App.</b> Transeen sucht einmal täglich und lädt, prüft und installiert die neue Version, sobald du zustimmst.", "<b>Ein letzter manueller Download.</b> Von 0.13.0 oder älter lädst du diese Version einmal selbst; spätere kommen über die App."]
 "0.13.0" = ["<b>Übersetzung anhalten.</b> Die Leertaste hält eine Übersetzung an und zeigt das Original; erneut drücken setzt sie dort fort.", "<b>Keine halb fertigen Kopien.</b> Kopieren, Anheften und Sichern warten auf das fertige Bild, in einer zweizeiligen Werkzeugleiste."]
 "0.12.1" = ["<b>Fette Überschriften richtig erkennen.</b> Große, fette Buchstaben werden nicht mehr als dunkler Hintergrund erkannt; invertierte Farben und Reste des Originaltexts entfallen.", "<b>Abstände beibehalten.</b> Große übersetzte Überschriften bleiben innerhalb der ursprünglichen Schrifthöhe; normaler Text behält sein Layout."]
@@ -218,19 +219,19 @@ full = "Vollständiges Änderungsprotokoll"
 ]
 
 [activation]
-fig = "Preis und Aktivierung"
-lede = "<b>Einmal kaufen, dauerhaft nutzen.</b> Alle Funktionen auf einem Mac."
-license = "Dauerlizenz"
-where = "Gib ihn in der Menüleiste unter Aktivierung &amp; Konto… ein."
-buy = "Code kaufen"
-billing = "Einmalzahlung · CNY"
-shop = "Kauf über 链动小铺. Der endgültige Preis steht beim Bezahlen."
-how = "So aktivierst du"
+fig = "Preis und Mitgliedschaft"
+lede = "<b>In iTool Jahr enthalten.</b> Eine Mitgliedschaft für alle iTool-Produkte."
+license = "iTool Jahresmitgliedschaft"
+where = "Melde dich in der Menüleiste unter Konto &amp; Mitgliedschaft… mit demselben iTool-Konto an."
+buy = "iTool Jahresmitgliedschaft holen"
+billing = "Pro Jahr · CNY · alle iTool-Produkte"
+shop = "Bezahlt wird mit Alipay auf itool.tech. Die Monatsmitgliedschaft umfasst die iTool-Website und LinkShell, nicht Transeen."
+how = "So meldest du dich an"
 items = [
-  "<b>Schaltet alles frei,</b> für einen Mac.",
-  "<b>Ohne Anmeldung.</b> Die Seriennummer wird nie gelesen.",
+  "<b>Schaltet alles frei</b> in Transeen und in allen anderen iTool-Produkten.",
+  "<b>Anmeldung mit Google, GitHub oder E-Mail.</b> Die Seriennummer wird nie gelesen.",
+  "<b>Funktioniert offline,</b> bis zu 7 Tage zwischen zwei Prüfungen.",
   "<b>Open Source</b> unter der MIT-Lizenz.",
-  "SM- und IT-Codes gehören zu anderen Produkten.",
 ]
 
 [faq]
@@ -247,7 +248,7 @@ a = "macOS 26 oder neuer, auf Apple-Chip oder Intel. Die lokalen Modelle brauche
 
 [[faq.items]]
 q = "Funktioniert es offline?"
-a = "Ja, sobald es aktiviert ist und das Sprachpaket oder Modell geladen ist. Nur eine LLM-API braucht eine Verbindung."
+a = "Ja, sobald du angemeldet bist und das Sprachpaket oder Modell geladen ist. Transeen prüft die Mitgliedschaft mindestens alle 7 Tage online. Nur eine LLM-API braucht für jede Übersetzung eine Verbindung."
 
 [[faq.items]]
 q = "Was verlässt meinen Mac?"
@@ -267,7 +268,7 @@ a = "Das hängt vom Übersetzungsdienst ab. Prüf mit <kbd>Tab</kbd> das Origina
 
 [[faq.items]]
 q = "Ist Transeen Open Source?"
-a = "Ja, unter der <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">MIT-Lizenz</a>. Die offizielle App braucht einen TR-Code."
+a = "Ja, unter der <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">MIT-Lizenz</a>. Die offizielle App braucht die iTool Jahresmitgliedschaft."
 
 [[faq.items]]
 q = "Wie aktualisiere ich?"
@@ -309,7 +310,7 @@ features = [
 [guide]
 name = "Einrichtungsanleitung"
 title = "Transeen einrichten, <span>in fünf Schritten.</span>"
-lead = "Vom Download bis zum ersten übersetzten Screenshot. Du brauchst einen Mac mit macOS 26 oder neuer und einen TR-Aktivierungscode."
+lead = "Vom Download bis zum ersten übersetzten Screenshot. Du brauchst einen Mac mit macOS 26 oder neuer und ein iTool-Konto mit Jahresmitgliedschaft."
 all_shortcuts = "Alle Kurzbefehle"
 toc = "Auf dieser Seite"
 next_title = "Transeen {version} laden"
@@ -318,11 +319,11 @@ back = "Zurück zu Transeen"
 
 [guide.howto]
 name = "So übersetzt du mit Transeen einen Screenshot auf dem Mac"
-supply = "Ein TR-Aktivierungscode"
+supply = "Ein iTool-Konto mit Jahresmitgliedschaft"
 tools = ["Ein Mac mit macOS 26 oder neuer", "Transeen"]
 steps = [
   { name = "Installieren", text = "Lade das DMG von GitHub Releases, zieh Transeen in den Ordner „Programme“ und öffne es. Es läuft in der Menüleiste." },
-  { name = "Aktivieren", text = "Wähl im Menü der Menüleiste „Aktivierung & Konto…“, gib deinen TR-Code ein und wähl „Diesen Mac aktivieren“." },
+  { name = "Anmelden", text = "Wähl im Menü der Menüleiste „Konto & Mitgliedschaft…“ und melde dich mit Google, GitHub oder E-Mail bei iTool an." },
   { name = "Bildschirmaufnahme erlauben", text = "Schalte Transeen unter Systemeinstellungen, Datenschutz & Sicherheit, Bildschirm- & Systemaudioaufnahme ein." },
   { name = "Sprachen wählen", text = "Wähl Ausgangs- und Zielsprache und lade die nötigen Apple-Sprachpakete vorab unter Einstellungen, Allgemein, Übersetzung." },
   { name = "Einen Bereich übersetzen", text = "Drück in jeder App F1, wähle einen Teil des Bildschirms und lies die Übersetzung an Ort und Stelle. Mit Tab vergleichst du mit dem Original." },
@@ -338,19 +339,19 @@ body = """
   <li>Öffne Transeen aus „Programme“. Es lebt in der Menüleiste; such sein Symbol also dort und nicht im Dock.</li>
 </ol>
 <p>App und DMG sind mit einer Developer ID signiert und von Apple beglaubigt, macOS öffnet sie deshalb ohne Warnung. Ein ZIP und SHA-256-Prüfsummen liegen auf derselben Seite. Die Oberfläche folgt der Sprache deines Macs: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español oder Deutsch.</p>
-<p>Die Einführung hat vier Schritte: Beispielübersetzung, Lesesprache, Bildschirmzugriff und erste Aufnahme. Das Beispiel braucht weder Aktivierung noch Berechtigung; dein Fortschritt bleibt gespeichert. Echte Aufnahmen benötigen eine Aktivierung. Ist die Übersetzung noch nicht bereit, kannst du zunächst Bilder annotieren.</p>
+<p>Die Einführung hat vier Schritte: Beispielübersetzung, Lesesprache, Bildschirmzugriff und erste Aufnahme. Das Beispiel braucht weder Anmeldung noch Berechtigung; dein Fortschritt bleibt gespeichert. Echte Aufnahmen brauchen ein iTool-Konto mit Jahresmitgliedschaft. Ist die Übersetzung noch nicht bereit, kannst du zunächst Bilder annotieren.</p>
 """
 
 [[guide.sections]]
 id = "activate"
-title = "Aktivieren"
+title = "Anmelden"
 body = """
 <ol>
-  <li>Wähl im Menü der Menüleiste <strong>Aktivierung &amp; Konto…</strong> oder im Startfenster <strong>Transeen aktivieren</strong>.</li>
-  <li>Gib deinen Code ein, der wie <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code> aussieht, und wähl <strong>Diesen Mac aktivieren</strong>. Eine Anmeldung ist nicht nötig.</li>
-  <li>Wenn du möchtest, meld dich mit Google, GitHub oder E-Mail bei einem iTool-Konto an und verknüpfe die Lizenz. Mit einer späteren Anmeldung beim selben Konto stellst du sie wieder her.</li>
+  <li>Wähl im Menü der Menüleiste <strong>Konto &amp; Mitgliedschaft…</strong> oder im Startfenster <strong>Bei iTool anmelden</strong>.</li>
+  <li>Melde dich mit Google, GitHub oder E-Mail bei deinem iTool-Konto an.</li>
+  <li>Ohne Jahresmitgliedschaft wählst du <strong>iTool Jahresmitgliedschaft holen</strong> (als Monatsmitglied <strong>Auf Jahresmitgliedschaft upgraden</strong>) und bezahlst mit Alipay auf itool.tech. Zurück in Transeen wählst du <strong>Mitgliedschaft aktualisieren</strong>.</li>
 </ol>
-<p>Die Aktivierung legt nur eine zufällige Installations-ID und einen Beleg im Schlüsselbund ab; die Seriennummer deines Macs wird nie gelesen. Ein Code gilt für einen Mac, und das Verknüpfen eines Kontos erzeugt keine zweite Lizenz. SM-Codes von StupidMirror und IT-Codes von iTool Pro gehören zu anderen Produkten und funktionieren hier nicht. Einen Code bekommst du, wenn du <a href="{purchase}">einen auf 链动小铺 kaufst</a>.</p>
+<p>Aufnahme, Markierung, Bildimport und Übersetzung brauchen die <a href="https://itool.tech/pro?from=transeen">iTool Jahresmitgliedschaft</a>: 99 CNY im Jahr für alle iTool-Produkte. Die Monatsmitgliedschaft (9,90 CNY) umfasst nur die iTool-Website und LinkShell. Transeen legt deine Anmeldung und die letzte Prüfung im Schlüsselbund ab; die Seriennummer deines Macs wird nie gelesen. Nach einer erfolgreichen Prüfung funktioniert es bis zu 7 Tage offline, nie über das Ende der Mitgliedschaft hinaus. Aktivierungscodes werden nicht mehr verkauft oder angenommen.</p>
 """
 
 [[guide.sections]]
@@ -501,5 +502,5 @@ body = """
 git clone https://github.com/LiuTianjie/Transeen.git
 cd Transeen
 ./scripts/build.sh</code></pre>
-<p>Die App landet in <code>dist/Transeen.app</code>. Ohne Developer-ID-Identität wird ad hoc signiert; setz <code>TRANSEEN_SIGNING_IDENTITY</code> für einen signierten Build. Die Tests sind <code>./scripts/test.sh</code>, <code>./scripts/test-license.sh</code> und <code>./scripts/test-lifecycle.sh</code>. Der gehostete Aktivierungsdienst gehört zur offiziellen App, eine unabhängige Verteilung braucht deshalb ein eigenes Lizenz-Backend.</p>
+<p>Die App landet in <code>dist/Transeen.app</code>. Ohne Developer-ID-Identität wird ad hoc signiert; setz <code>TRANSEEN_SIGNING_IDENTITY</code> für einen signierten Build. Die Tests sind <code>./scripts/test.sh</code>, <code>./scripts/test-license.sh</code> und <code>./scripts/test-lifecycle.sh</code>. Die offizielle App prüft die iTool-Mitgliedschaft, eine unabhängige Verteilung braucht deshalb ein eigenes Konto-Backend.</p>
 """

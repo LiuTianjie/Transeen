@@ -1,5 +1,13 @@
 # Transeen licensing service
 
+> **Legacy.** Since 0.15.0 the app no longer calls this service. Transeen is part of
+> the iTool membership and checks `GET https://itool.tech/api/membership/entitlement?product=transeen`
+> (or the `public.itool_entitlement` RPC) with the user's access token; see
+> [LICENSING.md](../LICENSING.md). The `transeen-license` Edge Function and the
+> `transeen_licensing` schema stay deployed for older app versions and for the
+> one-off conversion of account-bound codes to yearly memberships. Do not extend
+> them; remove them only after older versions no longer matter.
+
 Transeen has its own `TR-` activation codes and perpetual entitlement. It shares
 the iTool Auth project (`mkbeusztkzffnzjdwmqk`), but never grants or consumes
 StupidMirror (`SM-`) or iTool Pro (`IT-`) entitlements.

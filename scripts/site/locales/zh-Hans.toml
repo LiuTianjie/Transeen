@@ -7,8 +7,8 @@ keywords = "Mac 截图翻译, 屏幕翻译, Mac 翻译软件, OCR 翻译, 图片
 og_title = "Transeen｜框选屏幕，译文留在原处"
 og_description = "在任意软件里按 F1 框选屏幕，Transeen 把文字换成你的语言，直接画回同一张图里。"
 image_alt = "Mac 上的日文订票页面，框选的车次卡片在原处换成了中文，下方是 Transeen 工具栏"
-guide_title = "Mac 怎么截图翻译？Transeen 使用指南：安装、激活与快捷键"
-guide_description = "五步装好 Transeen：下载、激活、开启屏幕录制、选择语言、框选翻译。附完整快捷键表、内置本地翻译模型与兼容 OpenAI 接口的配置方法，以及常见问题的解决办法。"
+guide_title = "Mac 怎么截图翻译？Transeen 使用指南：安装、登录与快捷键"
+guide_description = "五步装好 Transeen：下载、登录 iTool 账号、开启屏幕录制、选择语言、框选翻译。附完整快捷键表、内置本地翻译模型与兼容 OpenAI 接口的配置方法，以及常见问题的解决办法。"
 guide_keywords = "Mac 截图翻译教程, Transeen 使用指南, 屏幕录制权限, Mac 翻译快捷键, 本地翻译模型, 离线翻译"
 guide_og_title = "五步装好 Transeen"
 guide_og_description = "从下载到第一次在 Mac 上截图翻译，附完整快捷键与模型配置。"
@@ -22,7 +22,7 @@ how = "工作原理"
 apps = "任意软件"
 tools = "工具"
 languages = "语言"
-activation = "激活"
+activation = "会员"
 guide = "使用指南"
 download = "下载"
 download_mac = "下载 Mac 版"
@@ -203,6 +203,7 @@ lede = "<b>最近更新。</b>"
 full = "完整更新记录"
 
 [changes.notes]
+"0.15.0" = ["<b>包含在 iTool 年度会员中。</b>登录 iTool 账号即可截图、标注和翻译，¥99/年的年度会员含全部 iTool 产品。", "<b>不再使用激活码。</b>会员状态联网确认，离线最多可用 7 天。"]
 "0.14.0" = ["<b>应用内自动更新。</b>每天检查一次新版本，经你同意后自动下载、校验并安装。", "<b>最后一次手动下载。</b>从 0.13.0 或更早版本升级需手动下载这一版，之后的版本在应用内即可更新。"]
 "0.13.0" = ["<b>翻译中可暂停。</b>按空格暂停并显示原文，再按从停下的地方继续。", "<b>不会复制半成品。</b>复制、钉图和保存会等翻译完成，工具栏精简为两行。"]
 "0.12.1" = ["<b>大字识别更准确。</b>修复超粗大标题被误判为深色背景、译文反色和原文残留。", "<b>保留原有行距。</b>大标题译文限制在原文字形高度内，普通文字沿用原有排版。"]
@@ -217,19 +218,19 @@ full = "完整更新记录"
 ]
 
 [activation]
-fig = "定价与购买"
-lede = "<b>一次购买，永久使用。</b>一台 Mac，全部功能。"
-license = "永久授权"
-where = "在菜单栏选择“激活与账号…”输入。"
-buy = "购买激活码"
-billing = "一次购买 · 人民币"
-shop = "前往链动小铺购买，实际支付金额以商品页为准。"
-how = "怎么激活"
+fig = "定价与会员"
+lede = "<b>包含在 iTool 年度会员中。</b>一份会员，全部 iTool 产品。"
+license = "iTool 年度会员"
+where = "在菜单栏选择“账号与会员…”，登录同一个 iTool 账号。"
+buy = "开通 iTool 年度会员"
+billing = "每年 · 人民币 · 含全部 iTool 产品"
+shop = "在 itool.tech 使用支付宝付款。月度会员包含 iTool 网站和 LinkShell，不含 Transeen。"
+how = "怎么登录"
 items = [
-  "<b>解锁全部功能，</b>适用于一台 Mac。",
-  "<b>无需登录，</b>从不读取序列号。",
+  "<b>解锁 Transeen 全部功能，</b>以及其他所有 iTool 产品。",
+  "<b>使用 Google、GitHub 或邮箱登录，</b>从不读取序列号。",
+  "<b>可离线使用，</b>两次联网确认之间最多 7 天。",
   "<b>MIT 开源。</b>",
-  "SM- 和 IT- 激活码属于其他产品。",
 ]
 
 [faq]
@@ -246,7 +247,7 @@ a = "macOS 26 或更高版本，Apple 芯片和 Intel 都支持。本地模型�
 
 [[faq.items]]
 q = "可以离线使用吗？"
-a = "可以，激活并下载好语言包或模型之后就行。只有大模型接口需要联网。"
+a = "可以，登录并下载好语言包或模型之后就行。Transeen 至少每 7 天联网确认一次会员状态。只有大模型接口每次翻译都要联网。"
 
 [[faq.items]]
 q = "哪些数据会离开我的 Mac？"
@@ -266,7 +267,7 @@ a = "取决于翻译服务。依赖某个细节之前，按 <kbd>Tab</kbd> 对�
 
 [[faq.items]]
 q = "Transeen 开源吗？"
-a = "开源，采用 <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">MIT 许可证</a>。官方应用需要 TR- 激活码。"
+a = "开源，采用 <a href=\"https://github.com/LiuTianjie/Transeen/blob/main/LICENSE\">MIT 许可证</a>。官方应用需要 iTool 年度会员。"
 
 [[faq.items]]
 q = "怎么更新？"
@@ -308,7 +309,7 @@ features = [
 [guide]
 name = "使用指南"
 title = "五步装好 Transeen，<span>然后按 F1。</span>"
-lead = "从下载到第一次截图翻译。你需要一台 macOS 26 或更高版本的 Mac，和一个 TR- 激活码。"
+lead = "从下载到第一次截图翻译。你需要一台 macOS 26 或更高版本的 Mac，和一个开通了年度会员的 iTool 账号。"
 all_shortcuts = "全部快捷键"
 toc = "本页内容"
 next_title = "下载 Transeen {version}"
@@ -317,11 +318,11 @@ back = "返回首页"
 
 [guide.howto]
 name = "如何用 Transeen 在 Mac 上截图翻译"
-supply = "一个 TR- 激活码"
+supply = "一个开通了年度会员的 iTool 账号"
 tools = ["一台 macOS 26 或更高版本的 Mac", "Transeen"]
 steps = [
   { name = "安装", text = "从 GitHub Releases 下载 DMG，把 Transeen 拖进“应用程序”并打开。它常驻在菜单栏。" },
-  { name = "激活", text = "在菜单栏菜单中选择“激活与账号…”，输入 TR- 激活码，选择“激活这台 Mac”。" },
+  { name = "登录", text = "在菜单栏菜单中选择“账号与会员…”，使用 Google、GitHub 或邮箱登录 iTool 账号。" },
   { name = "开启屏幕录制", text = "在系统设置 → 隐私与安全性 → 屏幕与系统音频录制中打开 Transeen。" },
   { name = "选择语言", text = "选好原文语言和译文语言，并在设置 → 通用 → 翻译中提前下载需要的 Apple 语言包。" },
   { name = "框选翻译", text = "在任意软件里按 F1 框选屏幕的一部分，在原处读译文。按 Tab 对照原文。" },
@@ -337,19 +338,19 @@ body = """
   <li>从“应用程序”打开 Transeen。它常驻在菜单栏，不在程序坞里，请在菜单栏找它的图标。</li>
 </ol>
 <p>应用和 DMG 都用 Developer ID 签名并经过 Apple 公证，macOS 打开时不会弹出警告。同一个发布页还有 ZIP 和 SHA-256 校验值。界面语言跟随系统：简体中文、繁體中文、English、日本語、한국어、Français、Español、Deutsch。</p>
-<p>首次打开会经过四步引导：体验示例翻译、选择阅读语言、准备截屏权限、开始第一次截图。示例无需激活或授权，引导会记住进度。真实截图需要激活；翻译服务尚未准备好时，可以先使用截图标注。</p>
+<p>首次打开会经过四步引导：体验示例翻译、选择阅读语言、准备截屏权限、开始第一次截图。示例无需登录或授权，引导会记住进度。真实截图需要开通了年度会员的 iTool 账号；翻译服务尚未准备好时，可以先使用截图标注。</p>
 """
 
 [[guide.sections]]
 id = "activate"
-title = "激活"
+title = "登录"
 body = """
 <ol>
-  <li>在菜单栏菜单中选择 <strong>激活与账号…</strong>，或在主窗口中选择 <strong>激活 Transeen</strong>。</li>
-  <li>输入激活码，格式是 <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code>，然后选择 <strong>激活这台 Mac</strong>。无需登录。</li>
-  <li>如果愿意，可以用 Google、GitHub 或邮箱登录 iTool 账号并绑定授权。以后登录同一账号即可恢复。</li>
+  <li>在菜单栏菜单中选择 <strong>账号与会员…</strong>，或在主窗口中选择 <strong>登录 iTool 账号</strong>。</li>
+  <li>使用 Google、GitHub 或邮箱登录 iTool 账号。</li>
+  <li>还没有年度会员时，选择 <strong>开通 iTool 年度会员</strong>（月度会员选择 <strong>升级年度会员</strong>），在 itool.tech 用支付宝付款。回到 Transeen 后选择 <strong>刷新会员状态</strong>。</li>
 </ol>
-<p>激活只在钥匙串里保存一个随机安装 ID 和一份凭证，不读取 Mac 的序列号。一个激活码对应一台 Mac，绑定账号不会多出一份授权。StupidMirror 的 SM- 和 iTool Pro 的 IT- 激活码属于其他产品，在这里不能用。想要激活码，请<a href="{purchase}">前往链动小铺购买</a>。</p>
+<p>截图、标注、导入图片和翻译需要 <a href="https://itool.tech/pro?from=transeen">iTool 年度会员</a>：¥99/年，含全部 iTool 产品。月度会员（¥9.9）只包含 iTool 网站和 LinkShell。Transeen 把登录信息和最近一次会员确认保存在钥匙串里，不读取 Mac 的序列号。联网确认成功后可离线使用最多 7 天，且不会超过会员到期时间。激活码已停止销售，也不再使用。</p>
 """
 
 [[guide.sections]]
@@ -500,5 +501,5 @@ body = """
 git clone https://github.com/LiuTianjie/Transeen.git
 cd Transeen
 ./scripts/build.sh</code></pre>
-<p>应用会生成在 <code>dist/Transeen.app</code>。没有 Developer ID 证书时使用临时签名；设置 <code>TRANSEEN_SIGNING_IDENTITY</code> 可生成正式签名的版本。测试脚本是 <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code> 和 <code>./scripts/test-lifecycle.sh</code>。托管的激活服务只属于官方版本，独立分发需要自己的授权后端。</p>
+<p>应用会生成在 <code>dist/Transeen.app</code>。没有 Developer ID 证书时使用临时签名；设置 <code>TRANSEEN_SIGNING_IDENTITY</code> 可生成正式签名的版本。测试脚本是 <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code> 和 <code>./scripts/test-lifecycle.sh</code>。官方应用通过 iTool 会员授权，独立分发需要自己的账号后端。</p>
 """

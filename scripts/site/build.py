@@ -189,7 +189,9 @@ def home_graph(loc, w):
             "inLanguage": [other["hreflang"][0] for other in locales],
             "downloadUrl": download,
             "installUrl": download,
-            "offers": {"@type": "Offer", "price": site["price"], "priceCurrency": site["currency"], "url": purchase},
+            "offers": {"@type": "Offer", "price": site["price"], "priceCurrency": site["currency"], "url": purchase,
+                       "priceSpecification": {"@type": "UnitPriceSpecification", "price": site["price"], "priceCurrency": site["currency"],
+                                              "billingDuration": "P1Y", "unitCode": "ANN"}},
             "releaseNotes": f"{repo}/blob/main/CHANGELOG.md",
             "softwareHelp": {"@type": "CreativeWork", "url": address(loc, True)},
             "image": image_of(loc),
@@ -647,9 +649,8 @@ def home_main(loc, w):
         f'        <p class="license-instruction">{act["where"]}</p>',
         '        <ul class="license-list" role="list">',
     ]
-    for n, item in enumerate(act["items"]):
-        icon = "xmark" if n == len(act["items"]) - 1 else "check"
-        block.append(f'        <li><svg aria-hidden="true"><use href="#ui-{icon}" /></svg><span>{item}</span></li>')
+    for item in act["items"]:
+        block.append(f'        <li><svg aria-hidden="true"><use href="#ui-check" /></svg><span>{item}</span></li>')
     block += ["        </ul>", "      </div>", "    </div>", f'    <p class="license-shop">{act["shop"]}</p>', "  </div>", "</section>", ""]
     sections.append(block)
 

@@ -42,7 +42,7 @@ struct OnboardingView: View {
         _sampleSource = State(initialValue: settings.source == settings.target ? settings.target.alternate : settings.source)
     }
 
-    private var captureReady: Bool { license.state.isActivated && permission.granted }
+    private var captureReady: Bool { license.state.isEntitled && permission.granted }
     private var needsLanguagePack: Bool { !LanguagePacks.sources(for: settings.target, source: sampleSource).isEmpty }
     private var translationReady: Bool {
         switch settings.service {
@@ -58,9 +58,17 @@ struct OnboardingView: View {
         case .remote: L("大模型接口")
         }
     }
+    private var membershipTitle: String {
+        switch license.state {
+        case .entitled: L("iTool 年度会员已生效")
+        case .signedOut: L("实际截图需要登录 iTool 账号")
+        case .notEntitled(let entitlement) where entitlement.tier == .monthly: L("Transeen 需要 iTool 年度会员")
+        default: L("实际截图需要 iTool 年度会员")
+        }
+    }
     private var primaryTitle: String {
         if step == .permission || step == .capture {
-            if !license.state.isActivated { return L("激活 Transeen") }
+            if !license.state.isEntitled { return license.state.isSignedIn ? L("开通 iTool 年度会员") : L("登录 iTool 账号") }
             if !permission.granted { return L("允许截屏") }
         }
         if step == .capture { return translationReady ? L("开始截图翻译") : L("先试试截图标注") }
@@ -306,18 +314,15 @@ struct OnboardingView: View {
                 HStack(spacing: 12) {
                     OnboardingRowIcon(symbol: "key")
                     VStack(alignment: .leading, spacing: 5) {
-                        Text(license.state.isActivated ? L("Transeen 已激活") : L("实际截图需要激活 Transeen"))
+                        Text(membershipTitle)
                             .font(.system(size: 13, weight: .medium))
-                        Text(license.state.isActivated ? L("截图、标注与翻译已解锁") : L("需要 TR- 激活码，无需登录"))
+                        Text(license.state.isEntitled ? L("截图、标注与翻译已解锁") : L("需要登录 iTool 账号，并拥有 iTool 年度会员 (¥99/年，含全部 iTool 产品)"))
                             .font(.system(size: 11)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                     }
                     Spacer(minLength: 12)
-                    if license.state.isActivated { readyMark }
+                    if license.state.isEntitled { readyMark }
                     else if license.state == .checking { ProgressView().controlSize(.small).frame(width: 20) }
-                    else { Button(L("输入激活码…")) { showsActivation = true }.controlSize(.small) }
-                }
-                if case .unavailable(let reason) = license.state {
-                    Text(reason).font(.caption).foregroundStyle(.orange).padding(.top, 12).padding(.leading, 44)
+                    else { Button(license.state.isSignedIn ? L("查看会员…") : L("登录…")) { showsActivation = true }.controlSize(.small) }
                 }
             }.onboardingPanel()
             if permission.requested && !permission.granted {
@@ -397,7 +402,7 @@ struct OnboardingView: View {
 
     private func advance() {
         if step == .permission || step == .capture {
-            guard license.state.isActivated else { showsActivation = true; return }
+            guard license.state.isEntitled else { showsActivation = true; return }
             permission.refresh()
             guard permission.granted else { permission.openSettings(); return }
         }

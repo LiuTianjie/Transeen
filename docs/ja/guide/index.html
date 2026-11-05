@@ -5,7 +5,7 @@
     <script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mac でスクリーンショットを翻訳する方法：Transeen セットアップガイド</title>
-    <meta name="description" content="Transeen のインストール、アクティベート、画面収録の許可、最初の翻訳までを説明します。キーボードショートカットの一覧、内蔵ローカルモデルと OpenAI 互換 API の設定、よくある問題の解決方法も掲載しています。" />
+    <meta name="description" content="Transeen のインストール、iTool へのログイン、画面収録の許可、最初の翻訳までを説明します。キーボードショートカットの一覧、内蔵ローカルモデルと OpenAI 互換 API の設定、よくある問題の解決方法も掲載しています。" />
     <meta name="keywords" content="Mac スクリーンショット 翻訳 方法, Transeen 使い方, 画面収録 許可, Mac 翻訳 ショートカット, ローカル翻訳モデル, オフライン翻訳" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="LiuTianjie" />
@@ -99,7 +99,7 @@
             "@type": "TechArticle",
             "@id": "https://transeen.itool.tech/ja/guide/#article",
             "headline": "Transeen の準備は、5 つのステップ。",
-            "description": "Transeen のインストール、アクティベート、画面収録の許可、最初の翻訳までを説明します。キーボードショートカットの一覧、内蔵ローカルモデルと OpenAI 互換 API の設定、よくある問題の解決方法も掲載しています。",
+            "description": "Transeen のインストール、iTool へのログイン、画面収録の許可、最初の翻訳までを説明します。キーボードショートカットの一覧、内蔵ローカルモデルと OpenAI 互換 API の設定、よくある問題の解決方法も掲載しています。",
             "inLanguage": "ja",
             "url": "https://transeen.itool.tech/ja/guide/",
             "mainEntityOfPage": "https://transeen.itool.tech/ja/guide/",
@@ -131,7 +131,7 @@
             "supply": [
               {
                 "@type": "HowToSupply",
-                "name": "TR- アクティベーションコード"
+                "name": "年間メンバーシップのある iTool アカウント"
               }
             ],
             "tool": [
@@ -155,9 +155,9 @@
               {
                 "@type": "HowToStep",
                 "position": 2,
-                "name": "アクティベート",
+                "name": "ログイン",
                 "url": "https://transeen.itool.tech/ja/guide/#activate",
-                "text": "メニューバーのメニューで「アクティベーションとアカウント…」を選び、TR- コードを入力して「この Mac をアクティベート」を選びます。"
+                "text": "メニューバーのメニューで「アカウントとメンバーシップ…」を選び、Google、GitHub、メールで iTool にログインします。"
               },
               {
                 "@type": "HowToStep",
@@ -325,7 +325,7 @@
               <li><a href="../../de/guide/" hreflang="de" lang="de">Deutsch</a></li>
             </ul>
           </details>
-          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.dmg">ダウンロード</a>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.dmg">ダウンロード</a>
         </div>
       </div>
     </header>
@@ -336,9 +336,9 @@
         <div class="wrap">
           <nav class="crumbs load" aria-label="パンくずリスト"><a href="../">Transeen</a><span aria-hidden="true">/</span><span aria-current="page">セットアップガイド</span></nav>
           <h1 class="load" id="guide-title" style="--d: 60">Transeen の準備は、<span>5 つのステップ。</span></h1>
-          <p class="hero-lead load" style="--d: 140">ダウンロードから、最初のスクリーンショットを翻訳するまで。macOS 26 以降の Mac と、TR- アクティベーションコードが必要です。</p>
+          <p class="hero-lead load" style="--d: 140">ダウンロードから、最初のスクリーンショットを翻訳するまで。macOS 26 以降の Mac と、年間メンバーシップのある iTool アカウントが必要です。</p>
           <div class="hero-actions load" style="--d: 220">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Mac 版をダウンロード</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Mac 版をダウンロード</a>
             <a class="link-arrow" href="#shortcuts">すべてのショートカット</a>
           </div>
         </div>
@@ -349,7 +349,7 @@
           <p id="toc-title">このページの内容</p>
           <ol>
             <li><a href="#install">インストール</a></li>
-            <li><a href="#activate">アクティベート</a></li>
+            <li><a href="#activate">ログイン</a></li>
             <li><a href="#permission">画面収録を許可</a></li>
             <li><a href="#languages">言語を選ぶ</a></li>
             <li><a href="#translate">範囲を翻訳</a></li>
@@ -373,17 +373,17 @@
               <li>アプリケーションフォルダから Transeen を開きます。メニューバーで動作するので、Dock ではなくメニューバーのアイコンを探してください。</li>
             </ol>
             <p>App と DMG は Developer ID で署名され、Apple の公証を受けているので、macOS は警告なしで開きます。同じリリースページに ZIP と SHA-256 チェックサムもあります。画面表示は Mac の言語に合わせます：English、简体中文、繁體中文、日本語、한국어、Français、Español、Deutsch。</p>
-            <p>初回ガイドは、サンプル翻訳、読む言語、画面収録の準備、最初のキャプチャの4段階です。サンプルに認証や権限は不要で、進行状況は保存されます。実際のキャプチャには認証が必要です。翻訳の準備ができていなくても、注釈用のキャプチャから始められます。</p>
+            <p>初回ガイドは、サンプル翻訳、読む言語、画面収録の準備、最初のキャプチャの4段階です。サンプルにログインや権限は不要で、進行状況は保存されます。実際のキャプチャには年間メンバーシップのある iTool アカウントが必要です。翻訳の準備ができていなくても、注釈用のキャプチャから始められます。</p>
           </section>
 
           <section id="activate" aria-labelledby="activate-title">
-            <h2 id="activate-title"><small>02</small>アクティベート</h2>
+            <h2 id="activate-title"><small>02</small>ログイン</h2>
             <ol>
-              <li>メニューバーのメニューで <strong>アクティベーションとアカウント…</strong> を、またはホームウインドウで <strong>Transeen をアクティベート</strong> を選びます。</li>
-              <li><code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code> の形式のコードを入力し、<strong>この Mac をアクティベート</strong> を選びます。ログインは不要です。</li>
-              <li>必要なら Google、GitHub、メールで iTool アカウントにログインし、ライセンスを連携します。あとで同じアカウントにログインすれば復元できます。</li>
+              <li>メニューバーのメニューで <strong>アカウントとメンバーシップ…</strong> を、またはホームウインドウで <strong>iTool にログイン</strong> を選びます。</li>
+              <li>Google、GitHub、メールで iTool アカウントにログインします。</li>
+              <li>年間メンバーシップがない場合は <strong>iTool 年間メンバーに登録</strong>（月間メンバーは <strong>年間メンバーにアップグレード</strong>）を選び、itool.tech で Alipay で支払います。Transeen に戻ったら <strong>メンバーシップを更新</strong> を選びます。</li>
             </ol>
-            <p>アクティベーションでは、ランダムなインストール ID とレシートをキーチェーンに保存するだけで、Mac のシリアル番号は読み取りません。1 つのコードで Mac 1 台分です。アカウントに連携してもライセンスは増えません。StupidMirror の SM- コードと iTool Pro の IT- コードは別製品のもので、ここでは使えません。コードの入手は <a href="https://wzyp.cn/item/gq2xie">链动小铺で購入できます</a>。</p>
+            <p>キャプチャ、注釈、画像の読み込み、翻訳には <a href="https://itool.tech/pro?from=transeen">iTool 年間メンバーシップ</a>（年 ¥99、すべての iTool 製品を含む）が必要です。月間メンバーシップ（¥9.9）は iTool のウェブサイトと LinkShell のみです。Transeen はログイン情報と最後のメンバーシップ確認をキーチェーンに保存し、Mac のシリアル番号は読み取りません。確認に成功してから最長 7 日間オフラインで使え、メンバーシップの期限を過ぎることはありません。アクティベーションコードの販売と利用は終了しました。</p>
           </section>
 
           <section id="permission" aria-labelledby="permission-title">
@@ -512,17 +512,17 @@
 git clone https://github.com/LiuTianjie/Transeen.git
 cd Transeen
 ./scripts/build.sh</code></pre>
-            <p>App は <code>dist/Transeen.app</code> に書き出されます。Developer ID がない場合はアドホック署名になります。署名付きでビルドするには <code>TRANSEEN_SIGNING_IDENTITY</code> を設定します。テストは <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code>、<code>./scripts/test-lifecycle.sh</code> です。ホスト型のアクティベーションサービスは公式の App のものなので、独自に配布する場合は独自のライセンスバックエンドが必要です。</p>
+            <p>App は <code>dist/Transeen.app</code> に書き出されます。Developer ID がない場合はアドホック署名になります。署名付きでビルドするには <code>TRANSEEN_SIGNING_IDENTITY</code> を設定します。テストは <code>./scripts/test.sh</code>、<code>./scripts/test-license.sh</code>、<code>./scripts/test-lifecycle.sh</code> です。公式の App は iTool メンバーシップで認証するため、独自に配布する場合は独自のアカウントバックエンドが必要です。</p>
           </section>
         </article>
       </div>
 
       <section class="guide-next" aria-labelledby="next-title">
         <div class="wrap">
-          <h2 id="next-title">Transeen 0.14.0 をダウンロード</h2>
+          <h2 id="next-title">Transeen 0.15.0 をダウンロード</h2>
           <p>macOS 26 以降向けのユニバーサル App。署名と公証を済ませています。</p>
           <div class="hero-actions">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Mac 版をダウンロード</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Mac 版をダウンロード</a>
             <a class="link-arrow" href="../">Transeen のトップへ</a>
           </div>
         </div>

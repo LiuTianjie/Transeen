@@ -47,8 +47,8 @@ struct LauncherView: View {
                     .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 1) {
                     Text("Transeen").font(.system(size: 13, weight: .semibold))
-                    if !license.state.isActivated {
-                        Button(L("激活 Transeen"), action: showLicense)
+                    if !license.state.isEntitled {
+                        Button(license.state.isSignedIn ? L("开通 iTool 年度会员") : L("登录 iTool 账号"), action: showLicense)
                             .buttonStyle(.plain).font(.system(size: 11)).foregroundStyle(.tint)
                     }
                 }
@@ -113,7 +113,7 @@ struct LauncherView: View {
                     Button(L("屏幕权限…"), action: showPermission)
                     Button(L("新手引导…"), action: showOnboarding)
                     Divider()
-                    Button(L("激活与账号…"), action: showLicense)
+                    Button(L("账号与会员…"), action: showLicense)
                     Button(L("检查更新…"), action: checkForUpdates)
                     Divider()
                     Button(L("退出 Transeen"), action: quit)

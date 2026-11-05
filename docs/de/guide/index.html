@@ -5,7 +5,7 @@
     <script>if(location.hostname.endsWith("github.io"))location.replace("https://transeen.itool.tech"+location.pathname.replace(/^\/Transeen/i,"")+location.search+location.hash)</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Screenshot auf dem Mac übersetzen: Anleitung für Transeen</title>
-    <meta name="description" content="Transeen installieren, aktivieren, die Bildschirmaufnahme erlauben und den ersten Bereich übersetzen. Alle Tastaturkurzbefehle, die eingebauten lokalen Modelle, OpenAI-kompatible Endpunkte und Lösungen für häufige Probleme." />
+    <meta name="description" content="Transeen installieren, bei iTool anmelden, die Bildschirmaufnahme erlauben und den ersten Bereich übersetzen. Alle Tastaturkurzbefehle, die eingebauten lokalen Modelle, OpenAI-kompatible Endpunkte und Lösungen für häufige Probleme." />
     <meta name="keywords" content="Screenshot übersetzen Mac Anleitung, Transeen Anleitung, Bildschirmaufnahme erlauben, Übersetzen Kurzbefehl Mac, lokales Übersetzungsmodell, Offline-Übersetzung" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="LiuTianjie" />
@@ -99,7 +99,7 @@
             "@type": "TechArticle",
             "@id": "https://transeen.itool.tech/de/guide/#article",
             "headline": "Transeen einrichten, in fünf Schritten.",
-            "description": "Transeen installieren, aktivieren, die Bildschirmaufnahme erlauben und den ersten Bereich übersetzen. Alle Tastaturkurzbefehle, die eingebauten lokalen Modelle, OpenAI-kompatible Endpunkte und Lösungen für häufige Probleme.",
+            "description": "Transeen installieren, bei iTool anmelden, die Bildschirmaufnahme erlauben und den ersten Bereich übersetzen. Alle Tastaturkurzbefehle, die eingebauten lokalen Modelle, OpenAI-kompatible Endpunkte und Lösungen für häufige Probleme.",
             "inLanguage": "de",
             "url": "https://transeen.itool.tech/de/guide/",
             "mainEntityOfPage": "https://transeen.itool.tech/de/guide/",
@@ -131,7 +131,7 @@
             "supply": [
               {
                 "@type": "HowToSupply",
-                "name": "Ein TR-Aktivierungscode"
+                "name": "Ein iTool-Konto mit Jahresmitgliedschaft"
               }
             ],
             "tool": [
@@ -155,9 +155,9 @@
               {
                 "@type": "HowToStep",
                 "position": 2,
-                "name": "Aktivieren",
+                "name": "Anmelden",
                 "url": "https://transeen.itool.tech/de/guide/#activate",
-                "text": "Wähl im Menü der Menüleiste „Aktivierung & Konto…“, gib deinen TR-Code ein und wähl „Diesen Mac aktivieren“."
+                "text": "Wähl im Menü der Menüleiste „Konto & Mitgliedschaft…“ und melde dich mit Google, GitHub oder E-Mail bei iTool an."
               },
               {
                 "@type": "HowToStep",
@@ -325,7 +325,7 @@
               <li><a href="./" aria-current="page">Deutsch</a></li>
             </ul>
           </details>
-          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.dmg">Laden</a>
+          <a class="button small" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.dmg">Laden</a>
         </div>
       </div>
     </header>
@@ -336,9 +336,9 @@
         <div class="wrap">
           <nav class="crumbs load" aria-label="Brotkrumen"><a href="../">Transeen</a><span aria-hidden="true">/</span><span aria-current="page">Einrichtungsanleitung</span></nav>
           <h1 class="load" id="guide-title" style="--d: 60">Transeen einrichten, <span>in fünf Schritten.</span></h1>
-          <p class="hero-lead load" style="--d: 140">Vom Download bis zum ersten übersetzten Screenshot. Du brauchst einen Mac mit macOS 26 oder neuer und einen TR-Aktivierungscode.</p>
+          <p class="hero-lead load" style="--d: 140">Vom Download bis zum ersten übersetzten Screenshot. Du brauchst einen Mac mit macOS 26 oder neuer und ein iTool-Konto mit Jahresmitgliedschaft.</p>
           <div class="hero-actions load" style="--d: 220">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Für Mac laden</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Für Mac laden</a>
             <a class="link-arrow" href="#shortcuts">Alle Kurzbefehle</a>
           </div>
         </div>
@@ -349,7 +349,7 @@
           <p id="toc-title">Auf dieser Seite</p>
           <ol>
             <li><a href="#install">Installieren</a></li>
-            <li><a href="#activate">Aktivieren</a></li>
+            <li><a href="#activate">Anmelden</a></li>
             <li><a href="#permission">Bildschirmaufnahme erlauben</a></li>
             <li><a href="#languages">Sprachen wählen</a></li>
             <li><a href="#translate">Einen Bereich übersetzen</a></li>
@@ -373,17 +373,17 @@
               <li>Öffne Transeen aus „Programme“. Es lebt in der Menüleiste; such sein Symbol also dort und nicht im Dock.</li>
             </ol>
             <p>App und DMG sind mit einer Developer ID signiert und von Apple beglaubigt, macOS öffnet sie deshalb ohne Warnung. Ein ZIP und SHA-256-Prüfsummen liegen auf derselben Seite. Die Oberfläche folgt der Sprache deines Macs: English, 简体中文, 繁體中文, 日本語, 한국어, Français, Español oder Deutsch.</p>
-            <p>Die Einführung hat vier Schritte: Beispielübersetzung, Lesesprache, Bildschirmzugriff und erste Aufnahme. Das Beispiel braucht weder Aktivierung noch Berechtigung; dein Fortschritt bleibt gespeichert. Echte Aufnahmen benötigen eine Aktivierung. Ist die Übersetzung noch nicht bereit, kannst du zunächst Bilder annotieren.</p>
+            <p>Die Einführung hat vier Schritte: Beispielübersetzung, Lesesprache, Bildschirmzugriff und erste Aufnahme. Das Beispiel braucht weder Anmeldung noch Berechtigung; dein Fortschritt bleibt gespeichert. Echte Aufnahmen brauchen ein iTool-Konto mit Jahresmitgliedschaft. Ist die Übersetzung noch nicht bereit, kannst du zunächst Bilder annotieren.</p>
           </section>
 
           <section id="activate" aria-labelledby="activate-title">
-            <h2 id="activate-title"><small>02</small>Aktivieren</h2>
+            <h2 id="activate-title"><small>02</small>Anmelden</h2>
             <ol>
-              <li>Wähl im Menü der Menüleiste <strong>Aktivierung &amp; Konto…</strong> oder im Startfenster <strong>Transeen aktivieren</strong>.</li>
-              <li>Gib deinen Code ein, der wie <code>TR-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX</code> aussieht, und wähl <strong>Diesen Mac aktivieren</strong>. Eine Anmeldung ist nicht nötig.</li>
-              <li>Wenn du möchtest, meld dich mit Google, GitHub oder E-Mail bei einem iTool-Konto an und verknüpfe die Lizenz. Mit einer späteren Anmeldung beim selben Konto stellst du sie wieder her.</li>
+              <li>Wähl im Menü der Menüleiste <strong>Konto &amp; Mitgliedschaft…</strong> oder im Startfenster <strong>Bei iTool anmelden</strong>.</li>
+              <li>Melde dich mit Google, GitHub oder E-Mail bei deinem iTool-Konto an.</li>
+              <li>Ohne Jahresmitgliedschaft wählst du <strong>iTool Jahresmitgliedschaft holen</strong> (als Monatsmitglied <strong>Auf Jahresmitgliedschaft upgraden</strong>) und bezahlst mit Alipay auf itool.tech. Zurück in Transeen wählst du <strong>Mitgliedschaft aktualisieren</strong>.</li>
             </ol>
-            <p>Die Aktivierung legt nur eine zufällige Installations-ID und einen Beleg im Schlüsselbund ab; die Seriennummer deines Macs wird nie gelesen. Ein Code gilt für einen Mac, und das Verknüpfen eines Kontos erzeugt keine zweite Lizenz. SM-Codes von StupidMirror und IT-Codes von iTool Pro gehören zu anderen Produkten und funktionieren hier nicht. Einen Code bekommst du, wenn du <a href="https://wzyp.cn/item/gq2xie">einen auf 链动小铺 kaufst</a>.</p>
+            <p>Aufnahme, Markierung, Bildimport und Übersetzung brauchen die <a href="https://itool.tech/pro?from=transeen">iTool Jahresmitgliedschaft</a>: 99 CNY im Jahr für alle iTool-Produkte. Die Monatsmitgliedschaft (9,90 CNY) umfasst nur die iTool-Website und LinkShell. Transeen legt deine Anmeldung und die letzte Prüfung im Schlüsselbund ab; die Seriennummer deines Macs wird nie gelesen. Nach einer erfolgreichen Prüfung funktioniert es bis zu 7 Tage offline, nie über das Ende der Mitgliedschaft hinaus. Aktivierungscodes werden nicht mehr verkauft oder angenommen.</p>
           </section>
 
           <section id="permission" aria-labelledby="permission-title">
@@ -512,17 +512,17 @@
 git clone https://github.com/LiuTianjie/Transeen.git
 cd Transeen
 ./scripts/build.sh</code></pre>
-            <p>Die App landet in <code>dist/Transeen.app</code>. Ohne Developer-ID-Identität wird ad hoc signiert; setz <code>TRANSEEN_SIGNING_IDENTITY</code> für einen signierten Build. Die Tests sind <code>./scripts/test.sh</code>, <code>./scripts/test-license.sh</code> und <code>./scripts/test-lifecycle.sh</code>. Der gehostete Aktivierungsdienst gehört zur offiziellen App, eine unabhängige Verteilung braucht deshalb ein eigenes Lizenz-Backend.</p>
+            <p>Die App landet in <code>dist/Transeen.app</code>. Ohne Developer-ID-Identität wird ad hoc signiert; setz <code>TRANSEEN_SIGNING_IDENTITY</code> für einen signierten Build. Die Tests sind <code>./scripts/test.sh</code>, <code>./scripts/test-license.sh</code> und <code>./scripts/test-lifecycle.sh</code>. Die offizielle App prüft die iTool-Mitgliedschaft, eine unabhängige Verteilung braucht deshalb ein eigenes Konto-Backend.</p>
           </section>
         </article>
       </div>
 
       <section class="guide-next" aria-labelledby="next-title">
         <div class="wrap">
-          <h2 id="next-title">Transeen 0.14.0 laden</h2>
+          <h2 id="next-title">Transeen 0.15.0 laden</h2>
           <p>Eine universelle App für macOS 26 oder neuer, signiert und beglaubigt.</p>
           <div class="hero-actions">
-            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.14.0/Transeen-0.14.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Für Mac laden</a>
+            <a class="button" href="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.0/Transeen-0.15.0.dmg"><svg aria-hidden="true"><use href="#ui-download" /></svg>Für Mac laden</a>
             <a class="link-arrow" href="../">Zurück zu Transeen</a>
           </div>
         </div>
