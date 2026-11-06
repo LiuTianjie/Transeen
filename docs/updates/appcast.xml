@@ -6,13 +6,13 @@
     <description>Transeen updates</description>
     <language>en</language>
     <item>
-      <title>Transeen 0.15.2</title>
-      <pubDate>Thu, 05 Nov 2026 13:07:47 +0000</pubDate>
-      <sparkle:version>23</sparkle:version>
-      <sparkle:shortVersionString>0.15.2</sparkle:shortVersionString>
+      <title>Transeen 0.15.3</title>
+      <pubDate>Fri, 06 Nov 2026 03:17:15 +0000</pubDate>
+      <sparkle:version>24</sparkle:version>
+      <sparkle:shortVersionString>0.15.3</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-      <description><![CDATA[<ul><li>Google and GitHub sign-in now opens as a tab in your own browser, where you may already be signed in, instead of a separate sign-in window. The browser hands the result back to Transeen on this Mac; the panel shows a Cancel button while it waits.</li></ul>]]></description>
-      <enclosure url="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.2/Transeen-0.15.2.zip" type="application/octet-stream" sparkle:edSignature="+MfpJ0LoOWv1nnz4tXmbrv20RNttZa6U8SdyadtOl1cnr/kdbF19FMMZ7ubh3HN1C4vKiBFoDmDtOc1uUho2Bw==" length="11072338" />
+      <description><![CDATA[<ul><li>Signing out of Transeen ends only Transeen&#x27;s sign-in. Before, it also signed the account out of itool.tech and the other iTool apps.</li></ul>]]></description>
+      <enclosure url="https://github.com/LiuTianjie/Transeen/releases/download/v0.15.3/Transeen-0.15.3.zip" type="application/octet-stream" sparkle:edSignature="63Q6AKic+DMCmIs2mhp9PK665XqZZuR+ChDxTx4LBg7SuhScApujZc7+RH0J8ebPxsqXRYnQabU2nBJhHo91CQ==" length="11073377" />
     </item>
   </channel>
 </rss>
