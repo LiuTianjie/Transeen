@@ -204,6 +204,7 @@ lede = "<b>Lo último.</b>"
 full = "Historial completo"
 
 [changes.notes]
+"0.15.3" = ["<b>Cerrar sesión solo en Transeen.</b> Cerrar sesión en Transeen ya no cierra tu sesión en itool.tech ni en las otras apps de iTool.", "<b>La misma membresía.</b> No cambia nada más: actualiza desde la app o vuelve a descargarla."]
 "0.15.2" = ["<b>Inicia sesión en tu navegador.</b> El inicio de sesión con Google y GitHub se abre en una pestaña de tu navegador predeterminado, donde quizá ya tengas la sesión iniciada.", "<b>La misma membresía.</b> No cambia nada más: actualiza desde la app o vuelve a descargarla."]
 "0.15.1" = ["<b>Inicio de sesión con Google y GitHub corregido.</b> Transeen ya no se cierra al abrir el navegador de inicio de sesión.", "<b>La misma membresía.</b> No cambia nada más: actualiza desde la app o vuelve a descargarla."]
 "0.15.0" = ["<b>Incluido en iTool anual.</b> Inicia sesión en iTool para capturar, anotar y traducir; la membresía anual de 99 CNY incluye todos los productos iTool.", "<b>Adiós a los códigos de activación.</b> La membresía se comprueba en línea y funciona sin conexión hasta 7 días."]

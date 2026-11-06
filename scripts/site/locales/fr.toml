@@ -204,6 +204,7 @@ lede = "<b>Dernières versions.</b>"
 full = "Historique complet"
 
 [changes.notes]
+"0.15.3" = ["<b>La déconnexion reste dans Transeen.</b> Se déconnecter de Transeen ne vous déconnecte plus d’itool.tech ni des autres apps iTool.", "<b>Même abonnement.</b> Rien d’autre ne change : mettez à jour dans l’app ou téléchargez à nouveau."]
 "0.15.2" = ["<b>Connexion dans votre navigateur.</b> La connexion Google et GitHub s’ouvre dans un onglet de votre navigateur par défaut, où vous êtes peut-être déjà connecté.", "<b>Même abonnement.</b> Rien d’autre ne change : mettez à jour dans l’app ou téléchargez à nouveau."]
 "0.15.1" = ["<b>Connexion Google et GitHub corrigée.</b> Transeen ne se ferme plus à l’ouverture du navigateur de connexion.", "<b>Même abonnement.</b> Rien d’autre ne change : mettez à jour dans l’app ou téléchargez à nouveau."]
 "0.15.0" = ["<b>Inclus dans iTool annuel.</b> Connectez-vous à iTool pour capturer, annoter et traduire ; l’abonnement annuel à 99 CNY couvre tous les produits iTool.", "<b>Fini les codes d’activation.</b> L’abonnement est vérifié en ligne et fonctionne hors ligne jusqu’à 7 jours."]

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.15.3
+
+- Signing out of Transeen ends only Transeen's sign-in. Before, it also signed the account out of itool.tech and the other iTool apps.
+
 ## 0.15.2
 
 - Google and GitHub sign-in now opens as a tab in your own browser, where you may already be signed in, instead of a separate sign-in window. The browser hands the result back to Transeen on this Mac; the panel shows a Cancel button while it waits.

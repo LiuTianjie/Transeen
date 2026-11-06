@@ -205,6 +205,7 @@ lede = "<b>Recently shipped.</b>"
 full = "Full changelog"
 
 [changes.notes]
+"0.15.3" = ["<b>Sign-out stays in Transeen.</b> Signing out of Transeen no longer signs you out of itool.tech or the other iTool apps.", "<b>Same membership.</b> Nothing else changes; update in the app or download again."]
 "0.15.2" = ["<b>Sign in in your own browser.</b> Google and GitHub sign-in opens as a tab in your default browser, where you may already be signed in.", "<b>Same membership.</b> Nothing else changes; update in the app or download again."]
 "0.15.1" = ["<b>Google and GitHub sign-in fixed.</b> Transeen no longer quits when the sign-in browser opens.", "<b>Same membership.</b> Nothing else changes; update in the app or download again."]
 "0.15.0" = ["<b>Included in iTool yearly.</b> Sign in to iTool to capture, mark up and translate; the CNY 99 yearly membership covers every iTool product.", "<b>No more activation codes.</b> Your membership is checked online and works offline for up to 7 days."]

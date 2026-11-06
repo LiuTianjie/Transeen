@@ -99,6 +99,7 @@ func makeManager(
         try await accountChanges()
         try await wireClient()
         try await loopbackOAuth()
+        try await signOutIsLocal()
         check(ReleaseVersion("v0.10.0")! > ReleaseVersion("0.9.9")!, "version order")
         check(ReleaseVersion("0.7") == ReleaseVersion("0.7.0"), "version padding")
         check(ReleaseVersion("0.7.0-beta") == nil, "pre-release versions are ignored")
@@ -324,6 +325,23 @@ func makeManager(
         catch {}
     }
 
+    /// Signing out of Transeen ends only this sign-in; itool.tech and the other iTool apps stay
+    /// signed in. Without `scope=local` Supabase ends every session of the account.
+    static func signOutIsLocal() async throws {
+        let seen = SeenRequests()
+        let transport = TestTransport { request in seen.add(request); return (204, "") }
+        let configuration = LicenseRemoteConfiguration(
+            supabaseURL: URL(string: "https://example.supabase.co"), publishableKey: "sb_publishable_x",
+            entitlementURL: nil, appVersion: "test")
+        await SupabaseLicenseAuthClient(configuration: configuration, transport: transport).signOut(session(token: "jwt"))
+        let request = seen.all.first
+        check(request?.httpMethod == "POST", "sign-out posts")
+        check(request?.url?.path == "/auth/v1/logout", "sign-out path")
+        check(URLComponents(url: request!.url!, resolvingAgainstBaseURL: false)?.queryItems?.contains(URLQueryItem(name: "scope", value: "local")) == true, "sign-out is scope=local")
+        check(request?.value(forHTTPHeaderField: "Authorization") == "Bearer jwt", "sign-out sends the session")
+        print("sign-out scope local: ok")
+    }
+
     /// GitHub / Google sign-in opens a tab in the person's browser and waits on a loopback
     /// listener (LoopbackOAuth.swift). Here a URLSession request stands in for the browser.
     static func loopbackOAuth() async throws {
@@ -395,4 +413,11 @@ final class OpenedURL: @unchecked Sendable {
         }
         fatalError("FAILED: the browser was never opened")
     }
+}
+
+final class SeenRequests: @unchecked Sendable {
+    private let lock = NSLock()
+    private var requests: [URLRequest] = []
+    func add(_ request: URLRequest) { lock.withLock { requests.append(request) } }
+    var all: [URLRequest] { lock.withLock { requests } }
 }

@@ -204,6 +204,7 @@ lede = "<b>Zuletzt veröffentlicht.</b>"
 full = "Vollständiges Änderungsprotokoll"
 
 [changes.notes]
+"0.15.3" = ["<b>Abmelden nur in Transeen.</b> Wer sich in Transeen abmeldet, bleibt bei itool.tech und den anderen iTool-Apps angemeldet.", "<b>Gleiche Mitgliedschaft.</b> Sonst ändert sich nichts: in der App aktualisieren oder neu laden."]
 "0.15.2" = ["<b>Anmeldung im eigenen Browser.</b> Die Anmeldung mit Google und GitHub öffnet sich als Tab im Standardbrowser, in dem du vielleicht schon angemeldet bist.", "<b>Gleiche Mitgliedschaft.</b> Sonst ändert sich nichts: in der App aktualisieren oder neu laden."]
 "0.15.1" = ["<b>Anmeldung mit Google und GitHub behoben.</b> Transeen beendet sich nicht mehr, wenn sich der Anmeldebrowser öffnet.", "<b>Gleiche Mitgliedschaft.</b> Sonst ändert sich nichts: in der App aktualisieren oder neu laden."]
 "0.15.0" = ["<b>In iTool Jahr enthalten.</b> Melde dich bei iTool an, um aufzunehmen, zu markieren und zu übersetzen; die Jahresmitgliedschaft für 99 CNY umfasst alle iTool-Produkte.", "<b>Keine Aktivierungscodes mehr.</b> Die Mitgliedschaft wird online geprüft und funktioniert bis zu 7 Tage offline."]
