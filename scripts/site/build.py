@@ -337,6 +337,7 @@ def head(loc, guide, w, graph):
         f'<link rel="apple-touch-icon" href="{prefix}assets/apple-touch-icon.png" />',
         f'<link rel="manifest" href="{prefix}site.webmanifest" />',
         f'<link rel="preload" href="{prefix}assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />',
+        f'<link rel="stylesheet" href="{prefix}assets/family.css" />',
         f'<link rel="stylesheet" href="{prefix}assets/site.css" />',
         '<script>document.documentElement.classList.add("js")</script>',
     ]
@@ -445,6 +446,7 @@ def footer(loc, guide, w):
         f"      <p>{u['trademarks']}</p>",
         "    </div>",
         "  </div>",
+        '  <p class="fam-wordmark" aria-hidden="true" translate="no">Transeen</p>',
         "</footer>",
     ]
     return lines(out, 4)
@@ -753,7 +755,7 @@ def page(loc, guide):
     body = guide_main(loc, w) if guide else home_main(loc, w)
     return "\n".join([
         "<!doctype html>",
-        f'<html lang="{loc["lang"]}">',
+        f'<html lang="{loc["lang"]}" data-product="transeen">',
         "  <head>",
         head(loc, guide, w, graph),
         "  </head>",
@@ -805,7 +807,7 @@ def not_found():
     w = words["en"]
     homes = "\n".join(f'        <a href="/{path(loc)}"{lang_attrs(english, loc)}>{loc["name"]}</a>' for loc in locales)
     return f"""<!doctype html>
-<html lang="en">
+<html lang="en" data-product="transeen">
   <head>
     <meta charset="utf-8" />
     {REDIRECT}
@@ -817,6 +819,7 @@ def not_found():
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/assets/app-icon.svg" type="image/svg+xml" />
     <link rel="preload" href="/assets/fonts/geist-1.8.2.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/assets/family.css" />
     <link rel="stylesheet" href="/assets/site.css" />
   </head>
   <body>

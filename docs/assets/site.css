@@ -7,17 +7,19 @@
 }
 
 :root {
-  --bg: #08090a;
-  --bg-raised: #0f1011;
-  --panel: #121314;
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.14);
-  --fg: #f7f8f8;
-  --fg-2: #8a8f98;
-  --fg-3: #62666d;
+  /* Family skeleton (family.css); --blue is the app's own capture colour inside the demo. */
+  --bg: var(--fam-canvas);
+  --bg-raised: var(--fam-surface);
+  --panel: var(--fam-raised);
+  --line: var(--fam-line);
+  --line-strong: var(--fam-line-strong);
+  --fg: var(--fam-text);
+  --fg-2: var(--fam-text-2);
+  --fg-3: var(--fam-text-3);
+  --hue: var(--fam-accent);
   --blue: #0a84ff;
-  --ease: cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease: var(--fam-ease);
+  --ease-out: var(--fam-ease);
   --sans: "Geist", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
   --wrap: 1180px;
@@ -99,13 +101,13 @@ dd a:hover {
 }
 
 :focus-visible {
-  outline: 2px solid var(--blue);
+  outline: 2px solid var(--hue);
   outline-offset: 3px;
   border-radius: 6px;
 }
 
 ::selection {
-  background: rgba(10, 132, 255, 0.4);
+  background: color-mix(in srgb, var(--hue) 35%, transparent);
 }
 
 h1,
@@ -243,7 +245,7 @@ code {
   gap: 8px;
   height: 40px;
   padding: 0 18px;
-  border-radius: 999px;
+  border-radius: var(--fam-r-md);
   background: var(--fg);
   color: #08090a;
   font: 500 14px/1 var(--sans);
@@ -257,7 +259,7 @@ code {
 }
 
 .button:active {
-  transform: scale(0.97);
+  transform: translateY(1px);
 }
 
 .button svg {
@@ -380,7 +382,7 @@ code {
 }
 
 .hero-title span {
-  color: var(--fg-2);
+  color: var(--hue);
 }
 
 .hero-title .nb {
@@ -458,7 +460,7 @@ code {
 }
 
 .demo:focus-visible .window {
-  box-shadow: 0 0 0 2px var(--blue), 0 40px 120px -30px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 0 2px var(--hue), 0 40px 120px -30px rgba(0, 0, 0, 0.8);
 }
 
 .demo-viewport {
@@ -1285,7 +1287,7 @@ code {
   height: 30px;
   padding: 0 12px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--fam-r-sm);
   background: rgba(255, 255, 255, 0.04);
   box-shadow: inset 0 0 0 1px var(--line);
   color: var(--fg-2);
@@ -1319,7 +1321,7 @@ code {
   height: 30px;
   padding: 0 12px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--fam-r-sm);
   background: none;
   box-shadow: inset 0 0 0 1px var(--line);
   color: var(--fg-2);
@@ -1450,7 +1452,7 @@ code {
 }
 
 .art .blue {
-  color: var(--blue);
+  color: var(--hue);
 }
 
 /* Lines that draw in carry pathLength="1". The rules select them by tag and :not() of the dashed
@@ -1477,7 +1479,7 @@ code {
   grid-template-columns: repeat(5, 1fr);
   margin-top: 0;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: var(--fam-r-lg);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent);
 }
 
@@ -1642,7 +1644,7 @@ code {
 /* Once drawn, the matrix lights one source language's row at a time: each language in turn
    translating into the other seven. */
 .matrix.is-live .dot {
-  animation: lp-row 8s var(--ease) infinite;
+  animation: lp-row 8s var(--ease) 1;
   animation-delay: calc(var(--r) * 1s);
 }
 
@@ -1652,8 +1654,8 @@ code {
 
 @keyframes lp-row {
   0%, 12.5%, 100% { fill: var(--fg-2); transform: none; }
-  3% { fill: var(--blue); transform: scale(1.45); }
-  8% { fill: var(--blue); transform: scale(1.15); }
+  3% { fill: var(--hue); transform: scale(1.45); }
+  8% { fill: var(--hue); transform: scale(1.15); }
 }
 
 .matrix-caption {
@@ -1727,7 +1729,7 @@ code {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: var(--fam-r-lg);
   overflow: hidden;
 }
 
@@ -1963,7 +1965,7 @@ code {
   margin-bottom: 36px;
   border: 1px solid var(--line-strong);
   border-bottom-width: 3px;
-  border-radius: 14px;
+  border-radius: var(--fam-r-lg);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
   font: 500 17px/1 var(--mono);
 }
@@ -1971,7 +1973,8 @@ code {
 /* Footer */
 
 .footer {
-  padding: 64px 0 40px;
+  padding: 64px 0 0;
+  overflow: hidden;
   border-top: 1px solid var(--line);
   font-size: 13.5px;
 }
@@ -2365,7 +2368,7 @@ code {
 .figs .art [class*="lp-"] {
   animation-duration: var(--loop);
   animation-timing-function: var(--ease);
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
   animation-delay: var(--at);
   animation-play-state: paused;
   animation-fill-mode: both;
@@ -2386,7 +2389,7 @@ code {
 }
 
 .figs.is-live .lp-ants {
-  animation: lp-ants 1.4s linear infinite;
+  animation: lp-ants 1.4s linear 4;
   animation-play-state: inherit;
 }
 
@@ -2452,7 +2455,7 @@ code {
 
 .art .lp-scan {
   stroke-width: 2.2;
-  filter: drop-shadow(0 0 3px rgba(10, 132, 255, 0.9));
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--hue) 90%, transparent));
 }
 
 /* A window in the apps figure is filled with the page colour, so the one in front hides the
@@ -2596,7 +2599,7 @@ code {
   gap: 7px;
   height: 32px;
   padding: 0 10px;
-  border-radius: 999px;
+  border-radius: var(--fam-r-md);
   color: var(--fg-2);
   cursor: pointer;
   list-style: none;
@@ -2656,7 +2659,7 @@ code {
 .langmenu a[aria-current="page"]::after {
   content: "✓";
   float: right;
-  color: var(--blue);
+  color: var(--hue);
 }
 
 .footer-langs {
